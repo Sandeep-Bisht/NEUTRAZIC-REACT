@@ -8,6 +8,7 @@ import "../components/Carouselcomp";
 import $ from "jquery";
 import CategoryCreation from "./Admin/CategoryCreation";
 import Carouselcomp from "../components/Carouselcomp";
+import Cart from "./Cart";
 //import Button from './button';
 
 let changeNavValue = 0;
@@ -16,6 +17,7 @@ var sticky;
 var Userdata = "";
 // var userCart=[]
 const Header1 = (props) => {
+  console.log(props,"lengthhhhhhhhhhhhhh");
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -753,7 +755,11 @@ const Header1 = (props) => {
                     </div>
                   </div>
                 </div>
+                
                 <div className="col-sm-8 user-login">
+                   {
+                    (props && props.CartItems ? <h6 className="Total-Item">{props.CartItems.length}</h6> : "")
+                  }
                   <span className="sp">Cart</span>
                   <br />
                   <span className="Sp1">₹ 0.0</span>
