@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
+
+
 var Userdata;
 const AllProducts = (props) => {
   const [AllProduct, setAllProduct] = useState([]);

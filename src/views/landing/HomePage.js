@@ -521,12 +521,12 @@ const HomePage = () => {
               })}
             </div>
             {/* hover Button */}
-            {/* <div className="wrapperbtn pt-0">
-              <Link to="/TrendingProducts" className="btn10">
+            <div className="wrapperbtn pt-0">
+              <Link to="/AllProducts" className="btn10">
                 <span>Show More</span>
                 <div className="transition"></div>
               </Link>
-            </div> */}
+            </div>
             {/* Hover Button End */}
           </div>
         </section>

@@ -104,7 +104,7 @@ const Cart = () => {
 
   return (
     <>
-      <Header1 />
+      <Header1 CartItems={cart}/>
       <div className="first-nav container-fluid">
         <span>
           <Link to="/">Home</Link>/ Cart
