@@ -164,13 +164,13 @@ const Cart = () => {
                                 <td className="product-name text-left">
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     <div className="text-left">
-                                      <StarsRating
+                                      {/* <StarsRating
                                         count={5}
                                         // onChange={ratingChanged}
                                         size={17}
                                         color2={"#ffd700"}
                                         value={3.5}
-                                      />
+                                      /> */}
                                       {el.name}
                                     </div>
                                   </Link>

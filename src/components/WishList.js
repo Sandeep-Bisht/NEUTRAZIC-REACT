@@ -91,11 +91,11 @@ const WishList = ()=>{
                   </div>
                   <div className="col-8">
                      <h6>{item.name}</h6>
-                     <StarsRating
+                     {/* <StarsRating
                   count={5}
                     size={30}
               color2={'#ffd700'}
-              value={4} />
+              value={4} /> */}
                      <p><ReadMoreReact text={item.description}
             min={100}
             ideal={100}

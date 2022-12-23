@@ -2,6 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../views/landing/homepage.css";
 const Footer = () => {
+// Contact Page scroll
+const ContactHandler=()=>{
+  window.scroll(0,0);
+}
+
+// WishlistHandler page scroll
+const WishlistHandler=()=>{
+  window.scroll(0,0);
+}
+
   return (
     <>
       <footer className="footer-area">
@@ -74,7 +84,7 @@ const Footer = () => {
                     <a href="/about">About Us</a>
                   </li>
                   <li>
-                    <Link to="/ContactUs">Contact Us</Link>
+                    <Link to="/ContactUs" onClick={ContactHandler}>Contact Us</Link>
                   </li>
                   <li>
                     <a href="privacy-policy.html">Privacy Policy</a>
@@ -105,7 +115,7 @@ const Footer = () => {
                     <Link to="/Ordered">Order History</Link>
                   </li>
                   <li>
-                    <a href="cart.html">Wishlist</a>
+                    <Link to="/WishList" onClick={WishlistHandler}>Wishlist</Link>
                   </li>
                   <li>
                     <a href="contact.html">Newsletter</a>
