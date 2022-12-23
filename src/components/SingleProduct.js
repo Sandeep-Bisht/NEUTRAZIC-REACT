@@ -608,13 +608,13 @@ const SingleProduct = (props) => {
                 <span>{data.name}</span>
               </div>
               <div className="pt-2 pb-2">
-                <StarsRating
+                {/* <StarsRating
                   count={5}
                   // onChange={ratingChanged}
                   size={35}
                   color2={"#ffd700"}
                   value={4}
-                />
+                /> */}
               </div>
               <div className="MRP-Taxes-div">
                 <span>MRP (incl. of all taxes)</span>
@@ -984,11 +984,11 @@ const SingleProduct = (props) => {
                             </h3>
                           </Link>
                           <div className="d-flex pb-2 pl-4">
+                            {/* <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
-                            <i className="bx bxs-star"></i>
-                            <i className="bx bxs-star"></i>
+                            <i className="bx bxs-star"></i> */}
                           </div>
                           <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                             <div className="discount-price-div">

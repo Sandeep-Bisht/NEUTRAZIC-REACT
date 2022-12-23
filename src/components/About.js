@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Baseline from "./Baseline";
 
 
+import Header1 from './Header1'
 
 const About = () => {
   
