@@ -787,13 +787,13 @@ const SingleProduct = (props) => {
                     <div className="start-div">
                       <div className="row">
                         <div className="col-6">
-                          <StarsRating
+                          {/* <StarsRating
                             count={5}
                             // onChange={ratingChanged}
                             size={25}
                             color2={"#ffd700"}
                             value={4}
-                          />
+                          /> */}
                         </div>
                         <div className="col-6 text-right">
                           <span className="date">22/07/2021</span>
@@ -830,13 +830,13 @@ const SingleProduct = (props) => {
                     <div className="start-div">
                       <div className="row">
                         <div className="col-6">
-                          <StarsRating
+                          {/* <StarsRating
                             count={5}
                             // onChange={ratingChanged}
                             size={25}
                             color2={"#ffd700"}
                             value={4}
-                          />
+                          /> */}
                         </div>
                         <div className="col-6 text-right">
                           <span className="date">22/07/2021</span>
@@ -893,13 +893,13 @@ const SingleProduct = (props) => {
                     </div>
                     <div className="row">
                       <div className="col-6">
-                        <StarsRating
+                        {/* <StarsRating
                           count={5}
                           // onChange={ratingChanged}
                           size={30}
                           color2={"#ffd700"}
                           value={0}
-                        />
+                        /> */}
                       </div>
 
                       <div className="col-6">
@@ -1230,13 +1230,13 @@ const SingleProduct = (props) => {
             <div className="pinfo">Rate our overall services.</div>
 
             <div className="form-group">
-              <StarsRating
+              {/* <StarsRating
                 count={5}
                 // onChange={ratingChanged}
                 size={25}
                 color2={"#ffd700"}
                 value={4}
-              />
+              /> */}
             </div>
 
             <div className="pinfo">Write your feedback.</div>

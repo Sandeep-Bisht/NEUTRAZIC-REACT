@@ -55,10 +55,14 @@ const WishList = ()=>{
          "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        
          _id:productId,
       }),
    })
-      .then((res) => res.json())
+      .then((res) =>{ res.json()
+      console.log(res,"hellllllllllllll")
+      }
+      )
       .then(async (data) => {
         
          GetWishlist()
@@ -80,11 +84,10 @@ const WishList = ()=>{
          <div className="row">
          {wishlistData.length >0 ? 
             wishlistData.map((item,ind)=>(
-               <div className="col-12 wishlistDiv">
+               
+               <div className="col-5 ms-5 wishlistDiv">
                <div className="row">
-                  <div className="col-1">
-                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>X</span>
-                  </div>
+                  
                   <div className="col-3">
                   {/* <img src={"http://144.91.110.221:3033/"+item.image[0].path} /> */}
                   <img src={"http://localhost:3033/"+item.image[0].path} />
@@ -102,8 +105,14 @@ const WishList = ()=>{
             max={110}
             readMoreText={"read more..."}/></p>
                   </div>
+                  <div className="col-1">
+                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>X</span>
+                  </div>
                </div>
+               
                </div> 
+               
+               
             )) 
             :
             <div className="col-12 text-center EMPTYWISHLIST-DIV">
