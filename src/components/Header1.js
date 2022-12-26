@@ -9,6 +9,8 @@ import $ from "jquery";
 import CategoryCreation from "./Admin/CategoryCreation";
 import Carouselcomp from "../components/Carouselcomp";
 import Cart from "./Cart";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //import Button from './button';
 
 let changeNavValue = 0;
@@ -63,6 +65,10 @@ const Header1 = (props) => {
   }, []);
   const logout = () => {
     localStorage.setItem("Userdata", null);
+    toast.success("Logout successfull",{
+      position:toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 5000,
+    })
     window.location.replace("/");
   };
   const RegisterUser = () => {
@@ -118,7 +124,7 @@ const Header1 = (props) => {
             localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
 
-            history.push("/");
+            //history.push("/");
             window.location.reload();
           } else if (
             res.role == "superAdmin" ||
@@ -142,6 +148,10 @@ const Header1 = (props) => {
             );
           }
         });
+        toast.success("Login successfull",{
+          position:toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+        })
     } else {
       console.log("not getting role");
        setMsg('Please Enter a Valid Data');
@@ -587,6 +597,8 @@ const Header1 = (props) => {
                           >
                             Login
                           </button>
+                          <ToastContainer
+                          />
                           <Link>
                             <p className="mt-2">Forget Password...</p>
                           </Link>
@@ -758,7 +770,7 @@ const Header1 = (props) => {
                 
                 <div className="col-sm-8 user-login">
                    {
-                    (props && props.CartItems ? <h6 className="Total-Item">{props.CartItems.length}</h6> : "")
+                    props && props.CartItems ? <h6 className="Total-Item">{props.CartItems.length>0 ? props.CartItems.length: ""}</h6> :""
                   }
                   <span className="sp">Cart</span>
                   <br />
@@ -1114,7 +1126,7 @@ const Header1 = (props) => {
       {/* phone main-navbar */}
       <nav className="navbar navbar-expand-lg navbar-light bg-light mobile-nav-bar">
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             <img className="pl-2" src={require("../Images/logo1.png")} />
           </Link>
           <button
@@ -1136,9 +1148,9 @@ const Header1 = (props) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/AllProducts">
                   Shop
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/ContactUs">
@@ -1146,9 +1158,9 @@ const Header1 = (props) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/">
                   Blog
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <a

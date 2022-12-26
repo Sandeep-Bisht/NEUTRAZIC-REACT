@@ -12,6 +12,8 @@ import ReadMoreReact from "read-more-react";
 import Mobile from "../../Images/Mobile.png";
 import {AiFillApple} from 'react-icons/ai';
 import {IoLogoGooglePlaystore} from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import $ from "jquery";
 
@@ -40,6 +42,7 @@ const HomePage = () => {
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
+
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -333,8 +336,13 @@ const HomePage = () => {
                   console.log(err, "error e");
                 });
             }
+           
           } else {
-            alert("Allready in wishlist");
+          
+          toast.error("Allready in wishlist !",{
+            position: toast.POSITION.BOTTOM_RIGHT, 
+            autoClose: 5000,         
+          });
           }
         }
       });
@@ -789,6 +797,10 @@ const HomePage = () => {
                                           </Link>
                                         </>
                                       )}
+                                      
+                                      <ToastContainer 
+                            
+                                      />
                                       <i className="bx bx-cart mr-1"></i>
                                     </div>
                                   </div>

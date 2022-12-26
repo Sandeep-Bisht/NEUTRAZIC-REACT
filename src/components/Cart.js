@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
 import "../components/Header1.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 var Userdata = "";
 const Cart = () => {
   const [newquantities, setNewqantities] = useState();
@@ -100,6 +102,10 @@ const Cart = () => {
     const array = await cart.filter((e, i) => i !== index);
     await UpdateCart(array);
     await CartById();
+    toast.success("Item deleted successfull",{
+      position:"bottom-right",
+      autoClose:5000,
+    })
   };
 
   return (
@@ -407,6 +413,7 @@ const Cart = () => {
           </table>
         </div>
       </div>
+      <ToastContainer/>
       {/*  End mobile responsive cart */}
       <Baseline />
       <Footer />

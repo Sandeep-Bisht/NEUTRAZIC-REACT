@@ -4,8 +4,8 @@ import Footer from "./Footer";
 import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
-
-
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 var Userdata;
 const AllProducts = (props) => {
   const [AllProduct, setAllProduct] = useState([]);
@@ -107,6 +107,7 @@ const AllProducts = (props) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
+      
     }
   };
   const UpdateCart = () => {
@@ -662,12 +663,16 @@ const AllProducts = (props) => {
                   >
                     Add to Cart
                   </Link>
+                  
                 </figure>
+                
               );
             }
           })}
+          
         </div>
       </div>
+      
       <div className="col-12 pagination text-center">
         <button
           className="Prebutton"
@@ -685,6 +690,7 @@ const AllProducts = (props) => {
         >
           Next
         </button>
+        
       </div>
 
       {/* <div className="brands-area bg-f7f8fa pt-70 pb-40">
