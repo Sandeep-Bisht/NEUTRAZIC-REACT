@@ -78,7 +78,7 @@ const Register = (props) => {
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
             window.location.reload();
-            history.push("/");
+             history.push("/");
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||

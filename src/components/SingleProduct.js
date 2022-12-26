@@ -8,6 +8,8 @@ import StarsRating from "stars-rating";
 import ReactImageZoom from "react-image-zoom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import $ from "jquery";
 
 var Userdata = "";
@@ -23,13 +25,13 @@ const SingleProduct = (props) => {
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
   const [wishlist, setWishlist] = useState();
+  
   const history = useHistory();
   let Wishlist = [];
   //let ImageData ;
   useEffect(() => {
     related = 0;
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
 
     window.scrollTo(0, 0)
     Getsingledata();
@@ -223,6 +225,7 @@ const SingleProduct = (props) => {
         .catch((err) => {
           console.log(err, "error");
         });
+        
     }
     // else{
     //   history.push('/Register')
@@ -314,6 +317,10 @@ const SingleProduct = (props) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
+        toast.success("Add to cart",{
+        position:"bottom-right",
+        autoClose:5000,
+      });
     }
   };
 
@@ -467,7 +474,10 @@ const SingleProduct = (props) => {
                 });
             }
           } else {
-            alert("Allready in wishlist");
+            toast.error('Allready in wishlist !', {
+              position: toast.POSITION.BOTTOM_RIGHT
+          });
+            
           }
         }
       });
@@ -691,10 +701,11 @@ const SingleProduct = (props) => {
                 ></i>
               </div>
               <div className="add-to-cart mt-1">
-                <button
+                {
+                  Userdata ? 
+                  <button
                   onClick={() => {
                     {
-                      console.log("sendimng dataaaaaaaaaaaaaa", data)
                       Userdata != null
                         ? cartfunction(
                             data._id,
@@ -722,10 +733,23 @@ const SingleProduct = (props) => {
                           );
                     }
                   }}
+                 
+                   
                 >
                   Add to Cart
-                </button>
+                </button> :
+                     <button
+                     data-bs-toggle="modal"
+                     data-bs-target={Userdata == null ? "#exampleModal" : null}>
+                     <Link to="/Register">                  
+                     </Link>
+                     Add to Cart
+                     </button>
+                     
+                }
+                
               </div>
+              
               <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
                 {Userdata ? (
                   <i
@@ -756,6 +780,9 @@ const SingleProduct = (props) => {
                     </Link>
                   </>
                 )}
+                
+                 <ToastContainer />
+  
               </div>
             </div>
           </div>
