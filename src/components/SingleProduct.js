@@ -869,12 +869,12 @@ const SingleProduct = (props) => {
                           <span className="date">22/07/2021</span>
                         </div>
                         {/* </div> */}
-                        <div className="col-12 ">
+                        <div className="col-12">
                           <span className="content-text">
                             Loved this toner! I've been searching for
                             non-alcohol options and this one is my match!
                             Alcohol Free Matcha Toner To Tighten Pores And
-                            Balance pH & Oil Levels
+                            Balance pH & Oil Levels   
                           </span>
                         </div>
                         <div className="col-12 varified-div">
