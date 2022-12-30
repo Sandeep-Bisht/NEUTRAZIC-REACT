@@ -42,6 +42,7 @@ import Subcategories from "../components/Subcategories";
 import TrendingProducts from "../components/TrendingProducts";
 import ProductByManufacturer from "../components/ProductByManufacturer";
 import SearchResult from "../components/SearchResult";
+import MyAccount from "../components/MyAccount";
 
 var Userdata = "";
 const Root = (props) => {
@@ -133,6 +134,7 @@ const Root = (props) => {
               path="/SearchResult/:Search"
               component={SearchResult}
             />
+            <Route exact path = "/MyAccount" component = {MyAccount}/>
           </Switch>
         </>
       </Router>

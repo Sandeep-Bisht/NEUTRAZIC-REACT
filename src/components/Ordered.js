@@ -5,6 +5,7 @@ import Header1 from "./Header1";
 import Baseline from "./Baseline";
 var Userdata = "";
 const Ordered = () => {
+  window.scroll(0, 0);
   const [orderes, setOrderes] = useState([]);
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -135,7 +136,7 @@ const Ordered = () => {
                             {/* {(item.mrp -
                               (item.mrp * item.discountprice) / 100) *
                               item.quantity} */}
-                              {item.quantity * item.singleprice}
+                            {item.quantity * item.singleprice}
                           </span>
                         </td>
                         <td className="product-subtotal">

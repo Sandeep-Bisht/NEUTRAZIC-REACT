@@ -622,6 +622,7 @@ const SearchResult = (props) => {
           <div className="container-fluid">
             <div className="row">
               {filterdata.map((el, ind) => {
+                console.log(filterdata,"filterdata");
                 if (
                   el.name.toLowerCase().includes(searchresults) ||
                   el.manufacturer.name.toLowerCase().includes(searchresults) ||

@@ -42,6 +42,7 @@ const HomePage = () => {
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
+  const [color,setColor]=useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -481,7 +482,8 @@ const HomePage = () => {
                                       </del>
                                       {Userdata ? (
                                         <i
-                                          className="bx bxs-heart ml-3"
+                                          className=" bx bxs-heart ml-3"
+                                        
                                           onClick={() => {
                                             AddtoWishlist(
                                               el._id,
@@ -513,7 +515,9 @@ const HomePage = () => {
                                           </Link>
                                         </>
                                       )}
-                                      <i className="bx bx-cart mr-1"></i>
+                                      <i className="bx bx-cart mr-1"
+                                        
+                                      ></i>
                                     </div>
                                   </div>
                                 </div>
