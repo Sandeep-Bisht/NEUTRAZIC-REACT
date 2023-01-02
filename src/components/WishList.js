@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Header1 from './Header1';
 import ReadMoreReact from 'read-more-react';
 import { Link } from 'react-router-dom';
-var Userdata=''
+var Userdata='';
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
    useEffect(() => {

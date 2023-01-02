@@ -157,6 +157,7 @@ const Root = (props) => {
               path="/SearchResult/:Search"
               component={SearchResult}
             />
+          
           </Switch>
         </>
       </Router>
