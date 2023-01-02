@@ -265,9 +265,25 @@ const Sidemenu = () => {
                     </Link>
                   ) : null
                 ) : null}
+                 <Link to="/AllManufactureDetails" className="nav__link">
+                  <i className="bx bx-folder nav__icon"></i>
+                  <span className="nav__name">All_Manufacture</span>
+                </Link>
+                 <Link to="/AllCategoriesDetails" className="nav__link">
+                  <i className="bx bx-folder nav__icon"></i>
+                  <span className="nav__name">All_Category</span>
+                </Link>
+                <Link to="/AllSubCategoriesDetails" className="nav__link">
+                  <i className="bx bx-folder nav__icon"></i>
+                  <span className="nav__name">All_SubCategory</span>
+                </Link>
                 <Link to="/ProductForm" className="nav__link">
                   <i className="bx bx-folder nav__icon"></i>
                   <span className="nav__name">Products</span>
+                </Link>
+                <Link to="/AllProductsDetails" className="nav__link">
+                  <i className="bx bx-folder nav__icon"></i>
+                  <span className="nav__name">All_Products</span>
                 </Link>
 
                 {/* <Link  className="nav__link configration">

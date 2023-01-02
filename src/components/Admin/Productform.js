@@ -12,6 +12,7 @@ const Productform = () => {
   const [manufactureres, setManufactureres] = useState([]);
   const [products, Setproducts] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [shwoTable, setShowTable] = useState(false);
   let [data, Setdata] = useState({
     name: "",
     description: "",
@@ -49,12 +50,12 @@ const Productform = () => {
     //const url="http://144.91.110.221:3033/api/product/add_product"
     const url = "http://localhost:3033/api/product/add_product";
     await fetch(url, {
-     
+
       mode: 'no-cors',
       method: "POST",
       body: formData,
     })
-      .then((res) =>res.json())
+      .then((res) => res.json())
       // .then((res) => {
       //   this.getAddOn();
       // })
@@ -69,8 +70,8 @@ const Productform = () => {
     GetData();
     GetSubCategory();
 
-    $(document).ready(function() {
-      $(".update").click(function() {
+    $(document).ready(function () {
+      $(".update").click(function () {
         $(".update-btn").css("display", "block");
       });
     });
@@ -153,44 +154,44 @@ const Productform = () => {
         data1.push(
           item.manufacturer.name == Userdata.organization
             ? {
-                sr_no: index + 1,
-                name: item.name,
-                category: item.category,
-                manufacturer: item.manufacturer.name,
-                "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
-                "INRdiscount/Doolerdiscount":
-                  item.inrDiscount + "/" + item.dollerDiscount,
-                action:
-                  Userdata != undefined && Userdata.role == "superAdmin" ? (
-                    <>
-                      <button className="btnbtn-danger data-table-button">
-                        <i
-                          className="bx bx-trash"
-                          onClick={() => {
-                            if (window.confirm("Are you sure ?")) {
-                              DeleteProduct(item._id);
-                            } else {
-                              return false;
-                            }
-                          }}
-                        ></i>
-                      </button>{" "}
-                      <button
-                        onClick={() => Editproduct(item)}
-                        className=" btnbtn-danger"
-                      >
-                        <i className="bx bx-edit"></i>
-                      </button>
-                    </>
-                  ) : (
+              sr_no: index + 1,
+              name: item.name,
+              category: item.category,
+              manufacturer: item.manufacturer.name,
+              "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
+              "INRdiscount/Doolerdiscount":
+                item.inrDiscount + "/" + item.dollerDiscount,
+              action:
+                Userdata != undefined && Userdata.role == "superAdmin" ? (
+                  <>
+                    <button className="btnbtn-danger data-table-button">
+                      <i
+                        className="bx bx-trash"
+                        onClick={() => {
+                          if (window.confirm("Are you sure ?")) {
+                            DeleteProduct(item._id);
+                          } else {
+                            return false;
+                          }
+                        }}
+                      ></i>
+                    </button>{" "}
                     <button
                       onClick={() => Editproduct(item)}
-                      className="update btnbtn-danger"
+                      className=" btnbtn-danger"
                     >
-                      <i className="bx bx-show"></i>
+                      <i className="bx bx-edit"></i>
                     </button>
-                  ),
-              }
+                  </>
+                ) : (
+                  <button
+                    onClick={() => Editproduct(item)}
+                    className="update btnbtn-danger"
+                  >
+                    <i className="bx bx-show"></i>
+                  </button>
+                ),
+            }
             : null
         );
       });
@@ -302,6 +303,11 @@ const Productform = () => {
 
   console.log("inside ")
 
+  const showAllProductHandler = () => {
+    setShowTable(true);
+    console.log(products, "inside the product");
+  }
+
   return (
     <>
       <div className="container-fluid">
@@ -319,7 +325,7 @@ const Productform = () => {
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form
-            enctype="multipart/form-data">
+              enctype="multipart/form-data">
               <div className="container mb-5">
                 <div className="row">
                   {/* <div className="col-1"></div> */}
@@ -348,7 +354,7 @@ const Productform = () => {
                             // value={data.image}
                             onChange={(e) => {
                               //console.log(e.target.files,"payloadddddddddddddddddddddddddddddd data")
-                              Setdata({ ...data, image: e.target.files});
+                              Setdata({ ...data, image: e.target.files });
                             }}
                           />
                         </div>
@@ -522,6 +528,7 @@ const Productform = () => {
                               Submit
                             </button>
                           </div>
+
                         ) : (
                           <div className="col-6 p-1">
                             <button
@@ -552,7 +559,7 @@ const Productform = () => {
         ) : null}
 
         {/* Table for Admin Uploaded Products */}
-        <div className="container table-responsive">
+        {/* <div className="container table-responsive"> */}
           {/* <DataTable
         data={data1}
         columns={columns}
@@ -561,8 +568,9 @@ const Productform = () => {
         responsive={true}
         // onClickRow={click}
       /> */}
-        </div>
+        {/* </div> */}
       </div>
+
       {/* End Of products table */}
     </>
   );

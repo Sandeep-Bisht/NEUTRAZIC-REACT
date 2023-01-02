@@ -1,0 +1,87 @@
+import React, { useState } from "react";
+import { Table, Input } from "antd";
+import axios from "axios";
+// import { data } from "./columns";
+import { useTableSearch } from "../useTableSearch";
+import Sidemenu from "../Sidemenu";
+import "../Dashboard.css";
+
+const { Search } = Input;
+
+const fetchUsers = async () => {
+  const data = await axios.get(
+    "http://localhost:3033/api/category/all_category"
+  );
+  return data.data;
+};
+
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name"
+  },
+  {
+    title: "Description",
+    dataIndex: "description",
+    key: "description"
+  }
+]
+
+export default function AllCategoriesDetails() {
+  const [searchVal, setSearchVal] = useState(null);
+
+  const { filteredData, loading } = useTableSearch({
+    searchVal,
+    retrieve: fetchUsers
+  });
+
+  return (
+    <>
+      <div className="container-fluid">
+        {" "}
+        <a href="#" className="nav__logo">
+          <img
+            src={require("../../../Images/logo2.png")}
+            className="dashboard-logo"
+            alt="image"
+          />
+        </a>
+      </div>
+      <div id="body-pd">
+        <Sidemenu />
+        <div className="container">
+          <div className="row">
+            <div className="col-8">
+              <h3>All categories</h3>
+            </div>
+            <div className="col-4">
+              <Search
+                onChange={e => setSearchVal(e.target.value)}
+                placeholder="Search"
+                enterButton
+                style={{ position: "sticky", top: "0", left: "0" }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className="row">
+
+            <Table
+              rowKey="name"
+              dataSource={filteredData}
+              columns={columns}
+              loading={loading}
+              pagination={false}
+            />
+
+
+          </div>
+        </div>
+      </div>
+
+    </>
+  );
+}
