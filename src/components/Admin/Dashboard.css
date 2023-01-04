@@ -320,7 +320,10 @@ a{
   display:none;
   transition: 1.0s;
 }
-
+.animation svg
+{
+  height: 200px;
+}
 
 .nav__link .collapsed 
 {
@@ -394,7 +397,7 @@ padding: 0px !important;
 }
 .table>:not(:last-child)>:last-child>*
 {
-color: #006837;
+color: #1e144f;
 font-family: Foco;
 }
 .table td, .table th

@@ -683,13 +683,13 @@ const SearchResult = (props) => {
                                   />
                                 </h3>
                               </Link>
-                              <div className="d-flex pb-2 pl-4">
+                              {/* <div className="d-flex pb-2 pl-4">
                                 <i className="bx bxs-star"></i>
                                 <i className="bx bxs-star"></i>
                                 <i className="bx bxs-star"></i>
                                 <i className="bx bxs-star"></i>
                                 <i className="bx bxs-star"></i>
-                              </div>
+                              </div> */}
                               <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                                 <div className="discount-price-div">
                                   <span>{el.inrDiscount}</span>

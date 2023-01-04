@@ -85,6 +85,16 @@ text-align: justify;
    
 }
 
+/* /Toast/ */
+
+.Toastify__progress-bar--success
+{
+    background: #1e144f !important;
+}
+.Toastify__toast-body svg
+{
+    fill: #1e144f;
+}
 
 /* button css on image hover */
 
