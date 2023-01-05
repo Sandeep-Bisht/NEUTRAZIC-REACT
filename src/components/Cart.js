@@ -20,6 +20,7 @@ const Cart = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     CartById();
     CartById();
+    window.scroll(0,0);
   }, []);
   // const Subtotal=()=>{
   //    subtotal=subtotal+
@@ -86,6 +87,7 @@ const Cart = () => {
     }
   };
   const Plusquantity = async (quantity, price, index) => {
+    console.log(quantity,price,index,"Abhishek Herer");
     if (quantity >= 1) {
       //  isquantity = true
       cart[index].quantity = quantity + 1;

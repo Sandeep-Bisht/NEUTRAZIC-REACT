@@ -393,6 +393,9 @@ const SingleProduct = (props) => {
       console.log(JSON.stringify(CartDataWoLogin));
     }
   };
+
+
+
   const AddtoWishlist = async (
     productid,
     name,
