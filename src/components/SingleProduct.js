@@ -221,6 +221,10 @@ const SingleProduct = (props) => {
         .then(async (data) => {
           setUserCart(data.data);
           history.push("/Cart");
+          // toast.success("Add to cart",{
+          //   position:"bottom-right",
+          //   autoClose:5000,
+          // });
         })
         .catch((err) => {
           console.log(err, "error");
@@ -249,7 +253,11 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "after update");
-        history.push("/Cart");
+        //history.push("/Cart");
+        //   toast.success("Add to cart",{
+        //   position:"bottom-right",
+        //   autoClose:5000,
+        // });
       })
       .then((err) => console.log(err));
   };
@@ -322,6 +330,7 @@ const SingleProduct = (props) => {
         autoClose:5000,
       });
     }
+    window.scroll(0,0);
   };
 
   const categoryDetails = async (id) => {
