@@ -249,7 +249,8 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "after update");
-        history.push("/Cart");
+        //history.push("/Cart");
+        window.scroll(0,0);
       })
       .then((err) => console.log(err));
   };
@@ -384,6 +385,9 @@ const SingleProduct = (props) => {
       console.log(JSON.stringify(CartDataWoLogin));
     }
   };
+
+
+
   const AddtoWishlist = async (
     productid,
     name,

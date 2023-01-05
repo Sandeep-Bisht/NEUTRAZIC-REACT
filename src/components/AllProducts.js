@@ -20,6 +20,7 @@ const AllProducts = (props) => {
   const [next, SetNext] = useState(8);
   const [filter, setFilter] = useState("");
   const [mrp, setMrp] = useState();
+  const [data, setData] = useState([]);
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -245,7 +246,7 @@ const AllProducts = (props) => {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        if (!JSON.stringify(data.data).includes(productid)) {
+        if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
               //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
@@ -274,15 +275,51 @@ const AllProducts = (props) => {
                 //  await console.log(wishlist,"khlklklklk")
               })
               .catch((err) => {
-                console.log(err, "error");
+                console.log(err, "error e");
               });
           }
         } else {
-          alert("Allready in wishlist");
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(
+                //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
+                "http://localhost:3033/api/wishlist/add_to_wishlist",
+                {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    userid: Userdata._id,
+                    image: image,
+                    name: name,
+                    productId: productid,
+                    rating: "5",
+                    category: category,
+                    manufacturer: manufacturer,
+                    description: description,
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(async (data) => {
+                  // setWishlist(data.data[0]);
+                  //  await console.log(wishlist,"khlklklklk")
+                })
+                .catch((err) => {
+                  console.log(err, "error e");
+                });
+            }
+          } else {
+            toast.error('Allready in wishlist !', {
+              position: toast.POSITION.BOTTOM_RIGHT
+          });
+            
+          }
         }
       });
   };
-
   // allcategory api //
   const GetCategory = async () => {
     //await fetch("http://144.91.110.221:3033/api/category/all_category")

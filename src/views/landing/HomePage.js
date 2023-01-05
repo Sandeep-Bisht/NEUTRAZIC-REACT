@@ -10,14 +10,15 @@ import { useHistory } from "react-router-dom";
 import Delivery from "../../Images/delivery.jpg";
 import ReadMoreReact from "read-more-react";
 import Mobile from "../../Images/Mobile.png";
-import {AiFillApple} from 'react-icons/ai';
-import {IoLogoGooglePlaystore} from "react-icons/io5";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { AiFillApple } from "react-icons/ai";
+import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import $ from "jquery";
 
 var Userdata = "";
+var CartDataWoLogin = [];
 let tranding = 0;
 let skincare = 0;
 const HomePage = () => {
@@ -42,7 +43,7 @@ const HomePage = () => {
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
-  const [color,setColor]=useState(false);
+  const [color, setColor] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -69,9 +70,14 @@ const HomePage = () => {
     });
   }, []);
   const WishlistHeart = () => {
-    $(".icon-wishlist").on("click", function() {
-      $(this).toggleClass("in-wishlist");
-    });
+    // $(".icon-wishlist").on("click", function() {
+    //   $(this).toggleClass("in-wishlist");
+    // });
+    // $(document).ready(function() {
+    //   $(".WishHeart").on("click", function() {
+    //     $(this).toggleClass("active-color");
+    //   });
+    // });
   };
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
@@ -112,7 +118,8 @@ const HomePage = () => {
         console.log(err, "error");
       });
   };
-  const cartfunction = async (
+
+  const addToCartWithoutRegistration = (
     productid,
     name,
     quantity,
@@ -123,7 +130,49 @@ const HomePage = () => {
     manufacturer,
     image
   ) => {
-    if (quantity !== 0) {
+    var newItemObj = {
+      productid: productid,
+      name: name,
+      image: image,
+      quantity: quantity,
+      mrp: parseInt(mrp),
+      singleprice: parseInt(mrp),
+      discountprice: discount,
+      description: description,
+      category: category,
+      manufacturer: manufacturer,
+      description: description,
+      status: "Pending",
+      justification: "Enjoy",
+      delivery_time: "No Status",
+    };
+    if (
+      !JSON.stringify(CartDataWoLogin).includes(name) &&
+      !JSON.stringify(localStorage.getItem("CartDataWoLogin")).includes(name)
+    ) {
+      if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
+        CartDataWoLogin = JSON.parse(localStorage.getItem("CartDataWoLogin"));
+      }
+      CartDataWoLogin.push(newItemObj);
+      localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
+      console.log(JSON.stringify(CartDataWoLogin));
+    }
+  };
+
+  const cartfunction = async (
+    productid,
+    name,
+    quantity,
+    mrp,
+    singleprice,
+    discount,
+    description,
+    category,
+    manufacturer,
+    image
+  ) => {
+    console.log("quantityyy", quantity);
+    if (quantity > 0) {
       var merged = false;
       var newItemObj = {
         productid: productid,
@@ -131,18 +180,21 @@ const HomePage = () => {
         image: image,
         quantity: quantity,
         mrp: parseInt(mrp),
-        singleprice: parseInt(mrp),
+        singleprice: parseInt(singleprice),
         discountprice: discount,
-
+        description: description,
         category: category,
         manufacturer: manufacturer,
         description: description,
+        status: "Pending",
+        justification: "Enjoy",
+        delivery_time: "No Status",
       };
       if (userCart.order == null || userCart.order == []) {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            order[i].mrp += newItemObj.mrp;
+            // order[i].mrp += newItemObj.mrp;
             // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
@@ -158,10 +210,7 @@ const HomePage = () => {
         for (var i = 0; i < userCart.order.length; i++) {
           if (userCart.order[i].productid == newItemObj.productid) {
             userCart.order[i].quantity += newItemObj.quantity;
-            userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-          } else {
-            merged = false;
           }
           setQuantity(1);
         }
@@ -169,17 +218,21 @@ const HomePage = () => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        CartById();
-        UpdateCart();
-
+        // CartById();
+        await UpdateCart();
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
+      toast.success("Add to cart", {
+        position: "bottom-right",
+        autoClose: 5000,
+      });
     }
   };
+
   const UpdateCart = () => {
+    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
     const url = "http://localhost:3033/api/cart/update_cart_by_id";
-    // const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
     fetch(url, {
       method: "put",
       headers: {
@@ -195,7 +248,8 @@ const HomePage = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "after update");
-        history.push("/Cart");
+        //history.push("/Cart");
+        window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
@@ -223,8 +277,8 @@ const HomePage = () => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
+      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
       await fetch("http://localhost:3033/api/cart/add_to_cart", {
-        //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -245,7 +299,7 @@ const HomePage = () => {
         });
     }
     // else{
-    //    history.push('/Register')
+    //   history.push('/Register')
     // }
   };
   const AddtoWishlist = async (
@@ -336,18 +390,24 @@ const HomePage = () => {
                 .catch((err) => {
                   console.log(err, "error e");
                 });
+                
             }
-           
           } else {
-          
-          toast.error("Allready in wishlist !",{
-            position: toast.POSITION.BOTTOM_RIGHT, 
-            autoClose: 5000,         
-          });
+            toast.error("Allready in wishlist !", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 5000,
+            });
           }
         }
       });
   };
+  // const HeartColor = (el) => {
+  //   $(document).ready(function() {
+  //     $(".bxs-heart").click(function() {
+  //       $(".bxs-heart").addClass("active-color");
+  //     });
+  //   });
+  // };
 
   const responsive = {
     superLargeDesktop: {
@@ -430,11 +490,12 @@ const HomePage = () => {
         </section>
 
         <section className="products-area">
-          <h1 className="trendign-head"><span className="products-color">Trending Products</span></h1>
+          <h1 className="trendign-head">
+            <span className="products-color">Trending Products</span>
+          </h1>
           <div className="container m-auto">
             <div className="row">
               {data.map((el, ind) => {
-                console.log("tranding products", el);
                 if (
                   (tranding < 8 && el.type == "Tranding Product") ||
                   el.type == "Trending Product"
@@ -476,14 +537,16 @@ const HomePage = () => {
                                       <ReadMoreReact text={el.name} />
                                     </Link>
                                     <div className="price-div d-flex align-items-center justify-content-between">
-                                      <span className="new-price"><i class="fa fa-inr"></i>{" "}{el.inrDiscount}</span>
+                                      <span className="new-price">
+                                        <i class="fa fa-inr"></i>{" "}
+                                        {el.inrDiscount}
+                                      </span>
                                       <del className="new-price ml-1">
-                                         {el.inrMrp}
+                                        {el.inrMrp}
                                       </del>
                                       {Userdata ? (
                                         <i
-                                          className=" bx bxs-heart ml-3"
-                                        
+                                          className="bx bxs-heart ml-3"
                                           onClick={() => {
                                             AddtoWishlist(
                                               el._id,
@@ -509,15 +572,61 @@ const HomePage = () => {
                                                 : null
                                             }
                                           ></i>
-                                          
+
                                           <Link to="/Register">
                                             <i className="bx bxs-heart ml-3 mobile-heart"></i>
                                           </Link>
                                         </>
                                       )}
-                                      <i className="bx bx-cart mr-1"
-                                        
-                                      ></i>
+                                      <div>
+                                        {Userdata ? (
+                                          // console.log(Userdata,"Abhishek User")
+                                          <i
+                                            className="bx bx-cart"
+                                            onClick={() => {
+                                              {
+                                                Userdata !== null
+                                                  ? cartfunction(
+                                                      el._id,
+                                                      el.name,
+                                                      quantity,
+                                                      el.inrMrp,
+                                                      el.inrDiscount,
+                                                      el.discount,
+                                                      el.description,
+                                                      el.category,
+                                                      el.manufacturer.name,
+                                                      el.image[0].path
+                                                    )
+                                                  : addToCartWithoutRegistration(
+                                                      el._id,
+                                                      el.name,
+                                                      quantity,
+                                                      el.inrMrp,
+                                                      el.inrDiscount,
+                                                      el.discount,
+                                                      el.description,
+                                                      el.category,
+                                                      el.manufacturer.name,
+                                                      el.image[0].path
+                                                    );
+                                              }
+                                            }}
+                                          ></i>
+                                        ) : (
+                                          <i
+                                            className="bx bx-cart mr-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target={
+                                              Userdata == null
+                                                ? "#exampleModal"
+                                                : null
+                                            }
+                                          >
+                                            <Link to="/Register"></Link>
+                                          </i>
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -613,7 +722,9 @@ const HomePage = () => {
         </section>
 
         <section className="products-area ">
-          <h1 className="trendign-head"><span className="products-color">Products</span></h1>
+          <h1 className="trendign-head">
+            <span className="products-color">Products</span>
+          </h1>
           <div className="container m-auto py-4">
             <div className="row ">
               {data.map((el, ind) => {
@@ -622,75 +733,120 @@ const HomePage = () => {
                     <div className="col-lg-2 col-md-12 col-sm-12 ">
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
-                          <div className="row">
-                            <div className="col-md-12">
-                              <div className="product-div">
-                                <div className="product-image-div">
-                                  <Link
-                                    to={"/SingleProduct/" + el._id}
-                                    className="product-image-link"
-                                  >
-                                    <div className="image hover-switch">
-                                      <img
-                                        src={require("../../Images/products/Hintosulin (1).png")}
-                                        alt=""
-                                      />
-                                      <img
-                                        src={
-                                          //"http://144.91.110.221:3033/" +
-                                          "http://localhost:3033/" +
-                                          el.image[0].path
-                                        }
-                                        alt=""
-                                        style={{ position: "absolute" }}
-                                      />
-                                    </div>
+                        <div className="row">
+                          <div className="col-md-12">
+                            <div className="product-div">
+                              <div className="product-image-div">
+                                <Link
+                                  to={"/SingleProduct/" + el._id}
+                                  className="product-image-link"
+                                >
+                                  <div className="image hover-switch">
+                                    <img
+                                      src={require("../../Images/products/Hintosulin (1).png")}
+                                      alt=""
+                                    />
+                                    <img
+                                      src={
+                                        //"http://144.91.110.221:3033/" +
+                                        "http://localhost:3033/" +
+                                        el.image[0].path
+                                      }
+                                      alt=""
+                                      style={{ position: "absolute" }}
+                                    />
+                                  </div>
+                                </Link>
+                              </div>
+                              <div className="tranding product-image-content">
+                                <div className="content product-content">
+                                  <Link to={"/SingleProduct/" + el._id}>
+                                    <ReadMoreReact text={el.name} />
                                   </Link>
-                                </div>
-                                <div className="tranding product-image-content">
-                                  <div className="content product-content">
-                                    <Link to={"/SingleProduct/" + el._id}>
-                                      <ReadMoreReact text={el.name} />
-                                    </Link>
-                                    <div className="price-div d-flex align-items-center justify-content-between">
-                                      <span className="new-price">$899</span>
-                                      <del className="new-price ml-1">
-                                        $1000
-                                      </del>
-                                      {Userdata ? (
+                                  <div className="price-div d-flex align-items-center justify-content-between">
+                                    <span className="new-price">$899</span>
+                                    <del className="new-price ml-1">$1000</del>
+                                    {Userdata ? (
+                                      <i
+                                        className="bx bxs-heart ml-3"
+                                        onClick={() => {
+                                          AddtoWishlist(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image
+                                          );
+                                        }}
+                                      ></i>
+                                    ) : (
+                                      <>
                                         <i
-                                          className="bx bxs-heart ml-3"
+                                          className="bx bxs-heart ml-3 pc-heart"
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
+                                        ></i>
+                                        <Link to="/Register">
+                                          <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                        </Link>
+                                      </>
+                                    )}
+                                    <div>
+                                      {Userdata ? (
+                                        // console.log(Userdata,"Abhishek User")
+                                        <i
+                                          className="bx bx-cart"
                                           onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
+                                            {
+                                              Userdata !== null
+                                                ? cartfunction(
+                                                    el._id,
+                                                    el.name,
+                                                    quantity,
+                                                    el.inrMrp,
+                                                    el.inrDiscount,
+                                                    el.discount,
+                                                    el.description,
+                                                    el.category,
+                                                    el.manufacturer.name,
+                                                    el.image[0].path
+                                                  )
+                                                : addToCartWithoutRegistration(
+                                                    el._id,
+                                                    el.name,
+                                                    quantity,
+                                                    el.inrMrp,
+                                                    el.inrDiscount,
+                                                    el.discount,
+                                                    el.description,
+                                                    el.category,
+                                                    el.manufacturer.name,
+                                                    el.image[0].path
+                                                  );
+                                            }
                                           }}
                                         ></i>
                                       ) : (
-                                        <>
-                                          <i
-                                            className="bx bxs-heart ml-3 pc-heart"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-                                          <Link to="/Register">
-                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                          </Link>
-                                        </>
+                                        <i
+                                          className="bx bx-cart mr-1"
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
+                                        >
+                                          <Link to="/Register"></Link>
+                                        </i>
                                       )}
-                                      <i className="bx bx-cart mr-1"></i>
                                     </div>
                                   </div>
                                 </div>
@@ -698,6 +854,7 @@ const HomePage = () => {
                             </div>
                           </div>
                         </div>
+                      </div>
                       {/* </Link> */}
                     </div>
                   );
@@ -716,7 +873,9 @@ const HomePage = () => {
           </div>
         </section>
         <section className="products-area">
-        <h1 className="trendign-head"><span className="products-color">Skin Care</span></h1>
+          <h1 className="trendign-head">
+            <span className="products-color">Skin Care</span>
+          </h1>
           <div className="container m-auto">
             <div className="row">
               {data.map((el, ind) => {
@@ -733,88 +892,131 @@ const HomePage = () => {
                     <div className="col-lg-2 col-md-12 col-sm-12 ">
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
-                          <div className="row">
-                            <div className="col-md-12">
-                              <div className="product-div">
-                                <div className="product-image-div">
-                                  <Link
-                                    to={"/SingleProduct/" + el._id}
-                                    className="product-image-link"
-                                  >
-                                    <div className="image hover-switch">
-                                      <img
-                                        src={require("../../Images/products/Hintosulin (1).png")}
-                                        alt=""
-                                      />
-                                      <img
-                                        src={
-                                          //"http://144.91.110.221:3033/" +
-                                          "http://localhost:3033/" +
-                                          el.image[0].path
-                                        }
-                                        alt=""
-                                        style={{ position: "absolute" }}
-                                      />
-                                    </div>
+                        <div className="row">
+                          <div className="col-md-12">
+                            <div className="product-div">
+                              <div className="product-image-div">
+                                <Link
+                                  to={"/SingleProduct/" + el._id}
+                                  className="product-image-link"
+                                >
+                                  <div className="image hover-switch">
+                                    <img
+                                      src={require("../../Images/products/Hintosulin (1).png")}
+                                      alt=""
+                                    />
+                                    <img
+                                      src={
+                                        //"http://144.91.110.221:3033/" +
+                                        "http://localhost:3033/" +
+                                        el.image[0].path
+                                      }
+                                      alt=""
+                                      style={{ position: "absolute" }}
+                                    />
+                                  </div>
+                                </Link>
+                              </div>
+                              <div className="tranding product-image-content">
+                                <div className="content product-content">
+                                  <Link to={"/SingleProduct/" + el._id}>
+                                    <ReadMoreReact text={el.name} />
                                   </Link>
-                                </div>
-                                <div className="tranding product-image-content">
-                                  <div className="content product-content">
-                                    <Link to={"/SingleProduct/" + el._id}>
-                                      <ReadMoreReact text={el.name} />
-                                    </Link>
-                                    <div className="price-div d-flex align-items-center justify-content-between">
-                                      <span className="new-price">$899</span>
-                                      <del className="new-price ml-1">
-                                        $1000
-                                      </del>
-                                      {Userdata ? (
+                                  <div className="price-div d-flex align-items-center justify-content-between">
+                                    <span className="new-price">$899</span>
+                                    <del className="new-price ml-1">$1000</del>
+                                    {Userdata ? (
+                                      <i
+                                        className="bx bxs-heart ml-3"
+                                        onClick={() => {
+                                          AddtoWishlist(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image
+                                          );
+                                        }}
+                                      ></i>
+                                    ) : (
+                                      <>
                                         <i
-                                          className="bx bxs-heart ml-3"
-                                          onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
-                                          }}
+                                          className="bx bxs-heart ml-3 pc-heart"
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
                                         ></i>
-                                      ) : (
-                                        <>
-                                          <i
-                                            className="bx bxs-heart ml-3 pc-heart"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-                                          <Link to="/Register">
-                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                          </Link>
-                                        </>
-                                      )}
-                                      
-                                      <ToastContainer 
-                            
-                                      />
-                                      <i className="bx bx-cart mr-1"></i>
-                                    </div>
+                                        <Link to="/Register">
+                                          <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                        </Link>
+                                      </>
+                                    )}
+
+                                    <ToastContainer />
+                                    {Userdata ? (
+                                      // console.log(Userdata,"Abhishek User")
+                                      <i
+                                        className="bx bx-cart"
+                                        onClick={() => {
+                                          {
+                                            Userdata !== null
+                                              ? cartfunction(
+                                                  el._id,
+                                                  el.name,
+                                                  quantity,
+                                                  el.inrMrp,
+                                                  el.inrDiscount,
+                                                  el.discount,
+                                                  el.description,
+                                                  el.category,
+                                                  el.manufacturer.name,
+                                                  el.image[0].path
+                                                )
+                                              : addToCartWithoutRegistration(
+                                                  el._id,
+                                                  el.name,
+                                                  quantity,
+                                                  el.inrMrp,
+                                                  el.inrDiscount,
+                                                  el.discount,
+                                                  el.description,
+                                                  el.category,
+                                                  el.manufacturer.name,
+                                                  el.image[0].path
+                                                );
+                                          }
+                                        }}
+                                      ></i>
+                                    ) : (
+                                      <i
+                                        className="bx bx-cart mr-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target={
+                                          Userdata == null
+                                            ? "#exampleModal"
+                                            : null
+                                        }
+                                      >
+                                        <Link to="/Register"></Link>
+                                      </i>
+                                    )}
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      {/* </Link> */}
+                      </div>
                     </div>
+
+                    // </div>
                   );
                 }
               })}
@@ -832,7 +1034,9 @@ const HomePage = () => {
 
         <div className="brands-area">
           <div className="container m-auto">
-            <div className="trendign-head"><span className="products-color">Selling Brands</span></div>
+            <div className="trendign-head">
+              <span className="products-color">Selling Brands</span>
+            </div>
             <div className="row align-items-center">
               {Manufactureres &&
                 Manufactureres.length > 0 &&
@@ -865,7 +1069,9 @@ const HomePage = () => {
                 <div className="mobile-main">
                   <div>
                     <h3 className="cat-heading">
-                      Download the <span className="nutrazik-color">Nutrazik</span> <br/> mobile app
+                      Download the{" "}
+                      <span className="nutrazik-color">Nutrazik</span> <br />{" "}
+                      mobile app
                     </h3>
                     <div>
                       <p id="para" className="text-justify">
@@ -879,24 +1085,20 @@ const HomePage = () => {
                     </div>
                   </div>
                   <div className="btn-div">
-                    <button
-                      type="button"
-                      className="btn"
-                      id="btn-1"
-                    >
+                    <button type="button" className="btn" id="btn-1">
                       <div className="d-flex align-items-center">
-                    <div><AiFillApple/></div>
-                    <div>App Store</div>
-                    </div>
+                        <div>
+                          <AiFillApple />
+                        </div>
+                        <div>App Store</div>
+                      </div>
                     </button>
-                    <button
-                      type="button"
-                      className="btn ms-3"
-                      id="btn-2"
-                    >
+                    <button type="button" className="btn ms-3" id="btn-2">
                       <div className="d-flex align-items-center">
-                      <div><IoLogoGooglePlaystore/></div>
-                      <div>Google Play</div>
+                        <div>
+                          <IoLogoGooglePlaystore />
+                        </div>
+                        <div>Google Play</div>
                       </div>
                     </button>
                   </div>

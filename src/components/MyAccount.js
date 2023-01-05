@@ -22,7 +22,7 @@ const MyAccount = () => {
     formState: { errors },
   } = useForm();
   const onsubmit = (data) => {
-    alert("Success");
+    // alert("Success");
     // console.log(
     //   data.name,
     //   data.address,
@@ -35,7 +35,7 @@ const MyAccount = () => {
   return (
     <>
       <Header1 />
-      <div id="Myacount">
+      <div id="Myacount-Page">
         <form onSubmit={handleSubmit(onsubmit)}>
           <div className="container mt-5 mb-5">
             <div className="row">
