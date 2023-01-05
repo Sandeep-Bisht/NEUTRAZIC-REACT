@@ -766,10 +766,9 @@ const SearchResult = (props) => {
                       {/* </Link> */}
                     </div>
                   );
-                } 
-                else {
-                  if (count <= 0) {
-                    count=1;
+                } else {
+                  if (count < 0) {
+                    count = 1;
                     return (
                       <lottie-player
                         src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"

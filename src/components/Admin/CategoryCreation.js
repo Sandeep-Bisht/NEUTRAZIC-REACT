@@ -12,6 +12,9 @@ const CategoryCreation = (props) => {
     descripton: "",
     image: [],
   });
+
+  const [editableData]=useState(props.history.location.state);
+
   const submitData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -114,40 +117,40 @@ const CategoryCreation = (props) => {
       });
   };
 
-  const data1 = [];
-  {
-    categories.map((item, index) => {
-      data1.push({
-        sr_no: index + 1,
-        name: item.name,
-        Action: (
-          <>
-            <button
-              className="btnbtn-danger"
-              onClick={(e) => {
-                if (window.confirm("Are you sure ?")) {
-                  DeleteCategory(item._id, e);
-                } else {
-                  return false;
-                }
-              }}
-            >
-              <i className="bx bx-trash"></i>
-            </button>
-            <button
-              className="ml-2 btnbtn-danger"
-              onClick={() => {
-                EditCategory(item);
-                setUpdate(true);
-              }}
-            >
-              <i className="bx bx-edit"></i>
-            </button>
-          </>
-        ),
-      });
-    });
-  }
+  // const data1 = [];
+  // {
+  //   categories.map((item, index) => {
+  //     data1.push({
+  //       sr_no: index + 1,
+  //       name: item.name,
+  //       Action: (
+  //         <>
+  //           <button
+  //             className="btnbtn-danger"
+  //             onClick={(e) => {
+  //               if (window.confirm("Are you sure ?")) {
+  //                 DeleteCategory(item._id, e);
+  //               } else {
+  //                 return false;
+  //               }
+  //             }}
+  //           >
+  //             <i className="bx bx-trash"></i>
+  //           </button>
+  //           <button
+  //             className="ml-2 btnbtn-danger"
+  //             onClick={() => {
+  //               EditCategory(item);
+  //               setUpdate(true);
+  //             }}
+  //           >
+  //             <i className="bx bx-edit"></i>
+  //           </button>
+  //         </>
+  //       ),
+  //     });
+  //   });
+  // }
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Category Name", data: "name" },
@@ -199,7 +202,7 @@ const CategoryCreation = (props) => {
                             type="text"
                             className="form-control Dashborad-search"
                             placeholder="Category Name "
-                            defaultValue={update == true ? data.name : ""}
+                            defaultValue={editableData ? editableData.name : ""}
                             onChange={(e) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
@@ -211,15 +214,25 @@ const CategoryCreation = (props) => {
                             placeholder="Category Description"
                             rows="3"
                             defaultValue={
-                              update == true ? data.description : ""
+                              editableData ? editableData.description : ""
                             }
                             onChange={(e) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
                         </div>
-                        {update == false ? (
+                        {editableData ? (
                           <div className="col-12 pt-4">
+                            
+                            <button
+                              className="btn btn-primary"
+                              onClick={(e) => UpdateCategory(e, data._id)}
+                            >
+                              Update
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="col-12 p-1">
                             <button
                               className="btn btn-primary"
                               onClick={(e) => {
@@ -227,15 +240,6 @@ const CategoryCreation = (props) => {
                               }}
                             >
                               Submit
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="col-12 p-1">
-                            <button
-                              className="btn btn-primary"
-                              onClick={(e) => UpdateCategory(e, data._id)}
-                            >
-                              Update
                             </button>
                           </div>
                         )}

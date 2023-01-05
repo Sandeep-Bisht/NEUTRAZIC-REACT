@@ -5,7 +5,7 @@ import "./Dashboard.css";
 import $ from "jquery";
 import { Link } from "react-router-dom";
 var Userdata;
-const ManufacturerCreation = () => {
+const ManufacturerCreation = (props) => {
   var count = 0;
   const [manufactureres, setManufactureres] = useState([]);
   const [ManufacturerCount, setManufacturerCount] = useState(0);
@@ -15,6 +15,7 @@ const ManufacturerCreation = () => {
     descripton: "",
     image: [],
   });
+  const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
     const formData = new FormData();
@@ -121,45 +122,45 @@ const ManufacturerCreation = () => {
       });
   };
 
-  const data1 = [];
-  {
-    manufactureres.map((item, index) => {
-      data1.push({
-        sr_no: index + 1,
-        name: item.name,
-        Action:
-          Userdata !== undefined && Userdata.role == "superAdmin" ? (
-            <>
-              <button
-                className="btnbtn-danger"
-                onClick={() => {
-                  if (window.confirm("Are you sure ?")) {
-                    DeleteManufacturer(item._id);
-                  } else {
-                    return false;
-                  }
-                }}
-              >
-                <i className="bx bx-trash"></i>
-              </button>
-              <button
-                className="ml-2 btnbtn-danger"
-                onClick={() => {
-                  EditManufacturer(item);
-                  setUpdate(true);
-                }}
-              >
-                <i className="bx bx-edit"></i>
-              </button>
-            </>
-          ) : (
-            <button>
-              <i className="bx bx-show"></i>
-            </button>
-          ),
-      });
-    });
-  }
+  // const data1 = [];
+  // {
+  //   manufactureres.map((item, index) => {
+  //     data1.push({
+  //       sr_no: index + 1,
+  //       name: item.name,
+  //       Action:
+  //         Userdata !== undefined && Userdata.role == "superAdmin" ? (
+  //           <>
+  //             <button
+  //               className="btnbtn-danger"
+  //               onClick={() => {
+  //                 if (window.confirm("Are you sure ?")) {
+  //                   DeleteManufacturer(item._id);
+  //                 } else {
+  //                   return false;
+  //                 }
+  //               }}
+  //             >
+  //               <i className="bx bx-trash"></i>
+  //             </button>
+  //             <button
+  //               className="ml-2 btnbtn-danger"
+  //               onClick={() => {
+  //                 EditManufacturer(item);
+  //                 setUpdate(true);
+  //               }}
+  //             >
+  //               <i className="bx bx-edit"></i>
+  //             </button>
+  //           </>
+  //         ) : (
+  //           <button>
+  //             <i className="bx bx-show"></i>
+  //           </button>
+  //         ),
+  //     });
+  //   });
+  // }
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Manufacturer Name", data: "name" },
@@ -209,7 +210,7 @@ const ManufacturerCreation = () => {
                             type="text"
                             className="form-control Dashborad-search"
                             placeholder="Manufacturer Name "
-                            defaultValue={update == true ? data.name : ""}
+                            defaultValue={editableData ? editableData.name : ""}
                             onChange={(e) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
@@ -221,20 +222,22 @@ const ManufacturerCreation = () => {
                             placeholder="Manufacturer Description"
                             rows="3"
                             defaultValue={
-                              update == true ? data.description : ""
+                              editableData ? editableData.description : ""
                             }
                             onChange={(e) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
                         </div>
-                        {update == false ? (
+                        {editableData ? (
                           <div className="col-12 pt-4">
+                            
                             <button
                               className="btn btn-primary"
-                              onClick={(e) => submitData(e)}
+                              id="update-btn"
+                              onClick={(e) => UpdateManufacturer(e, data._id)}
                             >
-                              Submit
+                              Update
                             </button>
                           </div>
                         ) : null}
@@ -242,10 +245,9 @@ const ManufacturerCreation = () => {
                           <div className="col-12 p-1">
                             <button
                               className="btn btn-primary"
-                              id="update-btn"
-                              onClick={(e) => UpdateManufacturer(e, data._id)}
+                              onClick={(e) => submitData(e)}
                             >
-                              Update
+                              Submit
                             </button>
                           </div>
                         ) : null}
