@@ -9993,17 +9993,11 @@ p:last-child {
 }
 
 .section-title {
-<<<<<<< HEAD
-	display: flex;
-	justify-content: center;
-	font-family: Poppins;
-=======
 	/* margin-bottom: 5rem;; */
 	position: relative;
 
 	/* margin-top: 5rem; */
 	font-family: 'Roboto', sans-serif;
->>>>>>> 70d1161cdf4df3e295574814470e765292e4c0b6
 }
 .section-title .Products
 {
