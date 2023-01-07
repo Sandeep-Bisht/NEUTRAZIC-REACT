@@ -51,9 +51,9 @@ const Productform = (props) => {
     await formData.append("image", data.image);
     //await formData.append("featuredImage", data.featuredImage)    
     //const url="http://144.91.110.221:3033/api/product/add_product"
+    console.log(data, "formData before sending")
     const url = "http://localhost:3033/api/product/add_product";
     await fetch(url, {
-
       mode: 'no-cors',
       method: "POST",
       body: formData,
@@ -63,7 +63,7 @@ const Productform = (props) => {
       //   this.getAddOn();
       // })
       .catch((err) => console.log(err));
-    //console.log(formData)
+    // console.log(formData)
   };
 
   useEffect(() => {
@@ -351,13 +351,12 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <input
                             type="file"
-                            name="image[]"
-                            multiple
+                            name="image[]"                            
                             className="form-control Dashborad-search"
                             accept="image/png, .jpeg, .jpg"
                             //value={editableData  ? editableData.image[0].path : ""}
                             onChange={(e) => {
-                              Setdata({ ...data, image: e.target.files });
+                              Setdata({ ...data, image: e.target.files[0] });
                             }}
                           />
                         </div>
