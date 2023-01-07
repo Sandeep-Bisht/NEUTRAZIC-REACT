@@ -19,7 +19,7 @@ var sticky;
 var Userdata = "";
 // var userCart=[]
 const Header1 = (props) => {
-  console.log(props,"lengthhhhhhhhhhhhhh");
+  
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -35,6 +35,7 @@ const Header1 = (props) => {
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
   useEffect(() => {
+    console.log(props,"lengthhhhhhhhhhhhhh212345");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     GetSubCategory();
@@ -741,9 +742,9 @@ const Header1 = (props) => {
                 <div className="col-sm-2">
                   <div className="option-item">
                     <div className="cart-btn">
-                      <Link to="/Ordered">
+                      {/* <Link to="/Ordered"> */}
                         <i className="bx bx-heart"></i>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>
@@ -786,11 +787,11 @@ const Header1 = (props) => {
               <input
                 type="text"
                 onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                onKeyPress={(e) => {
-                  if (e.key == "Enter") {
-                    searchData(search);
-                  }
-                }}
+                // onKeyPress={(e) => {
+                //   if (e.key == "Enter") {
+                //     searchData(search);
+                //   }
+                // }}
               />
               <Link to={"/SearchResult/" + search}>
                 <button

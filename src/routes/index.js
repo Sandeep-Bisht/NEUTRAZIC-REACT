@@ -46,6 +46,7 @@ import AllProductsDetails from "../components/Admin/AllProducts/AllProductsDetai
 import AllCategoriesDetails from "../components/Admin/AllCategory/AllCategoriesDetails";
 import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCategoriesDetails";
 import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
+import MyAccount from "../components/MyAccount"
 
 var Userdata = "";
 const Root = (props) => {
@@ -157,6 +158,7 @@ const Root = (props) => {
               path="/SearchResult/:Search"
               component={SearchResult}
             />
+            <Route exact path = "/MyAccount" component={MyAccount}/>
           
           </Switch>
         </>

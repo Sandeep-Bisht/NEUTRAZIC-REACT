@@ -19662,3 +19662,10 @@ margin: 40px 8px 15px 0px;
     position: relative;
     bottom: 20px;
 }
+
+.Toastify__toast-body{
+	justify-content: space-between;
+	padding-right: 60px !important;
+}
+
+

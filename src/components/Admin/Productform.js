@@ -5,7 +5,8 @@ import $ from "jquery";
 import "./Dashboard.css";
 var Userdata;
 // http://localhost:3010/api/product/add_product
-const Productform = () => {
+const Productform = (props) => {
+
   var productCount = 0;
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
@@ -13,6 +14,8 @@ const Productform = () => {
   const [products, Setproducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [shwoTable, setShowTable] = useState(false);
+  const [editableData]=useState(props.history.location.state);
+ 
   let [data, Setdata] = useState({
     name: "",
     description: "",
@@ -48,9 +51,9 @@ const Productform = () => {
     await formData.append("image", data.image);
     //await formData.append("featuredImage", data.featuredImage)    
     //const url="http://144.91.110.221:3033/api/product/add_product"
+    console.log(data, "formData before sending")
     const url = "http://localhost:3033/api/product/add_product";
     await fetch(url, {
-
       mode: 'no-cors',
       method: "POST",
       body: formData,
@@ -60,7 +63,7 @@ const Productform = () => {
       //   this.getAddOn();
       // })
       .catch((err) => console.log(err));
-    //console.log(formData)
+    // console.log(formData)
   };
 
   useEffect(() => {
@@ -146,107 +149,108 @@ const Productform = () => {
         console.log(err, "error");
       });
   };
-  const data1 = [];
+  // const data1 = [];
 
-  if (Userdata != undefined && Userdata.role == "Vendor") {
-    {
-      products.map((item, index) => {
-        data1.push(
-          item.manufacturer.name == Userdata.organization
-            ? {
-              sr_no: index + 1,
-              name: item.name,
-              category: item.category,
-              manufacturer: item.manufacturer.name,
-              "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
-              "INRdiscount/Doolerdiscount":
-                item.inrDiscount + "/" + item.dollerDiscount,
-              action:
-                Userdata != undefined && Userdata.role == "superAdmin" ? (
-                  <>
-                    <button className="btnbtn-danger data-table-button">
-                      <i
-                        className="bx bx-trash"
-                        onClick={() => {
-                          if (window.confirm("Are you sure ?")) {
-                            DeleteProduct(item._id);
-                          } else {
-                            return false;
-                          }
-                        }}
-                      ></i>
-                    </button>{" "}
-                    <button
-                      onClick={() => Editproduct(item)}
-                      className=" btnbtn-danger"
-                    >
-                      <i className="bx bx-edit"></i>
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={() => Editproduct(item)}
-                    className="update btnbtn-danger"
-                  >
-                    <i className="bx bx-show"></i>
-                  </button>
-                ),
-            }
-            : null
-        );
-      });
-    }
-  } else if (
-    (Userdata != undefined && Userdata.role == "superAdmin") ||
-    (Userdata != undefined && Userdata.role == "Manager")
-  ) {
-    {
-      products.map((item, index) => {
-        data1.push({
-          sr_no: index + 1,
-          name: item.name,
-          category: item.category,
-          manufacturer: item.manufacturer.name,
-          "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
-          "INRdiscount/Doolerdiscount":
-            item.inrDiscount + "/" + item.dollerDiscount,
-          action:
-            Userdata != undefined && Userdata.role == "superAdmin" ? (
-              <>
-                <button className="btnbtn-danger">
-                  <i
-                    className="bx bx-trash"
-                    onClick={() => {
-                      if (window.confirm("Are you sure ?")) {
-                        DeleteProduct(item._id);
-                      } else {
-                        return false;
-                      }
-                    }}
-                  ></i>
-                </button>{" "}
-                <button
-                  onClick={() => {
-                    Editproduct(item);
-                    setUpdate(true);
-                  }}
-                  className="btnbtn-danger"
-                >
-                  <i className="bx bx-edit"></i>
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={() => Editproduct(item)}
-                className="btnbtn-danger"
-              >
-                <i className="bx bx-show "></i>
-              </button>
-            ),
-        });
-      });
-    }
-  }
+  // if (Userdata != undefined && Userdata.role == "Vendor") {
+  //   {
+  //     console.log(products,"productssssssssssssssssss")
+  //     products.map((item, index) => {
+  //       data1.push(
+  //         item.manufacturer.name == Userdata.organization
+  //           ? {
+  //             sr_no: index + 1,
+  //             name: item.name,
+  //             category: item.category,
+  //             manufacturer: item.manufacturer.name,
+  //             "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
+  //             "INRdiscount/Doolerdiscount":
+  //               item.inrDiscount + "/" + item.dollerDiscount,
+  //             action:
+  //               Userdata != undefined && Userdata.role == "superAdmin" ? (
+  //                 <>
+  //                   <button className="btnbtn-danger data-table-button">
+  //                     <i
+  //                       className="bx bx-trash"
+  //                       onClick={() => {
+  //                         if (window.confirm("Are you sure ?")) {
+  //                           DeleteProduct(item._id);
+  //                         } else {
+  //                           return false;
+  //                         }
+  //                       }}
+  //                     ></i>
+  //                   </button>{" "}
+  //                   <button
+  //                     onClick={() => Editproduct(item)}
+  //                     className=" btnbtn-danger"
+  //                   >
+  //                     <i className="bx bx-edit"></i>
+  //                   </button>
+  //                 </>
+  //               ) : (
+  //                 <button
+  //                   onClick={() => Editproduct(item)}
+  //                   className="update btnbtn-danger"
+  //                 >
+  //                   <i className="bx bx-show"></i>
+  //                 </button>
+  //               ),
+  //           }
+  //           : null
+  //       );
+  //     });
+  //   }
+  // } else if (
+  //   (Userdata != undefined && Userdata.role == "superAdmin") ||
+  //   (Userdata != undefined && Userdata.role == "Manager")
+  // ) {
+  //   {
+  //     products.map((item, index) => {
+  //       data1.push({
+  //         sr_no: index + 1,
+  //         name: item.name,
+  //         category: item.category,
+  //         manufacturer: item.manufacturer.name,
+  //         "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
+  //         "INRdiscount/Doolerdiscount":
+  //           item.inrDiscount + "/" + item.dollerDiscount,
+  //         action:
+  //           Userdata != undefined && Userdata.role == "superAdmin" ? (
+  //             <>
+  //               <button className="btnbtn-danger">
+  //                 <i
+  //                   className="bx bx-trash"
+  //                   onClick={() => {
+  //                     if (window.confirm("Are you sure ?")) {
+  //                       DeleteProduct(item._id);
+  //                     } else {
+  //                       return false;
+  //                     }
+  //                   }}
+  //                 ></i>
+  //               </button>{" "}
+  //               <button
+  //                 onClick={() => {
+  //                   Editproduct(item);
+  //                   setUpdate(true);
+  //                 }}
+  //                 className="btnbtn-danger"
+  //               >
+  //                 <i className="bx bx-edit"></i>
+  //               </button>
+  //             </>
+  //           ) : (
+  //             <button
+  //               onClick={() => Editproduct(item)}
+  //               className="btnbtn-danger"
+  //             >
+  //               <i className="bx bx-show "></i>
+  //             </button>
+  //           ),
+  //       });
+  //     });
+  //   }
+  // }
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Name", data: "name" },
@@ -281,7 +285,6 @@ const Productform = () => {
 
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
-    console.log(_id, "hello deepak  ");
     await fetch("http://144.91.110.221:3033/api/product/update_product_by_id", {
       method: "Put",
       headers: {
@@ -339,7 +342,7 @@ const Productform = () => {
                             type="text"
                             className="form-control Dashborad-search"
                             placeholder="Product Name"
-                            defaultValue={update == true ? data.name : ""}
+                            defaultValue={editableData  ? editableData.name : ""}
                             onChange={(e) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
@@ -348,13 +351,12 @@ const Productform = () => {
                         <div className="col-6 p-1">
                           <input
                             type="file"
-                            name="image[]"
-                            multiple
+                            name="image[]"                            
                             className="form-control Dashborad-search"
-                            // value={data.image}
+                            accept="image/png, .jpeg, .jpg"
+                            //value={editableData  ? editableData.image[0].path : ""}
                             onChange={(e) => {
-                              //console.log(e.target.files,"payloadddddddddddddddddddddddddddddd data")
-                              Setdata({ ...data, image: e.target.files });
+                              Setdata({ ...data, image: e.target.files[0] });
                             }}
                           />
                         </div>
@@ -374,12 +376,11 @@ const Productform = () => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
-                            defaultValue={update == true ? data.category : ""}
                             onChange={(e) => {
                               Setdata({ ...data, category: e.target.value });
                             }}
                           >
-                            <option selected>Select Category</option>
+                            <option selected >{editableData  ? editableData.category.name : "Select Category"}</option>
                             {categories.map((el, ind) => (
                               <option value={el._id}>{el.name}</option>
                             ))}
@@ -388,14 +389,11 @@ const Productform = () => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
-                            defaultValue={
-                              update == true ? data.subcategory : ""
-                            }
-                            onChange={(e) => {
+                           onChange={(e) => {
                               Setdata({ ...data, subcategory: e.target.value });
                             }}
                           >
-                            <option selected>Select Sub Category</option>
+                            <option selected>{editableData  ? editableData.subcategory.name : "Select Sub Category"}</option>
                             {subcategories.map((el, ind) => (
                               <option value={el._id}>{el.name}</option>
                             ))}
@@ -405,9 +403,6 @@ const Productform = () => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
-                            defaultValue={
-                              update == true ? data.manufacturer : ""
-                            }
                             onChange={(e) => {
                               Setdata({
                                 ...data,
@@ -415,7 +410,7 @@ const Productform = () => {
                               });
                             }}
                           >
-                            <option selected>Select Manufacturer</option>
+                            <option selected>{editableData  ? editableData.manufacturer.name : "Select Manufacturer"}</option>
                             {manufactureres.map((el, ind) =>
                               Userdata.role == "superAdmin" ? (
                                 <option value={el._id}>{el.name}</option>
@@ -431,7 +426,7 @@ const Productform = () => {
                           <input
                             type="text"
                             className="form-control Dashborad-search"
-                            defaultValue={update == true ? data.storage : ""}
+                            defaultValue={editableData  ? editableData.storage : ""}
                             placeholder="Storage "
                             onChange={(e) => {
                               Setdata({ ...data, storage: e.target.value });
@@ -443,7 +438,7 @@ const Productform = () => {
                             type="text"
                             className="form-control Dashborad-search"
                             placeholder="MRP In Rupees"
-                            defaultValue={update == true ? data.inrMrp : ""}
+                            defaultValue={editableData  ? editableData.inrMrp : ""}
                             onChange={(e) => {
                               Setdata({ ...data, inrMrp: e.target.value });
                             }}
@@ -454,7 +449,7 @@ const Productform = () => {
                             type="text"
                             className="form-control Dashborad-search"
                             defaultValue={
-                              update == true ? data.inrDiscount : ""
+                              editableData  ? editableData.inrDiscount : ""
                             }
                             placeholder="Discount In Rupees "
                             onChange={(e) => {
@@ -467,7 +462,7 @@ const Productform = () => {
                             type="text"
                             className="form-control Dashborad-search"
                             placeholder="MRP In Doller "
-                            defaultValue={update == true ? data.dollerMrp : ""}
+                            defaultValue={editableData  ? editableData.dollerMrp : ""}
                             onChange={(e) => {
                               Setdata({ ...data, dollerMrp: e.target.value });
                             }}
@@ -479,7 +474,7 @@ const Productform = () => {
                             type="text"
                             className="form-control Dashborad-search"
                             defaultValue={
-                              update == true ? data.dollerDiscount : ""
+                              editableData  ? editableData.dollerDiscount : ""
                             }
                             placeholder="Discount In Dollers"
                             onChange={(e) => {
@@ -496,7 +491,7 @@ const Productform = () => {
                             className="form-control"
                             placeholder="Product Description"
                             defaultValue={
-                              update == true ? data.description : ""
+                              editableData  ? editableData.description : ""
                             }
                             rows="3"
                             onChange={(e) => {
@@ -507,7 +502,7 @@ const Productform = () => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
-                            defaultValue={update == true ? data.type : ""}
+                            defaultValue={editableData  ? editableData.typ : ""}
                             onChange={(e) => {
                               Setdata({ ...data, type: e.target.value });
                             }}
@@ -519,23 +514,24 @@ const Productform = () => {
                             {/* <option></option> */}
                           </select>
                         </div>
-                        {update == false ? (
+                        {editableData  ? (
                           <div className="col-6 pt-4">
-                            <button
-                              className="btn btn-primary submit"
-                              onClick={(e) => submitData(e)}
-                            >
-                              Submit
-                            </button>
-                          </div>
-
-                        ) : (
-                          <div className="col-6 p-1">
                             <button
                               className="btn btn-registration"
                               onClick={(e) => UpdateProduct(e, data._id)}
                             >
                               Update
+                            </button>
+                            
+                          </div>
+
+                        ) : (
+                          <div className="col-6 p-1">
+                            <button
+                              className="btn btn-primary submit"
+                              onClick={(e) => submitData(e)}
+                            >
+                              Submit
                             </button>
                           </div>
                         )}

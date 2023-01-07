@@ -767,7 +767,7 @@ const SearchResult = (props) => {
                     </div>
                   );
                 } else {
-                  if (count <= 0) {
+                  if (count < 0) {
                     count = 1;
                     return (
                       <lottie-player

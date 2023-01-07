@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Table, Input } from "antd";
+import React, { useState,useEffect } from "react";
+import { Table, Input, Typography, Popconfirm, Space } from "antd";
 import axios from "axios";
 // import { data } from "./columns";
-import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import {BiSearchAlt} from 'react-icons/bi';
@@ -37,7 +36,6 @@ const columns = [
 ];
 
 export default function AllManufactureDetails() {
-  const [searchVal, setSearchVal] = useState(null);
 
   const { filteredData, loading } = useTableSearch({
     searchVal,

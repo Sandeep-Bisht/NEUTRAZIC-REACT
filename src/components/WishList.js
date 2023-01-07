@@ -39,14 +39,16 @@ const WishList = ()=>{
       })
         .then((res) => res.json())
         .then(async (data) => {
-           if(data.data[0] !=undefined){
+           if(data.data[0] !== undefined){
          
             Setwishlist(data.data)
            }
         })
+        
         .catch((err) => {
           console.log(err, "error");
         });
+       
     };
    const DeleteWishlist = async (productId) => {
    // await fetch("http://144.91.110.221:3033/api/wishlist/delete_wishlist_by_id", {
@@ -66,7 +68,8 @@ const WishList = ()=>{
       }
       )
       .then(async (data) => {
-        
+         Setwishlist("");
+       
          GetWishlist()
 
       })
