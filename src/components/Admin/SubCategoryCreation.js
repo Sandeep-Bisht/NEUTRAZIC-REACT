@@ -186,7 +186,7 @@ const SubCategoryCreation = (props) => {
         {" "}
         <a href="#" className="nav__logo">
           <img
-            src={require("../../Images/logo2.png")}
+            src={require("../../Images/new-logo.png")}
             className="dashboard-logo"
             alt="image"
           />

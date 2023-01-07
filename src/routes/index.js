@@ -42,6 +42,10 @@ import Subcategories from "../components/Subcategories";
 import TrendingProducts from "../components/TrendingProducts";
 import ProductByManufacturer from "../components/ProductByManufacturer";
 import SearchResult from "../components/SearchResult";
+import AllProductsDetails from "../components/Admin/AllProducts/AllProductsDetails";
+import AllCategoriesDetails from "../components/Admin/AllCategory/AllCategoriesDetails";
+import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCategoriesDetails";
+import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
 
 var Userdata = "";
 const Root = (props) => {
@@ -88,6 +92,26 @@ const Root = (props) => {
               path="/Manufacturer"
               component={ManufacturerCreation}
             />
+            <Route
+              exact
+              path="/AllManufactureDetails"
+              component={AllManufactureDetails}
+            />
+            <Route
+              exact
+              path="/AllProductsDetails"
+              component={AllProductsDetails}
+            />
+            <Route
+              exact
+              path="/AllCategoriesDetails"
+              component={AllCategoriesDetails}
+            />
+             <Route
+              exact
+              path="/AllSubCategoriesDetails"
+              component={AllSubCategoriesDetails}
+            />
             <Route exact path="/SingleProduct/:id" component={SingleProduct} />
             <Route exact path="/Cart" component={Cart} />
             <Route exact path="/ContactUs" component={ContactUs} />
@@ -133,6 +157,7 @@ const Root = (props) => {
               path="/SearchResult/:Search"
               component={SearchResult}
             />
+          
           </Switch>
         </>
       </Router>

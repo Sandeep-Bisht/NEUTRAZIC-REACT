@@ -10,7 +10,7 @@
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #006837;
+    background: #1e144f;
   }
   
   /* Handle on hover */
@@ -177,7 +177,7 @@ color:#1e144f;
     outline: 0;
     border-radius: 10px;
     font-size: 16px;
-    color: #fff;
+    color: #000;
     cursor: pointer;
     background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
 }

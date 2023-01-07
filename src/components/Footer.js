@@ -109,7 +109,7 @@ const WishlistHandler=()=>{
                     <a href="faq.html">Help &amp; FAQs</a>
                   </li>
                   <li>
-                    <a href="profile-authentication.html">My Account</a>
+                  <Link to="/MyAccount">My Account</Link>
                   </li>
                   <li>
                     <Link to="/Ordered">Order History</Link>

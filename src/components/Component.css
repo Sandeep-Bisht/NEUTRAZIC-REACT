@@ -416,3 +416,16 @@ width:100%;
 
 
 /* End Media Query Responsive for Desktop */
+
+
+/* MyAccount Css  Abhishek */
+
+
+.Myacount-heading{
+    color: #1e144f;
+    font-size: 2.5rem;
+}
+.Myacount-button{
+    width: 10rem !important;
+    
+}

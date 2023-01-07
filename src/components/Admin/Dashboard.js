@@ -3,10 +3,24 @@ import "./Dashboard.css";
 import $ from "jquery";
 import DataTable from "datatables.net";
 import Sidemenu from "./Sidemenu";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { BsCartPlus } from "react-icons/bs";
+import { GiFactory } from "react-icons/gi";
+import { FiUserCheck } from "react-icons/fi";
+import { GiBoxUnpacking } from "react-icons/gi";
+import { BiCategory } from "react-icons/bi";
+import { BsListNested } from "react-icons/bs";
+import UserImg from "../../Images/user3.jpg";
+import AllManufactureDetails from "./AllManufacture/AllManufactureDetails";
+import AllSubCategoriesDetails from "./AllSubCategory/AllSubCategoriesDetails";
+import AllProductsDetails from "./AllProducts/AllProductsDetails";
+import AllCategoriesDetails from "./AllCategory/AllCategoriesDetails";
+
 // var ManufacturerCount1='';
 // var productCount1=''
-var test = "";
+
+var Userdata = " ";
+
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
   const [products, Setproducts] = useState("");
@@ -14,6 +28,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState("");
   const [categories, setCategories] = useState("");
   const [subCategories, setSubCategories] = useState("");
+
   useEffect(() => {
     setCount();
     GetUser();
@@ -106,137 +121,171 @@ const Dashboard = () => {
     // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
   };
 
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+  });
+
+  const logout = () => {
+    localStorage.setItem("Userdata", null);
+    window.location.replace("/");
+  };
+
   return (
     <>
-      <div className="container-fluid nav__logo">
-        {" "}
-        <a href="/" style={{ cursor: "pointer" }}>
+      <div className="nav__logo">
+        <div>
+          <a href="/" style={{ cursor: "pointer" }}>
+            <img
+              src={require("../../Images/new-logo.png")}
+              className="dashboard-logo"
+              alt="image"
+            />
+          </a>
+        </div>
+        <div className="d-flex align-items-center">
           <img
-            src={require("../../Images/logo2.png")}
-            className="dashboard-logo"
-            alt="image"
+            src={UserImg}
+            alt="user_image"
+            className="img-fluid dashboard-user"
           />
-        </a>
+          <p className="dashboard-username">{Userdata && Userdata.username}</p>
+        </div>
       </div>
-      <div id="body-pd">
-        <Sidemenu />
-        <main className="main">
-          <div className="container">
-            <div className="row cardsec-row">
-              <div className="col-3">
-                <Link to="/Manufacturer">
-                  <div className="card cardsec">
-                    <div className="row">
-                      <div className="col-4">
-                        <i className="bx bxs-user cardicon"></i>
+      <section id="body-pd">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-2 px-0">
+              <Sidemenu />
+            </div>
+            <div className="col-10">
+              {/* <main className="main">
+                <div className="row cardsec-row">
+                  <div className="col-3">
+                    <Link to="/Manufacturer">
+                      <div className="card cardsec">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div>
+                                <GiFactory className="cardicon" />
+                                <h6 className="cardheads">Manufacturer </h6>
+                              </div>
+                              <div>
+                                <span className="count">{Manufacturer}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-
-                      <div className="col-8">
-                        <h6 className="cardheads">Manufacturer </h6>
-                        <span className="count">{Manufacturer}</span>
+                    </Link>
+                  </div>
+                  <div className="col-3">
+                    <div className="card cardsec">
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="d-flex justify-content-between align-items-center">
+                            <div>
+                              <FiUserCheck className="cardicon" />
+                              <h6 className="cardheads">Users </h6>
+                            </div>
+                            <div>
+                              <Link to="/Orders">
+                                <span className="count">{users}</span>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </Link>
-              </div>
-              <div className="col-3">
-                <div className="card cardsec">
-                  <div className="row">
-                    <div className="col-4">
-                      <i className="bx bxs-user cardicon"></i>
-                    </div>
-
-                    <div className="col-8">
-                      <Link to="/Orders">
-                        <h6 className="cardheads">Users </h6>
-                        <span className="count">{users}</span>
-                      </Link>
-                    </div>
+                  <div className="col-3">
+                    <Link to="/Orders">
+                      <div className="card cardsec">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div>
+                                <BsCartPlus className="cardicon" />
+                                <h6 className="cardheads">Orders </h6>
+                              </div>
+                              <div>
+                                <span className="count">{Orders}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="col-3">
+                    <Link to="/ProductForm">
+                      <div className="card cardsec">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div>
+                                <GiBoxUnpacking className="cardicon" />
+                                <h6 className="cardheads">Products </h6>
+                              </div>
+                              <div>
+                                <span className="count">{products}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="col-3 pt-4">
+                    <Link to="/Category">
+                      <div className="card cardsec">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div>
+                                <BiCategory className="cardicon" />
+                                <h6 className="cardheads">Category </h6>
+                              </div>
+                              <div>
+                                <span className="count">{categories}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="col-3 pt-4">
+                    <Link to="/SubCategoryCreation">
+                      <div className="card cardsec">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div>
+                                <BsListNested className="cardicon" />
+                                <h6 className="cardheads">Sub category</h6>
+                              </div>
+                              <div>
+                                <span className="count">{subCategories}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
                 </div>
-              </div>
-              <div className="col-3">
-                <Link to="/Orders">
-                  <div className="card cardsec">
-                    <div className="row">
-                      <div className="col-4">
-                        <i className="bx bxs-cart cardicon"></i>
-                      </div>
-                      <div className="col-8">
-                        <h6 className="cardheads">Orders </h6>
-                        <span className="count">{Orders}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-3">
-                <Link to="/ProductForm">
-                  <div className="card cardsec">
-                    <div className="row">
-                      <div className="col-5">
-                        <i className="bx bxs-user cardicon"></i>
-                      </div>
-                      <div className="col-7">
-                        <h6 className="cardheads">Products </h6>
-                        <span className="count">{products}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-3 pt-5">
-                <Link to="/Category">
-                  <div className="card cardsec">
-                    <div className="row">
-                      <div className="col-5">
-                        <i className="bx bxs-user cardicon"></i>
-                      </div>
-                      <div className="col-7">
-                        <h6 className="cardheads">Category </h6>
-                        <span className="count">{categories}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-3 pt-5">
-                <Link to="/SubCategoryCreation">
-                  <div className="card cardsec">
-                    <div className="row">
-                      <div className="col-5">
-                        <i className="bx bxs-user cardicon"></i>
-                      </div>
-                      <div className="col-7">
-                        <h6 className="cardheads">Sub category</h6>
-                        <span className="count">{subCategories}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+              </main> */}
+
+              <AllManufactureDetails />
+
+              {/* <AllSubCategoriesDetails/>
+        <AllProductsDetails/>
+        <AllCategoriesDetails/> */}
             </div>
           </div>
-          {/* <section className="chartsec">
-            <div className="container ">
-                <div className="row">
-                    <div className="col-8">
-                        <div className="card chart-card">
-                            <h3 >Monthly Users</h3>
-                        <div id="chartdiv"></div>
-                        </div>
-                    </div>
-                    <div className="col-4">
-                        <div className="card piechart-card">
-                            <h3>Unresolved Complains</h3>
-                        <div id="piechartdiv"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> */}
-        </main>
-      </div>
+        </div>
+      </section>
     </>
   );
 };
