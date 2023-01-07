@@ -528,7 +528,7 @@ const SearchResult = (props) => {
               id="flush-collapseFive"
               className="accordion-collapse collapse"
               aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
+              data-bs-parent="#accordionFlushExample" 
             >
               <div className="accordion-body price">
                 <div className="price-div row">
@@ -768,11 +768,9 @@ const SearchResult = (props) => {
                     </div>
                     </>
                   );
-                } 
-                
-                else {
-                  if (count <= 0) {
-                    count=1;
+                } else {
+                  if (count < 0) {
+                    count = 1;
                     return (
                       <>
                       <lottie-player
