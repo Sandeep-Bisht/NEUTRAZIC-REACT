@@ -384,7 +384,9 @@ color:#1e144f;
 .icons1
 {
  padding-left:15px;
+ max-width: 17%;
 }
+
 .Home-navbar ul li{
     padding:0px 10px;
 }
@@ -859,6 +861,11 @@ body {
         font-family: foco;
         left:4px;
     }
+}
+
+/* remove default css */
+.accordion-button::after{
+    background-image: none;
 }
 
 

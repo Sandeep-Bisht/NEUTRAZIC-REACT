@@ -130,7 +130,7 @@ export default function AllManufactureDetails() {
         <div className="container">
           <div className="row">
             <div className="col-8">
-              <h3>All Manufactures</h3>
+              <h3>All Manufacturers</h3>
             </div>
             <div className="col-4">
               <Search

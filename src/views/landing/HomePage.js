@@ -249,7 +249,7 @@ const HomePage = () => {
       .then((res) => {
         console.log(res, "after update");
         //history.push("/Cart");
-        window.scroll(0, 0);
+        //window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
@@ -560,7 +560,7 @@ const HomePage = () => {
                                               el.image
                                             );
                                           }}
-                                        ></i>
+                                        ></i>                                       
                                       ) : (
                                         <>
                                           <i

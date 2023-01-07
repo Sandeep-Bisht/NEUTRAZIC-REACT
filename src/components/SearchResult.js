@@ -622,7 +622,6 @@ const SearchResult = (props) => {
           <div className="container-fluid">
             <div className="row">
               {filterdata.map((el, ind) => {
-                console.log(filterdata,"filterdata");
                 if (
                   el.name.toLowerCase().includes(searchresults) ||
                   el.manufacturer.name.toLowerCase().includes(searchresults) ||
@@ -684,13 +683,7 @@ const SearchResult = (props) => {
                                   />
                                 </h3>
                               </Link>
-                              {/* <div className="d-flex pb-2 pl-4">
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                              </div> */}
+                             
                               <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                                 <div className="discount-price-div">
                                   <span>{el.inrDiscount}</span>
@@ -766,11 +759,9 @@ const SearchResult = (props) => {
                       {/* </Link> */}
                     </div>
                   );
-                } else {
-                  if (count < 0) {
-                    count = 1;
-                    return (
-                      <lottie-player
+                }
+              })}
+              {count == 0 && <lottie-player
                         src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
                         background="transparent"
                         speed="1"
@@ -781,11 +772,7 @@ const SearchResult = (props) => {
                         }}
                         loop
                         autoplay
-                      ></lottie-player>
-                    );
-                  }
-                }
-              })}
+                      ></lottie-player>}
             </div>
           </div>
         </section>
