@@ -132,7 +132,7 @@ const Cart = () => {
               <div className="row">
                 <div className="col-sm-8">
                   {cart.length > 0 ? (
-                    <div className="cart-table ">
+                    <div className="cart-table">
                       <table className="table" cellsacing="10px" cellPadding="10px">
                         <thead className="text-center">
                           <tr>
@@ -157,7 +157,7 @@ const Cart = () => {
 
                             return (
                               //  <Link to={"/SingleProduct/" + el.productid} >
-                              <tr key={ind1} className="cart-data">
+                              <tr key={ind1} className="cart-data mt-2">
                                 <td className="product-thumbnail">
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     <img
