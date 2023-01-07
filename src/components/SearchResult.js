@@ -318,8 +318,7 @@ const SearchResult = (props) => {
                 console.log(err, "error");
               });
           }
-        } else {
-        }
+        } 
       });
   };
 
@@ -405,6 +404,7 @@ const SearchResult = (props) => {
               <div className="accordion-body">
                 <ul>
                   {categories.map((el, ind) => (
+                    
                     <li className="mt-2">
                       <input
                         type="checkbox"
@@ -528,7 +528,7 @@ const SearchResult = (props) => {
               id="flush-collapseFive"
               className="accordion-collapse collapse"
               aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
+              data-bs-parent="#accordionFlushExample" 
             >
               <div className="accordion-body price">
                 <div className="price-div row">
@@ -645,6 +645,7 @@ const SearchResult = (props) => {
                 ) {
                   count = count + 1;
                   return (
+                    <>
                     <div className="col-lg-3 col-md-12 col-sm-12 ">
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
@@ -758,6 +759,7 @@ const SearchResult = (props) => {
                       </div>
                       {/* </Link> */}
                     </div>
+                    </>
                   );
                 }
               })}

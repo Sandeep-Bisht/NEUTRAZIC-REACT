@@ -9,31 +9,47 @@ import $ from "jquery";
 import CategoryCreation from "./Admin/CategoryCreation";
 import Carouselcomp from "../components/Carouselcomp";
 import Cart from "./Cart";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useForm } from "react-hook-form";
 //import Button from './button';
 
 let changeNavValue = 0;
 var header;
 var sticky;
 var Userdata = "";
+
+
 // var userCart=[]
 const Header1 = (props) => {
-  
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
-  const [email, setemail] = useState("");
+  // const [email, setemail] = useState("");
   const [subcategories, setSubCategories] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [repassword, setRePassword] = useState("");
+  // const [repassword, setRePassword] = useState("");
   let [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
   const [msg, setMsg] = useState("");
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues:{
+    username:"",
+    email:"",
+    password:"",
+    repassword:"",
+    }
+  });
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
@@ -65,22 +81,28 @@ const Header1 = (props) => {
   }, []);
   const logout = () => {
     localStorage.setItem("Userdata", null);
-    toast.success("Logout successfull",{
-      position:toast.POSITION.BOTTOM_RIGHT,
+    toast.success("Logout successfull", {
+      position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 5000,
-    })
+    });
     window.location.replace("/");
     
   };
-  const RegisterUser = () => {
+
+  const RegisterUser = (data) => {
+    console.log(data,"mkkkkkkkkkkkkkkk");
+    // setUsername(data.username);
+    // setemail(data.email);
+    // setPassword(data.password);
+    // setRePassword(data.repassword);
     if (
-      username  &&
-      password  &&
-      email  &&
-      password &&
-       repassword &&
-       password == repassword
+      data.email &&
+      data.password &&
+      data.repassword &&
+      data.username&&
+      data.password == data.repassword
     ) {
+      console.log(data,"After if con")
       //fetch("http://144.91.110.221:3033/api/auth/register", {
       fetch("http://localhost:3033/api/auth/register", {
         method: "POST",
@@ -89,9 +111,9 @@ const Header1 = (props) => {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          password: password,
-          email: email,
+          username: data.username,
+          password: data.password,
+          email: data.email,
           role: "user",
         }),
       })
@@ -108,7 +130,7 @@ const Header1 = (props) => {
   };
   const LoginUser = (e) => {
     e.preventDefault();
-    if (username  && password ) {
+    if (username && password) {
       //fetch("http://144.91.110.221:3033/api/auth/login", {
       fetch("http://localhost:3033/api/auth/login", {
         method: "POST",
@@ -167,7 +189,7 @@ const Header1 = (props) => {
        
     } else {
       console.log("not getting role");
-       setMsg('Please Enter a Valid Data');
+      setMsg("Please Enter a Valid Data");
     }
   };
   const headerFunction = async () => {
@@ -338,7 +360,10 @@ const Header1 = (props) => {
               </button>
             </div>
             <div className="modal-body">
-              <div className="accordion accordion-flush" id="accordionFlushExample">
+              <div
+                className="accordion accordion-flush"
+                id="accordionFlushExample"
+              >
                 {subcategories &&
                   subcategories.length > 0 &&
                   subcategories.map((el, ind) => (
@@ -475,7 +500,6 @@ const Header1 = (props) => {
       </div>
       {/* end side bar Modal */}
       <div className="container-fluid top-nav">
-        
         {/* login Register Modal  */}
         <div
           className="modal fade"
@@ -511,72 +535,89 @@ const Header1 = (props) => {
                   {registerModal ? (
                     <div className="col-lg-12 logiRegisterContentDiv">
                       <div className="form-row">
-                        <div className="form-group col-lg-12">
-                          <label>
-                            Username<span>*</span>
-                          </label>
-                          <input
+                        <form className="form-group col-lg-12" onSubmit={handleSubmit(RegisterUser)}>
+                          <div className="form-group">
+                            <label>
+                              Username<span>*</span>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              
+                              {...register("username", {
+                                required: true,
+                               
+                              })}
+                            />
+                            {errors?.username?.type === "required" && <p className="text-danger">Name is Required</p>}
+                            {/* <input
                             type="text"
                             className="form-control "
-                            required
+                            
                             onChange={(e) => {
                               setUsername(e.target.value);
                             }}
-                          />
-                        </div>
-                        <div className="form-group col-lg-12">
-                          <label>
-                            Email<span>*</span>
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control "
-                            required
-                            onChange={(e) => {
-                              setemail(e.target.value);
-                            }}
-                          />
-                        </div>
-                        <div className="form-group col-lg-12">
-                          <label>
-                            Password<span>*</span>
-                          </label>
-                          <input
-                            type="password"
-                            className="form-control "
-                            required
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                          />
-                        </div>
-                        <div className="form-group col-lg-12">
-                          <label>
-                            Confirm Password<span>*</span>
-                          </label>
-                          <input
-                            type="password"
-                            className="form-control "
-                            required
-                            onChange={(e) => {
-                              setRePassword(e.target.value);
-                            }}
-                          />
-                        </div>
-                        <h5 className="Login-fail-msg">{regmsg}</h5>
-                        {/* <div className="form-group col-lg-12">
+                          /> */}
+                          </div>
+                          <div className="form-group ">
+                            <label>
+                              Email<span>*</span>
+                            </label>
+                            <input
+                              type="email"
+                              className="form-control "
+                              
+                              {...register("email", {
+                                required: true,
+                                
+                              })}
+                            />
+                            {errors?.email?.type === "required" && <p className="text-danger">Email is Required</p>}
+                            {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
+                          </div>
+                          <div className="form-group">
+                            <label>
+                              Password<span>*</span>
+                            </label>
+                            <input
+                              type="password"
+                              className="form-control "
+                              
+                              {...register("password", {
+                                required: true,
+                                
+                              })}
+                            />
+                            {errors?.password?.type === "required" && <p className="text-danger">Password is Required</p>}
+                          </div>
+                          <div className="form-group ">
+                            <label>
+                              Confirm Password<span>*</span>
+                            </label>
+                            <input
+                              type="password"
+                              className="form-control "
+                            
+                              {...register("repassword", {
+                                required: true,
+                                
+                              })}
+                            />
+                            {errors?.repassword?.type === "required" && <p className="text-danger">Re-Password is Required</p>}
+                          </div>
+                          {/* <h5 className="Login-fail-msg">{}</h5> */}
+                          {/* <div className="form-group col-lg-12">
                            <span>Register Sucessfully</span>
                         </div> */}
-                        <div className="form-group col-lg-12">
-                          <button
-                            className="btn btn-success btn-lg"
-                            onClick={(e) => {
-                              RegisterUser(e);
-                            }}
-                          >
-                            Register
-                          </button>
-                        </div>
+                          <div className="form-group ">
+                            <button
+                              className="btn btn-success btn-lg"
+                              type="submit"
+                            >
+                              Register
+                            </button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   ) : (
@@ -617,8 +658,7 @@ const Header1 = (props) => {
                           >
                             Login
                           </button>
-                          <ToastContainer
-                          />
+                          <ToastContainer />
                           <Link>
                             <p className="mt-2">Forget Password...</p>
                           </Link>
@@ -762,7 +802,7 @@ const Header1 = (props) => {
                   <div className="option-item">
                     <div className="cart-btn">
                       {/* <Link to="/Ordered"> */}
-                        <i className="bx bx-heart"></i>
+                      <i className="bx bx-heart"></i>
                       {/* </Link> */}
                     </div>
                   </div>
@@ -787,11 +827,15 @@ const Header1 = (props) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="col-sm-8 user-login">
-                   {
-                    props && props.CartItems ? <h6 className="Total-Item">{props.CartItems.length>0 ? props.CartItems.length: ""}</h6> :""
-                  }
+                  {props && props.CartItems ? (
+                    <h6 className="Total-Item">
+                      {props.CartItems.length > 0 ? props.CartItems.length : ""}
+                    </h6>
+                  ) : (
+                    ""
+                  )}
                   <span className="sp">Cart</span>
                   <br />
                   <span className="Sp1">₹ 0.0</span>
@@ -1196,7 +1240,10 @@ const Header1 = (props) => {
                 <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
                   {categories.map((el, ind) => (
                     <li>
-                      <Link className="dropdown-item" to={"/AllCategory/" + el._id}>
+                      <Link
+                        className="dropdown-item"
+                        to={"/AllCategory/" + el._id}
+                      >
                         {el.name}
                       </Link>
                     </li>

@@ -110,12 +110,9 @@ const WishList = ()=>{
             max={110}
             readMoreText={"read more..."}/></p>
                   </div>
-                  <div className="col-md-1">
-                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>
-                        <AiOutlineClose className='close-btn'/>
-                     </span>
+                  <div className="col-1">
+                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}><i className='bx bx-x'></i></span>
                   </div>
-               </div>
                </div>
                </div> 
               
