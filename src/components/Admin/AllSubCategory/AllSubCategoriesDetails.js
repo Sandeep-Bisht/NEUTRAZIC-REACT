@@ -5,8 +5,8 @@ import axios from "axios";
 import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
-import { useHistory } from "react-router-dom";
-import {Link} from 'react-router-dom';
+import {BiSearchAlt} from 'react-icons/bi';
+import { useHistory,Link } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -109,38 +109,32 @@ export default function AllSubCategoriesDetails() {
 
   return (
     <>
-      <div className="container-fluid">
+      {/* <div className="container-fluid">
         {" "}
         <a href="#" className="nav__logo">
           <img
-            src={require("../../../Images/logo2.png")}
+            src={require("../../../Images/new-logo.png")}
             className="dashboard-logo"
             alt="image"
           />
         </a>
-      </div>
-      <div id="body-pd">
-        <Sidemenu />
-        <div className="container">
-          <div className="row">
-            <div className="col-8">
-              <h3>All SubCategories</h3>
-            </div>
-            <div className="col-4">
-              <Search
-                onChange={e => onChangeHandler(e)}
-                onKeyUp={searchHandler}
-                placeholder="Search"
-                enterButton
-                style={{ position: "sticky", top: "0", left: "0" }}
-              />
+      </div> */}
+      
+        {/* <Sidemenu /> */}
+        <section className="sub-category-details-section">     
+            <div className="row">
+            <div className="col-12">
+              <div className="d-flex justify-content-between align-items-center">
+              <h3 className="sub-category-head">All sub categories</h3>
+              <div className="subcategory-search-wrap">
+              <input type='text' placeholder='Search..' className='sub-category-search-input' onChange={e => setSearchVal(e.target.value)}/>
+              <button className="sub-category-btn" type="button"><BiSearchAlt/></button>
+              </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="container">
           <div className="row">
-
+            <div className="col-12">
             <Table
               rowKey="name"
               dataSource={filteredData && filteredData.length ? filteredData : getuser}
@@ -148,12 +142,9 @@ export default function AllSubCategoriesDetails() {
               loading={loading}
               pagination={false}
             />
-
-
-          </div>
-        </div>
-      </div>
-
+            </div>
+          </div>    
+          </section>
     </>
   );
 }

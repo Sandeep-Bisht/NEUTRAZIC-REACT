@@ -6,7 +6,9 @@ import Footer from './Footer';
 import Header1 from './Header1';
 import ReadMoreReact from 'read-more-react';
 import { Link } from 'react-router-dom';
-var Userdata='';
+import {AiOutlineClose} from 'react-icons/ai';
+
+var Userdata=''
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
    useEffect(() => {
@@ -57,10 +59,14 @@ const WishList = ()=>{
          "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        
          _id:productId,
       }),
    })
-      .then((res) => res.json())
+      .then((res) =>{ res.json()
+      console.log(res,"hellllllllllllll")
+      }
+      )
       .then(async (data) => {
          Setwishlist("");
        
@@ -80,19 +86,18 @@ const WishList = ()=>{
     <div className="first-nav container-fluid"><span><Link to="/">Home</Link>/ Wishlist</span></div>
 
       <div className="wishlist-container">
-         <div className="row">
+         <div className="row mx-1">
          {wishlistData.length >0 ? 
             wishlistData.map((item,ind)=>(
-               <div className="col-12 wishlistDiv">
+               
+               <div className="col-md-6">
+                  <div className='wishlistDiv'>
                <div className="row">
-                  <div className="col-1">
-                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>X</span>
-                  </div>
-                  <div className="col-3">
+                  <div className="col-md-4">
                   {/* <img src={"http://144.91.110.221:3033/"+item.image[0].path} /> */}
                   <img src={"http://localhost:3033/"+item.image[0].path} />
                   </div>
-                  <div className="col-8">
+                  <div className="col-md-6">
                      <h6>{item.name}</h6>
                      {/* <StarsRating
                   count={5}
@@ -105,8 +110,16 @@ const WishList = ()=>{
             max={110}
             readMoreText={"read more..."}/></p>
                   </div>
+                  <div className="col-md-1">
+                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>
+                        <AiOutlineClose className='close-btn'/>
+                     </span>
+                  </div>
+               </div>
                </div>
                </div> 
+              
+               
             )) 
             :
             <div className="col-12 text-center EMPTYWISHLIST-DIV">

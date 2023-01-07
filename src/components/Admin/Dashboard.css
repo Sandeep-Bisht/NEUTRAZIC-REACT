@@ -1,5 +1,5 @@
 /*===== GOOGLE FONTS =====*/
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 /*===== VARIABLES CSS =====*/
 :root{
@@ -12,11 +12,15 @@
   --white-color: #F7F6FB;
   
   /*===== Font and typography =====*/
-  --body-font: 'Fraunces', serif;
+  --body-font: 'Roboto', sans-serif;
   --normal-font-size: 1rem;
   
   /*===== z index =====*/
   --z-fixed: 100;
+}
+body
+{
+  font-family: 'Roboto', sans-serif;
 }
 
 .container{
@@ -27,6 +31,72 @@
 /*===== BASE =====*/
 *,::before,::after{
   box-sizing: border-box;
+}
+
+.dashboard-user
+{
+  height: 46px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* manufacturing-css */
+
+.all-manufacture-details-section
+{
+  padding-top: 10px;
+}
+
+/* subcategory-css */
+
+.sub-category-details-section
+{
+  padding-top: 10px;
+}
+.sub-category-head
+{
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: #000;
+  opacity: .7;
+  text-transform: capitalize;
+}
+.sub-category-search-input
+{
+  padding: 5px 10px;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding-left: 10px;
+}
+.sub-category-search-input::placeholder
+{
+  color: #000;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.25px;
+  opacity: .6;
+}
+.sub-category-btn
+{
+  background-color: #1e144f;
+  color: #fff;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 4px;
+}
+.sub-category-btn svg
+{
+  height: 20px;
+}
+
+/* products-css */
+
+.all-products-details-section
+{
+  padding-top: 10px;
 }
 
 /* body{
@@ -124,7 +194,7 @@ a{
 /* img{
   width: 100px;
 } */
-.l-navbar{
+/* .l-navbar{
   position: fixed;
   top: 73px;
   left: -30%;
@@ -134,7 +204,7 @@ a{
   padding: .5rem 1rem 0 0;
   transition: .5s;
   z-index: var(--z-fixed);
-}
+} */
 
 .nav{
   /* height: 100%; */
@@ -149,7 +219,18 @@ a{
   grid-template-columns: max-content max-content;
   align-items: center;
   column-gap: 1rem;
-  padding: .5rem 0 .5rem 1.5rem;
+}
+
+.dashboard-username
+{
+  margin: 0 10px;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e144f;
+  opacity: .8;
+  text-transform: capitalize;
+  letter-spacing: 0.25px;
 }
 
 .nav__logo{
@@ -169,7 +250,7 @@ a{
 .nav__link{
   position: relative;
   color: var(--first-color-light);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   transition: .3s;
 }
 .nav__link .nav_name Link{
@@ -181,8 +262,13 @@ a{
 } */
 
 .nav__icon{
-  font-size: 1.25rem;
-  color:#006837;
+  height: 20px;
+  width: auto;
+  color:#000;
+  opacity: .3;
+}
+.nav__icon:hover{
+  color: #1e144f;
 }
 
 /*Show navbar movil*/
@@ -200,14 +286,14 @@ a{
   color: var(--white-color);
 } */
 
-.active::before{
+/* .active::before{
   content: '';
   position: absolute;
   left: 0;
   width: 2px;
   height: 32px;
   background-color: var(--white-color);
-}
+} */
 
 /* ===== MEDIA QUERIES=====*/
 @media screen and (min-width: 768px){
@@ -251,20 +337,26 @@ a{
 }
 
  .cardsec{
-   /* background: rgb(251, 251, 251) !important; */
-
-   box-shadow: 0 18px 24px rgb(0 0 0 / 12%);
-   padding: 1.42857rem!important;
+  border: none;
+   box-shadow: 0 18px 24px rgb(0 0 0 / 10%);
+   padding: 25px 20px !important;
 } 
 .cardheads
 {
-  font-family: Poppins !important;
-  color: #006837;
+  font-family: 'Roboto', sans-serif !important;
+  color: #495057;
+  opacity: .8;
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+  margin-bottom: 0;
 }
 
-/* .main{
-  margin-top: 80px;
-} */
+.main{
+  padding-top: 10px;
+}
+
 /* .cardsec{
   height: 120px;
   width: 95%;
@@ -295,17 +387,16 @@ a{
   
 }
 .cardicon{
-  font-size: 48px;
-  /* color: rgba(51, 108, 251, 0.5); */
-  color:#00B560;
+  height: 30px;
+  width: auto;
+  color:#000;
+  opacity: .3;
 }
 .count{
-  font-size: 20px;
-    /* color: rgb(51, 108, 251); */
-    color:#006837;
-    line-height: 1.4;
-    font-family: Foco;
-    font-size:20px;
+  font-size: 22px;
+  color:#1b97ff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
 }
 .table-sec{
   margin-top: 20px;
@@ -320,7 +411,10 @@ a{
   display:none;
   transition: 1.0s;
 }
-
+.animation svg
+{
+  height: 200px;
+}
 
 .nav__link .collapsed 
 {
@@ -334,17 +428,27 @@ a{
 .nav__link .collapsed span
 {
   font-size:17px;
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
 }
 .nav__link .accordion-item .accordion-header .d-flex button
 {
   font-size:15px;
-  color:#afa5d9;
+  color:#1b97ff;
+}
+.nav__link .accordion-item .accordion-header .d-flex button:hover
+{
+  color: #1e144f;
 }
 
 /* .nav__link .collapsed span:hover{
   color:green;
 } */
+
+.dashboard-accordion-body
+{
+  padding-top: 1rem;
+  padding-left: 2.2rem;
+}
 .nav__link .accordion-item
 {
   background-color: transparent;
@@ -375,7 +479,7 @@ a{
   padding:0;
   margin: 0;
   width: 100%;
-  line-height: 50px;
+  line-height: 36px;
 }
 
 
@@ -388,14 +492,13 @@ padding: 0px !important;
 .form-inline label
 {
   color:#006837;
-
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
 }
 .table>:not(:last-child)>:last-child>*
 {
-color: #006837;
-font-family: Foco;
+color: #1e144f;
+font-family: 'Roboto', sans-serif;
 }
 .table td, .table th
 {
@@ -431,14 +534,14 @@ font-family: Foco;
 .product-form h5
 {
   color:#006837;
-  font-family: Foco;
+  font-family: 'Roboto', sans-serif;
   font-weight:400 !important;
   font-size: 25px !important;
   text-decoration: underline;
 }
 .product-form .row div input,select,textarea
 {
-  font-family:Foco;
+  font-family: 'Roboto', sans-serif;
   border-radius: 0;
 }
 .product-form .row div button
@@ -465,25 +568,53 @@ font-family: Foco;
 /* Sidemenu Css Start */
 .header-toggle-button
 {
-  color:#006837;
+  color:#1b97ff;
+}
+.header-toggle-button:hover
+{
+  color:#1e144f;
 }
 .header-toggle-button.bx-x{
   
     position: absolute;
     right: 24px;
 }
+.nav__list
+{
+  background-color: #fff;
+  position: fixed;
+  height: 100vh;
+  padding: 10px 6px;
+  box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
+}
+.nav__link
+{
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.nav__link:hover
+{
+  background: #e0f3ff !important;
+  border-radius: 5px;
+  color:#1e144f;
+}
 .nav div .nav__list .nav__link .nav__name
 {
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
   font-size: 17px;
-  color:#006837;
- 
+  color:#1b97ff;
+}
+.nav div .nav__list .nav__link .nav__name:hover
+{
+  color: #1e144f;
 }
 .nav__name
 {
-  font-family: Poppins;
-  font-size: 17px;
-  color:#006837;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  opacity: .7;
 }
 
 
@@ -505,20 +636,19 @@ font-family: Foco;
 }
 .order-details-div .modal-body .row .logiRegisterContentDiv  .heading  h1
 {
-  font-family: Foco !important;
+  font-family: 'Roboto', sans-serif !important;
   font-weight: normal !important;
   color: #84928b;
 }
 .order-details-div .modal-body .row .logiRegisterContentDiv div table thead tr th
 {
   color:#006837;
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
 }
 .order-details-div .modal-body .row .logiRegisterContentDiv div table tbody tr td
 {
   color:black;
-  font-family: Poppins;
-  
+  font-family: 'Roboto', sans-serif;
 }
 /* End Admin Dashboard Order Details */
 
@@ -527,12 +657,12 @@ font-family: Foco;
 {
   background-color: rgb(145, 7, 7);
   color:white;
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
   border-radius: 0;
 }
 .input-text
 {
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
   border-radius: 0;
 }
 
@@ -544,8 +674,23 @@ font-family: Foco;
 .nav__logo 
 {
   position: fixed;
-  top: 0px;
-  z-index: 20;
+  width: 100%;
+  top: 0;
+    z-index: 10;
+    -webkit-box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    background-color: #fafbfc;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    align-items: center;
+}
+
+#body-pd
+{
+  padding-top: 48px;
+  background-color: #f1f4f6;
+  height: 100vh;
 }
 
 /* End Dashboard header image css */
@@ -559,14 +704,14 @@ font-family: Foco;
 }
 .create-manu span
 {
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
   font-size: 17px;
   margin-right: 10px;
   color:#006837;
 }
 .create-manu button
 {
-  font-family: Poppins;
+  font-family: 'Roboto', sans-serif;
   font-size: 17px;
   height:38px;
   width: 40px;

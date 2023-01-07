@@ -560,7 +560,10 @@ const HomePage = () => {
                                               el.image
                                             );
                                           }}
-                                        ></i>                                       
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
                                       ) : (
                                         <>
                                           <i

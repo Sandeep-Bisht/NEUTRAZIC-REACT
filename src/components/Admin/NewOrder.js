@@ -165,7 +165,7 @@ const NewOrder=(props)=>{
     return(
         <>
          <div className="container-fluid"> <a href="#" className="nav__logo">
-                    <img src={require('../../Images/logo2.png')}  className="dashboard-logo" alt="image" />
+                    <img src={require('../../Images/new-logo.png')}  className="dashboard-logo" alt="image" />
                     </a>
 </div>
 

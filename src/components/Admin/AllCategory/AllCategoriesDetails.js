@@ -5,8 +5,9 @@ import axios from "axios";
 import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
-import { useHistory } from "react-router-dom";
-import {Link} from 'react-router-dom'
+import {BiSearchAlt} from 'react-icons/bi';
+import { useHistory, Link } from "react-router-dom";
+
 
 const { Search } = Input;
 
@@ -101,19 +102,6 @@ export default function AllCategoriesDetails() {
 
   return (
     <>
-      <div className="container-fluid">
-        {" "}
-        <a href="#" className="nav__logo">
-          <img
-            src={require("../../../Images/logo2.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </a>
-      </div>
-      <div id="body-pd">
-        <Sidemenu />
-        <div className="container">
           <div className="row">
             <div className="col-8">
               <h3>All categories</h3>
@@ -128,11 +116,9 @@ export default function AllCategoriesDetails() {
               />
             </div>
           </div>
-        </div>
 
-        <div className="container">
           <div className="row">
-
+<div className="col-12">
             <Table
               rowKey="name"
               dataSource={filteredData && filteredData.length ? filteredData : getuser}
@@ -144,7 +130,6 @@ export default function AllCategoriesDetails() {
 
           </div>
         </div>
-      </div>
 
     </>
   );
