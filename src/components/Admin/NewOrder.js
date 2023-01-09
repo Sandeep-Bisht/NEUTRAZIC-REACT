@@ -2,6 +2,8 @@ import React, { useEffect,useState } from 'react';
 // import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from './Sidemenu';
 import './Dashboard.css';
+import DashboardHeaader from './DashboardHeaader';
+
 var Userdata;
 const NewOrder=(props)=>{
     const[orders,setOrders]=useState([])
@@ -164,13 +166,14 @@ const NewOrder=(props)=>{
        
     return(
         <>
-         <div className="container-fluid"> <a href="#" className="nav__logo">
-                    <img src={require('../../Images/new-logo.png')}  className="dashboard-logo" alt="image" />
-                    </a>
-</div>
-
-        <div className="container">
-        
+       <section id='body-pd'>
+         <div className='container-fluid'>
+           <DashboardHeaader/>
+        <div className="row">
+        <div className='col-2 px-0'>
+         <Sidemenu/>
+         </div>
+         <div className='col-10'>
         {/* login Products Details Modal  */}
    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog justify-content-center d-grid">
@@ -265,21 +268,10 @@ const NewOrder=(props)=>{
       </div>
    </div>
    </div>
-   {/* End Products details Modal  */}
-      
-<div className="container" id="body-pd">
-<Sidemenu />
-{/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
-      </div>
+   </div>
+   </div>
+   </section>
 
-{/* End Of products table */}
         </>
     );
 }

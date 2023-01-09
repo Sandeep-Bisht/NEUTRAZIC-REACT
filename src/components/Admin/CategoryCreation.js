@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
+import DashboardHeaader from "./DashboardHeaader";
 // import DataTable from '@bit/adeoy.utils.data-table';
 var Userdata;
 const CategoryCreation = (props) => {
@@ -163,18 +164,14 @@ const CategoryCreation = (props) => {
 
   return (
     <>
+    <section id="body-pd">
       <div className="container-fluid">
-        {" "}
-        <a href="#" className="nav__logo">
-          <img
-            src={require("../../Images/new-logo.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </a>
-      </div>
-      <div id="body-pd">
+        <DashboardHeaader/>
+        <div className="row">
+          <div className="col-2 px-0">
         <Sidemenu />
+        </div>
+        <div className="col-10">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
             <form>
@@ -261,42 +258,9 @@ const CategoryCreation = (props) => {
           </button>
         </div>
       ) : null}
-      {/*     
-    <table class="table table-hover table-striped text-center">
-  <thead>
-    <tr>
-    <th scope="col">Sr.No</th>
-      <th scope="col">Category Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  {categories.map((el, ind) => {
-      categoryCount +=1;
-    return(
-    <tr>
-      
-      <td>{categoryCount}</td>
-      <td>{el.name}</td>
-     
-      <td><i className="bx bx-trash"></i><i className="bx bx-edit pl-4"></i></td>
-    </tr>
-    )
-     })}
-  
-  </tbody>
-</table> */}
-      <div className="container">
-        {/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
       </div>
+    </div>
+      </section>
     </>
   );
 };
