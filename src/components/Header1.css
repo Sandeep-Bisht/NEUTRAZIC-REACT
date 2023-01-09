@@ -106,7 +106,7 @@
     left:45px;
 }
 .sp{
-font-family:foco;
+    font-family: 'Roboto', sans-serif;
 font-size:15px;
 position: relative;
 color:#1e144f;
@@ -115,12 +115,12 @@ color:#1e144f;
     font-size:9px;
     position: relative;
     bottom:12px;
-    font-family: foco;
+    font-family: 'Roboto', sans-serif;
     
 }
 .contact1
 {   
-    font-family:Foco;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     color:white;
     margin-top:1px;
@@ -133,7 +133,7 @@ color:#1e144f;
 
 .contact
 {   
-    font-family:Foco;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     color:white;
 
@@ -149,7 +149,7 @@ color:#1e144f;
     height: 30px;
     width:260px;
     font-size:15px;
-    font-family: Foco;
+    font-family: 'Roboto', sans-serif;
     color:#C0C0C0;
 
 }
@@ -171,7 +171,7 @@ color:#1e144f;
 .currancy select
 {
     height: 30px;
-    font-family: Poppins;
+    font-family: 'Roboto', sans-serif;
     border: 0;
     padding: 5px 7px;
     outline: 0;
@@ -187,14 +187,14 @@ color:#1e144f;
     margin-left:30px;
 }
 .nav-item .nav-heading{
-    font-family: Foco;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight:600;
     color:white !important;
 }
 .number
 {
-    font-family: Foco;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight:800;
     color:white !important;
@@ -208,7 +208,7 @@ color:#1e144f;
 .drop-category .category-head
 {
     font-size:16px;
-    font-family: Poppins;
+    font-family: 'Roboto', sans-serif;
     color:white;
 
     margin-top: 0;
@@ -235,7 +235,7 @@ color:#1e144f;
 {
     font-size: 17px;
     line-height:65px;
-    font-family:Poppins;
+    font-family: 'Roboto', sans-serif;
     font-weight:500;
     color:#2F2F2F;
     border-bottom:1px solid rgba(0,0,0,0.1);
@@ -277,7 +277,7 @@ color:#1e144f;
 .button{
     margin:7px 0px; 
     width:100%;
-    font-family:Poppins;
+    font-family: 'Roboto', sans-serif;
     color:#2F2F2F;
 }
 .button i{
@@ -526,7 +526,7 @@ h3 .read-more-button
     font-size: 10px !important;
     position: relative;
     bottom: 11px;
-    font-family: foco;
+    font-family: 'Roboto', sans-serif;
     outline: 0;
     box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
 
@@ -552,7 +552,7 @@ h3 .read-more-button
 .Logout-ul .Logout-li
 {
     font-size:17px;
-    font-family: Poppins;
+    font-family: 'Roboto', sans-serif;
     line-height: 40px;
     text-align: center;
     color:#006837;
@@ -730,7 +730,7 @@ body {
 {
     color:red;
     font-size: 12px;
-    font-family: Poppins;
+    font-family: 'Roboto', sans-serif;
 }
 
 
@@ -761,7 +761,7 @@ body {
 .mobile-nav-bar .mobile-nav-list .nav-item .nav-link
 {
     color:white;
-    font-family: Poppins;
+    font-family: 'Roboto', sans-serif;
     font-style:normal;
     font-weight: bold;
     font-size: 17px;
@@ -802,7 +802,7 @@ body {
     height: 25px;
     width: 180px;
     font-size: 15px;
-    font-family: Foco;
+    font-family: 'Roboto', sans-serif;
     color: #C0C0C0;
 }
 .login-div2 .search {
@@ -856,7 +856,7 @@ body {
     font-size: 11px;
 }
 .sp{
-    font-family:foco;
+    font-family: 'Roboto', sans-serif;
     font-size:15px;
     position: relative;
     color:#006837;
@@ -866,7 +866,7 @@ body {
         font-size:9px;
         position: relative;
         bottom:12px;
-        font-family: foco;
+        font-family: 'Roboto', sans-serif;
         left:4px;
     }
 }

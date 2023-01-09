@@ -6,6 +6,7 @@ import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import {BiSearchAlt} from 'react-icons/bi';
+import { useHistory,Link } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -119,7 +120,7 @@ export default function AllSubCategoriesDetails() {
         </a>
       </div> */}
       
-        {/* <Sidemenu /> */}
+        
         <section className="sub-category-details-section">     
             <div className="row">
             <div className="col-12">

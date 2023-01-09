@@ -5,7 +5,8 @@ import axios from "axios";
 import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
-import {BiSearchAlt} from 'react-icons/bi';
+import { useHistory } from "react-router-dom";
+import {Link} from 'react-router-dom'
 
 const { Search } = Input;
 
@@ -100,17 +101,20 @@ export default function AllCategoriesDetails() {
 
   return (
     <>
+      <div className="container-fluid">
+        {" "}
+        <a href="#" className="nav__logo">
+          <img
+            src={require("../../../Images/logo2.png")}
+            className="dashboard-logo"
+            alt="image"
+          />
+        </a>
+      </div>
+      <div id="body-pd">
+        <Sidemenu />
+        <div className="container">
           <div className="row">
-<<<<<<< HEAD
-          <div className="col-12">
-              <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All categories</h3>
-              <div className="subcategory-search-wrap">
-              <input type='text' placeholder='Search..' className='sub-category-search-input' onChange={e => setSearchVal(e.target.value)}/>
-              <button className="sub-category-btn" type="button"><BiSearchAlt/></button>
-              </div>
-              </div>
-=======
             <div className="col-8">
               <h3>All categories</h3>
             </div>
@@ -122,12 +126,13 @@ export default function AllCategoriesDetails() {
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
               />
->>>>>>> 2183a7dcefb11b2268d30efc26bf3812aa57f47d
             </div>
           </div>
+        </div>
 
+        <div className="container">
           <div className="row">
-<div className="col-12">
+
             <Table
               rowKey="name"
               dataSource={filteredData && filteredData.length ? filteredData : getuser}
@@ -139,6 +144,7 @@ export default function AllCategoriesDetails() {
 
           </div>
         </div>
+      </div>
 
     </>
   );
