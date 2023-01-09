@@ -5,8 +5,9 @@ import axios from "axios";
 import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
-import { useHistory } from "react-router-dom";
-import {Link} from 'react-router-dom';
+import {BiSearchAlt} from 'react-icons/bi';
+import { useHistory,Link } from "react-router-dom";
+import DashboardHeaader from "../DashboardHeaader";
 
 const { Search } = Input;
 
@@ -109,24 +110,27 @@ export default function AllSubCategoriesDetails() {
 
   return (
     <>
-      <div className="container-fluid">
+      {/* <div className="container-fluid">
         {" "}
         <a href="#" className="nav__logo">
           <img
-            src={require("../../../Images/logo2.png")}
+            src={require("../../../Images/new-logo.png")}
             className="dashboard-logo"
             alt="image"
           />
         </a>
-      </div>
-      <div id="body-pd">
-        <Sidemenu />
-        <div className="container">
-          <div className="row">
-            <div className="col-8">
-              <h3>All SubCategories</h3>
+      </div> */}
+       <section id="body-pd">
+  <div className="container-fluid">
+    <DashboardHeaader/>
+      <div className="row">
+      <div className="col-2 px-0">
+              <Sidemenu />
             </div>
-            <div className="col-4">
+        <div className="col-10">
+        <div className="d-flex justify-content-between align-items-center">
+              <h3 className="sub-category-head">All Subcategories</h3>
+              <div className="subcategory-search-wrap">
               <Search
                 onChange={e => onChangeHandler(e)}
                 onKeyUp={searchHandler}
@@ -134,26 +138,20 @@ export default function AllSubCategoriesDetails() {
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
               />
-            </div>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="row">
-
-            <Table
-              rowKey="name"
-              dataSource={filteredData && filteredData.length ? filteredData : getuser}
-              columns={columns}
-              loading={loading}
-              pagination={false}
-            />
-
-
-          </div>
+              </div>
+              </div>
+        
+          <Table
+            rowKey="name"
+            dataSource={filteredData && filteredData.length ? filteredData : getuser}
+            columns={columns}
+            loading={loading}
+            pagination={false}
+          />
         </div>
       </div>
-
+      </div>
+      </section>
     </>
   );
 }

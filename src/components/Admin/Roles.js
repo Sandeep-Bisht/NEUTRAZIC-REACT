@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import DashboardHeaader from "./DashboardHeaader";
 // import DataTable from '@bit/adeoy.utils.data-table';
 
 // import { useStateValue } from '../state';
@@ -168,22 +169,17 @@ const Roles = (props) => {
 
   return (
     <>
+    <section id="body-pd">
       <div className="container-fluid">
-        {" "}
-        <Link href="#" className="nav__logo">
-          <img
-            src={require("../../Images/logo2.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </Link>
-      </div>
-
-      <div className="container-fluid top-nav" id="body-pd">
+        <DashboardHeaader/>
+      
+<div className="row">
+  <div className="col-2 px-0">
         <Sidemenu />
+        </div>
+        <div className="col-10">
         {/* login Register Modal  */}
-
-        <div className="form-row de-flex items-align-center justify-content-center mt-5">
+        <div className="form-row de-flex items-align-center justify-content-center">
           <div className="container justify-content-center align-items-center d-flex">
             <div className="col-1"></div>
             <div
@@ -302,23 +298,10 @@ const Roles = (props) => {
             <div className="col-1"></div>
           </div>
         </div>
-
-        {/* tabs start */}
-
-        {/* Ends Tabs */}
-
-        {/* End login register Modal  */}
-        <div className="container pt-5">
-          {/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
         </div>
       </div>
+      </div>
+      </section>
     </>
   );
 };

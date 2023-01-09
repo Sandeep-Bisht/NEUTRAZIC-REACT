@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Sidemenu from "./Sidemenu";
 import $ from "jquery";
 import "./Dashboard.css";
+import DashboardHeaader from "./DashboardHeaader";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -312,24 +313,20 @@ const Productform = (props) => {
   }
 
   return (
-    <>
+    <> 
+      <section id="body-pd">
       <div className="container-fluid">
-        {" "}
-        <a href="#" className="nav__logo">
-          <img
-            src={require("../../Images/logo2.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </a>
-      </div>
-      <div id="body-pd">
+       <DashboardHeaader/>
+       <div className="row">
+        <div className="col-2 px-0">
         <Sidemenu />
+        </div>
+        <div className="col-10">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form
               enctype="multipart/form-data">
-              <div className="container mb-5">
+              <div className="container-fluid mb-5">
                 <div className="row">
                   {/* <div className="col-1"></div> */}
                   <div className="col-10">
@@ -538,7 +535,7 @@ const Productform = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-1"></div>
+                 
                 </div>
               </div>
             </form>
@@ -554,20 +551,10 @@ const Productform = (props) => {
           </div>
         ) : null}
 
-        {/* Table for Admin Uploaded Products */}
-        {/* <div className="container table-responsive"> */}
-          {/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
-        {/* </div> */}
+</div>
+     </div>
       </div>
-
-      {/* End Of products table */}
+      </section>
     </>
   );
 };

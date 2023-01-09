@@ -1269,13 +1269,13 @@ const SingleProduct = (props) => {
             <div className="pinfo">Rate our overall services.</div>
 
             <div className="form-group">
-              <StarsRating
+              {/* <StarsRating
                 count={5}
                 // onChange={ratingChanged}
                 size={25}
                 color2={"#ffd700"}
                 value={4}
-              />
+              /> */}
             </div>
 
             <div className="pinfo">Write your feedback.</div>
