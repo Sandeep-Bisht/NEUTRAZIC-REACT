@@ -129,7 +129,11 @@ const AllProducts = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "after update");
-        history.push("/Cart");
+        //history.push("/Cart");
+        toast.success("Add to cart",{
+          position: "bottom-right",
+          autoClose: 5000,
+        })
       })
       .then((err) => console.log(err));
   };
@@ -172,7 +176,7 @@ const AllProducts = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          history.push("/Cart");
+          //history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
@@ -679,9 +683,8 @@ const AllProducts = (props) => {
                         : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
                     </span>
                   </div>
-                  <Link
-                    className="button"
-                    to="/Cart"
+                  <button
+                    className="button btn"
                     onClick={() => {
                       cartfunction(
                         el._id,
@@ -699,7 +702,7 @@ const AllProducts = (props) => {
                     data-bs-target={Userdata == null ? "#exampleModal" : null}
                   >
                     Add to Cart
-                  </Link>
+                  </button>
                   
                 </figure>
                 
@@ -764,6 +767,7 @@ const AllProducts = (props) => {
                 </div>
             </div>
         </div> */}
+        <ToastContainer/>
 
       <Footer />
     </>

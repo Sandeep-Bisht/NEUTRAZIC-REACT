@@ -10,7 +10,7 @@
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #006837;
+    background: #1e144f;
   }
   
   /* Handle on hover */
@@ -177,7 +177,7 @@ color:#1e144f;
     outline: 0;
     border-radius: 10px;
     font-size: 16px;
-    color: #fff;
+    color: #000;
     cursor: pointer;
     background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
 }
@@ -377,7 +377,9 @@ color:#1e144f;
 }
 .wishlistDiv img
 {
-    height:140px;
+    height: 130px;
+    width: auto;
+    object-fit: contain;
 }
 /* End wishlist code */
 .accordion-item .accordion-header .d-flex  button
@@ -389,7 +391,9 @@ color:#1e144f;
 .icons1
 {
  padding-left:15px;
+ max-width: 17%;
 }
+
 .Home-navbar ul li{
     padding:0px 10px;
 }
@@ -864,6 +868,11 @@ body {
         font-family: 'Roboto', sans-serif;
         left:4px;
     }
+}
+
+/* remove default css */
+.accordion-button::after{
+    background-image: none;
 }
 
 

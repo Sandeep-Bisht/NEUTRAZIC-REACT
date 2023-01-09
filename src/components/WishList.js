@@ -6,7 +6,6 @@ import Footer from './Footer';
 import Header1 from './Header1';
 import ReadMoreReact from 'read-more-react';
 import { Link } from 'react-router-dom';
-
 var Userdata='';
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
@@ -84,14 +83,16 @@ const WishList = ()=>{
          <div className="row">
          {wishlistData.length >0 ? 
             wishlistData.map((item,ind)=>(
-               <div className="col-5 ms-3 p-1 wishlistDiv">
+               <div className="col-12 wishlistDiv">
                <div className="row">
-                  
-                  <div className="col-4">
+                  <div className="col-1">
+                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>X</span>
+                  </div>
+                  <div className="col-3">
                   {/* <img src={"http://144.91.110.221:3033/"+item.image[0].path} /> */}
                   <img src={"http://localhost:3033/"+item.image[0].path} />
                   </div>
-                  <div className="col-7">
+                  <div className="col-8">
                      <h6>{item.name}</h6>
                      {/* <StarsRating
                   count={5}
@@ -103,9 +104,6 @@ const WishList = ()=>{
             ideal={100}
             max={110}
             readMoreText={"read more..."}/></p>
-                  </div>
-                  <div className="col-1">
-                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}><i className='bx bx-x'></i></span>
                   </div>
                </div>
                </div> 

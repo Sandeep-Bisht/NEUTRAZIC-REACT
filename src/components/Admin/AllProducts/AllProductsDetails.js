@@ -2,168 +2,146 @@ import React, { useEffect, useState } from "react";
 import { Table, Input, Popconfirm, Typography, Space } from "antd";
 import axios from "axios";
 // import { data } from "./columns";
-import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
-import { useHistory,Link } from "react-router-dom";
+import { BiSearchAlt } from "react-icons/bi";
+import DashboardHeaader from "../DashboardHeaader";
+import {Link} from "react-router-dom"
 
-const { Search } = Input;
+
+
+
 
 export default function AllProductsDetails() {
-  
-   
-  
-  const [gridData,setGridData]=useState([]);
+
+  const [getuser,setGetuser]=useState([])
   const [loading,setLoading]=useState(false);
-  const [searchVal,setSearchVal]=useState([]);
-  let [filteredData]=useState();
- 
-  const history= useHistory();
+  const [searchVal,setSearchVal]=useState("");
+  const [filteredData]=useState([]);
+  
+  const { Search } = Input;
 
   useEffect(()=>{
-    loadData();
-  },[])
+    fetchUsers();
+   },[])
 
-  const loadData = async () => {
+  const fetchUsers = async () => {
     setLoading(true);
-    const response = await axios.get(
-      "http://localhost:3033/api/product/all_product" 
-    );
-    setGridData(response.data.data);
+    const response = await axios.get("http://localhost:3033/api/product/all_product");
+    setGetuser(response.data.data);
     setLoading(false);
   };
-
-  const searchHandler=(e)=>{
-    setSearchVal(e.target.value);
-    if(e.target.value=="")
-    {
-      loadData();
-    }
-  }
-
-  const globalSearch=(e)=>{
-    const filteredData=gridData.filter((value)=>{
-      return(
-        value.name.toLowerCase().includes(searchVal.toLowerCase())
-      )
-    })
-    setGridData(filteredData);
-  }
-
-  // const editHandler=(record)=>{
-  //   history.push(
-  //     {
-  //      pathname :"/ProductForm",
-  //      state : {...record.value}
-  //     });      
-  // }
-
-
-  const handleDelete = (_id)=>{
-    // const response=axios.delete("http://localhost:3033/api/product/delete_product_by_id", {data: {_id:_id}});
-    // setGridData(response.data.data);
+  
+  const handleDelete=(_id)=>{
+    // const DeletedData=axios.delete("http://localhost:3033/api/subcategory/delete_product_by_id",{state: {_id:_id}});
+    // setGetuser(DeletedData.data.data);
     alert(_id);
   }
 
+  const onChangeHandler=(e)=>{
+    setSearchVal(e.target.value);
+    if(e.target.value=="")
+    {
+      fetchUsers();
+    }
+  }
 
-   const columns = [
+  const searchHandler=()=>{
+    const filteredData=getuser.filter((value)=>{
+      return value.name.toLowerCase().includes(searchVal.toLowerCase());
+    })
+    setGetuser(filteredData);
+  }
+
+  const columns = [
     {
       title: "Name",
       dataIndex: "name",
-      key: "name"
+      key: "name",
     },
     {
       title: "Price",
       dataIndex: "inrMrp",
-      key: "inrMrp"
+      key: "inrMrp",
     },
     {
       title: "Discount",
       dataIndex: "inrDiscount",
-      key: "inrDiscount"
+      key: "inrDiscount",
     },
     {
-      title: 'Image',
-      dataIndex: 'image[0].path',
+      title: "Image",
+      dataIndex: "image[0].path",
       width: 80,
       maxWidth: 90,
-      render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />
-    },  
+      render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />,
+    },
     {
-      
-      title: 'Action',
-      dataIndex: 'Action',
+      title: "Action",
+      dataIndex: "Action",
+      width: "20%",
       render: (_, record) =>
-      gridData.length >= 1 ? (
-        <Space size="middle">
-          <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record._id)}>
-            <a style={{color:"blue"}}>Delete</a>
-          </Popconfirm>
-          <Typography.Link   >
-           <Link to={{pathname:"/ProductForm", 
-           state:
-           {
-            ...record,
-          }}} 
-           style={{color:"blue"}}>Edit</Link> 
-          </Typography.Link>
-         </Space>
+        getuser.length >= 1 ? (
+          <Space size="middle">
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => handleDelete(record._id)}
+            >
+              <a style={{ color: "blue" }}>Delete</a>
+            </Popconfirm>
+            <Typography.Link>
+              <Link
+                to={{
+                  pathname: "/ProductForm",
+                  state: {
+                    ...record,
+                  },
+                }}
+                style={{ color: "blue" }}
+              >
+                Edit
+              </Link>
+            </Typography.Link>
+          </Space>
         ) : null,
     },
-       
   ];
-
- 
+  
 
   return (
     <>
+    <section id="body-pd">
       <div className="container-fluid">
-        {" "}
-        <a href="#" className="nav__logo">
-          <img
-            src={require("../../../Images/logo2.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </a>
-      </div>
-      <div id="body-pd">
-        <Sidemenu />
-        <div className="container">
-          <div className="row">
-            <div className="col-8">
-              <h3>All Products</h3>
+    <DashboardHeaader/>
+
+    <div className="row">
+      <div className="col-2 px-0">
+              <Sidemenu />
             </div>
-            <div className="col-4">
-                <Search
-                onChange={e => searchHandler(e)}
-                placeholder="Search"                
-                onKeyUp={globalSearch}
-                value={searchVal}
+        <div className="col-10">
+        <div className="d-flex justify-content-between align-items-center">
+              <h3 className="sub-category-head">All Products</h3>
+              <div className="subcategory-search-wrap">
+              <Search
+                onChange={e => onChangeHandler(e)}
+                onKeyUp={searchHandler}
+                placeholder="Search"
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
-              />             
-            </div>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="row">
-
-            <Table
-              rowKey="name"
-              columns={columns}
-              dataSource={filteredData && filteredData.length ? filteredData : gridData}
-              bordered
-              loading={loading}
-              pagination={false}
-            />
-
-
-          </div>
+              />
+              </div>
+              </div>
+        <Table
+          rowKey="name"
+          dataSource={filteredData && filteredData.length ? filteredData : getuser}
+          columns={columns}
+          loading={loading}
+          pagination={false}
+        />
         </div>
       </div>
-
+      </div>
+      </section>
     </>
   );
 }

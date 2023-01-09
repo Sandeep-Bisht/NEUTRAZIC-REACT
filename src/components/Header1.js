@@ -122,8 +122,7 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          
-          // console.log(data,"After post Api");
+          console.log(data,"After post Api");
            window.location.reload();
           
         });
