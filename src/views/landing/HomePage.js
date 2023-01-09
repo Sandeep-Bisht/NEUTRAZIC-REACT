@@ -1123,9 +1123,10 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-      </div>
-      <Baseline />
+        <Baseline />
       <Footer />
+      </div>
+      
     </>
   );
 };
