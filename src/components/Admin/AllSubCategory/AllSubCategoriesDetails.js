@@ -119,9 +119,7 @@ export default function AllSubCategoriesDetails() {
           />
         </a>
       </div> */}
-      
-        
-        <section className="sub-category-details-section">     
+        <section className="sub-category-details-section">      
             <div className="row">
             <div className="col-12">
               <div className="d-flex justify-content-between align-items-center">

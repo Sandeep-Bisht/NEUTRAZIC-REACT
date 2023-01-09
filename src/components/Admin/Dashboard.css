@@ -49,7 +49,7 @@ body
 
 /* subcategory-css */
 
-.sub-category-details-section
+.sub-category-details-section , .category-details-section
 {
   padding-top: 10px;
 }

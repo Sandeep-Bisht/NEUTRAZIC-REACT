@@ -158,7 +158,7 @@ const Dashboard = () => {
               <Sidemenu />
             </div>
             <div className="col-10">
-              {/* <main className="main">
+              <main className="main">
                 <div className="row cardsec-row">
                   <div className="col-3">
                     <Link to="/Manufacturer">
@@ -275,13 +275,11 @@ const Dashboard = () => {
                     </Link>
                   </div>
                 </div>
-              </main> */}
-
-              <AllManufactureDetails />
-
-              {/* <AllSubCategoriesDetails/>
-        <AllProductsDetails/>
-        <AllCategoriesDetails/> */}
+              </main>
+              {/* <AllCategoriesDetails /> */}
+              {/* <AllManufactureDetails />
+              <AllProductsDetails />
+              <AllSubCategoriesDetails /> */}
             </div>
           </div>
         </div>

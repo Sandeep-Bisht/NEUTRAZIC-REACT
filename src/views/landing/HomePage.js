@@ -406,16 +406,13 @@ const HomePage = () => {
             autoClose: 5000,         
           });
           }
-          
-          
         }
       }); 
   };
-  // const HeartColor = (data) => {
-  //   console.log(data,"New Dataaaaaaaaaaaaaaaaaaaa")
+  // const HeartColor = (el) => {
   //   $(document).ready(function() {
-  //     $(".wishHeart").on("click",function() {
-  //       $(".wishHeart").toggleClass("active-color");
+  //     $(".bxs-heart").click(function() {
+  //       $(".bxs-heart").addClass("active-color");
   //     });
   //   });
   // };
@@ -562,10 +559,8 @@ const HomePage = () => {
                                       </del>
                                       {Userdata ? (
                                         <i
-                                          className=" wishHeart bx bxs-heart ml-3"
+                                          className="bx bxs-heart ml-3"
                                           onClick={() => {
-                                           
-          
                                             AddtoWishlist(
                                               el._id,
                                               el.name,
@@ -1133,9 +1128,9 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-      </div>
-      <Baseline />
+        <Baseline />
       <Footer />
+      </div>
     </>
   );
 };
