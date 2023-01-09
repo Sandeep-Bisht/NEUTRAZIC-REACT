@@ -276,10 +276,10 @@ const Dashboard = () => {
                   </div>
                 </div>
               </main>
-              {/* <AllCategoriesDetails /> */}
-              {/* <AllManufactureDetails />
-              <AllProductsDetails />
-              <AllSubCategoriesDetails /> */}
+              <AllManufactureDetails/>
+              <AllSubCategoriesDetails/>
+        <AllProductsDetails/>
+        <AllCategoriesDetails/>
             </div>
           </div>
         </div>

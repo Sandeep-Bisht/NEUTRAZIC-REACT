@@ -316,7 +316,6 @@ const Sidemenu = () => {
                     <h2 className="accordion-header" id="headingThree">
                       <div className="d-flex align-items-center justify-content-center div1">
                         <i className="bx bx-message-alt-check nav__icon"></i>
-
                         <button
                           className="accordion-button collapsed"
                           type="button"
