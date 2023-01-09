@@ -19,6 +19,8 @@ var header;
 var sticky;
 var Userdata = "";
 
+const errorEmail = "Please Enter a valid Email Address";
+
 
 // var userCart=[]
 const Header1 = (props) => {
@@ -41,6 +43,7 @@ const Header1 = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({
     defaultValues:{
     username:"",
@@ -51,6 +54,7 @@ const Header1 = (props) => {
   });
 
   useEffect(() => {
+    console.log(props, "lengthhhhhhhhhhhhhh212345");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     GetSubCategory();
@@ -86,11 +90,10 @@ const Header1 = (props) => {
       autoClose: 5000,
     });
     window.location.replace("/");
-    
   };
 
   const RegisterUser = (data) => {
-    console.log(data,"mkkkkkkkkkkkkkkk");
+    
     // setUsername(data.username);
     // setemail(data.email);
     // setPassword(data.password);
@@ -102,7 +105,7 @@ const Header1 = (props) => {
       data.username&&
       data.password == data.repassword
     ) {
-      console.log(data,"After if con")
+      
       //fetch("http://144.91.110.221:3033/api/auth/register", {
       fetch("http://localhost:3033/api/auth/register", {
         method: "POST",
@@ -118,15 +121,13 @@ const Header1 = (props) => {
         }),
       })
         .then((res) => res.json())
-        .then(() => {
+        .then((data) => {
+          console.log(data,"After post Api");
+           window.location.reload();
           
-          window.location.reload();
         });
-        
-    } else {
-      setRegMsg("Please Enter Right Data");
     }
-   
+    
   };
   const LoginUser = (e) => {
     e.preventDefault();
@@ -149,29 +150,18 @@ const Header1 = (props) => {
             Userdata = res;
             localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
-            history.push("/");
+
+            //history.push("/");
             window.location.reload();
-            toast.success("Login successfull",{
-              position:toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 5000,
-            })
-            
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||
             res.role == "Manager"
           ) {
-            toast.success("Login successfull",{
-              position:toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 5000,
-            })
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
-            
             history.push("/Dashboard");
-             
             window.location.reload();
-           
           } else if (Userdata == undefined) {
             setMsg("User Name Or PassWord is not Valid");
           }
@@ -181,12 +171,14 @@ const Header1 = (props) => {
             await JSON.parse(localStorage.getItem("CartDataWoLogin")).map(
               async (item, index) => {
                 await cartfunction(item);
-                
               }
             );
           }
         });
-       
+      toast.success("Login successfull", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+      });
     } else {
       console.log("not getting role");
       setMsg("Please Enter a Valid Data");
@@ -375,13 +367,13 @@ const Header1 = (props) => {
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           >
-                            {/* <img
+                            <img
                               className="icons1"
                               src={
                                 //"http://144.91.110.221:3033/" + el.image[0].path
                                 "http://localhost:3033/" + el.image[0].path
                               }
-                            /> */}
+                            />
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -392,13 +384,6 @@ const Header1 = (props) => {
                             >
                               {el.name}
                             </button>
-                            <img
-                              className="icons1"
-                              src={
-                                //"http://144.91.110.221:3033/" + el.image[0].path
-                                "http://localhost:3033/" + el.image[0].path
-                              }
-                            />
                           </div>
                         </Link>
                       </h2>
@@ -569,10 +554,12 @@ const Header1 = (props) => {
                               
                               {...register("email", {
                                 required: true,
+                                pattern:/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                                 
                               })}
                             />
                             {errors?.email?.type === "required" && <p className="text-danger">Email is Required</p>}
+                            {errors?.email?.type === "pattern" && <p className="text-danger">Not a valid Email Address </p>}
                             {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                           </div>
                           <div className="form-group">
@@ -585,10 +572,12 @@ const Header1 = (props) => {
                               
                               {...register("password", {
                                 required: true,
+                                pattern:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                                 
                               })}
                             />
                             {errors?.password?.type === "required" && <p className="text-danger">Password is Required</p>}
+                            {errors?.password?.type === "pattern" && <p className="text-danger">Minimum eight characters, at least one letter, one number and one special character</p>}
                           </div>
                           <div className="form-group ">
                             <label>
@@ -600,10 +589,16 @@ const Header1 = (props) => {
                             
                               {...register("repassword", {
                                 required: true,
+                                validate: (val) =>{
+                                  if(watch('password') !== val){
+                                    return "Your Password Does not Match"
+                                  }
+                                }
                                 
                               })}
                             />
                             {errors?.repassword?.type === "required" && <p className="text-danger">Re-Password is Required</p>}
+                            {errors?.repassword?.type === "validate" && <p className="text-danger">Password does not match</p>  }
                           </div>
                           {/* <h5 className="Login-fail-msg">{}</h5> */}
                           {/* <div className="form-group col-lg-12">
@@ -691,15 +686,49 @@ const Header1 = (props) => {
               <div className="col-sm-1">
                 <div className="option-item">
                   <div className="cart-btn">
-                    <Link to="/Ordered">
-                      <i className="bx bx-user"></i>
-                    </Link>
+                    
+                    
+                      
+
+                  { Userdata == null ?
+                      (
+                        <>
+                        <span
+                      className="sp"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <i className="user-icon bx bx-user"></i>
+                    </span>
+                    <br />
+                    <span
+                      className="Sp1 mt-5"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      style={{ cursor: "pointer" }}
+                    >
+                     
+                    </span>
+                  </>
+                       
+                      ):
+                      (
+                        <>
+                        <i className="user-icon bx bx-user"></i>
+                        </>
+                      )
+                      }
+                    
+                    
+                    
                   </div>
                 </div>
               </div>
               <div className="col-sm-8 user-login">
                 {Userdata == null ? (
                   <>
+                  
                     <span
                       className="sp"
                       data-bs-toggle="modal"
