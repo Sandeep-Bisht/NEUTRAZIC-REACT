@@ -489,7 +489,7 @@ const HomePage = () => {
     <>
       <Header1 />
       {/* <Carouselcomp /> */}
-      <div id="body-pd">
+      <div id="">
         {/* trending section  */}
         <section className="home-banner">
           <div className="container m-auto">

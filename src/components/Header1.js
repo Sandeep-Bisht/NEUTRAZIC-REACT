@@ -160,7 +160,10 @@ const Header1 = (props) => {
             Userdata = res;
             localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
-
+            toast.success("Login successfull", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+      });
             //history.push("/");
             window.location.reload();
           } else if (
@@ -173,6 +176,7 @@ const Header1 = (props) => {
             history.push("/Dashboard");
             window.location.reload();
           } else if (Userdata == undefined) {
+            console.log(res,"response failure")
             setMsg("User Name Or PassWord is not Valid");
           }
         })
@@ -185,12 +189,12 @@ const Header1 = (props) => {
             );
           }
         });
-      toast.success("Login successfull", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-      });
+      // toast.success("Login successfull", {
+      //   position: toast.POSITION.BOTTOM_RIGHT,
+      //   autoClose: 5000,
+      // });
     } else {
-      console.log("not getting role");
+      console.log("not getting role","faiure");
       setMsg("Please Enter a Valid Data");
     }
   };
@@ -455,7 +459,7 @@ const Header1 = (props) => {
                                
                               })}
                             />
-                            {errors?.username?.type === "required" && <p className="text-danger">Name is Required</p>}
+                            {errors?.username?.type === "required" && <p className="text-danger">This field is required</p>}
                             {/* <input
                             type="text"
                             className="form-control "
@@ -479,8 +483,8 @@ const Header1 = (props) => {
                                 
                               })}
                             />
-                            {errors?.email?.type === "required" && <p className="text-danger">Email is Required</p>}
-                            {errors?.email?.type === "pattern" && <p className="text-danger">Not a valid Email Address </p>}
+                            {errors?.email?.type === "required" && <p className="text-danger">This field is required</p>}
+                            {errors?.email?.type === "pattern" && <p className="text-danger">Please enter the valid Email</p>}
                             {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                           </div>
                           <div className="form-group">
@@ -497,8 +501,8 @@ const Header1 = (props) => {
                                 
                               })}
                             />
-                            {errors?.password?.type === "required" && <p className="text-danger">Password is Required</p>}
-                            {errors?.password?.type === "pattern" && <p className="text-danger">Minimum eight characters, at least one letter, one number and one special character</p>}
+                            {errors?.password?.type === "required" && <p className="text-danger">This field is required</p>}
+                            {errors?.password?.type === "pattern" && <p className="text-danger">Must have more than 8 characters, Must have atleast one number, Must have upper & lowercase letters, Must have atleast one special character</p>}
                           </div>
                           <div className="form-group ">
                             <label>
@@ -518,7 +522,7 @@ const Header1 = (props) => {
                                 
                               })}
                             />
-                            {errors?.repassword?.type === "required" && <p className="text-danger">Re-Password is Required</p>}
+                            {errors?.repassword?.type === "required" && <p className="text-danger">This field is required</p>}
                             {errors?.repassword?.type === "validate" && <p className="text-danger">Password does not match</p>  }
                           </div>
                           {/* <h5 className="Login-fail-msg">{}</h5> */}

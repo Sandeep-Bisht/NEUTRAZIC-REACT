@@ -34,6 +34,7 @@ const AllProducts = (props) => {
     GetManufacturer();
     // GetCategory();
   }, []);
+  console.log(AllProduct,"all productssssssssssssssss");
   const setPreviousValue = () => {
     if (prev >= 7) {
       SetNext(next - 8);
@@ -376,7 +377,7 @@ const AllProducts = (props) => {
       <Header1 />
 
       {/* <!-- Right side Modal --> */}
-      <div id="mySidenav" className="sidenav">
+      {/* <div id="mySidenav" className="sidenav">
         <Link
           href="javascript:void(0)"
           className="closebtn"
@@ -570,7 +571,7 @@ const AllProducts = (props) => {
           style={{}}
         ></i>
       </div>
-      <div id="main"></div>
+      <div id="main"></div> */}
 
       {/* end side bar Modal */}
 
@@ -614,14 +615,13 @@ const AllProducts = (props) => {
             </div>
           </div>
           <div className="col-5">
-            <hr />
           </div>
           <div className="col-1"></div>
         </div>
       </div>
 
       <div id="wrap">
-        <div id="columns" className="columns_4">
+        <div id="columns" className="columns_5">
           {AllProduct.map((el, ind1) => {
             if (ind1 > prev && ind1 <= next) {
               return (
