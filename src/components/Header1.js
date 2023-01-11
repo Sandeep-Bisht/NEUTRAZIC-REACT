@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
 import "../views/landing/homepage.css";
@@ -24,8 +25,7 @@ const errorEmail = "Please Enter a valid Email Address";
 
 // var userCart=[]
 const Header1 = (props) => {
-  let { cartItems } = props 
-  console.log("propsss", cartItems)
+  const state = useSelector((state=>state.GetCartItemReducer))
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -40,6 +40,7 @@ const Header1 = (props) => {
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
+  const [cartItems, setCartItems] = useState();
 
   const {
     register,
@@ -54,6 +55,13 @@ const Header1 = (props) => {
     repassword:"",
     }
   });
+
+  useEffect(() => {
+    if(state.noOfItemsInCart) {
+      setCartItems(state.noOfItemsInCart)
+    }
+
+  }, [state.noOfItemsInCart])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -771,14 +779,12 @@ const Header1 = (props) => {
                   </div>
                 </div>
 
-                <div className="col-sm-8 user-login">
-                  {props && cartItems ? (
-                    <h6 className="Total-Item">
-                      {props && cartItems > 0 ? cartItems : ""}
+                <div className="col-8 user-login">
+                  { cartItems ?(             
+                  <h6 className="Total-Item">
+                      { cartItems }
                     </h6>
-                  ) : (
-                    ""
-                  )}
+                  ) :""}
                   <span className="sp">Cart</span>
                   <br />
                   <span className="Sp1">₹ 0.0</span>

@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "../store"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { StateProvider } from "../state";
-import { INITIAL_STATE as AUTH_INITIAL_STATE } from "../state/auth/reducers";
-import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from "../state/product/reducers";
-import reducers from "../state/reducers";
+// import { StateProvider } from "../state";
+// import { INITIAL_STATE as AUTH_INITIAL_STATE } from "../state/auth/reducers";
+// import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from "../state/product/reducers";
+// import reducers from "../state/reducers";
 // import BaseStyles from './base-styles';
 import PrivateRoute from "./private-route";
 // import Content from '../components/content';
@@ -70,6 +72,7 @@ const Root = (props) => {
   return (
     // <StateProvider initialState={initialState} reducer={reducers}>
       /* <BaseStyles /> */
+      <Provider store={store}>
       <Router>
         <>
           <Switch>
@@ -163,6 +166,7 @@ const Root = (props) => {
           </Switch>
         </>
       </Router>
+      </Provider>
     //* </StateProvider> */
   );
 };

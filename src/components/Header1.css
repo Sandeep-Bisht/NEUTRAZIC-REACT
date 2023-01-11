@@ -2,7 +2,10 @@
 ::-webkit-scrollbar {
     width: 2px;
   }
-  
+  .Total-Item
+  {
+    background-color: red;
+  }
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;

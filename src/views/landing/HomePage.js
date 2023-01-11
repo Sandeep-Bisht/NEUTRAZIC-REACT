@@ -14,6 +14,8 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import * as ACTIONS from "../../CommonService/GetCartItem/action";
+import { useSelector, useDispatch } from "react-redux";
 
 import $ from "jquery";
 
@@ -22,6 +24,8 @@ var CartDataWoLogin = [];
 let tranding = 0;
 let skincare = 0;
 const HomePage = () => {
+
+  let dispatch = useDispatch()
   const images = [
     "../../Images/categories/categories-img1.png",
     "../../Images/categories/categories-img2.png",
@@ -47,11 +51,16 @@ const HomePage = () => {
   const [wishlistData,Setwishlist]=useState([])
 
   const history = useHistory();
+
+  // useEffect(() => {
+    
+  // },[])
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetData();
-    GetWishlist();
     CartById();
+    GetWishlist();    
     GetCategory();
     GetManufacturer();
     tranding = 0;
@@ -221,6 +230,7 @@ const HomePage = () => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
+          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -263,6 +273,7 @@ const HomePage = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        CartById();
         //history.push("/Cart");
         //window.scroll(0, 0);
       })
@@ -286,6 +297,9 @@ const HomePage = () => {
         .then(async (data) => {
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
+          let cartItems = data.data[0].order.length;
+          console.log(cartItems, "before dispatch")
+          dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
           console.log(err, "error");
@@ -473,7 +487,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Header1  cartItems={cartItems} />
+      <Header1 />
       {/* <Carouselcomp /> */}
       <div id="body-pd">
         {/* trending section  */}
