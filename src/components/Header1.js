@@ -334,7 +334,7 @@ const Header1 = (props) => {
       <div
         className="modal left fade"
         id="myModal"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
       >
@@ -402,7 +402,7 @@ const Header1 = (props) => {
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -567,9 +567,9 @@ const Header1 = (props) => {
                             Login
                           </button>
                           <ToastContainer />
-                          <Link>
+                          <span>
                             <p className="mt-2">Forget Password...</p>
-                          </Link>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -877,7 +877,7 @@ const Header1 = (props) => {
                       <Link
                         className="nav-link nav-heading"
                         to="/ContactUs"
-                        tabindex="-1"
+                        tabIndex="-1"
                         aria-disabled="true"
                       >
                         Contact
@@ -887,7 +887,7 @@ const Header1 = (props) => {
                       <a
                         className="nav-link nav-heading"
                         href="#"
-                        tabindex="-1"
+                        tabIndex="-1"
                         aria-disabled="true"
                       >
                         Blog

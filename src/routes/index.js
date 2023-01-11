@@ -50,10 +50,10 @@ import MyAccount from "../components/MyAccount"
 
 var Userdata = "";
 const Root = (props) => {
-  const initialState = {
-    auth: AUTH_INITIAL_STATE,
-    product: PRODUCT_INITIAL_STATE,
-  };
+  // const initialState = {
+  //   auth: AUTH_INITIAL_STATE,
+  //   product: PRODUCT_INITIAL_STATE,
+  // };
   const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
       {...rest}
@@ -68,8 +68,8 @@ const Root = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
   return (
-    <StateProvider initialState={initialState} reducer={reducers}>
-      {/* <BaseStyles /> */}
+    // <StateProvider initialState={initialState} reducer={reducers}>
+      /* <BaseStyles /> */
       <Router>
         <>
           <Switch>
@@ -163,7 +163,7 @@ const Root = (props) => {
           </Switch>
         </>
       </Router>
-    </StateProvider>
+    //* </StateProvider> */
   );
 };
 
