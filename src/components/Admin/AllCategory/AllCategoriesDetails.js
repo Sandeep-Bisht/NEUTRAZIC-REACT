@@ -48,10 +48,12 @@ export default function AllCategoriesDetails() {
     setGetuser(filteredData);
   };
 
-  const handleDelete = (_id) => {
-    // const DeletedData=axios.delete("http://localhost:3033/api/category/delete_category_by_id",{state : {_id:_id}});
-    // setGetuser(DeletedData.data.data);
-    alert(_id);
+  const handleDelete = async (_id) => {
+    try{
+      const DeletedData=await axios.delete("http://localhost:3033/api/category/delete_category_by_id",{data : {_id:_id}});
+      fetchUsers();
+    }catch(error){
+    }
   };
 
   // const editHandler=(_id)=>{
@@ -115,7 +117,7 @@ export default function AllCategoriesDetails() {
             </div>
         <div className="col-10">
         <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All Manufacturer</h3>
+              <h3 className="sub-category-head">All categories</h3>
               <div className="subcategory-search-wrap">
               <Search
                 onChange={e => onChangeHandler(e)}

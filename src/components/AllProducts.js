@@ -377,7 +377,7 @@ const AllProducts = (props) => {
       <Header1 />
 
       {/* <!-- Right side Modal --> */}
-      <div id="mySidenav" className="sidenav">
+      {/* <div id="mySidenav" className="sidenav">
         <Link
           href="javascript:void(0)"
           className="closebtn"
@@ -571,7 +571,7 @@ const AllProducts = (props) => {
           style={{}}
         ></i>
       </div>
-      <div id="main"></div>
+      <div id="main"></div> */}
 
       {/* end side bar Modal */}
 

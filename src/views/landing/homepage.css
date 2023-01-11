@@ -10016,7 +10016,7 @@ p:last-child {
 	opacity: 1;
 }
 .section-title h2 {
-	margin-top: -50px;
+	margin-top: 0px;
 	border-bottom: 3px solid #1e144f;
 	padding-bottom: 0;
 	font-size: 2rem;

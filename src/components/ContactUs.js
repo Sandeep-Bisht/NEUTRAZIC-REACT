@@ -3,6 +3,8 @@ import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import Header1 from "./Header1";
 import Baseline from "./Baseline";
+import "../views/landing/homepage.css";
+
 const ContactUs = () => {
   return (
     <>
@@ -153,7 +155,7 @@ const ContactUs = () => {
                       </div>
                     </div>
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                      <button type="submit" className="default-btn">
+                      <button type="submit" className="btn btn cosmetic-shop-now">
                         Send Message
                       </button>
                     </div>
