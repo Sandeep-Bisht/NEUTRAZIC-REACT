@@ -14,6 +14,8 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import * as ACTIONS from "../../CommonService/GetCartItem/action";
+import { useSelector, useDispatch } from "react-redux";
 
 import $ from "jquery";
 
@@ -22,6 +24,8 @@ var CartDataWoLogin = [];
 let tranding = 0;
 let skincare = 0;
 const HomePage = () => {
+
+  let dispatch = useDispatch()
   const images = [
     "../../Images/categories/categories-img1.png",
     "../../Images/categories/categories-img2.png",
@@ -40,17 +44,23 @@ const HomePage = () => {
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
+  const [cartItems, setCartItems] = useState(undefined)
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
-  const [color, setColor] = useState(false);
+  const [wishlistData,Setwishlist]=useState([])
 
   const history = useHistory();
+
+  // useEffect(() => {
+    
+  // },[])
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
     GetData();
     CartById();
+    GetWishlist();    
     GetCategory();
     GetManufacturer();
     tranding = 0;
@@ -69,24 +79,43 @@ const HomePage = () => {
       });
     });
   }, []);
-  const WishlistHeart = () => {
-    // $(".icon-wishlist").on("click", function() {
-    //   $(this).toggleClass("in-wishlist");
-    // });
-    // $(document).ready(function() {
-    //   $(".WishHeart").on("click", function() {
-    //     $(this).toggleClass("active-color");
-    //   });
-    // });
-  };
+
+  const GetWishlist = async () => {
+    let id;
+    if(Userdata){
+     id=Userdata._id
+    }
+  // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
+     await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+       
+      userid: id,
+    }),
+  })
+    .then((res) => res.json())
+    .then(async (data) => {
+       if(data.data[0] !== undefined){
+     
+        Setwishlist(data.data)
+       }
+    })    
+    .catch((err) => {
+      console.log(err, "error");
+    });
+   
+};
+
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
     await fetch("http://localhost:3033/api/product/all_product")
       //await fetch("http://144.91.110.221:3033/api/product/all_product")
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
         setData(data.data);
       })
       .catch((err) => {
@@ -98,9 +127,7 @@ const HomePage = () => {
       //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
         setManufactureres(data.data);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -111,7 +138,6 @@ const HomePage = () => {
       // await fetch("http://144.91.110.221:3033/api/category/all_category")
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hrre");
         setCategories(data.data);
       })
       .catch((err) => {
@@ -155,7 +181,7 @@ const HomePage = () => {
       }
       CartDataWoLogin.push(newItemObj);
       localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-      console.log(JSON.stringify(CartDataWoLogin));
+      // console.log(JSON.stringify(CartDataWoLogin));
     }
   };
 
@@ -171,7 +197,6 @@ const HomePage = () => {
     manufacturer,
     image
   ) => {
-    console.log("quantityyy", quantity);
     if (quantity > 0) {
       var merged = false;
       var newItemObj = {
@@ -205,6 +230,7 @@ const HomePage = () => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
+          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -247,12 +273,13 @@ const HomePage = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
+        CartById();
         //history.push("/Cart");
         //window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
+  
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch("http://localhost:3033/api/cart/cart_by_id", {
@@ -269,12 +296,17 @@ const HomePage = () => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data[0]);
+          setCartItems(data.data[0].order.length);
+          let cartItems = data.data[0].order.length;
+          console.log(cartItems, "before dispatch")
+          dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
   };
+
   const AddtoCart = async () => {
     if (!Userdata == []) {
       //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
@@ -292,7 +324,9 @@ const HomePage = () => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          history.push("/Cart");
+          CartById();
+          // setCartItems(data.data[0].order.length);
+          // history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
@@ -312,7 +346,7 @@ const HomePage = () => {
     category,
     manufacturer,
     image
-  ) => {
+  ) => { 
     await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
       // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
       method: "post",
@@ -351,15 +385,19 @@ const HomePage = () => {
             )
               .then((res) => res.json())
               .then(async (data) => {
-                
+                //add product to wishlist response is comming here
+               
+                let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
+                wishList.classList.add("wishlisted");
                 // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
               })
               .catch((err) => {
                 console.log(err, "error e");
               });
           }
-        } else {
+        } 
+        else {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
@@ -386,9 +424,11 @@ const HomePage = () => {
                 .then((res) => res.json())
                 .then(async (data) => {
                   
-                  
+                  let wishList = document.getElementById(productid);
+                  wishList.classList.add("in-wishlist");
+                  wishList.classList.add("wishlisted");
+
                   // setWishlist(data.data[0]);
-                  //  await console.log(wishlist,"khlklklklk")
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -435,6 +475,15 @@ const HomePage = () => {
   const searchData = (e) => {
     // if (props.func) props.func(e);
   };
+
+  const checkWishlistItem = (productId) => {
+    for (let item of wishlistData) {
+      if (item.productId == productId) {
+        return "wishlisted"
+      }
+    }
+    }
+  
 
   return (
     <>
@@ -541,7 +590,7 @@ const HomePage = () => {
                                     </Link>
                                     <div className="price-div d-flex align-items-center justify-content-between">
                                       <span className="new-price">
-                                        <i class="fa fa-inr"></i>{" "}
+                                        <i className="fa fa-inr"></i>{" "}
                                         {el.inrDiscount}
                                       </span>
                                       <del className="new-price ml-1">
@@ -549,7 +598,8 @@ const HomePage = () => {
                                       </del>
                                       {Userdata ? (
                                         <i
-                                          className="bx bxs-heart ml-3"
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                          id={el._id}
                                           onClick={() => {
                                             AddtoWishlist(
                                               el._id,
@@ -586,7 +636,6 @@ const HomePage = () => {
                                       )}
                                       <div>
                                         {Userdata ? (
-                                          // console.log(Userdata,"Abhishek User")
                                           <i
                                             className="bx bx-cart"
                                             onClick={() => {
@@ -770,11 +819,12 @@ const HomePage = () => {
                                     <ReadMoreReact text={el.name} />
                                   </Link>
                                   <div className="price-div d-flex align-items-center justify-content-between">
-                                    <span className="new-price">$899</span>
-                                    <del className="new-price ml-1">$1000</del>
+                                    <span className="new-price">{el.inrDiscount}</span>
+                                    <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
                                       <i
-                                        className="bx bxs-heart ml-3"
+                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                          id={el._id}
                                         onClick={() => {
                                           AddtoWishlist(
                                             el._id,
@@ -807,7 +857,6 @@ const HomePage = () => {
                                     )}
                                     <div>
                                       {Userdata ? (
-                                        // console.log(Userdata,"Abhishek User")
                                         <i
                                           className="bx bx-cart"
                                           onClick={() => {
@@ -885,14 +934,12 @@ const HomePage = () => {
           <div className="container m-auto">
             <div className="row">
               {data.map((el, ind) => {
-                console.log("skin careee outside", data);
                 // if (
                 //   (ind > 0  && el.name == "Obloss") ||
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
                 if (ind > 0 && el.category.name == "Skin Care") {
-                  console.log("skin careee inside", el);
                   skincare = skincare + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12 ">
@@ -933,7 +980,8 @@ const HomePage = () => {
                                     <del className="new-price ml-1">$1000</del>
                                     {Userdata ? (
                                       <i
-                                        className="bx bxs-heart ml-3"
+                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                          id={el._id}
                                         onClick={() => {
                                           AddtoWishlist(
                                             el._id,
@@ -967,7 +1015,6 @@ const HomePage = () => {
 
                                     <ToastContainer />
                                     {Userdata ? (
-                                      // console.log(Userdata,"Abhishek User")
                                       <i
                                         className="bx bx-cart"
                                         onClick={() => {
@@ -1110,7 +1157,7 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div className="col-6">
                 <div className="img-div d-flex justify-content-center">
                   <img id="img" src={Mobile} alt="image" />
                 </div>

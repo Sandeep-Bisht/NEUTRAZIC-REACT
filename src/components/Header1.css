@@ -2,7 +2,10 @@
 ::-webkit-scrollbar {
     width: 2px;
   }
-  
+  .Total-Item
+  {
+    background-color: red;
+  }
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
@@ -780,7 +783,7 @@ body {
 
 
 
-{/* phone top-navbar */}
+/* phone top-navbar */
 .mobile-top-navbar
 {
     display: block;
@@ -828,8 +831,8 @@ body {
 {
     bottom:0px;
 }
-{/* end phone top-navbar */}
-}
+/* end phone top-navbar */
+
 /* end  mobile responsive header css */
 
 
@@ -885,4 +888,5 @@ body {
 .user-icon{
     font-size: 2rem;
     display: block;
+}
 }

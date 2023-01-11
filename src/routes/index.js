@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "../store"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { StateProvider } from "../state";
-import { INITIAL_STATE as AUTH_INITIAL_STATE } from "../state/auth/reducers";
-import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from "../state/product/reducers";
-import reducers from "../state/reducers";
+// import { StateProvider } from "../state";
+// import { INITIAL_STATE as AUTH_INITIAL_STATE } from "../state/auth/reducers";
+// import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from "../state/product/reducers";
+// import reducers from "../state/reducers";
 // import BaseStyles from './base-styles';
 import PrivateRoute from "./private-route";
 // import Content from '../components/content';
@@ -50,10 +52,10 @@ import MyAccount from "../components/MyAccount"
 
 var Userdata = "";
 const Root = (props) => {
-  const initialState = {
-    auth: AUTH_INITIAL_STATE,
-    product: PRODUCT_INITIAL_STATE,
-  };
+  // const initialState = {
+  //   auth: AUTH_INITIAL_STATE,
+  //   product: PRODUCT_INITIAL_STATE,
+  // };
   const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
       {...rest}
@@ -68,8 +70,9 @@ const Root = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
   return (
-    <StateProvider initialState={initialState} reducer={reducers}>
-      {/* <BaseStyles /> */}
+    // <StateProvider initialState={initialState} reducer={reducers}>
+      /* <BaseStyles /> */
+      <Provider store={store}>
       <Router>
         <>
           <Switch>
@@ -163,7 +166,8 @@ const Root = (props) => {
           </Switch>
         </>
       </Router>
-    </StateProvider>
+      </Provider>
+    //* </StateProvider> */
   );
 };
 
