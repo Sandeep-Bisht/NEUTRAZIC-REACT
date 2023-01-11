@@ -677,10 +677,11 @@ const AllProducts = (props) => {
                     </div>
                     <span className="price">
                       {" "}
-                      $
+                      {el.inrMrp}
+                      {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
-                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
+                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
                     </span>
                   </div>
                   <button

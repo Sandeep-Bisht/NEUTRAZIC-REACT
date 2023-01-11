@@ -1,4 +1,8 @@
-/*!* Bootstrap v4.5.0 (https://getbootstrap.com/)
+
+.wishlisted {
+	color: red !important;
+  }
+  /*!* Bootstrap v4.5.0 (https://getbootstrap.com/)
 * Copyright 2011-2020 The Bootstrap Authors
 * Copyright 2011-2020 Twitter, Inc.
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*/
@@ -75,7 +79,7 @@ section {
 	margin:0px !important;
 } */
 
-[tabindex="-1"]:focus:not(:focus-visible) {
+[tabIndex="-1"]:focus:not(:focus-visible) {
 	outline: 0!important
 }
 
