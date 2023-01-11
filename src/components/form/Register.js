@@ -88,7 +88,8 @@ const Register = (props) => {
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
             window.location.reload();
             history.push("/Dashboard");
-          } else if (Userdata == undefined) {
+          } 
+          else if (Userdata == undefined) {
             setMsg("User Name Or PassWord is not Valid");
           }
         })

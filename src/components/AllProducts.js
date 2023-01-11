@@ -34,6 +34,7 @@ const AllProducts = (props) => {
     GetManufacturer();
     // GetCategory();
   }, []);
+  console.log(AllProduct,"all productssssssssssssssss");
   const setPreviousValue = () => {
     if (prev >= 7) {
       SetNext(next - 8);
@@ -614,14 +615,13 @@ const AllProducts = (props) => {
             </div>
           </div>
           <div className="col-5">
-            <hr />
           </div>
           <div className="col-1"></div>
         </div>
       </div>
 
       <div id="wrap">
-        <div id="columns" className="columns_4">
+        <div id="columns" className="columns_5">
           {AllProduct.map((el, ind1) => {
             if (ind1 > prev && ind1 <= next) {
               return (
