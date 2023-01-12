@@ -8,6 +8,10 @@ import {BiSearchAlt} from 'react-icons/bi';
 import UserImg from "../../../Images/user3.jpg";
 import DashboardHeaader from "../DashboardHeaader";
 import {Link} from 'react-router-dom'
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md';
+import { baseUrl } from "../../../utils/services";
 
  
 
@@ -18,16 +22,37 @@ export default function AllManufactureDetails() {
   const [filteredData]=useState([]);
 
   const { Search } = Input;
+  const [Manufacturer, setManufacturer] = useState("");
   
   useEffect(()=>{
     fetchUsers();
+    setCount();
+    GetManufacturer();
    },[])
 
+
+   const setCount = async () => {
+    //  await setManufacturerCount1(localStorage.getItem("ManufacturerCount"));
+    // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
+  };
+
+  const GetManufacturer = async () => {
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        console.log(data, "hello");
+        setManufacturer(data.data.length);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err, "errors");
+      });
+  };
 
   const fetchUsers = async () => {
     setLoading(true);
   const response = await axios.get( 
-    "http://localhost:3033/api/manufacture/all_manufacture"
+    `${baseUrl}/api/manufacture/all_manufacture`
   );
   setGetuser(response.data.data);
     setLoading(false);
@@ -50,7 +75,7 @@ const searchHandler=()=>{
 
 const handleDelete = async (_id)=>{
   try{
-    const DeletedData=await axios.delete("http://localhost:3033/api/manufacture/delete_manufacturer_by_id", {data: {_id:_id}});
+    const DeletedData=await axios.delete(`${baseUrl}/api/manufacture/delete_manufacturer_by_id`, {data: {_id:_id}});
     fetchUsers();
   }catch(error){
   }
@@ -74,7 +99,7 @@ const columns = [
     dataIndex: "image[0].path",
     width: 80,
     maxWidth: 90,
-    render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />,
+    render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />,
   },
   {
     title: "Action",
@@ -87,7 +112,7 @@ const columns = [
             title="Sure to delete?"
             onConfirm={() => handleDelete(record._id)}
           >
-            <a style={{ color: "blue" }}>Delete</a>
+            <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
           </Popconfirm>
           <Typography.Link>
             <Link
@@ -96,10 +121,11 @@ const columns = [
                 state: {
                   ...record,
                 },
-              }}
+              }} className='edit-icon-wrap'
+              title="Edit"
               style={{ color: "blue" }}
             >
-              Edit
+              <MdOutlineEditNote/>
             </Link>
           </Typography.Link>
         </Space>
@@ -122,16 +148,21 @@ const columns = [
               <Sidemenu />
             </div>
         <div className="col-10">
-        <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All Manufacturer</h3>
-              <div className="subcategory-search-wrap">
-              <Search
+        <div className="all-manufacture-details-section">
+              <h3 className="all-manufacturer-head">All Manufacturer <span className="count">{Manufacturer}</span></h3>
+              <div className="all-manufacturer-search-wrap">
+                <Link to="/Manufacturer" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
+              <input
+              type='text'
                 onChange={e => onChangeHandler(e)}
                 onKeyUp={searchHandler}
-                placeholder="Search"
+                placeholder="Search.."
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
               />
+              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
               </div>
               </div>
         

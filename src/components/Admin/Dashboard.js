@@ -16,11 +16,10 @@ import AllSubCategoriesDetails from "./AllSubCategory/AllSubCategoriesDetails";
 import AllProductsDetails from "./AllProducts/AllProductsDetails";
 import AllCategoriesDetails from "./AllCategory/AllCategoriesDetails";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services"
 
 // var ManufacturerCount1='';
 // var productCount1=''
-
-var Userdata = " ";
 
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
@@ -42,8 +41,7 @@ const Dashboard = () => {
     // Subtotal1 =  localStorage.getItem("Subtotal")
   }, []);
   const GetProducts = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "product");
@@ -55,8 +53,7 @@ const Dashboard = () => {
   };
 
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
@@ -68,8 +65,7 @@ const Dashboard = () => {
   };
 
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data.length);
@@ -80,8 +76,7 @@ const Dashboard = () => {
   };
 
   const GetUser = async () => {
-    //await fetch("http://144.91.110.221:3033/api/auth/allusers")
-    await fetch("http://localhost:3033/api/auth/allusers")
+    await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
       .then(async (data) => {
         setUsers(data.data.length);
@@ -91,11 +86,9 @@ const Dashboard = () => {
       });
   };
   const GetOrders = async () => {
-    //await fetch("http://144.91.110.221:3033/api/order/all_order")
-    await fetch("http://localhost:3033/api/order/all_order")
+    await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello vineet");
         setOrders(data.data.length);
         //  console.log(" length "+data.data.length)
       })
@@ -105,11 +98,9 @@ const Dashboard = () => {
   };
 
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
         setManufacturer(data.data.length);
         console.log(data);
       })
@@ -121,10 +112,6 @@ const Dashboard = () => {
     //  await setManufacturerCount1(localStorage.getItem("ManufacturerCount"));
     // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
   };
-
-  useEffect(() => {
-    Userdata = JSON.parse(localStorage.getItem("Userdata"));
-  });
 
   const logout = () => {
     localStorage.setItem("Userdata", null);

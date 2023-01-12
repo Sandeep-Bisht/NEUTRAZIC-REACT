@@ -8,6 +8,10 @@ import "../Dashboard.css";
 import {BiSearchAlt} from 'react-icons/bi';
 import { useHistory,Link } from "react-router-dom";
 import DashboardHeaader from "../DashboardHeaader";
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md';
+import { baseUrl } from "../../../utils/services";
 
 const { Search } = Input;
 
@@ -19,17 +23,33 @@ export default function AllSubCategoriesDetails() {
   const [loading,setLoading]=useState(false);
   const [searchVal,setSearchVal]=useState("");
   const [filteredData]=useState([]);
+  const [subCategories, setSubCategories] = useState("");
 
   const history=useHistory();
 
   useEffect(()=>{
    fetchUsers();
+   GetSubCategory();
   },[])
   
+
+  const GetSubCategory = async () => {
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setSubCategories(data.data.length);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
+  
+
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(
-      "http://localhost:3033/api/subcategory/all_subcategory"
+      `${baseUrl}/api/subcategory/all_subcategory`
     );
     setGetuser(response.data.data);
     setLoading(false);
@@ -52,7 +72,7 @@ export default function AllSubCategoriesDetails() {
 
   const handleDelete=async (_id)=>{
     try{
-      const DeletedData=await axios.delete("http://localhost:3033/api/subcategory/delete_subcategory_by_id",{data: {_id:_id}});
+      const DeletedData=await axios.delete(`${baseUrl}/api/subcategory/delete_subcategory_by_id`,{data: {_id:_id}});
       fetchUsers();
     }catch(error){
 
@@ -85,7 +105,7 @@ export default function AllSubCategoriesDetails() {
       dataIndex: 'image[0].path',
       width: 80,
       maxWidth: 90,
-      render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />
+      render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />
     },
     {
       
@@ -96,7 +116,7 @@ export default function AllSubCategoriesDetails() {
       getuser.length >= 1 ? (
         <Space size="middle">
           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record._id)}>
-            <a style={{color:"blue"}}>Delete</a>
+            <a className="delete-icon-wrap" title="Delete" style={{color:"blue"}}><FaTrashAlt/></a>
           </Popconfirm>
           <Typography.Link   >
            <Link to={{pathname:"/SubCategoryCreation", 
@@ -104,7 +124,9 @@ export default function AllSubCategoriesDetails() {
            {
             ...record,
           }}} 
-           style={{color:"blue"}}>Edit</Link> 
+          title="Edit"
+                className='edit-icon-wrap'
+           style={{color:"blue"}}><MdOutlineEditNote/></Link> 
           </Typography.Link>
          </Space>
         ) : null,
@@ -132,16 +154,21 @@ export default function AllSubCategoriesDetails() {
               <Sidemenu />
             </div>
         <div className="col-10">
-        <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All Subcategories</h3>
+        <div className="sub-category-details-section">
+              <h3 className="sub-category-head">All Subcategories <span className="count">{subCategories}</span></h3>
               <div className="subcategory-search-wrap">
-              <Search
+                <Link to="/SubCategoryCreation" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
+              <input
+              type='text'
                 onChange={e => onChangeHandler(e)}
                 onKeyUp={searchHandler}
-                placeholder="Search"
+                placeholder="Search.."
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
               />
+              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
               </div>
               </div>
         

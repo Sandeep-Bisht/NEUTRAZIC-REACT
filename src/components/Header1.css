@@ -180,7 +180,8 @@ color:#1e144f;
     outline: 0;
     border-radius: 10px;
     font-size: 16px;
-    color: #000;
+    font-weight: 500;
+    color: #1e144f;
     cursor: pointer;
     background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
 }
@@ -528,6 +529,7 @@ h3 .read-more-button
     font-size: 10px !important;
     position: relative;
     bottom: 11px;
+    letter-spacing: 0.25px;
     font-family: 'Roboto', sans-serif;
     outline: 0;
     box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
@@ -537,29 +539,32 @@ h3 .read-more-button
 
 .Logout-ul 
 {
-    width: 250px !important;;
-    height:234px;
-
+    width: 200px !important;;
+    height:220px;
 }
 .Logout-ul div
 {
-    border-bottom:1px solid #00B560;
+    border-bottom:1px solid #f2f2f2;
 }
 .Logout-ul div i
 {
     font-size: 25px;
-    color:#006837;
+    color:#1b97ff;
 }
 
 .Logout-ul .Logout-li
 {
     font-size:17px;
     font-family: 'Roboto', sans-serif;
-    line-height: 40px;
+    line-height: 35px;
     text-align: center;
-    color:#006837;
-
+    color:#1e144f;
 }
+.Logout-ul .Logout-li:hover
+{
+    color: #1b97ff;
+}
+
 .dropdown-item:focus, .dropdown-item:hover
 {
     background:white;
@@ -832,7 +837,7 @@ body {
     bottom:0px;
 }
 /* end phone top-navbar */
-
+}
 /* end  mobile responsive header css */
 
 
@@ -888,5 +893,4 @@ body {
 .user-icon{
     font-size: 2rem;
     display: block;
-}
 }

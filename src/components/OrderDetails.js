@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
+import { baseUrl } from "../utils/services";
 
 const OrderDetails = (props) => {
   const [data, setData] = useState([]);
@@ -18,8 +19,7 @@ const OrderDetails = (props) => {
 
 
   const Getsingledata = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/product_by_id", {
-      await fetch("http://localhost:3033/api/product/product_by_id", {
+      await fetch(`${baseUrl}/api/product/product_by_id`, {
       method: "POST",
       headers: {
         Accept: "application/json",

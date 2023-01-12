@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import UserImg from "../../Images/user3.jpg";
 
+var Userdata = " ";
+
 function DashboardHeaader() {
+
+
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+  });
+
   return (
     <>
         <div className="nav__logo">
@@ -20,6 +28,7 @@ function DashboardHeaader() {
             alt="user_image"
             className="img-fluid dashboard-user"
           />
+          <p className="user-name">{Userdata.username}</p>
         </div>
       </div>
     </>

@@ -9,9 +9,17 @@ import { BsListNested } from "react-icons/bs";
 import { GiBoxUnpacking } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import {FaBoxOpen} from 'react-icons/fa';
+import {FaCartPlus} from 'react-icons/fa';
+import {GrInProgress} from 'react-icons/gr';
+import {BsBox} from 'react-icons/bs';
+import {FaShippingFast} from 'react-icons/fa';
+import {BsCartXFill} from 'react-icons/bs';
+import {MdRealEstateAgent} from 'react-icons/md';
+import {GrConfigure} from 'react-icons/gr';
+import {RiUserSettingsLine} from 'react-icons/ri';
 
 import $ from "jquery";
-var Userdata;
+var Userdata = '';
 
 const Sidemenu = () => {
   const SidebarMenu = () => {
@@ -283,24 +291,24 @@ const Sidemenu = () => {
               <div className="dashboard-accordion-body">
                 <ul className="Configration-List">
                   <Link to={"/NewOrder/" + "Pending"}>
-                    <li>New Orders</li>
+                    <li> <FaCartPlus className="configuration-icons-wrap"/>New Orders</li>
                   </Link>
                   <Link to={"/NewOrder/" + "In Progress"}>
                     {" "}
-                    <li>In Progress</li>
+                    <li> <GrInProgress className="configuration-icons-wrap"/>In Progress</li>
                   </Link>
                   <Link to={"/NewOrder/" + "Packed"}>
-                    <li>Packed</li>
+                    <li> <BsBox className='configuration-icons-wrap'/>Packed</li>
                   </Link>
                   <Link to={"/NewOrder/" + "Shipped"}>
-                    <li>Shipped</li>
+                    <li> <FaShippingFast className='configuration-icons-wrap'/>Shipped</li>
                   </Link>
                   <Link to={"/NewOrder/" + "Cancel"}>
-                    <li>Cancel Order</li>
+                    <li> <BsCartXFill className='configuration-icons-wrap'/>Cancel Order</li>
                   </Link>
                   <Link to={"/NewOrder/" + "Delivered"}>
                     {" "}
-                    <li>Delivered</li>
+                    <li> <MdRealEstateAgent className="configuration-icons-wrap"/>Delivered</li>
                   </Link>
                 </ul>
               </div>
@@ -315,8 +323,7 @@ const Sidemenu = () => {
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingThree">
                       <div className="d-flex align-items-center justify-content-center div1">
-                        <i className="bx bx-message-alt-check nav__icon"></i>
-
+                        <GrConfigure className="nav__icon"/>
                         <button
                           className="accordion-button collapsed"
                           type="button"
@@ -325,7 +332,7 @@ const Sidemenu = () => {
                           aria-expanded="false"
                           aria-controls="collapseThree"
                         >
-                          <span className="pl-3 nav__name"> Configration</span>
+                          <span className="pl-3 nav__name">Configuration</span>
                         </button>
                       </div>
                     </h2>
@@ -335,24 +342,24 @@ const Sidemenu = () => {
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="accordion-body">
+                      <div className="dashboard-accordion-body">
                         {Userdata != undefined ? (
                           Userdata.role == "superAdmin" ? (
                             <ul className="Configration-List">
                               <Link to="/Manufacturer">
-                                <li>Manufacturer</li>
+                                <li><GiFactory className="configuration-icons-wrap"/> Manufacturer</li>
                               </Link>
                               <Link to="/Category">
                                 {" "}
-                                <li>Category</li>{" "}
+                                <li><BiCategory className="configuration-icons-wrap"/>Category</li>{" "}
                               </Link>
                               <Link to="/SubCategoryCreation">
                                 {" "}
-                                <li>SubCategory</li>
+                                <li><BsListNested className="configuration-icons-wrap"/>SubCategory</li>
                               </Link>
                               <Link to="/Roles">
                                 {" "}
-                                <li>User Roles</li>
+                                <li><RiUserSettingsLine className="configuration-icons-wrap"/>User Roles</li>
                               </Link>
                             </ul>
                           ) : (
@@ -384,10 +391,10 @@ const Sidemenu = () => {
           <BsListNested className="nav__icon" />
           <span className="nav__name">All SubCategory</span>
         </Link>
-        <Link to="/ProductForm" className="nav__link">
+        {/* <Link to="/ProductForm" className="nav__link">
           <FaBoxOpen className="nav__icon" />
           <span className="nav__name">Products</span>
-        </Link>
+        </Link> */}
         <Link to="/AllProductsDetails" className="nav__link">
           <GiBoxUnpacking className="nav__icon" />
           <span className="nav__name">All Products</span>
@@ -395,7 +402,7 @@ const Sidemenu = () => {
         <div className="nav__link" onClick={() => logout()}>
           <BiLogOut className="nav__icon" />
           <span className="nav__name" style={{ cursor: "pointer" }}>
-            Log Out
+          Log Out
           </span>
         </div>
       </div>

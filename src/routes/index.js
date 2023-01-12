@@ -83,12 +83,9 @@ const Root = (props) => {
             {/* <PrivateRoute path="/home" component={Home} /> */}
             {/* <Route exact path="/Register" component={Register} /> */}
             {/* {Userdata!=undefined? Userdata.role=="superAdmin" ||Userdata.role=="Manager"||Userdata.role=="Vender"? */}
-            {/* <Switch> */}
-            <Route exact path="/Dashboard" component={Dashboard} />
-            {/* </Switch> */}
-            {/* :null:null} */}
 
-            {/* } */}
+            <Route exact path="/Dashboard" component={Dashboard} />
+            
             <Route exact path="/Productform" component={Productform} />
             <Route exact path="/Category" component={CategoryCreation} />
             <Route

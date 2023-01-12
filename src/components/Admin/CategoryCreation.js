@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services";
 // import DataTable from '@bit/adeoy.utils.data-table';
 var Userdata;
 const CategoryCreation = (props) => {
@@ -22,9 +23,7 @@ const CategoryCreation = (props) => {
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     formData.append("image", data.image);
-    // const url="http://144.91.110.221:3033/api/category/add_category"
-    const url = "http://localhost:3033/api/category/add_category";
-    console.log("payload before submit", formData)
+    const url = `${baseUrl}/api/category/add_category`;
      await fetch(url, {
     method: "POST",
       // headers: {
@@ -52,8 +51,7 @@ const CategoryCreation = (props) => {
   }, []);
 
   const DeleteCategory = async (_id) => {
-    // await fetch("http://144.91.110.221:3033/api/category/delete_category_by_id", {
-    await fetch("http://localhost:3033/api/category/delete_category_by_id", {
+    await fetch(`${baseUrl}/api/category/delete_category_by_id`, {
       method: "Delete",
       headers: {
         Accept: "application/json",
@@ -73,8 +71,7 @@ const CategoryCreation = (props) => {
   };
 
   const GetCategory = async () => {
-    // await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -104,8 +101,7 @@ const CategoryCreation = (props) => {
     await formData.append("image", data.image);
     await formData.append("featuredImage", []);
     await formData.append("slideShow", false);
-    // await fetch("http://144.91.110.221:3033/api/category/update_category_by_id", {
-    await fetch("http://localhost:3033/api/category/update_category_by_id", {
+    await fetch(`${baseUrl}/api/category/update_category_by_id`, {
       method: "Put",
       body: formData,
     })
@@ -175,10 +171,7 @@ const CategoryCreation = (props) => {
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
             <form>
-              <div className="container">
-                <div className="row">
-                  {/* <div className="1"></div> */}
-                  <div className="col-10">
+                  <div className="col-12">
                     <div className="card p-4 m-2 product-form">
                       <h5>Category Creation</h5>
                       <div className="row">
@@ -229,7 +222,7 @@ const CategoryCreation = (props) => {
                             </button>
                           </div>
                         ) : (
-                          <div className="col-12 p-1">
+                          <div className="col-12 pt-2">
                             <button
                               className="btn btn-primary"
                               onClick={(e) => {
@@ -243,9 +236,6 @@ const CategoryCreation = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-1"></div>
-                </div>
-              </div>
             </form>
           ) : null
         ) : null}

@@ -6,6 +6,7 @@ import Header1 from "./Header1";
 import "../views/landing/homepage.css";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from "../utils/services";
 var Userdata;
 const AllProducts = (props) => {
   const [AllProduct, setAllProduct] = useState([]);
@@ -113,8 +114,7 @@ const AllProducts = (props) => {
     }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -140,8 +140,7 @@ const AllProducts = (props) => {
   };
   const CartById = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -162,8 +161,7 @@ const AllProducts = (props) => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -194,8 +192,7 @@ const AllProducts = (props) => {
   };
 
   const ProductByCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         setAllProduct(data.data);
@@ -205,8 +202,7 @@ const AllProducts = (props) => {
       });
   };
   const categoryDetails = async () => {
-    // await fetch("http://144.91.110.221:3033/api/category/category_by_id", {
-    await fetch("http://localhost:3033/api/category/category_by_id", {
+    await fetch(`${baseUrl}/api/category/category_by_id`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -238,8 +234,7 @@ const AllProducts = (props) => {
     manufacturer,
     image
   ) => {
-    //await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -254,8 +249,7 @@ const AllProducts = (props) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
-              //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
-              "http://localhost:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               {
                 method: "POST",
                 headers: {
@@ -287,8 +281,7 @@ const AllProducts = (props) => {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
-                //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
-                "http://localhost:3033/api/wishlist/add_to_wishlist",
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
                 {
                   method: "POST",
                   headers: {
@@ -327,8 +320,7 @@ const AllProducts = (props) => {
   };
   // allcategory api //
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -341,8 +333,7 @@ const AllProducts = (props) => {
 
   // SubCategory API //
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data);
@@ -354,8 +345,7 @@ const AllProducts = (props) => {
   // End Subcategory //
   // Manufacturer API //
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -627,8 +617,7 @@ const AllProducts = (props) => {
               return (
                 <figure className="figure1">
                   {/* {Categorydetails.image!==undefined? */}
-                  {/* <img src={"http://144.91.110.221:3033/" + el.image[0].path} /> */}
-                  <img src={"http://localhost:3033/" + el.image[0].path} />
+                  <img src={`${baseUrl}/` + el.image[0].path} />
                   {/* :null} */}
                   <figcaption>{el.name}</figcaption>
                   <div className="text-center price-div">

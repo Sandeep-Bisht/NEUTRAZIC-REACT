@@ -20,7 +20,6 @@ const NewOrder=(props)=>{
                 await fetch("http://144.91.110.221:3033/api/order/all_order")
                         .then(res => res.json())
                         .then(async (data) => {
-                         console.log(data,"hello vineet");
                          setOrders(data.data)
                         //  console.log(" length "+data.data.length)
                           }
