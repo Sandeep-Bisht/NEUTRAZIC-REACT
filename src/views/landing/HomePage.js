@@ -14,7 +14,7 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as ACTIONS from "../../CommonService/GetCartItem/action";
+import * as ACTIONS from "../../CommonService/AddToCart/action";
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 
@@ -299,7 +299,6 @@ const HomePage = () => {
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          console.log(cartItems, "before dispatch")
           dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
