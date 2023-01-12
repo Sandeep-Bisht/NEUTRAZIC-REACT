@@ -40,7 +40,7 @@ const Header1 = (props) => {
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
-  const [cartItems, setCartItems] = useState();
+  const [cartItems, setCartItems] = useState("");
 
   const {
     register,
@@ -784,11 +784,11 @@ const Header1 = (props) => {
                 </div>
 
                 <div className="col-8 user-login">
-                  { cartItems ?(             
+                  { cartItems ? (             
                   <h6 className="Total-Item">
-                      { cartItems }
+                      { cartItems} 
                     </h6>
-                  ) :""}
+                  ) : ""}
                   <span className="sp">Cart</span>
                   <br />
                   <span className="Sp1">₹ 0.0</span>
