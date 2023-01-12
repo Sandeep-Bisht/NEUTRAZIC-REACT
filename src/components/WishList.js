@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Header1 from './Header1';
 import ReadMoreReact from 'read-more-react';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../utils/services';
 var Userdata='';
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
@@ -23,8 +24,7 @@ const WishList = ()=>{
         if(Userdata){
          id=Userdata._id
         }
-      // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-         await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+         await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
         method: "post",
         headers: {
           Accept: "application/json",
@@ -49,8 +49,7 @@ const WishList = ()=>{
        
     };
    const DeleteWishlist = async (productId) => {
-   // await fetch("http://144.91.110.221:3033/api/wishlist/delete_wishlist_by_id", {
-      await fetch("http://localhost:3033/api/wishlist/delete_wishlist_by_id", {
+      await fetch(`${baseUrl}/api/wishlist/delete_wishlist_by_id`, {
       method: "delete",
       headers: {
          Accept: "application/json",
@@ -89,8 +88,7 @@ const WishList = ()=>{
                      <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>X</span>
                   </div>
                   <div className="col-3">
-                  {/* <img src={"http://144.91.110.221:3033/"+item.image[0].path} /> */}
-                  <img src={"http://localhost:3033/"+item.image[0].path} />
+                  <img src={`${baseUrl}/`+item.image[0].path} />
                   </div>
                   <div className="col-8">
                      <h6>{item.name}</h6>

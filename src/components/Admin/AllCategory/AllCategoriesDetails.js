@@ -10,7 +10,8 @@ import { useHistory, Link } from "react-router-dom";
 import DashboardHeaader from "../DashboardHeaader";
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
-import {MdPlaylistAdd} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md'
+import { baseUrl } from "../../../utils//services"
 
 
 
@@ -32,8 +33,7 @@ export default function AllCategoriesDetails() {
 
 
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
@@ -48,7 +48,7 @@ export default function AllCategoriesDetails() {
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(
-      "http://localhost:3033/api/category/all_category"
+      `${baseUrl}/api/category/all_category`
     );
     setGetuser(response.data.data);
     setLoading(false);
@@ -70,7 +70,7 @@ export default function AllCategoriesDetails() {
 
   const handleDelete = async (_id) => {
     try{
-      const DeletedData=await axios.delete("http://localhost:3033/api/category/delete_category_by_id",{data : {_id:_id}});
+      const DeletedData=await axios.delete(`${baseUrl}/api/category/delete_category_by_id`,{data : {_id:_id}});
       fetchUsers();
     }catch(error){
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services";
 // import DataTable from '@bit/adeoy.utils.data-table';
 
 // import { useStateValue } from '../state';
@@ -33,8 +34,7 @@ const Roles = (props) => {
     GetManufacturer();
   }, []);
   const GetUser = async () => {
-    //await fetch("http://144.91.110.221:3033/api/auth/allusers")
-    await fetch("http://localhost:3033/api/auth/allusers")
+    await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
       .then(async (data) => {
         setUsers(data.data);
@@ -46,8 +46,7 @@ const Roles = (props) => {
   };
 
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -64,8 +63,7 @@ const Roles = (props) => {
   };
   const RegisterUser = () => {
     console.log("kp");
-    //fetch('http://144.91.110.221:3033/api/auth/register',
-    fetch("http://localhost:3033/api/auth/register", {
+    fetch(`${baseUrl}/api/auth/register`, {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -88,8 +86,7 @@ const Roles = (props) => {
     e.preventDefault();
     console.log("kp");
     if (username != "" && password != "") {
-      //fetch('http://144.91.110.221:3033/api/auth/login',
-      fetch("http://localhost:3033/api/auth/login", {
+      fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
           accept: "application/json",

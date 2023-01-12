@@ -3,4 +3,6 @@ const api = {
   token: '',
 };
 
+export const baseUrl = "http://localhost:3033"
+
 export default api;

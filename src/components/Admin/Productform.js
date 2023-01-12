@@ -4,6 +4,7 @@ import Sidemenu from "./Sidemenu";
 import $ from "jquery";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -33,7 +34,6 @@ const Productform = (props) => {
     //featuredImage : [],
   });
 
-  console.log("on change data", data.image)
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -52,8 +52,7 @@ const Productform = (props) => {
     await formData.append("image", data.image);
     //await formData.append("featuredImage", data.featuredImage)    
     //const url="http://144.91.110.221:3033/api/product/add_product"
-    console.log(data, "formData before sending")
-    const url = "http://localhost:3033/api/product/add_product";
+    const url = `${baseUrl}/api/product/add_product`;
     await fetch(url, {
       mode: 'no-cors',
       method: "POST",
@@ -82,8 +81,7 @@ const Productform = (props) => {
   }, []);
 
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -94,8 +92,7 @@ const Productform = (props) => {
   };
 
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data);
@@ -106,8 +103,7 @@ const Productform = (props) => {
   };
 
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -120,7 +116,7 @@ const Productform = (props) => {
   // Api for Get Products uploded by Admin //
   const GetData = async () => {
     //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         Setproducts(data.data);
@@ -131,8 +127,7 @@ const Productform = (props) => {
   };
   // End for products API //
   const DeleteProduct = async (_id) => {
-    //await fetch("http://144.91.110.221:3033/api/product/delete_product_by_id", {
-    await fetch("http://localhost:3033/api/product/delete_product_by_id", {
+    await fetch(`${baseUrl}/api/product/delete_product_by_id`, {
       method: "Delete",
       headers: {
         Accept: "application/json",

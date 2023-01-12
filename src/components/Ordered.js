@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import Baseline from "./Baseline";
+import { baseUrl } from "../utils/services";
 var Userdata = "";
 const Ordered = () => {
   window.scroll(0, 0);
@@ -15,8 +16,7 @@ const Ordered = () => {
 
   const ordersDetails = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/order/order_by_id", {
-      await fetch("http://localhost:3033/api/order/order_by_id", {
+      await fetch(`${baseUrl}/api/order/order_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -46,8 +46,7 @@ const Ordered = () => {
   };
 
   const UpdateOrderStatus = async (productId, status) => {
-    //await fetch("http://144.91.110.221:3033/api/order/update_order", {
-    await fetch("http://localhost:3033/api/order/update_order", {
+    await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -101,14 +100,12 @@ const Ordered = () => {
               <tbody>
                 {orderes.map((el, ind1) =>
                   JSON.parse(el.order).map((item, index) => {
-                    console.log(orderes, "order Itemssssssssssssssss");
                     return (
                       <tr>
                         <td className="product-thumbnail">
                           <a href="#">
                             <img
-                              // src={"http://144.91.110.221:3033/" + item.image}
-                              src={"http://localhost:3033/" + item.image}
+                              src={`${baseUrl}/` + item.image}
                               alt="item"
                             />
                           </a>
