@@ -9,10 +9,10 @@ import Header1 from ".././components/Header1";
 import { useHistory } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import $ from "jquery";
+import { baseUrl } from "../utils/services";
 var Userdata = "";
 let tranding = 0;
 const Subcategories = (props) => {
-  console.log(props,"subbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccc");
   const [data, setData] = useState([]);
   const [heading, setHeading] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -55,21 +55,18 @@ const Subcategories = (props) => {
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
     console.log(Userdata, "sadbhksabdhk");
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "product");
         setData(data.data);
-        console.log(data, "hey i'm here");
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hello");
@@ -81,8 +78,7 @@ const Subcategories = (props) => {
       });
   };
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hrre");
@@ -93,8 +89,7 @@ const Subcategories = (props) => {
       });
   };
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         data.data.map((item, index) => {
@@ -173,8 +168,7 @@ const Subcategories = (props) => {
     }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id"
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -196,8 +190,7 @@ const Subcategories = (props) => {
   };
   const CartById = async () => {
     if (!Userdata == []) {
-      // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -218,8 +211,7 @@ const Subcategories = (props) => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -255,8 +247,7 @@ const Subcategories = (props) => {
     manufacturer,
     image
   ) => {
-    // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -271,8 +262,7 @@ const Subcategories = (props) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
-              //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
-              "http://localhost:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               {
                 method: "POST",
                 headers: {
@@ -304,8 +294,7 @@ const Subcategories = (props) => {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
-                //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
-                "http://localhost:3033/api/wishlist/add_to_wishlist",
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
                 {
                   method: "POST",
                   headers: {
@@ -391,8 +380,7 @@ const Subcategories = (props) => {
                             /> */}
                                 <img
                                   src={
-                                    // "http://144.91.110.221:3033/" +
-                                    "http://localhost:3033/" +
+                                    `${baseUrl}/` +
                                     item.image[0].path
                                   }
                                   alt=""

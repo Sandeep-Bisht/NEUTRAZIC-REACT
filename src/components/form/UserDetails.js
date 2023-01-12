@@ -3,6 +3,7 @@ import '../../components/Admin/Dashboard.css'
 import Header1 from '../../components/Header1'
 import Baseline from '../../components/Baseline'
 import Footer from '../../components/Footer'
+import { baseUrl } from '../../utils/services';
 var Userdata=''
 var Usercartdata=''
 var Subtotal1=''
@@ -83,7 +84,7 @@ const UserDetails=(props)=>{
        await formData.append('deliverytype',data.deliverytype)
        await formData.append('username',Userdata.username)
         // const url="http://144.91.110.221:3033/api/order/add_order"
-        const url="http://localhost:3033/api/order/add_order"
+        const url=`${baseUrl}/api/order/add_order`
                 await fetch(url,
                     {  
                          method:'POST',                  
@@ -107,8 +108,7 @@ const UserDetails=(props)=>{
     const CartById = async () => {
       if(!Userdata==[]){   
         
-        // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-          await fetch("http://localhost:3033/api/cart/cart_by_id", {
+          await fetch(`${baseUrl}/api/cart/cart_by_id`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -134,8 +134,7 @@ const UserDetails=(props)=>{
 
 
       const DeleteCart =async () => {
-        // await fetch("http://144.91.110.221:3033/api/cart/delete_cart_by_id", {
-          await fetch("http://localhost:3033/api/cart/delete_cart_by_id", {
+          await fetch(`${baseUrl}/api/cart/delete_cart_by_id`, {
           method: "delete",
           headers: {
             Accept: "application/json",

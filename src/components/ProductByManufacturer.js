@@ -9,6 +9,7 @@ import Header1 from ".././components/Header1";
 import { useHistory } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import $ from "jquery";
+import { baseUrl } from "../utils/services";
 var Userdata = "";
 let tranding = 0;
 const ProductByManufacturer = (props) => {
@@ -26,7 +27,6 @@ const ProductByManufacturer = (props) => {
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
     GetData();
     CartById();
     GetCategory();
@@ -53,8 +53,7 @@ const ProductByManufacturer = (props) => {
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
     console.log(Userdata, "sadbhksabdhk");
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "product");
@@ -65,8 +64,7 @@ const ProductByManufacturer = (props) => {
       });
   };
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hello");
@@ -78,8 +76,7 @@ const ProductByManufacturer = (props) => {
       });
   };
   const GetCategory = async () => {
-    // await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hrre");
@@ -155,8 +152,7 @@ const ProductByManufacturer = (props) => {
     }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -178,7 +174,7 @@ const ProductByManufacturer = (props) => {
   };
   const CartById = async () => {
     if (!Userdata == []) {
-      await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -199,7 +195,7 @@ const ProductByManufacturer = (props) => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -234,8 +230,7 @@ const ProductByManufacturer = (props) => {
     manufacturer,
     image
   ) => {
-    // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-      await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -250,7 +245,7 @@ const ProductByManufacturer = (props) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
-              "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               {
                 method: "POST",
                 headers: {
@@ -282,7 +277,7 @@ const ProductByManufacturer = (props) => {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
-                "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
                 {
                   method: "POST",
                   headers: {
@@ -364,8 +359,7 @@ const ProductByManufacturer = (props) => {
                             /> */}
                                 <img
                                   src={
-                                    // "http://144.91.110.221:3033/" +
-                                    "http://localhost:3033/" + el.image[0].path
+                                    `${baseUrl}/` + el.image[0].path
                                   }
                                   alt=""
                                   //  style={{position:"absolute"}}

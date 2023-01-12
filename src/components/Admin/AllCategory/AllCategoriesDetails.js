@@ -8,6 +8,10 @@ import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory, Link } from "react-router-dom";
 import DashboardHeaader from "../DashboardHeaader";
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md'
+import { baseUrl } from "../../../utils//services"
 
 
 
@@ -16,6 +20,7 @@ export default function AllCategoriesDetails() {
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [filteredData] = useState([]);
+  const [categories, setCategories] = useState("");
 
   const { Search } = Input;
 
@@ -23,12 +28,27 @@ export default function AllCategoriesDetails() {
 
   useEffect(() => {
     fetchUsers();
+    GetCategory();
   }, []);
+
+
+  const GetCategory = async () => {
+    await fetch(`${baseUrl}/api/category/all_category`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setCategories(data.data.length);
+        // console.log("dsd dfz sf " + data.data.length);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
 
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(
-      "http://localhost:3033/api/category/all_category"
+      `${baseUrl}/api/category/all_category`
     );
     setGetuser(response.data.data);
     setLoading(false);
@@ -50,7 +70,7 @@ export default function AllCategoriesDetails() {
 
   const handleDelete = async (_id) => {
     try{
-      const DeletedData=await axios.delete("http://localhost:3033/api/category/delete_category_by_id",{data : {_id:_id}});
+      const DeletedData=await axios.delete(`${baseUrl}/api/category/delete_category_by_id`,{data : {_id:_id}});
       fetchUsers();
     }catch(error){
     }
@@ -86,7 +106,7 @@ export default function AllCategoriesDetails() {
               title="Sure to delete?"
               onConfirm={() => handleDelete(record._id)}
             >
-              <a style={{ color: "blue" }}>Delete</a>
+              <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
             </Popconfirm>
             <Typography.Link>
               <Link
@@ -96,9 +116,11 @@ export default function AllCategoriesDetails() {
                     ...record,
                   },
                 }}
+                title="Edit"
+                className='edit-icon-wrap'
                 style={{ color: "blue" }}
               >
-                Edit
+                <MdOutlineEditNote/>
               </Link>
             </Typography.Link>
           </Space>
@@ -116,16 +138,21 @@ export default function AllCategoriesDetails() {
               <Sidemenu />
             </div>
         <div className="col-10">
-        <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All categories</h3>
-              <div className="subcategory-search-wrap">
-              <Search
+        <div className="category-details-section">
+              <h3 className="all-category-head">All Category <span className="count">{categories}</span></h3>
+              <div className="all-category-search-wrap">
+                <Link to="/Category" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
+              <input
+              type='text'
                 onChange={e => onChangeHandler(e)}
                 onKeyUp={searchHandler}
-                placeholder="Search"
+                placeholder="Search.."
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
               />
+              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
               </div>
               </div>
         

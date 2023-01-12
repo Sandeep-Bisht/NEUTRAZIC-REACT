@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import Header1 from './Header1';
+import { baseUrl } from '../utils/services';
 var Userdata=''
 var Subtotal1=''
 const Checkout=()=>{
@@ -16,8 +17,7 @@ const Checkout=()=>{
 
 
         const CartById = async () => {
-            //await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-               await fetch("http://localhost:3033/api/cart/cart_by_id", {
+               await fetch(`${baseUrl}/api/cart/cart_by_id`, {
               method: "POST",
               headers: {
                 Accept: "application/json",

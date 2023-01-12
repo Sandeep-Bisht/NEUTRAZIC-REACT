@@ -5,6 +5,8 @@ import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import ReadMoreReact from "read-more-react";
 import "../views/landing/homepage.css";
+import { baseUrl } from "../utils/services";
+
 var Userdata;
 const Allcategory = (props) => {
   const [AllProduct, setAllProduct] = useState([]);
@@ -87,8 +89,7 @@ const Allcategory = (props) => {
     }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id"
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -111,8 +112,7 @@ const Allcategory = (props) => {
 
   const CartById = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -133,8 +133,7 @@ const Allcategory = (props) => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -160,8 +159,7 @@ const Allcategory = (props) => {
   };
 
   const ProductByCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         setAllProduct(data.data);
@@ -171,8 +169,7 @@ const Allcategory = (props) => {
       });
   };
   const categoryDetails = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/category_by_id", {
-    await fetch("http://localhost:3033/api/category/category_by_id", {
+    await fetch(`${baseUrl}/api/category/category_by_id`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -204,8 +201,7 @@ const Allcategory = (props) => {
     manufacturer,
     image
   ) => {
-    //await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -219,8 +215,7 @@ const Allcategory = (props) => {
       .then(async (data) => {
         if (!JSON.stringify(data.data).includes(productid)) {
           if (!Userdata == []) {
-            //await fetch("http://144.91.110.221:3033/api/wishlist/add_to_wishlist", {
-            await fetch("http://localhost:3033/api/wishlist/add_to_wishlist", {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -310,9 +305,8 @@ const Allcategory = (props) => {
                 <div className="main-banner-image">
                   {Categorydetails.image !== undefined ? (
                     <img
-                      // src={"http://144.91.110.221:3033/"+Categorydetails.image[0].path}
                       src={
-                        "http://localhost:3033/" + Categorydetails.image[0].path
+                        `${baseUrl}/` + Categorydetails.image[0].path
                       }
                     />
                   ) : null}
@@ -360,8 +354,7 @@ const Allcategory = (props) => {
                             /> */}
                             <img
                               src={
-                                //"http://144.91.110.221:3033/" +
-                                "http://localhost:3033/" + item.image[0].path
+                                `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
                             />

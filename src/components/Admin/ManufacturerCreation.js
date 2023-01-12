@@ -5,6 +5,7 @@ import "./Dashboard.css";
 import $ from "jquery";
 import { Link } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services";
 
 var Userdata;
 const ManufacturerCreation = (props) => {
@@ -24,8 +25,7 @@ const ManufacturerCreation = (props) => {
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     formData.append("image", data.image);
-    // const url = "http://144.91.110.221:3033/api/manufacture/add_manufacture";
-    const url = "http://localhost:3033/api/manufacture/add_manufacture";
+    const url = `${baseUrl}/api/manufacture/add_manufacture`;
     await fetch(url, {
       method: "POST",
       // headers: {
@@ -53,8 +53,7 @@ const ManufacturerCreation = (props) => {
   }, []);
   const DeleteManufacturer = async (_id) => {
     await fetch(
-      "http://localhost:3033/api/manufacture/delete_manufacturer_by_id",
-      // "http://144.91.110.221:3033/api/manufacture/delete_manufacturer_by_id",
+      `${baseUrl}/api/manufacture/delete_manufacturer_by_id`,
       {
         method: "Delete",
         headers: {
@@ -75,8 +74,7 @@ const ManufacturerCreation = (props) => {
       });
   };
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -101,9 +99,8 @@ const ManufacturerCreation = (props) => {
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
 
-    //await fetch("http://144.91.110.221:3033/api/manufacture/update_manufacturer_by_id", {
     await fetch(
-      "http://localhost:3033/api/manufacture/update_manufacturer_by_id",
+      `${baseUrl}/api/manufacture/update_manufacturer_by_id`,
       {
         method: "Put",
         headers: {
@@ -195,13 +192,8 @@ const ManufacturerCreation = (props) => {
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
             <form>
-              <div className="container">
-                <div className="row">
-                  {/* <div className="col-1"></div> */}
-                  <div className="col-10">
                     <div className="card p-4 m-2 product-form">
                       <h5>Manufacturer Creation</h5>
-
                       <div className="row">
                         <div className="col-6">
                           <input
@@ -261,10 +253,6 @@ const ManufacturerCreation = (props) => {
                         ) : null}
                       </div>
                     </div>
-                  </div>
-                  <div className="col-1"></div>
-                </div>
-              </div>
             </form>
           ) : null
         ) : null}

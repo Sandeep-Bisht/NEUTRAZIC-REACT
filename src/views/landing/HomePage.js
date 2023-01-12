@@ -14,8 +14,9 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as ACTIONS from "../../CommonService/GetCartItem/action";
+import * as ACTIONS from "../../CommonService/AddToCart/action";
 import { useSelector, useDispatch } from "react-redux";
+import { baseUrl } from "../../utils/services";
 
 import $ from "jquery";
 
@@ -86,7 +87,7 @@ const HomePage = () => {
      id=Userdata._id
     }
   // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-     await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
     method: "post",
     headers: {
       Accept: "application/json",
@@ -112,7 +113,7 @@ const HomePage = () => {
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       //await fetch("http://144.91.110.221:3033/api/product/all_product")
       .then((res) => res.json())
       .then(async (data) => {
@@ -123,7 +124,7 @@ const HomePage = () => {
       });
   };
   const GetManufacturer = async () => {
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
       .then((res) => res.json())
       .then(async (data) => {
@@ -134,7 +135,7 @@ const HomePage = () => {
       });
   };
   const GetCategory = async () => {
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       // await fetch("http://144.91.110.221:3033/api/category/all_category")
       .then((res) => res.json())
       .then(async (data) => {
@@ -258,7 +259,7 @@ const HomePage = () => {
 
   const UpdateCart = () => {
     //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -282,7 +283,7 @@ const HomePage = () => {
   
   const CartById = async () => {
     if (!Userdata == []) {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
         method: "POST",
         headers: {
@@ -309,7 +310,7 @@ const HomePage = () => {
   const AddtoCart = async () => {
     if (!Userdata == []) {
       //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -346,7 +347,7 @@ const HomePage = () => {
     manufacturer,
     image
   ) => { 
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
       method: "post",
       headers: {
@@ -362,7 +363,7 @@ const HomePage = () => {
         if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
-              "http://localhost:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               // "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
               {
                 method: "POST",
@@ -400,7 +401,7 @@ const HomePage = () => {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
-                "http://localhost:3033/api/wishlist/add_to_wishlist",
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
                 // "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
                 {
                   method: "POST",
@@ -573,7 +574,7 @@ const HomePage = () => {
                                       <img
                                         src={
                                           //"http://144.91.110.221:3033/" +
-                                          "http://localhost:3033/" +
+                                          `${baseUrl}/` +
                                           el.image[0].path
                                         }
                                         alt=""
@@ -803,7 +804,7 @@ const HomePage = () => {
                                     <img
                                       src={
                                         //"http://144.91.110.221:3033/" +
-                                        "http://localhost:3033/" +
+                                        `${baseUrl}/` +
                                         el.image[0].path
                                       }
                                       alt=""
@@ -960,7 +961,7 @@ const HomePage = () => {
                                     <img
                                       src={
                                         //"http://144.91.110.221:3033/" +
-                                        "http://localhost:3033/" +
+                                        `${baseUrl}/` +
                                         el.image[0].path
                                       }
                                       alt=""
@@ -1102,7 +1103,7 @@ const HomePage = () => {
                             src={
                               el.image && el.image.length > 0
                                 ? //"http://144.91.110.221:3033/" + el.image[0].path : ""
-                                  "http://localhost:3033/" + el.image[0].path
+                                `${baseUrl}/` + el.image[0].path
                                 : ""
                             }
                           />

@@ -8,8 +8,9 @@ import "../components/Header1.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
-import * as ACTIONS from "../CommonService/GetCartItem/action";
+import * as ACTIONS from '../CommonService/AddToCart/action'
 
+import { baseUrl } from "../utils/services";
 var Userdata = "";
 const Cart = () => {
   const [newquantities, setNewqantities] = useState();
@@ -35,8 +36,7 @@ const Cart = () => {
 
   const CartById = async () => {
     if (Userdata) {
-     // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -63,8 +63,7 @@ const Cart = () => {
   };
 
   const UpdateCart = async (array) => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     console.log(cart, "erjhejgrekjbk");
     await fetch(url, {
       method: "put",
@@ -172,8 +171,7 @@ const Cart = () => {
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     <img
                                       src={
-                                        //"http://144.91.110.221:3033/" + el.image
-                                        "http://localhost:3033/" + el.image
+                                        `${baseUrl}/`+ el.image
                                       }
                                       alt="item"
                                     />
@@ -333,8 +331,7 @@ const Cart = () => {
                   <div className="cart-info">
                     <Link to={"/SingleProduct/" + el.productid}>
                       <img
-                        //src={"http://144.91.110.221:3033/" + el.image}
-                        src={"http://localhost:3033/" + el.image}
+                        src={`${baseUrl}/` + el.image}
                         alt="item"
                       />
                     </Link>

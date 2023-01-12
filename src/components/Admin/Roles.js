@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services";
 // import DataTable from '@bit/adeoy.utils.data-table';
 
 // import { useStateValue } from '../state';
@@ -33,8 +34,7 @@ const Roles = (props) => {
     GetManufacturer();
   }, []);
   const GetUser = async () => {
-    //await fetch("http://144.91.110.221:3033/api/auth/allusers")
-    await fetch("http://localhost:3033/api/auth/allusers")
+    await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
       .then(async (data) => {
         setUsers(data.data);
@@ -46,8 +46,7 @@ const Roles = (props) => {
   };
 
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -64,8 +63,7 @@ const Roles = (props) => {
   };
   const RegisterUser = () => {
     console.log("kp");
-    //fetch('http://144.91.110.221:3033/api/auth/register',
-    fetch("http://localhost:3033/api/auth/register", {
+    fetch(`${baseUrl}/api/auth/register`, {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -88,8 +86,7 @@ const Roles = (props) => {
     e.preventDefault();
     console.log("kp");
     if (username != "" && password != "") {
-      //fetch('http://144.91.110.221:3033/api/auth/login',
-      fetch("http://localhost:3033/api/auth/login", {
+      fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -180,17 +177,10 @@ const Roles = (props) => {
         <div className="col-10">
         {/* login Register Modal  */}
         <div className="form-row de-flex items-align-center justify-content-center">
-          <div className="container justify-content-center align-items-center d-flex">
-            <div className="col-1"></div>
+          <div className="container justify-content-center align-items-center d-flex pt-4 m-auto">
             <div
-              className="col-10 d-flex"
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
-                borderRadius: "5px",
-              }}
-            >
-              <div className="form-group col-lg-6">
+              className="col-10 mx-auto dashboardroles-register-form-wrap">
+              <div className="form-group col-6">
                 {/* <h1>Sale</h1> */}
                 <img src={require("../../Images/woman-laptop.jpg")} />
               </div>
@@ -242,7 +232,7 @@ const Roles = (props) => {
                   <div className="form-group col-lg-12">
                     {/* <label>User Roles<span>*</span></label> */}
                     <select
-                      className="form-control"
+                      className="form-control custom-select"
                       onChange={(e) => {
                         setRole(e.target.value);
                       }}
@@ -272,12 +262,12 @@ const Roles = (props) => {
                 <div className="form-group col-lg-12">
                   {/* <label>Vendor Organization<span>*</span></label> */}
                   <select
-                    className="form-control"
+                    className="form-control custom-select"
                     onChange={(e) => {
                       setOrganization(e.target.value);
                     }}
                   >
-                    <option>Select Vendor Organization Form Here</option>
+                    <option selected>Select Vendor Organization Form Here</option>
                     {manufactureres.map((el, ind) => (
                       <option value={el.name}>{el.name}</option>
                     ))}
@@ -295,7 +285,7 @@ const Roles = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col-1"></div>
+           
           </div>
         </div>
         </div>
