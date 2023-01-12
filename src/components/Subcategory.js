@@ -245,7 +245,7 @@ const Subcategory = () => {
         if (!JSON.stringify(data.data).includes(productid)) {
           if (!Userdata == []) {
             await fetch(
-              "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               {
                 method: "POST",
                 headers: {

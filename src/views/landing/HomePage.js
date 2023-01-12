@@ -14,7 +14,7 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as ACTIONS from "../../CommonService/GetCartItem/action";
+import * as ACTIONS from '../../CommonService/AddToCart/action'
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 
@@ -86,7 +86,6 @@ const HomePage = () => {
     if(Userdata){
      id=Userdata._id
     }
-  // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
       await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
     method: "post",
     headers: {
@@ -114,7 +113,6 @@ const HomePage = () => {
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
     await fetch(`${baseUrl}/api/product/all_product`)
-      //await fetch("http://144.91.110.221:3033/api/product/all_product")
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data);
@@ -125,7 +123,6 @@ const HomePage = () => {
   };
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
-      //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -136,7 +133,6 @@ const HomePage = () => {
   };
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
-      // await fetch("http://144.91.110.221:3033/api/category/all_category")
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -258,7 +254,6 @@ const HomePage = () => {
   };
 
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -284,7 +279,6 @@ const HomePage = () => {
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
-        // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -310,7 +304,6 @@ const HomePage = () => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
@@ -349,7 +342,6 @@ const HomePage = () => {
     image
   ) => { 
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
-      // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -365,7 +357,6 @@ const HomePage = () => {
           if (!Userdata == []) {
             await fetch(
               `${baseUrl}/api/wishlist/add_to_wishlist`,
-              // "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
               {
                 method: "POST",
                 headers: {
@@ -403,7 +394,6 @@ const HomePage = () => {
             if (!Userdata == []) {
               await fetch(
                 `${baseUrl}/api/wishlist/add_to_wishlist`,
-                // "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
                 {
                   method: "POST",
                   headers: {
@@ -574,7 +564,6 @@ const HomePage = () => {
                                       />
                                       <img
                                         src={
-                                          //"http://144.91.110.221:3033/" +
                                           `${baseUrl}/` +
                                           el.image[0].path
                                         }
@@ -804,7 +793,6 @@ const HomePage = () => {
                                     />
                                     <img
                                       src={
-                                        //"http://144.91.110.221:3033/" +
                                         `${baseUrl}/` +
                                         el.image[0].path
                                       }
@@ -961,7 +949,6 @@ const HomePage = () => {
                                     />
                                     <img
                                       src={
-                                        //"http://144.91.110.221:3033/" +
                                         `${baseUrl}/` +
                                         el.image[0].path
                                       }
@@ -1103,7 +1090,7 @@ const HomePage = () => {
                           <img
                             src={
                               el.image && el.image.length > 0
-                                ? //"http://144.91.110.221:3033/" + el.image[0].path : ""
+                                ? 
                                 `${baseUrl}/` + el.image[0].path
                                 : ""
                             }

@@ -51,7 +51,6 @@ const Productform = (props) => {
     await formData.append("type", data.type);
     await formData.append("image", data.image);
     //await formData.append("featuredImage", data.featuredImage)    
-    //const url="http://144.91.110.221:3033/api/product/add_product"
     const url = `${baseUrl}/api/product/add_product`;
     await fetch(url, {
       mode: 'no-cors',
@@ -115,7 +114,6 @@ const Productform = (props) => {
 
   // Api for Get Products uploded by Admin //
   const GetData = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -281,7 +279,7 @@ const Productform = (props) => {
 
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
-    await fetch("http://144.91.110.221:3033/api/product/update_product_by_id", {
+    await fetch(`${baseUrl}/api/product/update_product_by_id`, {
       method: "Put",
       headers: {
         Accept: "application/json",
