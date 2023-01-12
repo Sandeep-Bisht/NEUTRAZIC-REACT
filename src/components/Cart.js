@@ -7,15 +7,23 @@ import Baseline from "./Baseline";
 import "../components/Header1.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import * as ACTIONS from '../CommonService/AddToCart/action'
+
 import { baseUrl } from "../utils/services";
 var Userdata = "";
+
 const Cart = () => {
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
+  const [cartItems,setCartItems] = useState();
+  
   var total = 0;
   var actualtotal = 0;
+
+  let dispatch = useDispatch()
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -44,6 +52,10 @@ const Cart = () => {
           console.log(data + "see");
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
           setCart(data.data[0].order);
+          setCartItems(data.data[0].order.length);
+          let cartItems = data.data[0].order.length;
+          console.log("cartitems on delete", cartItems)
+          dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })
         .catch((err) => {

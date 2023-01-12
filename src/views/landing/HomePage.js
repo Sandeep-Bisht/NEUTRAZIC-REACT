@@ -293,7 +293,6 @@ const HomePage = () => {
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          console.log(cartItems, "before dispatch")
           dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
