@@ -12,6 +12,7 @@ import * as ACTIONS from '../CommonService/AddToCart/action'
 
 import { baseUrl } from "../utils/services";
 var Userdata = "";
+
 const Cart = () => {
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
@@ -53,6 +54,7 @@ const Cart = () => {
           setCart(data.data[0].order);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
+          console.log("cartitems on delete", cartItems)
           dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })

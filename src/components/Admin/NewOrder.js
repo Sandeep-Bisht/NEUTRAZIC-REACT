@@ -3,7 +3,7 @@ import React, { useEffect,useState } from 'react';
 import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import DashboardHeaader from './DashboardHeaader';
-
+import { baseUrl } from '../../utils/services';
 var Userdata;
 const NewOrder=(props)=>{
     const[orders,setOrders]=useState([])
@@ -17,7 +17,7 @@ const NewOrder=(props)=>{
     
               const GetOrders=async()=>{ 
     
-                await fetch("http://144.91.110.221:3033/api/order/all_order")
+                await fetch(`${baseUrl}/api/order/all_order`)
                         .then(res => res.json())
                         .then(async (data) => {
                          setOrders(data.data)
@@ -30,7 +30,7 @@ const NewOrder=(props)=>{
                       }
                 
                       const UpdateOrderStatus = async (productId,status) => {
-                        await fetch("http://144.91.110.221:3033/api/order/update_order", {
+                        await fetch(`${baseUrl}/api/order/update_order`, {
                            method: "PATCH",
                            headers: {
                               Accept: "application/json",
@@ -53,7 +53,7 @@ const NewOrder=(props)=>{
                            });
                         };
                         const DeleteOrder = async (productId) => {
-                            await fetch("http://144.91.110.221:3033/api/order/delete_order_by_id", {
+                            await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
                                method: "delete",
                                headers: {
                                   Accept: "application/json",

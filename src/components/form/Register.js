@@ -5,6 +5,8 @@ import { Login } from "../../state/auth/queries";
 import Header1 from "../Header1";
 import Footer from "../Footer";
 import { useHistory } from "react-router";
+import { baseUrl } from '../../utils/services';
+
 var Userdata = "";
 const Register = (props) => {
   const history = useHistory();
@@ -29,7 +31,7 @@ const Register = (props) => {
       email != null &&
       password == repassword
     ) {
-      fetch("http://144.91.110.221:3033/api/auth/register", {
+      fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -60,7 +62,7 @@ const Register = (props) => {
   const LoginUser = (e) => {
     e.preventDefault();
     if (username != "" && password != "") {
-      fetch("http://144.91.110.221:3033/api/auth/login", {
+      fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -110,7 +112,7 @@ const Register = (props) => {
 
   const CartById = async () => {
     if (!Userdata == []) {
-      await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -170,7 +172,7 @@ const Register = (props) => {
   const AddtoCart = async () => {
     //  debugger
     if (!Userdata == []) {
-      await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -195,7 +197,7 @@ const Register = (props) => {
     // }
   };
   const UpdateCart = () => {
-    const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {

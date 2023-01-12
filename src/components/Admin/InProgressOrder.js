@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 // import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from './Sidemenu';
 import './Dashboard.css';
+import { baseUrl } from '../../utils/services';
 
 const InProgressOrder=()=>{
     const[orders,setOrders]=useState([])
@@ -12,7 +13,7 @@ const InProgressOrder=()=>{
     
               const GetOrders=async()=>{ 
     
-                await fetch("http://144.91.110.221:3033/api/order/all_order")
+                await fetch(`${baseUrl}/api/order/all_order`)
                         .then(res => res.json())
                         .then(async (data) => {
                          setOrders(data.data)
@@ -25,7 +26,7 @@ const InProgressOrder=()=>{
                       }
                 
                       const UpdateOrderStatus = async (productId,status) => {
-                        await fetch("http://144.91.110.221:3033/api/order/update_order", {
+                        await fetch(`${baseUrl}/api/order/update_order`, {
                            method: "PATCH",
                            headers: {
                               Accept: "application/json",
@@ -48,7 +49,7 @@ const InProgressOrder=()=>{
                            });
                         };
                         const DeleteOrder = async (productId) => {
-                            await fetch("http://144.91.110.221:3033/api/order/delete_order_by_id", {
+                            await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
                                method: "delete",
                                headers: {
                                   Accept: "application/json",

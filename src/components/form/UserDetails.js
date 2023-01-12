@@ -83,7 +83,6 @@ const UserDetails=(props)=>{
        await formData.append('addresstype',data.addresstype)
        await formData.append('deliverytype',data.deliverytype)
        await formData.append('username',Userdata.username)
-        // const url="http://144.91.110.221:3033/api/order/add_order"
         const url=`${baseUrl}/api/order/add_order`
                 await fetch(url,
                     {  

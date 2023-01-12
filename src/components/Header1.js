@@ -59,7 +59,7 @@ const Header1 = (props) => {
 
 
   useEffect(() => {
-    if(state.noOfItemsInCart) {
+    if(state.noOfItemsInCart >= 0) {
       setCartItems(state.noOfItemsInCart)
     }
 
