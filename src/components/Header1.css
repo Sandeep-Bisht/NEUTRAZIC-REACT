@@ -2,7 +2,10 @@
 ::-webkit-scrollbar {
     width: 2px;
   }
-  
+  .Total-Item
+  {
+    background-color: red;
+  }
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
@@ -69,7 +72,7 @@
     max-width:19px !important;
     margin-right:5px;
 }
-.option-item .cart-btn .bx-userbx-user
+.option-item .cart-btn .bx-user-user
 {
     size:20px;
 }
@@ -882,3 +885,12 @@ body {
 
 
 /* End Media Query Responsive for Desktop */
+
+
+/* User icon */
+
+
+.user-icon{
+    font-size: 2rem;
+    display: block;
+}

@@ -621,7 +621,7 @@ const SearchResult = (props) => {
         <section className="products-area pb-40">
           <div className="container-fluid">
             <div className="row">
-              {filterdata.map((el, ind) => {
+              {filterdata.length && filterdata.map((el, ind) => {
                 if (
                   el.name.toLowerCase().includes(searchresults) ||
                   el.manufacturer.name.toLowerCase().includes(searchresults) ||

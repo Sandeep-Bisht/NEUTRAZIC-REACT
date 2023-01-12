@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
 import "../views/landing/homepage.css";
@@ -19,9 +20,12 @@ var header;
 var sticky;
 var Userdata = "";
 
+const errorEmail = "Please Enter a valid Email Address";
+
 
 // var userCart=[]
 const Header1 = (props) => {
+  const state = useSelector((state=>state.GetCartItemReducer))
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -36,11 +40,13 @@ const Header1 = (props) => {
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
+  const [cartItems, setCartItems] = useState();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({
     defaultValues:{
     username:"",
@@ -49,6 +55,13 @@ const Header1 = (props) => {
     repassword:"",
     }
   });
+
+  useEffect(() => {
+    if(state.noOfItemsInCart) {
+      setCartItems(state.noOfItemsInCart)
+    }
+
+  }, [state.noOfItemsInCart])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -79,6 +92,7 @@ const Header1 = (props) => {
       });
     });
   }, []);
+
   const logout = () => {
     localStorage.setItem("Userdata", null);
     toast.success("Logout successfull", {
@@ -86,11 +100,10 @@ const Header1 = (props) => {
       autoClose: 5000,
     });
     window.location.replace("/");
-    
   };
 
   const RegisterUser = (data) => {
-    console.log(data,"mkkkkkkkkkkkkkkk");
+    
     // setUsername(data.username);
     // setemail(data.email);
     // setPassword(data.password);
@@ -102,7 +115,7 @@ const Header1 = (props) => {
       data.username&&
       data.password == data.repassword
     ) {
-      console.log(data,"After if con")
+      
       //fetch("http://144.91.110.221:3033/api/auth/register", {
       fetch("http://localhost:3033/api/auth/register", {
         method: "POST",
@@ -118,15 +131,13 @@ const Header1 = (props) => {
         }),
       })
         .then((res) => res.json())
-        .then(() => {
+        .then((data) => {
+          console.log(data,"After post Api");
+           window.location.reload();
           
-          window.location.reload();
         });
-        
-    } else {
-      setRegMsg("Please Enter Right Data");
     }
-   
+    
   };
   const LoginUser = (e) => {
     e.preventDefault();
@@ -149,30 +160,23 @@ const Header1 = (props) => {
             Userdata = res;
             localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
-            history.push("/");
+            toast.success("Login successfull", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+      });
+            //history.push("/");
             window.location.reload();
-            toast.success("Login successfull",{
-              position:toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 5000,
-            })
-            
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||
             res.role == "Manager"
           ) {
-            toast.success("Login successfull",{
-              position:toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 5000,
-            })
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
-            
             history.push("/Dashboard");
-             
             window.location.reload();
-           
           } else if (Userdata == undefined) {
+            console.log(res,"response failure")
             setMsg("User Name Or PassWord is not Valid");
           }
         })
@@ -181,14 +185,16 @@ const Header1 = (props) => {
             await JSON.parse(localStorage.getItem("CartDataWoLogin")).map(
               async (item, index) => {
                 await cartfunction(item);
-                
               }
             );
           }
         });
-       
+      // toast.success("Login successfull", {
+      //   position: toast.POSITION.BOTTOM_RIGHT,
+      //   autoClose: 5000,
+      // });
     } else {
-      console.log("not getting role");
+      console.log("not getting role","faiure");
       setMsg("Please Enter a Valid Data");
     }
   };
@@ -340,7 +346,7 @@ const Header1 = (props) => {
       <div
         className="modal left fade"
         id="myModal"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
       >
@@ -375,13 +381,13 @@ const Header1 = (props) => {
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           >
-                            {/* <img
+                            <img
                               className="icons1"
                               src={
                                 //"http://144.91.110.221:3033/" + el.image[0].path
                                 "http://localhost:3033/" + el.image[0].path
                               }
-                            /> */}
+                            />
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -392,107 +398,11 @@ const Header1 = (props) => {
                             >
                               {el.name}
                             </button>
-                            <img
-                              className="icons1"
-                              src={
-                                //"http://144.91.110.221:3033/" + el.image[0].path
-                                "http://localhost:3033/" + el.image[0].path
-                              }
-                            />
                           </div>
                         </Link>
-                      </h2>
-                      {/* <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                     <div className="accordion-body">
-                        <ul>
-                           <li>1</li>
-                           <li>2</li>
-                           <li>3</li>
-                           <li>4</li>
-                        </ul>
-                     </div>
-                  </div> */}
+                      </h2>                      
                     </div>
-                  ))}
-                {/* <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingTwo">
-                     <div className="d-flex align-items-center">
-                        <img className="icons1" src={require('../Images/Icons/liver-1.png')}/>
-                        <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Liver
-                        </button>
-                     </div>
-                  </h2>
-                  <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                     <div className="accordion-body">
-                        <ul>
-                           <li>1</li>
-                           <li>2</li>
-                           <li>3</li>
-                           <li>4</li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingThree">
-                     <div className="d-flex align-items-center">
-                        <img className="icons1" src={require('../Images/Icons/infection-1.png')}/>
-                        <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Viral Infection
-                        </button>
-                     </div>
-                  </h2>
-                  <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                     <div className="accordion-body">
-                        <ul>
-                           <li>1</li>
-                           <li>2</li>
-                           <li>3</li>
-                           <li>4</li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingFour">
-                     <div className="d-flex align-items-center">
-                        <img className="icons1" src={require('../Images/Icons/immune-1.png')}/>
-                        <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                        Immunity   
-                        </button>
-                     </div>
-                  </h2>
-                  <div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                     <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                  </div>
-               </div>
-               <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingFive">
-                     <div className="d-flex align-items-center">
-                        <img className="icons1" src={require('../Images/Icons/heartbeat-1.png')}/>
-                        <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                        Health    </button>
-                     </div>
-                  </h2>
-                  <div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                     <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                  </div>
-               </div>
-               <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingSix">
-                     <div className="d-flex align-items-center">
-                        <img className="icons1" src={require('../Images/Icons/categories-1.png')}/>
-                        <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                        Other Products
-                        </button>
-                     </div>
-                  </h2>
-                  <div id="flush-collapseSix" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                     <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                  </div>
-               </div>
-               */}
+                  ))}                
               </div>
             </div>
           </div>
@@ -504,7 +414,7 @@ const Header1 = (props) => {
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -549,7 +459,7 @@ const Header1 = (props) => {
                                
                               })}
                             />
-                            {errors?.username?.type === "required" && <p className="text-danger">Name is Required</p>}
+                            {errors?.username?.type === "required" && <p className="text-danger">This field is required</p>}
                             {/* <input
                             type="text"
                             className="form-control "
@@ -569,10 +479,12 @@ const Header1 = (props) => {
                               
                               {...register("email", {
                                 required: true,
+                                pattern:/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                                 
                               })}
                             />
-                            {errors?.email?.type === "required" && <p className="text-danger">Email is Required</p>}
+                            {errors?.email?.type === "required" && <p className="text-danger">This field is required</p>}
+                            {errors?.email?.type === "pattern" && <p className="text-danger">Please enter the valid Email</p>}
                             {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                           </div>
                           <div className="form-group">
@@ -585,10 +497,12 @@ const Header1 = (props) => {
                               
                               {...register("password", {
                                 required: true,
+                                pattern:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                                 
                               })}
                             />
-                            {errors?.password?.type === "required" && <p className="text-danger">Password is Required</p>}
+                            {errors?.password?.type === "required" && <p className="text-danger">This field is required</p>}
+                            {errors?.password?.type === "pattern" && <p className="text-danger">Must have more than 8 characters, Must have atleast one number, Must have upper & lowercase letters, Must have atleast one special character</p>}
                           </div>
                           <div className="form-group ">
                             <label>
@@ -600,10 +514,16 @@ const Header1 = (props) => {
                             
                               {...register("repassword", {
                                 required: true,
+                                validate: (val) =>{
+                                  if(watch('password') !== val){
+                                    return "Your Password Does not Match"
+                                  }
+                                }
                                 
                               })}
                             />
-                            {errors?.repassword?.type === "required" && <p className="text-danger">Re-Password is Required</p>}
+                            {errors?.repassword?.type === "required" && <p className="text-danger">This field is required</p>}
+                            {errors?.repassword?.type === "validate" && <p className="text-danger">Password does not match</p>  }
                           </div>
                           {/* <h5 className="Login-fail-msg">{}</h5> */}
                           {/* <div className="form-group col-lg-12">
@@ -659,9 +579,9 @@ const Header1 = (props) => {
                             Login
                           </button>
                           <ToastContainer />
-                          <Link>
+                          <span>
                             <p className="mt-2">Forget Password...</p>
-                          </Link>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -691,15 +611,49 @@ const Header1 = (props) => {
               <div className="col-sm-1">
                 <div className="option-item">
                   <div className="cart-btn">
-                    <Link to="/Ordered">
-                      <i className="bx bx-user"></i>
-                    </Link>
+                    
+                    
+                      
+
+                  { Userdata == null ?
+                      (
+                        <>
+                        <span
+                      className="sp"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <i className="user-icon bx bx-user"></i>
+                    </span>
+                    <br />
+                    <span
+                      className="Sp1 mt-5"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      style={{ cursor: "pointer" }}
+                    >
+                     
+                    </span>
+                  </>
+                       
+                      ):
+                      (
+                        <>
+                        <i className="user-icon bx bx-user"></i>
+                        </>
+                      )
+                      }
+                    
+                    
+                    
                   </div>
                 </div>
               </div>
               <div className="col-sm-8 user-login">
                 {Userdata == null ? (
                   <>
+                  
                     <span
                       className="sp"
                       data-bs-toggle="modal"
@@ -760,6 +714,7 @@ const Header1 = (props) => {
                               style={{ cursor: "pointer" }}
                             >
                               <span className="pr-4">Cart</span>
+                              {/* <span className="text-danger">item</span> */}
                             </li>
                           </div>
                         </Link>
@@ -828,17 +783,15 @@ const Header1 = (props) => {
                   </div>
                 </div>
 
-                <div className="col-sm-8 user-login">
-                  {props && props.CartItems ? (
-                    <h6 className="Total-Item">
-                      {props.CartItems.length > 0 ? props.CartItems.length : ""}
+                <div className="col-8 user-login">
+                  { cartItems ?(             
+                  <h6 className="Total-Item">
+                      { cartItems }
                     </h6>
-                  ) : (
-                    ""
-                  )}
+                  ) :""}
                   <span className="sp">Cart</span>
                   <br />
-                  <span className="Sp1">₹ 0.0</span>
+                  {/* <span className="Sp1">₹ 0.0</span> */}
                 </div>
               </div>
             </Link>
@@ -934,7 +887,7 @@ const Header1 = (props) => {
                       <Link
                         className="nav-link nav-heading"
                         to="/ContactUs"
-                        tabindex="-1"
+                        tabIndex="-1"
                         aria-disabled="true"
                       >
                         Contact
@@ -944,7 +897,7 @@ const Header1 = (props) => {
                       <a
                         className="nav-link nav-heading"
                         href="#"
-                        tabindex="-1"
+                        tabIndex="-1"
                         aria-disabled="true"
                       >
                         Blog
@@ -968,111 +921,7 @@ const Header1 = (props) => {
         </div>
       </div>
       <div className="container-fluid p-0">
-        <div className="row side-nav">
-          {/* 
-      <div className="col-sm-2  pd-0 insideNav" >
-         <div className="accordion accordion-flush" id="accordionFlushExample">
-            <div className="accordion-item">
-               <h2 className="accordion-header" id="flush-headingOne">
-                  <div className="d-flex align-items-center">
-                     <img className="icons1" src={require('../Images/Icons/face-1.png')}/>  
-                     <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                     Skin Care
-                     </button>
-                  </div>
-               </h2>
-               <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">
-                     <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div className="accordion-item">
-               <h2 className="accordion-header" id="flush-headingTwo">
-                  <div className="d-flex align-items-center">
-                     <img className="icons1" src={require('../Images/Icons/liver-1.png')}/>
-                     <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                     Liver
-                     </button>
-                  </div>
-               </h2>
-               <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">
-                     <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div className="accordion-item">
-               <h2 className="accordion-header" id="flush-headingThree">
-                  <div className="d-flex align-items-center">
-                     <img className="icons1" src={require('../Images/Icons/infection-1.png')}/>
-                     <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                     Viral Infection
-                     </button>
-                  </div>
-               </h2>
-               <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">
-                     <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div className="accordion-item">
-               <h2 className="accordion-header" id="flush-headingFour">
-                  <div className="d-flex align-items-center">
-                     <img className="icons1" src={require('../Images/Icons/immune-1.png')}/>
-                     <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                     Immunity   
-                     </button>
-                  </div>
-               </h2>
-               <div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-               </div>
-            </div>
-            <div className="accordion-item">
-               <h2 className="accordion-header" id="flush-headingFive">
-                  <div className="d-flex align-items-center">
-                     <img className="icons1" src={require('../Images/Icons/heartbeat-1.png')}/>
-                     <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                     Health    </button>
-                  </div>
-               </h2>
-               <div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-               </div>
-            </div>
-            <div className="accordion-item">
-               <h2 className="accordion-header" id="flush-headingSix">
-                  <div className="d-flex align-items-center">
-                     <img className="icons1" src={require('../Images/Icons/categories-1.png')}/>
-                     <button className="accordion-button collapsed button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                     Other Products
-                     </button>
-                  </div>
-               </h2>
-               <div id="flush-collapseSix" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-               </div>
-            </div>
-         </div>
-      </div>
-      */}
+        <div className="row side-nav">          
           <div className=" col-sm-12 p-0 content">
             <React.Fragment>{props.children}</React.Fragment>
           </div>

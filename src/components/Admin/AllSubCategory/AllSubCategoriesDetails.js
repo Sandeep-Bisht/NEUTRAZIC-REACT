@@ -70,10 +70,14 @@ export default function AllSubCategoriesDetails() {
     setGetuser(filteredData);
   }
 
-  const handleDelete=(_id)=>{
-    // const DeletedData=axios.delete("http://localhost:3033/api/subcategory/delete_subcategory_by_id",{state: {_id:_id}});
-    // setGetuser(DeletedData.data.data);
-    alert(_id);
+  const handleDelete=async (_id)=>{
+    try{
+      const DeletedData=await axios.delete("http://localhost:3033/api/subcategory/delete_subcategory_by_id",{data: {_id:_id}});
+      fetchUsers();
+    }catch(error){
+
+    }
+    
   }
 
   // const editHandler=(_id)=>{
