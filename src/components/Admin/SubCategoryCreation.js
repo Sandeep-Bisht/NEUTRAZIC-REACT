@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
+import DashboardHeaader from "./DashboardHeaader";
 // import DataTable from '@bit/adeoy.utils.data-table';
 
 var Userdata;
@@ -15,7 +16,7 @@ const SubCategoryCreation = (props) => {
     category: "",
     image: [],
   });
-  const [editableData]=useState(props.history.location.state);
+  const [editableData] = useState(props.history.location.state);
   const submitData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -183,155 +184,121 @@ const SubCategoryCreation = (props) => {
 
   return (
     <>
-      <div className="container-fluid">
-        {" "}
-        <a href="#" className="nav__logo">
-          <img
-            src={require("../../Images/new-logo.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </a>
-      </div>
-
-      <div id="body-pd">
-        <Sidemenu />
-        {Userdata !== undefined ? (
-          Userdata.role == "superAdmin" ? (
-            <form>
-              <div className="container">
-                <div className="row">
-                  {/* <div className="col-1"></div> */}
-                  <div className="col-10">
-                    <div className="card p-4 m-2 product-form">
-                      <h5>SubCategory Creation</h5>
-                      <div className="row">
-                        <div className="col-6 p-1">
-                          <input
-                            type="file"
-                            className="form-control Dashborad-search"
-                            placeholder="SubCategory Name "
-                            onChange={(e) => {
-                              Setdata({ ...data, image: e.target.files[0] });
-                            }}
-                          />
-                        </div>
-                        <div className="col-6 p-1">
-                          <select
-                            className="form-control Dashborad-search"
-                            defaultValue={editableData ? editableData.name : "" }
-                            onChange={(e) => {
-                              Setdata({ ...data, category: e.target.value });
-                            }}
-                          >
-                            <option selected>{editableData ? editableData.name : "Select Category"}</option>
-                            {categories.map((el, ind) => (
-                              <option value={el._id}>{el.name}</option>
-                            ))}
-                          </select>
-                        </div>
-                        <div className="col-6 p-1">
-                          <input
-                            type="text"
-                            className="form-control Dashborad-search"
-                            placeholder="SubCategory Name "
-                            defaultValue={editableData ? editableData.name : ""}
-                            onChange={(e) => {
-                              Setdata({ ...data, name: e.target.value });
-                            }}
-                          />
-                        </div>
-
-                        <div className="col-6 p-1">
-                          <textarea
-                            className="form-control"
-                            placeholder="SubCategory Description"
-                            rows="3"
-                            defaultValue={
-                              editableData ? editableData.description : ""
-                            }
-                            onChange={(e) => {
-                              Setdata({ ...data, description: e.target.value });
-                            }}
-                          ></textarea>
-                        </div>
-                        {editableData  ? (
-                          <div className="col-12 pt-4">
-                            
-                            <button
-                              className="btn btn-primary"
-                              onClick={(e) => UpdateSubCategory(e, data._id)}
-                            >
-                              Update
-                            </button>
+      <section id="body-pd">
+        <div className="container-fluid">
+          <DashboardHeaader />
+          <div className="row">
+            <div className="col-2 px-0">
+              <Sidemenu />
+            </div>
+            <div className="col-10">
+              {Userdata !== undefined ? (
+                Userdata.role == "superAdmin" ? (
+                  <form>
+                    <div className="col-12">
+                      <div className="card p-4 m-2 product-form">
+                        <h5>SubCategory Creation</h5>
+                        <div className="row">
+                          <div className="col-6 p-1">
+                            <input
+                              type="file"
+                              className="form-control Dashborad-search"
+                              placeholder="SubCategory Name "
+                              onChange={(e) => {
+                                Setdata({ ...data, image: e.target.files[0] });
+                              }}
+                            />
                           </div>
-                        ) : null}
-                        {update ? (
-                          <div className="col-12 p-1">
-                            <button
-                              className="btn btn-primary"
-                              onClick={(e) => {
-                                submitData(e);
+                          <div className="col-6 p-1">
+                            <select
+                              className="form-control Dashborad-search"
+                              defaultValue={
+                                editableData ? editableData.name : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({ ...data, category: e.target.value });
                               }}
                             >
-                              Submit
-                            </button>
+                              <option selected>
+                                {editableData
+                                  ? editableData.name
+                                  : "Select Category"}
+                              </option>
+                              {categories.map((el, ind) => (
+                                <option value={el._id}>{el.name}</option>
+                              ))}
+                            </select>
                           </div>
-                        ) : null}
+                          <div className="col-6 p-1">
+                            <input
+                              type="text"
+                              className="form-control Dashborad-search"
+                              placeholder="SubCategory Name "
+                              defaultValue={
+                                editableData ? editableData.name : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({ ...data, name: e.target.value });
+                              }}
+                            />
+                          </div>
+
+                          <div className="col-6 p-1">
+                            <textarea
+                              className="form-control"
+                              placeholder="SubCategory Description"
+                              rows="3"
+                              defaultValue={
+                                editableData ? editableData.description : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({
+                                  ...data,
+                                  description: e.target.value,
+                                });
+                              }}
+                            ></textarea>
+                          </div>
+                          {editableData ? (
+                            <div className="col-12 pt-4">
+                              <button
+                                className="btn btn-primary"
+                                onClick={(e) => UpdateSubCategory(e, data._id)}
+                              >
+                                Update
+                              </button>
+                            </div>
+                          ) : null}
+                          {update ? (
+                            <div className="col-12 p-1">
+                              <button
+                                className="btn btn-primary"
+                                onClick={(e) => {
+                                  submitData(e);
+                                }}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          ) : null}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-1"></div>
-                </div>
+                  </form>
+                ) : null
+              ) : null}
+            </div>
+            {update ? (
+              <div className="create-manu container text-right">
+                <span>Create Manufacturer</span>
+                <button onClick={() => setUpdate(false)}>
+                  <i className="bx bx-plus"></i>
+                </button>
               </div>
-            </form>
-          ) : null
-        ) : null}
-      </div>
-      {update ? (
-        <div className="create-manu container text-right">
-          <span>Create Manufacturer</span>
-          <button onClick={() => setUpdate(false)}>
-            <i className="bx bx-plus"></i>
-          </button>
+            ) : null}
+          </div>
         </div>
-      ) : null}
-      {/*     
-    <table className="table table-hover table-striped text-center">
-  <thead>
-    <tr>
-    <th scope="col">Sr.No</th>
-      <th scope="col">Category Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  {categories.map((el, ind) => {
-      categoryCount +=1;
-    return(
-    <tr>
-      
-      <td>{categoryCount}</td>
-      <td>{el.name}</td>
-     
-      <td><i className="bx bx-trash"></i><i className="bx bx-edit pl-4"></i></td>
-    </tr>
-    )
-     })}
-  
-  </tbody>
-</table> */}
-      <div className="container">
-        {/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
-      </div>
+      </section>
     </>
   );
 };

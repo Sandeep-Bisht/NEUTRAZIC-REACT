@@ -44,14 +44,20 @@ body
 
 .all-manufacture-details-section
 {
-  padding-top: 10px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* subcategory-css */
 
 .sub-category-details-section , .category-details-section
 {
-  padding-top: 10px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .sub-category-head
 {
@@ -96,7 +102,10 @@ body
 
 .all-products-details-section
 {
-  padding-top: 10px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* body{
@@ -340,6 +349,7 @@ a{
   border: none;
    box-shadow: 0 18px 24px rgb(0 0 0 / 10%);
    padding: 25px 20px !important;
+   cursor: pointer;
 } 
 .cardheads
 {
@@ -351,6 +361,7 @@ a{
   font-weight: 500;
   letter-spacing: 0.15px;
   margin-bottom: 0;
+  text-transform: capitalize;
 }
 
 .main{
@@ -447,7 +458,7 @@ a{
 .dashboard-accordion-body
 {
   padding-top: 1rem;
-  padding-left: 2.2rem;
+  padding-left: 30px;
 }
 .nav__link .accordion-item
 {
@@ -468,11 +479,10 @@ a{
 }
 .nav__link .accordion-button::after
 {
-  /* height: 1.25rem;
-  width: 1.25rem; */
+  height: 1.25rem;
+  width: 1.25rem;
   /* background-image: url('../../Images/Icons/Rectangle 90.png') !important; */
-  font-size: px;
-
+  color: #1e144f;
 }
 .nav__link ul
 {
@@ -533,7 +543,7 @@ font-family: 'Roboto', sans-serif;
 }
 .product-form h5
 {
-  color:#006837;
+  color:#1e144f;
   font-family: 'Roboto', sans-serif;
   font-weight:400 !important;
   font-size: 25px !important;
@@ -546,16 +556,15 @@ font-family: 'Roboto', sans-serif;
 }
 .product-form .row div button
 {
-  width:100px;
   color: #fff;
-  background-color: #1b97ff;
-  border-color: #1b97ff;
-  border:0px;
-}
-.product-form .row div button:hover
-{
-  color: #000;
+  background-color: #1e144f;
   border: none;
+  border-radius: 5px;
+  padding: 6px 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
 }
 /* .update-btn
 {
@@ -656,15 +665,34 @@ font-family: 'Roboto', sans-serif;
 /* User Roles Css */
 .btn-registration
 {
-  background-color: rgb(145, 7, 7);
+  background-color: #1e144f;
   color:white;
+  padding: 6px 16px;
   font-family: 'Roboto', sans-serif;
-  border-radius: 0;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  border-radius: 3px;
 }
 .input-text
 {
   font-family: 'Roboto', sans-serif;
   border-radius: 0;
+}
+
+.dashboardroles-register-form-wrap
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 15px;
+}
+.dashboardroles-register-form-wrap .custom-select
+{
+  cursor: pointer;
 }
 
 /* End User Roles Css */
@@ -677,19 +705,29 @@ font-family: 'Roboto', sans-serif;
   position: fixed;
   width: 100%;
   top: 0;
+  right: 0;
     z-index: 10;
     -webkit-box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
     box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
     background-color: #fafbfc;
     display: flex;
     justify-content: space-between;
-    padding: 5px 8px;
+    padding: 12px 8px;
     align-items: center;
+}
+.nav__logo .user-name
+{
+  color: #1e144f;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 10px;
+  text-transform: capitalize;
 }
 
 #body-pd
 {
-  padding-top: 48px;
+  padding-top: 60px;
   background-color: #f1f4f6;
   height: 100vh;
 }
@@ -731,3 +769,111 @@ font-family: 'Roboto', sans-serif;
 
 
 /* end add button css */
+
+
+/* Search-icon-css for dashboard */
+
+.all-manufacturer-search-wrap , .all-category-search-wrap , .all-products-search-wrap , .subcategory-search-wrap
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.all-manufacturer-search-wrap .add-icon , .all-category-search-wrap .add-icon , .all-products-search-wrap .add-icon , .subcategory-search-wrap .add-icon
+{
+  background-color: #1e144f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 30px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  /* opacity: .8; */
+  cursor: pointer;
+}
+.all-manufacturer-search-wrap .add-icon svg , .all-category-search-wrap .add-icon svg , .all-products-search-wrap .add-icon svg , .subcategory-search-wrap .add-icon svg
+{
+  height: 20px;
+  width: auto;
+  margin-right: 5px;
+  height: 20px;
+  color: #fff;
+  /* opacity: .3; */
+}
+.all-manufacturer-search-wrap input , .all-category-search-wrap input , .all-products-search-wrap input , .subcategory-search-wrap input
+{
+  padding: 5px 8px;
+  background-color: #fff;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.all-manufacturer-search-wrap input::placeholder , .all-category-search-wrap input::placeholder , .all-products-search-wrap input::placeholder , .subcategory-search-wrap input::placeholder
+{
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: .3;
+}
+.all-manufacturer-search-wrap .dashboard-search-btn , .all-category-search-wrap .dashboard-search-btn , .all-products-search-wrap .dashboard-search-btn , .subcategory-search-wrap .dashboard-search-btn
+{
+  padding: 5px 10px;
+  background-color: #1e144f;
+  color: #fff;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.all-manufacturer-search-wrap .dashboard-search-btn svg , .all-category-search-wrap .dashboard-search-btn svg , .all-products-search-wrap .dashboard-search-btn svg , .subcategory-search-wrap .dashboard-search-btn svg
+{
+  height: 20px;
+}
+
+/* manufacturer css */
+
+.delete-icon-wrap
+{
+  color: red !important;
+  cursor: pointer;
+}
+.delete-icon-wrap svg
+{
+  height: 20px;
+}
+.edit-icon-wrap
+{
+  color: #1e144f;
+  cursor: pointer;
+}
+.edit-icon-wrap svg
+{
+  height: 25px;
+}
+
+/* configuration-css */
+
+.Configration-List .configuration-icons-wrap
+{
+  height: 18px;
+    width: auto;
+    color: #000;
+    opacity: .5;
+    padding-right: 10px;
+}
+.Configration-List li
+{
+  font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000;
+    opacity: .7;
+}
+.Configration-List li:hover
+{
+  background: #e0f3ff !important;
+    border-radius: 5px;
+    color: #1e144f;
+}

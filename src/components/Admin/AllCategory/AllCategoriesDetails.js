@@ -7,20 +7,43 @@ import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory, Link } from "react-router-dom";
+import DashboardHeaader from "../DashboardHeaader";
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md';
 
-const { Search } = Input;
+
 
 export default function AllCategoriesDetails() {
   const [getuser, setGetuser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [filteredData] = useState([]);
+  const [categories, setCategories] = useState("");
+
+  const { Search } = Input;
 
   const history = useHistory();
 
   useEffect(() => {
     fetchUsers();
+    GetCategory();
   }, []);
+
+
+  const GetCategory = async () => {
+    //await fetch("http://144.91.110.221:3033/api/category/all_category")
+    await fetch("http://localhost:3033/api/category/all_category")
+      .then((res) => res.json())
+      .then(async (data) => {
+        setCategories(data.data.length);
+        // console.log("dsd dfz sf " + data.data.length);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -81,7 +104,7 @@ export default function AllCategoriesDetails() {
               title="Sure to delete?"
               onConfirm={() => handleDelete(record._id)}
             >
-              <a style={{ color: "blue" }}>Delete</a>
+              <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
             </Popconfirm>
             <Typography.Link>
               <Link
@@ -91,9 +114,11 @@ export default function AllCategoriesDetails() {
                     ...record,
                   },
                 }}
+                title="Edit"
+                className='edit-icon-wrap'
                 style={{ color: "blue" }}
               >
-                Edit
+                <MdOutlineEditNote/>
               </Link>
             </Typography.Link>
           </Space>
@@ -103,39 +128,42 @@ export default function AllCategoriesDetails() {
 
   return (
     <>
-      <section className="category-details-section">
-        <div className="row">
-          <div className="col-12">
-            <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All categories</h3>
-              <div className="subcategory-search-wrap">
-                <input
-                  type="text"
-                  placeholder="Search.."
-                  className="sub-category-search-input"
-                  onChange={(e) => setSearchVal(e.target.value)}
-                />
-                <button className="sub-category-btn" type="button">
-                  <BiSearchAlt />
-                </button>
-              </div>
+      <section id="body-pd">
+  <div className="container-fluid">
+    <DashboardHeaader/>
+      <div className="row">
+      <div className="col-2 px-0">
+              <Sidemenu />
             </div>
-          </div>
+        <div className="col-10">
+        <div className="category-details-section">
+              <h3 className="all-category-head">All Category <span className="count">{categories}</span></h3>
+              <div className="all-category-search-wrap">
+                <Link to="/Category" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
+              <input
+              type='text'
+                onChange={e => onChangeHandler(e)}
+                onKeyUp={searchHandler}
+                placeholder="Search.."
+                enterButton
+                style={{ position: "sticky", top: "0", left: "0" }}
+              />
+              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
+              </div>
+              </div>
+        
+          <Table
+            rowKey="name"
+            dataSource={filteredData && filteredData.length ? filteredData : getuser}
+            columns={columns}
+            loading={loading}
+            pagination={false}
+          />
         </div>
-
-        <div className="row">
-          <div className="col-12">
-            <Table
-              rowKey="name"
-              dataSource={
-                filteredData && filteredData.length ? filteredData : getuser
-              }
-              columns={columns}
-              loading={loading}
-              pagination={false}
-            />
-          </div>
-        </div>
+      </div>
+      </div>
       </section>
     </>
   );

@@ -7,6 +7,10 @@ import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import {BiSearchAlt} from 'react-icons/bi';
 import { useHistory,Link } from "react-router-dom";
+import DashboardHeaader from "../DashboardHeaader";
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md';
 
 const { Search } = Input;
 
@@ -18,13 +22,30 @@ export default function AllSubCategoriesDetails() {
   const [loading,setLoading]=useState(false);
   const [searchVal,setSearchVal]=useState("");
   const [filteredData]=useState([]);
+  const [subCategories, setSubCategories] = useState("");
 
   const history=useHistory();
 
   useEffect(()=>{
    fetchUsers();
+   GetSubCategory();
   },[])
   
+
+  const GetSubCategory = async () => {
+    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
+    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+      .then((res) => res.json())
+      .then(async (data) => {
+        setSubCategories(data.data.length);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
+  
+
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(
@@ -91,7 +112,7 @@ export default function AllSubCategoriesDetails() {
       getuser.length >= 1 ? (
         <Space size="middle">
           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record._id)}>
-            <a style={{color:"blue"}}>Delete</a>
+            <a className="delete-icon-wrap" title="Delete" style={{color:"blue"}}><FaTrashAlt/></a>
           </Popconfirm>
           <Typography.Link   >
            <Link to={{pathname:"/SubCategoryCreation", 
@@ -99,7 +120,9 @@ export default function AllSubCategoriesDetails() {
            {
             ...record,
           }}} 
-           style={{color:"blue"}}>Edit</Link> 
+          title="Edit"
+                className='edit-icon-wrap'
+           style={{color:"blue"}}><MdOutlineEditNote/></Link> 
           </Typography.Link>
          </Space>
         ) : null,
@@ -119,30 +142,43 @@ export default function AllSubCategoriesDetails() {
           />
         </a>
       </div> */}
-        <section className="sub-category-details-section">      
-            <div className="row">
-            <div className="col-12">
-              <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All sub categories</h3>
+       <section id="body-pd">
+  <div className="container-fluid">
+    <DashboardHeaader/>
+      <div className="row">
+      <div className="col-2 px-0">
+              <Sidemenu />
+            </div>
+        <div className="col-10">
+        <div className="sub-category-details-section">
+              <h3 className="sub-category-head">All Subcategories <span className="count">{subCategories}</span></h3>
               <div className="subcategory-search-wrap">
-              <input type='text' placeholder='Search..' className='sub-category-search-input' onChange={e => setSearchVal(e.target.value)}/>
-              <button className="sub-category-btn" type="button"><BiSearchAlt/></button>
+                <Link to="/SubCategoryCreation" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
+              <input
+              type='text'
+                onChange={e => onChangeHandler(e)}
+                onKeyUp={searchHandler}
+                placeholder="Search.."
+                enterButton
+                style={{ position: "sticky", top: "0", left: "0" }}
+              />
+              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
               </div>
               </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-            <Table
-              rowKey="name"
-              dataSource={filteredData && filteredData.length ? filteredData : getuser}
-              columns={columns}
-              loading={loading}
-              pagination={false}
-            />
-            </div>
-          </div>    
-          </section>
+        
+          <Table
+            rowKey="name"
+            dataSource={filteredData && filteredData.length ? filteredData : getuser}
+            columns={columns}
+            loading={loading}
+            pagination={false}
+          />
+        </div>
+      </div>
+      </div>
+      </section>
     </>
   );
 }

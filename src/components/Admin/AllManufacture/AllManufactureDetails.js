@@ -2,19 +2,83 @@ import React, { useState,useEffect } from "react";
 import { Table, Input, Typography, Popconfirm, Space } from "antd";
 import axios from "axios";
 // import { data } from "./columns";
-import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import {BiSearchAlt} from 'react-icons/bi';
+import UserImg from "../../../Images/user3.jpg";
+import DashboardHeaader from "../DashboardHeaader";
+import {Link} from 'react-router-dom'
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md';
 
-const { Search } = Input;
+ 
 
-const fetchUsers = async () => {
-  const data = await axios.get(
+export default function AllManufactureDetails() {
+  const [getuser,setGetuser]=useState([])
+  const [loading,setLoading]=useState(false);
+  const [searchVal,setSearchVal]=useState("");
+  const [filteredData]=useState([]);
+
+  const { Search } = Input;
+  const [Manufacturer, setManufacturer] = useState("");
+  
+  useEffect(()=>{
+    fetchUsers();
+    setCount();
+    GetManufacturer();
+   },[])
+
+
+   const setCount = async () => {
+    //  await setManufacturerCount1(localStorage.getItem("ManufacturerCount"));
+    // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
+  };
+
+  const GetManufacturer = async () => {
+    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
+    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+      .then((res) => res.json())
+      .then(async (data) => {
+        console.log(data, "hello");
+        setManufacturer(data.data.length);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err, "errors");
+      });
+  };
+
+  const fetchUsers = async () => {
+    setLoading(true);
+  const response = await axios.get( 
     "http://localhost:3033/api/manufacture/all_manufacture"
   );
-  return data.data;
+  setGetuser(response.data.data);
+    setLoading(false);
 };
+
+const onChangeHandler=(e)=>{
+  setSearchVal(e.target.value);
+  if(e.target.value=="")
+  {
+    fetchUsers();
+  }
+}
+
+const searchHandler=()=>{
+  const filteredData=getuser.filter((value)=>{
+    return value.name.toLowerCase().includes(searchVal.toLowerCase());
+  })
+  setGetuser(filteredData);
+}
+
+const handleDelete=(_id)=>{
+  // const DeletedData=axios.delete("http://localhost:3033/api/subcategory/delete_manufacturer_by_id",{state: {_id:_id}});
+  // setGetuser(DeletedData.data.data);
+  alert(_id);
+}
+
 
 const columns = [
   {
@@ -34,42 +98,80 @@ const columns = [
     maxWidth: 90,
     render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />,
   },
+  {
+    title: "Action",
+    dataIndex: "Action",
+    width: "20%",
+    render: (_, record) =>
+      getuser.length >= 1 ? (
+        <Space size="middle">
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record._id)}
+          >
+            <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
+          </Popconfirm>
+          <Typography.Link>
+            <Link
+              to={{
+                pathname: "/Manufacturer",
+                state: {
+                  ...record,
+                },
+              }} className='edit-icon-wrap'
+              title="Edit"
+              style={{ color: "blue" }}
+            >
+              <MdOutlineEditNote/>
+            </Link>
+          </Typography.Link>
+        </Space>
+      ) : null,
+  },
+  
 ];
+ 
 
-export default function AllManufactureDetails() {
-  const [searchVal, setSearchVal] = useState(null);
 
-  const { filteredData, loading } = useTableSearch({
-    searchVal,
-    retrieve: fetchUsers,
-  });
 
   return (
     <>
-      {/* <Sidemenu /> */}
-<section className="all-manufacture-details-section">
+      
+<section id="body-pd">
+  <div className="container-fluid">
+    <DashboardHeaader/>
       <div className="row">
-      <div className="col-12">
-              <div className="d-flex justify-content-between align-items-center">
-              <h3 className="sub-category-head">All Manufacturer</h3>
-              <div className="subcategory-search-wrap">
-              <input type='text' placeholder='Search..' className='sub-category-search-input' onChange={e => setSearchVal(e.target.value)}/>
-              <button className="sub-category-btn" type="button"><BiSearchAlt/></button>
-              </div>
-              </div>
+      <div className="col-2 px-0">
+              <Sidemenu />
             </div>
-      </div>
-
-      <div className="row">
-        <div className="col-12">
+        <div className="col-10">
+        <div className="all-manufacture-details-section">
+              <h3 className="all-manufacturer-head">All Manufacturer <span className="count">{Manufacturer}</span></h3>
+              <div className="all-manufacturer-search-wrap">
+                <Link to="/Manufacturer" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
+              <input
+              type='text'
+                onChange={e => onChangeHandler(e)}
+                onKeyUp={searchHandler}
+                placeholder="Search.."
+                enterButton
+                style={{ position: "sticky", top: "0", left: "0" }}
+              />
+              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
+              </div>
+              </div>
+        
           <Table
             rowKey="name"
-            dataSource={filteredData}
+            dataSource={filteredData && filteredData.length ? filteredData : getuser}
             columns={columns}
             loading={loading}
             pagination={false}
           />
         </div>
+      </div>
       </div>
       </section>
     </>

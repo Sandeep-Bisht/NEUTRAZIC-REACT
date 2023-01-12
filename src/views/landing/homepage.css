@@ -2311,8 +2311,8 @@ textarea.form-control.is-invalid {
 }
 
 .btn:hover {
-	color: #fff;
-	text-decoration: none
+	color: #000;
+	text-decoration: none;
 }
 
 .btn.focus,
@@ -19671,7 +19671,9 @@ margin: 40px 8px 15px 0px;
 	padding-right: 60px !important;
 }
 
-
+.Toastify__progress-bar--error{
+	background-color: #1e144f !important;
+}
 /* HEart css */
 
 .active-color{

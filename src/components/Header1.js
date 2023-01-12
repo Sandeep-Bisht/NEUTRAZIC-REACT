@@ -51,7 +51,6 @@ const Header1 = (props) => {
   });
 
   useEffect(() => {
-    console.log(props, "lengthhhhhhhhhhhhhh212345");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     GetSubCategory();
@@ -87,6 +86,7 @@ const Header1 = (props) => {
       autoClose: 5000,
     });
     window.location.replace("/");
+    
   };
 
   const RegisterUser = (data) => {
@@ -118,12 +118,15 @@ const Header1 = (props) => {
         }),
       })
         .then((res) => res.json())
-        .then((data) => {
-          console.log(data,"After post Api");
-           window.location.reload();
+        .then(() => {
           
+          window.location.reload();
         });
+        
+    } else {
+      setRegMsg("Please Enter Right Data");
     }
+   
   };
   const LoginUser = (e) => {
     e.preventDefault();
@@ -146,18 +149,29 @@ const Header1 = (props) => {
             Userdata = res;
             localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
-
-            //history.push("/");
+            history.push("/");
             window.location.reload();
+            toast.success("Login successfull",{
+              position:toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 5000,
+            })
+            
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||
             res.role == "Manager"
           ) {
+            toast.success("Login successfull",{
+              position:toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 5000,
+            })
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
+            
             history.push("/Dashboard");
+             
             window.location.reload();
+           
           } else if (Userdata == undefined) {
             setMsg("User Name Or PassWord is not Valid");
           }
@@ -167,14 +181,12 @@ const Header1 = (props) => {
             await JSON.parse(localStorage.getItem("CartDataWoLogin")).map(
               async (item, index) => {
                 await cartfunction(item);
+                
               }
             );
           }
         });
-      toast.success("Login successfull", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-      });
+       
     } else {
       console.log("not getting role");
       setMsg("Please Enter a Valid Data");
@@ -363,13 +375,13 @@ const Header1 = (props) => {
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           >
-                            <img
+                            {/* <img
                               className="icons1"
                               src={
                                 //"http://144.91.110.221:3033/" + el.image[0].path
                                 "http://localhost:3033/" + el.image[0].path
                               }
-                            />
+                            /> */}
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -380,6 +392,13 @@ const Header1 = (props) => {
                             >
                               {el.name}
                             </button>
+                            <img
+                              className="icons1"
+                              src={
+                                //"http://144.91.110.221:3033/" + el.image[0].path
+                                "http://localhost:3033/" + el.image[0].path
+                              }
+                            />
                           </div>
                         </Link>
                       </h2>

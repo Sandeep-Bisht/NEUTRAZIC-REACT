@@ -4,6 +4,8 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import $ from "jquery";
 import { Link } from "react-router-dom";
+import DashboardHeaader from "./DashboardHeaader";
+
 var Userdata;
 const ManufacturerCreation = (props) => {
   var count = 0;
@@ -172,7 +174,7 @@ const ManufacturerCreation = (props) => {
   };
   return (
     <>
-      <div className="container-fluid">
+      {/* <div className="container-fluid">
         {" "}
         <Link href="#" className="nav__logo">
           <img
@@ -181,19 +183,20 @@ const ManufacturerCreation = (props) => {
             alt="image"
           />
         </Link>
-      </div>
-      <div id="body-pd">
-        <Sidemenu />
+      </div> */}
+      <section id="body-pd">
+      <div className="container-fluid">
+      <DashboardHeaader/>
+        <div className="row">
+      <div className="col-2 px-0">
+              <Sidemenu />
+            </div>
+            <div className="col-10">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
             <form>
-              <div className="container">
-                <div className="row">
-                  {/* <div className="col-1"></div> */}
-                  <div className="col-10">
                     <div className="card p-4 m-2 product-form">
                       <h5>Manufacturer Creation</h5>
-
                       <div className="row">
                         <div className="col-6">
                           <input
@@ -253,10 +256,6 @@ const ManufacturerCreation = (props) => {
                         ) : null}
                       </div>
                     </div>
-                  </div>
-                  <div className="col-1"></div>
-                </div>
-              </div>
             </form>
           ) : null
         ) : null}
@@ -268,47 +267,10 @@ const ManufacturerCreation = (props) => {
             </button>
           </div>
         ) : null}
-        <div className="container table-responsive">
-          {/* <table class="table table-hover table-striped text-center">
-  <thead>
-    <tr>
-      <th>Sr.No</th>
-      <th scope="col">Manufacturer Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  {manufactureres.map((el, ind) => {
-       count +=1;
-       localStorage.setItem("ManufacturerCount",count);
-    return(
-        
-    <tr>
-      
-        <td>{count}</td>
-      <td>{el.name}</td>
-     
-      <td><i className="bx bx-trash"></i><i className="bx bx-edit pl-4"></i></td>
-       
-    </tr>
-   
-    )
-    })}
-   
-  </tbody>
-</table> */}
-
-          {/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
         </div>
-      </div>
+        </div>
+        </div>
+      </section>
     </>
   );
 };

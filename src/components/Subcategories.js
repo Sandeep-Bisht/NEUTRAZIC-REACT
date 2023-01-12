@@ -12,6 +12,7 @@ import $ from "jquery";
 var Userdata = "";
 let tranding = 0;
 const Subcategories = (props) => {
+  console.log(props,"subbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccc");
   const [data, setData] = useState([]);
   const [heading, setHeading] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -368,7 +369,7 @@ const Subcategories = (props) => {
             <div className="row">
               {data.map((item, ind) => {
                 if (
-                  ind > 34 &&
+                  // ind > 34 &&
                   item.subcategory._id == props.match.params._id
                 ) {
                   return (

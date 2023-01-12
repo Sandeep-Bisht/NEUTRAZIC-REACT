@@ -249,7 +249,7 @@ const HomePage = () => {
       .then((res) => {
         console.log(res, "after update");
         //history.push("/Cart");
-        window.scroll(0, 0);
+        //window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
@@ -311,9 +311,8 @@ const HomePage = () => {
     description,
     category,
     manufacturer,
-    image,  
+    image
   ) => {
-    
     await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
       // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
       method: "post",
@@ -352,14 +351,10 @@ const HomePage = () => {
             )
               .then((res) => res.json())
               .then(async (data) => {
-                console.log(data , "hello", productid);
-                  let  colorAdded = document.getElementById(productid)
-                  console.log(colorAdded, "inside set wishlist color")
-                  colorAdded.classList.add("add-color");
+                
                 // setWishlist(data.data[0]);
                 //  await console.log(wishlist,"khlklklklk")
               })
-
               .catch((err) => {
                 console.log(err, "error e");
               });
@@ -391,6 +386,7 @@ const HomePage = () => {
                 .then((res) => res.json())
                 .then(async (data) => {
                   
+                  
                   // setWishlist(data.data[0]);
                   //  await console.log(wishlist,"khlklklklk")
                 })
@@ -400,14 +396,13 @@ const HomePage = () => {
                 
             }
           } else {
-          
-          toast.error("Already in wishlist !",{
-            position: toast.POSITION.BOTTOM_RIGHT, 
-            autoClose: 5000,         
-          });
+            toast.error("Allready in wishlist !", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 5000,
+            });
           }
         }
-      }); 
+      });
   };
   // const HeartColor = (el) => {
   //   $(document).ready(function() {
@@ -440,11 +435,6 @@ const HomePage = () => {
   const searchData = (e) => {
     // if (props.func) props.func(e);
   };
-
-  // const wishList = (el) => {
-  // let  colorAdded = document.getElementById(el._id)
-  // colorAdded.classList.add("add-color");
-  // }
 
   return (
     <>
@@ -1131,6 +1121,7 @@ const HomePage = () => {
         <Baseline />
       <Footer />
       </div>
+      
     </>
   );
 };

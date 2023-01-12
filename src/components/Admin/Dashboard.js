@@ -15,11 +15,10 @@ import AllManufactureDetails from "./AllManufacture/AllManufactureDetails";
 import AllSubCategoriesDetails from "./AllSubCategory/AllSubCategoriesDetails";
 import AllProductsDetails from "./AllProducts/AllProductsDetails";
 import AllCategoriesDetails from "./AllCategory/AllCategoriesDetails";
+import DashboardHeaader from "./DashboardHeaader";
 
 // var ManufacturerCount1='';
 // var productCount1=''
-
-var Userdata = " ";
 
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
@@ -121,10 +120,6 @@ const Dashboard = () => {
     // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
   };
 
-  useEffect(() => {
-    Userdata = JSON.parse(localStorage.getItem("Userdata"));
-  });
-
   const logout = () => {
     localStorage.setItem("Userdata", null);
     window.location.replace("/");
@@ -132,27 +127,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="nav__logo">
-        <div>
-          <a href="/" style={{ cursor: "pointer" }}>
-            <img
-              src={require("../../Images/new-logo.png")}
-              className="dashboard-logo"
-              alt="image"
-            />
-          </a>
-        </div>
-        <div className="d-flex align-items-center">
-          <img
-            src={UserImg}
-            alt="user_image"
-            className="img-fluid dashboard-user"
-          />
-          <p className="dashboard-username">{Userdata && Userdata.username}</p>
-        </div>
-      </div>
-      <section id="body-pd">
+    <section id="body-pd">
         <div className="container-fluid">
+          <DashboardHeaader/>
+      
+      
           <div className="row">
             <div className="col-2 px-0">
               <Sidemenu />
@@ -276,10 +255,6 @@ const Dashboard = () => {
                   </div>
                 </div>
               </main>
-              <AllManufactureDetails/>
-              <AllSubCategoriesDetails/>
-        <AllProductsDetails/>
-        <AllCategoriesDetails/>
             </div>
           </div>
         </div>

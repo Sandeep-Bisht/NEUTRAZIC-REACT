@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import DashboardHeaader from "./DashboardHeaader";
 // import DataTable from '@bit/adeoy.utils.data-table';
 
 // import { useStateValue } from '../state';
@@ -168,33 +169,21 @@ const Roles = (props) => {
 
   return (
     <>
+    <section id="body-pd">
       <div className="container-fluid">
-        {" "}
-        <Link href="#" className="nav__logo">
-          <img
-            src={require("../../Images/new-logo.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </Link>
-      </div>
-
-      <div className="container-fluid top-nav" id="body-pd">
+        <DashboardHeaader/>
+      
+<div className="row">
+  <div className="col-2 px-0">
         <Sidemenu />
+        </div>
+        <div className="col-10">
         {/* login Register Modal  */}
-
-        <div className="form-row de-flex items-align-center justify-content-center mt-5">
-          <div className="container justify-content-center align-items-center d-flex">
-            <div className="col-1"></div>
+        <div className="form-row de-flex items-align-center justify-content-center">
+          <div className="container justify-content-center align-items-center d-flex pt-4 m-auto">
             <div
-              className="col-10 d-flex"
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
-                borderRadius: "5px",
-              }}
-            >
-              <div className="form-group col-lg-6">
+              className="col-10 mx-auto dashboardroles-register-form-wrap">
+              <div className="form-group col-6">
                 {/* <h1>Sale</h1> */}
                 <img src={require("../../Images/woman-laptop.jpg")} />
               </div>
@@ -246,7 +235,7 @@ const Roles = (props) => {
                   <div className="form-group col-lg-12">
                     {/* <label>User Roles<span>*</span></label> */}
                     <select
-                      className="form-control"
+                      className="form-control custom-select"
                       onChange={(e) => {
                         setRole(e.target.value);
                       }}
@@ -276,12 +265,12 @@ const Roles = (props) => {
                 <div className="form-group col-lg-12">
                   {/* <label>Vendor Organization<span>*</span></label> */}
                   <select
-                    className="form-control"
+                    className="form-control custom-select"
                     onChange={(e) => {
                       setOrganization(e.target.value);
                     }}
                   >
-                    <option>Select Vendor Organization Form Here</option>
+                    <option selected>Select Vendor Organization Form Here</option>
                     {manufactureres.map((el, ind) => (
                       <option value={el.name}>{el.name}</option>
                     ))}
@@ -299,26 +288,13 @@ const Roles = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col-1"></div>
+           
           </div>
         </div>
-
-        {/* tabs start */}
-
-        {/* Ends Tabs */}
-
-        {/* End login register Modal  */}
-        <div className="container pt-5">
-          {/* <DataTable
-        data={data1}
-        columns={columns}
-        striped={true}
-        hover={true}
-        responsive={true}
-        // onClickRow={click}
-      /> */}
         </div>
       </div>
+      </div>
+      </section>
     </>
   );
 };
