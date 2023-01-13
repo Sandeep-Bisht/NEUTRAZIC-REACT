@@ -545,7 +545,7 @@ const HomePage = () => {
                   tranding = tranding + 1;
                   return (
                     <>
-                      <div className="col-lg-2 col-md-12 col-sm-12 ">
+                      <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
@@ -771,10 +771,10 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto py-4">
             <div className="row ">
-              {data.map((el, ind) => {
-                if (ind > 0) {
+              {data.map((el, index) => {
+                if (index > 0) {
                   return (
-                    <div className="col-lg-2 col-md-12 col-sm-12 ">
+                    <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
@@ -921,16 +921,16 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row">
-              {data.map((el, ind) => {
+              {data.map((el, i) => {
                 // if (
                 //   (ind > 0  && el.name == "Obloss") ||
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                if (ind > 0 && el.category.name == "Skin Care") {
+                if (i > 0 && el.category.name == "Skin Care") {
                   skincare = skincare + 1;
                   return (
-                    <div className="col-lg-2 col-md-12 col-sm-12 ">
+                    <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
@@ -1080,8 +1080,8 @@ const HomePage = () => {
             <div className="row align-items-center">
               {Manufactureres &&
                 Manufactureres.length > 0 &&
-                Manufactureres.map((el, ind) => (
-                  <div className="col-lg-2 col-sm-4 col-md-2 col-6">
+                Manufactureres.map((el, index) => (
+                  <div className="col-lg-2 col-sm-4 col-md-2 col-6" key={index}>
                     <Link to={"/ProductByManufacturer/" + el.name}>
                       <div className="single-brands-item">
                         <a className="d-block" href="#">
