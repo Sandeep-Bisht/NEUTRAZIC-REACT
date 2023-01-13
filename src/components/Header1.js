@@ -7,7 +7,7 @@ import "../views/landing/homepage.css";
 import "../components/Header1.css";
 import "../components/Carouselcomp";
 import $ from "jquery";
-import CategoryCreation from "./Admin/CategoryCreation";
+import b from "./Admin/CategoryCreation";
 import Carouselcomp from "../components/Carouselcomp";
 import Cart from "./Cart";
 import { ToastContainer, toast } from "react-toastify";
@@ -183,7 +183,7 @@ const Header1 = (props) => {
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
             await JSON.parse(localStorage.getItem("CartDataWoLogin")).map(
-              async (item, index) => {
+              async (item) => {
                 await cartfunction(item);
               }
             );
@@ -368,7 +368,7 @@ const Header1 = (props) => {
                 {subcategories &&
                   subcategories.length > 0 &&
                   subcategories.map((el, ind) => (
-                    <div className="accordion-item">
+                    <div className="accordion-item" key={ind}>
                       <h2 className="accordion-header" id="flush-headingOne">
                         <Link to={"/Subcategories/" + el._id}>
                           <div
@@ -604,12 +604,8 @@ const Header1 = (props) => {
             <div className="row login-div mt-4">
               <div className="col-sm-1">
                 <div className="option-item">
-                  <div className="cart-btn">
-                    
-                    
-                      
-
-                  { Userdata == null ?
+                  <div className="cart-btn">        
+                   { Userdata == null ?
                       (
                         <>
                         <span
@@ -637,8 +633,7 @@ const Header1 = (props) => {
                         <i className="user-icon bx bx-user"></i>
                         </>
                       )
-                      }
-                    
+                      }                
                     
                     
                   </div>
@@ -1082,7 +1077,7 @@ const Header1 = (props) => {
                 </a>
                 <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
                   {categories.map((el, ind) => (
-                    <li>
+                    <li key={ind}>
                       <Link
                         className="dropdown-item"
                         to={"/AllCategory/" + el._id}
@@ -1107,7 +1102,7 @@ const Header1 = (props) => {
                 </a>
                 <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
                   {subcategories.map((el, ind) => (
-                    <li>
+                    <li key={ind}>
                       {" "}
                       <Link
                         to={"/Subcategories/" + el._id}
