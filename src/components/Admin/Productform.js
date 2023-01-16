@@ -31,7 +31,7 @@ const Productform = (props) => {
     manufacturer: "",
     type: "",
     image: [],
-    //featuredImage : [],
+    featuredImage : [],
   });
 
 
@@ -50,8 +50,9 @@ const Productform = (props) => {
     await formData.append("manufacturer", data.manufacturer);
     await formData.append("type", data.type);
     await formData.append("image", data.image);
-    //await formData.append("featuredImage", data.featuredImage)    
+    await formData.append("featuredImage", data.featuredImage)    
     const url = `${baseUrl}/api/product/add_product`;
+    console.log("before dispatc", data , "dasta", formData)
     await fetch(url, {
       mode: 'no-cors',
       method: "POST",
@@ -264,7 +265,7 @@ const Productform = (props) => {
       _id: item._id,
       name: item.name,
       image: item.image,
-      // featuredImage: item.featuredImage,
+      featuredImage: item.featuredImage,
       storage: item.storage,
       category: item.category,
       inrMrp: item.inrMrp,
@@ -351,17 +352,17 @@ const Productform = (props) => {
                           />
                         </div>
 
-                        {/* <div className="col-6 p-1">
+                        <div className="col-6 p-1">
                           <input
                             type="file"
                             className="form-control Dashborad-search"
                             multiple
                             // value={data.image}
                             onChange={(e) => {
-                              Setdata({ ...data, featuredImage: e.target.files });
+                              Setdata({ ...data, featuredImage: e.target.files[0] });
                             }}
                           />
-                        </div> */}
+                        </div>
 
                         <div className="col-6 p-1">
                           <select
