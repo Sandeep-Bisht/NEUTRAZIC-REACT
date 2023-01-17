@@ -265,7 +265,7 @@ const Sidemenu = () => {
           <RxDashboard className="nav__icon" />
           <span className="nav__name">Dashboard</span>
         </Link>
-        <Link to="#" className="nav__link active">
+        <div className="nav__link active">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingThree">
               <div className="d-flex align-items-center justify-content-center div1">
@@ -314,10 +314,10 @@ const Sidemenu = () => {
               </div>
             </div>
           </div>
-        </Link>
+        </div>
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Manager" ? (
-            <Link to="#" className="nav__link">
+            <div className="nav__link">
               <span className="nav__name">
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">
@@ -376,7 +376,7 @@ const Sidemenu = () => {
                   </div>
                 </div>
               </span>
-            </Link>
+            </div>
           ) : null
         ) : null}
         <Link to="/AllManufactureDetails" className="nav__link">

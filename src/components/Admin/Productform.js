@@ -31,7 +31,7 @@ const Productform = (props) => {
     manufacturer: "",
     type: "",
     image: [],
-    //featuredImage : [],
+    // featuredImage : [],
   });
 
 
@@ -50,8 +50,9 @@ const Productform = (props) => {
     await formData.append("manufacturer", data.manufacturer);
     await formData.append("type", data.type);
     await formData.append("image", data.image);
-    //await formData.append("featuredImage", data.featuredImage)    
+    // await formData.append("featuredImage", data.featuredImage)    
     const url = `${baseUrl}/api/product/add_product`;
+    console.log("dasta", formData, "data.image", data.image)
     await fetch(url, {
       mode: 'no-cors',
       method: "POST",
@@ -298,7 +299,6 @@ const Productform = (props) => {
       });
   };
 
-  console.log("inside ")
 
   const showAllProductHandler = () => {
     setShowTable(true);
@@ -318,7 +318,7 @@ const Productform = (props) => {
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form
-              enctype="multipart/form-data">
+              encType="multipart/form-data">
               <div className="container-fluid mb-5">
                 <div className="row">
                   {/* <div className="col-1"></div> */}
@@ -341,12 +341,13 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <input
                             type="file"
-                            name="image[]"                            
+                            name="image[]"    
+                            multiple                        
                             className="form-control Dashborad-search"
                             accept="image/png, .jpeg, .jpg"
                             //value={editableData  ? editableData.image[0].path : ""}
                             onChange={(e) => {
-                              Setdata({ ...data, image: e.target.files[0] });
+                              Setdata({ ...data, image: e.target.files });
                             }}
                           />
                         </div>
@@ -358,7 +359,7 @@ const Productform = (props) => {
                             multiple
                             // value={data.image}
                             onChange={(e) => {
-                              Setdata({ ...data, featuredImage: e.target.files });
+                              Setdata({ ...data, featuredImage: e.target.files[0] });
                             }}
                           />
                         </div> */}
