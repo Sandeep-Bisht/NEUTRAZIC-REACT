@@ -499,49 +499,35 @@ const SingleProduct = (props) => {
       </div>
       <div className="container-fluid product-div mt-5">
         <div className="row ">
-          {/* <div className="col-sm-1"></div> */ console.log("single product page hun", data.image && data.image[0].path) }         
 
           <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image ? (
+              {data.image && data.image.length > 0 ? 
+              (
                 <img src={
                   `${baseUrl}/` + data.image[0].path
                 } />
               ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
             </div>
             {/* <ReactImageZoom {...ImageData} /> */}
-
             <div className="row image-group pt-2">
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
+            {data.image && data.image.length > 0 ?            
+            data.image.map((item,ind)=>(
+              <div className="col-3" key={ind}>              
+                <img
+                  src={`${baseUrl}/` + item.path}
+                />
+              
             </div>
+            
+              )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
+            }
+            </div>
+            
+              
+          
+            
 
             {/* phone single page caresouel */}
             <div
@@ -646,7 +632,7 @@ const SingleProduct = (props) => {
                   <li>Restructures and shrinks pores</li>
                   <li>Non-Drying, Alcohol-Free Formula</li>
                   <li>Chlorophyll in Matcha protects against sun damage.</li>
-                  <li>Stabilized Vitamin C provides compact & firmer skin.</li>
+                  <li>{data.description}</li>
                 </ul>
               </div>
             </div>
@@ -991,12 +977,12 @@ const SingleProduct = (props) => {
                            }
                            alt="" 
                             /> */}
-                            <img
+                            {/* <img
                               src={
                                 `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
-                            />
+                            /> */}
                           </div>
                         </Link>
                       </div>
@@ -1296,7 +1282,7 @@ const SingleProduct = (props) => {
       {/* End Review section for mobile */}
       <Baseline />
       <Footer />
-    </>
+      </>
   );
 };
 export default SingleProduct;
