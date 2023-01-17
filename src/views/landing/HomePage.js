@@ -58,7 +58,7 @@ const HomePage = () => {
   // },[])
 
   useEffect(() => {
-    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    Userdata = localStorage.getItem("Userdata");
     GetData();
     CartById();
     GetWishlist();    
@@ -111,7 +111,7 @@ const HomePage = () => {
 };
 
   const GetData = async () => {
-    Userdata = await JSON.parse(localStorage.getItem("Userdata"));
+    Userdata = await (localStorage.getItem("Userdata"));
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -477,7 +477,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Header1 />
+      <Header1/>
       {/* <Carouselcomp /> */}
       <div id="">
         {/* trending section  */}
