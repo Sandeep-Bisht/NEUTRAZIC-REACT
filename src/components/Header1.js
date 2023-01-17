@@ -682,7 +682,7 @@ const Header1 = (props) => {
                         className="dropdown-menu Logout-ul"
                         aria-labelledby="dropdownMenuButton1"
                       >
-                        <Link to="/Ordered">
+                        <div>
                           <div className="Logout-div d-flex align-items-center">
                             <i className="bx bx-file pl-2"></i>{" "}
                             <li
@@ -694,7 +694,7 @@ const Header1 = (props) => {
                               </Link>
                             </li>
                           </div>
-                        </Link>
+                        </div>
                         <Link to="/Cart">
                           <div className="Logout-div d-flex align-items-center">
                             <i className="bx bx-cart pl-2"></i>{" "}
