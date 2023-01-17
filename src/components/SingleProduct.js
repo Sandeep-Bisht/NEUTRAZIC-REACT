@@ -38,6 +38,7 @@ const SingleProduct = (props) => {
     Getsingledata();
     CartById();
     ProductByCategory();
+    
 
     $(document).ready(function() {
       $("#comments-button-div").css("visibility", "hidden");
@@ -323,7 +324,7 @@ const SingleProduct = (props) => {
       }
         toast.success("Add to cart",{
         position:"bottom-right",
-        autoClose:5000,
+        autoClose:500,
       });
     }
     window.scroll(0,0);
@@ -635,7 +636,7 @@ const SingleProduct = (props) => {
 
               <div className="price pt-2">
                 <span className="price-detail">
-                  ₹899 <del>1000</del> <span>10% OFF</span>
+                ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
                 </span>
               </div>
 
