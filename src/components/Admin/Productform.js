@@ -49,7 +49,9 @@ const Productform = (props) => {
     await formData.append("dollerDiscount", data.dollerDiscount);
     await formData.append("manufacturer", data.manufacturer);
     await formData.append("type", data.type);
-    await formData.append("image", data.image);
+    for(let item of data.image){
+      await formData.append("image", item);
+    }    
     // await formData.append("featuredImage", data.featuredImage)    
     const url = `${baseUrl}/api/product/add_product`;
     console.log("dasta", formData, "data.image", data.image)
