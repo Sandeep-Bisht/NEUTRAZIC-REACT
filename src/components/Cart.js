@@ -22,6 +22,7 @@ const Cart = () => {
   
   var total = 0;
   var actualtotal = 0;
+  var total1 = 0;
 
   let dispatch = useDispatch()
 
@@ -161,7 +162,8 @@ const Cart = () => {
                            // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
-                            total = total + (el.singleprice * el.quantity);
+                            total = el.singleprice * el.quantity;
+                            total1 = total1 + (el.singleprice * el.quantity);
                             localStorage.setItem("Subtotal", total);
                             actualtotal += el.mrp * el.quantity;
                             localStorage.setItem("ActualSubtotal", actualtotal);
@@ -293,12 +295,12 @@ const Cart = () => {
                     <h3>Cart Totals</h3>
                     <ul>
                       <li>
-                        Subtotal <span>{total}</span>
+                        Subtotal <span>{actualtotal}</span>
                       </li>
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total <span>{total}</span>
+                        Total <span>{total1}</span>
                       </li>
                     </ul>
                     <Link
@@ -404,12 +406,12 @@ const Cart = () => {
           <table>
             <tr>
               <td className="footheading">Subtotal</td>
-              <td>₹{total}</td>
+              <td>₹{actualtotal}</td>
             </tr>
 
             <tr>
               <td className="footheading">Total</td>
-              <td>₹{total}</td>
+              <td>₹{actualtotal}</td>
             </tr>
             <tr className="text-center">
               <td colSpan="2">
