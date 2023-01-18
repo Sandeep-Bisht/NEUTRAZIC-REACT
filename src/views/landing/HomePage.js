@@ -58,7 +58,8 @@ const HomePage = () => {
   // },[])
 
   useEffect(() => {
-    Userdata = localStorage.getItem("Userdata");
+    // Userdata = localStorage.getItem("Userdata");
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetData();
     CartById();
     GetWishlist();    
@@ -111,7 +112,8 @@ const HomePage = () => {
 };
 
   const GetData = async () => {
-    Userdata = await (localStorage.getItem("Userdata"));
+    // Userdata = await (localStorage.getItem("Userdata"));
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -340,6 +342,7 @@ const HomePage = () => {
     manufacturer,
     image
   ) => { 
+    console.log("button clicked", productid)
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -377,7 +380,7 @@ const HomePage = () => {
               .then((res) => res.json())
               .then(async (data) => {
                 //add product to wishlist response is comming here
-               
+               console.log("inside wishlist response")
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");

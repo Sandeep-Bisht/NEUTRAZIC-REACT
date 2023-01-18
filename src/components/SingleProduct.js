@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import defaultImage from "../Images/products/Hintosulin (1).png"
+
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -971,18 +973,16 @@ const SingleProduct = (props) => {
                           className="product-image-link"
                         >
                           <div className="image hover-switch">
-                            {/* <img
-                           src={
-                           require('../../Images/products/Hintosulin (1).png')
-                           }
+                            <img
+                           src={defaultImage}
                            alt="" 
-                            /> */}
-                            {/* <img
-                              src={
+                            />
+                            <img
+                              src={ 
                                 `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
-                            /> */}
+                            />
                           </div>
                         </Link>
                       </div>
