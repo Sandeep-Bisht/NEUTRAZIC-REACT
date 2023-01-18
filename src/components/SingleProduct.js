@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import defaultImage from "../Images/products/Hintosulin (1).png"
+
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -26,7 +28,7 @@ const SingleProduct = (props) => {
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
   const [wishlist, setWishlist] = useState();
-  
+  const [MainImage,SetMainImage] = useState();
   const history = useHistory();
   let Wishlist = [];
   //let ImageData ;
@@ -38,6 +40,7 @@ const SingleProduct = (props) => {
     Getsingledata();
     CartById();
     ProductByCategory();
+    
 
     $(document).ready(function() {
       $("#comments-button-div").css("visibility", "hidden");
@@ -168,6 +171,7 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data[0]);
+        SetMainImage(data.data[0].image[0].path)
 
         //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         // console.log("image path " , data.data[0].image)
@@ -232,6 +236,17 @@ const SingleProduct = (props) => {
     //   history.push('/Register')
     // }
   };
+ 
+  // ImageHandler
+
+  const ImageHandler = (m,i)=>{
+    console.log(m,i,"This is image slider");
+    let Imagestore = m.path;
+    console.log(Imagestore,"Hello Image");
+    SetMainImage(Imagestore);
+  }
+
+
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
@@ -323,7 +338,7 @@ const SingleProduct = (props) => {
       }
         toast.success("Add to cart",{
         position:"bottom-right",
-        autoClose:5000,
+        autoClose:1000,
       });
     }
     window.scroll(0,0);
@@ -498,49 +513,37 @@ const SingleProduct = (props) => {
       </div>
       <div className="container-fluid product-div mt-5">
         <div className="row ">
-          {/* <div className="col-sm-1"></div> */ console.log("single product page hun", data.image && data.image[0].path) }         
 
           <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image ? (
+              {data.image && data.image.length > 0 ? 
+              (
                 <img src={
-                  `${baseUrl}/` + data.image[0].path
+                  `${baseUrl}/` + MainImage
                 } />
               ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
             </div>
             {/* <ReactImageZoom {...ImageData} /> */}
-
             <div className="row image-group pt-2">
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
+            {data.otherImage && data.otherImage.length > 0 ?            
+            data.otherImage.map((item,ind)=>(
+              <div className="col-3 " key={ind}>              
+                <img
+                className="img-slide"
+                  src={`${baseUrl}/` + item.path}
+                  onClick = {()=> ImageHandler(item,ind)}
+                />
+              
             </div>
+            
+              )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
+            }
+            </div>
+            
+              
+          
+            
 
             {/* phone single page caresouel */}
             <div
@@ -645,7 +648,7 @@ const SingleProduct = (props) => {
                   <li>Restructures and shrinks pores</li>
                   <li>Non-Drying, Alcohol-Free Formula</li>
                   <li>Chlorophyll in Matcha protects against sun damage.</li>
-                  <li>Stabilized Vitamin C provides compact & firmer skin.</li>
+                  <li>{data.description}</li>
                 </ul>
               </div>
             </div>
@@ -971,6 +974,7 @@ const SingleProduct = (props) => {
       <div className="container-fluid p-4 products">
         <div className="row products-row  ">
           {AllProduct.map((item, index) => {
+            console.log(item.inrDiscount,"This is inr discount");
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
               return (
@@ -985,13 +989,11 @@ const SingleProduct = (props) => {
                         >
                           <div className="image hover-switch">
                             {/* <img
-                           src={
-                           require('../../Images/products/Hintosulin (1).png')
-                           }
+                           src={defaultImage}
                            alt="" 
                             /> */}
                             <img
-                              src={
+                              src={ 
                                 `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
@@ -1021,7 +1023,7 @@ const SingleProduct = (props) => {
                           </div>
                           <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                             <div className="discount-price-div">
-                              <span>{item.inrDiscount}%</span>
+                              <span>{item.inrDiscount}</span>
                             </div>
                             <div className="discount-price-div2">
                               <span>off</span>
@@ -1296,7 +1298,7 @@ const SingleProduct = (props) => {
       {/* End Review section for mobile */}
       <Baseline />
       <Footer />
-    </>
+      </>
   );
 };
 export default SingleProduct;

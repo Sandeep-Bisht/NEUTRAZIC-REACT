@@ -3,15 +3,15 @@ import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import Header1 from './Header1';
 import { baseUrl } from '../utils/services';
-var Userdata=''
-var Subtotal1=''
+var Userdata='';
+var Subtotal1='';
 const Checkout=()=>{
 
     const [cart, setCart] = useState([]);
     const [_id,Set_id]=useState();
     useEffect(() => {
         Userdata =  JSON.parse(localStorage.getItem("Userdata"))
-        Subtotal1 =  localStorage.getItem("Subtotal")
+        Subtotal1 =  localStorage.getItem("Subtotal");
         CartById()
         },[]);
 

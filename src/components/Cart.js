@@ -23,6 +23,7 @@ const Cart = () => {
   
   var total = 0;
   var actualtotal = 0;
+  var total1 = 0;
 
   let dispatch = useDispatch()
 
@@ -117,7 +118,7 @@ const Cart = () => {
     await CartById();
     toast.success("Item deleted successfull",{
       position:"bottom-right",
-      autoClose:5000,
+      autoClose:1000,
     })
   };
 
@@ -160,11 +161,12 @@ const Cart = () => {
                            // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
-                            total = total + (el.singleprice * el.quantity);
-                            localStorage.setItem("Subtotal", total);
+                            total = el.singleprice * el.quantity;
+                            total1 = total1 + (el.singleprice * el.quantity);
+                            localStorage.setItem("Subtotal", total1); 
                             actualtotal += el.mrp * el.quantity;
-                            localStorage.setItem("ActualSubtotal", actualtotal);
-                            console.log(actualtotal,"actualtotal",total,"total");
+                            localStorage.setItem("ActualSubtotal", total1);
+
                             return (
                               //  <Link to={"/SingleProduct/" + el.productid} >
                               <tr key={ind1} className="cart-data mt-2">
@@ -307,7 +309,7 @@ const Cart = () => {
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total <span>{total}</span>
+                        Total <span>{total1}</span>
                       </li>
                     </ul>
                     <Link
@@ -413,12 +415,12 @@ const Cart = () => {
           <table>
             <tr>
               <td className="footheading">Subtotal</td>
-              <td>₹{total}</td>
+              <td>₹{actualtotal}</td>
             </tr>
 
             <tr>
               <td className="footheading">Total</td>
-              <td>₹{total}</td>
+              <td>₹{actualtotal}</td>
             </tr>
             <tr className="text-center">
               <td colSpan="2">
