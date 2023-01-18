@@ -118,7 +118,7 @@ const Cart = () => {
     await CartById();
     toast.success("Item deleted successfull",{
       position:"bottom-right",
-      autoClose:5000,
+      autoClose:1000,
     })
   };
 
@@ -164,9 +164,9 @@ const Cart = () => {
                             // el.quantity;
                             total = el.singleprice * el.quantity;
                             total1 = total1 + (el.singleprice * el.quantity);
-                            localStorage.setItem("Subtotal", total);
+                            localStorage.setItem("Subtotal", total1); 
                             actualtotal += el.mrp * el.quantity;
-                            localStorage.setItem("ActualSubtotal", actualtotal);
+                            localStorage.setItem("ActualSubtotal", total1);
 
                             return (
                               //  <Link to={"/SingleProduct/" + el.productid} >

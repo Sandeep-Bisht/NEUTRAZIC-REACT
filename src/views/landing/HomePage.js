@@ -250,7 +250,7 @@ const HomePage = () => {
       }
       toast.success("Add to cart", {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 1000,
       });
     }
   };
@@ -431,7 +431,7 @@ const HomePage = () => {
           } else {
             toast.error("Allready in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 5000,
+              autoClose: 1000,
             });
           }
         }
@@ -546,6 +546,7 @@ const HomePage = () => {
                   el.type == "Trending Product"
                 ) {
                   tranding = tranding + 1;
+                  console.log(el, "inside tranding")
                   return (
                     <>
                       <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
@@ -561,8 +562,8 @@ const HomePage = () => {
                                   >
                                     <div className="image hover-switch">
                                       <img
-                                      src={
-                                        el.image.length > 1 ? `${baseUrl}/` + el.image[1].path :
+                                      src={ el.otherImage && 
+                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path :
                                         require("../../Images/products/Hintosulin (1).png")
                                       }
                                         // src={require("../../Images/products/Hintosulin (1).png")}
@@ -574,7 +575,7 @@ const HomePage = () => {
                                           el.image[0].path
                                         }
                                         alt=""
-                                        style={{ position: "absolute" }}
+                                        style={{ position: "absolute", left:"0" }}
                                       />
                                     </div>
                                   </Link>
