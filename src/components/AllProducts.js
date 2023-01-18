@@ -35,7 +35,6 @@ const AllProducts = (props) => {
     GetManufacturer();
     // GetCategory();
   }, []);
-  console.log(AllProduct,"all productssssssssssssssss");
   const setPreviousValue = () => {
     if (prev >= 7) {
       SetNext(next - 8);
@@ -53,13 +52,14 @@ const AllProducts = (props) => {
     name,
     quantity,
     mrp,
+    singleprice,
     discount,
     description,
     category,
     manufacturer,
     image
   ) => {
-    if (quantity !== 0) {
+    if (quantity > 0) {
       var merged = false;
       var newItemObj = {
         productid: productid,
@@ -67,17 +67,21 @@ const AllProducts = (props) => {
         image: image,
         quantity: quantity,
         mrp: parseInt(mrp),
-        singleprice: parseInt(mrp),
+        singleprice: parseInt(singleprice),
         discountprice: discount,
         description: description,
         category: category,
         manufacturer: manufacturer,
+        description: description,
+        status: "Pending",
+        justification: "Enjoy",
+        delivery_time: "No Status",
       };
       if (userCart.order == null || userCart.order == []) {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            order[i].mrp += newItemObj.mrp;
+            // order[i].mrp += newItemObj.mrp;
             // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
@@ -88,15 +92,13 @@ const AllProducts = (props) => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
+          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
           if (userCart.order[i].productid == newItemObj.productid) {
             userCart.order[i].quantity += newItemObj.quantity;
-            userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-          } else {
-            merged = false;
           }
           setQuantity(1);
         }
@@ -104,13 +106,15 @@ const AllProducts = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        CartById();
-        UpdateCart();
-
+        // CartById();
+        await UpdateCart();
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      
+      // toast.success("Add to cart", {
+      //   position: "bottom-right",
+      //   autoClose: 5000,
+      // });
     }
   };
   const UpdateCart = () => {
@@ -676,17 +680,19 @@ const AllProducts = (props) => {
                   <button
                     className="button btn"
                     onClick={() => {
-                      cartfunction(
+                      cartfunction
+                      (
                         el._id,
                         el.name,
                         quantity,
                         el.inrMrp,
                         el.inrDiscount,
+                        el.discount,
                         el.description,
                         el.category,
                         el.manufacturer.name,
                         el.image[0].path
-                      );
+                      )
                     }}
                     data-bs-toggle={Userdata == null ? "modal" : null}
                     data-bs-target={Userdata == null ? "#exampleModal" : null}

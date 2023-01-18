@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import * as ACTIONS from '../CommonService/AddToCart/action'
 
 import { baseUrl } from "../utils/services";
+import AllProducts from "./AllProducts";
 var Userdata = "";
 
 const Cart = () => {
@@ -28,7 +29,6 @@ const Cart = () => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    CartById();
     CartById();
     window.scroll(0,0);
   }, []);
@@ -152,13 +152,12 @@ const Cart = () => {
                             <th scope="col"></th>
                             <th scope="col">PRICE</th>
                             <th scope="col">QUANTITY</th>
-                            <th scope="col">TOTAL</th>
                             <th scope="col">ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
                           {cart.map((el, ind1) => {
-                            console.log("cartttttttt", cart)
+                            console.log(el,"all the el things");
                            // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
@@ -247,15 +246,22 @@ const Cart = () => {
                                     </div>
                                   </div>
                                 </td>
-                                <td className="product-subtotal">
+                                {/* <td className="product-subtotal">
                                   <div className="amount">
                                     <span className="subtotal-amount mt-4">
-                                      {/* {(el.mrp - el.discountprice) *
-                                        el.quantity} */}
-                                        {total}
+                                        {(el.mrp-el.singleprice)*el.quantity}
                                     </span>
                                   </div>
-                                </td>
+                                </td> */}
+                                {/* <td className="product-subtotal">
+                                  <div className="amount">
+                                    <span className="subtotal-amount mt-4">
+                                         {
+                                          total
+                                         }
+                                    </span>
+                                  </div>
+                                </td> */}
                                 <td>
                                   <button
                                     className="btn btn-danger btn-sm w-50"
@@ -294,8 +300,11 @@ const Cart = () => {
                   <div className="cart-totals">
                     <h3>Cart Totals</h3>
                     <ul>
-                      <li>
+                    <li>
                         Subtotal <span>{actualtotal}</span>
+                      </li>
+                      <li>
+                        Total Discount <span>{actualtotal-total}</span>
                       </li>
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
