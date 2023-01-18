@@ -791,7 +791,7 @@ const HomePage = () => {
                                 >
                                   <div className="image hover-switch">
                                     <img
-                                      src={require("../../Images/products/Hintosulin (1).png")}
+                                      src={el.image.length > 1 ? `${baseUrl}/` + el.image[1].path : require("../../Images/products/Hintosulin (1).png")}
                                       alt=""
                                     />
                                     <img
@@ -945,9 +945,10 @@ const HomePage = () => {
                                   to={"/SingleProduct/" + el._id}
                                   className="product-image-link"
                                 >
+                                  
                                   <div className="image hover-switch">
                                     <img
-                                      src={require("../../Images/products/Hintosulin (1).png")}
+                                      src={el.image.length > 1 ? `${baseUrl}/` + el.image[1].path : require("../../Images/products/Hintosulin (1).png")}
                                       alt=""
                                     />
                                     <img
