@@ -28,7 +28,7 @@ const SingleProduct = (props) => {
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
   const [wishlist, setWishlist] = useState();
-  
+  const [MainImage,SetMainImage] = useState();
   const history = useHistory();
   let Wishlist = [];
   //let ImageData ;
@@ -171,6 +171,7 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data[0]);
+        SetMainImage(data.data[0].image[0].path)
 
         //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         // console.log("image path " , data.data[0].image)
@@ -235,6 +236,17 @@ const SingleProduct = (props) => {
     //   history.push('/Register')
     // }
   };
+ 
+  // ImageHandler
+
+  const ImageHandler = (m,i)=>{
+    console.log(m,i,"This is image slider");
+    let Imagestore = m.path;
+    console.log(Imagestore,"Hello Image");
+    SetMainImage(Imagestore);
+  }
+
+
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
@@ -326,7 +338,7 @@ const SingleProduct = (props) => {
       }
         toast.success("Add to cart",{
         position:"bottom-right",
-        autoClose:500,
+        autoClose:1000,
       });
     }
     window.scroll(0,0);
@@ -508,17 +520,19 @@ const SingleProduct = (props) => {
               {data.image && data.image.length > 0 ? 
               (
                 <img src={
-                  `${baseUrl}/` + data.image[0].path
+                  `${baseUrl}/` + MainImage
                 } />
               ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
             </div>
             {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
-            {data.image && data.image.length > 0 ?            
-            data.image.map((item,ind)=>(
-              <div className="col-3" key={ind}>              
+            {data.otherImage && data.otherImage.length > 0 ?            
+            data.otherImage.map((item,ind)=>(
+              <div className="col-3 " key={ind}>              
                 <img
+                className="img-slide"
                   src={`${baseUrl}/` + item.path}
+                  onClick = {()=> ImageHandler(item,ind)}
                 />
               
             </div>
@@ -960,6 +974,7 @@ const SingleProduct = (props) => {
       <div className="container-fluid p-4 products">
         <div className="row products-row  ">
           {AllProduct.map((item, index) => {
+            console.log(item.inrDiscount,"This is inr discount");
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
               return (
@@ -973,10 +988,10 @@ const SingleProduct = (props) => {
                           className="product-image-link"
                         >
                           <div className="image hover-switch">
-                            <img
+                            {/* <img
                            src={defaultImage}
                            alt="" 
-                            />
+                            /> */}
                             <img
                               src={ 
                                 `${baseUrl}/` + item.image[0].path
@@ -1008,7 +1023,7 @@ const SingleProduct = (props) => {
                           </div>
                           <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                             <div className="discount-price-div">
-                              <span>{item.inrDiscount}%</span>
+                              <span>{item.inrDiscount}</span>
                             </div>
                             <div className="discount-price-div2">
                               <span>off</span>

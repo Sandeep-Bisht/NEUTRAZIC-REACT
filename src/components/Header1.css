@@ -353,9 +353,28 @@ color:#1e144f;
 
 /* wishlist code */
 .wishlistDiv{
-    margin-top: 30px;
-    border: 0.8px solid #C7C7C7;
+    padding: 10px;
+    border: 1px solid #C7C7C7;
     border-radius: 5px;
+    position: relative;
+    margin: 10px 0;
+}
+.wishlist-close-icon
+{
+    position: absolute;
+    top: 7px;
+    right: 0;
+}
+.wishlist-close-icon svg
+{
+    color: #000;
+    height: 25px;
+    opacity: .7;
+}
+.wishlist-close-icon svg:hover
+{
+    color: #000;
+    opacity: .9;
 }
 .wishlistDiv .row .col-1{
     position:absolute;
@@ -377,9 +396,9 @@ color:#1e144f;
 }
 .wishlistDiv img
 {
-    height: 130px;
-    width: auto;
-    object-fit: contain;
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
 }
 /* End wishlist code */
 .accordion-item .accordion-header .d-flex  button

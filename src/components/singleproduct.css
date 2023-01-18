@@ -1519,3 +1519,9 @@ left: 0;
 	}
 }
 /* End Media Query Responsive for Desktop */
+
+/* ImageSlider for SingleProductImage */
+
+.img-slide{
+	cursor: pointer;
+}
