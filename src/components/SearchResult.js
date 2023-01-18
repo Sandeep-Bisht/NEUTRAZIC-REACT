@@ -690,16 +690,17 @@ const SearchResult = (props) => {
                               </div>
                               <div className="price-div justify-content-center align-items-center d-flex">
                                 <span className="new-price ml-3">
-                                  $
+                                  {/* $
                                   {isNaN(
                                     el.inrMrp -
                                       (el.inrMrp * el.inrDiscount) / 100
                                   )
                                     ? 0
                                     : el.inrMrp -
-                                      (el.inrMrp * el.inrDiscount) / 100}
+                                      (el.inrMrp * el.inrDiscount) / 100} */}
+                                      {el.inrDiscount}
                                 </span>
-                                <del className="new-price ml-1">1000</del>
+                                <del className="new-price ml-1">{el.inrMrp}</del>
                                 <i
                                   className="bx bxs-heart ml-3"
                                   onClick={() => {
