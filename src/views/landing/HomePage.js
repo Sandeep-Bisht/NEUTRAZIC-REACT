@@ -14,8 +14,9 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as ACTIONS from "../../CommonService/GetCartItem/action";
+import * as ACTIONS from '../../CommonService/AddToCart/action'
 import { useSelector, useDispatch } from "react-redux";
+import { baseUrl } from "../../utils/services";
 
 import $ from "jquery";
 
@@ -57,7 +58,7 @@ const HomePage = () => {
   // },[])
 
   useEffect(() => {
-    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    Userdata = localStorage.getItem("Userdata");
     GetData();
     CartById();
     GetWishlist();    
@@ -85,8 +86,7 @@ const HomePage = () => {
     if(Userdata){
      id=Userdata._id
     }
-  // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-     await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
     method: "post",
     headers: {
       Accept: "application/json",
@@ -111,9 +111,8 @@ const HomePage = () => {
 };
 
   const GetData = async () => {
-    Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    await fetch("http://localhost:3033/api/product/all_product")
-      //await fetch("http://144.91.110.221:3033/api/product/all_product")
+    Userdata = await (localStorage.getItem("Userdata"));
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data);
@@ -123,8 +122,7 @@ const HomePage = () => {
       });
   };
   const GetManufacturer = async () => {
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
-      //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -134,8 +132,7 @@ const HomePage = () => {
       });
   };
   const GetCategory = async () => {
-    await fetch("http://localhost:3033/api/category/all_category")
-      // await fetch("http://144.91.110.221:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -257,8 +254,7 @@ const HomePage = () => {
   };
 
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -282,8 +278,7 @@ const HomePage = () => {
   
   const CartById = async () => {
     if (!Userdata == []) {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
-        // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -298,7 +293,6 @@ const HomePage = () => {
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          console.log(cartItems, "before dispatch")
           dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
@@ -309,8 +303,7 @@ const HomePage = () => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -347,8 +340,7 @@ const HomePage = () => {
     manufacturer,
     image
   ) => { 
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
-      // await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -363,8 +355,7 @@ const HomePage = () => {
         if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
-              "http://localhost:3033/api/wishlist/add_to_wishlist",
-              // "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               {
                 method: "POST",
                 headers: {
@@ -401,8 +392,7 @@ const HomePage = () => {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
-                "http://localhost:3033/api/wishlist/add_to_wishlist",
-                // "http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
                 {
                   method: "POST",
                   headers: {
@@ -487,7 +477,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Header1 />
+      <Header1/>
       {/* <Carouselcomp /> */}
       <div id="">
         {/* trending section  */}
@@ -555,7 +545,7 @@ const HomePage = () => {
                   tranding = tranding + 1;
                   return (
                     <>
-                      <div className="col-lg-2 col-md-12 col-sm-12 ">
+                      <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
@@ -568,13 +558,16 @@ const HomePage = () => {
                                   >
                                     <div className="image hover-switch">
                                       <img
-                                        src={require("../../Images/products/Hintosulin (1).png")}
+                                      src={
+                                        el.image.length > 1 ? `${baseUrl}/` + el.image[1].path :
+                                        require("../../Images/products/Hintosulin (1).png")
+                                      }
+                                        // src={require("../../Images/products/Hintosulin (1).png")}
                                         alt=""
                                       />
                                       <img
                                         src={
-                                          //"http://144.91.110.221:3033/" +
-                                          "http://localhost:3033/" +
+                                          `${baseUrl}/` +
                                           el.image[0].path
                                         }
                                         alt=""
@@ -782,10 +775,10 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto py-4">
             <div className="row ">
-              {data.map((el, ind) => {
-                if (ind > 0) {
+              {data.map((el, index) => {
+                if (index > 0) {
                   return (
-                    <div className="col-lg-2 col-md-12 col-sm-12 ">
+                    <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
@@ -803,8 +796,7 @@ const HomePage = () => {
                                     />
                                     <img
                                       src={
-                                        //"http://144.91.110.221:3033/" +
-                                        "http://localhost:3033/" +
+                                        `${baseUrl}/` +
                                         el.image[0].path
                                       }
                                       alt=""
@@ -933,16 +925,16 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row">
-              {data.map((el, ind) => {
+              {data.map((el, i) => {
                 // if (
                 //   (ind > 0  && el.name == "Obloss") ||
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                if (ind > 0 && el.category.name == "Skin Care") {
+                if (i > 0 && el.category.name == "Skin Care") {
                   skincare = skincare + 1;
                   return (
-                    <div className="col-lg-2 col-md-12 col-sm-12 ">
+                    <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
@@ -960,8 +952,7 @@ const HomePage = () => {
                                     />
                                     <img
                                       src={
-                                        //"http://144.91.110.221:3033/" +
-                                        "http://localhost:3033/" +
+                                        `${baseUrl}/` +
                                         el.image[0].path
                                       }
                                       alt=""
@@ -1093,8 +1084,8 @@ const HomePage = () => {
             <div className="row align-items-center">
               {Manufactureres &&
                 Manufactureres.length > 0 &&
-                Manufactureres.map((el, ind) => (
-                  <div className="col-lg-2 col-sm-4 col-md-2 col-6">
+                Manufactureres.map((el, index) => (
+                  <div className="col-lg-2 col-sm-4 col-md-2 col-6" key={index}>
                     <Link to={"/ProductByManufacturer/" + el.name}>
                       <div className="single-brands-item">
                         <a className="d-block" href="#">
@@ -1102,8 +1093,8 @@ const HomePage = () => {
                           <img
                             src={
                               el.image && el.image.length > 0
-                                ? //"http://144.91.110.221:3033/" + el.image[0].path : ""
-                                  "http://localhost:3033/" + el.image[0].path
+                                ? 
+                                `${baseUrl}/` + el.image[0].path
                                 : ""
                             }
                           />

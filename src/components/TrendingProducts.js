@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
+import { baseUrl } from "../utils/services";
 // import "../../sass/whislist.css";
 // import Carouselcomp from "../../components/Carouselcomp";
 import Baseline from ".././components/Baseline";
@@ -26,7 +27,6 @@ const TrendingProducts = (props) => {
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
     GetData();
     CartById();
     GetCategory();
@@ -52,9 +52,7 @@ const TrendingProducts = (props) => {
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "product");
@@ -65,8 +63,7 @@ const TrendingProducts = (props) => {
       });
   };
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hello");
@@ -78,8 +75,7 @@ const TrendingProducts = (props) => {
       });
   };
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hrre");
@@ -155,8 +151,7 @@ const TrendingProducts = (props) => {
     }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id"
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -178,8 +173,7 @@ const TrendingProducts = (props) => {
   };
   const CartById = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -200,8 +194,7 @@ const TrendingProducts = (props) => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -236,8 +229,7 @@ const TrendingProducts = (props) => {
     manufacturer,
     image
   ) => {
-    //await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -251,8 +243,7 @@ const TrendingProducts = (props) => {
       .then(async (data) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
-            //await fetch("http://144.91.110.221:3033/api/wishlist/add_to_wishlist", {
-            await fetch("http://localhost:3033/api/wishlist/add_to_wishlist", {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -326,8 +317,7 @@ const TrendingProducts = (props) => {
                             /> */}
                                 <img
                                   src={
-                                    //"http://144.91.110.221:3033/" + el.image[0].path
-                                    "http://localhost:3033/" + el.image[0].path
+                                    `${baseUrl}/` + el.image[0].path
                                   }
                                   alt=""
                                   //  style={{position:"absolute"}}

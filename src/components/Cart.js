@@ -7,14 +7,24 @@ import Baseline from "./Baseline";
 import "../components/Header1.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import * as ACTIONS from '../CommonService/AddToCart/action'
+
+import { baseUrl } from "../utils/services";
 var Userdata = "";
+
 const Cart = () => {
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
+  const [cartItems,setCartItems] = useState();
+  
   var total = 0;
   var actualtotal = 0;
+  var total1 = 0;
+
+  let dispatch = useDispatch()
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -28,8 +38,7 @@ const Cart = () => {
 
   const CartById = async () => {
     if (Userdata) {
-     // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -44,6 +53,10 @@ const Cart = () => {
           console.log(data + "see");
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
           setCart(data.data[0].order);
+          setCartItems(data.data[0].order.length);
+          let cartItems = data.data[0].order.length;
+          console.log("cartitems on delete", cartItems)
+          dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })
         .catch((err) => {
@@ -53,8 +66,7 @@ const Cart = () => {
   };
 
   const UpdateCart = async (array) => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     console.log(cart, "erjhejgrekjbk");
     await fetch(url, {
       method: "put",
@@ -150,7 +162,8 @@ const Cart = () => {
                            // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
-                            total = total + (el.singleprice * el.quantity);
+                            total = el.singleprice * el.quantity;
+                            total1 = total1 + (el.singleprice * el.quantity);
                             localStorage.setItem("Subtotal", total);
                             actualtotal += el.mrp * el.quantity;
                             localStorage.setItem("ActualSubtotal", actualtotal);
@@ -162,8 +175,7 @@ const Cart = () => {
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     <img
                                       src={
-                                        //"http://144.91.110.221:3033/" + el.image
-                                        "http://localhost:3033/" + el.image
+                                        `${baseUrl}/`+ el.image
                                       }
                                       alt="item"
                                     />
@@ -283,12 +295,12 @@ const Cart = () => {
                     <h3>Cart Totals</h3>
                     <ul>
                       <li>
-                        Subtotal <span>{total}</span>
+                        Subtotal <span>{actualtotal}</span>
                       </li>
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total <span>{total}</span>
+                        Total <span>{total1}</span>
                       </li>
                     </ul>
                     <Link
@@ -323,8 +335,7 @@ const Cart = () => {
                   <div className="cart-info">
                     <Link to={"/SingleProduct/" + el.productid}>
                       <img
-                        //src={"http://144.91.110.221:3033/" + el.image}
-                        src={"http://localhost:3033/" + el.image}
+                        src={`${baseUrl}/` + el.image}
                         alt="item"
                       />
                     </Link>
@@ -395,12 +406,12 @@ const Cart = () => {
           <table>
             <tr>
               <td className="footheading">Subtotal</td>
-              <td>₹{total}</td>
+              <td>₹{actualtotal}</td>
             </tr>
 
             <tr>
               <td className="footheading">Total</td>
-              <td>₹{total}</td>
+              <td>₹{actualtotal}</td>
             </tr>
             <tr className="text-center">
               <td colSpan="2">

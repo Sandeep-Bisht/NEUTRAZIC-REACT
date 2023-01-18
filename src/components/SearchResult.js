@@ -9,6 +9,7 @@ import Header1 from ".././components/Header1";
 import { useHistory, useParams } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import $ from "jquery";
+import { baseUrl } from "../utils/services";
 var Userdata = "";
 let tranding = 0;
 const SearchResult = (props) => {
@@ -76,8 +77,7 @@ const SearchResult = (props) => {
   };
 
   const GetData = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "product");
@@ -91,8 +91,7 @@ const SearchResult = (props) => {
       });
   };
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hello");
@@ -106,8 +105,7 @@ const SearchResult = (props) => {
   };
 
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hrre");
@@ -118,8 +116,7 @@ const SearchResult = (props) => {
       });
   };
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setHeading(data.data);
@@ -194,8 +191,7 @@ const SearchResult = (props) => {
     }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id"
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -217,8 +213,7 @@ const SearchResult = (props) => {
   };
   const CartById = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -239,8 +234,7 @@ const SearchResult = (props) => {
   };
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -276,8 +270,7 @@ const SearchResult = (props) => {
     manufacturer,
     image
   ) => {
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
-      //await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -291,8 +284,7 @@ const SearchResult = (props) => {
       .then(async (data) => {
         if (!JSON.stringify(data.data).includes(productid)) {
           if (!Userdata == []) {
-            // await fetch("http://144.91.110.221:3033/api/wishlist/add_to_wishlist", {
-            await fetch("http://localhost:3033/api/wishlist/add_to_wishlist", {
+            await fetch(`${baseUrl}api/wishlist/add_to_wishlist`, {
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -662,8 +654,7 @@ const SearchResult = (props) => {
                                 />
                                 <img
                                   src={
-                                    // "http://144.91.110.221:3033/" +
-                                    "http://localhost:3033/" + el.image[0].path
+                                    `${baseUrl}/` + el.image[0].path
                                   }
                                   alt=""
                                   style={{ position: "absolute" }}

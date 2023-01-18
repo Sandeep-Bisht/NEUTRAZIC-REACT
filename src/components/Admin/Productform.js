@@ -4,6 +4,7 @@ import Sidemenu from "./Sidemenu";
 import $ from "jquery";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
+import { baseUrl } from "../../utils/services";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -30,10 +31,9 @@ const Productform = (props) => {
     manufacturer: "",
     type: "",
     image: [],
-    //featuredImage : [],
+    // featuredImage : [],
   });
 
-  console.log("on change data", data.image)
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -49,11 +49,12 @@ const Productform = (props) => {
     await formData.append("dollerDiscount", data.dollerDiscount);
     await formData.append("manufacturer", data.manufacturer);
     await formData.append("type", data.type);
-    await formData.append("image", data.image);
-    //await formData.append("featuredImage", data.featuredImage)    
-    //const url="http://144.91.110.221:3033/api/product/add_product"
-    console.log(data, "formData before sending")
-    const url = "http://localhost:3033/api/product/add_product";
+    for(let item of data.image){
+      await formData.append("image", item);
+    }    
+    // await formData.append("featuredImage", data.featuredImage)    
+    const url = `${baseUrl}/api/product/add_product`;
+    console.log("dasta", formData, "data.image", data.image)
     await fetch(url, {
       mode: 'no-cors',
       method: "POST",
@@ -82,8 +83,7 @@ const Productform = (props) => {
   }, []);
 
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("http://localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -94,8 +94,7 @@ const Productform = (props) => {
   };
 
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data);
@@ -106,8 +105,7 @@ const Productform = (props) => {
   };
 
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
@@ -119,8 +117,7 @@ const Productform = (props) => {
 
   // Api for Get Products uploded by Admin //
   const GetData = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         Setproducts(data.data);
@@ -131,8 +128,7 @@ const Productform = (props) => {
   };
   // End for products API //
   const DeleteProduct = async (_id) => {
-    //await fetch("http://144.91.110.221:3033/api/product/delete_product_by_id", {
-    await fetch("http://localhost:3033/api/product/delete_product_by_id", {
+    await fetch(`${baseUrl}/api/product/delete_product_by_id`, {
       method: "Delete",
       headers: {
         Accept: "application/json",
@@ -286,7 +282,7 @@ const Productform = (props) => {
 
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
-    await fetch("http://144.91.110.221:3033/api/product/update_product_by_id", {
+    await fetch(`${baseUrl}/api/product/update_product_by_id`, {
       method: "Put",
       headers: {
         Accept: "application/json",
@@ -305,7 +301,6 @@ const Productform = (props) => {
       });
   };
 
-  console.log("inside ")
 
   const showAllProductHandler = () => {
     setShowTable(true);
@@ -325,7 +320,7 @@ const Productform = (props) => {
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form
-              enctype="multipart/form-data">
+              encType="multipart/form-data">
               <div className="container-fluid mb-5">
                 <div className="row">
                   {/* <div className="col-1"></div> */}
@@ -348,12 +343,13 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <input
                             type="file"
-                            name="image[]"                            
+                            name="image[]"    
+                            multiple                        
                             className="form-control Dashborad-search"
                             accept="image/png, .jpeg, .jpg"
                             //value={editableData  ? editableData.image[0].path : ""}
                             onChange={(e) => {
-                              Setdata({ ...data, image: e.target.files[0] });
+                              Setdata({ ...data, image: e.target.files });
                             }}
                           />
                         </div>
@@ -365,7 +361,7 @@ const Productform = (props) => {
                             multiple
                             // value={data.image}
                             onChange={(e) => {
-                              Setdata({ ...data, featuredImage: e.target.files });
+                              Setdata({ ...data, featuredImage: e.target.files[0] });
                             }}
                           />
                         </div> */}

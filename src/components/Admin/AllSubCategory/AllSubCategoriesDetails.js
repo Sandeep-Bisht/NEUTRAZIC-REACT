@@ -11,6 +11,7 @@ import DashboardHeaader from "../DashboardHeaader";
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
+import { baseUrl } from "../../../utils/services";
 
 const { Search } = Input;
 
@@ -33,8 +34,7 @@ export default function AllSubCategoriesDetails() {
   
 
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data.length);
@@ -49,7 +49,7 @@ export default function AllSubCategoriesDetails() {
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(
-      "http://localhost:3033/api/subcategory/all_subcategory"
+      `${baseUrl}/api/subcategory/all_subcategory`
     );
     setGetuser(response.data.data);
     setLoading(false);
@@ -72,7 +72,7 @@ export default function AllSubCategoriesDetails() {
 
   const handleDelete=async (_id)=>{
     try{
-      const DeletedData=await axios.delete("http://localhost:3033/api/subcategory/delete_subcategory_by_id",{data: {_id:_id}});
+      const DeletedData=await axios.delete(`${baseUrl}/api/subcategory/delete_subcategory_by_id`,{data: {_id:_id}});
       fetchUsers();
     }catch(error){
 
@@ -105,7 +105,7 @@ export default function AllSubCategoriesDetails() {
       dataIndex: 'image[0].path',
       width: 80,
       maxWidth: 90,
-      render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />
+      render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />
     },
     {
       

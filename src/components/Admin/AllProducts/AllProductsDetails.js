@@ -10,6 +10,7 @@ import {Link} from "react-router-dom"
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
+import { baseUrl } from "../../../utils/services";
 
 
 
@@ -30,8 +31,7 @@ export default function AllProductsDetails() {
 
 
    const GetProducts = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "product");
@@ -44,14 +44,14 @@ export default function AllProductsDetails() {
 
   const fetchUsers = async () => {
     setLoading(true);
-    const response = await axios.get("http://localhost:3033/api/product/all_product");
+    const response = await axios.get(`${baseUrl}/api/product/all_product`);
     setGetuser(response.data.data);
     setLoading(false);
   };
   
   const handleDelete=async (_id)=>{
     try{
-      const DeletedData=await axios.delete("http://localhost:3033/api/product/delete_product_by_id",{data: {_id:_id}});
+      const DeletedData=await axios.delete(`${baseUrl}/api/product/delete_product_by_id`,{data: {_id:_id}});
       fetchUsers();
     }catch(error)
     {
@@ -96,7 +96,7 @@ export default function AllProductsDetails() {
       dataIndex: "image[0].path",
       width: 80,
       maxWidth: 90,
-      render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />,
+      render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />,
     },
     {
       title: "Action",

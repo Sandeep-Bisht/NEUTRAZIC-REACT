@@ -227,8 +227,8 @@ input[type=number] {
 	float:left;
 	width:220px;
 	height:68px;
-	background-color:;
-	border:1px solid #00B560;
+	background-color: #1e144f;
+	border:1px solid #1e144f;
 	border-radius: 7px;
 	margin-left:10px;
 }
@@ -257,7 +257,7 @@ input[type=number] {
 .content-div .add .wishlist
 {
 	display:block;
-	background-color:;
+	background-color: #1e144f;
 	float:left;
 	font-size:px;
 	
@@ -278,7 +278,7 @@ input[type=number] {
 .content-div .add .wishlist i
 {
 	font-size:16px;
-	background-color:;
+	background-color: #1e144f;
 	margin:3px; 
 	color:#3DBACB;
 	margin-top: 3px;
@@ -305,7 +305,7 @@ input[type=number] {
 {
 
 	height:55px;
-	background-color:#00D872;
+	background-color:#1e144f;
 	/* border: 1px solid #C4C4C4;; */
 	border-bottom:none;
 }
@@ -414,7 +414,7 @@ color: #FFFFFF;
 	outline:0;
 	font-family: 'Roboto', sans-serif;
 	font-size:25px;
-	color: #00B560;
+	color: #1b97ff;
 	font-style: normal;
 
 	font-weight: bold;
@@ -453,7 +453,7 @@ color: #FFFFFF;
 .relate-product .line .hr
 {
    
-	background-color:#00D872;
+	background-color:#1e144f;
 	height:3px;
 	opacity:1;
 }
@@ -464,7 +464,7 @@ color: #FFFFFF;
 }
 .relate-products .related span
 {
-	color:#00D872;
+	color:#1e144f;
 	font-family: 'Roboto', sans-serif;
 	font-size:70px;
 }
@@ -1178,7 +1178,7 @@ font-size: 15px;
   
   #fh6 {
    padding: 2px 15px;
-   color: #4d0er1;
+   color: #1e144f;
    text-align: center;
    font-weight: normal;
   }

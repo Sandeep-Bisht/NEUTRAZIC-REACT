@@ -7,7 +7,7 @@ import "../views/landing/homepage.css";
 import "../components/Header1.css";
 import "../components/Carouselcomp";
 import $ from "jquery";
-import CategoryCreation from "./Admin/CategoryCreation";
+import b from "./Admin/CategoryCreation";
 import Carouselcomp from "../components/Carouselcomp";
 import Cart from "./Cart";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { MdOutlineClose } from "react-icons/md";
 //import Button from './button';
+import { baseUrl } from "../utils/services";
 
 let changeNavValue = 0;
 var header;
@@ -40,7 +41,7 @@ const Header1 = (props) => {
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
-  const [cartItems, setCartItems] = useState();
+  const [cartItems, setCartItems] = useState("");
 
   const {
     register,
@@ -56,9 +57,10 @@ const Header1 = (props) => {
     },
   });
 
+
   useEffect(() => {
-    if (state.noOfItemsInCart) {
-      setCartItems(state.noOfItemsInCart);
+    if(state.noOfItemsInCart >= 0) {
+      setCartItems(state.noOfItemsInCart)
     }
   }, [state.noOfItemsInCart]);
 
@@ -113,8 +115,8 @@ const Header1 = (props) => {
       data.username &&
       data.password == data.repassword
     ) {
-      //fetch("http://144.91.110.221:3033/api/auth/register", {
-      fetch("http://localhost:3033/api/auth/register", {
+      
+      fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -137,8 +139,7 @@ const Header1 = (props) => {
   const LoginUser = (e) => {
     e.preventDefault();
     if (username && password) {
-      //fetch("http://144.91.110.221:3033/api/auth/login", {
-      fetch("http://localhost:3033/api/auth/login", {
+      fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -178,7 +179,7 @@ const Header1 = (props) => {
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
             await JSON.parse(localStorage.getItem("CartDataWoLogin")).map(
-              async (item, index) => {
+              async (item) => {
                 await cartfunction(item);
               }
             );
@@ -201,8 +202,7 @@ const Header1 = (props) => {
     }
   };
   const GetCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/category/all_category")
-    await fetch("localhost:3033/api/category/all_category")
+    await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
@@ -212,8 +212,7 @@ const Header1 = (props) => {
       });
   };
   const GetSubCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/subcategory/all_subcategory")
-    await fetch("http://localhost:3033/api/subcategory/all_subcategory")
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data);
@@ -264,8 +263,7 @@ const Header1 = (props) => {
 
   const CartById = async () => {
     if (!Userdata == []) {
-      // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -288,8 +286,7 @@ const Header1 = (props) => {
   const AddtoCart = async () => {
     //  debugger
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -314,8 +311,7 @@ const Header1 = (props) => {
     // }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -368,7 +364,7 @@ const Header1 = (props) => {
                 {subcategories &&
                   subcategories.length > 0 &&
                   subcategories.map((el, ind) => (
-                    <div className="accordion-item">
+                    <div className="accordion-item" key={ind}>
                       <h2 className="accordion-header" id="flush-headingOne">
                         <Link to={"/Subcategories/" + el._id}>
                           <div
@@ -379,8 +375,7 @@ const Header1 = (props) => {
                             <img
                               className="icons1"
                               src={
-                                //"http://144.91.110.221:3033/" + el.image[0].path
-                                "http://localhost:3033/" + el.image[0].path
+                                `${baseUrl}/`+ el.image[0].path
                               }
                             />
                             <button
@@ -631,9 +626,10 @@ const Header1 = (props) => {
             <div className="row login-div mt-4">
               <div className="col-sm-1">
                 <div className="option-item">
-                  <div className="cart-btn">
-                    {Userdata == null ? (
-                      <>
+                  <div className="cart-btn">        
+                   { Userdata == null ?
+                      (
+                        <>
                         <span
                           className="sp"
                           data-bs-toggle="modal"
@@ -653,8 +649,11 @@ const Header1 = (props) => {
                     ) : (
                       <>
                         <i className="user-icon bx bx-user"></i>
-                      </>
-                    )}
+                        </>
+                      )
+                      }                
+                    
+                    
                   </div>
                 </div>
               </div>
@@ -700,7 +699,7 @@ const Header1 = (props) => {
                         className="dropdown-menu Logout-ul"
                         aria-labelledby="dropdownMenuButton1"
                       >
-                        <Link to="/Ordered">
+                        <div>
                           <div className="Logout-div d-flex align-items-center">
                             <i className="bx bx-file pl-2"></i>{" "}
                             <li
@@ -712,7 +711,7 @@ const Header1 = (props) => {
                               </Link>
                             </li>
                           </div>
-                        </Link>
+                        </div>
                         <Link to="/Cart">
                           <div className="Logout-div d-flex align-items-center">
                             <i className="bx bx-cart pl-2"></i>{" "}
@@ -791,8 +790,12 @@ const Header1 = (props) => {
                 </div>
 
                 <div className="col-8 user-login">
-                  {cartItems ? <h6 className="Total-Item">{cartItems}</h6> : ""}
-                  <span className="sp pl-2">Cart</span>
+                  { cartItems ? (             
+                  <h6 className="Total-Item">
+                      { cartItems} 
+                    </h6>
+                  ) : ""}
+                  <span className="sp">Cart</span>
                   <br />
                   {/* <span className="Sp1">₹ 0.0</span> */}
                 </div>
@@ -1091,7 +1094,7 @@ const Header1 = (props) => {
                 </a>
                 <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
                   {categories.map((el, ind) => (
-                    <li>
+                    <li key={ind}>
                       <Link
                         className="dropdown-item"
                         to={"/AllCategory/" + el._id}
@@ -1116,7 +1119,7 @@ const Header1 = (props) => {
                 </a>
                 <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
                   {subcategories.map((el, ind) => (
-                    <li>
+                    <li key={ind}>
                       {" "}
                       <Link
                         to={"/Subcategories/" + el._id}

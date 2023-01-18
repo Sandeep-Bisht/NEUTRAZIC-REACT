@@ -11,6 +11,7 @@ import ReadMoreReact from "read-more-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import $ from "jquery";
+import { baseUrl } from "../utils/services";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -37,6 +38,7 @@ const SingleProduct = (props) => {
     Getsingledata();
     CartById();
     ProductByCategory();
+    
 
     $(document).ready(function() {
       $("#comments-button-div").css("visibility", "hidden");
@@ -143,8 +145,7 @@ const SingleProduct = (props) => {
   //   }
 
   const ProductByCategory = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/all_product")
-    await fetch("http://localhost:3033/api/product/all_product")
+    await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
         setAllProduct(data.data);
@@ -155,8 +156,7 @@ const SingleProduct = (props) => {
   };
 
   const Getsingledata = async () => {
-    //await fetch("http://144.91.110.221:3033/api/product/product_by_id", {
-    await fetch("http://localhost:3033/api/product/product_by_id", {
+    await fetch(`${baseUrl}/api/product/product_by_id`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -182,8 +182,7 @@ const SingleProduct = (props) => {
   };
   const CartById = async () => {
     if (!Userdata == []) {
-      // await fetch("http://144.91.110.221:3033/api/cart/cart_by_id", {
-      await fetch("http://localhost:3033/api/cart/cart_by_id", {
+      await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -205,8 +204,7 @@ const SingleProduct = (props) => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //await fetch("http://144.91.110.221:3033/api/cart/add_to_cart", {
-      await fetch("http://localhost:3033/api/cart/add_to_cart", {
+      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -236,8 +234,7 @@ const SingleProduct = (props) => {
     // }
   };
   const UpdateCart = () => {
-    //const url = "http://144.91.110.221:3033/api/cart/update_cart_by_id";
-    const url = "http://localhost:3033/api/cart/update_cart_by_id";
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
       headers: {
@@ -327,15 +324,14 @@ const SingleProduct = (props) => {
       }
         toast.success("Add to cart",{
         position:"bottom-right",
-        autoClose:5000,
+        autoClose:500,
       });
     }
     window.scroll(0,0);
   };
 
   const categoryDetails = async (id) => {
-    //await fetch("http://144.91.110.221:3033/api/category/category_by_id", {
-    await fetch("http://localhost:3033/api/category/category_by_id", {
+    await fetch(`${baseUrl}/api/category/category_by_id`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -407,8 +403,7 @@ const SingleProduct = (props) => {
     manufacturer,
     image
   ) => {
-    //await fetch("http://144.91.110.221:3033/api/wishlist/wishlist_by_id", {
-    await fetch("http://localhost:3033/api/wishlist/wishlist_by_id", {
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -423,8 +418,7 @@ const SingleProduct = (props) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(
-              //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
-              "http://localhost:3033/api/wishlist/add_to_wishlist",
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
               {
                 method: "POST",
                 headers: {
@@ -456,8 +450,7 @@ const SingleProduct = (props) => {
           if (!JSON.stringify(data.data).includes(productid) && data.data) {
             if (!Userdata == []) {
               await fetch(
-                //"http://144.91.110.221:3033/api/wishlist/add_to_wishlist",
-                "http://localhost:3033/api/wishlist/add_to_wishlist",
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
                 {
                   method: "POST",
                   headers: {
@@ -506,50 +499,35 @@ const SingleProduct = (props) => {
       </div>
       <div className="container-fluid product-div mt-5">
         <div className="row ">
-          {/* <div className="col-sm-1"></div> */ console.log("single product page hun", data.image && data.image[0].path) }         
 
           <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image ? (
+              {data.image && data.image.length > 0 ? 
+              (
                 <img src={
-                  //"http://144.91.110.221:3033/" +
-                  "http://localhost:3033/" + data.image[0].path
+                  `${baseUrl}/` + data.image[0].path
                 } />
               ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
             </div>
             {/* <ReactImageZoom {...ImageData} /> */}
-
             <div className="row image-group pt-2">
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
-              <div className="col-3">
-                <div>
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                </div>
-              </div>
+            {data.image && data.image.length > 0 ?            
+            data.image.map((item,ind)=>(
+              <div className="col-3" key={ind}>              
+                <img
+                  src={`${baseUrl}/` + item.path}
+                />
+              
             </div>
+            
+              )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
+            }
+            </div>
+            
+              
+          
+            
 
             {/* phone single page caresouel */}
             <div
@@ -644,7 +622,7 @@ const SingleProduct = (props) => {
 
               <div className="price pt-2">
                 <span className="price-detail">
-                  ₹899 <del>1000</del> <span>10% OFF</span>
+                ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
                 </span>
               </div>
 
@@ -654,7 +632,7 @@ const SingleProduct = (props) => {
                   <li>Restructures and shrinks pores</li>
                   <li>Non-Drying, Alcohol-Free Formula</li>
                   <li>Chlorophyll in Matcha protects against sun damage.</li>
-                  <li>Stabilized Vitamin C provides compact & firmer skin.</li>
+                  <li>{data.description}</li>
                 </ul>
               </div>
             </div>
@@ -999,13 +977,12 @@ const SingleProduct = (props) => {
                            }
                            alt="" 
                             /> */}
-                            <img
+                            {/* <img
                               src={
-                                //"http://144.91.110.221:3033/" +
-                                "http://localhost:3033/" + item.image[0].path
+                                `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
-                            />
+                            /> */}
                           </div>
                         </Link>
                       </div>
@@ -1305,7 +1282,7 @@ const SingleProduct = (props) => {
       {/* End Review section for mobile */}
       <Baseline />
       <Footer />
-    </>
+      </>
   );
 };
 export default SingleProduct;

@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom'
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
+import { baseUrl } from "../../../utils/services";
 
  
 
@@ -36,8 +37,7 @@ export default function AllManufactureDetails() {
   };
 
   const GetManufacturer = async () => {
-    //await fetch("http://144.91.110.221:3033/api/manufacture/all_manufacture")
-    await fetch("http://localhost:3033/api/manufacture/all_manufacture")
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data, "hello");
@@ -52,7 +52,7 @@ export default function AllManufactureDetails() {
   const fetchUsers = async () => {
     setLoading(true);
   const response = await axios.get( 
-    "http://localhost:3033/api/manufacture/all_manufacture"
+    `${baseUrl}/api/manufacture/all_manufacture`
   );
   setGetuser(response.data.data);
     setLoading(false);
@@ -75,7 +75,7 @@ const searchHandler=()=>{
 
 const handleDelete = async (_id)=>{
   try{
-    const DeletedData=await axios.delete("http://localhost:3033/api/manufacture/delete_manufacturer_by_id", {data: {_id:_id}});
+    const DeletedData=await axios.delete(`${baseUrl}/api/manufacture/delete_manufacturer_by_id`, {data: {_id:_id}});
     fetchUsers();
   }catch(error){
   }
@@ -99,7 +99,7 @@ const columns = [
     dataIndex: "image[0].path",
     width: 80,
     maxWidth: 90,
-    render: (t, r) => <img src={`http://localhost:3033/${r.image[0].path}`} />,
+    render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />,
   },
   {
     title: "Action",
