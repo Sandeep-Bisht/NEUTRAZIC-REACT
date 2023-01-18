@@ -137,7 +137,7 @@ font-weight: 300;
 {
 	width:145px;
 	height:68px;
-	background-color:;
+	/* background-color:; */
 	border:0.5px solid #00B560;;
 	float: left;
 	border-radius: 7px;
@@ -227,7 +227,7 @@ input[type=number] {
 	float:left;
 	width:220px;
 	height:68px;
-	background-color:;
+	/* background-color:; */
 	border:1px solid #00B560;
 	border-radius: 7px;
 	margin-left:10px;
@@ -257,7 +257,7 @@ input[type=number] {
 .content-div .add .wishlist
 {
 	display:block;
-	background-color:;
+	/* background-color:; */
 	float:left;
 	font-size:px;
 	
@@ -278,7 +278,7 @@ input[type=number] {
 .content-div .add .wishlist i
 {
 	font-size:16px;
-	background-color:;
+	/* background-color:; */
 	margin:3px; 
 	color:#3DBACB;
 	margin-top: 3px;
@@ -1178,7 +1178,7 @@ font-size: 15px;
   
   #fh6 {
    padding: 2px 15px;
-   color: #4d0er1;
+   color: #1e144f;
    text-align: center;
    font-weight: normal;
   }
