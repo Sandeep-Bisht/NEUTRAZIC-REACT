@@ -583,7 +583,7 @@ const HomePage = () => {
                                     <Link to={"/SingleProduct/" + el._id}>
                                       <ReadMoreReact text={el.name} />
                                     </Link>
-                                    <div className="price-div d-flex align-items-center justify-content-between">
+                                    <div className="price-div">
                                       <span className="new-price">
                                         <i className="fa fa-inr"></i>{" "}
                                         {el.inrDiscount}
@@ -778,7 +778,7 @@ const HomePage = () => {
           <div className="container m-auto py-4">
             <div className="row ">
               {data.map((el, index) => {
-                if (index > 0) {
+                if (index >= 0) {
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
@@ -791,9 +791,10 @@ const HomePage = () => {
                                   to={"/SingleProduct/" + el._id}
                                   className="product-image-link"
                                 >
-                                  <div className="image hover-switch">
+                                  <div className="image hover-switch">                                  
                                     <img
-                                      src={el.image.length > 1 ? `${baseUrl}/` + el.image[1].path : require("../../Images/products/Hintosulin (1).png")}
+                                      src={el.otherImage &&
+                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
                                       alt=""
                                     />
                                     <img
@@ -802,7 +803,7 @@ const HomePage = () => {
                                         el.image[0].path
                                       }
                                       alt=""
-                                      style={{ position: "absolute" }}
+                                      style={{ position: "absolute",left: "0" }}
                                     />
                                   </div>
                                 </Link>
@@ -812,8 +813,9 @@ const HomePage = () => {
                                   <Link to={"/SingleProduct/" + el._id}>
                                     <ReadMoreReact text={el.name} />
                                   </Link>
-                                  <div className="price-div d-flex align-items-center justify-content-between">
-                                    <span className="new-price">{el.inrDiscount}</span>
+                                  <div className="price-div">
+                                    <span className="new-price">
+                                    <i className="fa fa-inr"></i>{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
                                       <i
@@ -933,8 +935,7 @@ const HomePage = () => {
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                  console.log("inside skincare",el)
-                if (i > 0 && el.category.name === "Skin Care") {
+                if (i > 0 && el.category.name === "Skincare") {
                   skincare = skincare + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
@@ -951,7 +952,8 @@ const HomePage = () => {
                                   
                                   <div className="image hover-switch">
                                     <img
-                                      src={el.image.length > 1 ? `${baseUrl}/` + el.image[1].path : require("../../Images/products/Hintosulin (1).png")}
+                                      src={el.otherImage &&
+                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
                                       alt=""
                                     />
                                     <img
@@ -960,7 +962,7 @@ const HomePage = () => {
                                         el.image[0].path
                                       }
                                       alt=""
-                                      style={{ position: "absolute" }}
+                                      style={{ position: "absolute", left: "0" }}
                                     />
                                   </div>
                                 </Link>
@@ -970,7 +972,7 @@ const HomePage = () => {
                                   <Link to={"/SingleProduct/" + el._id}>
                                     <ReadMoreReact text={el.name} />
                                   </Link>
-                                  <div className="price-div d-flex align-items-center justify-content-between">
+                                  <div className="price-div">
                                     <span className="new-price">{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (

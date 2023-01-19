@@ -13,6 +13,7 @@ import Cart from "./Cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
+import { MdOutlineClose } from "react-icons/md";
 //import Button from './button';
 import { baseUrl } from "../utils/services";
 
@@ -23,10 +24,9 @@ var Userdata = "";
 
 const errorEmail = "Please Enter a valid Email Address";
 
-
 // var userCart=[]
 const Header1 = (props) => {
-  const state = useSelector((state=>state.GetCartItemReducer))
+  const state = useSelector((state) => state.GetCartItemReducer);
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -49,12 +49,12 @@ const Header1 = (props) => {
     formState: { errors },
     watch,
   } = useForm({
-    defaultValues:{
-    username:"",
-    email:"",
-    password:"",
-    repassword:"",
-    }
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      repassword: "",
+    },
   });
 
 
@@ -62,8 +62,7 @@ const Header1 = (props) => {
     if(state.noOfItemsInCart >= 0) {
       setCartItems(state.noOfItemsInCart)
     }
-
-  }, [state.noOfItemsInCart])
+  }, [state.noOfItemsInCart]);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -105,7 +104,6 @@ const Header1 = (props) => {
   };
 
   const RegisterUser = (data) => {
-    
     // setUsername(data.username);
     // setemail(data.email);
     // setPassword(data.password);
@@ -114,7 +112,7 @@ const Header1 = (props) => {
       data.email &&
       data.password &&
       data.repassword &&
-      data.username&&
+      data.username &&
       data.password == data.repassword
     ) {
       
@@ -133,12 +131,10 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data,"After post Api");
-           window.location.reload();
-          
+          console.log(data, "After post Api");
+          window.location.reload();
         });
     }
-    
   };
   const LoginUser = (e) => {
     e.preventDefault();
@@ -161,9 +157,9 @@ const Header1 = (props) => {
             localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
             toast.success("Login successfull", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-      });
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 5000,
+            });
             //history.push("/");
             window.location.reload();
           } else if (
@@ -176,7 +172,7 @@ const Header1 = (props) => {
             history.push("/Dashboard");
             window.location.reload();
           } else if (Userdata == undefined) {
-            console.log(res,"response failure")
+            console.log(res, "response failure");
             setMsg("User Name Or PassWord is not Valid");
           }
         })
@@ -194,7 +190,7 @@ const Header1 = (props) => {
       //   autoClose: 5000,
       // });
     } else {
-      console.log("not getting role","faiure");
+      console.log("not getting role", "faiure");
       setMsg("Please Enter a Valid Data");
     }
   };
@@ -394,9 +390,9 @@ const Header1 = (props) => {
                             </button>
                           </div>
                         </Link>
-                      </h2>                      
+                      </h2>
                     </div>
-                  ))}                
+                  ))}
               </div>
             </div>
           </div>
@@ -415,7 +411,7 @@ const Header1 = (props) => {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-body">
-                <div className="row pt-4 ">
+                <div className="row pt-4">
                   <div className="col-6 logiRegisterHeader1 pr-0">
                     <h3
                       onClick={() => {
@@ -439,7 +435,10 @@ const Header1 = (props) => {
                   {registerModal ? (
                     <div className="col-lg-12 logiRegisterContentDiv">
                       <div className="form-row">
-                        <form className="form-group col-lg-12" onSubmit={handleSubmit(RegisterUser)}>
+                        <form
+                          className="form-group col-lg-12"
+                          onSubmit={handleSubmit(RegisterUser)}
+                        >
                           <div className="form-group">
                             <label>
                               Username<span>*</span>
@@ -447,13 +446,15 @@ const Header1 = (props) => {
                             <input
                               type="text"
                               className="form-control"
-                              
                               {...register("username", {
                                 required: true,
-                               
                               })}
                             />
-                            {errors?.username?.type === "required" && <p className="text-danger">This field is required</p>}
+                            {errors?.username?.type === "required" && (
+                              <p className="text-danger">
+                                This field is required
+                              </p>
+                            )}
                             {/* <input
                             type="text"
                             className="form-control "
@@ -470,15 +471,21 @@ const Header1 = (props) => {
                             <input
                               type="email"
                               className="form-control "
-                              
                               {...register("email", {
                                 required: true,
-                                pattern:/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                                
+                                pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                               })}
                             />
-                            {errors?.email?.type === "required" && <p className="text-danger">This field is required</p>}
-                            {errors?.email?.type === "pattern" && <p className="text-danger">Please enter the valid Email</p>}
+                            {errors?.email?.type === "required" && (
+                              <p className="text-danger">
+                                This field is required
+                              </p>
+                            )}
+                            {errors?.email?.type === "pattern" && (
+                              <p className="text-danger">
+                                Please enter the valid Email
+                              </p>
+                            )}
                             {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                           </div>
                           <div className="form-group">
@@ -488,15 +495,23 @@ const Header1 = (props) => {
                             <input
                               type="password"
                               className="form-control "
-                              
                               {...register("password", {
                                 required: true,
-                                pattern:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                                
+                                pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                               })}
                             />
-                            {errors?.password?.type === "required" && <p className="text-danger">This field is required</p>}
-                            {errors?.password?.type === "pattern" && <p className="text-danger">Must have more than 8 characters, Must have atleast one number, Must have upper & lowercase letters, Must have atleast one special character</p>}
+                            {errors?.password?.type === "required" && (
+                              <p className="text-danger">
+                                This field is required
+                              </p>
+                            )}
+                            {errors?.password?.type === "pattern" && (
+                              <p className="text-danger">
+                                Must have more than 8 characters, Must have
+                                atleast one number, Must have upper & lowercase
+                                letters, Must have atleast one special character
+                              </p>
+                            )}
                           </div>
                           <div className="form-group ">
                             <label>
@@ -505,19 +520,25 @@ const Header1 = (props) => {
                             <input
                               type="password"
                               className="form-control "
-                            
                               {...register("repassword", {
                                 required: true,
-                                validate: (val) =>{
-                                  if(watch('password') !== val){
-                                    return "Your Password Does not Match"
+                                validate: (val) => {
+                                  if (watch("password") !== val) {
+                                    return "Your Password Does not Match";
                                   }
-                                }
-                                
+                                },
                               })}
                             />
-                            {errors?.repassword?.type === "required" && <p className="text-danger">This field is required</p>}
-                            {errors?.repassword?.type === "validate" && <p className="text-danger">Password does not match</p>  }
+                            {errors?.repassword?.type === "required" && (
+                              <p className="text-danger">
+                                This field is required
+                              </p>
+                            )}
+                            {errors?.repassword?.type === "validate" && (
+                              <p className="text-danger">
+                                Password does not match
+                              </p>
+                            )}
                           </div>
                           {/* <h5 className="Login-fail-msg">{}</h5> */}
                           {/* <div className="form-group col-lg-12">
@@ -581,6 +602,7 @@ const Header1 = (props) => {
                     </div>
                   )}
                 </div>
+                <MdOutlineClose className="login-register-close-icon" />
               </div>
             </div>
           </div>
@@ -609,27 +631,23 @@ const Header1 = (props) => {
                       (
                         <>
                         <span
-                      className="sp"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <i className="user-icon bx bx-user"></i>
-                    </span>
-                    <br />
-                    <span
-                      className="Sp1 mt-5"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      style={{ cursor: "pointer" }}
-                    >
-                     
-                    </span>
-                  </>
-                       
-                      ):
-                      (
-                        <>
+                          className="sp"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <i className="user-icon bx bx-user"></i>
+                        </span>
+                        <br />
+                        <span
+                          className="Sp1 mt-5"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          style={{ cursor: "pointer" }}
+                        ></span>
+                      </>
+                    ) : (
+                      <>
                         <i className="user-icon bx bx-user"></i>
                         </>
                       )
@@ -642,9 +660,8 @@ const Header1 = (props) => {
               <div className="col-sm-8 user-login">
                 {Userdata == null ? (
                   <>
-                  
                     <span
-                      className="sp"
+                      className="sp pl-2"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       style={{ cursor: "pointer" }}
@@ -653,7 +670,7 @@ const Header1 = (props) => {
                     </span>
                     <br />
                     <span
-                      className="Sp1 mt-5"
+                      className="Sp1 mt-5 pl-2"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       style={{ cursor: "pointer" }}
@@ -910,7 +927,7 @@ const Header1 = (props) => {
         </div>
       </div>
       <div className="container-fluid p-0">
-        <div className="row side-nav">          
+        <div className="row side-nav">
           <div className=" col-sm-12 p-0 content">
             <React.Fragment>{props.children}</React.Fragment>
           </div>

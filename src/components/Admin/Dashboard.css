@@ -746,17 +746,17 @@ font-family: 'Roboto', sans-serif;
   font-family: 'Roboto', sans-serif;
   font-size: 17px;
   margin-right: 10px;
-  color:#006837;
+  color:#1e144f;
 }
 .create-manu button
 {
   font-family: 'Roboto', sans-serif;
   font-size: 17px;
-  height:38px;
+  height: 40px;
   width: 40px;
   border-radius: 50%;
   border:0;
-  background-color: #00B560;
+  background-color: #1e144f;
   filter: drop-shadow(2px 4px 6px black);
   padding-top: 6px;
  
