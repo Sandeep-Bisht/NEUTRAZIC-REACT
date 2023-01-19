@@ -971,8 +971,8 @@ const HomePage = () => {
                                     <ReadMoreReact text={el.name} />
                                   </Link>
                                   <div className="price-div d-flex align-items-center justify-content-between">
-                                    <span className="new-price">$899</span>
-                                    <del className="new-price ml-1">$1000</del>
+                                    <span className="new-price">{el.inrDiscount}</span>
+                                    <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
                                       <i
                                         className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}

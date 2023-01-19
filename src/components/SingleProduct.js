@@ -684,7 +684,7 @@ const getWishlist = async () => {
 
               <div className="price pt-2">
                 <span className="price-detail">
-                ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
+                  {data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
                 </span>
               </div>
 
@@ -1081,14 +1081,15 @@ const getWishlist = async () => {
                           </div>
                           <div className="price-div justify-content-center align-items-center d-flex">
                             <span className="new-price ml-3">
-                              ${" "}
+                              {/* ${" "}
                               {isNaN(
                                 item.inrMrp -
                                   (item.inrMrp * item.inrDiscount) / 100
                               )
                                 ? 0
                                 : item.inrMrp -
-                                  (item.inrMrp * item.inrDiscount) / 100}
+                                  (item.inrMrp * item.inrDiscount) / 100} */}
+                                  {item.inrDiscount}
                             </span>
                             <del className="new-price ml-1">{item.inrMrp}</del>
                             {Userdata ? (
