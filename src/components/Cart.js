@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
 import * as ACTIONS from '../CommonService/AddToCart/action'
+import confirm, { Button, alert } from "react-alert-confirm";
 
 import { baseUrl } from "../utils/services";
 import AllProducts from "./AllProducts";
@@ -113,12 +114,19 @@ const Cart = () => {
 
   const Sliceorder = async (index, e) => {
     e.preventDefault();
+    
     const array = await cart.filter((e, i) => i !== index);
+    confirm({
+      title: "This is title",
+      language: "en",
+      content: <h2>This is content !</h2>,
+      onOk: () => console.log("ok")
+    });
     await UpdateCart(array);
     await CartById();
     toast.success("Item deleted successfull",{
       position:"bottom-right",
-      autoClose:1000,
+      autoClose:2000,
     })
   };
 
@@ -263,7 +271,7 @@ const Cart = () => {
                                   </div>
                                 </td> */}
                                 <td>
-                                  <button
+                                  <Button
                                     className="btn btn-danger btn-sm w-50"
                                     style={{ margin: "0" }}
                                     onClick={(e) => {
@@ -271,7 +279,8 @@ const Cart = () => {
                                     }}
                                   >
                                     <i className="bx bx-trash"></i>
-                                  </button>
+                                  </Button>
+                                  {/* <Button onClick={handleClickBasic}>Basic</Button> */}
                                 </td>
                               </tr>
                               //     </Link>

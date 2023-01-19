@@ -16,6 +16,7 @@
     "jquery": "^3.6.0",
     "primereact": "^8.7.3",
     "react": "^16.8.6",
+    "react-alert-confirm": "^4.1.6",
     "react-dom": "^16.8.6",
     "react-hook-form": "^7.41.5",
     "react-icons": "^4.6.0",
