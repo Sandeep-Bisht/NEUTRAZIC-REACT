@@ -198,7 +198,8 @@ const ManufacturerCreation = (props) => {
             <div className="col-10">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
-            <form className="form-floating">
+            <form>
+              <div className="col-12">
                     <div className="card p-4 m-2 product-form">
                       <h5>Manufacturer Creation</h5>
                       <div className="row">
@@ -227,7 +228,7 @@ const ManufacturerCreation = (props) => {
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <textarea
-                            className="form-control Dashborad-search"
+                            className="form-control"
                             id="floatingInputValue"
                             placeholder="Manufacturer Description"
                             rows="3"
@@ -241,7 +242,7 @@ const ManufacturerCreation = (props) => {
                           <label for="floatingInputValue">Manufacturer Description</label>
                         </div>
                         {editableData ? (
-                          <div className="col-12 pt-4">
+                          <div className="col-12 p-1">
                             
                             <button
                               className="btn btn-primary"
@@ -264,16 +265,9 @@ const ManufacturerCreation = (props) => {
                         ) }
                       </div>
                     </div>
+                    </div>
             </form>
           ) : null
-        ) : null}
-        {update ? (
-          <div className="create-manu container text-right">
-            <span>Create Manufacturer</span>
-            <button onClick={() => setUpdate(false)}>
-              <i className="bx bx-plus"></i>
-            </button>
-          </div>
         ) : null}
         </div>
         </div>
