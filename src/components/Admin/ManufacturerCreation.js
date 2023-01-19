@@ -6,6 +6,7 @@ import $ from "jquery";
 import { Link } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import { useHistory } from "react-router-dom";
 
 var Userdata;
 const ManufacturerCreation = (props) => {
@@ -18,6 +19,8 @@ const ManufacturerCreation = (props) => {
     descripton: "",
     image: [],
   });
+  const history=useHistory();
+
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
@@ -34,7 +37,11 @@ const ManufacturerCreation = (props) => {
       //   },
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) =>
+      {
+        res.json()
+        history.push("/AllManufactureDetails");
+      })
       .then((res) => {
         GetManufacturer();
         this.getAddOn();

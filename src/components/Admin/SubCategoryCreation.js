@@ -3,6 +3,7 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import { useHistory } from "react-router";
 // import DataTable from '@bit/adeoy.utils.data-table';
 
 var Userdata;
@@ -17,6 +18,8 @@ const SubCategoryCreation = (props) => {
     category: "",
     image: [],
   });
+
+  const history=useHistory();
   const [editableData] = useState(props.history.location.state);
   const submitData = async (e) => {
     e.preventDefault();
@@ -34,7 +37,10 @@ const SubCategoryCreation = (props) => {
       //   },
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        res.json();
+        history.push("/AllSubCategoriesDetails")
+      })
       .then((res) => {
         GetSubCategory();
 

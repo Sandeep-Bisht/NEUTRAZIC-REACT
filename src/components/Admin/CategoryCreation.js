@@ -3,6 +3,7 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import { useHistory } from "react-router";
 // import DataTable from '@bit/adeoy.utils.data-table';
 var Userdata;
 const CategoryCreation = (props) => {
@@ -14,7 +15,7 @@ const CategoryCreation = (props) => {
     descripton: "",
     image: [],
   });
-
+  const history=useHistory();
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
@@ -33,7 +34,10 @@ const CategoryCreation = (props) => {
       //   },
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) =>{
+        res.json()
+        history.push("/AllCategoriesDetails");
+      } )
       .then((res) => {
         GetCategory();
 

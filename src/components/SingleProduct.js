@@ -53,7 +53,7 @@ const SingleProduct = (props) => {
       $("#submit-review-div").hide();
       $("#Reviewdiv").hide();
       $("#Technicaldiv").hide();
-      $("#Description").css("background", "white");
+      $("#Description").css("background", "none");
       $("#Review").click(function() {
         $("#Reviewdiv").show();
         $("#Descriptiondiv").hide();
@@ -344,7 +344,7 @@ const SingleProduct = (props) => {
       }
         toast.success("Add to cart",{
         position:"bottom-right",
-        autoClose:1000,
+        autoClose:2000,
       });
     }
     window.scroll(0,0);
@@ -499,7 +499,8 @@ const getWishlist = async () => {
                 let wishlist = document.getElementById(productid)
                 wishlist.classList.add("wishlisted");
                 toast.success('Added to wishlist !', {
-                  position: toast.POSITION.BOTTOM_RIGHT
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose:2000,
               });
               })
               .catch((err) => {
@@ -540,7 +541,8 @@ const getWishlist = async () => {
             }
           } else {
             toast.error('Allready in wishlist !', {
-              position: toast.POSITION.BOTTOM_RIGHT
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose:2000,
           });
             
           }
@@ -686,22 +688,18 @@ const getWishlist = async () => {
 
               <div className="price pt-2">
                 <span className="price-detail">
+                <i className="fa fa-inr"></i>
                 ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
                 </span>
               </div>
 
               <div className="List pt-1">
-                {/* <ul>
-                  <li>Balances Skin pH levels</li>
-                  <li>Restructures and shrinks pores</li>
-                  <li>Non-Drying, Alcohol-Free Formula</li>
-                  <li>Chlorophyll in Matcha protects against sun damage.</li>
-                  <li>{data.description}</li>
-                </ul> */}
-                <p>{data.description}</p>
+                <div>
+                  <p>{data.description}</p>
+                </div>
               </div>
             </div>
-            <div className="row pt-2 pb-3 add ml-2">
+            <div className="row pt-2 pb-3 add">
               {/* wishlist animation */}
               {/* <div className="stage">
                  <div className="heart"></div>
@@ -709,9 +707,9 @@ const getWishlist = async () => {
 
               {/* end Wishlist animation */}
               <div className="wishlist">
-                <i className="search-btn bx bx-category-alt ml-1"></i>
-                <span className="ml-1">
-                  Category: <span>{categoryname}</span>
+                <i className="search-btn"></i>
+                <span className="">
+                  Category: <span> Skin Care</span>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
@@ -731,7 +729,7 @@ const getWishlist = async () => {
                 </a>
               </div>
             </div>
-            <div className="mt-3 add-cart-buttons">
+            <div className="mt-3 add-cart-buttons ml-3">
               <div className="quantity1 mt-1 justify-content-center align-items-center d-flex">
                 <i
                   className="bx bx-minus minus-single mr-2"
@@ -848,20 +846,20 @@ const getWishlist = async () => {
         <div className="row main-div p-4">
           <div>
             <div className="row heading mt-4 jutify-content-center align-items-center">
-              <div className="col-sm-1"></div>
-              <div className="col-sm-2 text-center title" id="Description">
+              {/* <div className="col-sm-1"></div> */}
+              <div className="col-sm-2 title" id="Description">
                 <button className="button2">Description</button>
               </div>
-              <div className="col-sm-2 text-center title " id="Review">
+              {/* <div className="col-sm-2 text-center title " id="Review">
                 <button className="button1">Review</button>
               </div>
               <div className="col-sm-2 text-center title" id="Technical">
                 <button className="button1">Add a Review</button>
-              </div>
-              <div className="col-sm-3"></div>
+              </div> */}
+              {/* <div className="col-sm-3"></div> */}
             </div>
             <div className="row content1">
-              <div className="container p-5  text" id="Descriptiondiv">
+              <div className="text" id="Descriptiondiv">
                 <span>{data.description}</span>
               </div>
               <div className="container p-5  text " id="Reviewdiv">
@@ -997,8 +995,9 @@ const getWishlist = async () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid p-4 relate-products text-center">
-        <div className="row relate-product">
+
+      <div className="container-fluid p-4 products relate-products text-center">
+      <div className="row relate-product">
           <div className="col-3 line">
             <hr className="hr"></hr>
           </div>
@@ -1020,40 +1019,39 @@ const getWishlist = async () => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-      </div>
-      <div className="container-fluid p-4 products">
-        <div className="row products-row  ">
+        <div className="row products-row p-4 ">
           {AllProduct.map((item, index) => {
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
               return (
-                <div className="col-lg-3 col-md-12 col-sm-12 ">
+                <div className="col-lg-2 col-md-12 col-sm-12 ">
                   {/* <Link to={"/SingleProduct/" + el._id}> */}
                   <div className="single-products-box border">
                     <div className="row  align-items-center product-div">
-                      <div className="col-6 product-image-div">
+                      <div className="product-image-div">
                         <Link
                           to={"/SingleProduct/" + item._id}
                           className="product-image-link"
                         >
                           <div className="image hover-switch">
-                            {/* <img
+                            <img
                            src={defaultImage}
                            alt="" 
-                            /> */}
+                            />
                             <img
                               src={ 
                                 `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
+                              style={{ position: "absolute", left:"0" }}
                             />
                           </div>
                         </Link>
                       </div>
-                      <div className="col-6 pd-0 tranding product-image-content">
+                      <div className="pd-0 tranding product-image-content">
                         <div className="content product-content">
                           <Link to={"/SingleProduct/" + item._id}>
-                            <h3 className="pb-1 pl-4 pt-5">
+                            <h3 className="">
                               <ReadMoreReact
                                 text={item.name}
                                 min={7}
@@ -1063,27 +1061,23 @@ const getWishlist = async () => {
                               />
                             </h3>
                           </Link>
-                          <div className="d-flex pb-2 pl-4">
+                          {/* <div className="d-flex pb-2 pl-4"> */}
                             {/* <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i> */}
-                          </div>
-                          <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
+                          {/* </div> */}
+                          {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                             <div className="discount-price-div">
                               <span>{item.inrDiscount}%</span>
                             </div>
                             <div className="discount-price-div2">
                               <span>off</span>
                             </div>
-                          </div>
-
-                          <div className="hr-div">
-                            <hr />
-                          </div>
-                          <div className="price-div justify-content-center align-items-center d-flex">
-                            <span className="new-price ml-3">
+                          </div> */}
+                          <div className="price-div">
+                            <span className="new-price">
                               {/* ${" "}
                               {isNaN(
                                 item.inrMrp -
@@ -1092,7 +1086,7 @@ const getWishlist = async () => {
                                 ? 0
                                 : item.inrMrp -
                                   (item.inrMrp * item.inrDiscount) / 100} */}
-                                  {item.inrDiscount}
+                                  <i className="fa fa-inr"></i>{item.inrDiscount}
                             </span>
                             <del className="new-price ml-1">{item.inrMrp}</del>
                             {Userdata ? (
@@ -1127,7 +1121,7 @@ const getWishlist = async () => {
                               </>
                             )}
 
-                            <i className="bx bx-cart ml-1"></i>
+                            <i className="bx bx-cart ml-3"></i>
                           </div>
                           {/* <div className="price mt-1">
                               <div>

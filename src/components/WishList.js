@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { baseUrl } from '../utils/services';
 import {IoClose} from 'react-icons/io5';
 import SingleProduct from './SingleProduct';
+import { ToastContainer, toast } from "react-toastify";
 
 var Userdata='';
 const WishList = ()=>{
@@ -65,7 +66,10 @@ const WishList = ()=>{
       .then((res) => res.json())
       .then(async (data) => {
          Setwishlist("");
-       
+        toast.error("Product removed success",{
+         position:"bottom-right",
+         autoClose:2000,
+        })
          GetWishlist()
 
       })
@@ -85,12 +89,12 @@ const WishList = ()=>{
             wishlistData.map((item,ind)=>(
                <div className="col-6">
                <div className='wishlistDiv'>
-                  <div className='row mt-0'>
-                     <Link to={"/SingleProduct/" + item.productId}>
+                  <div className='row'>
                <div className='col-4'>
+               <Link to={"/SingleProduct/" + item.productId}>
                <img src={`${baseUrl}/`+item.image[0].path} />
-               </div>
                </Link>
+               </div>
                <div className='col-8 py-0'>
                <h6>{item.name}</h6>
                <p><ReadMoreReact text={item.description}
@@ -111,6 +115,7 @@ const WishList = ()=>{
             </div>
             }       
          </div>
+         <ToastContainer/>
       </div>
       <Baseline />
       <Footer />

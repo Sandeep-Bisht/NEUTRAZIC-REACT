@@ -5,6 +5,7 @@ import $ from "jquery";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import { useHistory } from "react-router";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -33,6 +34,7 @@ const Productform = (props) => {
     image: [],
     otherImage : []
   });
+  const history=useHistory();
 
 
   const submitData = async (e) => {
@@ -59,12 +61,17 @@ const Productform = (props) => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
-      // .then((res) => {
-      //   this.getAddOn();
-      // })
+      .then((res) => {
+        res.json();
+        history.push("/AllProductsDetails");
+      })
+      .then((res) => {
+        this.getAddOn();
+      })
       .catch((err) => console.log(err));
-    // console.log(formData)
+     
+
+   
   };
 
   useEffect(() => {
