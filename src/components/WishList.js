@@ -85,12 +85,12 @@ const WishList = ()=>{
             wishlistData.map((item,ind)=>(
                <div className="col-6">
                <div className='wishlistDiv'>
-                  <div className='row mt-0'>
-                     <Link to={"/SingleProduct/" + item.productId}>
+                  <div className='row'>
                <div className='col-4'>
+               <Link to={"/SingleProduct/" + item.productId}>
                <img src={`${baseUrl}/`+item.image[0].path} />
-               </div>
                </Link>
+               </div>
                <div className='col-8 py-0'>
                <h6>{item.name}</h6>
                <p><ReadMoreReact text={item.description}

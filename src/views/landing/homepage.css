@@ -12156,6 +12156,7 @@ textarea.form-control {
 .products-row
 {
 	background-color: #f6f7fb;
+	gap: 15px;
 }
 .single-products-box .image .buttons-list ul li:first-child {
 	transition-delay: .1s
