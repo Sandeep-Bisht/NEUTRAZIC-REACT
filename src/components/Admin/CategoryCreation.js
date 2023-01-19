@@ -175,11 +175,11 @@ const CategoryCreation = (props) => {
                     <div className="card p-4 m-2 product-form">
                       <h5>Category Creation</h5>
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-6 p-1">
                           <input
                             type="file"
                             className="form-control Dashborad-search"
-                            placeholder="Category Name "
+                            
                             multiple
                             // onChange={SelectImage}
                             onChange={(e) => {
@@ -187,21 +187,24 @@ const CategoryCreation = (props) => {
                             }}
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-6 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingInputValue"
                             className="form-control Dashborad-search"
-                            placeholder="Category Name "
+                            placeholder="Category Name"
                             defaultValue={editableData ? editableData.name : ""}
                             onChange={(e) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
                           />
+                          <label for="floatingInputValue">Category Name</label>
                         </div>
-                        <div className="col-6 pt-2">
+                        <div className="col-6 p-1 form-floating">
                           <textarea
-                            className="form-control"
+                            className="form-control Dashborad-search"
                             placeholder="Category Description"
+                            id="floatingInputValue"
                             rows="3"
                             defaultValue={
                               editableData ? editableData.description : ""
@@ -210,6 +213,7 @@ const CategoryCreation = (props) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
+                          <label for="floatingInputValue">Category Description</label>
                         </div>
                         {editableData ? (
                           <div className="col-12 pt-4">
@@ -222,7 +226,7 @@ const CategoryCreation = (props) => {
                             </button>
                           </div>
                         ) : (
-                          <div className="col-12 pt-2">
+                          <div className="col-12 p-1">
                             <button
                               className="btn btn-primary"
                               onClick={(e) => {
