@@ -106,7 +106,7 @@
 }
 .sp{
     font-family: 'Roboto', sans-serif;
-font-size:15px;
+font-size:16px;
 position: relative;
 color:#1e144f;
 }
@@ -313,10 +313,10 @@ color:#1e144f;
 }
 }
 .logiRegisterContentDiv{
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
     padding-bottom: 20px;
-    padding-top: 60px;
+    padding-top: 50px;
 }
 .logiRegisterContentDiv .btn{
     padding: 18px;
@@ -399,13 +399,15 @@ color:#1e144f;
     height: 150px;
     width: 100%;
     object-fit: cover;
+    background-color: #f2f2f2;
+    padding: 10px;
+    cursor: pointer;
 }
+
 /* End wishlist code */
 .accordion-item .accordion-header .d-flex  button
 {
-    
     font-size:1.2rem;
-    
 }
 .icons1
 {
@@ -449,6 +451,19 @@ color:#1e144f;
 .modal.left .modal-body,
 .modal.right .modal-body {
     padding: 15px 15px 80px;
+}
+.modal-body
+{
+    position: relative;
+}
+.login-register-close-icon
+{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    height: 30px;
+    color: #000;
+    cursor: pointer;
 }
 
 /*Left*/
@@ -529,7 +544,7 @@ color: #fff;
 /* End Side Bar Modal CSs */
 .read-more-button
 {
-    color:#00D872;
+    color:#1b97ff;
     font-weight:700;
     cursor: pointer;
 }

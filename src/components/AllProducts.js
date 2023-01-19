@@ -113,7 +113,8 @@ const AllProducts = (props) => {
         }
         setQuantity(1);
         // CartById();
-        await UpdateCart();
+        UpdateCart();
+
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }

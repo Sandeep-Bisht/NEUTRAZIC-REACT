@@ -583,7 +583,7 @@ const HomePage = () => {
                                     <Link to={"/SingleProduct/" + el._id}>
                                       <ReadMoreReact text={el.name} />
                                     </Link>
-                                    <div className="price-div d-flex align-items-center justify-content-between">
+                                    <div className="price-div">
                                       <span className="new-price">
                                         <i className="fa fa-inr"></i>{" "}
                                         {el.inrDiscount}
@@ -813,8 +813,9 @@ const HomePage = () => {
                                   <Link to={"/SingleProduct/" + el._id}>
                                     <ReadMoreReact text={el.name} />
                                   </Link>
-                                  <div className="price-div d-flex align-items-center justify-content-between">
-                                    <span className="new-price">{el.inrDiscount}</span>
+                                  <div className="price-div">
+                                    <span className="new-price">
+                                    <i className="fa fa-inr"></i>{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
                                       <i
@@ -971,7 +972,7 @@ const HomePage = () => {
                                   <Link to={"/SingleProduct/" + el._id}>
                                     <ReadMoreReact text={el.name} />
                                   </Link>
-                                  <div className="price-div d-flex align-items-center justify-content-between">
+                                  <div className="price-div">
                                     <span className="new-price">{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
