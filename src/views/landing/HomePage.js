@@ -26,7 +26,7 @@ let tranding = 0;
 let skincare = 0;
 const HomePage = () => {
 
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   const images = [
     "../../Images/categories/categories-img1.png",
     "../../Images/categories/categories-img2.png",
@@ -249,7 +249,7 @@ const HomePage = () => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Add to cart", {
+      toast.success("Successfully added to Cart", {
         position: "bottom-right",
         autoClose: 1000,
       });
@@ -583,7 +583,7 @@ const HomePage = () => {
                                     <Link to={"/SingleProduct/" + el._id}>
                                       <ReadMoreReact text={el.name} />
                                     </Link>
-                                    <div className="price-div d-flex align-items-center justify-content-between">
+                                    <div className="price-div">
                                       <span className="new-price">
                                         <i className="fa fa-inr"></i>{" "}
                                         {el.inrDiscount}
@@ -812,8 +812,9 @@ const HomePage = () => {
                                   <Link to={"/SingleProduct/" + el._id}>
                                     <ReadMoreReact text={el.name} />
                                   </Link>
-                                  <div className="price-div d-flex align-items-center justify-content-between">
-                                    <span className="new-price">{el.inrDiscount}</span>
+                                  <div className="price-div">
+                                    <span className="new-price">
+                                    <i className="fa fa-inr"></i>{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
                                       <i
@@ -970,7 +971,7 @@ const HomePage = () => {
                                   <Link to={"/SingleProduct/" + el._id}>
                                     <ReadMoreReact text={el.name} />
                                   </Link>
-                                  <div className="price-div d-flex align-items-center justify-content-between">
+                                  <div className="price-div">
                                     <span className="new-price">{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (

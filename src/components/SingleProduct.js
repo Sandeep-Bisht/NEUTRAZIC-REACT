@@ -561,6 +561,7 @@ const getWishlist = async () => {
         <div className="row ">
 
           <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
+            
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
               {data.image && data.image.length > 0 ? 
@@ -570,6 +571,7 @@ const getWishlist = async () => {
                 } />
               ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
             </div>
+            
             {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
             {data.otherImage && data.otherImage.length > 0 ?            
@@ -990,8 +992,9 @@ const getWishlist = async () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid p-4 relate-products text-center">
-        <div className="row relate-product">
+
+      <div className="container-fluid p-4 products relate-products text-center">
+      <div className="row relate-product">
           <div className="col-3 line">
             <hr className="hr"></hr>
           </div>
@@ -1013,40 +1016,39 @@ const getWishlist = async () => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-      </div>
-      <div className="container-fluid p-4 products">
-        <div className="row products-row  ">
+        <div className="row products-row p-4 ">
           {AllProduct.map((item, index) => {
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
               return (
-                <div className="col-lg-3 col-md-12 col-sm-12 ">
+                <div className="col-lg-2 col-md-12 col-sm-12 ">
                   {/* <Link to={"/SingleProduct/" + el._id}> */}
                   <div className="single-products-box border">
                     <div className="row  align-items-center product-div">
-                      <div className="col-6 product-image-div">
+                      <div className="product-image-div">
                         <Link
                           to={"/SingleProduct/" + item._id}
                           className="product-image-link"
                         >
                           <div className="image hover-switch">
-                            {/* <img
+                            <img
                            src={defaultImage}
                            alt="" 
-                            /> */}
+                            />
                             <img
                               src={ 
                                 `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
+                              style={{ position: "absolute", left:"0" }}
                             />
                           </div>
                         </Link>
                       </div>
-                      <div className="col-6 pd-0 tranding product-image-content">
+                      <div className="pd-0 tranding product-image-content">
                         <div className="content product-content">
                           <Link to={"/SingleProduct/" + item._id}>
-                            <h3 className="pb-1 pl-4 pt-5">
+                            <h3 className="">
                               <ReadMoreReact
                                 text={item.name}
                                 min={7}
@@ -1056,27 +1058,23 @@ const getWishlist = async () => {
                               />
                             </h3>
                           </Link>
-                          <div className="d-flex pb-2 pl-4">
+                          {/* <div className="d-flex pb-2 pl-4"> */}
                             {/* <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i> */}
-                          </div>
-                          <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
+                          {/* </div> */}
+                          {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                             <div className="discount-price-div">
-                              <span>{item.inrDiscount}</span>
+                              <span>{item.inrDiscount}%</span>
                             </div>
                             <div className="discount-price-div2">
                               <span>off</span>
                             </div>
-                          </div>
-
-                          <div className="hr-div">
-                            <hr />
-                          </div>
-                          <div className="price-div justify-content-center align-items-center d-flex">
-                            <span className="new-price ml-3">
+                          </div> */}
+                          <div className="price-div">
+                            <span className="new-price">
                               {/* ${" "}
                               {isNaN(
                                 item.inrMrp -
@@ -1085,7 +1083,7 @@ const getWishlist = async () => {
                                 ? 0
                                 : item.inrMrp -
                                   (item.inrMrp * item.inrDiscount) / 100} */}
-                                  {item.inrDiscount}
+                                  <i className="fa fa-inr"></i>{item.inrDiscount}
                             </span>
                             <del className="new-price ml-1">{item.inrMrp}</del>
                             {Userdata ? (
@@ -1120,7 +1118,7 @@ const getWishlist = async () => {
                               </>
                             )}
 
-                            <i className="bx bx-cart ml-1"></i>
+                            <i className="bx bx-cart ml-3"></i>
                           </div>
                           {/* <div className="price mt-1">
                               <div>

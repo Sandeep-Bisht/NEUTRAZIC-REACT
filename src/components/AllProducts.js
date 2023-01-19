@@ -145,7 +145,7 @@ const AllProducts = (props) => {
         //history.push("/Cart");
         toast.success("Add to cart",{
           position: "bottom-right",
-          autoClose: 5000,
+          autoClose: 500,
         })
       })
       .then((err) => console.log(err));
@@ -365,7 +365,8 @@ const AllProducts = (props) => {
             }
           } else {
             toast.error('Allready in wishlist !', {
-              position: toast.POSITION.BOTTOM_RIGHT
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 500,
           });
             
           }
@@ -670,8 +671,12 @@ const AllProducts = (props) => {
             if (ind1 > prev && ind1 <= next) {
               return (
                 <figure className="figure1">
+                  <Link Link to={"/SingleProduct/" + el._id}>
+                  <div>
                   {/* {Categorydetails.image!==undefined? */}
                   <img src={`${baseUrl}/` + el.image[0].path} />
+                  </div>
+                  </Link>
                   {/* :null} */}
                   <figcaption>{el.name}</figcaption>
                   <div className="text-center price-div">

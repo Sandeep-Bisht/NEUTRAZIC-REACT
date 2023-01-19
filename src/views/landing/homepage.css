@@ -12152,9 +12152,11 @@ textarea.form-control {
 	visibility: visible;
 	opacity: 1;
 	top: -45px;
-	
 }
-
+.products-row
+{
+	background-color: #f6f7fb;
+}
 .single-products-box .image .buttons-list ul li:first-child {
 	transition-delay: .1s
 }
@@ -12230,6 +12232,7 @@ letter-spacing: 0.50px;
 	margin-bottom: 8px;
 	font-size: 17px;
 	font-family: 'Roboto', sans-serif !important;
+	text-align: start;
 }
 .single-products-box .content .price span {
 	
@@ -12885,7 +12888,7 @@ letter-spacing: 0.50px;
 }
 .bx-plus:before {
   
-    background: #00B560;
+    background: #1e144f;
 	color:white;	
 	/* padding: 4px; */
 	padding-top: 0;
@@ -19108,6 +19111,14 @@ ul
 {
 	/* cursor:pointer; */
 }
+.price-div
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 8px;
+	padding-top: 10px;
+}
 
 .heart-top:before
 {
@@ -19679,7 +19690,7 @@ margin: 40px 8px 15px 0px;
 }
 
 .Toastify__progress-bar--error{
-	background-color: #1e144f !important;
+	background-color: #1b97ff !important;
 }
 /* HEart css */
 
