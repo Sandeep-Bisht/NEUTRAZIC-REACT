@@ -261,7 +261,7 @@ const SubCategoryCreation = (props) => {
                             <label for="floatingInputValue">SubCategory Description</label>
                           </div>
                           {editableData ? (
-                            <div className="col-12 pt-4">
+                            <div className="col-12 p-1">
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => UpdateSubCategory(e, data._id)}
@@ -289,14 +289,6 @@ const SubCategoryCreation = (props) => {
                 ) : null
               ) : null}
             </div>
-            {update ? (
-              <div className="create-manu container text-right">
-                <span>Create Manufacturer</span>
-                <button onClick={() => setUpdate(false)}>
-                  <i className="bx bx-plus"></i>
-                </button>
-              </div>
-            ) : null}
           </div>
         </div>
       </section>

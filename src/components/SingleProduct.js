@@ -686,18 +686,19 @@ const getWishlist = async () => {
 
               <div className="price pt-2">
                 <span className="price-detail">
-                  {data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
+                ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
                 </span>
               </div>
 
               <div className="List pt-1">
-                <ul>
+                {/* <ul>
                   <li>Balances Skin pH levels</li>
                   <li>Restructures and shrinks pores</li>
                   <li>Non-Drying, Alcohol-Free Formula</li>
                   <li>Chlorophyll in Matcha protects against sun damage.</li>
                   <li>{data.description}</li>
-                </ul>
+                </ul> */}
+                <p>{data.description}</p>
               </div>
             </div>
             <div className="row pt-2 pb-3 add ml-2">
@@ -710,7 +711,7 @@ const getWishlist = async () => {
               <div className="wishlist">
                 <i className="search-btn bx bx-category-alt ml-1"></i>
                 <span className="ml-1">
-                  Category: <span> Skin Care</span>
+                  Category: <span>{categoryname}</span>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">

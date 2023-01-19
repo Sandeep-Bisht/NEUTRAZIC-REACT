@@ -320,11 +320,11 @@ const Productform = (props) => {
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form
               encType="multipart/form-data">
-              <div className="container-fluid mb-5">
+              <div className="container-fluid mb-3">
                 <div className="row">
                   {/* <div className="col-1"></div> */}
                   <div className="col-10">
-                    <div className="card p-4 m-2 product-form">
+                    <div className="card p-4 product-form" id="Allproduct-form">
                       <h5>Product Creation</h5>
 
                       <div className="row">
@@ -455,7 +455,7 @@ const Productform = (props) => {
                               Setdata({ ...data, inrDiscount: e.target.value });
                             }}
                           />
-                          <label for="floatingform">Discount In Rupees</label>
+                          <label for="floatingform">Price after Discount</label>
                         </div>
                         <div className="col-3 p-1 form-floating">
                           <input
@@ -503,6 +503,7 @@ const Productform = (props) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
+                          <label for="formfloating">Product Description</label>
                         </div>
                         <div className="col-6 p-1">
                           <select
@@ -519,8 +520,10 @@ const Productform = (props) => {
                             {/* <option></option> */}
                           </select>
                         </div>
+                        <div className="row">
                         {editableData  ? (
-                          <div className="col-6 pt-4">
+                          
+                          <div className="col-6 p-1">
                             <button
                               className="btn btn-registration"
                               onClick={(e) => UpdateProduct(e, data._id)}
@@ -529,6 +532,7 @@ const Productform = (props) => {
                             </button>
                             
                           </div>
+                          
 
                         ) : (
                           <div className="col-6 p-1">
@@ -539,28 +543,19 @@ const Productform = (props) => {
                               Submit
                             </button>
                           </div>
+                          
                         )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                 
+                  </div> 
                 </div>
               </div>
             </form>
           ) : null
         ) : null}
-
-        {update ? (
-          <div className="create-manu container text-right">
-            <span>Create Manufacturer</span>
-            <button onClick={() => setUpdate(false)}>
-              <i className="bx bx-plus"></i>
-            </button>
-          </div>
-        ) : null}
-
-</div>
-     </div>
+        </div>
+      </div>
       </div>
       </section>
     </>
