@@ -8,6 +8,7 @@ import ReadMoreReact from 'read-more-react';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../utils/services';
 import {IoClose} from 'react-icons/io5';
+import SingleProduct from './SingleProduct';
 
 var Userdata='';
 const WishList = ()=>{
@@ -74,8 +75,6 @@ const WishList = ()=>{
    };
 
 
-
-
     return(<>
     <Header1 />
     <div className="first-nav container-fluid"><span><Link to="/">Home</Link>/ Wishlist</span></div>
@@ -87,9 +86,11 @@ const WishList = ()=>{
                <div className="col-6">
                <div className='wishlistDiv'>
                   <div className='row mt-0'>
+                     <Link to={"/SingleProduct/" + item.productId}>
                <div className='col-4'>
                <img src={`${baseUrl}/`+item.image[0].path} />
                </div>
+               </Link>
                <div className='col-8 py-0'>
                <h6>{item.name}</h6>
                <p><ReadMoreReact text={item.description}

@@ -328,9 +328,10 @@ const Productform = (props) => {
                       <h5>Product Creation</h5>
 
                       <div className="row">
-                        <div className="col-6 p-1 ">
+                        <div className="col-6 p-1 form-floating ">
                           <input
                             type="text"
+                            id="floatingform"
                             className="form-control Dashborad-search"
                             placeholder="Product Name"
                             defaultValue={editableData  ? editableData.name : ""}
@@ -338,6 +339,7 @@ const Productform = (props) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
                           />
+                          <label for="floatingform">Product Name</label>
                         </div>
                         <div className="col-6 p-1">
                           <input
@@ -414,9 +416,10 @@ const Productform = (props) => {
                           </select>
                         </div>
 
-                        <div className="col-6 p-1">
+                        <div className="col-6 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingform"
                             className="form-control Dashborad-search"
                             defaultValue={editableData  ? editableData.storage : ""}
                             placeholder="Storage"
@@ -424,10 +427,12 @@ const Productform = (props) => {
                               Setdata({ ...data, storage: e.target.value });
                             }}
                           />
+                          <label for="floatingform">Storage</label>
                         </div>
-                        <div className="col-3 p-1">
+                        <div className="col-3 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingform"
                             className="form-control Dashborad-search"
                             placeholder="MRP In Rupees"
                             defaultValue={editableData  ? editableData.inrMrp : ""}
@@ -435,10 +440,12 @@ const Productform = (props) => {
                               Setdata({ ...data, inrMrp: e.target.value });
                             }}
                           />
+                          <label for="floatingform">MRP In Rupees</label>
                         </div>
-                        <div className="col-3 p-1">
+                        <div className="col-3 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingform"
                             className="form-control Dashborad-search"
                             defaultValue={
                               editableData  ? editableData.inrDiscount : ""
@@ -448,22 +455,26 @@ const Productform = (props) => {
                               Setdata({ ...data, inrDiscount: e.target.value });
                             }}
                           />
+                          <label for="floatingform">Discount In Rupees</label>
                         </div>
-                        <div className="col-3 p-1">
+                        <div className="col-3 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingform"
                             className="form-control Dashborad-search"
-                            placeholder="MRP In Doller "
+                            placeholder="MRP In Doller"
                             defaultValue={editableData  ? editableData.dollerMrp : ""}
                             onChange={(e) => {
                               Setdata({ ...data, dollerMrp: e.target.value });
                             }}
                           />
+                          <label for="floatingform">MRP In Doller</label>
                         </div>
 
-                        <div className="col-3 p-1">
+                        <div className="col-3 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingform"
                             className="form-control Dashborad-search"
                             defaultValue={
                               editableData  ? editableData.dollerDiscount : ""
@@ -476,11 +487,13 @@ const Productform = (props) => {
                               });
                             }}
                           />
+                          <label for="floatingform">Discount In Dollers</label>
                         </div>
 
-                        <div className="col-6 p-1">
+                        <div className="col-6 p-1 form-floating">
                           <textarea
                             className="form-control"
+                            id="floatingform"
                             placeholder="Product Description"
                             defaultValue={
                               editableData  ? editableData.description : ""

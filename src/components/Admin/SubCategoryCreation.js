@@ -190,7 +190,7 @@ const SubCategoryCreation = (props) => {
             <div className="col-10">
               {Userdata !== undefined ? (
                 Userdata.role == "superAdmin" ? (
-                  <form>
+                  <form className="form-floating">
                     <div className="col-12">
                       <div className="card p-4 m-2 product-form">
                         <h5>SubCategory Creation</h5>
@@ -198,6 +198,7 @@ const SubCategoryCreation = (props) => {
                           <div className="col-6 p-1">
                             <input
                               type="file"
+                              
                               className="form-control Dashborad-search"
                               placeholder="SubCategory Name "
                               onChange={(e) => {
@@ -225,9 +226,10 @@ const SubCategoryCreation = (props) => {
                               ))}
                             </select>
                           </div>
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-1 form-floating">
                             <input
                               type="text"
+                              id="floatingInputValue"
                               className="form-control Dashborad-search"
                               placeholder="SubCategory Name "
                               defaultValue={
@@ -237,11 +239,13 @@ const SubCategoryCreation = (props) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
+                            <label for="floatingInputValue">SubCategory Name</label>
                           </div>
 
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-1 form-floating">
                             <textarea
                               className="form-control"
+                              id="floatingInputValue"
                               placeholder="SubCategory Description"
                               rows="3"
                               defaultValue={
@@ -254,6 +258,7 @@ const SubCategoryCreation = (props) => {
                                 });
                               }}
                             ></textarea>
+                            <label for="floatingInputValue">SubCategory Description</label>
                           </div>
                           {editableData ? (
                             <div className="col-12 pt-4">
@@ -264,8 +269,8 @@ const SubCategoryCreation = (props) => {
                                 Update
                               </button>
                             </div>
-                          ) : null}
-                          {update ? (
+                          ) : 
+                           (
                             <div className="col-12 p-1">
                               <button
                                 className="btn btn-primary"
@@ -276,7 +281,7 @@ const SubCategoryCreation = (props) => {
                                 Submit
                               </button>
                             </div>
-                          ) : null}
+                          )}
                         </div>
                       </div>
                     </div>
