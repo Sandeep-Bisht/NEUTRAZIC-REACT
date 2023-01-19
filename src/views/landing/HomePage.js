@@ -102,7 +102,6 @@ const HomePage = () => {
     .then(async (data) => {
       console.log("inside getwishlist home page", data.data[0])
        if(data.data[0] !== undefined){
-     
         Setwishlist(data.data)
        }
     })    
@@ -343,6 +342,7 @@ const HomePage = () => {
     manufacturer,
     image
   ) => { 
+    
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -383,10 +383,12 @@ const HomePage = () => {
                   position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 2000,
                 });
+                
                 //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
+                 GetWishlist();
                 // setWishlist(data.data[0]);
               })
               .catch((err) => {
@@ -426,7 +428,7 @@ const HomePage = () => {
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
-                  
+                  GetWishlist();
                   // setWishlist(data.data[0]);
                 })
                 .catch((err) => {
@@ -825,24 +827,27 @@ const HomePage = () => {
                                     <i className="fa fa-inr"></i>{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
-                                      <i
-                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                        <i
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
                                           id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
-                                        }}
-                                      ></i>
-                                    ) : (
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
+                                      ) : (
                                       <>
                                         <i
                                           className="bx bxs-heart ml-3 pc-heart"
@@ -983,24 +988,27 @@ const HomePage = () => {
                                     <span className="new-price">{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
-                                      <i
-                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                        <i
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
                                           id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
-                                        }}
-                                      ></i>
-                                    ) : (
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
+                                      ) : (
                                       <>
                                         <i
                                           className="bx bxs-heart ml-3 pc-heart"
