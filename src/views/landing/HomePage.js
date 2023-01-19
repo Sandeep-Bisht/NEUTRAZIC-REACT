@@ -26,7 +26,7 @@ let tranding = 0;
 let skincare = 0;
 const HomePage = () => {
 
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   const images = [
     "../../Images/categories/categories-img1.png",
     "../../Images/categories/categories-img2.png",
@@ -249,7 +249,7 @@ const HomePage = () => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Add to cart", {
+      toast.success("Successfully added to Cart", {
         position: "bottom-right",
         autoClose: 1000,
       });
