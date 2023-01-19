@@ -19106,7 +19106,7 @@ ul
 /* End Hover Button Css */
 .wishlist
 {
-	cursor:pointer;
+	/* cursor:pointer; */
 }
 
 .heart-top:before

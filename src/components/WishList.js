@@ -7,6 +7,9 @@ import Header1 from './Header1';
 import ReadMoreReact from 'read-more-react';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../utils/services';
+import {IoClose} from 'react-icons/io5';
+
+
 var Userdata='';
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
@@ -82,27 +85,22 @@ const WishList = ()=>{
          <div className="row">
          {wishlistData.length >0 ? 
             wishlistData.map((item,ind)=>(
-               <div className="col-12 wishlistDiv">
-               <div className="row">
-                  <div className="col-1">
-                     <span onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}>X</span>
-                  </div>
-                  <div className="col-3">
-                  <img src={`${baseUrl}/`+item.image[0].path} />
-                  </div>
-                  <div className="col-8">
-                     <h6>{item.name}</h6>
-                     {/* <StarsRating
-                  count={5}
-                    size={30}
-              color2={'#ffd700'}
-              value={4} /> */}
-                     <p><ReadMoreReact text={item.description}
+               <div className="col-6">
+               <div className='wishlistDiv'>
+                  <div className='row mt-0'>
+               <div className='col-4'>
+               <img src={`${baseUrl}/`+item.image[0].path} />
+               </div>
+               <div className='col-8 py-0'>
+               <h6>{item.name}</h6>
+               <p><ReadMoreReact text={item.description}
             min={100}
             ideal={100}
             max={110}
             readMoreText={"read more..."}/></p>
-                  </div>
+            </div>
+            </div>
+            <div className='wishlist-close-icon' onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}><IoClose/></div>
                </div>
                </div> 
             )) 

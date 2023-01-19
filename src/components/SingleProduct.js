@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import defaultImage from "../Images/products/Hintosulin (1).png"
+
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -45,7 +47,7 @@ const SingleProduct = (props) => {
       $("#submit-review-div").hide();
       $("#Reviewdiv").hide();
       $("#Technicaldiv").hide();
-      $("#Description").css("background", "white");
+      $("#Description").css("background", "none");
       $("#Review").click(function() {
         $("#Reviewdiv").show();
         $("#Descriptiondiv").hide();
@@ -627,16 +629,12 @@ const SingleProduct = (props) => {
               </div>
 
               <div className="List pt-1">
-                <ul>
-                  <li>Balances Skin pH levels</li>
-                  <li>Restructures and shrinks pores</li>
-                  <li>Non-Drying, Alcohol-Free Formula</li>
-                  <li>Chlorophyll in Matcha protects against sun damage.</li>
-                  <li>{data.description}</li>
-                </ul>
+                <div>
+                  <p>{data.description}</p>
+                </div>
               </div>
             </div>
-            <div className="row pt-2 pb-3 add ml-2">
+            <div className="row pt-2 pb-3 add">
               {/* wishlist animation */}
               {/* <div className="stage">
                  <div className="heart"></div>
@@ -644,8 +642,8 @@ const SingleProduct = (props) => {
 
               {/* end Wishlist animation */}
               <div className="wishlist">
-                <i className="search-btn bx bx-category-alt ml-1"></i>
-                <span className="ml-1">
+                <i className="search-btn"></i>
+                <span className="">
                   Category: <span> Skin Care</span>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
@@ -666,7 +664,7 @@ const SingleProduct = (props) => {
                 </a>
               </div>
             </div>
-            <div className="mt-3 add-cart-buttons">
+            <div className="mt-3 add-cart-buttons ml-3">
               <div className="quantity1 mt-1 justify-content-center align-items-center d-flex">
                 <i
                   className="bx bx-minus minus-single mr-2"
@@ -782,20 +780,20 @@ const SingleProduct = (props) => {
         <div className="row main-div p-4">
           <div>
             <div className="row heading mt-4 jutify-content-center align-items-center">
-              <div className="col-sm-1"></div>
-              <div className="col-sm-2 text-center title" id="Description">
+              {/* <div className="col-sm-1"></div> */}
+              <div className="col-sm-2 title" id="Description">
                 <button className="button2">Description</button>
               </div>
-              <div className="col-sm-2 text-center title " id="Review">
+              {/* <div className="col-sm-2 text-center title " id="Review">
                 <button className="button1">Review</button>
               </div>
               <div className="col-sm-2 text-center title" id="Technical">
                 <button className="button1">Add a Review</button>
-              </div>
-              <div className="col-sm-3"></div>
+              </div> */}
+              {/* <div className="col-sm-3"></div> */}
             </div>
             <div className="row content1">
-              <div className="container p-5  text" id="Descriptiondiv">
+              <div className="text" id="Descriptiondiv">
                 <span>{data.description}</span>
               </div>
               <div className="container p-5  text " id="Reviewdiv">
@@ -971,18 +969,16 @@ const SingleProduct = (props) => {
                           className="product-image-link"
                         >
                           <div className="image hover-switch">
-                            {/* <img
-                           src={
-                           require('../../Images/products/Hintosulin (1).png')
-                           }
+                            <img
+                           src={defaultImage}
                            alt="" 
-                            /> */}
-                            {/* <img
-                              src={
+                            />
+                            <img
+                              src={ 
                                 `${baseUrl}/` + item.image[0].path
                               }
                               alt=""
-                            /> */}
+                            />
                           </div>
                         </Link>
                       </div>
