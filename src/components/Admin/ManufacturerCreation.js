@@ -12,7 +12,7 @@ const ManufacturerCreation = (props) => {
   var count = 0;
   const [manufactureres, setManufactureres] = useState([]);
   const [ManufacturerCount, setManufacturerCount] = useState(0);
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(true);
   const [data, Setdata] = useState({
     name: "",
     descripton: "",

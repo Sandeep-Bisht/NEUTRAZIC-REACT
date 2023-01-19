@@ -13,11 +13,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import defaultImage from "../Images/products/Hintosulin (1).png"
+import * as ACTIONS from "../CommonService/AddToCart/action"
+import { useDispatch } from "react-redux";
 
 
 var Userdata = "";
 var CartDataWoLogin = [];
 const SingleProduct = (props) => {
+
+  let dispatch = useDispatch();
+  let prodId = props.match.params.id;
   let related = 0;
   const [AllProduct, setAllProduct] = useState([]);
   const [data, setData] = useState([]);
@@ -30,7 +35,7 @@ const SingleProduct = (props) => {
   const [wishlist, setWishlist] = useState();
   const [MainImage,SetMainImage] = useState();
   const history = useHistory();
-  let Wishlist = [];
+  // let Wishlist = [];
   //let ImageData ;
   useEffect(() => {
     related = 0;
@@ -38,6 +43,7 @@ const SingleProduct = (props) => {
 
     window.scrollTo(0, 0)
     Getsingledata();
+    getWishlist();
     CartById();
     ProductByCategory();
     
@@ -174,16 +180,14 @@ const SingleProduct = (props) => {
         SetMainImage(data.data[0].image[0].path)
 
         //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
-        // console.log("image path " , data.data[0].image)
         setProductCategory(data.data[0].category.name);
-        console.log(data, "hete");
         categoryDetails(data.data[0].category);
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-  const CartById = async () => {
+  const CartById = async () => {    
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
@@ -197,7 +201,11 @@ const SingleProduct = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
+          console.log("inside cart by id")
           setUserCart(data.data[0]);
+          let cartItems = data.data[0].order.length;
+          dispatch(ACTIONS.getCartItem(cartItems))
+          
         })
         .catch((err) => {
           console.log(err, "error");
@@ -207,6 +215,7 @@ const SingleProduct = (props) => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
+      //  this block is not working
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
@@ -240,9 +249,7 @@ const SingleProduct = (props) => {
   // ImageHandler
 
   const ImageHandler = (m,i)=>{
-    console.log(m,i,"This is image slider");
     let Imagestore = m.path;
-    console.log(Imagestore,"Hello Image");
     SetMainImage(Imagestore);
   }
 
@@ -263,14 +270,14 @@ const SingleProduct = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
+        CartById();
         //history.push("/Cart");
         //   toast.success("Add to cart",{
         //   position:"bottom-right",
         //   autoClose:5000,
         // });
       })
-      .then((err) => console.log(err));
+      .then((err) => console.log(err, "inside update cart"));
   };
   const cartfunction = async (
     productid,
@@ -284,7 +291,6 @@ const SingleProduct = (props) => {
     manufacturer,
     image
   ) => {
-    console.log("quantity on cart", quantity)
     if (quantity > 0) {
       var merged = false;
       var newItemObj = {
@@ -331,7 +337,7 @@ const SingleProduct = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        // CartById();
+         
         await UpdateCart();
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
@@ -358,7 +364,6 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         Setcategoryname(data.data[0].name);
-        await console.log(categoryname, "khlklklklk");
       })
       .catch((err) => {
         console.log(err, "error");
@@ -400,11 +405,48 @@ const SingleProduct = (props) => {
       }
       CartDataWoLogin.push(newItemObj);
       localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-      console.log(JSON.stringify(CartDataWoLogin));
     }
   };
 
+//==============================Get Wishlist =========================================
 
+const getWishlist = async () => {
+  let id;
+  if(Userdata){
+   id=Userdata._id
+  }
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+  method: "post",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+     
+    userid: id,
+  }),
+})
+  .then((res) => res.json())
+  .then(async (data) => {
+     if(data.data[0] !== undefined){  
+      let prodId =  props.match.params.id;
+      setWishlist(data.data)
+      let response = data.data;
+      for(let item of response){
+        if(props.match.params.id == item.productId){
+          let alreadyWishlist = document.getElementById(prodId);
+          alreadyWishlist.classList.add("wishlisted")
+        }
+      }
+     }
+  })    
+  .catch((err) => {
+    console.log(err, "error");
+  });
+ 
+};
+
+// ======================================= Add to Wishlist =========================
 
   const AddtoWishlist = async (
     productid,
@@ -454,7 +496,11 @@ const SingleProduct = (props) => {
               .then((res) => res.json())
               .then(async (data) => {
                 // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
+                let wishlist = document.getElementById(productid)
+                wishlist.classList.add("wishlisted");
+                toast.success('Added to wishlist !', {
+                  position: toast.POSITION.BOTTOM_RIGHT
+              });
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -486,7 +532,7 @@ const SingleProduct = (props) => {
                 .then((res) => res.json())
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
-                  //  await console.log(wishlist,"khlklklklk")
+                 
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -759,6 +805,7 @@ const SingleProduct = (props) => {
               <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
                 {Userdata ? (
                   <i
+                    id={prodId}
                     className="bx bxs-heart"
                     onClick={() => {
                       AddtoWishlist(
@@ -974,7 +1021,6 @@ const SingleProduct = (props) => {
       <div className="container-fluid p-4 products">
         <div className="row products-row  ">
           {AllProduct.map((item, index) => {
-            console.log(item.inrDiscount,"This is inr discount");
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
               return (
