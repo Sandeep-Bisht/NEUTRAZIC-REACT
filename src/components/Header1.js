@@ -99,7 +99,7 @@ const Header1 = (props) => {
     localStorage.setItem("Userdata", null);
     toast.success("Logout successfull", {
       position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 5000,
+      autoClose: 2000,
     });
     window.location.replace("/");
   };
@@ -162,7 +162,7 @@ const Header1 = (props) => {
             await CartById();
             toast.success("Login successfull", {
         position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
+        autoClose: 2000,
       });
             //history.push("/");
             window.location.reload();

@@ -251,7 +251,7 @@ const HomePage = () => {
       }
       toast.success("Successfully added to Cart", {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 2000,
       });
     }
   };
@@ -379,6 +379,10 @@ const HomePage = () => {
             )
               .then((res) => res.json())
               .then(async (data) => {
+                toast.error("Product is wishlisted !", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 2000,
+                });
                 //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
@@ -415,11 +419,14 @@ const HomePage = () => {
               )
                 .then((res) => res.json())
                 .then(async (data) => {
-                  
+                  toast.error("Product is wishlisted !", {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    autoClose: 2000,
+                  });
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
-
+                  
                   // setWishlist(data.data[0]);
                 })
                 .catch((err) => {
@@ -430,7 +437,7 @@ const HomePage = () => {
           } else {
             toast.error("Allready in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 1000,
+              autoClose: 2000,
             });
           }
         }
@@ -1008,7 +1015,7 @@ const HomePage = () => {
                                       </>
                                     )}
 
-                                    <ToastContainer />
+                                    
                                     {Userdata ? (
                                       <i
                                         className="bx bx-cart"
@@ -1159,6 +1166,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+          <ToastContainer />
         </section>
         <Baseline />
       <Footer />

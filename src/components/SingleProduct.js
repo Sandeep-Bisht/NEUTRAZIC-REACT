@@ -344,7 +344,7 @@ const SingleProduct = (props) => {
       }
         toast.success("Add to cart",{
         position:"bottom-right",
-        autoClose:1000,
+        autoClose:2000,
       });
     }
     window.scroll(0,0);
@@ -499,7 +499,8 @@ const getWishlist = async () => {
                 let wishlist = document.getElementById(productid)
                 wishlist.classList.add("wishlisted");
                 toast.success('Added to wishlist !', {
-                  position: toast.POSITION.BOTTOM_RIGHT
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose:2000,
               });
               })
               .catch((err) => {
@@ -540,7 +541,8 @@ const getWishlist = async () => {
             }
           } else {
             toast.error('Allready in wishlist !', {
-              position: toast.POSITION.BOTTOM_RIGHT
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose:2000,
           });
             
           }
