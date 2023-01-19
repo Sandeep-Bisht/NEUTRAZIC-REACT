@@ -10,7 +10,7 @@ const SubCategoryCreation = (props) => {
   var categoryCount = 0;
   const [subcategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(true);
   const [data, Setdata] = useState({
     name: "",
     descripton: "",

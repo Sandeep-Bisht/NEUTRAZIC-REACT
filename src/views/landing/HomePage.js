@@ -100,6 +100,7 @@ const HomePage = () => {
   })
     .then((res) => res.json())
     .then(async (data) => {
+      console.log("inside getwishlist home page", data.data[0])
        if(data.data[0] !== undefined){
      
         Setwishlist(data.data)
@@ -342,7 +343,6 @@ const HomePage = () => {
     manufacturer,
     image
   ) => { 
-    console.log("button clicked", productid)
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -380,7 +380,6 @@ const HomePage = () => {
               .then((res) => res.json())
               .then(async (data) => {
                 //add product to wishlist response is comming here
-               console.log("inside wishlist response")
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
@@ -546,7 +545,6 @@ const HomePage = () => {
                   el.type == "Trending Product"
                 ) {
                   tranding = tranding + 1;
-                  
                   return (
                     <>
                       <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
@@ -935,7 +933,8 @@ const HomePage = () => {
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                if (i > 0 && el.category.name == "Skin Care") {
+                  console.log("inside skincare",el)
+                if (i > 0 && el.category.name === "Skin Care") {
                   skincare = skincare + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
@@ -972,8 +971,8 @@ const HomePage = () => {
                                     <ReadMoreReact text={el.name} />
                                   </Link>
                                   <div className="price-div d-flex align-items-center justify-content-between">
-                                    <span className="new-price">$899</span>
-                                    <del className="new-price ml-1">$1000</del>
+                                    <span className="new-price">{el.inrDiscount}</span>
+                                    <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
                                       <i
                                         className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
