@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { baseUrl } from '../utils/services';
 import {IoClose} from 'react-icons/io5';
 
-
 var Userdata='';
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
