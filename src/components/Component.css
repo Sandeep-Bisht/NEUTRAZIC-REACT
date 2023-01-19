@@ -89,11 +89,11 @@ text-align: justify;
 
 .Toastify__progress-bar--success
 {
-    background: #1e144f !important;
+    background: #1b97ff !important;
 }
 .Toastify__toast-body svg
 {
-    fill: #1e144f;
+    fill: #1b97ff !important;
 }
 
 /* button css on image hover */

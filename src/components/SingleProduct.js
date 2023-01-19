@@ -240,9 +240,7 @@ const SingleProduct = (props) => {
   // ImageHandler
 
   const ImageHandler = (m,i)=>{
-    console.log(m,i,"This is image slider");
     let Imagestore = m.path;
-    console.log(Imagestore,"Hello Image");
     SetMainImage(Imagestore);
   }
 
@@ -515,6 +513,7 @@ const SingleProduct = (props) => {
         <div className="row ">
 
           <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
+            
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
               {data.image && data.image.length > 0 ? 
@@ -524,6 +523,7 @@ const SingleProduct = (props) => {
                 } />
               ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
             </div>
+            
             {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
             {data.otherImage && data.otherImage.length > 0 ?            
@@ -1023,7 +1023,7 @@ const SingleProduct = (props) => {
                           </div>
                           <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                             <div className="discount-price-div">
-                              <span>{item.inrDiscount}</span>
+                              <span>{item.inrDiscount}%</span>
                             </div>
                             <div className="discount-price-div2">
                               <span>off</span>

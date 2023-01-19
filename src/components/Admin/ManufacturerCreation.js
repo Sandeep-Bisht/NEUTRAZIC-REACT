@@ -191,11 +191,11 @@ const ManufacturerCreation = (props) => {
             <div className="col-10">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
-            <form>
+            <form className="form-floating">
                     <div className="card p-4 m-2 product-form">
                       <h5>Manufacturer Creation</h5>
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-6 p-1">
                           <input
                             type="file"
                             multiple
@@ -205,9 +205,10 @@ const ManufacturerCreation = (props) => {
                             }}
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-6 p-1 form-floating">
                           <input
                             type="text"
+                            id="floatingInputValue"
                             className="form-control Dashborad-search"
                             placeholder="Manufacturer Name "
                             defaultValue={editableData ? editableData.name : ""}
@@ -215,10 +216,12 @@ const ManufacturerCreation = (props) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
                           />
+                          <label  for="floatingInputValue">Manufacturer Name</label>
                         </div>
-                        <div className="col-6 pt-2">
+                        <div className="col-6 p-1 form-floating">
                           <textarea
-                            className="form-control"
+                            className="form-control Dashborad-search"
+                            id="floatingInputValue"
                             placeholder="Manufacturer Description"
                             rows="3"
                             defaultValue={
@@ -228,6 +231,7 @@ const ManufacturerCreation = (props) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
+                          <label for="floatingInputValue">Manufacturer Description</label>
                         </div>
                         {editableData ? (
                           <div className="col-12 pt-4">
@@ -240,8 +244,8 @@ const ManufacturerCreation = (props) => {
                               Update
                             </button>
                           </div>
-                        ) : null}
-                        {update == true ? (
+                        ) : 
+                         (
                           <div className="col-12 p-1">
                             <button
                               className="btn btn-primary"
@@ -250,7 +254,7 @@ const ManufacturerCreation = (props) => {
                               Submit
                             </button>
                           </div>
-                        ) : null}
+                        ) }
                       </div>
                     </div>
             </form>
