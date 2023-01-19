@@ -21,6 +21,7 @@ const SubCategoryCreation = (props) => {
 
   const history=useHistory();
   const [editableData] = useState(props.history.location.state);
+  
   const submitData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
