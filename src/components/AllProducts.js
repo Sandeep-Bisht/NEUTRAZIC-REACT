@@ -7,8 +7,12 @@ import "../views/landing/homepage.css";
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from "../utils/services";
+import * as ACTIONS from "../CommonService/AddToCart/action"
+import { useDispatch } from "react-redux";
 var Userdata;
 const AllProducts = (props) => {
+
+  let dispatch = useDispatch()
   const [AllProduct, setAllProduct] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -17,25 +21,26 @@ const AllProducts = (props) => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
+  const [wishlistData,Setwishlist]=useState([])
   const [prev, SetPrev] = useState(0);
-  const [next, SetNext] = useState(8);
+  const [next, SetNext] = useState(20);
   const [filter, setFilter] = useState("");
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
   const history = useHistory();
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
     window.scrollTo(0, 0)
     ProductByCategory();
     categoryDetails();
+    GetWishlist();
     CartById();
     GetCategory();
     GetSubCategory();
     GetManufacturer();
     // GetCategory();
   }, []);
-  console.log(AllProduct,"all productssssssssssssssss");
   const setPreviousValue = () => {
     if (prev >= 7) {
       SetNext(next - 8);
@@ -104,7 +109,7 @@ const AllProducts = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        CartById();
+        // CartById();
         UpdateCart();
 
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
@@ -130,6 +135,7 @@ const AllProducts = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "after update");
+        CartById();
         //history.push("/Cart");
         toast.success("Add to cart",{
           position: "bottom-right",
@@ -153,6 +159,8 @@ const AllProducts = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data[0]);
+          let cartItems = data.data[0].order.length;
+          dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
           console.log(err, "error");
@@ -223,6 +231,43 @@ const AllProducts = (props) => {
       });
   };
 
+  const GetWishlist = async () => {
+    let id;
+    if(Userdata){
+     id=Userdata._id
+    }
+      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+       
+      userid: id,
+    }),
+  })
+    .then((res) => res.json())
+    .then(async (data) => {
+       if(data.data[0] !== undefined){
+     
+        Setwishlist(data.data)
+       }
+    })    
+    .catch((err) => {
+      console.log(err, "error");
+    });
+   
+};
+
+  const checkWishlistItem = (productId) => {
+    for (let item of wishlistData) {
+      if (item.productId == productId) {
+        return "wishlisted"
+      }
+    }
+    }
+
   const AddtoWishlist = async (
     productid,
     name,
@@ -271,7 +316,8 @@ const AllProducts = (props) => {
               .then((res) => res.json())
               .then(async (data) => {
                 // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
+                let wishList = document.getElementById(productid);
+               wishList.classList.add("wishlisted");
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -303,7 +349,9 @@ const AllProducts = (props) => {
                 .then((res) => res.json())
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
-                  //  await console.log(wishlist,"khlklklklk")
+                  //add product to wishlist response is comming here
+               let wishList = document.getElementById(productid);
+               wishList.classList.add("wishlisted");
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -638,7 +686,8 @@ const AllProducts = (props) => {
                                </Link> 
                               </div> */}
                       <div className="col-8 text-center ">
-                        <p
+                        <p 
+                        
                           className="bottom-icon text-nowrap wishlist"
                           onClick={() => {
                             AddtoWishlist(
@@ -658,7 +707,7 @@ const AllProducts = (props) => {
                             Userdata == null ? "#exampleModal" : null
                           }
                         >
-                          <i className="bx bx-heart"></i>Wishlist
+                          <i id={el._id} className={`bx bx-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
                         </p>
                         {/* <div className="icon-wishlist"></div> */}
                       </div>

@@ -31,7 +31,7 @@ const Productform = (props) => {
     manufacturer: "",
     type: "",
     image: [],
-    // featuredImage : [],
+    otherImage : []
   });
 
 
@@ -49,12 +49,11 @@ const Productform = (props) => {
     await formData.append("dollerDiscount", data.dollerDiscount);
     await formData.append("manufacturer", data.manufacturer);
     await formData.append("type", data.type);
-    for(let item of data.image){
-      await formData.append("image", item);
-    }    
-    // await formData.append("featuredImage", data.featuredImage)    
+    await formData.append("image", data.image) 
+    for(let item of data.otherImage){
+      await formData.append("otherImage", item);
+    }           
     const url = `${baseUrl}/api/product/add_product`;
-    console.log("dasta", formData, "data.image", data.image)
     await fetch(url, {
       mode: 'no-cors',
       method: "POST",
@@ -267,7 +266,7 @@ const Productform = (props) => {
       _id: item._id,
       name: item.name,
       image: item.image,
-      // featuredImage: item.featuredImage,
+      otherImage : item.otherImage,
       storage: item.storage,
       category: item.category,
       inrMrp: item.inrMrp,
@@ -343,28 +342,28 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <input
                             type="file"
-                            name="image[]"    
-                            multiple                        
+                            name="image[]"  
+                                                    
                             className="form-control Dashborad-search"
                             accept="image/png, .jpeg, .jpg"
                             //value={editableData  ? editableData.image[0].path : ""}
                             onChange={(e) => {
-                              Setdata({ ...data, image: e.target.files });
+                              Setdata({ ...data, image: e.target.files[0] });
                             }}
                           />
                         </div>
 
-                        {/* <div className="col-6 p-1">
+                        <div className="col-6 p-1">
                           <input
                             type="file"
                             className="form-control Dashborad-search"
                             multiple
                             // value={data.image}
                             onChange={(e) => {
-                              Setdata({ ...data, featuredImage: e.target.files[0] });
+                              Setdata({ ...data, otherImage: e.target.files });
                             }}
                           />
-                        </div> */}
+                        </div>
 
                         <div className="col-6 p-1">
                           <select
@@ -420,7 +419,7 @@ const Productform = (props) => {
                             type="text"
                             className="form-control Dashborad-search"
                             defaultValue={editableData  ? editableData.storage : ""}
-                            placeholder="Storage "
+                            placeholder="Storage"
                             onChange={(e) => {
                               Setdata({ ...data, storage: e.target.value });
                             }}
@@ -444,7 +443,7 @@ const Productform = (props) => {
                             defaultValue={
                               editableData  ? editableData.inrDiscount : ""
                             }
-                            placeholder="Discount In Rupees "
+                            placeholder="Price after discount In Rupees"
                             onChange={(e) => {
                               Setdata({ ...data, inrDiscount: e.target.value });
                             }}
@@ -469,7 +468,7 @@ const Productform = (props) => {
                             defaultValue={
                               editableData  ? editableData.dollerDiscount : ""
                             }
-                            placeholder="Discount In Dollers"
+                            placeholder="Price after discount In Dollers"
                             onChange={(e) => {
                               Setdata({
                                 ...data,
