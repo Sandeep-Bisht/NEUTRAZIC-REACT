@@ -17,6 +17,8 @@ import {BsCartXFill} from 'react-icons/bs';
 import {MdRealEstateAgent} from 'react-icons/md';
 import {GrConfigure} from 'react-icons/gr';
 import {RiUserSettingsLine} from 'react-icons/ri';
+import {AiOutlineUser} from 'react-icons/ai';
+import { ToastContainer,toast } from "react-toastify";
 
 import $ from "jquery";
 var Userdata = '';
@@ -70,7 +72,12 @@ const Sidemenu = () => {
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
+    toast.success("Logout Successfully",{
+      position:"bottom-right",
+      autoClose:1000,
+    });
     window.location.replace("/");
+    
   };
 
   return (
@@ -347,21 +354,39 @@ const Sidemenu = () => {
                           Userdata.role == "superAdmin" ? (
                             <ul className="Configration-List">
                               <Link to="/Manufacturer">
-                                <li><GiFactory className="configuration-icons-wrap"/> Manufacturer</li>
+                                <li><GiFactory className="configuration-icons-wrap"/>Add Manufacturer</li>
                               </Link>
                               <Link to="/Category">
                                 {" "}
-                                <li><BiCategory className="configuration-icons-wrap"/>Category</li>{" "}
+                                <li><BiCategory className="configuration-icons-wrap"/>Add Category</li>{" "}
                               </Link>
                               <Link to="/SubCategoryCreation">
                                 {" "}
-                                <li><BsListNested className="configuration-icons-wrap"/>SubCategory</li>
+                                <li><BsListNested className="configuration-icons-wrap"/>Add SubCategory</li>
                               </Link>
                               <Link to="/Roles">
                                 {" "}
                                 <li><RiUserSettingsLine className="configuration-icons-wrap"/>User Roles</li>
                               </Link>
+                              <Link to="/AllManufactureDetails">
+                             
+                             <li className="nav-name"><GiFactory className="configuration-icons-wrap"/>All Manufacturer</li>
+                             </Link>
+                             <Link to="/AllCategoriesDetails">
+                             
+                             <li><BiCategory className="configuration-icons-wrap"/>All Category</li>
+                             </Link>
+                             <Link to="/AllSubCategoriesDetails">
+                              <li><BsListNested className="configuration-icons-wrap"/>All SubCategory</li>
+                             </Link>
+                             <Link to="/AllProductsDetails">
+                              <li><GiBoxUnpacking className="configuration-icons-wrap"/>All Products</li>
+                             </Link>
+                             <Link to="/AllUsers">
+                              <li><AiOutlineUser className="configuration-icons-wrap"/>AllUsers</li>
+                             </Link>
                             </ul>
+                            
                           ) : (
                             <ul className="Configration-List">
                               <Link to="/Roles">
@@ -379,26 +404,26 @@ const Sidemenu = () => {
             </div>
           ) : null
         ) : null}
-        <Link to="/AllManufactureDetails" className="nav__link">
+        {/* <Link to="/AllManufactureDetails" className="nav__link">
           <GiFactory className="nav__icon" />
           <span className="nav__name">All Manufacturer</span>
-        </Link>
-        <Link to="/AllCategoriesDetails" className="nav__link">
+        </Link> */}
+        {/* <Link to="/AllCategoriesDetails" className="nav__link">
           <BiCategory className="nav__icon" />
           <span className="nav__name">All Category</span>
-        </Link>
-        <Link to="/AllSubCategoriesDetails" className="nav__link">
+        </Link> */}
+        {/* <Link to="/AllSubCategoriesDetails" className="nav__link">
           <BsListNested className="nav__icon" />
           <span className="nav__name">All SubCategory</span>
-        </Link>
+        </Link> */}
         {/* <Link to="/ProductForm" className="nav__link">
           <FaBoxOpen className="nav__icon" />
           <span className="nav__name">Products</span>
         </Link> */}
-        <Link to="/AllProductsDetails" className="nav__link">
+        {/* <Link to="/AllProductsDetails" className="nav__link">
           <GiBoxUnpacking className="nav__icon" />
           <span className="nav__name">All Products</span>
-        </Link>
+        </Link> */}
         <div className="nav__link" onClick={() => logout()}>
           <BiLogOut className="nav__icon" />
           <span className="nav__name" style={{ cursor: "pointer" }}>
@@ -406,6 +431,7 @@ const Sidemenu = () => {
           </span>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 };

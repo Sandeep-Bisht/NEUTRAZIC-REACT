@@ -709,7 +709,7 @@ const getWishlist = async () => {
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
-                  Category: <span> Skin Care</span>
+                  Category: <span> {categoryname}</span>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">

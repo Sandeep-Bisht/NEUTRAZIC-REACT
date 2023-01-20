@@ -534,6 +534,7 @@ font-family: 'Roboto', sans-serif;
 /* Product Form */
 #Allproduct-form{
   height: 610px !important;
+  width: 117%;
   
 }
 
@@ -752,17 +753,17 @@ font-family: 'Roboto', sans-serif;
   font-family: 'Roboto', sans-serif;
   font-size: 17px;
   margin-right: 10px;
-  color:#1e144f;
+  color:#006837;
 }
 .create-manu button
 {
   font-family: 'Roboto', sans-serif;
   font-size: 17px;
-  height: 40px;
+  height:38px;
   width: 40px;
   border-radius: 50%;
   border:0;
-  background-color: #1e144f;
+  background-color: #00B560;
   filter: drop-shadow(2px 4px 6px black);
   padding-top: 6px;
  
@@ -863,19 +864,18 @@ font-family: 'Roboto', sans-serif;
 
 .Configration-List .configuration-icons-wrap
 {
-  height: 18px;
+    height: 18px;
     width: auto;
     color: #000;
-    opacity: .5;
-    padding-right: 10px;
+    opacity: .6;
+    padding-right: 3px;
 }
 .Configration-List li
 {
   font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 0.8rem;
     color: #000;
-    opacity: .7;
+    opacity: .8;
 }
 .Configration-List li:hover
 {

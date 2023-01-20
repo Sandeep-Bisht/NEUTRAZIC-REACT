@@ -49,6 +49,7 @@ import AllCategoriesDetails from "../components/Admin/AllCategory/AllCategoriesD
 import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCategoriesDetails";
 import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
 import MyAccount from "../components/MyAccount"
+import AllUsers from "../components/Admin/AllUsers";
 
 var Userdata = "";
 const Root = (props) => {
@@ -141,6 +142,7 @@ const Root = (props) => {
               path="/SubCategoryCreation"
               component={SubCategoryCreation}
             />
+            <Route path="/AllUsers" component={AllUsers}/> 
             <Route exact path="/Subcategory" component={Subcategory} />
             <Route exact path="/Subcategories/:_id" component={Subcategories} />
             <Route
