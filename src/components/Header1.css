@@ -95,8 +95,9 @@
 .user-login .Total-Item
 {
   position: absolute;
-  bottom:12px;
-  left: 8px;
+  bottom: 10px;
+  left: -2px;
+  font-size: 14px;
 }
 
 .wishlist-div
@@ -149,8 +150,8 @@ color:#1e144f;
     width:260px;
     font-size:15px;
     font-family: 'Roboto', sans-serif;
-    color:#C0C0C0;
-
+    color:#000;
+    padding-left: 6px;
 }
 .login-div2 .search{
     position:relative;
@@ -840,7 +841,8 @@ body {
     width: 180px;
     font-size: 15px;
     font-family: 'Roboto', sans-serif;
-    color: #C0C0C0;
+    color: #000;
+    padding-left: 6px;
 }
 .login-div2 .search {
     position: relative;

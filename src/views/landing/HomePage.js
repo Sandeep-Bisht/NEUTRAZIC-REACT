@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import * as ACTIONS from '../../CommonService/AddToCart/action'
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
+import Carousel from "react-elastic-carousel";
 
 import $ from "jquery";
 
@@ -35,6 +36,13 @@ const HomePage = () => {
     "../../Images/categories/categories-img5.png",
     "../../Images/categories/categories-img6.png",
   ];
+
+const breakPoints = [
+{ width : 1, itemsToShow : 1},
+{ width : 550, itemsToShow : 2},
+{ width : 768, itemsToShow : 4},
+{ width : 1200, itemToShow : 6},
+];
 
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -1082,14 +1090,16 @@ const HomePage = () => {
         </section>
 
         <div className="brands-area">
-          <div className="container m-auto">
+          <div className="container-fluid">
             <div className="trendign-head">
               <span className="products-color">Selling Brands</span>
             </div>
+              <Carousel breakPoints={breakPoints}>
             <div className="row align-items-center">
               {Manufactureres &&
                 Manufactureres.length > 0 &&
                 Manufactureres.map((el, index) => (
+                  <>
                   <div className="col-lg-2 col-sm-4 col-md-2 col-6" key={index}>
                     <Link to={"/ProductByManufacturer/" + el.name}>
                       <div className="single-brands-item">
@@ -1107,8 +1117,10 @@ const HomePage = () => {
                       </div>
                     </Link>
                   </div>
+                  </>
                 ))}
             </div>
+                  </Carousel>
           </div>
         </div>
         <section className="mobile-app">

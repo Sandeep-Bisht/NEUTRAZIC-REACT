@@ -71,8 +71,12 @@ float: right;
 }
 .product-div .row .picture-div .image-group div img
 {
-	height:110px;
-	
+	height: 110px;
+    background: #f2f2f2;
+    object-fit: contain;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
 }
 .product-div .row .picture-div .container-fluid .row img{
 	height:160px;

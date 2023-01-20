@@ -652,20 +652,13 @@ const AllProducts = (props) => {
         </div>
       </div>
 
-      <div className="container Category-div">
+      <div className="container m-auto Category-div">
         <div className="row align-items-center">
-          <div className="col-6">
-            <div className="section-title">
+          <div className="col-12">
+            <div className="section-title my-4">
               <h2>All Products</h2>
             </div>
-          </div>
-          <div className="col-5">
-          </div>
-          <div className="col-1"></div>
-        </div>
-      </div>
-
-      <div id="wrap">
+            <div>
         <div id="columns" className="columns_5">
           {AllProduct.map((el, ind1) => {
             if (ind1 > prev && ind1 <= next) {
@@ -679,7 +672,7 @@ const AllProducts = (props) => {
                   </Link>
                   {/* :null} */}
                   <figcaption>{el.name}</figcaption>
-                  <div className="text-center price-div">
+                  <div className="allproduct-price-div">
                     {/* <div className="d-flex justify-content-center">
                       <StarsRating
                         count={5}
@@ -690,16 +683,24 @@ const AllProducts = (props) => {
                       />
                     </div> */}
                     <div className="row">
-                      <div className="col-2 "></div>
                       {/* <div className="col-4 ">
                               <Link to={"/SingleProduct/" + el._id}>  
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                      <div className="col-8 text-center ">
+                    <div className="col-6">
+                      <span className="price">
+                      {" "}
+                      <i className="fa fa-inr"></i>{el.inrMrp}
+                      {/* $
+                      {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
+                        ? 0
+                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
+                    </span>
+                    </div>
+                      <div className="col-6 text-end">
                         <p 
-                        
-                          className="bottom-icon text-nowrap wishlist"
+                          className={`bottom-icon text-nowrap wishlist ${checkWishlistItem(el._id)}`}
                           onClick={() => {
                             AddtoWishlist(
                               el._id,
@@ -718,20 +719,11 @@ const AllProducts = (props) => {
                             Userdata == null ? "#exampleModal" : null
                           }
                         >
-                          <i id={el._id} className={`bx bx-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
+                          <i id={el._id} className={`bx bxs-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
                         </p>
                         {/* <div className="icon-wishlist"></div> */}
                       </div>
-                      <div className="col-2 "></div>
                     </div>
-                    <span className="price">
-                      {" "}
-                      {el.inrMrp}
-                      {/* $
-                      {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                        ? 0
-                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
-                    </span>
                   </div>
                   <button
                     className="button btn"
@@ -764,6 +756,11 @@ const AllProducts = (props) => {
           
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+
+      
       
       <div className="col-12 pagination text-center">
         <button

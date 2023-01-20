@@ -1,4 +1,37 @@
-
+.cVXxbE
+{
+	display: none;
+}
+.brands-area .Slxdj
+{
+    font-size: 1em !important;
+    width: 40px !important;
+    height: 36px !important;
+    min-width: 4px !important;
+    line-height: 29px !important;
+}
+.Slxdj
+{
+	font-size: 1em !important;
+    width: 40px !important;
+    height: 34px !important;
+    min-width: 4px !important;
+    line-height: 29px !important;
+}
+.allproduct-price-div
+{
+	font-size: 16px;
+    color: #212121;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.50px;
+}
+.allproduct-price-div i
+{
+	color: #4444;
+	padding-right: 5px;
+	font-size: 12px;
+}
 .wishlisted {
 	color: red !important;
   }
@@ -10021,10 +10054,8 @@ p:last-child {
 }
 .section-title h2 {
 	margin-top: 0px;
-	border-bottom: 3px solid #1e144f;
 	padding-bottom: 0;
 	font-size: 2rem;
-	text-align: center;
 	color: #1e144f;
 	font-family: 'Roboto', sans-serif;
 	opacity: 1;
@@ -12884,7 +12915,7 @@ letter-spacing: 0.50px;
 
 .bx-minus:before {
     content: "\eaed";
-    background: #00B560;
+    background: #1e144f;
 	color:white;
 }
 .bx-plus:before {
@@ -14153,7 +14184,7 @@ letter-spacing: 0.50px;
 	position: relative;
 	z-index: 1;
 	border: none;
-	background-color: #00B560;
+	background-color: #1b97ff;
 	font-family: 'Roboto', sans-serif;
 	box-shadow: unset;
 	text-align: center;
@@ -15084,6 +15115,7 @@ letter-spacing: 0.50px;
     width: 100%;
     object-fit: contain;
     padding: 10px;
+	background-color: #fff;
     border-radius: 10px;
 }
 
@@ -18715,6 +18747,7 @@ letter-spacing: 0.50px;
 	}
 	.bottom-icon{
 		font-size: 13px;
+		cursor: pointer;
 	}
 	.product-bottom-icon{
 	background: #FFDF6D;
@@ -18873,12 +18906,12 @@ letter-spacing: 0.50px;
   .columns_5 .figure1:nth-child(5){
 	  margin-right: 0;
   }
-  #columns .figure1:hover{
+  /* #columns .figure1:hover{
 	  -webkit-transform: scale(1.1);
 	  -moz-transform:scale(1.1);
 	  transform: scale(1.1);
   
-  }
+  } */
   #columns:hover .figure1:not(:hover) {
 	  opacity: 0.4;
   }
@@ -18913,7 +18946,7 @@ letter-spacing: 0.50px;
   div#columns .figure1 figcaption {
 	font-size: 1.0rem;
 	color: #444;
-	line-height: 1.5;
+	line-height: 2.4;
 	height:30px;
 	font-weight:600;
 	text-overflow:ellipsis;
@@ -19149,10 +19182,8 @@ ul
 /* Pagination buttons */
 .pagination
 {
-	margin-top: -45px;
 	text-align: center;
 	justify-content:center;
-	
 }
 .Prebutton
 {

@@ -15,10 +15,19 @@ import { baseUrl } from "../utils/services";
 import defaultImage from "../Images/products/Hintosulin (1).png"
 import * as ACTIONS from "../CommonService/AddToCart/action"
 import { useDispatch } from "react-redux";
+import Carousel from "react-elastic-carousel";
 
 
 var Userdata = "";
 var CartDataWoLogin = [];
+
+const breakPoints = [
+  { width : 1, itemsToShow : 1},
+  { width : 550, itemsToShow : 2},
+  { width : 768, itemsToShow : 4},
+  { width : 1200, itemToShow : 6},
+  ];
+
 const SingleProduct = (props) => {
 
   let dispatch = useDispatch();
@@ -573,10 +582,11 @@ const getWishlist = async () => {
             </div>
             
             {/* <ReactImageZoom {...ImageData} /> */}
+              <Carousel breakPoints={breakPoints}>
             <div className="row image-group pt-2">
             {data.otherImage && data.otherImage.length > 0 ?            
             data.otherImage.map((item,ind)=>(
-              <div className="col-3 " key={ind}>              
+              <div className="col-3" key={ind}>              
                 <img
                 className="img-slide"
                   src={`${baseUrl}/` + item.path}
@@ -584,14 +594,10 @@ const getWishlist = async () => {
                 />
               
             </div>
-            
               )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
             }
             </div>
-            
-              
-          
-            
+            </Carousel>
 
             {/* phone single page caresouel */}
             <div
