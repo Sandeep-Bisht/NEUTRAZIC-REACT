@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
 import * as ACTIONS from '../CommonService/AddToCart/action'
 import confirm, { Button, alert } from "react-alert-confirm";
+import { message, Popconfirm } from 'antd';
+import "../views/landing/homepage.css";
 
 import { baseUrl } from "../utils/services";
 import AllProducts from "./AllProducts";
@@ -20,8 +22,8 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
-  const [cartItems,setCartItems] = useState();
-  
+  const [cartItems, setCartItems] = useState();
+
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;
@@ -31,7 +33,7 @@ const Cart = () => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     CartById();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }, []);
   // const Subtotal=()=>{
   //    subtotal=subtotal+
@@ -100,7 +102,7 @@ const Cart = () => {
     }
   };
   const Plusquantity = async (quantity, price, index) => {
-    console.log(quantity,price,index,"Abhishek Herer");
+    console.log(quantity, price, index, "Abhishek Herer");
     if (quantity >= 1) {
       //  isquantity = true
       cart[index].quantity = quantity + 1;
@@ -114,25 +116,19 @@ const Cart = () => {
 
   const Sliceorder = async (index, e) => {
     e.preventDefault();
-    
     const array = await cart.filter((e, i) => i !== index);
-    confirm({
-      title: "This is title",
-      language: "en",
-      content: <h2>This is content !</h2>,
-      onOk: () => console.log("ok")
-    });
     await UpdateCart(array);
     await CartById();
-    toast.success("Item deleted successfull",{
-      position:"bottom-right",
-      autoClose:2000,
+    toast.success("Item deleted successfull", {
+      position: "bottom-right",
+      autoClose: 2000,
     })
   };
 
+
   return (
     <>
-      <Header1 CartItems={cart}/>
+      <Header1 CartItems={cart} />
       <div className="first-nav container-fluid">
         <span>
           <Link to="/">Home</Link>/ Cart
@@ -160,18 +156,19 @@ const Cart = () => {
                             <th scope="col"></th>
                             <th scope="col">PRICE</th>
                             <th scope="col">QUANTITY</th>
+                            <th scope="col">Total</th>
                             <th scope="col">ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
                           {cart.map((el, ind1) => {
-                            console.log(el,"all the el things");
-                           // total = total + (el.singleprice * el.quantity) ;
+                            console.log(el, "all the el things");
+                            // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
                             total = el.singleprice * el.quantity;
                             total1 = total1 + (el.singleprice * el.quantity);
-                            localStorage.setItem("Subtotal", total1); 
+                            localStorage.setItem("Subtotal", total1);
                             actualtotal += el.mrp * el.quantity;
                             localStorage.setItem("ActualSubtotal", total1);
 
@@ -182,7 +179,7 @@ const Cart = () => {
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     <img
                                       src={
-                                        `${baseUrl}/`+ el.image
+                                        `${baseUrl}/` + el.image
                                       }
                                       alt="item"
                                     />
@@ -204,9 +201,13 @@ const Cart = () => {
                                 </td>
                                 <td className="product-price">
                                   <div className="amount">
+                                    
+                                  <span className="new-price ml-1 fa fa-inr">
+                                    <del>{el.mrp}</del>
+                                    </span>
                                     <span className="unit-amount">
                                       {
-                                        el.mrp
+                                        el.singleprice
                                         //   isNaN(
                                         //     el.mrp -
                                         //       (el.mrp * el.discountprice) / 100
@@ -261,25 +262,23 @@ const Cart = () => {
                                     </span>
                                   </div>
                                 </td> */}
-                                {/* <td className="product-subtotal">
+                                <td className="product-subtotal">
                                   <div className="amount">
-                                    <span className="subtotal-amount mt-4">
+                                   <span className="subtotal-amount mt-4 fa fa-inr">
                                          {
-                                          total
+                                          el.singleprice*el.quantity
                                          }
                                     </span>
                                   </div>
-                                </td> */}
+                                </td>
                                 <td>
-                                  <Button
-                                    className="btn btn-danger btn-sm w-50"
+                                  <Popconfirm className="bx bx-trash btn-danger btn-sm"
+                                    title="Delete the Product"
+                                    description="Are you sure to delete this Product?"
                                     style={{ margin: "0" }}
-                                    onClick={(e) => {
-                                      Sliceorder(ind1, e);
-                                    }}
+                                    onConfirm={(e)=>Sliceorder(ind1, e)}
                                   >
-                                    <i className="bx bx-trash"></i>
-                                  </Button>
+                                  </Popconfirm>
                                   {/* <Button onClick={handleClickBasic}>Basic</Button> */}
                                 </td>
                               </tr>
@@ -309,16 +308,16 @@ const Cart = () => {
                   <div className="cart-totals">
                     <h3>Cart Totals</h3>
                     <ul>
-                    <li>
-                        Subtotal <span>{actualtotal}</span>
+                      <li>
+                        Subtotal <span>₹{actualtotal}</span>
                       </li>
                       <li>
-                        Total Discount <span>{actualtotal-total}</span>
+                        Discount <span>-₹{actualtotal - total1}</span>
                       </li>
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total <span>{total1}</span>
+                        Total Amount <span>₹{total1}</span>
                       </li>
                     </ul>
                     <Link
@@ -444,7 +443,7 @@ const Cart = () => {
           </table>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
       {/*  End mobile responsive cart */}
       <Baseline />
       <Footer />

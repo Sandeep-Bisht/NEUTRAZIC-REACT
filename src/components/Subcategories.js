@@ -285,6 +285,9 @@ const Subcategories = (props) => {
               .then(async (data) => {
                 // setWishlist(data.data[0]);
                 //  await console.log(wishlist,"khlklklklk")
+                let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
+                wishList.classList.add("wishlisted");
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -317,6 +320,9 @@ const Subcategories = (props) => {
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
                   //  await console.log(wishlist,"khlklklklk")
+                  let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
+                wishList.classList.add("wishlisted");
                 })
                 .catch((err) => {
                   console.log(err, "error e");

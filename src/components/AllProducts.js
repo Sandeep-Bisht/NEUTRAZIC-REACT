@@ -730,11 +730,10 @@ const AllProducts = (props) => {
                         </p>
                         {/* <div className="icon-wishlist"></div> */}
                       </div>
-                      <div className="col-2 "></div>
                     </div>
                     <span className="price">
                       {" "}
-                      {el.inrMrp}
+                      {el.inrDiscount}
                       {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0

@@ -57,7 +57,6 @@ const Header1 = (props) => {
     },
   });
 
-
   useEffect(() => {
     if(state.noOfItemsInCart >= 0) {
       setCartItems(state.noOfItemsInCart)
@@ -369,23 +368,30 @@ const Header1 = (props) => {
                 className="accordion accordion-flush"
                 id="accordionFlushExample"
               >
-                {subcategories &&
-                  subcategories.length > 0 &&
-                  subcategories.map((el, ind) => (
+                {categories &&
+                  categories.length > 0 &&
+                  categories.map((el, ind) => (
                     <div className="accordion-item" key={ind}>
                       <h2 className="accordion-header" id="flush-headingOne">
-                        <Link to={"/Subcategories/" + el._id}>
+                        <Link to={"/AllCategory/" + el._id}>
                           <div
                             className="d-flex align-items-center"
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           >
-                            <img
-                              className="icons1"
-                              src={
-                                `${baseUrl}/`+ el.image[0].path
-                              }
-                            />
+
+                            {
+                               el.image.length ? <img
+                               className="icons1"
+                               src={
+                                 `${baseUrl}/`+ el.image[0].path
+                               }
+                               alt=""
+                             /> : ""
+                            }
+                            
+                            
+                            
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -1106,7 +1112,7 @@ const Header1 = (props) => {
                     <li key={ind}>
                       <Link
                         className="dropdown-item"
-                        to={"/AllCategory/" + el._id}
+                        to={"/categories/" + el._id}
                       >
                         {el.name}
                       </Link>
