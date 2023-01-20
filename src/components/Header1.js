@@ -96,8 +96,8 @@ const Header1 = (props) => {
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
-    toast.success("Logout successfull", {
-      position: toast.POSITION.BOTTOM_RIGHT,
+    toast.success("Logout successfully", {
+      position: "bottom-right",
       autoClose: 2000,
     });
     window.location.replace("/");
@@ -132,6 +132,10 @@ const Header1 = (props) => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data, "After post Api");
+          toast.success("Registered Successfully",{
+            position:"bottom-right",
+            autoClose: 2000,
+          })
           window.location.reload();
         });
     }
@@ -154,14 +158,17 @@ const Header1 = (props) => {
         .then(async (res) => {
           if (res.role === "user") {
             Userdata = res;
-            localStorage.setItem("Userdata", JSON.stringify(res));
+           await localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
-            toast.success("Login successfull", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 2000,
-      });
-            //history.push("/");
+            
+            // history.push("/");
+           
             window.location.reload();
+            toast.success("Login successfully", {
+              position: "bottom-right",
+              autoClose: 2000,
+            });
+            
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||
@@ -170,6 +177,7 @@ const Header1 = (props) => {
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
             history.push("/Dashboard");
+            
             window.location.reload();
           } else if (Userdata == undefined) {
             console.log(res, "response failure");
@@ -593,7 +601,7 @@ const Header1 = (props) => {
                           >
                             Login
                           </button>
-                          <ToastContainer />
+                          
                           <span>
                             <p className="mt-2">Forget Password...</p>
                           </span>
@@ -1038,8 +1046,9 @@ const Header1 = (props) => {
             </div>
           )}
         </div>
+        
       </div>
-
+      <ToastContainer/>
       {/* end phone top-navbar */}
 
       {/* phone main-navbar */}
@@ -1135,6 +1144,7 @@ const Header1 = (props) => {
           </div>
         </div>
       </nav>
+      
       {/* end phone responsive header */}
     </>
   );

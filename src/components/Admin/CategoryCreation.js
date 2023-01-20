@@ -171,11 +171,11 @@ const CategoryCreation = (props) => {
           <div className="col-2 px-0">
         <Sidemenu />
         </div>
-        <div className="col-10">
+        <div className="col-10 px-0">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
             <form>
-                  <div className="col-12">
+                  <div className="col-12 px-0">
                     <div className="card p-4 m-2 product-form">
                       <h5>Category Creation</h5>
                       <div className="row">
