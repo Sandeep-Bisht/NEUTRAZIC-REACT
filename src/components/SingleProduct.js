@@ -689,7 +689,7 @@ const getWishlist = async () => {
               <div className="price pt-2">
                 <span className="price-detail">
                 <i className="fa fa-inr"></i>
-                ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
+                {data.inrDiscount} <del>{data.inrMrp}</del> <span>{Math.ceil(((data.inrMrp-data.inrDiscount)/data.inrMrp)*100)}% OFF</span>
                 </span>
               </div>
 
