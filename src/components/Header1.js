@@ -373,7 +373,7 @@ const Header1 = (props) => {
                   categories.map((el, ind) => (
                     <div className="accordion-item" key={ind}>
                       <h2 className="accordion-header" id="flush-headingOne">
-                        <Link to={"/AllCategory/" + el._id}>
+                        <Link to={"/Subcategories/" + el._id}>
                           <div
                             className="d-flex align-items-center"
                             data-bs-dismiss="modal"

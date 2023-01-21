@@ -25,6 +25,9 @@ const Subcategories = (props) => {
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
+  const [getSubCategories,setGetSubCategories]=useState([]);
+
+  console.log(getSubCategories,"inside the all the categories")
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -97,6 +100,7 @@ const Subcategories = (props) => {
             setHeading(item.name);
           }
         });
+        setGetSubCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -364,12 +368,10 @@ const Subcategories = (props) => {
             <div className="row">
               {data.map((item, ind) => {
                 if (
-                  // ind > 34 &&
-                  item.subcategory._id == props.match.params._id
+                  item.category._id == props.match.params._id
                 ) {
                   return (
                     <div className="col-lg-3 col-md-12 col-sm-12 ">
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row  align-items-center product-div">
                           <div className="col-6 product-image-div">
