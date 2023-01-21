@@ -3,6 +3,7 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import { useHistory } from "react-router";
 // import DataTable from '@bit/adeoy.utils.data-table';
 var Userdata;
 const CategoryCreation = (props) => {
@@ -14,7 +15,7 @@ const CategoryCreation = (props) => {
     descripton: "",
     image: [],
   });
-
+  const history=useHistory();
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
@@ -33,7 +34,10 @@ const CategoryCreation = (props) => {
       //   },
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) =>{
+        res.json()
+        history.push("/AllCategoriesDetails");
+      } )
       .then((res) => {
         GetCategory();
 
@@ -202,10 +206,10 @@ const CategoryCreation = (props) => {
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <textarea
-                            className="form-control Dashborad-search"
+                            className="form-control"
                             placeholder="Category Description"
                             id="floatingInputValue"
-                            rows="3"
+                            rows="10"
                             defaultValue={
                               editableData ? editableData.description : ""
                             }
@@ -216,7 +220,7 @@ const CategoryCreation = (props) => {
                           <label for="floatingInputValue">Category Description</label>
                         </div>
                         {editableData ? (
-                          <div className="col-12 pt-4">
+                          <div className="col-12 p-1">
                             
                             <button
                               className="btn btn-primary"
@@ -244,14 +248,6 @@ const CategoryCreation = (props) => {
           ) : null
         ) : null}
       </div>
-      {update ? (
-        <div className="create-manu container text-right">
-          <span>Create Manufacturer</span>
-          <button onClick={() => setUpdate(false)}>
-            <i className="bx bx-plus"></i>
-          </button>
-        </div>
-      ) : null}
       </div>
     </div>
       </section>

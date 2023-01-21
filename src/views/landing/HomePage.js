@@ -110,7 +110,6 @@ const breakPoints = [
     .then(async (data) => {
       console.log("inside getwishlist home page", data.data[0])
        if(data.data[0] !== undefined){
-     
         Setwishlist(data.data)
        }
     })    
@@ -259,7 +258,7 @@ const breakPoints = [
       }
       toast.success("Successfully added to Cart", {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 2000,
       });
     }
   };
@@ -351,6 +350,7 @@ const breakPoints = [
     manufacturer,
     image
   ) => { 
+    
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -387,10 +387,16 @@ const breakPoints = [
             )
               .then((res) => res.json())
               .then(async (data) => {
+                toast.error("Product is wishlisted !", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 2000,
+                });
+                
                 //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
+                 GetWishlist();
                 // setWishlist(data.data[0]);
               })
               .catch((err) => {
@@ -423,11 +429,14 @@ const breakPoints = [
               )
                 .then((res) => res.json())
                 .then(async (data) => {
-                  
+                  toast.error("Product is wishlisted !", {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    autoClose: 2000,
+                  });
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
-
+                  GetWishlist();
                   // setWishlist(data.data[0]);
                 })
                 .catch((err) => {
@@ -438,7 +447,7 @@ const breakPoints = [
           } else {
             toast.error("Allready in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 1000,
+              autoClose: 2000,
             });
           }
         }
@@ -786,7 +795,7 @@ const breakPoints = [
           <div className="container m-auto py-4">
             <div className="row ">
               {data.map((el, index) => {
-                if (index > 0) {
+                if (index >= 0) {
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
@@ -799,9 +808,10 @@ const breakPoints = [
                                   to={"/SingleProduct/" + el._id}
                                   className="product-image-link"
                                 >
-                                  <div className="image hover-switch">
+                                  <div className="image hover-switch">                                  
                                     <img
-                                      src={el.image.length > 1 ? `${baseUrl}/` + el.image[1].path : require("../../Images/products/Hintosulin (1).png")}
+                                      src={el.otherImage &&
+                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
                                       alt=""
                                     />
                                     <img
@@ -810,7 +820,7 @@ const breakPoints = [
                                         el.image[0].path
                                       }
                                       alt=""
-                                      style={{ position: "absolute" }}
+                                      style={{ position: "absolute",left: "0" }}
                                     />
                                   </div>
                                 </Link>
@@ -825,24 +835,27 @@ const breakPoints = [
                                     <i className="fa fa-inr"></i>{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
-                                      <i
-                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                        <i
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
                                           id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
-                                        }}
-                                      ></i>
-                                    ) : (
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
+                                      ) : (
                                       <>
                                         <i
                                           className="bx bxs-heart ml-3 pc-heart"
@@ -942,8 +955,7 @@ const breakPoints = [
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                  console.log("inside skincare",el)
-                if (i > 0 && el.category.name === "Skin Care") {
+                if (i > 0 && el.category.name === "Skincare") {
                   skincare = skincare + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
@@ -960,7 +972,8 @@ const breakPoints = [
                                   
                                   <div className="image hover-switch">
                                     <img
-                                      src={el.image.length > 1 ? `${baseUrl}/` + el.image[1].path : require("../../Images/products/Hintosulin (1).png")}
+                                      src={el.otherImage &&
+                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
                                       alt=""
                                     />
                                     <img
@@ -969,7 +982,7 @@ const breakPoints = [
                                         el.image[0].path
                                       }
                                       alt=""
-                                      style={{ position: "absolute" }}
+                                      style={{ position: "absolute", left: "0" }}
                                     />
                                   </div>
                                 </Link>
@@ -983,24 +996,27 @@ const breakPoints = [
                                     <span className="new-price">{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (
-                                      <i
-                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                        <i
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
                                           id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
-                                        }}
-                                      ></i>
-                                    ) : (
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
+                                      ) : (
                                       <>
                                         <i
                                           className="bx bxs-heart ml-3 pc-heart"
@@ -1017,7 +1033,7 @@ const breakPoints = [
                                       </>
                                     )}
 
-                                    <ToastContainer />
+                                    
                                     {Userdata ? (
                                       <i
                                         className="bx bx-cart"
@@ -1172,6 +1188,7 @@ const breakPoints = [
               </div>
             </div>
           </div>
+          <ToastContainer />
         </section>
         <Baseline />
       <Footer />

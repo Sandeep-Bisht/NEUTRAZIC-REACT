@@ -185,10 +185,11 @@ const Roles = (props) => {
                 <img src={require("../../Images/woman-laptop.jpg")} />
               </div>
               <div className="form-group col-6">
-                <div className="form-group col-lg-12 pt-3">
+                <div className="form-group col-lg-12 p-1  form-floating">
                   {/* <label>Username<span>*</span></label> */}
                   <input
                     type="text"
+                    id="floatingform"
                     className="form-control input-text "
                     placeholder="Username*"
                     required
@@ -196,11 +197,13 @@ const Roles = (props) => {
                       setUsername(e.target.value);
                     }}
                   />
+                  <label for="floatingform">Username*</label>
                 </div>
-                <div className="form-group col-lg-12">
+                <div className="form-group col-lg-12 p-1 form-floating">
                   {/* <label>Email<span>*</span></label> */}
                   <input
                     type="email"
+                    id="floatingform"
                     className="form-control input-text"
                     placeholder="Email*"
                     required
@@ -208,28 +211,33 @@ const Roles = (props) => {
                       setemail(e.target.value);
                     }}
                   />
+                  <label for="floatingform">Email*</label>
                 </div>
-                <div className="form-group col-lg-12">
+                <div className="form-group col-lg-12 p-1 form-floating">
                   {/* <label>Password<span>*</span></label> */}
                   <input
                     className="form-control input-text"
+                    id="formfloating"
                     placeholder="Password*"
                     required
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
                   />
+                  <label for="formfloating">Password*</label>
                 </div>
-                <div className="form-group col-lg-12">
+                <div className="form-group col-lg-12 p-1 form-floating">
                   {/* <label>Confirm Password<span>*</span></label> */}
                   <input
                     className="form-control input-text"
+                    id="formfloating"
                     placeholder="Confirm Password*"
                     required
                   />
+                  <label for="formfloating">Confirm Password*</label>
                 </div>
                 {Userdata != undefined && Userdata.role == "superAdmin" ? (
-                  <div className="form-group col-lg-12">
+                  <div className="form-group col-lg-12 p-1">
                     {/* <label>User Roles<span>*</span></label> */}
                     <select
                       className="form-control custom-select"
@@ -244,7 +252,7 @@ const Roles = (props) => {
                     </select>
                   </div>
                 ) : Userdata.role == "Manager" ? (
-                  <div className="form-group col-lg-12">
+                  <div className="form-group col-lg-12 p-1">
                     {/* <label>User Roles<span>*</span></label> */}
 
                     <select
@@ -259,7 +267,7 @@ const Roles = (props) => {
                     </select>
                   </div>
                 ) : null}
-                <div className="form-group col-lg-12">
+                <div className="form-group col-lg-12 p-1">
                   {/* <label>Vendor Organization<span>*</span></label> */}
                   <select
                     className="form-control custom-select"
@@ -273,7 +281,7 @@ const Roles = (props) => {
                     ))}
                   </select>
                 </div>
-                <div className="form-group col-lg-12">
+                <div className="form-group col-lg-12 p-1">
                   <button
                     className="btn btn-registration btn-lg"
                     onClick={(e) => {

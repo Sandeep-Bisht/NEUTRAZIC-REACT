@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action"
 import { useDispatch } from "react-redux";
+
+
 var Userdata;
 const AllProducts = (props) => {
 
@@ -145,7 +147,7 @@ const AllProducts = (props) => {
         //history.push("/Cart");
         toast.success("Add to cart",{
           position: "bottom-right",
-          autoClose: 500,
+          autoClose: 2000,
         })
       })
       .then((err) => console.log(err));
@@ -322,6 +324,10 @@ const AllProducts = (props) => {
               .then((res) => res.json())
               .then(async (data) => {
                 // setWishlist(data.data[0]);
+                toast.success("Product is wishlisted",{
+                  position:"bottom-right",
+                  autoClose:2000
+                })
                 let wishList = document.getElementById(productid);
                wishList.classList.add("wishlisted");
               })
@@ -356,6 +362,10 @@ const AllProducts = (props) => {
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
                   //add product to wishlist response is comming here
+                  toast.success("Product is wishlisted",{
+                    position:"bottom-right",
+                    autoClose:2000
+                  })
                let wishList = document.getElementById(productid);
                wishList.classList.add("wishlisted");
                 })
@@ -366,7 +376,7 @@ const AllProducts = (props) => {
           } else {
             toast.error('Allready in wishlist !', {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 500,
+              autoClose: 2000,
           });
             
           }
@@ -763,21 +773,19 @@ const AllProducts = (props) => {
       
       
       <div className="col-12 pagination text-center">
-        <button
+        {/* <IoIosArrowBack
           className="Prebutton"
           onClick={() => {
             setPreviousValue();
           }}
-        >
-          Prev
-        </button>
+        /> */}
         <button
           className="Nextbutton"
           onClick={() => {
             setNextValue();
           }}
         >
-          Next
+          Load More...
         </button>
         
       </div>
