@@ -36,6 +36,7 @@ const MyAccount = () => {
     <>
       <Header1 />
       <div id="Myacount-Page">
+        {Userdata ?(
         <form onSubmit={handleSubmit(onsubmit)}>
           <div className="container mt-5 mb-5">
             <div className="row">
@@ -145,6 +146,12 @@ const MyAccount = () => {
             </div>
           </div>
         </form>
+        ):
+        <div className="col-12 mt-4 text-center EMPTYWISHLIST-DIV">
+            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"  background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
+ 
+            </div>
+}
       </div>
       <Footer />
     </>

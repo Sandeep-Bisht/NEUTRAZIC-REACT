@@ -11,6 +11,7 @@ import {IoClose} from 'react-icons/io5';
 import SingleProduct from './SingleProduct';
 import { ToastContainer, toast } from "react-toastify";
 
+
 var Userdata='';
 const WishList = ()=>{
    const [wishlistData,Setwishlist]=useState([])
@@ -80,7 +81,7 @@ const WishList = ()=>{
 
 
     return(<>
-    <Header1 />
+    <Header1/>
     <div className="first-nav container-fluid"><span><Link to="/">Home</Link>/ Wishlist</span></div>
 
       <div className="wishlist-container">
@@ -98,10 +99,14 @@ const WishList = ()=>{
                <div className='col-8 py-0'>
                <h6>{item.name}</h6>
                <p><ReadMoreReact text={item.description}
-            min={100}
-            ideal={100}
-            max={110}
+            min={30}
+            ideal={30}
+            max={30}
             readMoreText={"read more..."}/></p>
+               <Link to={"/SingleProduct/" + item.productId}>
+               <button className=' wishlist-btn'>Buy Now</button>
+               </Link>
+
             </div>
             </div>
             <div className='wishlist-close-icon' onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}><IoClose/></div>

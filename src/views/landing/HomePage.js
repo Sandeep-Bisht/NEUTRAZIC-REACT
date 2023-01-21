@@ -993,6 +993,7 @@ const breakPoints = [
                                     <ReadMoreReact text={el.name} />
                                   </Link>
                                   <div className="price-div">
+                                    <i className="fa fa-inr"></i>
                                     <span className="new-price">{el.inrDiscount}</span>
                                     <del className="new-price ml-1">{el.inrMrp}</del>
                                     {Userdata ? (

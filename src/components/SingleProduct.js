@@ -41,8 +41,8 @@ const SingleProduct = (props) => {
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
-  const [wishlist, setWishlist] = useState();
-  const [MainImage,SetMainImage] = useState();
+  const [wishlist, setWishlist] = useState([]);
+  const [MainImage, SetMainImage] = useState();
   const history = useHistory();
   // let Wishlist = [];
   //let ImageData ;
@@ -55,15 +55,14 @@ const SingleProduct = (props) => {
     getWishlist();
     CartById();
     ProductByCategory();
-    
 
-    $(document).ready(function() {
+    $(document).ready(function () {
       $("#comments-button-div").css("visibility", "hidden");
       $("#submit-review-div").hide();
       $("#Reviewdiv").hide();
       $("#Technicaldiv").hide();
       $("#Description").css("background", "none");
-      $("#Review").click(function() {
+      $("#Review").click(function () {
         $("#Reviewdiv").show();
         $("#Descriptiondiv").hide();
         $("#Technicaldiv").hide();
@@ -90,7 +89,7 @@ const SingleProduct = (props) => {
         $("#Description > .button2").css("color", "white");
         $("#Technical > .button1").css("color", "white");
       });
-      $("#Description").click(function() {
+      $("#Description").click(function () {
         $("#Reviewdiv").hide();
         $("#Descriptiondiv").show();
         $("#Technicaldiv").hide();
@@ -113,7 +112,7 @@ const SingleProduct = (props) => {
         $("#Description > .button2").css("color", "#00B560");
         $("#Technical > .button1").css("color", "white");
       });
-      $("#Technical").click(function() {
+      $("#Technical").click(function () {
         $("#Technicaldiv").show();
         $("#Descriptiondiv").hide();
         $("#Reviewdiv").hide();
@@ -136,13 +135,13 @@ const SingleProduct = (props) => {
         $("#Description > .button2").css("color", "white");
         $("#Technical > .button1").css("color", "#00B560");
       });
-      $("#Comments").click(function() {
+      $("#Comments").click(function () {
         $("#submit-review-div").hide();
         $("#commtent-div").show();
         $("#comments-button-div").css("visibility", "hidden");
         $("#SubmitComments-button-div").css("visibility", "visible");
       });
-      $("#SubmitComments").click(function() {
+      $("#SubmitComments").click(function () {
         $("#commtent-div").hide();
         $("#submit-review-div").show();
         $("#comments-button-div").css("visibility", "inherit");
@@ -196,7 +195,34 @@ const SingleProduct = (props) => {
         console.log(err, "error");
       });
   };
-  const CartById = async () => {    
+
+  const relatedImageHandler = async (id) => {
+    await fetch(`${baseUrl}/api/product/product_by_id`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        setData(data.data[0]);
+        SetMainImage(data.data[0].image[0].path)
+
+        //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
+        setProductCategory(data.data[0].category.name);
+        categoryDetails(data.data[0].category);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+      window.scroll(0,0);
+  };
+
+  const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
@@ -214,7 +240,7 @@ const SingleProduct = (props) => {
           setUserCart(data.data[0]);
           let cartItems = data.data[0].order.length;
           dispatch(ACTIONS.getCartItem(cartItems))
-          
+
         })
         .catch((err) => {
           console.log(err, "error");
@@ -248,16 +274,16 @@ const SingleProduct = (props) => {
         .catch((err) => {
           console.log(err, "error");
         });
-        
+
     }
     // else{
     //   history.push('/Register')
     // }
   };
- 
+
   // ImageHandler
 
-  const ImageHandler = (m,i)=>{
+  const ImageHandler = (m, i) => {
     let Imagestore = m.path;
     SetMainImage(Imagestore);
   }
@@ -346,17 +372,17 @@ const SingleProduct = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-         
+
         await UpdateCart();
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-        toast.success("Add to cart",{
-        position:"bottom-right",
-        autoClose:2000,
+      toast.success("Add to cart", {
+        position: "bottom-right",
+        autoClose: 2000,
       });
     }
-    window.scroll(0,0);
+
   };
 
   const categoryDetails = async (id) => {
@@ -417,45 +443,45 @@ const SingleProduct = (props) => {
     }
   };
 
-//==============================Get Wishlist =========================================
+  //==============================Get Wishlist =========================================
 
-const getWishlist = async () => {
-  let id;
-  if(Userdata){
-   id=Userdata._id
-  }
+  const getWishlist = async () => {
+    let id;
+    if (Userdata) {
+      id = Userdata._id
+    }
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
-  method: "post",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-     
-    userid: id,
-  }),
-})
-  .then((res) => res.json())
-  .then(async (data) => {
-     if(data.data[0] !== undefined){  
-      let prodId =  props.match.params.id;
-      setWishlist(data.data)
-      let response = data.data;
-      for(let item of response){
-        if(props.match.params.id == item.productId){
-          let alreadyWishlist = document.getElementById(prodId);
-          alreadyWishlist.classList.add("wishlisted")
-        }
-      }
-     }
-  })    
-  .catch((err) => {
-    console.log(err, "error");
-  });
- 
-};
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
 
-// ======================================= Add to Wishlist =========================
+        userid: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.data[0] !== undefined) {
+          let prodId = props.match.params.id;
+          setWishlist(data.data)
+          let response = data.data;
+          for (let item of response) {
+            if (props.match.params.id == item.productId) {
+              let alreadyWishlist = document.getElementById(prodId);
+              alreadyWishlist.classList.add("wishlisted")
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+
+  };
+
+  // ======================================= Add to Wishlist =========================
 
   const AddtoWishlist = async (
     productid,
@@ -507,10 +533,11 @@ const getWishlist = async () => {
                 // setWishlist(data.data[0]);
                 let wishlist = document.getElementById(productid)
                 wishlist.classList.add("wishlisted");
+                getWishlist();
                 toast.success('Added to wishlist !', {
                   position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose:2000,
-              });
+                  autoClose: 2000,
+                });
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -542,7 +569,14 @@ const getWishlist = async () => {
                 .then((res) => res.json())
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
-                 
+                  let wishlist = document.getElementById(productid)
+                  wishlist.classList.add("wishlisted");
+                  getWishlist();
+                  toast.success('Added to wishlist !', {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    autoClose: 2000,
+
+                  })
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -551,13 +585,24 @@ const getWishlist = async () => {
           } else {
             toast.error('Allready in wishlist !', {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose:2000,
-          });
-            
+              autoClose: 2000,
+            });
+
           }
         }
       });
   };
+
+  const checkWishlistItem = (productId) => {
+    for (let item of wishlist) {
+      if (item.productId == productId) {
+        return "wishlisted"
+      }
+    }
+  }
+
+  
+
   return (
     <>
       <Header1 />
@@ -572,17 +617,17 @@ const getWishlist = async () => {
         <div className="row ">
 
           <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
-            
+
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image && data.image.length > 0 ? 
-              (
-                <img src={
-                  `${baseUrl}/` + MainImage
-                } />
-              ) :  <img src={require("../../src/Images/products/facewash1.png")} /> }
+              {data.image && data.image.length > 0 ?
+                (
+                  <img src={
+                    `${baseUrl}/` + MainImage
+                  } />
+                ) : <img src={require("../../src/Images/products/facewash1.png")} />}
             </div>
-            
+
             {/* <ReactImageZoom {...ImageData} /> */}
               <Carousel breakPoints={breakPoints}>
             <div className="row image-group pt-2">
@@ -694,8 +739,8 @@ const getWishlist = async () => {
 
               <div className="price pt-2">
                 <span className="price-detail">
-                <i className="fa fa-inr"></i>
-                ₹{data.inrDiscount} <del>{data.inrMrp}</del> <span>10% OFF</span>
+                  <i className="fa fa-inr"></i>
+                  {data.inrDiscount} <del>{data.inrMrp}</del> <span>{Math.ceil(((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100)}% OFF</span>
                 </span>
               </div>
 
@@ -715,7 +760,7 @@ const getWishlist = async () => {
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
-                  Category: <span> Skin Care</span>
+                  Category: <span> {categoryname}</span>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
@@ -761,54 +806,54 @@ const getWishlist = async () => {
               </div>
               <div className="add-to-cart mt-1">
                 {
-                  Userdata ? 
-                  <button
-                  onClick={() => {
-                    {
-                      Userdata != null
-                        ? cartfunction(
-                            data._id,
-                            data.name,
-                            quantity,
-                            data.inrMrp,
-                            data.inrDiscount,
-                            data.discount,
-                            data.description,
-                            data.category,
-                            data.manufacturer.name,
-                            data.image[0].path
-                          )
-                        : addToCartWithoutRegistration(
-                            data._id,
-                            data.name,
-                            quantity,
-                            data.inrMrp,
-                            data.inrDiscount,
-                            data.discount,
-                            data.description,
-                            data.category,
-                            data.manufacturer.name,
-                            data.image[0].path
-                          );
-                    }
-                  }}
-                 
-                   
-                >
-                  Add to Cart
-                </button> :
-                     <button
-                     data-bs-toggle="modal"
-                     data-bs-target={Userdata == null ? "#exampleModal" : null}>
-                     <Link to="/Register">                  
-                     </Link>
-                     Add to Cart
-                     </button>
-                     
+                  Userdata ?
+                    <button
+                      onClick={() => {
+                        {
+                          Userdata != null
+                            ? cartfunction(
+                              data._id,
+                              data.name,
+                              quantity,
+                              data.inrMrp,
+                              data.inrDiscount,
+                              data.discount,
+                              data.description,
+                              data.category,
+                              data.manufacturer.name,
+                              data.image[0].path
+                            )
+                            : addToCartWithoutRegistration(
+                              data._id,
+                              data.name,
+                              quantity,
+                              data.inrMrp,
+                              data.inrDiscount,
+                              data.discount,
+                              data.description,
+                              data.category,
+                              data.manufacturer.name,
+                              data.image[0].path
+                            );
+                        }
+                      }}
+
+
+                    >
+                      Add to Cart
+                    </button> :
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target={Userdata == null ? "#exampleModal" : null}>
+                      <Link to="/Register">
+                      </Link>
+                      Add to Cart
+                    </button>
+
                 }
-                
+
               </div>
-              
+
               <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
                 {Userdata ? (
                   <i
@@ -840,9 +885,9 @@ const getWishlist = async () => {
                     </Link>
                   </>
                 )}
-                
-                 <ToastContainer />
-  
+
+                <ToastContainer />
+
               </div>
             </div>
           </div>
@@ -934,7 +979,7 @@ const getWishlist = async () => {
                             Loved this toner! I've been searching for
                             non-alcohol options and this one is my match!
                             Alcohol Free Matcha Toner To Tighten Pores And
-                            Balance pH & Oil Levels   
+                            Balance pH & Oil Levels
                           </span>
                         </div>
                         <div className="col-12 varified-div">
@@ -1002,8 +1047,8 @@ const getWishlist = async () => {
         </div>
       </div>
 
-      <div className="container-fluid p-4 products relate-products text-center">
-      <div className="row relate-product">
+      <div className="container-fluid m-auto p-4 products relate-products text-center">
+        <div className="row relate-product">
           <div className="col-3 line">
             <hr className="hr"></hr>
           </div>
@@ -1033,23 +1078,25 @@ const getWishlist = async () => {
                 <div className="col-lg-2 col-md-12 col-sm-12 ">
                   {/* <Link to={"/SingleProduct/" + el._id}> */}
                   <div className="single-products-box border">
-                    <div className="row  align-items-center product-div">
+                    <div className="row  align-items-center product-div related-product">
                       <div className="product-image-div">
                         <Link
                           to={"/SingleProduct/" + item._id}
-                          className="product-image-link"
-                        >
-                          <div className="image hover-switch">
+                          className="product-image-link">
+                          <div className={`image hover-switch `}
+                          
+                          >
                             <img
-                           src={defaultImage}
-                           alt="" 
+                              src={defaultImage}
+                              alt=""
                             />
                             <img
-                              src={ 
+                              src={
                                 `${baseUrl}/` + item.image[0].path
                               }
+                              onClick={()=>relatedImageHandler(item._id)}
                               alt=""
-                              style={{ position: "absolute", left:"0" }}
+                              style={{ position: "absolute", left: "0" }}
                             />
                           </div>
                         </Link>
@@ -1068,7 +1115,7 @@ const getWishlist = async () => {
                             </h3>
                           </Link>
                           {/* <div className="d-flex pb-2 pl-4"> */}
-                            {/* <i className="bx bxs-star"></i>
+                          {/* <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
                             <i className="bx bxs-star"></i>
@@ -1092,12 +1139,13 @@ const getWishlist = async () => {
                                 ? 0
                                 : item.inrMrp -
                                   (item.inrMrp * item.inrDiscount) / 100} */}
-                                  <i className="fa fa-inr"></i>{item.inrDiscount}
+                              <i className="fa fa-inr"></i>{item.inrDiscount}
                             </span>
                             <del className="new-price ml-1">{item.inrMrp}</del>
                             {Userdata ? (
                               <i
-                                className="bx bxs-heart ml-3"
+                                className={`bx bxs-heart ml-3  ${checkWishlistItem(item._id)}`}
+                                id={item._id}
                                 onClick={() => {
                                   AddtoWishlist(
                                     item._id,
@@ -1127,7 +1175,52 @@ const getWishlist = async () => {
                               </>
                             )}
 
-                            <i className="bx bx-cart ml-3"></i>
+                            {Userdata ? (
+                              <i
+                                className="bx bx-cart"
+                                onClick={() => {
+                                  {
+                                    Userdata !== null
+                                      ? cartfunction(
+                                        item._id,
+                                        item.name,
+                                        quantity,
+                                        item.inrMrp,
+                                        item.inrDiscount,
+                                        item.discount,
+                                        item.description,
+                                        item.category,
+                                        item.manufacturer.name,
+                                        item.image[0].path
+                                      )
+                                      : addToCartWithoutRegistration(
+                                        item._id,
+                                        item.name,
+                                        quantity,
+                                        item.inrMrp,
+                                        item.inrDiscount,
+                                        item.discount,
+                                        item.description,
+                                        item.category,
+                                        item.manufacturer.name,
+                                        item.image[0].path
+                                      );
+                                  }
+                                }}
+                              ></i>
+                            ) : (
+                              <i
+                                className="bx bx-cart mr-1"
+                                data-bs-toggle="modal"
+                                data-bs-target={
+                                  Userdata == null
+                                    ? "#exampleModal"
+                                    : null
+                                }
+                              >
+                                <Link to="/Register"></Link>
+                              </i>
+                            )}
                           </div>
                           {/* <div className="price mt-1">
                               <div>
@@ -1347,7 +1440,7 @@ const getWishlist = async () => {
       {/* End Review section for mobile */}
       <Baseline />
       <Footer />
-      </>
+    </>
   );
 };
 export default SingleProduct;
