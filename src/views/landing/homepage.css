@@ -7003,7 +7003,7 @@ button.bg-dark:hover {
 }
 
 .align-items-center {
-	align-items: center!important
+	align-items: center!important;
 }
 
 .align-items-baseline {
@@ -19708,4 +19708,8 @@ margin: 40px 8px 15px 0px;
 }
 .anticon-spin::before, .anticon-spin{
 	display: none !important;
+}
+
+.all-product-heart i{
+	color: rgba(0, 0, 0, .3);
 }

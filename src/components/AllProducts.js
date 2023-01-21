@@ -707,7 +707,7 @@ const AllProducts = (props) => {
                       <div className="col-8 text-center ">
                         <p 
                         
-                          className="bottom-icon text-nowrap wishlist"
+                          className="bottom-icon text-nowrap wishlist all-product-heart"
                           onClick={() => {
                             AddtoWishlist(
                               el._id,
@@ -726,7 +726,7 @@ const AllProducts = (props) => {
                             Userdata == null ? "#exampleModal" : null
                           }
                         >
-                          <i id={el._id} className={`bx bx-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
+                          <i id={el._id} className={`bx bxs-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
                         </p>
                         {/* <div className="icon-wishlist"></div> */}
                       </div>
