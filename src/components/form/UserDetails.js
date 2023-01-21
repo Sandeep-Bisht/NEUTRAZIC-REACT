@@ -172,23 +172,25 @@ const UserDetails=(props)=>{
                                 </select>
                             </div>
                            
-                            <div className="col-6 p-1">
-                                <textarea type="text" className="form-control Dashborad-search" placeholder="Address " onChange={(e)=>{Setdata({...data,address:e.target.value})}}></textarea>
+                            <div className="col-6 p-1 form-floating">
+                                <textarea type="text" id='formfloating' className="form-control Dashborad-search" placeholder="Address " onChange={(e)=>{Setdata({...data,address:e.target.value})}}></textarea>
+                                <label for="formfloating ">Address</label>
                             </div>
-                            <div className="col-6 p-1">
-                                <input type="number" className="form-control Dashborad-search" placeholder="Pincode " onChange={(e)=>{Setdata({...data,pincode:e.target.value})}} />
-                                   
+                            <div className="col-6 p-1 form-floating">
+                                <input type="number" id='formfloating' className="form-control Dashborad-search" placeholder="Pincode " onChange={(e)=>{Setdata({...data,pincode:e.target.value})}} />
+                                <label for="formfloating ">Pincode</label>
                             </div>
-                                <div className="col-6 p-1">
-                                    <input type="number"  className="form-control Dashborad-search" placeholder="Mobile Number" rows="3" onChange={(e)=>{Setdata({...data,mobile:e.target.value})}} />               
+                                <div className="col-6 p-1 form-floating">
+                                    <input type="number" id='formfloating' className="form-control Dashborad-search" placeholder="Mobile Number" rows="3" onChange={(e)=>{Setdata({...data,mobile:e.target.value})}} />               
+                                    <label for="formfloating">Mobile Number</label>
                                  </div>
-                                 <div className="col-6 p-1">
-                                    <input type="text" className="form-control Dashborad-search" placeholder="Additional Mobile Number" rows="3" onChange={(e)=>{Setdata({...data,othermobile:e.target.value})}} /> 
-                                    
+                                 <div className="col-6 p-1 form-floating">
+                                    <input type="text" id='formfloating' className="form-control Dashborad-search" placeholder="Additional Mobile Number" rows="3" onChange={(e)=>{Setdata({...data,othermobile:e.target.value})}} /> 
+                                    <label for="formfloating">Additional Mobile Number</label>
                                   </div>
-                                  <div className="col-6 p-1">
-                                    <input type="email" className="form-control Dashborad-search" placeholder="Email" rows="3" onChange={(e)=>{Setdata({...data,email:e.target.value})}} /> 
-                                    
+                                  <div className="col-6 p-1 form-floating">
+                                    <input type="email" id='formfloating' className="form-control Dashborad-search" placeholder="Email" rows="3" onChange={(e)=>{Setdata({...data,email:e.target.value})}} /> 
+                                    <label for="formfloating">Email</label>
                                   </div>
                                     </div>
                                 <div><br/>

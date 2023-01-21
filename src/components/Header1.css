@@ -403,6 +403,24 @@ color:#1e144f;
     padding: 10px;
     cursor: pointer;
 }
+.wishlist-btn{
+	color: rgb(0, 0, 0,0.5);
+    padding: 8px 20px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+	font-family: 'Roboto', sans-serif;
+	
+	text-align: center;
+	display:inline-block;
+    border:1px solid rgb(27, 151, 255);
+}
+.wishlist-btn:hover{
+    background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+    color: white;
+    border:1px solid rgba(27, 151, 255,0.1);
+    border-radius: 3px;
+    
+}
 
 /* End wishlist code */
 .accordion-item .accordion-header .d-flex  button
