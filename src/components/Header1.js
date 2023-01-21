@@ -42,6 +42,7 @@ const Header1 = (props) => {
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
+  const [usermodal,setUsermodal]=useState();
 
   const {
     register,
