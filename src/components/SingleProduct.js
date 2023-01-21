@@ -627,7 +627,7 @@ const SingleProduct = (props) => {
                     <img
                       className="img-slide"
                       src={`${baseUrl}/` + item.path}
-                      onClick={() => ImageHandler(item, ind)}
+                      onMouseOver={() => ImageHandler(item, ind)}
                     />
 
                   </div>
