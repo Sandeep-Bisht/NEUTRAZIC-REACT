@@ -8,8 +8,12 @@ import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
 import { useHistory, useParams } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
+import { ToastContainer, toast } from "react-toastify";
+import * as ACTIONS from '../CommonService/AddToCart/action'
+import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+var CartDataWoLogin = [];
 var Userdata = "";
 let tranding = 0;
 const SearchResult = (props) => {
@@ -33,31 +37,36 @@ const SearchResult = (props) => {
   let [dataForFilter, setDataForFilter] = useState([]);
   let [minprice, setMinPrice] = useState();
   let [maxprice, setMaxPrice] = useState();
+  const [wishlistData,Setwishlist]=useState([]);
+  const [cartItems, setCartItems] = useState(undefined)
+  
   const history = useHistory();
+
+  const dispatch=useDispatch();
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
 
     GetData();
     CartById();
+    GetWishlist();
     GetCategory();
     GetManufacturer();
     GetSubCategory();
+    
 
     $(document).ready(function() {
-      $(".frontimage").hide();
-      $(".backimage").hide();
       //    $('.icon-wishlist').on('click', function(){
       //       $(this).toggleClass('in-wishlist');
 
       // })
-      $(".frontimage").mouseenter(function() {
-        $(".backimage").hide();
+
+      $(".frontimage").mouseover(function() {
+        alert("in");
       });
-      const WishlistHeart = () => {
-        $(".icon-wishlist").on("click", function() {
-          $(this).toggleClass("in-wishlist");
-        });
-      };
+      $(".frontimage").mouseleave(function() {
+        alert("in");
+      });
     });
   }, []);
   useEffect(() => {
@@ -75,6 +84,34 @@ const SearchResult = (props) => {
     setCT(Date());
     console.log("filreres " + data);
   };
+  const GetWishlist = async () => {
+    let id;
+    if(Userdata){
+     id=Userdata._id
+    }
+      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+       
+      userid: id,
+    }),
+  })
+    .then((res) => res.json())
+    .then(async (data) => {
+      console.log("inside getwishlist home page", data.data[0])
+       if(data.data[0] !== undefined){
+        Setwishlist(data.data)
+       }
+    })    
+    .catch((err) => {
+      console.log(err, "error");
+    });
+   
+};
 
   const GetData = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
@@ -130,13 +167,14 @@ const SearchResult = (props) => {
     name,
     quantity,
     mrp,
+    singleprice,
     discount,
     description,
     category,
     manufacturer,
     image
   ) => {
-    if (quantity !== 0) {
+    if (quantity > 0) {
       var merged = false;
       var newItemObj = {
         productid: productid,
@@ -144,18 +182,21 @@ const SearchResult = (props) => {
         image: image,
         quantity: quantity,
         mrp: parseInt(mrp),
-        singleprice: parseInt(mrp),
+        singleprice: parseInt(singleprice),
         discountprice: discount,
-
+        description: description,
         category: category,
         manufacturer: manufacturer,
         description: description,
+        status: "Pending",
+        justification: "Enjoy",
+        delivery_time: "No Status",
       };
       if (userCart.order == null || userCart.order == []) {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            order[i].mrp += newItemObj.mrp;
+            // order[i].mrp += newItemObj.mrp;
             // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
@@ -166,15 +207,13 @@ const SearchResult = (props) => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
+          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
           if (userCart.order[i].productid == newItemObj.productid) {
             userCart.order[i].quantity += newItemObj.quantity;
-            userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-          } else {
-            merged = false;
           }
           setQuantity(1);
         }
@@ -182,12 +221,15 @@ const SearchResult = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        CartById();
-        UpdateCart();
-
+        // CartById();
+        await UpdateCart();
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
+      toast.success("Successfully added to Cart", {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
     }
   };
   const UpdateCart = () => {
@@ -206,8 +248,8 @@ const SearchResult = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
-        history.push("/Cart");
+        CartById();
+        //history.push("/Cart");
       })
       .then((err) => console.log(err));
   };
@@ -226,6 +268,9 @@ const SearchResult = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data[0]);
+          setCartItems(data.data[0].order.length);
+          let cartItems = data.data[0].order.length;
+          dispatch(ACTIONS.getCartItem(cartItems))
         })
         .catch((err) => {
           console.log(err, "error");
@@ -248,17 +293,18 @@ const SearchResult = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          history.push("/Cart");
+          CartById();
+          // setCartItems(data.data[0].order.length);
+          // history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
     // else{
-    //    history.push('/Register')
+    //   history.push('/Register')
     // }
   };
-
   const AddtoWishlist = async (
     productid,
     name,
@@ -269,7 +315,8 @@ const SearchResult = (props) => {
     category,
     manufacturer,
     image
-  ) => {
+  ) => { 
+    
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -282,38 +329,94 @@ const SearchResult = (props) => {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        if (!JSON.stringify(data.data).includes(productid)) {
+        if (data.data == undefined) {
           if (!Userdata == []) {
-            await fetch(`${baseUrl}api/wishlist/add_to_wishlist`, {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                userid: Userdata._id,
-                image: image,
-                name: name,
-                productId: productid,
-                rating: "5",
-                category: category,
-                manufacturer: manufacturer,
-                description: description,
-              }),
-            })
+            await fetch(
+              `${baseUrl}/api/wishlist/add_to_wishlist`,
+              {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  userid: Userdata._id,
+                  image: image,
+                  name: name,
+                  productId: productid,
+                  rating: "5",
+                  category: category,
+                  manufacturer: manufacturer,
+                  description: description,
+                }),
+              }
+            )
               .then((res) => res.json())
               .then(async (data) => {
-                // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
+                toast.error("Product is wishlisted !", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 2000,
+                });
+                
+                //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
+                 GetWishlist();
+                // setWishlist(data.data[0]);
               })
               .catch((err) => {
-                console.log(err, "error");
+                console.log(err, "error e");
               });
           }
         } 
+        else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(
+                `${baseUrl}/api/wishlist/add_to_wishlist`,
+                {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    userid: Userdata._id,
+                    image: image,
+                    name: name,
+                    productId: productid,
+                    rating: "5",
+                    category: category,
+                    manufacturer: manufacturer,
+                    description: description,
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then(async (data) => {
+                  toast.error("Product is wishlisted !", {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    autoClose: 2000,
+                  });
+                  let wishList = document.getElementById(productid);
+                  wishList.classList.add("in-wishlist");
+                  wishList.classList.add("wishlisted");
+                  GetWishlist();
+                  // setWishlist(data.data[0]);
+                })
+                .catch((err) => {
+                  console.log(err, "error e");
+                });
+                
+            }
+          } else {
+            toast.error("Allready in wishlist !", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 2000,
+            });
+          }
+        }
       });
   };
 
@@ -353,6 +456,54 @@ const SearchResult = (props) => {
     await setCT(Date());
     console.log(price + "," + maxprice + "," + "minprice" + minprice + "price");
   };
+
+  const addToCartWithoutRegistration = (
+    productid,
+    name,
+    quantity,
+    mrp,
+    discount,
+    description,
+    category,
+    manufacturer,
+    image
+  ) => {
+    var newItemObj = {
+      productid: productid,
+      name: name,
+      image: image,
+      quantity: quantity,
+      mrp: parseInt(mrp),
+      singleprice: parseInt(mrp),
+      discountprice: discount,
+      description: description,
+      category: category,
+      manufacturer: manufacturer,
+      description: description,
+      status: "Pending",
+      justification: "Enjoy",
+      delivery_time: "No Status",
+    };
+    if (
+      !JSON.stringify(CartDataWoLogin).includes(name) &&
+      !JSON.stringify(localStorage.getItem("CartDataWoLogin")).includes(name)
+    ) {
+      if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
+        CartDataWoLogin = JSON.parse(localStorage.getItem("CartDataWoLogin"));
+      }
+      CartDataWoLogin.push(newItemObj);
+      localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
+      // console.log(JSON.stringify(CartDataWoLogin));
+    }
+  };
+
+  const checkWishlistItem = (productId) => {
+    for (let item of wishlistData) {
+      if (item.productId == productId) {
+        return "wishlisted"
+      }
+    }
+    }
 
   // End Filter Function //
 
@@ -613,10 +764,10 @@ const SearchResult = (props) => {
             </div>
           </div>
         </section>
-        <section className="products-area pb-40">
+        <section className="products-area pb-4">
           <div className="container-fluid">
-            <div className="row">
-              {filterdata.length && filterdata.map((el, ind) => {
+            <div className="row  m-2">
+              {filterdata && filterdata.length>0 && filterdata.map((el, ind) => {
                 if (
                   el.name.toLowerCase().includes(searchresults) ||
                   el.manufacturer.name.toLowerCase().includes(searchresults) ||
@@ -641,119 +792,145 @@ const SearchResult = (props) => {
                   count = count + 1;
                   return (
                     <>
-                    <div className="col-lg-3 col-md-12 col-sm-12 ">
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
-                      <div className="single-products-box border">
-                        <div className="row  align-items-center product-div">
-                          <div className="col-6 product-image-div">
-                            <Link
-                              to={"/SingleProduct/" + el._id}
-                              className="product-image-link"
-                            >
-                              <div className="image hover-switch">
-                                <img
-                                  src={require("../Images/products/Hintosulin (1).png")}
-                                  alt=""
-                                />
-                                <img
-                                  src={
-                                    `${baseUrl}/` + el.image[0].path
-                                  }
-                                  alt=""
-                                  style={{ position: "absolute" }}
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                          <div className="col-6 pd-0 tranding product-image-content">
-                            <div className="content product-content">
-                              <Link to={"/SingleProduct/" + el._id}>
-                                <h3 className="pb-1 pl-4 pt-5">
-                                  <ReadMoreReact
-                                    text={el.name}
-                                    min={10}
-                                    ideal={10}
-                                    max={10}
-                                    readMoreText={"..."}
-                                  />
-                                </h3>
-                              </Link>
-                             
-                              <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
-                                <div className="discount-price-div">
-                                  <span>{el.inrDiscount}</span>
+                      <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
+                        {/* <Link to={"/SingleProduct/" + el._id}> */}
+                        <div className="single-products-box border">
+                          <div className="row">
+                            <div className="col-md-12">
+                              <div className="product-div">
+                                <div className="product-image-div">
+                                  <Link
+                                    to={"/SingleProduct/" + el._id}
+                                    className="product-image-link"
+                                  >
+                                    <div className="image hover-switch">
+                                      <img
+                                      src={ el.otherImage && 
+                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path :
+                                        require("../Images/products/Hintosulin (1).png")
+                                      }
+                                        // src={require("../../Images/products/Hintosulin (1).png")}
+                                        alt=""
+                                      />
+                                      <img
+                                        src={
+                                          `${baseUrl}/` +
+                                          el.image[0].path
+                                        }
+                                        alt=""
+                                        style={{ position: "absolute", left:"0" }}
+                                      />
+                                    </div>
+                                  </Link>
                                 </div>
-                                <div className="discount-price-div2">
-                                  <span>off</span>
-                                </div>
-                              </div>
+                                <div className="tranding product-image-content">
+                                  <div className="content product-content">
+                                    <Link to={"/SingleProduct/" + el._id}>
+                                      <ReadMoreReact text={el.name} />
+                                    </Link>
+                                    <div className="price-div">
+                                      <span className="new-price">
+                                        <i className="fa fa-inr"></i>{" "}
+                                        {el.inrDiscount}
+                                      </span>
+                                      <del className="new-price ml-1">
+                                        {el.inrMrp}
+                                      </del>
+                                      {Userdata ? (
+                                        <i
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                          id={el._id}
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
+                                      ) : (
+                                        <>
+                                          <i
+                                            className="bx bxs-heart ml-3 pc-heart"
+                                            data-bs-toggle="modal"
+                                            data-bs-target={
+                                              Userdata == null
+                                                ? "#exampleModal"
+                                                : null
+                                            }
+                                          ></i>
 
-                              <div className="hr-div">
-                                <hr />
+                                          <Link to="/Register">
+                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                          </Link>
+                                        </>
+                                      )}
+                                      <div>
+                                        {Userdata ? (
+                                          <i
+                                            className="bx bx-cart"
+                                            onClick={() => {
+                                              {
+                                                Userdata !== null
+                                                  ? cartfunction(
+                                                      el._id,
+                                                      el.name,
+                                                      quantity,
+                                                      el.inrMrp,
+                                                      el.inrDiscount,
+                                                      el.discount,
+                                                      el.description,
+                                                      el.category,
+                                                      el.manufacturer.name,
+                                                      el.image[0].path
+                                                    )
+                                                  : addToCartWithoutRegistration(
+                                                      el._id,
+                                                      el.name,
+                                                      quantity,
+                                                      el.inrMrp,
+                                                      el.inrDiscount,
+                                                      el.discount,
+                                                      el.description,
+                                                      el.category,
+                                                      el.manufacturer.name,
+                                                      el.image[0].path
+                                                    );
+                                              }
+                                            }}
+                                          ></i>
+                                        ) : (
+                                          <i
+                                            className="bx bx-cart mr-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target={
+                                              Userdata == null
+                                                ? "#exampleModal"
+                                                : null
+                                            }
+                                          >
+                                            <Link to="/Register"></Link>
+                                          </i>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="price-div justify-content-center align-items-center d-flex">
-                                <span className="new-price ml-3">
-                                  {/* $
-                                  {isNaN(
-                                    el.inrMrp -
-                                      (el.inrMrp * el.inrDiscount) / 100
-                                  )
-                                    ? 0
-                                    : el.inrMrp -
-                                      (el.inrMrp * el.inrDiscount) / 100} */}
-                                      {el.inrDiscount}
-                                </span>
-                                <del className="new-price ml-1">{el.inrMrp}</del>
-                                <i
-                                  className="bx bxs-heart ml-3"
-                                  onClick={() => {
-                                    AddtoWishlist(
-                                      el._id,
-                                      el.name,
-                                      quantity,
-                                      el.inrMrp,
-                                      el.inrDiscount,
-                                      el.description,
-                                      el.category,
-                                      el.manufacturer.name,
-                                      el.image
-                                    );
-                                  }}
-                                  data-bs-toggle={
-                                    Userdata == null ? "modal" : null
-                                  }
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                ></i>
-                                <i className="bx bx-cart ml-1"></i>
-                              </div>
-                              {/* <div className="price mt-1">
-                              <div>
-                                 <span className="new-price">
-                                 $
-                                 {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                                 ? 0
-                                 : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
-                                 </span>
-                              </div>
-                           </div> */}
-                              {/* <div className="mt-2 mb-2">
-                              <button className="add-to-cart-button1 text-nowrap"  onClick={()=>{cartfunction(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image[0].path)}} data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}>Add to Cart</button>
-                           </div> */}
-                              {/* <div className="row">
-                              
-                              <div className="col-12">
-                                 <p className="bottom-icon text-nowrap" onClick={()=>{AddtoWishlist(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image)}}  data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}><i className='bx bx-heart' ></i>Wishlist</p>
-                              <div className="icon-wishlist"></div>
-                              </div>
-                           </div> */}
                             </div>
                           </div>
                         </div>
+                        {/* </Link> */}
                       </div>
-                      {/* </Link> */}
-                    </div>
                     </>
                   );
                 }
@@ -773,6 +950,7 @@ const SearchResult = (props) => {
             </div>
           </div>
         </section>
+        <ToastContainer/>
       </div>
       <Baseline />
       <Footer />
