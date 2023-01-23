@@ -712,18 +712,21 @@ const HomePage = () => {
         </section>
 
         <section className="categories-section">
+        <h1 className="trendign-head">
+            <span className="products-color">Featured Categories</span>
+          </h1>
           <div className="container m-auto">
             <div className="row ">
-              <div className="col-md-6">
+              { categories && categories.map((item, index) => {                 
+                if(item.featuredCategories == "Featured Categories"){
+                return(          
+              <div className="col-md-6" key={index}>
                 <div className="cat-left-side">
                   <div className="row">
                     <div className="col-md-6">
-                      <h1 className="cat-heading">Cosmetic</h1>
+                      <h1 className="cat-heading">{item.name}</h1>
                       <p className="cat-para">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Dolore dolores harum corporis, rerum, animi explicabo
-                        sed consequatur aut voluptas inventore dolorem
-                        perferendis natus, velit eius.
+                       {item.description}
                       </p>
                       <button className="btn btn cosmetic-shop-now">
                         Shop Now
@@ -733,42 +736,19 @@ const HomePage = () => {
                       <Link to={"/Allcategory/" + "610a8c607c5c2f5f8b1e579b"}>
                         <div className="category-div">
                           <figure>
-                            <img
+                            {/* <img
                               // src={require("../../Images/Nutraceutical-image 1.png")} cosmatic-healthcare.jpeg
                               src={require("../../Images/cosmatic-healthcare.jpeg")}
                               className="front-img img-fluid"
-                            />
-                          </figure>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="cat-right-side">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <h1 className="cat-heading">Nutracuetical</h1>
-                      <p className="cat-para">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Quibusdam earum dicta, laudantium soluta assumenda
-                        ad veniam veritatis porro nostrum nesciunt a adipisci
-                        eligendi, corrupti dolorum!
-                      </p>
-                      <button className="btn btn nutracuetical-shop-now">
-                        Shop Now
-                      </button>
-                    </div>
-                    <div className="col-md-6">
-                      <Link to={"/Allcategory/" + "610a8b4e7c5c2f5f8b1e578b"}>
-                        <div className="category-div">
-                          <figure>
+                            /> */}
                             <img
-                              // src={require("../../Images/Cosmetics image 1.png")}
-                              src={require("../../Images/nutrat.jpeg")}
-                              className="front-img img-fluid"
-                            />
+                                      src={
+                                        `${baseUrl}/` +
+                                        item.image[0].path
+                                      }
+                                      alt=""
+                                      style={{ position: "absolute"}}
+                                    />
                           </figure>
                         </div>
                       </Link>
@@ -776,6 +756,9 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
+                )}
+
+              })}             
             </div>
           </div>
         </section>

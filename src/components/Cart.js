@@ -316,7 +316,7 @@ const Cart = () => {
                     </ul>
                     <Link
                       className="default-btn1"
-                      to={Userdata ? "/CheckOut" : "/register"}
+                      to={Userdata ? "/UserDetails/"+ _id : "/register"}
                     >
                       <i className="flaticon-trolley"></i> Proceed to Checkout
                     </Link>
