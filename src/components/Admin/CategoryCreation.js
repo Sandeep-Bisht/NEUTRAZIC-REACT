@@ -209,7 +209,7 @@ const CategoryCreation = (props) => {
                             className="form-control"
                             placeholder="Category Description"
                             id="floatingInputValue"
-                            rows="10"
+                            rows="5"
                             defaultValue={
                               editableData ? editableData.description : ""
                             }
