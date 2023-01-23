@@ -17809,10 +17809,6 @@ letter-spacing: 0.50px;
 	font-size:15px;
 	border-radius: 0.25rem;
 }
-.single-footer-widget .newsletter-form .input::placeholder
-{
-	font-size: 16px;
-}
 .single-footer-widget .newsletter-form .input-newsletter:-ms-input-placeholder {
 	color: #999;
 	-ms-transition: var(--transition);
