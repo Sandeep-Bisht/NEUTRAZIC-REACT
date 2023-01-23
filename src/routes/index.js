@@ -49,6 +49,7 @@ import AllCategoriesDetails from "../components/Admin/AllCategory/AllCategoriesD
 import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCategoriesDetails";
 import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
 import MyAccount from "../components/MyAccount"
+import Success from '../components/Success';
 import AllUsers from "../components/Admin/AllUsers";
 import PageNotFound from "../components/PageNotFound";
 
@@ -126,6 +127,7 @@ const Root = (props) => {
               path="/OrderDetails/:productid"
               component={OrderDetails}
             />
+            <Route exact path="/Success" component={Success} />
             <Route exact path="/Checkout" component={Checkout} />
             <Route exact path="/UserDetails/:_id" component={UserDetails} />
             <Route exact path="/Header1" component={Header1} />
