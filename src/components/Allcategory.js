@@ -317,21 +317,17 @@ const Allcategory = (props) => {
         </div>
       </div>
 
-      <div className="container Category-div">
+      <div className="container m-auto Category-div">
         <div className="row align-items-center">
-          <div className="col-6">
+          <div className="col-12">
             <div className="section-title">
               <h2>{Categorydetails.name}</h2>
             </div>
           </div>
-          <div className="col-5">
-            <hr />
-          </div>
-          <div className="col-1"></div>
         </div>
       </div>
 
-      <div id="container-fluid p-4 products">
+      <div id="container m-auto p-4 products">
         <div id="columns" className="columns_4 products-row row">
           {AllProduct.map((item, ind1) => {
             if (item.category._id == props.match.params.name) {

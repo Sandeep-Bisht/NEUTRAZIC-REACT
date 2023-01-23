@@ -253,7 +253,7 @@ const SubCategoryCreation = (props) => {
                               className="form-control"
                               id="floatingInputValue"
                               placeholder="SubCategory Description"
-                              rows="3"
+                              rows="5"
                               defaultValue={
                                 editableData ? editableData.description : ""
                               }
