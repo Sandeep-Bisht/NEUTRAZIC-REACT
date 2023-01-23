@@ -17,6 +17,7 @@ import AllProductsDetails from "./AllProducts/AllProductsDetails";
 import AllCategoriesDetails from "./AllCategory/AllCategoriesDetails";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services"
+import PageNotFound from "../PageNotFound";
 
 // var ManufacturerCount1='';
 // var productCount1=''
@@ -133,12 +134,10 @@ const Dashboard = () => {
   };
   return (
     <>
-    <section id="body-pd">
+    
     {
-    
     localuser && localuser.role === "superAdmin"  ? (
-    
-    
+      <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader/>
       
@@ -276,15 +275,14 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        
+        </section>
     ):(
       <>
-      <h1 className="notfound-text text-danger">404 Page Not Found <Link to="/"><p>Back To Homepage</p></Link></h1>
-      
+      <PageNotFound/>
       </>
     )
 }
-</section>
+
     </>
   );
 };
