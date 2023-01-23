@@ -265,7 +265,7 @@ const SingleProduct = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          history.push("/Cart");
+          // history.push("/Cart");
           // toast.success("Add to cart",{
           //   position:"bottom-right",
           //   autoClose:5000,

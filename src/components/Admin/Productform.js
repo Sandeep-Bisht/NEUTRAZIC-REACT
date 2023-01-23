@@ -344,8 +344,7 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <input
                             type="file"
-                            name="image[]"  
-                                                    
+                            name="image[]"                                                
                             className="form-control Dashborad-search"
                             accept="image/png, .jpeg, .jpg"
                             //value={editableData  ? editableData.image[0].path : ""}

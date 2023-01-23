@@ -15,23 +15,21 @@ const ManufacturerCreation = (props) => {
   const [update, setUpdate] = useState(true);
   const [data, Setdata] = useState({
     name: "",
-    descripton: "",
+    description: "",
     image: [],
   });
   const [editableData]=useState(props.history.location.state);
 
-  const submitData = async (e) => {
+  const submitData = async (e) => { 
+    e.preventDefault();
     const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     formData.append("image", data.image);
     const url = `${baseUrl}/api/manufacture/add_manufacture`;
     await fetch(url, {
-      method: "POST",
-      // headers: {
-      // 'Accept': 'application/json',
-      // 'Content-Type': 'multipart/form-data'
-      //   },
+      mode: 'no-cors',
+      method: "POST",      
       body: formData,
     })
       .then((res) => res.json())

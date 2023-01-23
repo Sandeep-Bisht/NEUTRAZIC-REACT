@@ -83,26 +83,26 @@ const UserDetails=(props)=>{
        await formData.append('addresstype',data.addresstype)
        await formData.append('deliverytype',data.deliverytype)
        await formData.append('username',Userdata.username)
-        const url=`${baseUrl}/api/order/add_order`
+        // const url=`${baseUrl}/api/order/add_order`
+        const url=`${baseUrl}/api/order/create-checkout-session` 
                 await fetch(url,
                     {  
-                         method:'POST',                  
-                        // headers: {
-                        // 'Accept': 'application/json',
-                        // 'Content-Type': 'multipart/form-data'
-                        //   },
+                    method:'POST',               
                     body:formData
                 })
                 .then(res => res.json())              
                 .then((res)=>{  
-                  DeleteCart()
+                  console.log(res,"rsponse of create");
+                  window.location.href= res.url
+                  // alert("cart Deleted")
+                  //DeleteCart()
              
             
                
                
                 })            
                 .catch(err=>console.log(err)) 
-        console.log(formData)
+        
     } 
     const CartById = async () => {
       if(!Userdata==[]){   
@@ -151,7 +151,7 @@ const UserDetails=(props)=>{
           });
       };   
 
-      console.log('initisl state', data) 
+      
     return(
         <>
         <Header1/>
@@ -195,9 +195,9 @@ const UserDetails=(props)=>{
                                     </div>
                                 <div><br/>
                                 <h4>Order For</h4>
-                                    <input type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
-                                    <label for="html">For Me</label>&nbsp;
-                                    <input type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
+                                    <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
+                                    <label for="html" className='pr-3'>For Me</label>&nbsp;
+                                    <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
                                     <label for="html">For Other</label>
                                 </div>
                                 {
@@ -210,11 +210,9 @@ const UserDetails=(props)=>{
                             
                            ))}
                                     
-                                <div className="col-12 p-1">                     <div className="col-12 p-1">
-                                    <button className="btn btn-primary"onClick={(e)=>{submitData(e)}}>Submit</button>
-                                </div>
-
-                            </div>
+                                <div className="col-12 p-1"> 
+                                    <button className="btn btn-primary"onClick={(e)=>{submitData(e)}}>Pay now</button>
+                                </div>                           
                         </div>
                     </div>
                 </div>
