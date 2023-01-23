@@ -884,9 +884,9 @@ font-family: 'Roboto', sans-serif;
     color: #1e144f;
 }
 
-/* textarea css */
 
-.form-floating>.form-control, .form-floating>.form-select
-{
-  height: auto;
+/* //404 page css */
+
+.notfound-text{
+  text-align: center;
 }
