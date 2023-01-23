@@ -1,0 +1,35 @@
+.page-not-found-page
+{
+    background: rgb(40,40,40);
+    overflow: hidden;
+    height: 100vh;
+}
+.error-1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 130px;
+    text-align: center;
+    letter-spacing: 5px;
+    background-color: black;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+}
+span {
+    font-size: 1.2em;
+}
+.error-2
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 100px;
+    text-align: center;
+    letter-spacing: 5px;
+    background-color: black;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-transform: uppercase;
+}

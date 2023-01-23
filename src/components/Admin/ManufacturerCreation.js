@@ -6,7 +6,6 @@ import $ from "jquery";
 import { Link } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
-import { useHistory } from "react-router-dom";
 
 var Userdata;
 const ManufacturerCreation = (props) => {
@@ -19,8 +18,6 @@ const ManufacturerCreation = (props) => {
     description: "",
     image: [],
   });
-  const history=useHistory();
-
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => { 
@@ -35,11 +32,7 @@ const ManufacturerCreation = (props) => {
       method: "POST",      
       body: formData,
     })
-      .then((res) =>
-      {
-        res.json()
-        history.push("/AllManufactureDetails");
-      })
+      .then((res) => res.json())
       .then((res) => {
         GetManufacturer();
         this.getAddOn();
@@ -193,11 +186,11 @@ const ManufacturerCreation = (props) => {
       <div className="col-2 px-0">
               <Sidemenu />
             </div>
-            <div className="col-10">
+            <div className="col-10 px-0">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" ? (
             <form>
-              <div className="col-12">
+              <div className="col-12 px-0">
                     <div className="card p-4 m-2 product-form">
                       <h5>Manufacturer Creation</h5>
                       <div className="row">

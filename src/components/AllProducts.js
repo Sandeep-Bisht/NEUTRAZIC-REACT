@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action"
 import { useDispatch } from "react-redux";
+
+
 var Userdata;
 const AllProducts = (props) => {
 
@@ -660,20 +662,13 @@ const AllProducts = (props) => {
         </div>
       </div>
 
-      <div className="container Category-div">
+      <div className="container m-auto Category-div">
         <div className="row align-items-center">
-          <div className="col-6">
-            <div className="section-title">
+          <div className="col-12">
+            <div className="section-title my-4">
               <h2>All Products</h2>
             </div>
-          </div>
-          <div className="col-5">
-          </div>
-          <div className="col-1"></div>
-        </div>
-      </div>
-
-      <div id="wrap">
+            <div>
         <div id="columns" className="columns_5">
           {AllProduct.map((el, ind1) => {
             if (ind1 > prev && ind1 <= next) {
@@ -687,7 +682,7 @@ const AllProducts = (props) => {
                   </Link>
                   {/* :null} */}
                   <figcaption>{el.name}</figcaption>
-                  <div className="text-center price-div">
+                  <div className="allproduct-price-div">
                     {/* <div className="d-flex justify-content-center">
                       <StarsRating
                         count={5}
@@ -698,48 +693,60 @@ const AllProducts = (props) => {
                       />
                     </div> */}
                     <div className="row">
-                      <div className="col-2 "></div>
                       {/* <div className="col-4 ">
                               <Link to={"/SingleProduct/" + el._id}>  
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                      <div className="col-8 text-center ">
-                        <p 
-                        
-                          className="bottom-icon text-nowrap wishlist"
-                          onClick={() => {
-                            AddtoWishlist(
-                              el._id,
-                              el.name,
-                              quantity,
-                              el.inrMrp,
-                              el.inrDiscount,
-                              el.description,
-                              el.category,
-                              el.manufacturer.name,
-                              el.image
-                            );
-                          }}
-                          data-bs-toggle={Userdata == null ? "modal" : null}
-                          data-bs-target={
-                            Userdata == null ? "#exampleModal" : null
-                          }
-                        >
-                          <i id={el._id} className={`bx bx-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
-                        </p>
-                        {/* <div className="icon-wishlist"></div> */}
-                      </div>
-                      <div className="col-2 "></div>
-                    </div>
-                    <span className="price">
+                    <div className="col-6">
+                      <span className="price">
                       {" "}
-                      {el.inrMrp}
+                      <i className="fa fa-inr"></i>{el.inrDiscount}
                       {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
                         : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
                     </span>
+                    </div>
+                      <div className="col-6 text-end">
+                        <p 
+                          className={`text-nowrap wishlist`}
+                          
+                        >
+                                 {Userdata ? (
+                            <i
+                              id={el._id}
+                              onClick={() => {
+                                AddtoWishlist(
+                                  el._id,
+                                  el.name,
+                                  quantity,
+                                  el.inrMrp,
+                                  el.inrDiscount,
+                                  el.description,
+                                  el.category,
+                                  el.manufacturer.name,
+                                  el.image
+                                );
+                              }}
+                              className={`bx bxs-heart ${checkWishlistItem(
+                                el._id
+                              )}`}
+                            ></i>
+                          ) : (
+                            <i
+                              className="bx bxs-heart "
+                              data-bs-toggle="modal"
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                            ></i>
+                          )}
+                                          Wishlist
+                        </p>
+                        {/* <div className="icon-wishlist"></div> */}
+                      </div>
+                    </div>
                   </div>
                   <button
                     className="button btn"
@@ -772,23 +779,26 @@ const AllProducts = (props) => {
           
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+
+      
       
       <div className="col-12 pagination text-center">
-        <button
+        {/* <IoIosArrowBack
           className="Prebutton"
           onClick={() => {
             setPreviousValue();
           }}
-        >
-          Prev
-        </button>
+        /> */}
         <button
           className="Nextbutton"
           onClick={() => {
             setNextValue();
           }}
         >
-          Next
+          Load More...
         </button>
         
       </div>

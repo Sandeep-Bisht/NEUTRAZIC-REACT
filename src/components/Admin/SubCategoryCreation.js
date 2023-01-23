@@ -194,11 +194,11 @@ const SubCategoryCreation = (props) => {
             <div className="col-2 px-0">
               <Sidemenu />
             </div>
-            <div className="col-10">
+            <div className="col-10 px-0">
               {Userdata !== undefined ? (
                 Userdata.role == "superAdmin" ? (
-                  <form className="form-floating">
-                    <div className="col-12">
+                  <form>
+                    <div className="col-12 px-0">
                       <div className="card p-4 m-2 product-form">
                         <h5>SubCategory Creation</h5>
                         <div className="row">
@@ -254,7 +254,7 @@ const SubCategoryCreation = (props) => {
                               className="form-control"
                               id="floatingInputValue"
                               placeholder="SubCategory Description"
-                              rows="3"
+                              rows="5"
                               defaultValue={
                                 editableData ? editableData.description : ""
                               }

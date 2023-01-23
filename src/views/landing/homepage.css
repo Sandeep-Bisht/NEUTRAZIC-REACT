@@ -1,4 +1,37 @@
-
+.cVXxbE
+{
+	display: none;
+}
+.brands-area .Slxdj
+{
+    font-size: 1em !important;
+    width: 40px !important;
+    height: 36px !important;
+    min-width: 4px !important;
+    line-height: 29px !important;
+}
+.Slxdj
+{
+	font-size: 1em !important;
+    width: 40px !important;
+    height: 34px !important;
+    min-width: 4px !important;
+    line-height: 29px !important;
+}
+.allproduct-price-div
+{
+	font-size: 16px;
+    color: #212121;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.50px;
+}
+.allproduct-price-div i
+{
+	color: #4444;
+	padding-right: 5px;
+	font-size: 12px;
+}
 .wishlisted {
 	color: red !important;
   }
@@ -2977,7 +3010,8 @@ fieldset:disabled a.btn {
 	padding: .25rem .5rem;
 	font-size: .875rem;
 	line-height: 1.5;
-	border-radius: .2rem
+	border-radius: .2rem;
+	cursor: pointer;
 }
 
 .btn-block {
@@ -7002,7 +7036,7 @@ button.bg-dark:hover {
 }
 
 .align-items-center {
-	align-items: center!important
+	align-items: center!important;
 }
 
 .align-items-baseline {
@@ -10021,10 +10055,8 @@ p:last-child {
 }
 .section-title h2 {
 	margin-top: 0px;
-	border-bottom: 3px solid #1e144f;
 	padding-bottom: 0;
 	font-size: 2rem;
-	text-align: center;
 	color: #1e144f;
 	font-family: 'Roboto', sans-serif;
 	opacity: 1;
@@ -12884,7 +12916,7 @@ letter-spacing: 0.50px;
 
 .bx-minus:before {
     content: "\eaed";
-    background: #00B560;
+    background: #1e144f;
 	color:white;
 }
 .bx-plus:before {
@@ -13996,10 +14028,11 @@ letter-spacing: 0.50px;
 .product-subtotal .amount span
 {
 	position: relative;
-    top: 5px;
+    top: -4px;
     font-size: 21px;
     padding-left: 10px;
-    padding-right: 10px
+    padding-right: 10px;
+	font-weight: 550;
 }
 .cart-table table tbody tr td.product-quantity .input-counter span {
 	position: absolute;
@@ -14153,7 +14186,7 @@ letter-spacing: 0.50px;
 	position: relative;
 	z-index: 1;
 	border: none;
-	background-color: #00B560;
+	background-color: #1b97ff;
 	font-family: 'Roboto', sans-serif;
 	box-shadow: unset;
 	text-align: center;
@@ -15084,6 +15117,7 @@ letter-spacing: 0.50px;
     width: 100%;
     object-fit: contain;
     padding: 10px;
+	background-color: #fff;
     border-radius: 10px;
 }
 
@@ -17747,7 +17781,7 @@ letter-spacing: 0.50px;
 	width: 100%;
 	border: 1px solid #A6A6A6;
 	background-color: transparent;
-	color: #848484;
+	color: #000;
 	height: 50px;
 	transition: var(--transition);
 	padding-left: 15px;
@@ -18715,6 +18749,7 @@ letter-spacing: 0.50px;
 	}
 	.bottom-icon{
 		font-size: 13px;
+		cursor: pointer;
 	}
 	.product-bottom-icon{
 	background: #FFDF6D;
@@ -18873,12 +18908,12 @@ letter-spacing: 0.50px;
   .columns_5 .figure1:nth-child(5){
 	  margin-right: 0;
   }
-  #columns .figure1:hover{
+  /* #columns .figure1:hover{
 	  -webkit-transform: scale(1.1);
 	  -moz-transform:scale(1.1);
 	  transform: scale(1.1);
   
-  }
+  } */
   #columns:hover .figure1:not(:hover) {
 	  opacity: 0.4;
   }
@@ -18909,11 +18944,17 @@ letter-spacing: 0.50px;
     height: 170px;
     object-fit: contain;
   }
+
+  div#columns .figure1 .text-center{
+	display: block;
+	margin-top: -9px;
+	line-height: 20px;
+  }
   
   div#columns .figure1 figcaption {
 	font-size: 1.0rem;
 	color: #444;
-	line-height: 1.5;
+	line-height: 2.4;
 	height:30px;
 	font-weight:600;
 	text-overflow:ellipsis;
@@ -18943,7 +18984,7 @@ letter-spacing: 0.50px;
   }
   figure .button:hover
   {
-	padding: 10px;
+	padding: 7px;
 	background:linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
 	border: none;
 	color: #fff;
@@ -19149,10 +19190,8 @@ ul
 /* Pagination buttons */
 .pagination
 {
-	margin-top: -45px;
 	text-align: center;
 	justify-content:center;
-	
 }
 .Prebutton
 {
@@ -19176,7 +19215,6 @@ ul
 }
 .Nextbutton
 {
-	color:#fff;
 	font-size:16px;
 	font-family: 'Roboto', sans-serif;
 	float: right;
@@ -19185,7 +19223,7 @@ ul
 	outline: 0;
 	margin: 20px;
 	height:40px;
-	width:80px;
+	width:150px;
 	border-radius: 0.25rem;
 }
 .Nextbutton:hover
@@ -19697,4 +19735,11 @@ margin: 40px 8px 15px 0px;
 
 .active-color{
 	color: red !important;
+}
+.anticon-spin::before, .anticon-spin{
+	display: none !important;
+}
+
+.all-product-heart i{
+	color: rgba(0, 0, 0, .3);
 }

@@ -5,7 +5,6 @@ import $ from "jquery";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
-import { useHistory } from "react-router";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -34,7 +33,6 @@ const Productform = (props) => {
     image: [],
     otherImage : []
   });
-  const history=useHistory();
 
 
   const submitData = async (e) => {
@@ -61,17 +59,12 @@ const Productform = (props) => {
       method: "POST",
       body: formData,
     })
-      .then((res) => {
-        res.json();
-        history.push("/AllProductsDetails");
-      })
-      .then((res) => {
-        this.getAddOn();
-      })
+      .then((res) => res.json())
+      // .then((res) => {
+      //   this.getAddOn();
+      // })
       .catch((err) => console.log(err));
-     
-
-   
+    // console.log(formData)
   };
 
   useEffect(() => {
@@ -322,16 +315,16 @@ const Productform = (props) => {
         <div className="col-2 px-0">
         <Sidemenu />
         </div>
-        <div className="col-10">
+        <div className="col-10 px-0">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form
               encType="multipart/form-data">
-              <div className="container-fluid mb-3">
-                <div className="row">
+              <div className="container-fluid">
+                <div className="row px-0">
                   {/* <div className="col-1"></div> */}
-                  <div className="col-10">
-                    <div className="card p-4 product-form" id="Allproduct-form">
+                  <div className="col-10 px-0">
+                    <div className="card p-4 m-2 product-form" id="Allproduct-form">
                       <h5>Product Creation</h5>
 
                       <div className="row">

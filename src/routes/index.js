@@ -50,6 +50,8 @@ import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCa
 import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
 import MyAccount from "../components/MyAccount"
 import Success from '../components/Success';
+import AllUsers from "../components/Admin/AllUsers";
+import PageNotFound from "../components/PageNotFound";
 
 var Userdata = "";
 const Root = (props) => {
@@ -143,6 +145,7 @@ const Root = (props) => {
               path="/SubCategoryCreation"
               component={SubCategoryCreation}
             />
+            <Route path="/AllUsers" component={AllUsers}/> 
             <Route exact path="/Subcategory" component={Subcategory} />
             <Route exact path="/Subcategories/:_id" component={Subcategories} />
             <Route
@@ -161,6 +164,7 @@ const Root = (props) => {
               component={SearchResult}
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
+            <Route path='/pageNotFound' component={PageNotFound} />
           
           </Switch>
         </>

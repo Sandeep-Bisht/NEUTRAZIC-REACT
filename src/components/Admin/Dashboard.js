@@ -28,6 +28,9 @@ const Dashboard = () => {
   const [users, setUsers] = useState("");
   const [categories, setCategories] = useState("");
   const [subCategories, setSubCategories] = useState("");
+  const [localuser,setLocaluser] = useState("");
+  var Userdata;
+
 
   useEffect(() => {
     setCount();
@@ -37,21 +40,31 @@ const Dashboard = () => {
     GetManufacturer();
     GetOrders();
     GetProducts();
+    GetLocalUserData();
+    
 
     // Subtotal1 =  localStorage.getItem("Subtotal")
   }, []);
+
+  const GetLocalUserData = ()=>{
+    Userdata = JSON.parse( localStorage.getItem("Userdata"));
+    const users = Userdata;
+    setLocaluser(users);
+  }
+  
+
+
   const GetProducts = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
+        
         Setproducts(data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -74,7 +87,7 @@ const Dashboard = () => {
         console.log(err, "error");
       });
   };
-
+  
   const GetUser = async () => {
     await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
@@ -97,12 +110,13 @@ const Dashboard = () => {
       });
   };
 
+  
+
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufacturer(data.data.length);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -117,14 +131,18 @@ const Dashboard = () => {
     localStorage.setItem("Userdata", null);
     window.location.replace("/");
   };
-
   return (
     <>
     <section id="body-pd">
+    {
+    
+    localuser && localuser.role === "superAdmin"  ? (
+    
+    
         <div className="container-fluid">
           <DashboardHeaader/>
       
-      
+        
           <div className="row">
             <div className="col-2 px-0">
               <Sidemenu />
@@ -133,7 +151,7 @@ const Dashboard = () => {
               <main className="main">
                 <div className="row cardsec-row">
                   <div className="col-3">
-                    <Link to="/Manufacturer">
+                    <Link to="/AllManufactureDetails">
                       <div className="card cardsec">
                         <div className="row">
                           <div className="col-12">
@@ -151,25 +169,32 @@ const Dashboard = () => {
                       </div>
                     </Link>
                   </div>
+                  
                   <div className="col-3">
+                  <Link to = "/AllUsers">
                     <div className="card cardsec">
                       <div className="row">
                         <div className="col-12">
                           <div className="d-flex justify-content-between align-items-center">
+                            
                             <div>
                               <FiUserCheck className="cardicon" />
                               <h6 className="cardheads">Users </h6>
                             </div>
                             <div>
-                              <Link to="/Orders">
+                              
                                 <span className="count">{users}</span>
-                              </Link>
+                              
                             </div>
+                            
                           </div>
                         </div>
                       </div>
                     </div>
+                    </Link>
                   </div>
+                  
+                  
                   <div className="col-3">
                     <Link to="/Orders">
                       <div className="card cardsec">
@@ -190,7 +215,7 @@ const Dashboard = () => {
                     </Link>
                   </div>
                   <div className="col-3">
-                    <Link to="/ProductForm">
+                    <Link to="/AllProductsDetails">
                       <div className="card cardsec">
                         <div className="row">
                           <div className="col-12">
@@ -209,7 +234,7 @@ const Dashboard = () => {
                     </Link>
                   </div>
                   <div className="col-3 pt-4">
-                    <Link to="/Category">
+                    <Link to="/AllCategoriesDetails">
                       <div className="card cardsec">
                         <div className="row">
                           <div className="col-12">
@@ -228,7 +253,7 @@ const Dashboard = () => {
                     </Link>
                   </div>
                   <div className="col-3 pt-4">
-                    <Link to="/SubCategoryCreation">
+                    <Link to="/AllSubCategoriesDetails">
                       <div className="card cardsec">
                         <div className="row">
                           <div className="col-12">
@@ -251,7 +276,15 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </section>
+        
+    ):(
+      <>
+      <h1 className="notfound-text text-danger">404 Page Not Found <Link to="/"><p>Back To Homepage</p></Link></h1>
+      
+      </>
+    )
+}
+</section>
     </>
   );
 };

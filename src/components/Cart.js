@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import * as ACTIONS from '../CommonService/AddToCart/action'
 import confirm, { Button, alert } from "react-alert-confirm";
 import { message, Popconfirm } from 'antd';
+import "../views/landing/homepage.css";
 
 import { baseUrl } from "../utils/services";
 import AllProducts from "./AllProducts";
@@ -155,6 +156,7 @@ const Cart = () => {
                             <th scope="col"></th>
                             <th scope="col">PRICE</th>
                             <th scope="col">QUANTITY</th>
+                            <th scope="col">Total</th>
                             <th scope="col">ACTION</th>
                           </tr>
                         </thead>
@@ -199,9 +201,13 @@ const Cart = () => {
                                 </td>
                                 <td className="product-price">
                                   <div className="amount">
+                                    
+                                  <span className="new-price ml-1 fa fa-inr">
+                                    <del>{el.mrp}</del>
+                                    </span>
                                     <span className="unit-amount">
                                       {
-                                        el.mrp
+                                        el.singleprice
                                         //   isNaN(
                                         //     el.mrp -
                                         //       (el.mrp * el.discountprice) / 100
@@ -256,21 +262,21 @@ const Cart = () => {
                                     </span>
                                   </div>
                                 </td> */}
-                                {/* <td className="product-subtotal">
+                                <td className="product-subtotal">
                                   <div className="amount">
-                                    <span className="subtotal-amount mt-4">
+                                   <span className="subtotal-amount mt-4 fa fa-inr">
                                          {
-                                          total
+                                          el.singleprice*el.quantity
                                          }
                                     </span>
                                   </div>
-                                </td> */}
+                                </td>
                                 <td>
-                                  <Popconfirm className="bx bx-trash btn btn-danger btn-sm w-50"
+                                  <Popconfirm className="bx bx-trash btn-danger btn-sm"
                                     title="Delete the Product"
                                     description="Are you sure to delete this Product?"
                                     style={{ margin: "0" }}
-                                     onConfirm={(e)=>Sliceorder(ind1, e)}
+                                    onConfirm={(e)=>Sliceorder(ind1, e)}
                                   >
                                   </Popconfirm>
                                   {/* <Button onClick={handleClickBasic}>Basic</Button> */}
@@ -303,15 +309,15 @@ const Cart = () => {
                     <h3>Cart Totals</h3>
                     <ul>
                       <li>
-                        Subtotal <span>{actualtotal}</span>
+                        Subtotal <span>₹{actualtotal}</span>
                       </li>
                       <li>
-                        Total Discount <span>{actualtotal - total}</span>
+                        Discount <span>-₹{actualtotal - total1}</span>
                       </li>
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total <span>{total1}</span>
+                        Total Amount <span>₹{total1}</span>
                       </li>
                     </ul>
                     <Link
