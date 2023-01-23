@@ -23,7 +23,7 @@ const GetUserData = async()=>{
 await fetch(`${baseUrl}/api/auth/allusers`)
 .then((res)=>res.json())
 .then(async(data)=>{
-  const userfilter = data.data.filter((value)=>{ return value.role=== "user"});
+  const userfilter = data.data.filter((value)=>{ return value.role === "user"});
    setUserdata(userfilter);
 })
 .catch((err) => {

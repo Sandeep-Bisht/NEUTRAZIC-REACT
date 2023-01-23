@@ -883,3 +883,10 @@ font-family: 'Roboto', sans-serif;
     border-radius: 5px;
     color: #1e144f;
 }
+
+
+/* //404 page css */
+
+.notfound-text{
+  text-align: center;
+}

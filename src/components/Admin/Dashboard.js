@@ -28,6 +28,8 @@ const Dashboard = () => {
   const [users, setUsers] = useState("");
   const [categories, setCategories] = useState("");
   const [subCategories, setSubCategories] = useState("");
+  const [localuser,setLocaluser] = useState("");
+  var Userdata;
 
 
   useEffect(() => {
@@ -38,21 +40,31 @@ const Dashboard = () => {
     GetManufacturer();
     GetOrders();
     GetProducts();
+    GetLocalUserData();
+    
 
     // Subtotal1 =  localStorage.getItem("Subtotal")
   }, []);
+
+  const GetLocalUserData = ()=>{
+    Userdata = JSON.parse( localStorage.getItem("Userdata"));
+    const users = Userdata;
+    setLocaluser(users);
+  }
+  
+
+
   const GetProducts = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
+        
         Setproducts(data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -98,12 +110,13 @@ const Dashboard = () => {
       });
   };
 
+  
+
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
         setManufacturer(data.data.length);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -118,14 +131,18 @@ const Dashboard = () => {
     localStorage.setItem("Userdata", null);
     window.location.replace("/");
   };
-
   return (
     <>
     <section id="body-pd">
+    {
+    
+    localuser && localuser.role === "superAdmin"  ? (
+    
+    
         <div className="container-fluid">
           <DashboardHeaader/>
       
-        {}
+        
           <div className="row">
             <div className="col-2 px-0">
               <Sidemenu />
@@ -259,7 +276,15 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </section>
+        
+    ):(
+      <>
+      <h1 className="notfound-text text-danger">404 Page Not Found <Link to="/"><p>Back To Homepage</p></Link></h1>
+      
+      </>
+    )
+}
+</section>
     </>
   );
 };
