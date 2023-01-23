@@ -12,8 +12,9 @@ const CategoryCreation = (props) => {
   const [update, setUpdate] = useState(false);
   const [data, Setdata] = useState({
     name: "",
-    descripton: "",
-    image: [],
+    description: "",
+    featuredCategories:"",
+    image: [],    
   });
   const history=useHistory();
   const [editableData]=useState(props.history.location.state);
@@ -23,15 +24,12 @@ const CategoryCreation = (props) => {
     const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
-    formData.append("image", data.image);
+    await formData.append("featuredCategories", data.featuredCategories);
+    await formData.append("image", data.image);    
     const url = `${baseUrl}/api/category/add_category`;
+    console.log("insid esubmit", data)
      await fetch(url, {
     method: "POST",
-      // headers: {
-      // 'Accept': 'application/json',
-      // 'Content-Type': 'multipart/form-data'
-
-      //   },
       body: formData,
     })
       .then((res) =>{
@@ -44,7 +42,7 @@ const CategoryCreation = (props) => {
         this.getAddOn();
       })
       .catch((err) => console.log(err));
-  };
+   };
 
   const SelectImage = (e) => {
     Setdata({ ...data, image: [...e.target.files] });
@@ -183,8 +181,6 @@ const CategoryCreation = (props) => {
                           <input
                             type="file"
                             className="form-control Dashborad-search"
-                            
-                            multiple
                             // onChange={SelectImage}
                             onChange={(e) => {
                               Setdata({ ...data, image: e.target.files[0] });
@@ -218,6 +214,21 @@ const CategoryCreation = (props) => {
                             }}
                           ></textarea>
                           <label for="floatingInputValue">Category Description</label>
+                        </div>
+                        <div className="col-6 form-floating">
+                          <select
+                            className="form-control Dashborad-search"
+                            // defaultValue={editableData  ? editableData.typ : ""}
+                            onChange={(e) => {
+                              Setdata({ ...data, featuredCategories: e.target.value });
+                            }}
+                          >
+                            <option>Select Category Type</option>
+                            <option value="Featured Categories">
+                            Featured Categories
+                            </option>
+                            {/* <option></option> */}
+                          </select>
                         </div>
                         {editableData ? (
                           <div className="col-12 p-1">
