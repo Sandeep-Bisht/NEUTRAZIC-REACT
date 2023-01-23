@@ -477,12 +477,7 @@ color:#1e144f;
 }
 .login-register-close-icon
 {
-    position: absolute;
-    top: 5px;
-    right: 0;
-    height: 30px;
-    color: #000;
-    cursor: pointer;
+    display: none;
 }
 
 /*Left*/

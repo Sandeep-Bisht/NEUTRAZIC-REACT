@@ -701,7 +701,7 @@ const AllProducts = (props) => {
                     <div className="col-6">
                       <span className="price">
                       {" "}
-                      <i className="fa fa-inr"></i>{el.inrMrp}
+                      <i className="fa fa-inr"></i>{el.inrDiscount}
                       {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
@@ -710,26 +710,39 @@ const AllProducts = (props) => {
                     </div>
                       <div className="col-6 text-end">
                         <p 
-                          className={`bottom-icon text-nowrap wishlist ${checkWishlistItem(el._id)}`}
-                          onClick={() => {
-                            AddtoWishlist(
-                              el._id,
-                              el.name,
-                              quantity,
-                              el.inrMrp,
-                              el.inrDiscount,
-                              el.description,
-                              el.category,
-                              el.manufacturer.name,
-                              el.image
-                            );
-                          }}
-                          data-bs-toggle={Userdata == null ? "modal" : null}
-                          data-bs-target={
-                            Userdata == null ? "#exampleModal" : null
-                          }
+                          className={`text-nowrap wishlist`}
+                          
                         >
-                          <i id={el._id} className={`bx bxs-heart ${checkWishlistItem(el._id)}`} ></i>Wishlist
+                                 {Userdata ? (
+                            <i
+                              id={el._id}
+                              onClick={() => {
+                                AddtoWishlist(
+                                  el._id,
+                                  el.name,
+                                  quantity,
+                                  el.inrMrp,
+                                  el.inrDiscount,
+                                  el.description,
+                                  el.category,
+                                  el.manufacturer.name,
+                                  el.image
+                                );
+                              }}
+                              className={`bx bxs-heart ${checkWishlistItem(
+                                el._id
+                              )}`}
+                            ></i>
+                          ) : (
+                            <i
+                              className="bx bxs-heart "
+                              data-bs-toggle="modal"
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                            ></i>
+                          )}
+                                          Wishlist
                         </p>
                         {/* <div className="icon-wishlist"></div> */}
                       </div>
