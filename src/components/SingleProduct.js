@@ -876,7 +876,7 @@ const SingleProduct = (props) => {
                 ) : (
                   <>
                     <i
-                      className="bx bxs-heart ml-3 pc-heart"
+                      className="bx bxs-heart  pc-heart"
                       data-bs-toggle="modal"
                       data-bs-target={Userdata == null ? "#exampleModal" : null}
                     ></i>
