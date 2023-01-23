@@ -18,6 +18,10 @@
     min-width: 4px !important;
     line-height: 29px !important;
 }
+.Slxdj:hover:enabled, .Slxdj:focus:enabled
+{
+	background-color: #1b97ff !important;
+}
 .allproduct-price-div
 {
 	font-size: 16px;
@@ -9996,7 +10000,7 @@ p:last-child {
 	border: none;
 	box-shadow: unset;
 	text-align: center;
-	padding: 11px 40px 11px 20px;
+	/* padding: 11px 40px 11px 20px; */
 	font-size: Poppins;
 	font-weight: 600;
 	height:45px;
@@ -14186,16 +14190,30 @@ letter-spacing: 0.50px;
 	position: relative;
 	z-index: 1;
 	border: none;
-	background-color: #1b97ff;
+	background-color: fff;
 	font-family: 'Roboto', sans-serif;
 	box-shadow: unset;
 	text-align: center;
-	padding: 11px 25px 11px 20px;
 	font-size:20px;
 	font-weight: 700;
-	height:50px;
-	color:white;
-
+	border-radius: 5px;
+	text-transform: capitalize;
+	color: var(--optionalColor);
+    border: 1px solid #1b97ff;
+    padding: 10px 18px;
+    letter-spacing: .5px;
+}
+.cart-totals .default-btn1:hover
+{
+	background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+    color: #fff;
+	border: none;
+    /* border: none;
+    letter-spacing: .5px;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding: 10px 18px; */
 }
 .user-actions {
 	box-shadow: 0 2px 48px 0 rgba(0, 0, 0, .08);
@@ -17791,7 +17809,10 @@ letter-spacing: 0.50px;
 	font-size:15px;
 	border-radius: 0.25rem;
 }
-
+.single-footer-widget .newsletter-form .input::placeholder
+{
+	font-size: 16px;
+}
 .single-footer-widget .newsletter-form .input-newsletter:-ms-input-placeholder {
 	color: #999;
 	-ms-transition: var(--transition);
@@ -19143,11 +19164,15 @@ ul
   
   .wrapperbtn .btn10:hover{
 	background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
-	border: none;
+	border: 2px solid #1b97ff;
 	color: #fff;
 	padding: 8px 40px;
   }
   
+:where(.css-dev-only-do-not-override-k83k30).ant-btn.ant-btn-sm
+  {
+	height: auto;
+  }
 /* End Hover Button Css */
 .wishlist
 {
@@ -19685,7 +19710,7 @@ margin: 40px 8px 15px 0px;
 .btn-div .btn:hover
 {
 	background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
-	border: none;
+	border: 2px solid #1b97ff;
 	color: #fff;	
 }
 .btn-div .btn svg
