@@ -868,7 +868,7 @@ font-family: 'Roboto', sans-serif;
     width: auto;
     color: #000;
     opacity: .6;
-    padding-right: 3px;
+    padding-right: 8px;
 }
 .Configration-List li
 {
@@ -882,4 +882,11 @@ font-family: 'Roboto', sans-serif;
   background: #e0f3ff !important;
     border-radius: 5px;
     color: #1e144f;
+}
+
+/* textarea css */
+
+.form-floating>.form-control, .form-floating>.form-select
+{
+  height: auto;
 }

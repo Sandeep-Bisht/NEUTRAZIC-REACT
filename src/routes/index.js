@@ -50,6 +50,7 @@ import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCa
 import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
 import MyAccount from "../components/MyAccount"
 import AllUsers from "../components/Admin/AllUsers";
+import PageNotFound from "../components/PageNotFound";
 
 var Userdata = "";
 const Root = (props) => {
@@ -161,6 +162,7 @@ const Root = (props) => {
               component={SearchResult}
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
+            <Route path='/pageNotFound' component={PageNotFound} />
           
           </Switch>
         </>
