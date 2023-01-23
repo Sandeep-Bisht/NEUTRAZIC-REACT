@@ -31,23 +31,12 @@
     height:100%;
     z-index: 999
 }
-.main-nav
-{
-    height:6.1vh;
-    /* background-color:rgb(0,216,114) !important; */
-    
-}
 .drop-category
 {
     background-color:#1e144f;
-    /* padding:5px; */
-    
-    
-
-}
-.drop-category .category span
-{
-    padding-left:15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .navbar
 {
@@ -219,7 +208,7 @@ color:#1e144f;
 .drop-category  i
 {
     font-size:20px;
-    padding-top:10px ;
+    padding-right:10px;
     color:white;
 
 }

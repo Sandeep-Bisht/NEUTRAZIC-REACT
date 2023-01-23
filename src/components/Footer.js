@@ -162,7 +162,7 @@ const WishlistHandler=()=>{
             <div className="row align-items-center">
               <div className="col-lg-6 col-md-6">
                 <p>
-                  Designed & Developed by <i className="bx bx-copyright"></i>2022
+                  Designed & Developed by <i className="bx bx-copyright"></i>2023
                   GIKSIndia.
                 </p>
               </div>

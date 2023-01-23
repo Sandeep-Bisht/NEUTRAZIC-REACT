@@ -188,7 +188,7 @@ const NewOrder=(props)=>{
                   {/* end tabs */}
 
 
-                  <div className="col-lg-12 logiRegisterContentDiv ">
+                  <div className="col-12 logiRegisterContentDiv ">
                    <div className="text-center heading"> <h1>User Order's</h1> </div>
                    
                     <div>
