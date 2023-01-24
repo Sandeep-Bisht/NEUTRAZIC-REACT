@@ -1,0 +1,10 @@
+.shipping-policy-page
+{
+    padding-top: 30px;
+    background-color: #fff;
+}
+.shipping-policy-page h1, h2
+{
+    color: #1e144f;
+    text-transform: capitalize;
+}
