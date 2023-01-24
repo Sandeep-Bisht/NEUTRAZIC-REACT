@@ -340,181 +340,194 @@ const Subcategories = (props) => {
   };
   return (
     <>
-      <Header1 />
+    <Header1 />
 
-      <div id="__next">
-        {/* trending section  */}
+    <div id="__next">
+      {/* trending section  */}
 
-        <section className="trending-section mt-4 mb-4">
-          <div className="container h-100">
-            <div className="row h-100">
-              <div className="col-7 p-0">
-                <div className="align-items-center position-relative h-100 d-flex text-center w-100 justify-content-center">
-                  <h1 className="trendign-head">Showing</h1>
-                  <h2 className="pl-4 product-head mb-0">Subcategories</h2>
-                </div>
-              </div>
-              <div className="col-3 pl-0">
-                <div className="align-items-center position-relative h-100 d-flex text-center w-100 justify-content-center">
-                  <hr className="w-100 trending-product-hr" />
-                </div>
-              </div>
-              <div className="col-2 pl-0"></div>
-            </div>
-          </div>
-        </section>
-        <section className="products-area pb-40">
-          <div className="container-fluid">
-            <div className="row">
-              {getSubCategories.map((item, ind) => {
-                if (
+     
+      <section className=" pb-40">
+        <div className="container-fluid">
+          <div className="row">
+              <div className="col-2">
+              <div id="wrapper">
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+          <a href="#">
+              SubCategory
+          </a>
+      </li>
+      {
+          getSubCategories.map((item)=>{
+              if (
                   item.category == props.match.params._id
                 ) {
-                  return (
-                    <div className="col-lg-3 col-md-12 col-sm-12 ">
-                      <div className="single-products-box border">
-                        <div className="row  align-items-center product-div">
-                          <div className="col-6 product-image-div">
-                            <Link
-                              to={"/SingleProduct/" + item._id}
-                              className="product-image-link"
-                            >
-                              <div className="image hover-switch">
-                                {/* <img
-                           src={
-                           require('../../Images/products/Hintosulin (1).png')
-                           }
-                           alt="" 
-                            /> */}
-                                <img
-                                  src={
-                                    `${baseUrl}/` +
-                                    item.image[0].path
-                                  }
-                                  alt=""
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                          <div className="col-6 pd-0 tranding product-image-content">
-                            <div className="content product-content">
-                              <Link to={"/SingleProduct/" + item._id}>
-                                <h3 className="pb-1 pl-4 pt-5">
-                                  <ReadMoreReact
-                                    text={item.name}
-                                    min={7}
-                                    ideal={7}
-                                    max={7}
-                                    readMoreText={"..."}
-                                  />
-                                </h3>
-                              </Link>
-                              <div className="d-flex pb-2 pl-4">
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                              </div>
-                              <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
-                                <div className="discount-price-div">
-                                  <span>{item.inrDiscount}%</span>
-                                </div>
-                                <div className="discount-price-div2">
-                                  <span>off</span>
-                                </div>
-                              </div>
+              return (
+                  <>
+                   <li>
+          <a href="#">{item.name}</a>
+      </li>
+                  </>
+              )
+          }})
+      }
+  </ul>
+</div>
 
-                              <div className="hr-div">
-                                <hr />
-                              </div>
-                              <div className="price-div justify-content-center align-items-center d-flex">
-                                <span className="new-price ml-3">
-                                  {/* $
-                                  {isNaN(
-                                    item.inrMrp -
-                                      (item.inrMrp * item.inrDiscount) / 100
-                                  )
-                                    ? 0
-                                    : item.inrMrp -
-                                      (item.inrMrp * item.inrDiscount) / 100} */}
-                                      {item.inrDiscount}
-                                </span>
-                                <del className="new-price ml-1">
-                                  {item.inrMrp}
-                                </del>
-                                {Userdata ? (
-                                  <i
-                                    className="bx bxs-heart ml-3"
-                                    onClick={() => {
-                                      AddtoWishlist(
-                                        item._id,
-                                        item.name,
-                                        quantity,
-                                        item.inrMrp,
-                                        item.inrDiscount,
-                                        item.description,
-                                        item.category,
-                                        item.manufacturer.name,
-                                        item.image
-                                      );
-                                    }}
-                                  ></i>
-                                ) : (
-                                  <>
-                                    <i
-                                      className="bx bxs-heart ml-3 pc-heart"
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null
-                                          ? "#exampleModal"
-                                          : null
-                                      }
-                                    ></i>
-                                    <Link to="/Register">
-                                      <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                    </Link>
-                                  </>
-                                )}
 
-                                <i className="bx bx-cart ml-1"></i>
-                              </div>
-                              {/* <div className="price mt-1">
-                              <div>
-                                 <span className="new-price">
-                                 $
-                                 {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                                 ? 0
-                                 : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
-                                 </span>
-                              </div>
-                           </div> */}
-                              {/* <div className="mt-2 mb-2">
-                              <button className="add-to-cart-button1 text-nowrap"  onClick={()=>{cartfunction(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image[0].path)}} data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}>Add to Cart</button>
-                           </div> */}
-                              {/* <div className="row">
-                              
-                              <div className="col-12">
-                                 <p className="bottom-icon text-nowrap" onClick={()=>{AddtoWishlist(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image)}}  data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}><i className='bx bx-heart' ></i>Wishlist</p>
-                              <div className="icon-wishlist"></div>
-                              </div>
-                           </div> */}
+</div>
+     </div>
+     <div className="col-10">
+     <section className="trending-section  mb-5">
+        <div className="container-fluid h-100">
+          <div className="row h-100">
+            <div className="col-12 p-0">
+              <div className="align-items-center position-relative h-100 d-flex w-100 ">
+                <h1 className="trendign-head">SubCategory</h1>
+                <h2 className="pl-4 product-head">Products</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="products-area pb-40">
+        <div className="container-fluid">
+          <div className="row">
+            {getSubCategories.map((item, ind) => {
+              if (
+                item.category == props.match.params._id
+              ) {
+                return (
+                  <div className="col-lg-3 col-md-12 col-sm-12 ">
+                    <div className="single-products-box border">
+                      <div className="row  align-items-center product-div-subcategory">
+                        <div className="col-6 product-image-div">
+                          <Link
+                            to={"/SingleProduct/" + item._id}
+                            className="product-image-link"
+                          >
+                            <div className="image hover-switch">
+                              {/* <img
+                         src={
+                         require('../../Images/products/Hintosulin (1).png')
+                         }
+                         alt="" 
+                          /> */}
+                              <img
+                                src={
+                                  `${baseUrl}/` +
+                                  item.image[0].path
+                                }
+                                alt=""
+                              />
                             </div>
+                          </Link>
+                        </div>
+                        <div className="col-6 pd-0 tranding product-image-content">
+                          <div className="content product-content">
+                            <Link to={"/SingleProduct/" + item._id}>
+                              <h3 className="pb-1 pl-4 pt-5">
+                                <ReadMoreReact
+                                  text={item.name}
+                                  min={7}
+                                  ideal={7}
+                                  max={7}
+                                  readMoreText={"..."}
+                                />
+                              </h3>
+                            </Link>
+                            <div className="d-flex pb-2 pl-4">
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                            </div>
+                            <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
+                              <div className="discount-price-div">
+                                <span>{item.inrDiscount}%</span>
+                              </div>
+                              <div className="discount-price-div2">
+                                <span>off</span>
+                              </div>
+                            </div>
+
+                            <div className="hr-div">
+                              <hr />
+                            </div>
+                            <div className="price-div justify-content-center align-items-center d-flex">
+                              <span className="new-price ml-3">
+                                {/* $
+                                {isNaN(
+                                  item.inrMrp -
+                                    (item.inrMrp * item.inrDiscount) / 100
+                                )
+                                  ? 0
+                                  : item.inrMrp -
+                                    (item.inrMrp * item.inrDiscount) / 100} */}
+                                    {item.inrDiscount}
+                              </span>
+                              <del className="new-price ml-1">
+                                {item.inrMrp}
+                              </del>
+                              {Userdata ? (
+                                <i
+                                  className="bx bxs-heart ml-3"
+                                  onClick={() => {
+                                    AddtoWishlist(
+                                      item._id,
+                                      item.name,
+                                      quantity,
+                                      item.inrMrp,
+                                      item.inrDiscount,
+                                      item.description,
+                                      item.category,
+                                      item.manufacturer.name,
+                                      item.image
+                                    );
+                                  }}
+                                ></i>
+                              ) : (
+                                <>
+                                  <i
+                                    className="bx bxs-heart ml-3 pc-heart"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null
+                                        ? "#exampleModal"
+                                        : null
+                                    }
+                                  ></i>
+                                  <Link to="/Register">
+                                    <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                  </Link>
+                                </>
+                              )}
+
+                              <i className="bx bx-cart ml-1"></i>
+                            </div>
+                        
                           </div>
                         </div>
                       </div>
-                      {/* </Link> */}
                     </div>
-                  );
-                }
-              })}
+                    {/* </Link> */}
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </div>
+      </section>
             </div>
           </div>
-        </section>
-      </div>
-      <Baseline />
-      <Footer />
-    </>
+        </div>
+      </section>
+    </div>
+    <Baseline />
+    <Footer />
+  </>
   );
 };
 export default Subcategories;
