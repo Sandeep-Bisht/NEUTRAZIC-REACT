@@ -3044,11 +3044,11 @@ input[type=submit].btn-block {
 }
 
 .fade:not(.show) {
-	opacity: 0
+	opacity:0;
 }
 
 .collapse:not(.show) {
-	display: none
+	display: none;
 }
 
 .collapsing {
@@ -5755,6 +5755,21 @@ a.close.disabled {
 	height: 100%;
 	overflow: hidden;
 	outline: 0
+}
+.modal-1
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1050;
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	outline: 0
+}
+.modal-1.fade-1:not(.show) {
+	opacity:2;
 }
 
 .modal-dialog {
@@ -17800,18 +17815,13 @@ letter-spacing: 0.50px;
 	border: 1px solid #A6A6A6;
 	background-color: transparent;
 	color: #000;
-	height: 50px;
 	transition: var(--transition);
-	padding-left: 15px;
+	padding: 10px;
 	border-radius: 0px;
 	font-weight: 300;
 	font-family: 'Roboto', sans-serif;
 	font-size:15px;
 	border-radius: 0.25rem;
-}
-.single-footer-widget .newsletter-form .input::placeholder
-{
-	font-size: 16px;
 }
 .single-footer-widget .newsletter-form .input-newsletter:-ms-input-placeholder {
 	color: #999;
@@ -18830,28 +18840,33 @@ letter-spacing: 0.50px;
     font-weight: bold;
 	font-family: 'Roboto', sans-serif;
     color: #1e144f;
-	padding-top: 24px;
 	padding-bottom: 0;
 	margin-bottom: 0;
-	border-bottom: 2px solid #1b97ff4a;
 	}
 	.categories-section .cat-para
 	{
 		padding: 20px 0;
 		margin-bottom: 0;
 		font-size: 1rem;
+		text-align: justify;
+		min-height: 300px;
 	}
-	.categories-section .cat-left-side
+	.cat-left-side
 	{
-		padding: 20px 30px;
-		background-color: #fff;
-		border-radius: 10px
+		padding: 0 10px;
 	}
 	.categories-section .cat-right-side
 	{
 		padding: 20px 30px;
 		background-color: #fff;
 		border-radius: 10px
+	}
+
+	.cat-left-side-image
+	{
+		height: 200px;
+		width: 100%;
+		object-fit: cover;
 	}
 
 	/* categories section css ends */
@@ -19723,7 +19738,7 @@ margin: 40px 8px 15px 0px;
 /* --------------prashant css for home page additional section---------------- */
 .home-banner
 {
-	padding: 70px 0;
+	padding: 50px 0;
 	background-color: #fff;
 }
 /* .home-banner .home-banner-left{
@@ -19768,3 +19783,19 @@ margin: 40px 8px 15px 0px;
 .all-product-heart i{
 	color: rgba(0, 0, 0, .3);
 }
+#sidebar-wrapper{
+	position: static !important;
+	 top: 160px !important;
+	 overflow-y: hidden !important;
+	 height: 340px !important;
+	 /* border-bottom: 1px solid black !important; */
+ }
+ .trending-section{
+	 padding-left: 30px;
+ }
+ .sidebar-nav li a:hover{
+	 color: none !important;
+ }
+ .product-div-subcategory{
+	margin-left: 10px;
+ }

@@ -174,7 +174,7 @@ const NewOrder=(props)=>{
          </div>
          <div className='col-10'>
         {/* login Products Details Modal  */}
-   <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div className="modal-1 fade-1" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog justify-content-center d-grid">
          <div className="modal-content order-details-div">
             <div className="modal-body ">
@@ -188,7 +188,7 @@ const NewOrder=(props)=>{
                   {/* end tabs */}
 
 
-                  <div className="col-lg-12 logiRegisterContentDiv ">
+                  <div className="col-12 logiRegisterContentDiv ">
                    <div className="text-center heading"> <h1>User Order's</h1> </div>
                    
                     <div>

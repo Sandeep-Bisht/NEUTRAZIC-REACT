@@ -98,15 +98,15 @@ const WishList = ()=>{
                </div>
                <div className='col-8 py-0'>
                <h6>{item.name}</h6>
-               <p><ReadMoreReact text={item.description}
-            min={30}
-            ideal={30}
-            max={30}
-            readMoreText={"read more..."}/></p>
-               <Link to={"/SingleProduct/" + item.productId}>
+               <p className='word-wrapping'>{item.description}</p>
+               <div className='buynow-details-btn-wrap'>
+               <Link to={"/cart/" + item.productId}>
                <button className=' wishlist-btn'>Buy Now</button>
                </Link>
-
+               <Link to={"/SingleProduct/" + item.productId}>
+               <button className=' wishlist-btn'>See Details</button>
+               </Link>
+               </div>
             </div>
             </div>
             <div className='wishlist-close-icon' onClick={()=>DeleteWishlist(item._id) } style={{cursor:'pointer'}}><IoClose/></div>
