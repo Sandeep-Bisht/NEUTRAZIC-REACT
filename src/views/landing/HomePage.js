@@ -279,7 +279,7 @@ const breakPoints = [
     })
       .then((res) => res.json())
       .then((res) => {
-        CartById();
+         CartById();
         //history.push("/Cart");
         //window.scroll(0, 0);
       })

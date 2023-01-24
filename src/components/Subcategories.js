@@ -351,7 +351,7 @@ const Subcategories = (props) => {
               <div className="col-7 p-0">
                 <div className="align-items-center position-relative h-100 d-flex text-center w-100 justify-content-center">
                   <h1 className="trendign-head">Showing</h1>
-                  <h2 className="pl-4 product-head mb-0">Products</h2>
+                  <h2 className="pl-4 product-head mb-0">Subcategories</h2>
                 </div>
               </div>
               <div className="col-3 pl-0">
@@ -366,9 +366,9 @@ const Subcategories = (props) => {
         <section className="products-area pb-40">
           <div className="container-fluid">
             <div className="row">
-              {data.map((item, ind) => {
+              {getSubCategories.map((item, ind) => {
                 if (
-                  item.category._id == props.match.params._id
+                  item.category == props.match.params._id
                 ) {
                   return (
                     <div className="col-lg-3 col-md-12 col-sm-12 ">
