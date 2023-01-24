@@ -534,11 +534,11 @@ const breakPoints = [
                     </Link>
                   </div>
 
-                  <div className="home-banner-buttons pt-4">
+                  {/* <div className="home-banner-buttons pt-4">
                     <button className="btn common-gradient-btn">
                       Read More
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="col-md-6">
@@ -730,9 +730,9 @@ const breakPoints = [
                 return(          
               <div className="col-md-6" key={index}>
                 <div className="cat-left-side">
-                  <div className="row">
+                  <div className="row mt-0 align-items-center">
+                  <h1 className="cat-heading">{item.name}</h1>
                     <div className="col-md-6">
-                      <h1 className="cat-heading">{item.name}</h1>
                       <p className="cat-para">
                        {item.description}
                       </p>
@@ -755,7 +755,7 @@ const breakPoints = [
                                         item.image[0].path
                                       }
                                       alt=""
-                                      style={{ position: "absolute"}}
+                                      className="cat-left-side-image"
                                     />
                           </figure>
                         </div>

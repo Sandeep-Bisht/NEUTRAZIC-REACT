@@ -1,0 +1,13 @@
+.terms-condition-page
+{
+    background-color: #fff;
+    padding-top: 30px;
+}
+.terms-condition-page h1, h3
+{
+    color: #1e144f;
+}
+.terms-condition-page ul
+{
+    list-style: disc;
+}

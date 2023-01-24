@@ -876,8 +876,7 @@ const Header1 = (props) => {
       </div>
       <div className="container-fluid main-nav">
         <div className="row mt-0" id="myHeader">
-          <div className="col-2 drop-category pl-4 ">
-            <div className="row">
+          <div className="col-2 drop-category">
               <div>
                 <div className="category ">
                   <i
@@ -890,7 +889,6 @@ const Header1 = (props) => {
                   <span className="category-head">Browse Categories</span>
                 </div>
               </div>
-            </div>
           </div>
           <div className="col-10">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">

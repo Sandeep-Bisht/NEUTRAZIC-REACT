@@ -52,6 +52,11 @@ import MyAccount from "../components/MyAccount"
 import Success from '../components/Success';
 import AllUsers from "../components/Admin/AllUsers";
 import PageNotFound from "../components/PageNotFound";
+import PrivacyPolicy from "../components/PrivacyPolicy";
+import TermsConditions from "../components/TermsConditions";
+import ReturnRefund from "../components/ReturnRefund";
+import ShippingPolicy from "../components/ShippingPolicy";
+import Faq from '../components/Faq';
 
 var Userdata = "";
 const Root = (props) => {
@@ -165,6 +170,11 @@ const Root = (props) => {
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
             <Route path='/pageNotFound' component={PageNotFound} />
+            <Route path='/privacyPolicy' component={PrivacyPolicy} />
+            <Route path='/termConditions' component={TermsConditions} />
+            <Route path='/returnRefund' component={ReturnRefund} />
+            <Route path='/shippingPolicy' component={ShippingPolicy} />
+            <Route path='/Faq' component={Faq} />
           
           </Switch>
         </>
