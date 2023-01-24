@@ -27,11 +27,11 @@ const Subcategories = (props) => {
   const [categoryname, Setcategoryname] = useState();
   const [getSubCategories,setGetSubCategories]=useState([]);
 
-  console.log(getSubCategories,"inside the all the categories")
+  
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
+    
     GetData();
     CartById();
     GetCategory();
@@ -57,11 +57,11 @@ const Subcategories = (props) => {
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
+    
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
+        
         setData(data.data);
       })
       .catch((err) => {
@@ -72,9 +72,9 @@ const Subcategories = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
+        
         setManufactureres(data.data);
-        console.log(data);
+       
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -84,7 +84,7 @@ const Subcategories = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hrre");
+        
         setCategories(data.data._id);
       })
       .catch((err) => {
@@ -187,7 +187,7 @@ const Subcategories = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
+        
         history.push("/Cart");
       })
       .then((err) => console.log(err));
@@ -338,6 +338,7 @@ const Subcategories = (props) => {
         }
       });
   };
+  
   return (
     <>
       <Header1 />
@@ -351,7 +352,7 @@ const Subcategories = (props) => {
               <div className="col-7 p-0">
                 <div className="align-items-center position-relative h-100 d-flex text-center w-100 justify-content-center">
                   <h1 className="trendign-head">Showing</h1>
-                  <h2 className="pl-4 product-head mb-0">Products</h2>
+                  <h2 className="pl-4 product-head mb-0">Subcategories</h2>
                 </div>
               </div>
               <div className="col-3 pl-0">
@@ -366,9 +367,9 @@ const Subcategories = (props) => {
         <section className="products-area pb-40">
           <div className="container-fluid">
             <div className="row">
-              {data.map((item, ind) => {
+              {getSubCategories.map((item, ind) => {
                 if (
-                  item.category._id == props.match.params._id
+                  item.category == props.match.params._id
                 ) {
                   return (
                     <div className="col-lg-3 col-md-12 col-sm-12 ">
