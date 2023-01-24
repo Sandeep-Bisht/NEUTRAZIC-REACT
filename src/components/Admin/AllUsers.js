@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import DashboardHeaader from "./DashboardHeaader";
+import axios from "axios";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
+import {Link} from "react-router-dom"
 import { baseUrl } from "../../utils/services";
 import { Table, Input, Typography, Popconfirm, Space } from "antd";
 import {BiSearchAlt} from 'react-icons/bi';
+import {FaTrashAlt} from 'react-icons/fa';
+import {MdOutlineEditNote} from 'react-icons/md';
+import {MdPlaylistAdd} from 'react-icons/md';
 
 const UserPage = () => {
 
@@ -45,6 +50,16 @@ const onChangeHandler=(e)=>{
     GetUserData();
   }
 }
+const handleDelete=async (_id)=>{
+  try{
+    const DeletedData=await axios.delete(`${baseUrl}/api/auth/delete_user_by_id`,{data: {_id:_id}});
+    GetUserData();
+  }catch(error)
+  {
+    console.log(error, "error")
+  }
+  
+}
 
 const columns = [
   {
@@ -56,6 +71,37 @@ const columns = [
     title: "Email",
     dataIndex: "email",
     key: "email",
+  },
+  {
+    title: "Action",
+    dataIndex: "Action",
+    width: "20%",
+    render: (_, record) =>
+      userdata.length >= 1 ? (
+        <Space size="middle">
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record._id)}
+          >
+            <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
+          </Popconfirm>
+          <Typography.Link>
+            <Link
+              to={{
+                pathname: "/ProductForm",
+                state: {
+                  ...record,
+                },
+              }}
+              title="Edit"
+              className='edit-icon-wrap'
+              style={{ color: "blue" }}
+            >
+              <MdOutlineEditNote/>
+            </Link>
+          </Typography.Link>
+        </Space>
+      ) : null,
   },
 ];
  
