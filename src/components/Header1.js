@@ -53,6 +53,7 @@ const Header1 = (props) => {
     defaultValues: {
       username: "",
       email: "",
+      phonenumber:"",
       password: "",
       repassword: "",
     },
@@ -113,6 +114,7 @@ const Header1 = (props) => {
       data.password &&
       data.repassword &&
       data.username &&
+      data.phonenumber&&
       data.password == data.repassword
     ) {
       
@@ -125,6 +127,7 @@ const Header1 = (props) => {
         body: JSON.stringify({
           username: data.username,
           password: data.password,
+          phonenumber:data.phonenumber,
           email: data.email,
           role: "user",
         }),
@@ -499,6 +502,24 @@ const Header1 = (props) => {
                             {errors?.email?.type === "pattern" && (
                               <p className="text-danger">
                                 Please enter the valid Email
+                              </p>
+                            )}
+                            {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
+                          </div>
+                          <div className="form-group ">
+                            <label>
+                              Phone Number<span>*</span>
+                            </label>
+                            <input
+                              type="number"
+                              className="form-control "
+                              {...register("phonenumber", {
+                                required: true,
+                              })}
+                            />
+                            {errors?.phonenumber?.type === "required" && (
+                              <p className="text-danger">
+                                This field is required
                               </p>
                             )}
                             {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
