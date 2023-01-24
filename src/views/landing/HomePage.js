@@ -928,7 +928,7 @@ const breakPoints = [
         </section>
         <section className="products-area">
           <h1 className="trendign-head">
-            <span className="products-color">Skin Care</span>
+            <span className="products-color">Weight Management</span>
           </h1>
           <div className="container m-auto">
             <div className="row">
@@ -938,7 +938,7 @@ const breakPoints = [
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                if (i > 0 && el.category.name === "Skincare") {
+                if (i > 0 && el.category.name === "Weight Management") {
                   skincare = skincare + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
