@@ -293,7 +293,7 @@ const SearchResult = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          CartById();
+          // CartById();
           // setCartItems(data.data[0].order.length);
           // history.push("/Cart");
         })
