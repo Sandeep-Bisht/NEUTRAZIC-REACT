@@ -534,11 +534,11 @@ const breakPoints = [
                     </Link>
                   </div>
 
-                  <div className="home-banner-buttons pt-4">
+                  {/* <div className="home-banner-buttons pt-4">
                     <button className="btn common-gradient-btn">
                       Read More
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="col-md-6">

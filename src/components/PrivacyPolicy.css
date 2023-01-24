@@ -1,0 +1,13 @@
+.privacy-policy-page
+{
+    background-color: #fff;
+    padding-top: 30px;
+}
+.privacy-policy-page h1, h2
+{
+    color: #1e144f;
+}
+.privacy-policy-page ul
+{
+    list-style: disc;
+}

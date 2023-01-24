@@ -1,0 +1,10 @@
+.return-policy-section
+{
+    padding-top: 30px;
+    background-color: #fff;
+}
+.return-policy-section h1, h2
+{
+    color: #1e144f;
+    text-transform: capitalize;
+}

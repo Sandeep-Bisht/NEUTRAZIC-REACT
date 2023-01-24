@@ -87,16 +87,16 @@ const WishlistHandler=()=>{
                     <Link to="/ContactUs" onClick={ContactHandler}>Contact Us</Link>
                   </li>
                   <li>
-                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <Link to='/privacyPolicy'>Privacy Policy</Link>
                   </li>
                   <li>
-                    <a href="terms-of-service.html">Terms &amp; Conditions</a>
+                    <Link to="/termConditions">Terms &amp; Conditions</Link>
                   </li>
                   <li>
-                    <a href="customer-service.html">Delivery Information</a>
+                    <Link to="/shippingPolicy">Shipping Policy</Link>
                   </li>
                   <li>
-                    <a href="customer-service.html">Orders and Returns</a>
+                  <Link to="/returnRefund">Return &amp; Refund</Link>
                   </li>
                 </ul>
               </div>
@@ -106,7 +106,7 @@ const WishlistHandler=()=>{
                 <h3>Customer Care</h3>
                 <ul className="link-list">
                   <li>
-                    <a href="faq.html">Help &amp; FAQs</a>
+                    <Link to="/Faq">FAQs</Link>
                   </li>
                   <li>
                   <Link to="/MyAccount">My Account</Link>
@@ -159,7 +159,7 @@ const WishlistHandler=()=>{
         </div>
         <div className="footer-bottom-area container m-auto">
           <div className="container m-auto">
-            <div className="row align-items-center">
+            <div className="row mt-0 align-items-center">
               <div className="col-lg-6 col-md-6">
                 <p>
                   Designed & Developed by <i className="bx bx-copyright"></i>2023
