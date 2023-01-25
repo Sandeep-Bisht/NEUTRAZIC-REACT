@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
@@ -21,18 +21,14 @@ import Carousel from "react-elastic-carousel";
 var Userdata = "";
 var CartDataWoLogin = [];
 
-const breakPoints = [
-  { width : 1, itemsToShow : 1},
-  { width : 550, itemsToShow : 2},
-  { width : 768, itemsToShow : 4},
-  { width : 1200, itemToShow : 6},
-  ];
+
 
 const SingleProduct = (props) => {
 
   let dispatch = useDispatch();
   let prodId = props.match.params.id;
   let related = 0;
+  let careouselImage =0;
   const [AllProduct, setAllProduct] = useState([]);
   const [data, setData] = useState([]);
   const [ProductCategory, setProductCategory] = useState([]);
@@ -46,6 +42,39 @@ const SingleProduct = (props) => {
   const history = useHistory();
   // let Wishlist = [];
   //let ImageData ;
+
+  const breakPoints = [
+    { width : 1, itemsToShow : 1},
+    { width : 550, itemsToShow : 2},
+    { width : 768, itemsToShow : 4},
+    { width : 1200, itemToShow : 4},
+    ];
+
+//     const carouselRef = React.useRef(null);
+// 
+// };
+let carouselRef = useRef(null);
+
+const onNextStart = (currentItem, nextItem) => {
+  if (currentItem.index === nextItem.index) {
+  carouselRef.current.goTo(0);
+  }
+}
+
+  const onPrevStart = (currentItem, nextItem) => {
+    if (currentItem.index === nextItem.index) {
+    carouselRef.current.goTo(data.otherImage.length);
+    }
+    };
+
+    const Loop = (currentItem) => {
+      if (currentItem.index == data.otherImage.length - 1) {
+      setTimeout(() => {
+      carouselRef.current.goTo(0);
+      }, 1000);
+      }
+      };
+
   useEffect(() => {
     related = 0;
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -600,6 +629,7 @@ const SingleProduct = (props) => {
       }
     }
   }
+  
 
   
 
@@ -629,11 +659,22 @@ const SingleProduct = (props) => {
             </div>
 
             {/* <ReactImageZoom {...ImageData} /> */}
-              <Carousel breakPoints={breakPoints}>
             <div className="row image-group pt-2">
+              <Carousel 
+             // breakPoints={breakPoints} 
+              enableAutoPlay
+              autoPlaySpeed={1500} 
+              itemsToShow={4}
+              onPrevStart={onPrevStart}
+              onNextStart={onNextStart}
+              // onChange={Loop}
+              ref={carouselRef}
+              disableArrowsOnEnd={false}
+              // itemPadding={[0, 4]}
+              >
             {data.otherImage && data.otherImage.length > 0 ?            
             data.otherImage.map((item,ind)=>(
-              <div className="col-3" key={ind}>              
+              <div className="col" key={ind}>              
                 <img
                 className="img-slide"
                   src={`${baseUrl}/` + item.path}
@@ -643,8 +684,8 @@ const SingleProduct = (props) => {
             </div>
               )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
             }
-            </div>
             </Carousel>
+            </div>
 
             {/* phone single page caresouel */}
             <div
