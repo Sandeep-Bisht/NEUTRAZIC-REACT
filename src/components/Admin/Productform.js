@@ -64,7 +64,6 @@ const Productform = (props) => {
       //   this.getAddOn();
       // })
       .catch((err) => console.log(err));
-    // console.log(formData)
   };
 
   useEffect(() => {
@@ -149,7 +148,6 @@ const Productform = (props) => {
 
   // if (Userdata != undefined && Userdata.role == "Vendor") {
   //   {
-  //     console.log(products,"productssssssssssssssssss")
   //     products.map((item, index) => {
   //       data1.push(
   //         item.manufacturer.name == Userdata.organization
@@ -303,7 +301,6 @@ const Productform = (props) => {
 
   const showAllProductHandler = () => {
     setShowTable(true);
-    console.log(products, "inside the product");
   }
 
   return (

@@ -108,7 +108,6 @@ const breakPoints = [
   })
     .then((res) => res.json())
     .then(async (data) => {
-      console.log("inside getwishlist home page", data.data[0])
        if(data.data[0] !== undefined){
         Setwishlist(data.data)
        }
@@ -188,7 +187,6 @@ const breakPoints = [
       }
       CartDataWoLogin.push(newItemObj);
       localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-      // console.log(JSON.stringify(CartDataWoLogin));
     }
   };
 

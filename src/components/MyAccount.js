@@ -12,7 +12,6 @@ const MyAccount = () => {
   window.scroll(0, 0);
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "userdata");
     setData(Userdata);
   }, []);
 

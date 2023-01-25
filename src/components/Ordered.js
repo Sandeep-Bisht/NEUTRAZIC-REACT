@@ -32,17 +32,12 @@ const Ordered = () => {
           if (data.data[0] != undefined) {
             setOrderes(data.data);
           }
-
-          console.log(data.data, "rrrr");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    //  else
-    //   {
-
-    //  }
+    
   };
 
   const UpdateOrderStatus = async (productId, status) => {

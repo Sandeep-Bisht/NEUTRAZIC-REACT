@@ -2,7 +2,6 @@
 // require('dotenv').config()
 // var uri =process.env.URL
 // export  function Login(url){  
-//   console.log(uri,"here")
 //   var result=[]
 //   var error=''
 //   var post=async (req)=>{ 

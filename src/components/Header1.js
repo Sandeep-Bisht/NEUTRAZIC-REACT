@@ -134,7 +134,6 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data, "After post Api");
           toast.success("Registered Successfully",{
             position:"bottom-right",
             autoClose: 2000,
@@ -201,7 +200,6 @@ const Header1 = (props) => {
       //   autoClose: 5000,
       // });
     } else {
-      console.log("not getting role", "faiure");
       setMsg("Please Enter a Valid Data");
     }
   };

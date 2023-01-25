@@ -40,7 +40,6 @@ const ManufacturerCreation = (props) => {
       })
       
       .catch((err) => console.log(err));
-    //console.log(formData)
     e.preventDefault();
     
   };

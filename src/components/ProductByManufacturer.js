@@ -52,11 +52,9 @@ const ProductByManufacturer = (props) => {
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "sadbhksabdhk");
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
         setData(data.data);
       })
       .catch((err) => {
@@ -67,9 +65,7 @@ const ProductByManufacturer = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
         setManufactureres(data.data);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -266,8 +262,6 @@ const ProductByManufacturer = (props) => {
             )
               .then((res) => res.json())
               .then(async (data) => {
-                // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
@@ -302,7 +296,6 @@ const ProductByManufacturer = (props) => {
                 .then((res) => res.json())
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
-                  //  await console.log(wishlist,"khlklklklk")
                   let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");

@@ -27,7 +27,6 @@ const CategoryCreation = (props) => {
     await formData.append("featuredCategories", data.featuredCategories);
     await formData.append("image", data.image);    
     const url = `${baseUrl}/api/category/add_category`;
-    console.log("insid esubmit", data)
      await fetch(url, {
     method: "POST",
       body: formData,
@@ -78,7 +77,6 @@ const CategoryCreation = (props) => {
       .then(async (data) => {
         setCategories(data.data);
         Setdata({ ...data, image: data.image });
-        console.log(data.data, "image");
       })
       .catch((err) => {
         console.log(err, "error");
@@ -158,7 +156,6 @@ const CategoryCreation = (props) => {
   const click = (row) => {
     console.log(row);
   };
-  console.log(data.image, "er");
 
   return (
     <>

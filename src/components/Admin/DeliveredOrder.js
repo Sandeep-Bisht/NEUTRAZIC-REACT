@@ -17,7 +17,6 @@ const DeliveredOrder=()=>{
                         .then(res => res.json())
                         .then(async (data) => {
                          setOrders(data.data)
-                        //  console.log(" length "+data.data.length)
                           }
                         )
                         .catch((err) => {
@@ -72,14 +71,12 @@ const DeliveredOrder=()=>{
 
            const CaptureDetails=(orders)=>
            {
-               console.log(orders, "Orderes")
             setOrderDetails(orders)
 
            }
                       const data1 =[];
                       {
                           orders.map((item,index)=>{
-                             console.log(item.status ,"status")
                            if(item.status.includes('Delivered')|| item.status.includes('delivered'))
                            {     
                            

@@ -142,7 +142,6 @@ const AllProducts = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
         CartById();
         //history.push("/Cart");
         toast.success("Add to cart",{
@@ -204,7 +203,6 @@ const AllProducts = (props) => {
 
   const FilterItems = (item) => {
     setFilter(item);
-    console.log(item, "filter");
   };
 
   const ProductByCategory = async () => {
@@ -232,7 +230,6 @@ const AllProducts = (props) => {
       .then(async (data) => {
         await setCategoryDetails(data.data[0]);
 
-        console.log(Categorydetails, "rrrr");
       })
       .catch((err) => {
         console.log(err, "error");

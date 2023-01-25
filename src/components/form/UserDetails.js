@@ -18,7 +18,6 @@ const UserDetails=(props)=>{
     var year = dateObj.getUTCFullYear();
 
     var    newdate = day + "/" + month + "/" + year;
-    console.log(cart, "date")
 
     var total = 0;
   var actualtotal = 0;
@@ -27,16 +26,12 @@ const UserDetails=(props)=>{
     useEffect(() => {
        
         Userdata = JSON.parse(localStorage.getItem("Userdata"))
-        console.log(Userdata,"sadbhksabdhk")
 
         Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"))
-        console.log(Usercartdata,"sadbhksabdhk11111")
 
         Subtotal1 =  localStorage.getItem("Subtotal")
-        console.log(Subtotal1,"sadbhksabdhk222")
 
         ActualSubtotal1 =  localStorage.getItem("ActualSubtotal")
-        console.log(ActualSubtotal1,"sadbhksabdhk333")
         CartById()
         },[]);
     const[data,Setdata]=useState(
@@ -96,7 +91,6 @@ const UserDetails=(props)=>{
                 })
                 .then(res => res.json())              
                 .then((res)=>{  
-                  console.log(res,"rsponse of create");
                   window.location.href= res.url
                   // alert("cart Deleted")
                   //DeleteCart()
@@ -126,7 +120,6 @@ const UserDetails=(props)=>{
             setCart(data.data[0].order);
             // setCartItems(data.data[0].order.length);
             // let cartItems = data.data[0].order.length;
-            // console.log("cartitems on delete", cartItems)
             // dispatch(ACTIONS.getCartItem(cartItems));
             Set_id(data.data[0]._id);
           })

@@ -38,7 +38,6 @@ const Roles = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setUsers(data.data);
-        console.log(data.data, "userdata");
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -50,7 +49,6 @@ const Roles = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setManufactureres(data.data);
-        console.log(data.data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -62,7 +60,6 @@ const Roles = (props) => {
     window.location.replace("/");
   };
   const RegisterUser = () => {
-    console.log("kp");
     fetch(`${baseUrl}/api/auth/register`, {
       method: "POST",
       headers: {
@@ -84,7 +81,6 @@ const Roles = (props) => {
   };
   const LoginUser = (e) => {
     e.preventDefault();
-    console.log("kp");
     if (username != "" && password != "") {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
@@ -100,7 +96,6 @@ const Roles = (props) => {
         .then((res) => res.json())
         .then(async (res) => {
           await localStorage.setItem("Userdata", JSON.stringify(res));
-          console.log(res, "hello Deepak");
           alert(res.role);
           if (res.role == "user") {
             history.push("/");

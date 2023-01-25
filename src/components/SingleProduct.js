@@ -265,7 +265,6 @@ const onNextStart = (currentItem, nextItem) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          console.log("inside cart by id")
           setUserCart(data.data[0]);
           let cartItems = data.data[0].order.length;
           dispatch(ACTIONS.getCartItem(cartItems))

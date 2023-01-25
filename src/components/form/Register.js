@@ -105,7 +105,6 @@ const Register = (props) => {
           }
         });
     } else {
-      console.log("not getting role");
       // setMsg('Please Enter a Valid Data');
     }
   };

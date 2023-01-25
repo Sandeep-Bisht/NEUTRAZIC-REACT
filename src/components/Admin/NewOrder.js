@@ -22,7 +22,6 @@ const NewOrder = () => {
     GetOrders();
   }, []);
 
-  console.log(OrderDetails,"orderDetails here");
   const GetOrders = async () => {
 
     await fetch(`${baseUrl}/api/order/all_order`)
@@ -40,7 +39,6 @@ const NewOrder = () => {
          setOrderDetails(arr)
         
       //   pandingOrders();
-        //  console.log(" length "+data.data.length)
       }
       )
       .catch((err) => {
@@ -94,7 +92,6 @@ const NewOrder = () => {
   };
 
   const CaptureDetails = (orders) => {
-    console.log(orders, "Orderes")
     setOrderDetails(orders)
 
   }
@@ -113,7 +110,6 @@ const NewOrder = () => {
 //   const data1 = [];
 //   {
 //     orders.map((item, index) => {
-//       console.log(item.status, "status")
 //       if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
 
 //         data1.push({

@@ -82,7 +82,6 @@ const SearchResult = (props) => {
     //   await data.filter((i) =>i.name.toLowerCase().includes(e.toLowerCase()))
     //   );
     setCT(Date());
-    console.log("filreres " + data);
   };
   const GetWishlist = async () => {
     let id;
@@ -102,7 +101,6 @@ const SearchResult = (props) => {
   })
     .then((res) => res.json())
     .then(async (data) => {
-      console.log("inside getwishlist home page", data.data[0])
        if(data.data[0] !== undefined){
         Setwishlist(data.data)
        }
@@ -117,7 +115,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
         setData(data.data);
       })
       .then(() => {
@@ -131,7 +128,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
         setManufactureres(data.data);
         Docsearch(params.Search);
         console.log(data);
@@ -145,7 +141,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hrre");
         setCategories(data.data);
       })
       .catch((err) => {
@@ -443,12 +438,10 @@ const SearchResult = (props) => {
       if (dataForFilter != null) {
         setSearchResults(params.Search);
       }
-      console.log(dataForFilter);
     }
     let daata = dataForFilter;
     setDataForFilter(daata);
     setCT(Date());
-    console.log("filter data" + JSON.stringify(dataForFilter));
   };
   const ChangeMinMax = async (price) => {
     await setMinPrice("0");
@@ -493,7 +486,6 @@ const SearchResult = (props) => {
       }
       CartDataWoLogin.push(newItemObj);
       localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-      // console.log(JSON.stringify(CartDataWoLogin));
     }
   };
 
