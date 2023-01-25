@@ -477,10 +477,11 @@ a{
 }
 .nav__link .accordion-button::after
 {
-  height: 1.25rem;
-  width: 1.25rem;
-  /* background-image: url('../../Images/Icons/Rectangle 90.png') !important; */
-  color: #1e144f;
+  height: 13px;
+  width: 13px;
+  background-image: url('../../Images/Icons/Rectangle 90.png') !important;
+  color: #595669 !important;
+  background-size: 13px!important;
 }
 .nav__link ul
 {

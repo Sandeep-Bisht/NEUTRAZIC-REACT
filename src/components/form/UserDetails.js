@@ -209,15 +209,15 @@ const UserDetails=(props)=>{
                                     <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
                                     <label for="html">For Other</label>
                                 </div>
-                                {
+                                {/* {
                            cart.map((el,ind1)=>(
                              total+=( el.mrp - (el.mrp * el.discountprice / 100) )* el.quantity,
                             
                                 <>
-                                    <span onChange={(e)=>{Setdata({...data,totalamount:e.target.value})}}>{total}hii</span>
+                                    <span onChange={(e)=>{Setdata({...data,totalamount:e.target.value})}}>{total}</span>
                                 </>
                             
-                           ))}
+                           ))} */}
                                     
                                 <div className="col-12 p-1"> 
                                     <button className="btn btn-primary"onClick={(e)=>{submitData(e)}}>Pay now</button>
@@ -233,10 +233,6 @@ const UserDetails=(props)=>{
                 {
                  
               cart.map((el, ind1) => {
-        console.log(el, "all the el things");
-        // total = total + (el.singleprice * el.quantity) ;
-        // (el.mrp - (el.mrp * el.discountprice) / 100) *
-        // el.quantity;
         total = el.singleprice * el.quantity;
         total1 = total1 + (el.singleprice * el.quantity);
         localStorage.setItem("Subtotal", total1);

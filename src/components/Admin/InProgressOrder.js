@@ -24,7 +24,16 @@ const InProgressOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then(res => res.json())
       .then(async (data) => {
-        setOrders(data.data)
+        let arr=[];
+         for(let item of data.data)
+         {
+            if(item.status=="Progress")
+
+            {
+               arr.push(item);
+            }
+         }
+         setOrderDetails(arr)
         //  console.log(" length "+data.data.length)
       }
       )
@@ -95,35 +104,34 @@ const InProgressOrder = () => {
     });
     setOrders(filteredData);
   };
-  const data1 = [];
-  {
-    orders.map((item, index) => {
-      console.log(item.status, "status")
-      if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
+  // const data1 = [];
+  // {
+  //   orders.map((item, index) => {
+  //     console.log(item.status, "status")
+  //     if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
 
-        data1.push({
-          "sr_no": index + 1, "name": item.username, "Mobile": item.mobile, "Addtionalnumber": item.othermobile, "Address": item.address, "actualamount": item.actualamount, "totalamount": item.totalamount, "status": <select value={item.status} onChange={(e) => UpdateOrderStatus(item._id, e.target.value)}>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In progress</option>
-            <option value="Delivered">Delivered</option>
-          </select>, "Action": <><button onClick={() => DeleteOrder(item._id)}><i className="bx bx-trash"></i></button>
-            <button className="ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => CaptureDetails(JSON.parse(item.order))}><i className='bx bx-show-alt'></i></button>
-          </>
-        })
-      }
-    })
-  }
+  //       data1.push({
+  //         "sr_no": index + 1, "name": item.username, "Mobile": item.mobile, "Addtionalnumber": item.othermobile, "Address": item.address, "actualamount": item.actualamount, "totalamount": item.totalamount, "status": <select value={item.status} onChange={(e) => UpdateOrderStatus(item._id, e.target.value)}>
+  //           <option value="Pending">Pending</option>
+  //           <option value="In Progress">In progress</option>
+  //           <option value="Delivered">Delivered</option>
+  //         </select>, "Action": <><button onClick={() => DeleteOrder(item._id)}><i className="bx bx-trash"></i></button>
+  //           <button className="ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => CaptureDetails(JSON.parse(item.order))}><i className='bx bx-show-alt'></i></button>
+  //         </>
+  //       })
+  //     }
+  //   })
+  // }
 
   const columns = [
-    { title: "SR NO", dataIndex: "sr_no", key: "sr_no" },
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Mobile No.", dataIndex: "Mobile", key: "Mobile" },
-    { title: "Addtional number.", dataIndex: "Addtionalnumber", key: 'Addtionalnumber' },
-    { title: "Address.", dataIndex: "Address", key: "Address" },
+    // { title: "SR NO", dataIndex: "sr_no", key: "sr_no" },
+    // { title: "Name", dataIndex: "name", key: "name" },
+    // { title: "Mobile No.", dataIndex: "Mobile", key: "Mobile" },
+    // { title: "Addtional number.", dataIndex: "Addtionalnumber", key: 'Addtionalnumber' },
+    { title: "Order No.", dataIndex: "order_no", key: "order_no" },
     { title: "Actual Amount.", dataIndex: "actualamount", key: "actualamount" },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
-    { title: "Status", dataIndex: "status", key: "status" },
-    { title: "Action", dataIndex: "Action", key: "Action" },
+    { title: "Status", dataIndex: "status", key: "status" }
 
   ];
   const click = (row) => {
@@ -147,11 +155,11 @@ const InProgressOrder = () => {
             </div>
             <div className="col-10">
               <div className="category-details-section">
-                <h3 className="all-category-head">All Category </h3>
+                <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
-                  <Link to="/Category" className="add-icon">
+                  {/* <Link to="/Category" className="add-icon">
                     <MdPlaylistAdd />Add
-                  </Link>
+                  </Link> */}
                   <input
                     type='text'
                     onChange={e => onChangeHandler(e)}
