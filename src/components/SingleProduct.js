@@ -629,8 +629,8 @@ const SingleProduct = (props) => {
             </div>
 
             {/* <ReactImageZoom {...ImageData} /> */}
-              <Carousel breakPoints={breakPoints}>
             <div className="row image-group pt-2">
+              <Carousel breakPoints={breakPoints}>
             {data.otherImage && data.otherImage.length > 0 ?            
             data.otherImage.map((item,ind)=>(
               <div className="col-3" key={ind}>              
@@ -643,8 +643,8 @@ const SingleProduct = (props) => {
             </div>
               )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
             }
-            </div>
             </Carousel>
+            </div>
 
             {/* phone single page caresouel */}
             <div

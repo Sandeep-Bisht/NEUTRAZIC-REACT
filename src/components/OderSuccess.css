@@ -1,0 +1,68 @@
+.order-success-page
+{
+    background-color: #f2f2f2;
+    padding: 80px 0;
+}
+.order-success-page .order-success-card
+{
+    background-color: #e1e1e1;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+}
+.success-heading h1
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 26px;
+    font-weight: 500 !important;
+    color: #1e144f;
+    margin-bottom: 0;
+}
+.success-thank-you h2
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400 !important;
+    color: #000;
+    letter-spacing: 0.25px;
+}
+.order-success-page .success-home-btn
+{
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    /* background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%); */
+    background-color: #1b97ff;
+}
+.order-success-page .success-home-btn a
+{
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+    text-transform: uppercase;
+}
+.success-svg 
+{
+    padding: 8px;
+    background-color: #0E912C;
+    border: none;
+    border-radius: 50%;
+    margin: 20px 0;
+}
+.success-svg svg
+{
+    color: #fff;
+}
+.success-order-id p, .success-email-confirm-msg p
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.15px;
+}

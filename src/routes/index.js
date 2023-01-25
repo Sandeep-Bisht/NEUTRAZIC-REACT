@@ -57,6 +57,7 @@ import TermsConditions from "../components/TermsConditions";
 import ReturnRefund from "../components/ReturnRefund";
 import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
+import OrderSuccess from "../components/OrderSuccess";
 
 var Userdata = "";
 const Root = (props) => {
@@ -175,6 +176,7 @@ const Root = (props) => {
             <Route path='/returnRefund' component={ReturnRefund} />
             <Route path='/shippingPolicy' component={ShippingPolicy} />
             <Route path='/Faq' component={Faq} />
+            <Route path='/orderSuccess' component={OrderSuccess} />
           
           </Switch>
         </>

@@ -199,7 +199,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="about-section-6">
+      {/* <section className="about-section-6">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -216,7 +216,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <Baseline />
       <div className="go-top ">
         <i className="bx bx-up-arrow-alt"></i>
