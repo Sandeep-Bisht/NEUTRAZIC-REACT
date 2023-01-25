@@ -300,20 +300,20 @@ const Sidemenu = () => {
                   <Link to={"/NewOrder/" + "Pending"}>
                     <li> <FaCartPlus className="configuration-icons-wrap"/>New Orders</li>
                   </Link>
-                  <Link to={"/NewOrder/" + "In Progress"}>
+                  <Link to={"/InProgressOrder/" + "In Progress"}>
                     {" "}
                     <li> <GrInProgress className="configuration-icons-wrap"/>In Progress</li>
                   </Link>
-                  <Link to={"/NewOrder/" + "Packed"}>
+                  <Link to={"/InProgressOrder/" + "Packed"}>
                     <li> <BsBox className='configuration-icons-wrap'/>Packed</li>
                   </Link>
-                  <Link to={"/NewOrder/" + "Shipped"}>
+                  <Link to={"/InProgressOrder/" + "Shipped"}>
                     <li> <FaShippingFast className='configuration-icons-wrap'/>Shipped</li>
                   </Link>
-                  <Link to={"/NewOrder/" + "Cancel"}>
+                  <Link to={"/InProgressOrder/" + "Cancel"}>
                     <li> <BsCartXFill className='configuration-icons-wrap'/>Cancel Order</li>
                   </Link>
-                  <Link to={"/NewOrder/" + "Delivered"}>
+                  <Link to={"/InProgressOrder/" + "Delivered"}>
                     {" "}
                     <li> <MdRealEstateAgent className="configuration-icons-wrap"/>Delivered</li>
                   </Link>

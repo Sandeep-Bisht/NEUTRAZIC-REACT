@@ -888,3 +888,6 @@ font-family: 'Roboto', sans-serif;
 .notfound-text{
   text-align: center;
 }
+.anticon svg{
+  height: 13px !important;
+}
