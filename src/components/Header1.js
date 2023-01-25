@@ -384,10 +384,10 @@ const Header1 = (props) => {
                             aria-label="Close"
                           >
 
-                            {
-                               el.image.length ? <img
+                            { el.image &&
+                               el.image.length > 0 ? <img
                                className="icons1"
-                               src={
+                               src={  
                                  `${baseUrl}/`+ el.image[0].path
                                }
                                alt=""

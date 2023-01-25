@@ -747,7 +747,7 @@ const breakPoints = [
                               className="front-img img-fluid"
                             /> */}
                             <img
-                                      src={
+                                      src={ item.image && 
                                         `${baseUrl}/` +
                                         item.image[0].path
                                       }
