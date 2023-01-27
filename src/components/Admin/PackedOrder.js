@@ -4,43 +4,36 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Typography,Dropdown } from "antd";
+import { Table, Input, Space, Popconfirm, Typography } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import {MdPlaylistAdd} from 'react-icons/md'
 import {Link} from "react-router-dom";
-import Orders from '../Orders';
-import { DownOutlined } from '@ant-design/icons';
-import { render } from 'react-dom';
 
-const NewOrder = () => {
+const InProgressOrder = () => {
   const [orders, setOrders] = useState([])
   const [OrderDetails, setOrderDetails] = useState([])
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  const [PendingOrders,setPendingOrders]=useState([]);
   useEffect(() => {
     GetOrders();
   }, []);
 
-  console.log(OrderDetails,"orderDetails here");
   const GetOrders = async () => {
 
     await fetch(`${baseUrl}/api/order/all_order`)
       .then(res => res.json())
       .then(async (data) => {
-         let arr=[];
+        let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Pending")
+            if(item.status=="Packed")
 
             {
                arr.push(item);
             }
          }
          setOrderDetails(arr)
-        
-      //   pandingOrders();
         //  console.log(" length "+data.data.length)
       }
       )
@@ -111,71 +104,43 @@ const NewOrder = () => {
     });
     setOrders(filteredData);
   };
-//   const data1 = [];
-//   {
-//     orders.map((item, index) => {
-//       console.log(item.status, "status")
-//       if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
+  const data1 = [];
+  {
+    orders.map((item, index) => {
+      console.log(item.status, "status")
+      if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
 
-//         data1.push({
-//           "sr_no": index + 1, "name": item.username, "Mobile": item.mobile, "Addtionalnumber": item.othermobile, "Address": item.address, "actualamount": item.actualamount, "totalamount": item.totalamount, "status": <select value={item.status} onChange={(e) => UpdateOrderStatus(item._id, e.target.value)}>
-//             <option value="Pending">Pending</option>
-//             <option value="In Progress">In progress</option>
-//             <option value="Delivered">Delivered</option>
-//           </select>, "Action": <><button onClick={() => DeleteOrder(item._id)}><i className="bx bx-trash"></i></button>
-//             <button className="ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => CaptureDetails(JSON.parse(item.order))}><i className='bx bx-show-alt'></i></button>
-//           </>
-//         })
-//       }
-//     })
-//   }
-const items = [
-   {
-     key: '1',
-     label: 'Cancel',
-   },
-   {
-     key: '2',
-     label: 'InProgress',
-   },
- ];
+        data1.push({
+          "sr_no": index + 1, "name": item.username, "Mobile": item.mobile, "Addtionalnumber": item.othermobile, "Address": item.address, "actualamount": item.actualamount, "totalamount": item.totalamount, "status": <select value={item.status} onChange={(e) => UpdateOrderStatus(item._id, e.target.value)}>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In progress</option>
+            <option value="Delivered">Delivered</option>
+          </select>, "Action": <><button onClick={() => DeleteOrder(item._id)}><i className="bx bx-trash"></i></button>
+            <button className="ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => CaptureDetails(JSON.parse(item.order))}><i className='bx bx-show-alt'></i></button>
+          </>
+        })
+      }
+    })
+  }
 
   const columns = [
-   //  { title: "SR NO", dataIndex: "sr_no", key: "sr_no" },
-   //  { title: "Name", dataIndex: "name", key: "name" },
-   //  { title: "Mobile No.", dataIndex: "Mobile", key: "Mobile" },
-   //  { title: "Addtional number.", dataIndex: "Addtionalnumber", key: 'Addtionalnumber' },
-
+    // { title: "SR NO", dataIndex: "sr_no", key: "sr_no" },
+    // { title: "Name", dataIndex: "name", key: "name" },
+    // { title: "Mobile No.", dataIndex: "Mobile", key: "Mobile" },
+    // { title: "Addtional number.", dataIndex: "Addtionalnumber", key: 'Addtionalnumber' },
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
     { title: "Actual Amount.", dataIndex: "actualamount", key: "actualamount" },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
-    { title: "Status", 
-    render: () => (
-      <Space size="middle">
-        <Dropdown
-          menu={{
-            items,
-          }}
-        >
-          <a>
-           Pending <DownOutlined />
-          </a>
-        </Dropdown>
-      </Space>
-    ),},
+    { title: "Status", dataIndex: "status", key: "status" }
 
   ];
   const click = (row) => {
     console.log(row);
   };
 
-
-
-
-
-
   return (
     <>
+    
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
@@ -204,7 +169,7 @@ const items = [
 
               <Table
                 rowKey="name"
-                dataSource={filteredData && filteredData.length ? filteredData : OrderDetails}
+                dataSource={filteredData && filteredData.length ? filteredData : orders}
                 columns={columns}
                 loading={loading}
                 pagination={false}
@@ -217,4 +182,4 @@ const items = [
   );
 }
 
-export default NewOrder;
+export default InProgressOrder;

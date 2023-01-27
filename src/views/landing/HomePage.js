@@ -23,8 +23,6 @@ import $ from "jquery";
 
 var Userdata = "";
 var CartDataWoLogin = [];
-let tranding = 0;
-let skincare = 0;
 const HomePage = () => {
 
   let dispatch = useDispatch();
@@ -73,8 +71,6 @@ const breakPoints = [
     GetWishlist();    
     GetCategory();
     GetManufacturer();
-    tranding = 0;
-    skincare = 0;
     $(document).ready(function() {
       //    $('.icon-wishlist').on('click', function(){
       //       $(this).toggleClass('in-wishlist');
@@ -328,6 +324,7 @@ const breakPoints = [
         .then(async (data) => {
           setUserCart(data.data);
           CartById();
+          
           // setCartItems(data.data[0].order.length);
           // history.push("/Cart");
         })
@@ -557,11 +554,8 @@ const breakPoints = [
           <div className="container m-auto">
             <div className="row">
               {data.map((el, ind) => {
-                if (
-                  (tranding < 7 && el.type == "Tranding Product") ||
-                  el.type == "Trending Product"
-                ) {
-                  tranding = tranding + 1;
+                if(ind<6)
+                {
                   return (
                     <>
                       <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
@@ -725,10 +719,11 @@ const breakPoints = [
           </h1>
           <div className="container m-auto">
             <div className="row ">
+              <Carousel breakPoints={breakPoints}>       
               { categories && categories.map((item, index) => {                 
                 if(item.featuredCategories == "Featured Categories"){
-                return(          
-              <div className="col-md-6" key={index}>
+                return(  
+              <div className="col-md-12" key={index}>
                 <div className="cat-left-side">
                   <div className="row mt-0 align-items-center">
                   <h1 className="cat-heading">{item.name}</h1>
@@ -769,7 +764,8 @@ const breakPoints = [
               </div>
                 )}
 
-              })}             
+              })}   
+              </Carousel>          
             </div>
           </div>
         </section>
@@ -781,7 +777,7 @@ const breakPoints = [
           <div className="container m-auto py-4">
             <div className="row ">
               {data.map((el, index) => {
-                if (index >= 0) {
+                if (index < 6) {
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
@@ -935,17 +931,151 @@ const breakPoints = [
           </h1>
           <div className="container m-auto">
             <div className="row">
-              {data.map((el, i) => {
-                // if (
-                //   (ind > 0  && el.name == "Obloss") ||
-                //   el.name == "UDC II" ||
-                //   el.subcategory == "6133469ff51d5a1242de049a"
-                // ) {
-                if (i > 0 && el.category.name === "Weight Management") {
-                  skincare = skincare + 1;
+              {data.filter((item) => item.category.name == "Weight Management").map((el,index)=>{
+                if(index < 6){
+                  return(
+
+                    <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
+                    {/* <Link to={"/SingleProduct/" + el._id}> */}
+                    <div className="single-products-box border">
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="product-div">
+                            <div className="product-image-div">
+                              <Link
+                                to={"/SingleProduct/" + el._id}
+                                className="product-image-link" 
+                              >
+                                
+                                <div className="image hover-switch">
+                                  <img
+                                    src={el.otherImage &&
+                                      el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
+                                    alt=""
+                                  />
+                                  <img
+                                    src={
+                                      `${baseUrl}/` +
+                                      el.image[0].path
+                                    }
+                                    alt=""
+                                    style={{ position: "absolute", left: "0" }}
+                                  />
+                                </div>
+                              </Link>
+                            </div>
+                            <div className="tranding product-image-content">
+                              <div className="content product-content">
+                                <Link to={"/SingleProduct/" + el._id}>
+                                  <ReadMoreReact text={el.name} />
+                                </Link>
+                                <div className="price-div">
+                                  <i className="fa fa-inr"></i>
+                                  <span className="new-price">{el.inrDiscount}</span>
+                                  <del className="new-price ml-1">{el.inrMrp}</del>
+                                  {Userdata ? (
+                                      <i
+                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                        id={el._id}
+                                        onClick={() => {
+                                          AddtoWishlist(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image
+                                          );
+                                        }}
+                                        // onClick={() => {
+                                        //   wishList(el)
+                                        // }}
+                                      ></i>
+                                    ) : (
+                                    <>
+                                      <i
+                                        className="bx bxs-heart ml-3 pc-heart"
+                                        data-bs-toggle="modal"
+                                        data-bs-target={
+                                          Userdata == null
+                                            ? "#exampleModal"
+                                            : null
+                                        }
+                                      ></i>
+                                      <Link to="/Register">
+                                        <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                      </Link>
+                                    </>
+                                  )}
+
+                                  
+                                  {Userdata ? (
+                                    <i
+                                      className="bx bx-cart"
+                                      onClick={() => {
+                                        {
+                                          Userdata !== null
+                                            ? cartfunction(
+                                                el._id,
+                                                el.name,
+                                                quantity,
+                                                el.inrMrp,
+                                                el.inrDiscount,
+                                                el.discount,
+                                                el.description,
+                                                el.category,
+                                                el.manufacturer.name,
+                                                el.image[0].path
+                                              )
+                                            : addToCartWithoutRegistration(
+                                                el._id,
+                                                el.name,
+                                                quantity,
+                                                el.inrMrp,
+                                                el.inrDiscount,
+                                                el.discount,
+                                                el.description,
+                                                el.category,
+                                                el.manufacturer.name,
+                                                el.image[0].path
+                                              );
+                                        }
+                                      }}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bx-cart mr-1"
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null
+                                          ? "#exampleModal"
+                                          : null
+                                      }
+                                    >
+                                      <Link to="/Register"></Link>
+                                    </i>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  )
+                }
+              })}
+              
+              
+              {/* {data.map((el, i) => {
+                if (i > 0 && el.category.name === "Weight Management" && weightManagement < 6) {
+                  weightManagement = weightManagement + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
                           <div className="col-md-12">
@@ -999,9 +1129,6 @@ const breakPoints = [
                                               el.image
                                             );
                                           }}
-                                          // onClick={() => {
-                                          //   wishList(el)
-                                          // }}
                                         ></i>
                                       ) : (
                                       <>
@@ -1076,10 +1203,9 @@ const breakPoints = [
                       </div>
                     </div>
 
-                    // </div>
                   );
                 }
-              })}
+              })} */}
             </div>
             {/* hover Button */}
             <div className="wrapperbtn pt-3 pb-4">
@@ -1097,7 +1223,10 @@ const breakPoints = [
             <div className="trendign-head">
               <span className="products-color">Selling Brands</span>
             </div>
-              <Carousel breakPoints={breakPoints}>
+              <Carousel
+               breakPoints={breakPoints}
+               enableAutoPlay={true}
+               >
             <div className="row align-items-center">
               {Manufactureres &&
                 Manufactureres.length > 0 &&
