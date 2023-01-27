@@ -120,7 +120,7 @@ const Dashboard = () => {
         setManufacturer(data.data.length);
       })
       .catch((err) => {
-        console.log(err, "errors");
+        console.log(err,"errors");
       });
   };
   const setCount = async () => {
