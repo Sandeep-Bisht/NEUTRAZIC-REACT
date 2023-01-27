@@ -739,6 +739,7 @@ const breakPoints = [
                       <Link to={"/Allcategory/" + "610a8c607c5c2f5f8b1e579b"}>
                         <div className="category-div">
                           <figure>
+                            
                             {/* <img
                               // src={require("../../Images/Nutraceutical-image 1.png")} cosmatic-healthcare.jpeg
                               src={require("../../Images/cosmatic-healthcare.jpeg")}
@@ -746,12 +747,14 @@ const breakPoints = [
                             /> */}
                             <img
                                       src={
+                                        item.image && 
                                         `${baseUrl}/` +
                                         item.image[0].path
                                       }
                                       alt=""
                                       className="cat-left-side-image"
                                     />
+                
                           </figure>
                         </div>
                       </Link>
