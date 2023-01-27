@@ -96,6 +96,15 @@ export default function AllCategoriesDetails() {
       key: "description",
     },
     {
+      
+        title: "Image",
+        dataIndex: "image[0].path",
+        width: 80,
+        maxWidth: 90,
+        render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />,
+      
+    },
+    {
       title: "Action",
       dataIndex: "Action",
       width: "20%",

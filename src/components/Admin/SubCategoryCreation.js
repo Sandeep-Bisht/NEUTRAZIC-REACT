@@ -19,8 +19,10 @@ const SubCategoryCreation = (props) => {
     image: [],
   });
 
-  const history=useHistory();
+  
   const [editableData] = useState(props.history.location.state);
+  const history=useHistory();
+  
   
   const submitData = async (e) => {
     e.preventDefault();
@@ -55,7 +57,11 @@ const SubCategoryCreation = (props) => {
 
     GetSubCategory();
     GetCategory();
+    if(editableData){
+      Setdata(editableData);
+    }
   }, []);
+ 
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -110,11 +116,11 @@ const SubCategoryCreation = (props) => {
       description: item.description,
     };
 
-    Setdata(obj);
+    
   };
   const UpdateSubCategory = async (e, _id) => {
     e.preventDefault();
-
+    const formData = new formData();
     await fetch(
       `${baseUrl}/api/subcategory/update_subcategory_by_id`,
       {
