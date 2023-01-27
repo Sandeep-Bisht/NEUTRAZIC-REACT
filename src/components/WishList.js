@@ -100,7 +100,7 @@ const WishList = ()=>{
                <h6>{item.name}</h6>
                <p className='word-wrapping'>{item.description}</p>
                <div className='buynow-details-btn-wrap'>
-               <Link to={"/cart/" + item.productId}>
+               <Link to={"/UserDetails/" + item.productId}>
                <button className=' wishlist-btn'>Buy Now</button>
                </Link>
                <Link to={"/SingleProduct/" + item.productId}>

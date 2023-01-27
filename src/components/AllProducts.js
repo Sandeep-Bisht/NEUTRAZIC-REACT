@@ -679,9 +679,10 @@ const AllProducts = (props) => {
                   {/* {Categorydetails.image!==undefined? */}
                   <img src={`${baseUrl}/` + el.image[0].path} />
                   </div>
+                  <figcaption>{el.name}</figcaption>
                   </Link>
                   {/* :null} */}
-                  <figcaption>{el.name}</figcaption>
+                  
                   <div className="allproduct-price-div">
                     {/* <div className="d-flex justify-content-center">
                       <StarsRating

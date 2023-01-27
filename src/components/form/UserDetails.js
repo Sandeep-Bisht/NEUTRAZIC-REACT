@@ -229,7 +229,7 @@ const UserDetails=(props)=>{
         </form>
               </div>
               
-              <div className='col-4'>
+              <div className='col-4 mt-3'>
                 {
                  
               cart.map((el, ind1) => {
