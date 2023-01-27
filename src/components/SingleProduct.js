@@ -660,7 +660,18 @@ const onNextStart = (currentItem, nextItem) => {
 
             {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
-              <Carousel breakPoints={breakPoints}>
+              <Carousel 
+             // breakPoints={breakPoints} 
+              enableAutoPlay
+              autoPlaySpeed={1500} 
+              itemsToShow={4}
+              onPrevStart={onPrevStart}
+              onNextStart={onNextStart}
+              // onChange={Loop}
+              ref={carouselRef}
+              disableArrowsOnEnd={false}
+              // itemPadding={[0, 4]}
+              >
             {data.otherImage && data.otherImage.length > 0 ?            
             data.otherImage.map((item,ind)=>(
               <div className="col" key={ind}>              
@@ -937,7 +948,7 @@ const onNextStart = (currentItem, nextItem) => {
               <div className="col-sm-2 text-center title" id="Technical">
                 <button className="button1">Add a Review</button>
               </div> */}
-              {/* <div className="col-sm-3"></div> * /}
+              {/* <div className="col-sm-3"></div> */}
             </div>
             <div className="row content1">
               <div className="text" id="Descriptiondiv">
