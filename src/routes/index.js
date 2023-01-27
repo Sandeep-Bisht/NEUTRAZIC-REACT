@@ -101,7 +101,7 @@ const Root = (props) => {
               exact
               path="/Manufacturer"
               component={ManufacturerCreation}
-            />
+            /> 
             <Route
               exact
               path="/AllManufactureDetails"
