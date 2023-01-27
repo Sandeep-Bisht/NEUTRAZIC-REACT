@@ -391,7 +391,7 @@ const Header1 = (props) => {
                                  `${baseUrl}/`+ el.image[0].path
                                }
                                alt=""
-                             /> :""
+                             /> : ""
                             }
                             
                             
