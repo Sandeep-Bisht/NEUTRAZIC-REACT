@@ -937,7 +937,7 @@ const onNextStart = (currentItem, nextItem) => {
               <div className="col-sm-2 text-center title" id="Technical">
                 <button className="button1">Add a Review</button>
               </div> */}
-              {/* <div className="col-sm-3"></div> */}
+              {/* <div className="col-sm-3"></div> * /}
             </div>
             <div className="row content1">
               <div className="text" id="Descriptiondiv">
