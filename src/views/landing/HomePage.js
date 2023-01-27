@@ -719,10 +719,11 @@ const breakPoints = [
           </h1>
           <div className="container m-auto">
             <div className="row ">
+              <Carousel breakPoints={breakPoints}>       
               { categories && categories.map((item, index) => {                 
                 if(item.featuredCategories == "Featured Categories"){
-                return(          
-              <div className="col-md-6" key={index}>
+                return(  
+              <div className="col-md-12" key={index}>
                 <div className="cat-left-side">
                   <div className="row mt-0 align-items-center">
                   <h1 className="cat-heading">{item.name}</h1>
@@ -760,7 +761,8 @@ const breakPoints = [
               </div>
                 )}
 
-              })}             
+              })}   
+              </Carousel>          
             </div>
           </div>
         </section>
