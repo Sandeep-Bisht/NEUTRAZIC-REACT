@@ -1,25 +1,39 @@
-import React from 'react'
-import { Router } from 'react-router';
-import '../components/PageNotFound.css';
-import {Link} from "react-router-dom"
+import React from "react";
+import { Router } from "react-router";
+import "../components/PageNotFound.css";
+import { Link } from "react-router-dom";
+import pageNotFound from "../Images/page-not-found.png";
+import Footer from './Footer'
+import Header1 from './Header1'
 
 function PageNotFound() {
-  
   return (
     <>
-    <section className='page-not-found-page'>
-    <div className='container m-auto'>
-        <div className='row'>
-            <div className='col-md-12 col-lg-12 col-sm-12'>
-            <p className='error-1'>HTTP: <span>404</span></p>
-            <p className='error-2'>Page Not Found</p>
-            <Link to="/">Back to Home</Link>
+    <Header1/>
+      <section className="page-not-found-page">
+        <div className="container m-auto">
+          <div className="row">
+            <div className="col-8 mx-auto">
+              <div className="d-flex justify-content-center align-items-center">
+                <div>
+                  <img src={pageNotFound} alt="" className="error-image" />
+                  <p className="error-1">Page Not Found</p>
+                  <p className="error-message">
+                  We're sorry, the page you requested could not be found. Please click on the Homepage.
+                  </p><div className="error-home-btn">
+                  <button type="button">
+                    <Link to="/">Back to Home</Link>
+                  </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <Footer/>
         </div>
-    </div>
-    </section>
+      </section>
     </>
-  )
+  );
 }
 
-export default PageNotFound
+export default PageNotFound;
