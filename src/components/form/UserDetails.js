@@ -25,7 +25,7 @@ const UserDetails=(props)=>{
   var total1 = 0;
 
     useEffect(() => {
-       
+        window.scroll(0,0);
         Userdata = JSON.parse(localStorage.getItem("Userdata"))
         console.log(Userdata,"sadbhksabdhk")
 

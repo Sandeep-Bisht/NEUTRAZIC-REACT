@@ -638,9 +638,9 @@ h3 .read-more-button
     left: 250px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    /* margin-left: -250px; */
     overflow-y: auto;
-    background: white;
+    background: #1e144f;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -718,9 +718,9 @@ h3 .read-more-button
     font-size: 16px !important;
 }
 @media(min-width:768px) {
-    #wrapper {
+    /* #wrapper {
         padding-left: 228px;
-    }
+    } */
 
     #wrapper.toggled {
         padding-left: 0;
@@ -939,4 +939,8 @@ body {
 .user-icon{
     font-size: 2rem;
     display: block;
+}
+
+.logged-In{
+    font-size: 2rem;
 }
