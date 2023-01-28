@@ -120,7 +120,6 @@ const UserDetails=(props)=>{
             setCart(data.data[0].order);
             // setCartItems(data.data[0].order.length);
             // let cartItems = data.data[0].order.length;
-            // console.log("cartitems on delete", cartItems)
             // dispatch(ACTIONS.getCartItem(cartItems));
             Set_id(data.data[0]._id);
           })
@@ -161,7 +160,6 @@ const UserDetails=(props)=>{
         let discount=0;
         for(let item of cart)
         {
-          console.log(item,"itemmmmmmm");
           total=total+item.mrp*item.quantity;
           discount=discount+item.singleprice*item.quantity;
         }

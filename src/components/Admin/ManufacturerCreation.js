@@ -164,7 +164,6 @@ const ManufacturerCreation = (props) => {
     { title: "Action", data: "Action" },
   ];
   const click = (row) => {
-    console.log(row);
   };
   return (
     <>

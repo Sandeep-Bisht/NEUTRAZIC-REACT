@@ -180,9 +180,7 @@ const SubCategoryCreation = (props) => {
     { title: "Sub Category Name", data: "name" },
     { title: "Action", data: "Action" },
   ];
-  const click = (row) => {
-    console.log(row);
-  };
+  
 
   return (
     <>
