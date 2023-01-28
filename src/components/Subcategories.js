@@ -281,8 +281,7 @@ const Subcategories = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
+                
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
@@ -313,8 +312,7 @@ const Subcategories = (props) => {
               })
                 .then((res) => res.json())
                 .then(async (data) => {
-                  // setWishlist(data.data[0]);
-                  //  await console.log(wishlist,"khlklklklk")
+                  
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
@@ -329,10 +327,8 @@ const Subcategories = (props) => {
         }
       });
   };
-  console.log(data,"THis is data")
   const ProductsByCategory = ()=>{
     let Product = props.match.params._id;
-    console.log(data,"THis is data before filter");
     let filteronload = data.filter((value)=>{
       return value.category._id === Product
     })

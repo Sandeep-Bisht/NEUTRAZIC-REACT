@@ -55,7 +55,6 @@ const TrendingProducts = (props) => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
         setData(data.data);
       })
       .catch((err) => {
@@ -66,9 +65,7 @@ const TrendingProducts = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
         setManufactureres(data.data);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -78,7 +75,6 @@ const TrendingProducts = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hrre");
         setCategories(data.data._id);
       })
       .catch((err) => {
@@ -166,7 +162,6 @@ const TrendingProducts = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
         history.push("/Cart");
       })
       .then((err) => console.log(err));
@@ -262,8 +257,7 @@ const TrendingProducts = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
+                
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");

@@ -69,7 +69,6 @@ const Productform = (props) => {
       this.getAddOn();
     })
       .catch((err) => console.log(err));
-    // console.log(formData)
   };
 
   useEffect(() => {
@@ -156,7 +155,6 @@ const Productform = (props) => {
 
   // if (Userdata != undefined && Userdata.role == "Vendor") {
   //   {
-  //     console.log(products,"productssssssssssssssssss")
   //     products.map((item, index) => {
   //       data1.push(
   //         item.manufacturer.name == Userdata.organization
@@ -288,7 +286,6 @@ const Productform = (props) => {
 
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
-    console.log(data,"all the product data")
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("description", data.description);
@@ -325,7 +322,6 @@ const Productform = (props) => {
 
   const showAllProductHandler = () => {
     setShowTable(true);
-    console.log(products, "inside the product");
   }
 
   return (
