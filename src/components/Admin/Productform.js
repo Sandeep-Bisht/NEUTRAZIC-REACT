@@ -5,6 +5,7 @@ import $ from "jquery";
 import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import { useHistory } from "react-router-dom";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -34,6 +35,7 @@ const Productform = (props) => {
     otherImage : []
   });
 
+  const history=useHistory();
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -55,14 +57,17 @@ const Productform = (props) => {
     }           
     const url = `${baseUrl}/api/product/add_product`;
     await fetch(url, {
-      mode: 'no-cors',
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
-      // .then((res) => {
-      //   this.getAddOn();
-      // })
+    .then((res) =>{
+      res.json()
+      history.push("/AllProductsDetails");
+    } )
+    .then((res) => {
+      GetData();
+      this.getAddOn();
+    })
       .catch((err) => console.log(err));
     // console.log(formData)
   };
@@ -73,7 +78,9 @@ const Productform = (props) => {
     GetManufacturer();
     GetData();
     GetSubCategory();
-
+    if(editableData){
+      Setdata(editableData);
+    }
     $(document).ready(function () {
       $(".update").click(function () {
         $(".update-btn").css("display", "block");
@@ -281,17 +288,32 @@ const Productform = (props) => {
 
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
+    console.log(data,"all the product data")
+    const formData = new FormData();
+    await formData.append("_id", data._id);
+    await formData.append("description", data.description);
+    await formData.append("name", data.name);
+    await formData.append("storage", data.storage);
+    await formData.append("category", data.category);
+    await formData.append("subcategory", data.subcategory);
+    await formData.append("inrMrp", data.inrMrp);
+    await formData.append("dollerMrp", data.dollerMrp);
+    await formData.append("inrDiscount", data.inrDiscount);
+    await formData.append("dollerDiscount", data.dollerDiscount);
+    await formData.append("manufacturer", data.manufacturer);
+    await formData.append("type", data.type);
+    await formData.append("image", data.image) 
+    for(let item of data.otherImage){
+      await formData.append("otherImage", item);
+    }
     await fetch(`${baseUrl}/api/product/update_product_by_id`, {
       method: "Put",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...data,
-      }),
+      body: formData,
     })
-      .then((res) => res.json())
+    .then((res) =>{
+      history.push("/AllProductsDetails");
+      res.json()
+    })
       .then(async (data) => {
         GetData();
       })

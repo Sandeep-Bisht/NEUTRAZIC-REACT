@@ -14,7 +14,7 @@ const SubCategoryCreation = (props) => {
   const [update, setUpdate] = useState(true);
   const [data, Setdata] = useState({
     name: "",
-    descripton: "",
+    description: "",
     category: "",
     image: [],
   });
@@ -34,10 +34,6 @@ const SubCategoryCreation = (props) => {
     const url = `${baseUrl}/api/subcategory/add_subcategory`;
     await fetch(url, {
       method: "POST",
-      // headers: {
-      // 'Accept': 'application/json',
-      // 'Content-Type': 'multipart/form-data'
-      //   },
       body: formData,
     })
       .then((res) => {
@@ -54,9 +50,7 @@ const SubCategoryCreation = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
     GetSubCategory();
-    GetCategory();
     if(editableData){
       Setdata(editableData);
     }
@@ -120,22 +114,21 @@ const SubCategoryCreation = (props) => {
   };
   const UpdateSubCategory = async (e, _id) => {
     e.preventDefault();
-    const formData = new formData();
+    const formData = new FormData();
+    await formData.append("description", data.description);
+    await formData.append("category", data.category);
+    await formData.append("name", data.name);
+    formData.append("image", data.image);
     await fetch(
       `${baseUrl}/api/subcategory/update_subcategory_by_id`,
       {
         method: "Put",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-        }),
+        body: formData,
       }
     )
       .then((res) => res.json())
       .then(async (data) => {
+        history.push("/AllSubCategoriesDetails");
         GetSubCategory();
       })
       .catch((err) => {
