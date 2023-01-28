@@ -23,7 +23,9 @@ const UserDetails=(props)=>{
     var    newdate = day + "/" + month + "/" + year;
 
 
+        
     useEffect(() => { 
+      window.scroll(0,0);
         Userdata = JSON.parse(localStorage.getItem("Userdata"))
         Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"))
         Subtotal1 =  localStorage.getItem("Subtotal")
