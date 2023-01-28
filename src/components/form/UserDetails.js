@@ -11,6 +11,9 @@ var ActualSubtotal1=''
 const UserDetails=(props)=>{
     const [cart, setCart] = useState([]);
     const [_id,Set_id]=useState()
+    const [Subtotal,setSubTotal]=useState();
+    const [Discount,setDiscount]=useState();
+    
     var total=''
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1;
@@ -18,26 +21,17 @@ const UserDetails=(props)=>{
     var year = dateObj.getUTCFullYear();
 
     var    newdate = day + "/" + month + "/" + year;
-    console.log(cart, "date")
 
-    var total = 0;
-  var actualtotal = 0;
-  var total1 = 0;
 
-    useEffect(() => {
-        window.scroll(0,0);
+        
+    useEffect(() => { 
+      window.scroll(0,0);
         Userdata = JSON.parse(localStorage.getItem("Userdata"))
-        console.log(Userdata,"sadbhksabdhk")
-
         Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"))
-        console.log(Usercartdata,"sadbhksabdhk11111")
-
         Subtotal1 =  localStorage.getItem("Subtotal")
-        console.log(Subtotal1,"sadbhksabdhk222")
-
         ActualSubtotal1 =  localStorage.getItem("ActualSubtotal")
-        console.log(ActualSubtotal1,"sadbhksabdhk333")
         CartById()
+        cartTotal();
         },[]);
     const[data,Setdata]=useState(
         {
@@ -96,7 +90,7 @@ const UserDetails=(props)=>{
                 })
                 .then(res => res.json())              
                 .then((res)=>{  
-                  console.log(res,"rsponse of create");
+                
                   window.location.href= res.url
                   // alert("cart Deleted")
                   //DeleteCart()
@@ -156,6 +150,24 @@ const UserDetails=(props)=>{
           });
       };   
 
+      useEffect(()=> {
+        if(cart) {
+          cartTotal();
+        }
+      }, [cart])
+
+      const cartTotal=()=>{
+        let total=0;
+        let discount=0;
+        for(let item of cart)
+        {
+          console.log(item,"itemmmmmmm");
+          total=total+item.mrp*item.quantity;
+          discount=discount+item.singleprice*item.quantity;
+        }
+        setSubTotal(total);
+        setDiscount(discount);
+      }
       
     return(
         <>
@@ -230,41 +242,25 @@ const UserDetails=(props)=>{
               </div>
               
               <div className='col-4 mt-3'>
-                {
-                 
-              cart.map((el, ind1) => {
-        total = el.singleprice * el.quantity;
-        total1 = total1 + (el.singleprice * el.quantity);
-        localStorage.setItem("Subtotal", total1);
-        actualtotal += el.mrp * el.quantity;
-        localStorage.setItem("ActualSubtotal", total1);
-        return(
-          <>
            
           <div className="  mb-5">
                   <div className="cart-totals">
                     <h3>Cart Totals</h3>
                     <ul>
                       <li>
-                        Subtotal <span>₹{actualtotal}</span>
+                        Subtotal <span>₹{Subtotal}</span>
                       </li>
                       <li>
-                        Discount <span>-₹{actualtotal - total1}</span>
+                        Discount <span>-₹{Subtotal - Discount}</span>
                       </li>
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total Amount <span>₹{total1}</span>
+                        Total Amount <span>₹{Discount}</span>
                       </li>
                     </ul>
                   </div>
-                </div>
-                
-          </>
-        )
-              
-        
-        })}   
+                </div>   
         </div>
             </div>
           </div>
