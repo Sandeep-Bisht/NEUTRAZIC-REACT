@@ -28,9 +28,10 @@ const ManufacturerCreation = (props) => {
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     await formData.append("image", data.image);
+    // await formData.append("featuredImage", []);
+    // await formData.append("slideShow", false);
     const url = `${baseUrl}/api/manufacture/add_manufacture`;
     await fetch(url, {
-      mode: "no-cors",
       method: "POST",
       body: formData,
     })
@@ -96,11 +97,14 @@ const ManufacturerCreation = (props) => {
 
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
+    const formData = new FormData();
+    await formData.append("_id", data._id);
+    await formData.append("description", data.description);
+    await formData.append("name", data.name);
+    await formData.append("image", data.image);
     await fetch(`${baseUrl}/api/manufacture/update_manufacturer_by_id`, {
       method: "Put",
-      body: JSON.stringify({
-        ...data
-      }),
+      body: formData,
     })
       .then((res) => {
         history.push("/AllManufactureDetails");
