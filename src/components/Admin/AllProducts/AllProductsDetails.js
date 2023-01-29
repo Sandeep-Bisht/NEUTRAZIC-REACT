@@ -34,7 +34,6 @@ export default function AllProductsDetails() {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "product");
         Setproducts(data.data.length);
       })
       .catch((err) => {

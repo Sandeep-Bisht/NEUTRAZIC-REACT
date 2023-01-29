@@ -105,8 +105,7 @@ const Register = (props) => {
           }
         });
     } else {
-      console.log("not getting role");
-      // setMsg('Please Enter a Valid Data');
+     
     }
   };
 
@@ -156,7 +155,6 @@ const Register = (props) => {
             userCart.order[i].quantity += newItemObj.quantity;
             userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-            console.log("true");
           }
           if (!merged) {
             userCart.order.push(newItemObj);

@@ -1,10 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Header1 from "./Header1";
 import '../components/Faq.css';
 import Footer from "./Footer";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 function Faq () {
+  useEffect(()=>{
+    window.scroll(0,0);
+  },[])
+
     return (
         <>
         <Header1/>

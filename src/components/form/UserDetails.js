@@ -23,7 +23,9 @@ const UserDetails=(props)=>{
     var    newdate = day + "/" + month + "/" + year;
 
 
+        
     useEffect(() => { 
+      window.scroll(0,0);
         Userdata = JSON.parse(localStorage.getItem("Userdata"))
         Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"))
         Subtotal1 =  localStorage.getItem("Subtotal")
@@ -118,7 +120,6 @@ const UserDetails=(props)=>{
             setCart(data.data[0].order);
             // setCartItems(data.data[0].order.length);
             // let cartItems = data.data[0].order.length;
-            // console.log("cartitems on delete", cartItems)
             // dispatch(ACTIONS.getCartItem(cartItems));
             Set_id(data.data[0]._id);
           })
@@ -159,7 +160,6 @@ const UserDetails=(props)=>{
         let discount=0;
         for(let item of cart)
         {
-          console.log(item,"itemmmmmmm");
           total=total+item.mrp*item.quantity;
           discount=discount+item.singleprice*item.quantity;
         }

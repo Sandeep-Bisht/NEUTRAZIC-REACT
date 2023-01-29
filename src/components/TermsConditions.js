@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Footer from './Footer'
 import Header1 from './Header1'
 import '../components/TermsConditions.css';
 
 function TermsConditions() {
+    useEffect(()=>{
+        window.scroll(0,0);
+    },[])
   return (
     <>
     <Header1/>

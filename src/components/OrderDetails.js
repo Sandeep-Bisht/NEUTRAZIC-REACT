@@ -32,7 +32,6 @@ const OrderDetails = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data[0]);
-        console.log(data, "hete");
       })
       .catch((err) => {
         console.log(err, "error");

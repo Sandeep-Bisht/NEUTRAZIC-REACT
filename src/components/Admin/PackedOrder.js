@@ -34,7 +34,7 @@ const InProgressOrder = () => {
             }
          }
          setOrderDetails(arr)
-        //  console.log(" length "+data.data.length)
+        
       }
       )
       .catch((err) => {
@@ -88,7 +88,6 @@ const InProgressOrder = () => {
   };
 
   const CaptureDetails = (orders) => {
-    console.log(orders, "Orderes")
     setOrderDetails(orders)
 
   }
@@ -107,7 +106,6 @@ const InProgressOrder = () => {
   const data1 = [];
   {
     orders.map((item, index) => {
-      console.log(item.status, "status")
       if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
 
         data1.push({

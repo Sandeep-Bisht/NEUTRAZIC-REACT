@@ -40,9 +40,7 @@ export default function AllManufactureDetails() {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hello");
         setManufacturer(data.data.length);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err, "errors");

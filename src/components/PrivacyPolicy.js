@@ -2,8 +2,12 @@ import React from 'react'
 import Footer from './Footer'
 import Header1 from './Header1'
 import '../components/PrivacyPolicy.css';
+import { useEffect } from 'react'
 
 function PrivacyPolicy() {
+useEffect(()=>{
+  window.scroll(0,0);
+},[0])
   return (
     <>
     <Header1/>

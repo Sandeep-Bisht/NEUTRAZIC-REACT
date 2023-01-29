@@ -12,7 +12,6 @@ const MyAccount = () => {
   window.scroll(0, 0);
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "userdata");
     setData(Userdata);
   }, []);
 
@@ -22,15 +21,7 @@ const MyAccount = () => {
     formState: { errors },
   } = useForm();
   const onsubmit = (data) => {
-    // alert("Success");
-    // console.log(
-    //   data.name,
-    //   data.address,
-    //   data.email,
-    //   data.pincode,
-    //   data.alternativeNumber,
-    //   data.mobileNumber
-    // );
+    
   };
   return (
     <>

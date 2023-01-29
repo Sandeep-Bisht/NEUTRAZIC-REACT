@@ -160,10 +160,7 @@ const CategoryCreation = (props) => {
     { title: "Category Name", data: "name" },
     { title: "Action", data: "Action" },
   ];
-  const click = (row) => {
-    console.log(row);
-  };
-  console.log(data.image, "er");
+  
 
   return (
     <>
