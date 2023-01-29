@@ -119,7 +119,8 @@ const columns = [
                 state: {
                   ...record,
                 },
-              }} className='edit-icon-wrap'
+              }} 
+              className='edit-icon-wrap'
               title="Edit"
               style={{ color: "blue" }}
             >
