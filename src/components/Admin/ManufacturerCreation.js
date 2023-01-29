@@ -7,6 +7,7 @@ import $ from "jquery";
 import { Link } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import axios from "axios";
 
 var Userdata;
 const ManufacturerCreation = (props) => {
@@ -35,7 +36,10 @@ const ManufacturerCreation = (props) => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        res.json();
+        history.push('/AllManufactureDetails')
+      })
       .then((res) => {
         GetManufacturer();
         this.getAddOn();
@@ -102,20 +106,21 @@ const ManufacturerCreation = (props) => {
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     await formData.append("image", data.image);
-    await fetch(`${baseUrl}/api/manufacture/update_manufacturer_by_id`, {
-      method: "Put",
-      body: formData,
-    })
-      .then((res) => {
-        history.push("/AllManufactureDetails");
-        res.json();
-      })
-      .then(async (data) => {
-        GetManufacturer();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
+      try{
+        const response=await axios.put(`${baseUrl}/api/manufacture/update_manufacturer_by_id`, formData)
+        if(response.status==200)
+        {
+          await GetManufacturer();
+          setTimeout(()=>{
+            history.push("/AllManufactureDetails");
+          },1500)
+          
+        }
+        
+      }catch(error)
+      {
+        console.log(error);
+      }
   };
 
   // const data1 = [];

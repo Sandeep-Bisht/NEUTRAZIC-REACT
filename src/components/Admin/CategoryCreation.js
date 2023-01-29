@@ -85,6 +85,7 @@ const CategoryCreation = (props) => {
         console.log(err, "error");
       });
   };
+  
   const EditCategory = (item) => {
     let obj;
     obj = {
