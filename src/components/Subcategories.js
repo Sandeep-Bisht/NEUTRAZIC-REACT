@@ -213,7 +213,7 @@ const Subcategories = (props) => {
         setQuantity(1);
         CartById();
         UpdateCart();
-        toast.success("Successfully added to Cart", {
+        toast.success("Added to Cart", {
           position: "bottom-right",
           autoClose: 2000,
         });
@@ -363,7 +363,7 @@ const Subcategories = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                toast.error("Product is wishlisted !", {
+                toast.error("Added to wishlist", {
                   position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 2000,
                 });
@@ -398,7 +398,7 @@ const Subcategories = (props) => {
               })
                 .then((res) => res.json())
                 .then(async (data) => {
-                  toast.error("Product is wishlisted !", {
+                  toast.error("Added to wishlist", {
                     position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 2000,
                   });

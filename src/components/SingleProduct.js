@@ -405,7 +405,7 @@ const onNextStart = (currentItem, nextItem) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Add to cart", {
+      toast.success("Added to cart", {
         position: "bottom-right",
         autoClose: 2000,
       });
@@ -562,7 +562,7 @@ const onNextStart = (currentItem, nextItem) => {
                 let wishlist = document.getElementById(productid)
                 wishlist.classList.add("wishlisted");
                 getWishlist();
-                toast.success('Added to wishlist !', {
+                toast.success('Added to wishlist', {
                   position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 2000,
                 });
@@ -600,7 +600,7 @@ const onNextStart = (currentItem, nextItem) => {
                   let wishlist = document.getElementById(productid)
                   wishlist.classList.add("wishlisted");
                   getWishlist();
-                  toast.success('Added to wishlist !', {
+                  toast.success('Added to wishlist', {
                     position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 2000,
 
