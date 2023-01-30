@@ -31,7 +31,7 @@ const Checkout=()=>{
               .then(async (data) => {
                  setCart(data.data[0].order);
                  Set_id(data.data[0]._id)
-                console.log(data.data[0]._id, "hello")
+                
               })
               .catch((err) => {
                 console.log(err, "error");

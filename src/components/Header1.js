@@ -134,7 +134,7 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data, "After post Api");
+          
           toast.success("Registered Successfully",{
             position:"bottom-right",
             autoClose: 2000,
@@ -183,7 +183,6 @@ const Header1 = (props) => {
             
             window.location.reload();
           } else if (Userdata == undefined) {
-            console.log(res, "response failure");
             setMsg("User Name Or PassWord is not Valid");
           }
         })
@@ -201,7 +200,6 @@ const Header1 = (props) => {
       //   autoClose: 5000,
       // });
     } else {
-      console.log("not getting role", "faiure");
       setMsg("Please Enter a Valid Data");
     }
   };
@@ -258,7 +256,7 @@ const Header1 = (props) => {
             userCart.order[i].quantity += newItemObj.quantity;
             userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-            console.log("true");
+
           }
           if (!merged) {
             userCart.order.push(newItemObj);
@@ -385,7 +383,7 @@ const Header1 = (props) => {
                           >
 
                             {
-                               el.image.length ? <img
+                               el.image && el.image.length > 0 ? <img
                                className="icons1"
                                src={
                                  `${baseUrl}/`+ el.image[0].path
@@ -744,7 +742,7 @@ const Header1 = (props) => {
                     {/* <br /> */}
                     <div className="dropdown">
                       <button
-                        className="btn btn-white btn-sm dropdown-toggle"
+                        className="btn btn-white btn-sm dropdown-toggle user-dropdown-btn"
                         type="button"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"

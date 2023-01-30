@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import DataTable from '@bit/adeoy.utils.data-table';
+import { useHistory } from "react-router-dom";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import $ from "jquery";
 import { Link } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
+import axios from "axios";
 
 var Userdata;
 const ManufacturerCreation = (props) => {
@@ -18,51 +20,54 @@ const ManufacturerCreation = (props) => {
     description: "",
     image: [],
   });
-  const [editableData]=useState(props.history.location.state);
+  const history = useHistory();
+  const [editableData] = useState(props.history.location.state);
 
-  const submitData = async (e) => { 
+  const submitData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
-    formData.append("image", data.image);
+    await formData.append("image", data.image);
+    // await formData.append("featuredImage", []);
+    // await formData.append("slideShow", false);
     const url = `${baseUrl}/api/manufacture/add_manufacture`;
     await fetch(url, {
-      mode: 'no-cors',
-      method: "POST",      
+      method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        res.json();
+        history.push('/AllManufactureDetails')
+      })
       .then((res) => {
         GetManufacturer();
         this.getAddOn();
-        
       })
-      
+
       .catch((err) => console.log(err));
     //console.log(formData)
     e.preventDefault();
-    
   };
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetManufacturer();
+    if (editableData) {
+      Setdata(editableData);
+    }
   }, []);
   const DeleteManufacturer = async (_id) => {
-    await fetch(
-      `${baseUrl}/api/manufacture/delete_manufacturer_by_id`,
-      {
-        method: "Delete",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          _id: _id,
-        }),
-      }
-    )
+    await fetch(`${baseUrl}/api/manufacture/delete_manufacturer_by_id`, {
+      method: "Delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: _id,
+      }),
+    })
       .then((res) => res.json())
       .then(async (data) => {
         GetManufacturer();
@@ -82,41 +87,40 @@ const ManufacturerCreation = (props) => {
       });
   };
 
-  const EditManufacturer = (item) => {
-    let obj;
-    obj = {
-      _id: item._id,
-      image: item.image,
-      name: item.name,
-      description: item.description,
-    };
+  // const EditManufacturer = (item) => {
+  //   let obj;
+  //   obj = {
+  //     _id: item._id,
+  //     image: item.image,
+  //     name: item.name,
+  //     description: item.description,
+  //   };
 
-    Setdata(obj);
-  };
+  //   Setdata(obj);
+  // };
 
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
-
-    await fetch(
-      `${baseUrl}/api/manufacture/update_manufacturer_by_id`,
+    const formData = new FormData();
+    await formData.append("_id", data._id);
+    await formData.append("description", data.description);
+    await formData.append("name", data.name);
+    await formData.append("image", data.image);
+      try{
+        const response=await axios.put(`${baseUrl}/api/manufacture/update_manufacturer_by_id`, formData)
+        if(response.status==200)
+        {
+          await GetManufacturer();
+          setTimeout(()=>{
+            history.push("/AllManufactureDetails");
+          },1500)
+          
+        }
+        
+      }catch(error)
       {
-        method: "Put",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-        }),
+        console.log(error);
       }
-    )
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetManufacturer();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
   };
 
   // const data1 = [];
@@ -165,7 +169,6 @@ const ManufacturerCreation = (props) => {
     { title: "Action", data: "Action" },
   ];
   const click = (row) => {
-    console.log(row);
   };
   return (
     <>
@@ -180,88 +183,95 @@ const ManufacturerCreation = (props) => {
         </Link>
       </div> */}
       <section id="body-pd">
-      <div className="container-fluid">
-      <DashboardHeaader/>
-        <div className="row">
-      <div className="col-2 px-0">
+        <div className="container-fluid">
+          <DashboardHeaader />
+          <div className="row">
+            <div className="col-2 px-0">
               <Sidemenu />
             </div>
             <div className="col-10 px-0">
-        {Userdata != undefined ? (
-          Userdata.role == "superAdmin" ? (
-            <form>
-              <div className="col-12 px-0">
-                    <div className="card p-4 m-2 product-form">
-                      <h5>Manufacturer Creation</h5>
-                      <div className="row">
-                        <div className="col-6 p-1">
-                          <input
-                            type="file"
-                            multiple
-                            className="form-control Dashborad-search"
-                            onChange={(e) => {
-                              Setdata({ ...data, image: e.target.files[0] });
-                            }}
-                          />
-                        </div>
-                        <div className="col-6 p-1 form-floating">
-                          <input
-                            type="text"
-                            id="floatingInputValue"
-                            className="form-control Dashborad-search"
-                            placeholder="Manufacturer Name "
-                            defaultValue={editableData ? editableData.name : ""}
-                            onChange={(e) => {
-                              Setdata({ ...data, name: e.target.value });
-                            }}
-                          />
-                          <label  for="floatingInputValue">Manufacturer Name</label>
-                        </div>
-                        <div className="col-6 p-1 form-floating">
-                          <textarea
-                            className="form-control"
-                            id="floatingInputValue"
-                            placeholder="Manufacturer Description"
-                            rows="3"
-                            defaultValue={
-                              editableData ? editableData.description : ""
-                            }
-                            onChange={(e) => {
-                              Setdata({ ...data, description: e.target.value });
-                            }}
-                          ></textarea>
-                          <label for="floatingInputValue">Manufacturer Description</label>
-                        </div>
-                        {editableData ? (
-                          <div className="col-12 p-1">
-                            
-                            <button
-                              className="btn btn-primary"
-                              id="update-btn"
-                              onClick={(e) => UpdateManufacturer(e, data._id)}
-                            >
-                              Update
-                            </button>
+              {Userdata != undefined ? (
+                Userdata.role == "superAdmin" ? (
+                  <form>
+                    <div className="col-12 px-0">
+                      <div className="card p-4 m-2 product-form">
+                        <h5>Manufacturer Creation</h5>
+                        <div className="row">
+                          <div className="col-6 p-1">
+                            <input
+                              type="file"
+                              multiple
+                              className="form-control Dashborad-search"
+                              onChange={(e) => {
+                                Setdata({ ...data, image: e.target.files[0] });
+                              }}
+                            />
                           </div>
-                        ) : 
-                         (
-                          <div className="col-12 p-1">
-                            <button
-                              className="btn btn-primary"
-                              onClick={(e) => submitData(e)}
-                            >
-                              Submit
-                            </button>
+                          <div className="col-6 p-1 form-floating">
+                            <input
+                              type="text"
+                              id="floatingInputValue"
+                              className="form-control Dashborad-search"
+                              placeholder="Manufacturer Name "
+                              defaultValue={
+                                editableData ? editableData.name : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({ ...data, name: e.target.value });
+                              }}
+                            />
+                            <label for="floatingInputValue">
+                              Manufacturer Name
+                            </label>
                           </div>
-                        ) }
+                          <div className="col-6 p-1 form-floating">
+                            <textarea
+                              className="form-control"
+                              id="floatingInputValue"
+                              placeholder="Manufacturer Description"
+                              rows="3"
+                              defaultValue={
+                                editableData ? editableData.description : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({
+                                  ...data,
+                                  description: e.target.value,
+                                });
+                              }}
+                            ></textarea>
+                            <label for="floatingInputValue">
+                              Manufacturer Description
+                            </label>
+                          </div>
+                          {editableData ? (
+                            <div className="col-12 p-1">
+                              <button
+                                className="btn btn-primary"
+                                id="update-btn"
+                                onClick={(e) => UpdateManufacturer(e, data._id)}
+                              >
+                                Update
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="col-12 p-1">
+                              <button
+                                className="btn btn-primary"
+                                onClick={(e) => submitData(e)}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                    </div>
-            </form>
-          ) : null
-        ) : null}
-        </div>
-        </div>
+                  </form>
+                ) : null
+              ) : null}
+            </div>
+          </div>
         </div>
       </section>
     </>

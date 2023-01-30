@@ -19860,8 +19860,18 @@ margin: 40px 8px 15px 0px;
 	position: static !important;
 	 top: 160px !important;
 	 overflow-y: hidden !important;
-	 height: 340px !important;
+	 /* height: 340px !important; */
 	 /* border-bottom: 1px solid black !important; */
+ }
+ .back-ground-subcategory-sidebar
+ {
+	background-color: #F7F6FB;
+	height: 100%;
+	color: #002752;
+ }
+ #List-item
+ {
+	color: #002752 !important;
  }
  .trending-section{
 	 padding-left: 30px;
@@ -19872,3 +19882,7 @@ margin: 40px 8px 15px 0px;
  .product-div-subcategory{
 	margin-left: 10px;
  }
+
+
+ /* SubcategoryPage Css */
+ 

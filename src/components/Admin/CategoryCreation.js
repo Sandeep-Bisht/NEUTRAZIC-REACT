@@ -27,7 +27,7 @@ const CategoryCreation = (props) => {
     await formData.append("featuredCategories", data.featuredCategories);
     await formData.append("image", data.image);    
     const url = `${baseUrl}/api/category/add_category`;
-    console.log("insid esubmit", data)
+   
      await fetch(url, {
     method: "POST",
       body: formData,
@@ -50,6 +50,9 @@ const CategoryCreation = (props) => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
+    if(editableData){
+      Setdata(editableData);
+    }
   }, []);
 
   const DeleteCategory = async (_id) => {
@@ -76,14 +79,13 @@ const CategoryCreation = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        setCategories(data.data);
-        Setdata({ ...data, image: data.image });
-        console.log(data.data, "image");
+        setCategories(data.data); 
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
+  
   const EditCategory = (item) => {
     let obj;
     obj = {
@@ -97,7 +99,7 @@ const CategoryCreation = (props) => {
   const UpdateCategory = async (e, _id) => {
     e.preventDefault();
     const formData = new FormData();
-    await formData.append("_id", _id);
+    await formData.append("_id", data._id);
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     await formData.append("image", data.image);
@@ -107,7 +109,10 @@ const CategoryCreation = (props) => {
       method: "Put",
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) =>{
+        res.json()
+        history.push("/AllCategoriesDetails");
+      })
       .then(async (data) => {
         GetCategory();
       })
@@ -155,10 +160,7 @@ const CategoryCreation = (props) => {
     { title: "Category Name", data: "name" },
     { title: "Action", data: "Action" },
   ];
-  const click = (row) => {
-    console.log(row);
-  };
-  console.log(data.image, "er");
+  
 
   return (
     <>

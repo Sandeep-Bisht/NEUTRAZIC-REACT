@@ -37,7 +37,6 @@ export default function AllCategoriesDetails() {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
-        // console.log("dsd dfz sf " + data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -94,6 +93,15 @@ export default function AllCategoriesDetails() {
       title: "Description",
       dataIndex: "description",
       key: "description",
+    },
+    {
+      
+        title: "Image",
+        dataIndex: "image[0].path",
+        width: 80,
+        maxWidth: 90,
+        render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />,
+      
     },
     {
       title: "Action",

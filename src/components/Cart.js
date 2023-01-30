@@ -57,7 +57,7 @@ const Cart = () => {
           setCart(data.data[0].order);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          console.log("cartitems on delete", cartItems)
+          
           dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })
@@ -69,7 +69,7 @@ const Cart = () => {
 
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
-    console.log(cart, "erjhejgrekjbk");
+    
     await fetch(url, {
       method: "put",
       headers: {
@@ -84,7 +84,7 @@ const Cart = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "after update");
+        
       })
       .then((err) => console.log(err));
   };
@@ -101,7 +101,6 @@ const Cart = () => {
     }
   };
   const Plusquantity = async (quantity, price, index) => {
-    console.log(quantity, price, index, "Abhishek Herer");
     if (quantity >= 1) {
       //  isquantity = true
       cart[index].quantity = quantity + 1;
@@ -161,7 +160,7 @@ const Cart = () => {
                         </thead>
                         <tbody>
                           {cart.map((el, ind1) => {
-                            console.log(el, "all the el things");
+                            
                             // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;

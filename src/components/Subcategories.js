@@ -25,13 +25,15 @@ const Subcategories = (props) => {
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
-  const [getSubCategories,setGetSubCategories]=useState([]);
+  const [getSubCategories, setGetSubCategories] = useState([]);
+  const[filterData,setfilterData] = useState([]);
 
-  
   const history = useHistory();
+  
   useEffect(() => {
+    window.scroll(0, 0);
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    
+    ProductsByCategory();
     GetData();
     CartById();
     GetCategory();
@@ -57,11 +59,10 @@ const Subcategories = (props) => {
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    
+
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        
         setData(data.data);
       })
       .catch((err) => {
@@ -72,9 +73,7 @@ const Subcategories = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        
         setManufactureres(data.data);
-       
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -84,7 +83,6 @@ const Subcategories = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        
         setCategories(data.data._id);
       })
       .catch((err) => {
@@ -187,7 +185,6 @@ const Subcategories = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        
         history.push("/Cart");
       })
       .then((err) => console.log(err));
@@ -265,9 +262,38 @@ const Subcategories = (props) => {
       .then(async (data) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
-            await fetch(
-              `${baseUrl}/api/wishlist/add_to_wishlist`,
-              {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userid: Userdata._id,
+                image: image,
+                name: name,
+                productId: productid,
+                rating: "5",
+                category: category,
+                manufacturer: manufacturer,
+                description: description,
+              }),
+            })
+              .then((res) => res.json())
+              .then(async (data) => {
+                
+                let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
+                wishList.classList.add("wishlisted");
+              })
+              .catch((err) => {
+                console.log(err, "error e");
+              });
+          }
+        } else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -283,50 +309,13 @@ const Subcategories = (props) => {
                   manufacturer: manufacturer,
                   description: description,
                 }),
-              }
-            )
-              .then((res) => res.json())
-              .then(async (data) => {
-                // setWishlist(data.data[0]);
-                //  await console.log(wishlist,"khlklklklk")
-                let wishList = document.getElementById(productid);
-                wishList.classList.add("in-wishlist");
-                wishList.classList.add("wishlisted");
               })
-              .catch((err) => {
-                console.log(err, "error e");
-              });
-          }
-        } else {
-          if (!JSON.stringify(data.data).includes(productid) && data.data) {
-            if (!Userdata == []) {
-              await fetch(
-                `${baseUrl}/api/wishlist/add_to_wishlist`,
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userid: Userdata._id,
-                    image: image,
-                    name: name,
-                    productId: productid,
-                    rating: "5",
-                    category: category,
-                    manufacturer: manufacturer,
-                    description: description,
-                  }),
-                }
-              )
                 .then((res) => res.json())
                 .then(async (data) => {
-                  // setWishlist(data.data[0]);
-                  //  await console.log(wishlist,"khlklklklk")
+                  
                   let wishList = document.getElementById(productid);
-                wishList.classList.add("in-wishlist");
-                wishList.classList.add("wishlisted");
+                  wishList.classList.add("in-wishlist");
+                  wishList.classList.add("wishlisted");
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -338,197 +327,351 @@ const Subcategories = (props) => {
         }
       });
   };
-  
+  const ProductsByCategory = ()=>{
+    let Product = props.match.params._id;
+    let filteronload = data.filter((value)=>{
+      return value.category._id === Product
+    })
+    
+    setData(filteronload);
+    
+  } 
+
+    const GetSingleSubCategory = (id)=>{
+      const filteredData = data.filter((value) => {
+        return value.subcategory._id === id
+      })
+      setfilterData(filteredData);
+      
+  }
+
+  const GetallData = (Products)=>{
+    setfilterData("");
+    setData(Products);
+    
+  }
+  // const Addclassactive = ()=>{
+  //   let item = document.getElementById("List-item");
+  //   for(let i = 0 ; i<=item.length; i++){
+  //     item[i].
+  //   }
+  // }
   return (
     <>
-    <Header1 />
+      <Header1 />
 
-    <div id="__next">
-      {/* trending section  */}
+      <div id="__next">
+        {/* trending section  */}
 
-     
-      <section className=" pb-40">
-        <div className="container-fluid">
-          <div className="row">
-              <div className="col-2">
-              <div id="wrapper">
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-          <a href="#">
-              SubCategory
-          </a>
-      </li>
-      {
-          getSubCategories.map((item)=>{
-              if (
-                  item.category == props.match.params._id
-                ) {
-              return (
-                  <>
-                   <li>
-          <a href="#">{item.name}</a>
-      </li>
-                  </>
-              )
-          }})
-      }
-  </ul>
-</div>
-
-
-</div>
-     </div>
-     <div className="col-10">
-     <section className="trending-section  mb-5">
-        <div className="container-fluid h-100">
-          <div className="row h-100">
-            <div className="col-12 p-0">
-              <div className="align-items-center position-relative h-100 d-flex w-100 ">
-                <h1 className="trendign-head">SubCategory</h1>
-                <h2 className="pl-4 product-head">Products</h2>
+        <section className=" pb-40">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-2 ps-0">
+                <div className="back-ground-subcategory-sidebar">
+                <div id="wrapper">
+                  <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                      <li class="sidebar-brand">
+                        <h4 className="mt-4">Subcategories</h4>
+                      </li>
+                      <li className="box mt-3" onClick={()=>GetallData(data)} style={{ cursor: "pointer" }}><p className="active" id="List-item" style={{ cursor: "pointer" }}>All SubCategories</p></li>
+                      {getSubCategories.map((item) => {
+                        if(item.category == props.match.params._id)
+                         {
+                          return (
+                            <>
+                            
+                              <li className="mt-3 box">
+                                <p id="List-item" onClick={()=>{GetSingleSubCategory(item._id)}}  style={{ cursor: "pointer" }}>{item.name}</p>
+                              </li>
+                            </>
+                          );
+                        }
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="products-area pb-40">
-        <div className="container-fluid">
-          <div className="row">
-            {getSubCategories.map((item, ind) => {
-              if (
-                item.category == props.match.params._id
-              ) {
-                return (
-                  <div className="col-lg-3 col-md-12 col-sm-12 ">
-                    <div className="single-products-box border">
-                      <div className="row  align-items-center product-div-subcategory">
-                        <div className="col-6 product-image-div">
-                          <Link
-                            to={"/SingleProduct/" + item._id}
-                            className="product-image-link"
-                          >
-                            <div className="image hover-switch">
-                              {/* <img
-                         src={
-                         require('../../Images/products/Hintosulin (1).png')
-                         }
-                         alt="" 
-                          /> */}
-                              <img
-                                src={
-                                  `${baseUrl}/` +
-                                  item.image[0].path
-                                }
-                                alt=""
-                              />
-                            </div>
-                          </Link>
+              <div className="col-10">
+                <section className="trending-section  mb-5">
+                  <div className="container-fluid h-100">
+                    <div className="row h-100">
+                      <div className="col-12 p-0">
+                        <div className="align-items-center position-relative h-100 d-flex w-100 ">
+                          <h3 className="trendign-head">SubCategory</h3>
+                          <h3 className="trendign-head pl-2">Products</h3>
                         </div>
-                        <div className="col-6 pd-0 tranding product-image-content">
-                          <div className="content product-content">
-                            <Link to={"/SingleProduct/" + item._id}>
-                              <h3 className="pb-1 pl-4 pt-5">
-                                <ReadMoreReact
-                                  text={item.name}
-                                  min={7}
-                                  ideal={7}
-                                  max={7}
-                                  readMoreText={"..."}
-                                />
-                              </h3>
-                            </Link>
-                            <div className="d-flex pb-2 pl-4">
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section className="products-area pb-40">
+                  <div className="container-fluid">
+                    <div className="row">
+                      {filterData && filterData.length>0 ?(
+                      
+                      filterData.map((item, ind) => {
+                        
+                          return (
+                            <div className="col-lg-2 col-md-12 col-sm-12 ">
+                              <div className="single-products-box border">
+                                <div className="row">
+                                  <div className="col-md-12">
+                                    <div className="product-div">
+                                      <div className="product-image-div">
+                                        <Link
+                                          to={"/SingleProduct/" + item._id}
+                                          className="product-image-link"
+                                        >
+                                          <div className="image hover-switch">
+                                            <img
+                                              src={
+                                                item.otherImage &&
+                                                `${baseUrl}/` +
+                                                  item.otherImage[0].path
+                                              }
+                                              alt=""
+                                            />
+                                            <img
+                                              src={
+                                                `${baseUrl}/` +
+                                                item.image[0].path
+                                              }
+                                              alt=""
+                                              style={{
+                                                position: "absolute",
+                                                left: "0",
+                                                top: "0",
+                                              }}
+                                            />
+                                          </div>
+                                        </Link>
+                                      </div>
+                                      <div className="tranding product-image-content">
+                                        <div className="content product-content">
+                                          {/* <Link to={"/SingleProduct/" + item._id}> */}
+                                          <Link
+                                            to={"/SingleProduct/" + item._id}
+                                          >
+                                            <ReadMoreReact text={item.name} />
+                                          </Link>
+                                          {/* </Link> */}
+                                          {/* <div className="d-flex pb-2 pl-4">
                               <i className="bx bxs-star"></i>
                               <i className="bx bxs-star"></i>
                               <i className="bx bxs-star"></i>
                               <i className="bx bxs-star"></i>
                               <i className="bx bxs-star"></i>
-                            </div>
-                            <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
+                            </div> */}
+                                          {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
                               <div className="discount-price-div">
                                 <span>{item.inrDiscount}%</span>
                               </div>
                               <div className="discount-price-div2">
                                 <span>off</span>
                               </div>
-                            </div>
+                            </div> */}
 
-                            <div className="hr-div">
+                                          {/* <div className="hr-div">
                               <hr />
-                            </div>
-                            <div className="price-div justify-content-center align-items-center d-flex">
-                              <span className="new-price ml-3">
-                                {/* $
-                                {isNaN(
-                                  item.inrMrp -
-                                    (item.inrMrp * item.inrDiscount) / 100
-                                )
-                                  ? 0
-                                  : item.inrMrp -
-                                    (item.inrMrp * item.inrDiscount) / 100} */}
-                                    {item.inrDiscount}
-                              </span>
-                              <del className="new-price ml-1">
-                                {item.inrMrp}
-                              </del>
-                              {Userdata ? (
-                                <i
-                                  className="bx bxs-heart ml-3"
-                                  onClick={() => {
-                                    AddtoWishlist(
-                                      item._id,
-                                      item.name,
-                                      quantity,
-                                      item.inrMrp,
-                                      item.inrDiscount,
-                                      item.description,
-                                      item.category,
-                                      item.manufacturer.name,
-                                      item.image
-                                    );
-                                  }}
-                                ></i>
-                              ) : (
-                                <>
-                                  <i
-                                    className="bx bxs-heart ml-3 pc-heart"
-                                    data-bs-toggle="modal"
-                                    data-bs-target={
-                                      Userdata == null
-                                        ? "#exampleModal"
-                                        : null
-                                    }
-                                  ></i>
-                                  <Link to="/Register">
-                                    <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                  </Link>
-                                </>
-                              )}
+                            </div> */}
+                                          <div className="price-div">
+                                            <span className="new-price ">
+                                              <i className="fa fa-inr"></i>{" "}
+                                              {item.inrDiscount}
+                                            </span>
 
-                              <i className="bx bx-cart ml-1"></i>
+                                            <del className="new-price ml-1">
+                                              {item.inrMrp}
+                                            </del>
+                                            {Userdata ? (
+                                              <i
+                                                className="bx bxs-heart ml-3"
+                                                onClick={() => {
+                                                  AddtoWishlist(
+                                                    item._id,
+                                                    item.name,
+                                                    quantity,
+                                                    item.inrMrp,
+                                                    item.inrDiscount,
+                                                    item.description,
+                                                    item.category,
+                                                    item.manufacturer.name,
+                                                    item.image
+                                                  );
+                                                }}
+                                              ></i>
+                                            ) : (
+                                              <>
+                                                <i
+                                                  className="bx bxs-heart ml-3 pc-heart"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target={
+                                                    Userdata == null
+                                                      ? "#exampleModal"
+                                                      : null
+                                                  }
+                                                ></i>
+
+                                                <Link to="/Register">
+                                                  <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                                </Link>
+                                              </>
+                                            )}
+
+                                            <i className="bx bx-cart ml-1"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* </Link> */}
                             </div>
-                        
-                          </div>
-                        </div>
-                      </div>
+                          );
+                        }
+                      )):(
+                        <>
+
+                        { data.map((item, ind) => {
+                        if (item.category._id == props.match.params._id ) 
+                        {
+                          return (
+                            <div className="col-lg-2 col-md-12 col-sm-12 ">
+                              <div className="single-products-box border">
+                                <div className="row">
+                                  <div className="col-md-12">
+                                    <div className="product-div">
+                                      <div className="product-image-div">
+                                        <Link
+                                          to={"/SingleProduct/" + item._id}
+                                          className="product-image-link"
+                                        >
+                                          <div className="image hover-switch">
+                                            <img
+                                              src={
+                                                item.otherImage &&
+                                                `${baseUrl}/` +
+                                                  item.otherImage[0].path
+                                              }
+                                              alt=""
+                                            />
+                                            <img
+                                              src={
+                                                `${baseUrl}/` +
+                                                item.image[0].path
+                                              }
+                                              alt=""
+                                              style={{
+                                                position: "absolute",
+                                                left: "0",
+                                                top: "0",
+                                              }}
+                                            />
+                                          </div>
+                                        </Link>
+                                      </div>
+                                      <div className="tranding product-image-content">
+                                        <div className="content product-content">
+                                          {/* <Link to={"/SingleProduct/" + item._id}> */}
+                                          <Link
+                                            to={"/SingleProduct/" + item._id}
+                                          >
+                                            <ReadMoreReact text={item.name} />
+                                          </Link>
+                                          {/* </Link> */}
+                                          {/* <div className="d-flex pb-2 pl-4">
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                              <i className="bx bxs-star"></i>
+                            </div> */}
+                                          {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
+                              <div className="discount-price-div">
+                                <span>{item.inrDiscount}%</span>
+                              </div>
+                              <div className="discount-price-div2">
+                                <span>off</span>
+                              </div>
+                            </div> */}
+
+                                          {/* <div className="hr-div">
+                              <hr />
+                            </div> */}
+                                          <div className="price-div">
+                                            <span className="new-price ">
+                                              <i className="fa fa-inr"></i>{" "}
+                                              {item.inrDiscount}
+                                            </span>
+
+                                            <del className="new-price ml-1">
+                                              {item.inrMrp}
+                                            </del>
+                                            {Userdata ? (
+                                              <i
+                                                className="bx bxs-heart ml-3"
+                                                onClick={() => {
+                                                  AddtoWishlist(
+                                                    item._id,
+                                                    item.name,
+                                                    quantity,
+                                                    item.inrMrp,
+                                                    item.inrDiscount,
+                                                    item.description,
+                                                    item.category,
+                                                    item.manufacturer.name,
+                                                    item.image
+                                                  );
+                                                }}
+                                              ></i>
+                                            ) : (
+                                              <>
+                                                <i
+                                                  className="bx bxs-heart ml-3 pc-heart"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target={
+                                                    Userdata == null
+                                                      ? "#exampleModal"
+                                                      : null
+                                                  }
+                                                ></i>
+
+                                                <Link to="/Register">
+                                                  <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                                </Link>
+                                              </>
+                                            )}
+
+                                            <i className="bx bx-cart ml-1"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* </Link> */}
+                            </div>
+                          );
+                        }
+                      })}
+                      
+                        </>
+                      )}
                     </div>
-                    {/* </Link> */}
                   </div>
-                );
-              }
-            })}
-          </div>
-        </div>
-      </section>
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
-    <Baseline />
-    <Footer />
-  </>
+        </section>
+      </div>
+      <Baseline />
+      <Footer />
+    </>
   );
 };
 export default Subcategories;

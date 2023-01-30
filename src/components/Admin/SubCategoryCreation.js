@@ -5,6 +5,7 @@ import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router";
 // import DataTable from '@bit/adeoy.utils.data-table';
+import axios from "axios";
 
 var Userdata;
 const SubCategoryCreation = (props) => {
@@ -14,13 +15,15 @@ const SubCategoryCreation = (props) => {
   const [update, setUpdate] = useState(true);
   const [data, Setdata] = useState({
     name: "",
-    descripton: "",
+    description: "",
     category: "",
     image: [],
   });
 
-  const history=useHistory();
+  
   const [editableData] = useState(props.history.location.state);
+  const history=useHistory();
+  
   
   const submitData = async (e) => {
     e.preventDefault();
@@ -32,10 +35,6 @@ const SubCategoryCreation = (props) => {
     const url = `${baseUrl}/api/subcategory/add_subcategory`;
     await fetch(url, {
       method: "POST",
-      // headers: {
-      // 'Accept': 'application/json',
-      // 'Content-Type': 'multipart/form-data'
-      //   },
       body: formData,
     })
       .then((res) => {
@@ -52,10 +51,12 @@ const SubCategoryCreation = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
     GetSubCategory();
-    GetCategory();
+    if(editableData){
+      Setdata(editableData);
+    }
   }, []);
+ 
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -108,33 +109,26 @@ const SubCategoryCreation = (props) => {
       image: item.image,
       name: item.name,
       description: item.description,
-    };
-
-    Setdata(obj);
+    }; 
   };
+
   const UpdateSubCategory = async (e, _id) => {
     e.preventDefault();
-
-    await fetch(
-      `${baseUrl}/api/subcategory/update_subcategory_by_id`,
+    console.log(data.image)
+    const formData = new FormData();
+    await formData.append("_id", data._id);
+    await formData.append("name", data.name);
+    await formData.append("description", data.description);
+    await formData.append("category", data.category);
+    await formData.append("image", data.image);
+    const response=await axios.put(`${baseUrl}/api/subcategory/update_subcategory_by_id`, formData)
+      if(response.status==200)
       {
-        method: "Put",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-        }),
+        await GetSubCategory();
+        setTimeout(()=>{
+          history.push("/AllSubCategoriesDetails");
+        },1500);
       }
-    )
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetSubCategory();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
   };
 
   // const data1 = [];
@@ -181,9 +175,7 @@ const SubCategoryCreation = (props) => {
     { title: "Sub Category Name", data: "name" },
     { title: "Action", data: "Action" },
   ];
-  const click = (row) => {
-    console.log(row);
-  };
+  
 
   return (
     <>

@@ -71,7 +71,6 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
-        // console.log("dsd dfz sf " + data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -104,7 +103,6 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setOrders(data.data.length);
-        //  console.log(" length "+data.data.length)
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -120,7 +118,7 @@ const Dashboard = () => {
         setManufacturer(data.data.length);
       })
       .catch((err) => {
-        console.log(err, "errors");
+        console.log(err,"errors");
       });
   };
   const setCount = async () => {
@@ -278,7 +276,7 @@ const Dashboard = () => {
         </section>
     ):(
       <>
-      <PageNotFound/>
+      {/* <PageNotFound/> */}
       </>
     )
 }
