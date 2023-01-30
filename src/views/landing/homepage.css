@@ -19808,6 +19808,9 @@ margin: 40px 8px 15px 0px;
  .product-div-subcategory{
 	margin-left: 10px;
  }
+.active{
+	color: red;
+}
 
 
  /* SubcategoryPage Css */

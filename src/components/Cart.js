@@ -117,7 +117,7 @@ const Cart = () => {
     const array = await cart.filter((e, i) => i !== index);
     await UpdateCart(array);
     await CartById();
-    toast.success("Item deleted successfull", {
+    toast.success("Product romoved successfully", {
       position: "bottom-right",
       autoClose: 2000,
     })
@@ -160,7 +160,7 @@ const Cart = () => {
                         </thead>
                         <tbody>
                           {cart.map((el, ind1) => {
-                            
+                            console.log(el,"imageeeeeeeee");
                             // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
@@ -175,6 +175,7 @@ const Cart = () => {
                               <tr key={ind1} className="cart-data mt-2">
                                 <td className="product-thumbnail">
                                   <Link to={"/SingleProduct/" + el.productid}>
+                                    
                                     <img
                                       src={
                                         `${baseUrl}/` + el.image

@@ -405,7 +405,7 @@ const onNextStart = (currentItem, nextItem) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Add to cart", {
+      toast.success("Added to cart", {
         position: "bottom-right",
         autoClose: 2000,
       });
@@ -562,7 +562,7 @@ const onNextStart = (currentItem, nextItem) => {
                 let wishlist = document.getElementById(productid)
                 wishlist.classList.add("wishlisted");
                 getWishlist();
-                toast.success('Added to wishlist !', {
+                toast.success('Added to wishlist', {
                   position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 2000,
                 });
@@ -600,7 +600,7 @@ const onNextStart = (currentItem, nextItem) => {
                   let wishlist = document.getElementById(productid)
                   wishlist.classList.add("wishlisted");
                   getWishlist();
-                  toast.success('Added to wishlist !', {
+                  toast.success('Added to wishlist', {
                     position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 2000,
 
@@ -1118,8 +1118,8 @@ const onNextStart = (currentItem, nextItem) => {
                 <div className="col-lg-2 col-md-12 col-sm-12 ">
                   {/* <Link to={"/SingleProduct/" + el._id}> */}
                   <div className="single-products-box border">
-                    <div className="row  align-items-center product-div related-product">
-                      <div className="product-image-div">
+                    <div className="row   product-div related-product">
+                      <div className="product-image-div align-items-center">
                         <Link
                           to={"/SingleProduct/" + item._id}
                           className="product-image-link">
@@ -1141,18 +1141,13 @@ const onNextStart = (currentItem, nextItem) => {
                           </div>
                         </Link>
                       </div>
-                      <div className="pd-0 tranding product-image-content">
-                        <div className="content product-content">
+                      <div className="pd-0 tranding product-image-content align-items-start">
+                        <div className="content product-content align-items-start">
                           <Link to={"/SingleProduct/" + item._id}>
-                            <h3 className="">
-                              <ReadMoreReact
-                                text={item.name}
-                                min={7}
-                                ideal={7}
-                                max={7}
-                                readMoreText={"..."}
-                              />
-                            </h3>
+                          <span className="displayed-text"
+                          onClick={()=>relatedImageHandler(item._id)}>
+                              {item.name}
+                            </span>
                           </Link>
                           {/* <div className="d-flex pb-2 pl-4"> */}
                           {/* <i className="bx bxs-star"></i>
