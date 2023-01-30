@@ -121,7 +121,7 @@ const WishlistHandler=()=>{
                     <a href="contact.html">Newsletter</a>
                   </li>
                   <li>
-                    <a href="purchase-guide.html">Purchasing Policy</a>
+                    <Link to="/returnRefund">Purchasing Policy</Link>
                   </li>
                 </ul>
               </div>

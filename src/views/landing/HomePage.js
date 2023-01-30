@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import "./homepage.css";
@@ -85,6 +85,28 @@ const breakPoints = [
       });
     });
   }, []);
+
+  let carouselRef = useRef(null);
+
+  const onNextStart = (currentItem, nextItem) => {
+    if (currentItem.index === nextItem.index) {
+    carouselRef.current.goTo(0);
+    }
+  }
+  
+    const onPrevStart = (currentItem, nextItem) => {
+      if (currentItem.index === nextItem.index) {
+      carouselRef.current.goTo(data.otherImage.length);
+      }
+      };
+
+      const Loop = (currentItem) => {
+        if (currentItem.index == data.otherImage.length - 1) {
+        setTimeout(() => {
+        carouselRef.current.goTo(0);
+        }, 1000);
+        }
+        };
 
   const GetWishlist = async () => {
     let id;
@@ -509,7 +531,7 @@ const breakPoints = [
                     themes for everyone to use. Other themes can be found here.
                   </p>
 
-                  <div className="login-div2 clearfix">
+                  <div className="login-div2 clearfix mb-5">
                     <input
                       type="text"
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
@@ -717,7 +739,17 @@ const breakPoints = [
           </h1>
           <div className="container m-auto">
             <div className="row ">
-              <Carousel breakPoints={breakPoints}>       
+              <Carousel // breakPoints={breakPoints} 
+              enableAutoPlay
+              autoPlaySpeed={1500} 
+              itemsToShow={4}
+              onPrevStart={onPrevStart}
+              onNextStart={onNextStart}
+              // onChange={Loop}
+              ref={carouselRef}
+              disableArrowsOnEnd={false}
+              // itemPadding={[0, 4]}
+              >       
               { categories && categories.map((item, index) => {                 
                 if(item.featuredCategories == "Featured Categories"){
                 return(  
@@ -1222,8 +1254,16 @@ const breakPoints = [
               <span className="products-color">Selling Brands</span>
             </div>
               <Carousel
-               breakPoints={breakPoints}
-               enableAutoPlay={true}
+               // breakPoints={breakPoints} 
+              enableAutoPlay
+              autoPlaySpeed={1500} 
+              itemsToShow={4}
+              onPrevStart={onPrevStart}
+              onNextStart={onNextStart}
+              // onChange={Loop}
+              ref={carouselRef}
+              disableArrowsOnEnd={false}
+              // itemPadding={[0, 4]}
                >
             <div className="row align-items-center">
               {Manufactureres &&

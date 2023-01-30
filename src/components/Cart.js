@@ -133,7 +133,7 @@ const Cart = () => {
         </span>
       </div>
       <section className="cart-area ptb-70 pc-cart">
-        <div className="container">
+        <div className="container m-auto">
           <form>
             <div className="cart-buttons">
               <div className="row align-items-center">
