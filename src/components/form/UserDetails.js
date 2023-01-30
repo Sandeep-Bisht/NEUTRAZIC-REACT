@@ -18,7 +18,11 @@ const UserDetails=(props)=>{
     var year = dateObj.getUTCFullYear();
 
     var    newdate = day + "/" + month + "/" + year;
-    console.log(newdate, "date")
+    console.log(cart, "date")
+
+    var total = 0;
+  var actualtotal = 0;
+  var total1 = 0;
 
     useEffect(() => {
        
@@ -105,9 +109,8 @@ const UserDetails=(props)=>{
         
     } 
     const CartById = async () => {
-      if(!Userdata==[]){   
-        
-          await fetch(`${baseUrl}/api/cart/cart_by_id`, {
+      if (Userdata) {
+        await fetch(`${baseUrl}/api/cart/cart_by_id`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -118,19 +121,21 @@ const UserDetails=(props)=>{
           }),
         })
           .then((res) => res.json())
-          .then(async (res) => {
-            console.log(res, "hello")
-             await Setdata({...data,order:JSON.stringify(res.data[0].order)});
-             
-            await  Set_id(res.data[0]._id)
-            
-            })
+          .then(async (data) => {
+            await localStorage.setItem("Usercartdata", JSON.stringify(data));
+            setCart(data.data[0].order);
+            // setCartItems(data.data[0].order.length);
+            // let cartItems = data.data[0].order.length;
+            // console.log("cartitems on delete", cartItems)
+            // dispatch(ACTIONS.getCartItem(cartItems));
+            Set_id(data.data[0]._id);
+          })
           .catch((err) => {
             console.log(err, "error");
           });
-        }
-      };   
-
+      }
+    }; 
+      
 
       const DeleteCart =async () => {
           await fetch(`${baseUrl}/api/cart/delete_cart_by_id`, {
@@ -155,9 +160,13 @@ const UserDetails=(props)=>{
     return(
         <>
         <Header1/>
-        <div id="body-pd">
-        <form>
-            <div className="container mt-5 mb-5">
+        <div  id="__next">
+          <section>
+          <div className='container-fluid'>
+            <div className='row'>
+              <div className='col-8'>
+              <form>
+            <div className="container-fluid mt-5 mb-5">
                 <div className="row">
                     <div className="col-12">
                         <div className="card p-4 m-2">
@@ -200,15 +209,15 @@ const UserDetails=(props)=>{
                                     <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
                                     <label for="html">For Other</label>
                                 </div>
-                                {
+                                {/* {
                            cart.map((el,ind1)=>(
                              total+=( el.mrp - (el.mrp * el.discountprice / 100) )* el.quantity,
                             
                                 <>
-                                    <span onChange={(e)=>{Setdata({...data,totalamount:e.target.value})}}>{total}hii</span>
+                                    <span onChange={(e)=>{Setdata({...data,totalamount:e.target.value})}}>{total}</span>
                                 </>
                             
-                           ))}
+                           ))} */}
                                     
                                 <div className="col-12 p-1"> 
                                     <button className="btn btn-primary"onClick={(e)=>{submitData(e)}}>Pay now</button>
@@ -218,6 +227,48 @@ const UserDetails=(props)=>{
                 </div>
             </div>
         </form>
+              </div>
+              
+              <div className='col-4'>
+                {
+                 
+              cart.map((el, ind1) => {
+        total = el.singleprice * el.quantity;
+        total1 = total1 + (el.singleprice * el.quantity);
+        localStorage.setItem("Subtotal", total1);
+        actualtotal += el.mrp * el.quantity;
+        localStorage.setItem("ActualSubtotal", total1);
+        return(
+          <>
+           
+          <div className="  mb-5">
+                  <div className="cart-totals">
+                    <h3>Cart Totals</h3>
+                    <ul>
+                      <li>
+                        Subtotal <span>₹{actualtotal}</span>
+                      </li>
+                      <li>
+                        Discount <span>-₹{actualtotal - total1}</span>
+                      </li>
+
+                      {/* <li>Shipping <span>$30.00</span></li> */}
+                      <li>
+                        Total Amount <span>₹{total1}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
+          </>
+        )
+              
+        
+        })}   
+        </div>
+            </div>
+          </div>
+          </section>
     </div>
     <Baseline />
    <Footer />

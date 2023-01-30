@@ -58,6 +58,7 @@ import ReturnRefund from "../components/ReturnRefund";
 import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
 import OrderSuccess from "../components/OrderSuccess";
+import PackedOrder from "../components/Admin/PackedOrder";
 
 var Userdata = "";
 const Root = (props) => {
@@ -142,7 +143,8 @@ const Root = (props) => {
             <Route exact path="/Orders" component={Orders} />
             <Route exact path="/NewOrder/:status" component={NewOrder} />
 
-            <Route exact path="/InProgressOrder" component={InProgressOrder} />
+            <Route exact path="/InProgressOrder/:status" component={InProgressOrder} />
+            <Route exact path="/InProgressOrder/:status" component={PackedOrder} />
 
             <Route exact path="/DeliveredOrder" component={DeliveredOrder} />
             <Route exact path="/Roles" component={Roles} />

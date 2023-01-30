@@ -24,7 +24,7 @@ import $ from "jquery";
 var Userdata = "";
 var CartDataWoLogin = [];
 let tranding = 0;
-let skincare = 0;
+let weightManagement = 0;
 const HomePage = () => {
 
   let dispatch = useDispatch();
@@ -74,7 +74,7 @@ const breakPoints = [
     GetCategory();
     GetManufacturer();
     tranding = 0;
-    skincare = 0;
+    weightManagement = 0;
     $(document).ready(function() {
       //    $('.icon-wishlist').on('click', function(){
       //       $(this).toggleClass('in-wishlist');
@@ -514,7 +514,7 @@ const breakPoints = [
                     themes for everyone to use. Other themes can be found here.
                   </p>
 
-                  <div className="login-div2 clearfix mb-5">
+                  <div className="login-div2 clearfix">
                     <input
                       type="text"
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
@@ -557,10 +557,7 @@ const breakPoints = [
           <div className="container m-auto">
             <div className="row">
               {data.map((el, ind) => {
-                if (
-                  (tranding < 8 && el.type == "Tranding Product") ||
-                  el.type == "Trending Product"
-                ) {
+                if (el.type == "Trending Product" && tranding < 6) {
                   tranding = tranding + 1;
                   return (
                     <>
@@ -780,7 +777,7 @@ const breakPoints = [
           <div className="container m-auto py-4">
             <div className="row ">
               {data.map((el, index) => {
-                if (index >= 0) {
+                if (index >= 0 && el.type == "") {
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
@@ -940,8 +937,8 @@ const breakPoints = [
                 //   el.name == "UDC II" ||
                 //   el.subcategory == "6133469ff51d5a1242de049a"
                 // ) {
-                if (i > 0 && el.category.name === "Weight Management") {
-                  skincare = skincare + 1;
+                if (i > 0 && el.category.name === "Weight Management" && weightManagement < 6) {
+                  weightManagement = weightManagement + 1;
                   return (
                     <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
@@ -1096,7 +1093,10 @@ const breakPoints = [
             <div className="trendign-head">
               <span className="products-color">Selling Brands</span>
             </div>
-              <Carousel breakPoints={breakPoints}>
+              <Carousel
+               breakPoints={breakPoints}
+               enableAutoPlay={true}
+               >
             <div className="row align-items-center">
               {Manufactureres &&
                 Manufactureres.length > 0 &&

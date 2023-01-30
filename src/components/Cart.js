@@ -53,7 +53,6 @@ const Cart = () => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          console.log(data + "see");
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
           setCart(data.data[0].order);
           setCartItems(data.data[0].order.length);

@@ -330,7 +330,7 @@ const ProductByManufacturer = (props) => {
         {/* trending section  */}
 
         <section className="trending-section mt-4 mb-4">
-          <div className="container h-100">
+          <div className="container m-auto h-100">
             <div className="row h-100">
               <div className="col-12 p-0">
                 <div className="align-items-center position-relative h-100 d-flex text-center w-100 ">

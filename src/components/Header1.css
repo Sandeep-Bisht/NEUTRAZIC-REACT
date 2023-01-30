@@ -571,14 +571,18 @@ h3 .read-more-button
 
 .dropdown .btn-sm{
     padding: 0px !important;
-    font-size: 10px !important;
+    font-size: 16px !important;
     position: relative;
-    bottom: 11px;
+    bottom: 0;
     letter-spacing: 0.25px;
     font-family: 'Roboto', sans-serif;
     outline: 0;
     box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
-
+    text-transform: capitalize;
+}
+.login-div
+{
+    justify-content: end;
 }
 /* logout css ul */
 
