@@ -1137,7 +1137,7 @@ const onNextStart = (currentItem, nextItem) => {
                   <div className="allproduct-price-div">
                   <div className="row">
                             <div className="col-6">
-                            <span className="new-price">
+                            <span className="new-price mr-4">
                               {/* ${" "}
                               {isNaN(
                                 item.inrMrp -

@@ -84,8 +84,14 @@ const WishList = ()=>{
     <Header1/>
     <div className="first-nav container-fluid"><span><Link to="/">Home</Link>/ Wishlist</span></div>
 
-      <div className="wishlist-container">
-         <div className="row">
+<section className='wishlist-page'>
+      <div className="container m-auto">
+         <div className='row mt-0'>
+            <div className='col-md-12'>
+               <h1 className='wishlist-header'>Your Wishlist</h1>
+            </div>
+         </div>
+         <div className="row mt-0">
          {wishlistData.length >0 ? 
             wishlistData.map((item,ind)=>(
                <div className="col-6">
@@ -97,7 +103,7 @@ const WishList = ()=>{
                </Link>
                </div>
                <div className='col-8 py-0'>
-               <h6>{item.name}</h6>
+               <h6 className='wishlist-heading2'>{item.name}</h6>
                <p className='word-wrapping'>{item.description}</p>
                <div className='buynow-details-btn-wrap'>
                <Link to={"/UserDetails/" + item.productId}>
@@ -122,6 +128,7 @@ const WishList = ()=>{
          </div>
          <ToastContainer/>
       </div>
+      </section>
       <Baseline />
       <Footer />
     </>);

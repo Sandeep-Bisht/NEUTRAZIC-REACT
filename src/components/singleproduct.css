@@ -570,7 +570,7 @@ color: #FFFFFF;
   .figure2 button{
 	font-size: 15px;
 	padding:5px 10px;
-	border: 2px solid #1b97ff;
+	border: 2px solid rgb(27 151 255 / 33%);
 	display:block;
 	text-align:center;
 	color:var(--optionalColor);
