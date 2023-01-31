@@ -239,9 +239,9 @@ const UserDetails=(props)=>{
         </form>
               </div>
               
-              <div className='col-4 mt-3'>
-           
-          <div className="  mb-5">
+              <div className='col-4'>
+           <div className='row'>
+          <div className="container-fluid mt-4">
                   <div className="cart-totals">
                     <h3>Cart Totals</h3>
                     <ul>
@@ -258,7 +258,8 @@ const UserDetails=(props)=>{
                       </li>
                     </ul>
                   </div>
-                </div>   
+                </div>  
+                </div> 
         </div>
             </div>
           </div>

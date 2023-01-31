@@ -185,7 +185,7 @@ a {
 }
 
 a:hover {
-	color: #0056b3;
+	color: #1b97ff;
 	text-decoration: underline
 }
 
@@ -9958,7 +9958,7 @@ a:hover {
 }
 
 a:hover {
-	color: var(--mainColor)
+	color: #1b97ff;
 }
 
 :focus {
@@ -12061,9 +12061,7 @@ textarea.form-control {
     align-items: center;
     display: flex;
 	justify-content: center;
-	border-top-left-radius: 7px;
-	border-bottom-left-radius: 7px;
-	border:0 !important;
+	border: 1px solid #c7c7c769;
 	padding: 15px;
 	background-color: #fff;
 	border-radius: 5px;
@@ -14195,19 +14193,18 @@ letter-spacing: 0.50px;
 
 
 .cart-totals {
-	background: var(--whiteColor);
 	max-width: 500px;
 	/* box-shadow: 0 2px 48px 0 rgba(0, 0, 0, .08); */
 	border-radius: 3px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid #c7c7c7;
+	border: 2px solid #c7c7c769;
 	margin-top: 22px;
 }
 
 .cart-totals h3 {
 	padding: 20px;
-	border-bottom: 1px solid #c7c7c7;
+	border-bottom: 1px solid #c7c7c769;
 	font-size: 25px;
 	font-family: 'Roboto', sans-serif;
 	color: #323131cf;
@@ -14243,7 +14240,7 @@ letter-spacing: 0.50px;
 
 .cart-totals ul li:last-child {
 	font-size: 20px;
-	border-top: 1px solid #c7c7c7;
+	border-top: 1px solid #c7c7c769;
 	color: #323131cf;
 	background-color: #f4f4f4;
 }
@@ -17944,7 +17941,7 @@ letter-spacing: 0.50px;
 	padding-left: 25px;
 	padding-right: 25px;
 	color: var(--optionalColor);
-    border: 2px solid #1b97ff;
+    border: 2px solid rgb(27 151 255 / 33%);
 	border-radius:0.25rem;
 	font-family: 'Roboto', sans-serif;
 	font-weight:500;
@@ -18871,7 +18868,7 @@ letter-spacing: 0.50px;
 	border-radius: 10px;
 	}
 	.nutracuetical-shop-now{
-		border: 2px solid #1b97ff;
+		border: 2px solid rgb(27 151 255 / 33%);
 		padding: 4px 20px;
 		color: var(--optionalColor);
 		letter-spacing: .5px;
@@ -18882,7 +18879,7 @@ letter-spacing: 0.50px;
 
 	.cosmetic-shop-now{
 		
-		border: 2px solid #1b97ff;
+		border: 2px solid rgb(27 151 255 / 33%);
 		padding: 4px 20px;
 		color: var(--optionalColor);
 		letter-spacing: .5px;
@@ -18912,7 +18909,6 @@ letter-spacing: 0.50px;
 		padding: 20px 0;
 		margin-bottom: 0;
 		font-size: 1rem;
-		text-align: justify;
 		min-height: 300px;
 	}
 	.cat-left-side
@@ -19062,6 +19058,16 @@ letter-spacing: 0.50px;
 	justify-content: center;
 	font-family: 'Roboto', sans-serif;
   }
+  .content figcaption{
+	font-size: 15px;
+    color: black;
+    line-height: 1.5;
+    height: 41px;
+    font-weight: 550;
+    text-overflow: ellipsis;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+  }
   div#columns img
   {
 	  height:250px;
@@ -19075,7 +19081,7 @@ letter-spacing: 0.50px;
   figure .button{
 	font-size: 15px;
 	padding:5px 10px;
-	border: 2px solid #1b97ff;
+	border: 2px solid rgb(27 151 255 / 33%);
 	display:block;
 	text-align:center;
 	color:var(--optionalColor);
@@ -19184,7 +19190,6 @@ ul
 	position: relative;
 	text-decoration: none;
 	display:inline-block;
-	
   }
   
   .wrapperbtn .btn::before {
@@ -19218,18 +19223,6 @@ ul
   
   /* Btn 10  */
   .wrapperbtn .btn10{
-	/* font-family: "proxima-nova", sans-serif;
-	font-weight: 800;
-    border-radius: 10px;
-    background-color: #1594FF;
-    color: #fff;
-    border: none;
-    padding: 6px 30px;
-    font-size: 16px;
-	overflow: hidden;
-	z-index: 10; */
-	
-    border: 3px solid red;
     padding: 8px 40px;
     color:  var(--optionalColor);
     letter-spacing: .5px;
@@ -19237,7 +19230,7 @@ ul
     font-size: 14px;
     font-weight: 400;
 	border-radius: 0.25rem;
-	border: 2px solid #1b97ff;
+	border: 2px solid rgb(27 151 255 / 33%);
   }
   
   
@@ -19778,7 +19771,7 @@ margin: 40px 8px 15px 0px;
 
 .btn-div .btn{
 	color: var(--optionalColor);
-    border: 2px solid #1b97ff;
+    border: 2px solid rgb(27 151 255 / 33%);
     padding: 8px 30px;
     letter-spacing: .5px;
     text-transform: capitalize;
