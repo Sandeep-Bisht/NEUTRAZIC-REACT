@@ -565,7 +565,9 @@ const Subcategories = (props) => {
                                           <Link
                                             to={"/SingleProduct/" + item._id}
                                           >
-                                            {item.name}
+                                            <ReadMoreReact
+                                           text={item.name}
+                                            />
                                           </Link>
                                           {/* </Link> */}
                                           {/* <div className="d-flex pb-2 pl-4">

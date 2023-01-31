@@ -726,7 +726,7 @@ const Header1 = (props) => {
                     </span> */}
                     <br />
                     <span
-                      className="Sp1 mt-5 pl-2"
+                      className="Sp1"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       style={{ cursor: "pointer" }}
