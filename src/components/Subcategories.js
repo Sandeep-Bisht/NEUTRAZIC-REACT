@@ -83,7 +83,7 @@ const Subcategories = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        setCategories(data.data._id);
+        setCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -356,6 +356,7 @@ const Subcategories = (props) => {
   //     item[i].
   //   }
   // }
+  console.log(categories,"This is category")
   return (
     <>
       <Header1 />
@@ -399,8 +400,13 @@ const Subcategories = (props) => {
                     <div className="row h-100">
                       <div className="col-12 p-0">
                         <div className="align-items-center position-relative h-100 d-flex w-100 ">
-                          <h3 className="trendign-head">SubCategory</h3>
-                          <h3 className="trendign-head pl-2">Products</h3>
+                          { categories.map((item,ind)=>{
+                            if(item._id == props.match.params._id){
+                              console.log(item,"Category item");
+                              return(
+                          <h3 className="trendign-head">{item.name}</h3>
+                              )
+                        }})}
                         </div>
                       </div>
                     </div>
