@@ -1110,7 +1110,7 @@ const onNextStart = (currentItem, nextItem) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div className="columns_5">
+        <div id="columns1" className="columns_5">
           {AllProduct.map((item, index) => {
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
@@ -1118,7 +1118,7 @@ const onNextStart = (currentItem, nextItem) => {
 <figure className="figure2">
                   <Link to={"/SingleProduct/" + item._id}
                           className="product-image-link">
-                  <div className={`image hover-switch `}>
+                  <div>
                   <img
                               src={defaultImage}
                               alt=""

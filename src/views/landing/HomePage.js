@@ -738,11 +738,11 @@ const breakPoints = [
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
-            <div className="row ">
+            <div className="row mt-0 featured-products">
               <Carousel // breakPoints={breakPoints} 
               enableAutoPlay
               autoPlaySpeed={1500} 
-              itemsToShow={4}
+              itemsToShow={2}
               onPrevStart={onPrevStart}
               onNextStart={onNextStart}
               // onChange={Loop}
@@ -1249,15 +1249,16 @@ const breakPoints = [
         </section>
 
         <div className="brands-area">
-          <div className="container-fluid">
+          <div className="container m-auto">
             <div className="trendign-head">
               <span className="products-color">Selling Brands</span>
             </div>
+            <div className="row image-group">
               <Carousel
                // breakPoints={breakPoints} 
-              enableAutoPlay
+              disableAutoPlay
               autoPlaySpeed={1500} 
-              itemsToShow={4}
+              itemsToShow={5}
               onPrevStart={onPrevStart}
               onNextStart={onNextStart}
               // onChange={Loop}
@@ -1265,17 +1266,13 @@ const breakPoints = [
               disableArrowsOnEnd={false}
               // itemPadding={[0, 4]}
                >
-            <div className="row align-items-center">
+            
               {Manufactureres &&
                 Manufactureres.length > 0 &&
                 Manufactureres.map((el, index) => (
                   <>
-                  <div className="col-lg-2 col-sm-4 col-md-2 col-6" key={index}>
-                    <Link to={"/ProductByManufacturer/" + el.name}>
-                      <div className="single-brands-item">
-                        <a className="d-block" href="#">
-                          {" "}
-                          <img
+                  <div className="col" key={index}>
+                          <img className="img-slides"
                             src={
                               el.image && el.image.length > 0
                                 ? 
@@ -1283,14 +1280,11 @@ const breakPoints = [
                                 : ""
                             }
                           />
-                        </a>
-                      </div>
-                    </Link>
                   </div>
                   </>
                 ))}
-            </div>
                   </Carousel>
+                  </div>
           </div>
         </div>
         <section className="mobile-app">

@@ -254,7 +254,7 @@ const UserDetails=(props)=>{
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total Amount <span>₹{Discount}</span>
+                        Payable Amount <span>₹{Discount}</span>
                       </li>
                     </ul>
                   </div>

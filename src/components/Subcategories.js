@@ -363,25 +363,25 @@ const Subcategories = (props) => {
       <div id="__next">
         {/* trending section  */}
 
-        <section className=" pb-40">
+        <section>
           <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-2 ps-0">
+            <div className="row mt-0">
+              <div className="col-md-2 px-0">
                 <div className="back-ground-subcategory-sidebar">
                 <div id="wrapper">
                   <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                      <li class="sidebar-brand">
-                        <h4 className="mt-4">Subcategories</h4>
+                    <ul className="sidebar-nav">
+                      <li>
+                        <h1 className="browse-categories-header">Subcategories</h1>
                       </li>
-                      <li className="box mt-3" onClick={()=>GetallData(data)} style={{ cursor: "pointer" }}><p className="active" id="List-item" style={{ cursor: "pointer" }}>All SubCategories</p></li>
+                      <li className="box" onClick={()=>GetallData(data)} style={{ cursor: "pointer" }}><p className="active" id="List-item" style={{ cursor: "pointer" }}>All SubCategories</p></li>
                       {getSubCategories.map((item) => {
                         if(item.category == props.match.params._id)
                          {
                           return (
                             <>
                             
-                              <li className="mt-3 box">
+                              <li className="box">
                                 <p id="List-item" onClick={()=>{GetSingleSubCategory(item._id)}}  style={{ cursor: "pointer" }}>{item.name}</p>
                               </li>
                             </>
@@ -394,18 +394,9 @@ const Subcategories = (props) => {
                 </div>
               </div>
               <div className="col-10">
-                <section className="trending-section  mb-5">
-                  <div className="container-fluid h-100">
-                    <div className="row h-100">
-                      <div className="col-12 p-0">
-                        <div className="align-items-center position-relative h-100 d-flex w-100 ">
-                          <h3 className="trendign-head">SubCategory</h3>
-                          <h3 className="trendign-head pl-2">Products</h3>
+                        <div className="browse-categories-sub-heading">
+                          <h2>Subcategory Products</h2>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
                 <section className="products-area pb-40">
                   <div className="container-fluid">
                     <div className="row">
