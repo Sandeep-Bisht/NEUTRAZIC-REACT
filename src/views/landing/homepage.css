@@ -19062,6 +19062,16 @@ letter-spacing: 0.50px;
 	justify-content: center;
 	font-family: 'Roboto', sans-serif;
   }
+  .content figcaption{
+	font-size: 15px;
+    color: black;
+    line-height: 1.5;
+    height: 41px;
+    font-weight: 550;
+    text-overflow: ellipsis;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+  }
   div#columns img
   {
 	  height:250px;

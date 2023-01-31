@@ -612,7 +612,7 @@ const breakPoints = [
                                 <div className="tranding product-image-content">
                                   <div className="content product-content">
                                     <Link to={"/SingleProduct/" + el._id}>
-                                      <ReadMoreReact text={el.name} />
+                                      <figcaption>{el.name}</figcaption>
                                     </Link>
                                     <div className="price-div">
                                       <span className="new-price">
@@ -842,7 +842,7 @@ const breakPoints = [
                               <div className="tranding product-image-content">
                                 <div className="content product-content">
                                   <Link to={"/SingleProduct/" + el._id}>
-                                    <ReadMoreReact text={el.name} />
+                                  <figcaption>{el.name}</figcaption>
                                   </Link>
                                   <div className="price-div">
                                     <span className="new-price">
@@ -999,7 +999,7 @@ const breakPoints = [
                             <div className="tranding product-image-content">
                               <div className="content product-content">
                                 <Link to={"/SingleProduct/" + el._id}>
-                                  <ReadMoreReact text={el.name} />
+                                <figcaption>{el.name}</figcaption>
                                 </Link>
                                 <div className="price-div">
                                   <i className="fa fa-inr"></i>

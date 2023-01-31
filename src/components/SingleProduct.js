@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import "../components/singleproduct.css";
+import "../views/landing/homepage.css";
 import { useHistory } from "react-router-dom";
 import StarsRating from "stars-rating";
 import ReactImageZoom from "react-image-zoom";
@@ -28,7 +29,7 @@ const SingleProduct = (props) => {
   let dispatch = useDispatch();
   let prodId = props.match.params.id;
   let related = 0;
-  let careouselImage =0;
+  let careouselImage = 0;
   const [AllProduct, setAllProduct] = useState([]);
   const [data, setData] = useState([]);
   const [ProductCategory, setProductCategory] = useState([]);
@@ -44,36 +45,37 @@ const SingleProduct = (props) => {
   //let ImageData ;
 
   const breakPoints = [
-    { width : 1, itemsToShow : 1},
-    { width : 550, itemsToShow : 2},
-    { width : 768, itemsToShow : 4},
-    { width : 1200, itemToShow : 4},
-    ];
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2 },
+    { width: 768, itemsToShow: 4 },
+    { width: 1200, itemToShow: 4 },
+  ];
 
-//     const carouselRef = React.useRef(null);
-// 
-// };
-let carouselRef = useRef(null);
+  //     const carouselRef = React.useRef(null);
+  // 
+  // };
 
-const onNextStart = (currentItem, nextItem) => {
-  if (currentItem.index === nextItem.index) {
-  carouselRef.current.goTo(0);
+  let carouselRef = useRef(null);
+
+  const onNextStart = (currentItem, nextItem) => {
+    if (currentItem.index === nextItem.index) {
+      carouselRef.current.goTo(0);
+    }
   }
-}
 
   const onPrevStart = (currentItem, nextItem) => {
     if (currentItem.index === nextItem.index) {
-    carouselRef.current.goTo(data.otherImage.length);
+      carouselRef.current.goTo(data.otherImage.length);
     }
-    };
+  };
 
-    const Loop = (currentItem) => {
-      if (currentItem.index == data.otherImage.length - 1) {
+  const Loop = (currentItem) => {
+    if (currentItem.index == data.otherImage.length - 1) {
       setTimeout(() => {
-      carouselRef.current.goTo(0);
+        carouselRef.current.goTo(0);
       }, 1000);
-      }
-      };
+    }
+  };
 
   useEffect(() => {
     related = 0;
@@ -200,6 +202,10 @@ const onNextStart = (currentItem, nextItem) => {
       });
   };
 
+  // useEffect(()=>{
+  //   Getsingledata();
+  // },[])
+
   const Getsingledata = async () => {
     await fetch(`${baseUrl}/api/product/product_by_id`, {
       method: "POST",
@@ -248,7 +254,7 @@ const onNextStart = (currentItem, nextItem) => {
       .catch((err) => {
         console.log(err, "error");
       });
-      window.scroll(0,0);
+    window.scroll(0, 0);
   };
 
   const CartById = async () => {
@@ -628,9 +634,9 @@ const onNextStart = (currentItem, nextItem) => {
       }
     }
   }
-  
 
-  
+
+
 
   return (
     <>
@@ -659,31 +665,31 @@ const onNextStart = (currentItem, nextItem) => {
 
             {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
-              <Carousel 
-             // breakPoints={breakPoints} 
-              enableAutoPlay
-              autoPlaySpeed={1500} 
-              itemsToShow={4}
-              onPrevStart={onPrevStart}
-              onNextStart={onNextStart}
-              // onChange={Loop}
-              ref={carouselRef}
-              disableArrowsOnEnd={false}
+              <Carousel
+                // breakPoints={breakPoints} 
+                enableAutoPlay
+                autoPlaySpeed={1500}
+                itemsToShow={4}
+                onPrevStart={onPrevStart}
+                onNextStart={onNextStart}
+                // onChange={Loop}
+                ref={carouselRef}
+                disableArrowsOnEnd={false}
               // itemPadding={[0, 4]}
               >
-            {data.otherImage && data.otherImage.length > 0 ?            
-            data.otherImage.map((item,ind)=>(
-              <div className="col" key={ind}>              
-                <img
-                className="img-slide"
-                  src={`${baseUrl}/` + item.path}
-                  onMouseOver = {()=> ImageHandler(item,ind)}
-                />
-              
-            </div>
-              )) : <img src={require("../../src/Images/products/facewash1.png")} /> 
-            }
-            </Carousel>
+                {data.otherImage && data.otherImage.length > 0 ?
+                  data.otherImage.map((item, ind) => (
+                    <div className="col" key={ind}>
+                      <img
+                        className="img-slide"
+                        src={`${baseUrl}/` + item.path}
+                        onMouseOver={() => ImageHandler(item, ind)}
+                      />
+
+                    </div>
+                  )) : <img src={require("../../src/Images/products/facewash1.png")} />
+                }
+              </Carousel>
             </div>
 
             {/* phone single page caresouel */}
@@ -800,7 +806,7 @@ const onNextStart = (currentItem, nextItem) => {
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
-                  Category: <span> {categoryname}</span>
+                  Category: <span > {categoryname}</span>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
@@ -1110,137 +1116,117 @@ const onNextStart = (currentItem, nextItem) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div id="columns1" className="columns_5">
-          {AllProduct.map((item, index) => {
-            if (related < 4 && ProductCategory == item.category.name) {
-              related = related + 1;
-              return (
-<figure className="figure2">
-                  <Link to={"/SingleProduct/" + item._id}
-                          className="product-image-link">
-                  <div>
-                  <img
-                              src={defaultImage}
-                              alt=""
-                            />
-                  {/* <img
-                              src={
-                                `${baseUrl}/` + item.image[0].path
-                              }
-                              onClick={()=>relatedImageHandler(item._id)}
-                              alt=""
-                              style={{ position: "absolute", left: "0" }}
-                            /> */}
-                  </div>
-                  </Link>
-                  <figcaption><Link to={"/SingleProduct/" + item._id}>{item.name}</Link></figcaption>
-                  <div className="allproduct-price-div">
-                  <div className="row">
-                            <div className="col-6">
-                            <span className="new-price">
-                              {/* ${" "}
-                              {isNaN(
-                                item.inrMrp -
-                                  (item.inrMrp * item.inrDiscount) / 100
-                              )
-                                ? 0
-                                : item.inrMrp -
-                                  (item.inrMrp * item.inrDiscount) / 100} */}
-                              <i className="fa fa-inr"></i>{item.inrDiscount}
-                            </span>
-                            {/* <del className="new-price ml-1">{item.inrMrp}</del> */}
+        <div id="columns" className="columns_5 d-flex">
+        {AllProduct.map((el, ind1) => {
+                    if (ind1<5) {
+                      return (
+                        <figure className="figure1">
+                          <Link Link to={"/SingleProduct/" + el._id}>
+                            <div >
+                              {/* {Categorydetails.image!==undefined? */}
+                              <img src={`${baseUrl}/` + el.image[0].path}
+                              onClick={()=>relatedImageHandler(el._id)}
+                              alt=""/>
+                              <figcaption onClick={()=>relatedImageHandler(el._id)}>{el.name}</figcaption>
                             </div>
-                            {Userdata ? (
-                              <>
-                              <div className="col-6">
-                              <i
-                                className={`bx bxs-heart ml-3  ${checkWishlistItem(item._id)}`}
-                                id={item._id}
-                                onClick={() => {
-                                  AddtoWishlist(
-                                    item._id,
-                                    item.name,
-                                    quantity,
-                                    item.inrMrp,
-                                    item.inrDiscount,
-                                    item.description,
-                                    item.category,
-                                    item.manufacturer.name,
-                                    item.image
-                                  );
-                                }}
-                              >Wishlist</i>
-                              </div>
-                              </>
-                            ) : (
-                              <>
+                            
+                          </Link>
+                          {/* :null} */}
 
-                                <i
-                                  className="bx bxs-heart ml-3 pc-heart"
-                                  data-bs-toggle="modal"
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                ></i>
-                                <Link to="/Register">
-                                  <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                </Link>
-                              </>
-                            )}
-</div>
-                  </div>
-                  {Userdata ? (
-                              <button
-                                className="btn"
-                                type="button"
-                                onClick={() => {
-                                  {
-                                    Userdata !== null
-                                      ? cartfunction(
-                                        item._id,
-                                        item.name,
-                                        quantity,
-                                        item.inrMrp,
-                                        item.inrDiscount,
-                                        item.discount,
-                                        item.description,
-                                        item.category,
-                                        item.manufacturer.name,
-                                        item.image[0].path
-                                      )
-                                      : addToCartWithoutRegistration(
-                                        item._id,
-                                        item.name,
-                                        quantity,
-                                        item.inrMrp,
-                                        item.inrDiscount,
-                                        item.discount,
-                                        item.description,
-                                        item.category,
-                                        item.manufacturer.name,
-                                        item.image[0].path
-                                      );
-                                  }
-                                }}
-                              >Add To Cart</button>
-                            ) : (
-                              <i
-                                className="bx bx-cart mr-1"
-                                data-bs-toggle="modal"
-                                data-bs-target={
-                                  Userdata == null
-                                    ? "#exampleModal"
-                                    : null
-                                }
-                              >
-                                <Link to="/Register"></Link>
-                              </i>
-                            )}
-                  
-                </figure>
-              );
-            }
-          })}
+                          <div className="allproduct-price-div">
+                            {/* <div className="d-flex justify-content-center">
+                      <StarsRating
+                        count={5}
+                        // onChange={ratingChanged}
+                        size={20}
+                        color2={"#ffd700"}
+                        value={4}
+                      />
+                    </div> */}
+                            <div className="row">
+                              {/* <div className="col-4 ">
+                              <Link to={"/SingleProduct/" + el._id}>  
+                               <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
+                               </Link> 
+                              </div> */}
+                              <div className="col-6">
+                                <span className="price">
+                                  {" "}
+                                  <i className="fa fa-inr"></i>{el.inrDiscount}
+                                  {/* $
+                      {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
+                        ? 0
+                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
+                                </span>
+                              </div>
+                              <div className="col-6 text-end">
+                                <p
+                                  className={`text-nowrap wishlist`}
+
+                                >
+                                  {Userdata ? (
+                                    <i
+                                      id={el._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        el._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null ? "#exampleModal" : null
+                                      }
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                                {/* <div className="icon-wishlist"></div> */}
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            className="button btn"
+                            onClick={() => {
+                              cartfunction
+                                (
+                                  el._id,
+                                  el.name,
+                                  quantity,
+                                  el.inrMrp,
+                                  el.inrDiscount,
+                                  el.discount,
+                                  el.description,
+                                  el.category,
+                                  el.manufacturer.name,
+                                  el.image[0].path
+                                )
+                            }}
+                            data-bs-toggle={Userdata == null ? "modal" : null}
+                            data-bs-target={Userdata == null ? "#exampleModal" : null}
+                          >
+                            Add to Cart
+                          </button>
+
+                        </figure>
+
+                      );
+                    }
+                  })}
         </div>
       </div>
 

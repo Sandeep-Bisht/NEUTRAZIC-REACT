@@ -155,7 +155,6 @@ const Cart = () => {
                         </thead>
                         <tbody>
                           {cart.map((el, ind1) => {
-                            console.log(el,"imageeeeeeeee");
                             // total = total + (el.singleprice * el.quantity) ;
                             // (el.mrp - (el.mrp * el.discountprice) / 100) *
                             // el.quantity;
@@ -196,9 +195,9 @@ const Cart = () => {
                                 <td className="product-price">
                                   <div className="amount">
                                     
-                                  {/* <span className="new-price ml-1 fa fa-inr">
+                                  <span className="unit-amount fa fa-inr">
                                     <del>{el.mrp}</del>
-                                    </span> */}
+                                    </span>
                                     <span className="unit-amount fa fa-inr">
                                       {
                                         el.singleprice
