@@ -68,8 +68,6 @@
 }
 
 
-
-
 .login-div1
 {
     
@@ -301,6 +299,9 @@ color:#1e144f;
 .show {
     width: 100% !important;
 }
+.user-dropdown-btn.show{
+    width: auto !important;
+}
 }
 .logiRegisterContentDiv{
     padding-left: 50px;
@@ -431,8 +432,9 @@ color:#1e144f;
 }
 .icons1
 {
- padding-left:15px;
- max-width: 17%;
+ width: 60%;
+ height: 60px;
+ object-fit: contain;
 }
 
 .Home-navbar ul li{
@@ -571,14 +573,22 @@ h3 .read-more-button
 
 .dropdown .btn-sm{
     padding: 0px !important;
-    font-size: 10px !important;
+    font-size: 16px !important;
     position: relative;
-    bottom: 11px;
+    bottom: 0;
     letter-spacing: 0.25px;
     font-family: 'Roboto', sans-serif;
     outline: 0;
     box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
-
+    text-transform: capitalize;
+}
+.dropdown .btn-sm:hover
+{
+    color: #1b97ff;
+}
+.login-div
+{
+    justify-content: end;
 }
 /* logout css ul */
 
@@ -666,16 +676,16 @@ h3 .read-more-button
 
 .sidebar-nav {
     position: absolute;
-    top: 0;
-    width: 227px;
+    top: 30px;
+    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
+    line-height: 3;
+    padding-left: 20px;
 }
 
 .sidebar-nav li a {
@@ -937,7 +947,7 @@ body {
 
 
 .user-icon{
-    font-size: 2rem;
+    font-size: 28px;
     display: block;
 }
 

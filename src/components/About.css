@@ -1,0 +1,46 @@
+.about-section-2-header h2
+{
+    color: #000;
+    text-align: center !important;
+}
+.our-team-left-text h3
+{
+    color: #000;
+}
+.our-team-left-text .login-btn
+{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    background: #1b97ff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+    cursor: pointer;
+    letter-spacing: 0.25px;
+}
+.about-left-image, .about-right-text
+{
+    margin-top: 50px;
+}
+.about-section-2-header
+{
+    margin-top: 50px;
+}
+.our-team-left-text, .about-section-2-image
+{
+    margin-top: 50px;
+}
+.our-vision-left-image, .our-vision-right-text
+{
+    margin-top: 50px;
+}
+.easy-payment-right-image, .easy-payment-left-text
+{
+    margin-top: 50px;
+}
+.about-common-heading
+{
+    text-decoration: underline;
+}
