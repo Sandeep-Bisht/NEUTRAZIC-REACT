@@ -8,20 +8,20 @@ import { BiCategory } from "react-icons/bi";
 import { BsListNested } from "react-icons/bs";
 import { GiBoxUnpacking } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
-import {FaBoxOpen} from 'react-icons/fa';
-import {FaCartPlus} from 'react-icons/fa';
-import {GrInProgress} from 'react-icons/gr';
-import {BsBox} from 'react-icons/bs';
-import {FaShippingFast} from 'react-icons/fa';
-import {BsCartXFill} from 'react-icons/bs';
-import {MdRealEstateAgent} from 'react-icons/md';
-import {GrConfigure} from 'react-icons/gr';
-import {RiUserSettingsLine} from 'react-icons/ri';
-import {AiOutlineUser} from 'react-icons/ai';
-import { ToastContainer,toast } from "react-toastify";
+import { FaBoxOpen } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
+import { GrInProgress } from "react-icons/gr";
+import { BsBox } from "react-icons/bs";
+import { FaShippingFast } from "react-icons/fa";
+import { BsCartXFill } from "react-icons/bs";
+import { MdRealEstateAgent } from "react-icons/md";
+import { GrConfigure } from "react-icons/gr";
+import { RiUserSettingsLine } from "react-icons/ri";
+import { AiOutlineUser } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
 
 import $ from "jquery";
-var Userdata = '';
+var Userdata = "";
 
 const Sidemenu = () => {
   const SidebarMenu = () => {
@@ -72,12 +72,11 @@ const Sidemenu = () => {
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
-    toast.success("Logout Successfully",{
-      position:"bottom-right",
-      autoClose:1000,
+    toast.success("Logout Successfully", {
+      position: "bottom-right",
+      autoClose: 1000,
     });
     window.location.replace("/");
-    
   };
 
   return (
@@ -298,24 +297,48 @@ const Sidemenu = () => {
               <div className="dashboard-accordion-body">
                 <ul className="Configration-List">
                   <Link to={"/NewOrder/" + "Pending"}>
-                    <li> <FaCartPlus className="configuration-icons-wrap"/>New Orders</li>
+                    <li>
+                      {" "}
+                      <FaCartPlus className="configuration-icons-wrap" />
+                      New Orders
+                    </li>
                   </Link>
                   <Link to={"/InProgressOrder/" + "In Progress"}>
                     {" "}
-                    <li> <GrInProgress className="configuration-icons-wrap"/>In Progress</li>
+                    <li>
+                      {" "}
+                      <GrInProgress className="configuration-icons-wrap" />
+                      In Progress
+                    </li>
                   </Link>
                   <Link to={"/InProgressOrder/" + "Packed"}>
-                    <li> <BsBox className='configuration-icons-wrap'/>Packed</li>
+                    <li>
+                      {" "}
+                      <BsBox className="configuration-icons-wrap" />
+                      Packed
+                    </li>
                   </Link>
                   <Link to={"/InProgressOrder/" + "Shipped"}>
-                    <li> <FaShippingFast className='configuration-icons-wrap'/>Shipped</li>
+                    <li>
+                      {" "}
+                      <FaShippingFast className="configuration-icons-wrap" />
+                      Shipped
+                    </li>
                   </Link>
                   <Link to={"/InProgressOrder/" + "Cancel"}>
-                    <li> <BsCartXFill className='configuration-icons-wrap'/>Cancel Order</li>
+                    <li>
+                      {" "}
+                      <BsCartXFill className="configuration-icons-wrap" />
+                      Cancel Order
+                    </li>
                   </Link>
                   <Link to={"/InProgressOrder/" + "Delivered"}>
                     {" "}
-                    <li> <MdRealEstateAgent className="configuration-icons-wrap"/>Delivered</li>
+                    <li>
+                      {" "}
+                      <MdRealEstateAgent className="configuration-icons-wrap" />
+                      Delivered
+                    </li>
                   </Link>
                 </ul>
               </div>
@@ -330,7 +353,7 @@ const Sidemenu = () => {
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingThree">
                       <div className="d-flex align-items-center justify-content-center div1">
-                        <GrConfigure className="nav__icon"/>
+                        <GrConfigure className="nav__icon" />
                         <button
                           className="accordion-button collapsed"
                           type="button"
@@ -354,39 +377,57 @@ const Sidemenu = () => {
                           Userdata.role == "superAdmin" ? (
                             <ul className="Configration-List">
                               <Link to="/Manufacturer">
-                                <li><GiFactory className="configuration-icons-wrap"/>Add Manufacturer</li>
+                                <li>
+                                  <GiFactory className="configuration-icons-wrap" />
+                                  Add Manufacturer
+                                </li>
                               </Link>
                               <Link to="/Category">
                                 {" "}
-                                <li><BiCategory className="configuration-icons-wrap"/>Add Category</li>{" "}
+                                <li>
+                                  <BiCategory className="configuration-icons-wrap" />
+                                  Add Category
+                                </li>{" "}
                               </Link>
                               <Link to="/SubCategoryCreation">
                                 {" "}
-                                <li><BsListNested className="configuration-icons-wrap"/>Add SubCategory</li>
+                                <li>
+                                  <BsListNested className="configuration-icons-wrap" />
+                                  Add SubCategory
+                                </li>
                               </Link>
                               <Link to="/Roles">
                                 {" "}
-                                <li><RiUserSettingsLine className="configuration-icons-wrap"/>User Roles</li>
+                                <li>
+                                  <RiUserSettingsLine className="configuration-icons-wrap" />
+                                  User Roles
+                                </li>
                               </Link>
                               <Link to="/AllManufactureDetails">
-                             
-                             <li className="nav-name"><GiFactory className="configuration-icons-wrap"/>All Manufacturer</li>
-                             </Link>
-                             <Link to="/AllCategoriesDetails">
-                             
-                             <li><BiCategory className="configuration-icons-wrap"/>All Category</li>
-                             </Link>
-                             <Link to="/AllSubCategoriesDetails">
-                              <li><BsListNested className="configuration-icons-wrap"/>All SubCategory</li>
-                             </Link>
-                             <Link to="/AllProductsDetails">
-                              <li><GiBoxUnpacking className="configuration-icons-wrap"/>All Products</li>
-                             </Link>
-                             <Link to="/AllUsers">
-                              <li><AiOutlineUser className="configuration-icons-wrap"/>AllUsers</li>
-                             </Link>
+                                <li className="nav-name">
+                                  <GiFactory className="configuration-icons-wrap" />
+                                  All Manufacturer
+                                </li>
+                              </Link>
+                              <Link to="/AllCategoriesDetails">
+                                <li>
+                                  <BiCategory className="configuration-icons-wrap" />
+                                  All Category
+                                </li>
+                              </Link>
+                              <Link to="/AllSubCategoriesDetails">
+                                <li>
+                                  <BsListNested className="configuration-icons-wrap" />
+                                  All SubCategory
+                                </li>
+                              </Link>
+                              <Link to="/AllProductsDetails">
+                                <li>
+                                  <GiBoxUnpacking className="configuration-icons-wrap" />
+                                  All Products
+                                </li>
+                              </Link>
                             </ul>
-                            
                           ) : (
                             <ul className="Configration-List">
                               <Link to="/Roles">
@@ -420,18 +461,19 @@ const Sidemenu = () => {
           <FaBoxOpen className="nav__icon" />
           <span className="nav__name">Products</span>
         </Link> */}
-        {/* <Link to="/AllProductsDetails" className="nav__link">
-          <GiBoxUnpacking className="nav__icon" />
-          <span className="nav__name">All Products</span>
-        </Link> */}
+        <Link to="/AllUsers" className="nav__link">
+          
+          <AiOutlineUser className="nav__icon" />
+          <span className="nav__name">IAM</span>
+        </Link>
         <div className="nav__link" onClick={() => logout()}>
           <BiLogOut className="nav__icon" />
           <span className="nav__name" style={{ cursor: "pointer" }}>
-          Log Out
+            Log Out
           </span>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };

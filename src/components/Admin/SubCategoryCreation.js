@@ -52,6 +52,7 @@ const SubCategoryCreation = (props) => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetSubCategory();
+    GetCategory();
     if(editableData){
       Setdata(editableData);
     }
