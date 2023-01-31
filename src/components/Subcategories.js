@@ -14,6 +14,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import { BsWindowSidebar } from "react-icons/bs";
+import { set } from "dotenv-save";
 var Userdata = "";
 let tranding = 0;
 const Subcategories = (props) => {
@@ -33,7 +35,7 @@ const Subcategories = (props) => {
   const [filterData, setfilterData] = useState([]);
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
-
+ const [SubcategoryId , setsubcategoryId] = useState("All Categories");
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -74,6 +76,7 @@ const Subcategories = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data);
+        setfilterData("");
       })
       .catch((err) => {
         console.log(err, "error");
@@ -426,16 +429,18 @@ const Subcategories = (props) => {
     setData(filteronload);
   };
 
-  const GetSingleSubCategory = (id) => {
+  const GetSingleSubCategory = (id,name) => {
     const filteredData = data.filter((value) => {
       return value.subcategory._id === id;
     });
     setfilterData(filteredData);
+    setsubcategoryId(name); 
   };
-
+  
   const GetallData = (Products) => {
     setfilterData("");
     setData(Products);
+    setsubcategoryId("All Categories");
   };
   // const Addclassactive = ()=>{
   //   let item = document.getElementById("List-item");
@@ -497,7 +502,7 @@ const Subcategories = (props) => {
                                   <p
                                     id="List-item"
                                     onClick={() => {
-                                      GetSingleSubCategory(item._id);
+                                      GetSingleSubCategory(item._id,item.name);
                                     }}
                                     style={{ cursor: "pointer" }}
                                   >
@@ -515,13 +520,22 @@ const Subcategories = (props) => {
               </div>
               <div className="col-10">
                 <div className="browse-categories-sub-heading">
-                  <h2>Subcategory Products</h2>
+                  {getSubCategories.map((item,ind)=>{
+                    if(ind < 1)
+                    {
+                      return(
+                  <h2>{SubcategoryId}</h2>
+                  )
+                }
+                })
+                }
                 </div>
                 <section className="products-area pb-40">
                   <div className="container-fluid">
                     <div className="row">
                       {filterData && filterData.length > 0 ? (
                         filterData.map((item, ind) => {
+                          
                           return (
                             <div className="col-lg-2 col-md-12 col-sm-12 ">
                               <div className="single-products-box border">
@@ -540,7 +554,7 @@ const Subcategories = (props) => {
                                                 item.otherImage.length > 0
                                                   ? `${baseUrl}/` +
                                                     item.otherImage[0].path
-                                                  : require("../Images/products/Hintosulin (1).png")
+                                                  : ""
                                               }
                                               // src={require("../../Images/products/Hintosulin (1).png")}
                                               alt=""
@@ -696,10 +710,11 @@ const Subcategories = (props) => {
                               {/* </Link> */}
                             </div>
                           );
+                          
                         })
                       ) : (
                         <>
-                          {data.map((item, ind) => {
+                          { data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
                                 <div className="col-lg-2 col-md-12 col-sm-12 ">

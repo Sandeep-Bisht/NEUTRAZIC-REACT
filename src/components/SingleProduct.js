@@ -40,6 +40,7 @@ const SingleProduct = (props) => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlist, setWishlist] = useState([]);
   const [MainImage, SetMainImage] = useState();
+  const [categoryid,setcategoryId] = useState();
   const history = useHistory();
   // let Wishlist = [];
   //let ImageData ;
@@ -433,6 +434,7 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         Setcategoryname(data.data[0].name);
+        setcategoryId(data.data[0]._id);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -635,9 +637,6 @@ const SingleProduct = (props) => {
     }
   }
 
-
-
-
   return (
     <>
       <Header1 />
@@ -806,7 +805,7 @@ const SingleProduct = (props) => {
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
-                  Category: <span > {categoryname}</span>
+                  Category: <Link to={"/Subcategories/" + categoryid}><span> {categoryname}</span></Link>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
