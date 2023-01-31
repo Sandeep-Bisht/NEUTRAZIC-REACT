@@ -272,7 +272,7 @@ const breakPoints = [
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Successfully added to Cart", {
+      toast.success("Added to Cart", {
         position: "bottom-right",
         autoClose: 2000,
       });
@@ -404,7 +404,7 @@ const breakPoints = [
             )
               .then((res) => res.json())
               .then(async (data) => {
-                toast.error("Product is wishlisted !", {
+                toast.error("Added to wishlist", {
                   position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 2000,
                 });
@@ -446,7 +446,7 @@ const breakPoints = [
               )
                 .then((res) => res.json())
                 .then(async (data) => {
-                  toast.error("Product is wishlisted !", {
+                  toast.error("Added to wishlist", {
                     position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 2000,
                   });
@@ -751,7 +751,7 @@ const breakPoints = [
               // itemPadding={[0, 4]}
               >       
               { categories && categories.map((item, index) => {                 
-                if(item.featuredCategories == "Featured Categories"){
+                if(item.featuredCategories == "Featured Categories" && index < 2){
                 return(  
               <div className="col-md-12" key={index}>
                 <div className="cat-left-side">
@@ -761,12 +761,14 @@ const breakPoints = [
                       <p className="cat-para">
                        {item.description}
                       </p>
+                      <Link to={"/Subcategories/" + item._id}>
                       <button className="btn btn cosmetic-shop-now">
                         Shop Now
                       </button>
+                      </Link>
                     </div>
                     <div className="col-md-6">
-                      <Link to={"/Allcategory/" + "610a8c607c5c2f5f8b1e579b"}>
+                      <Link to={"/Subcategories/" + item._id}>
                         <div className="category-div">
                           <figure>
                             

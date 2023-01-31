@@ -1646,3 +1646,13 @@ left: 0;
 }
 
 
+.displayed-text{
+    color: #212121;
+    font-size: 14px;
+    font-weight: 600;
+}
+.single-products-box .product-div .product-image-content{
+	text-align: start !important;
+}
+
+
