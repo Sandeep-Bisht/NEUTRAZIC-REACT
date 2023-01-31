@@ -132,30 +132,25 @@ const Cart = () => {
           <Link to="/">Home</Link>/ Cart
         </span>
       </div>
-      <section className="cart-area ptb-70 pc-cart">
-        <div className="container">
+      <section className="cart-area pc-cart">
+        <div className="container m-auto">
           <form>
             <div className="cart-buttons">
-              <div className="row align-items-center">
-                {/* <div className="col-lg-7 col-sm-7 col-md-7">
-                           <div className="shopping-coupon-code"><input type="text" className="form-control" placeholder="Coupon code" name="coupon-code" id="coupon-code" /><button type="submit">Apply Coupon</button></div>
-                        </div> */}
-              </div>
+              <h1 className="cart-header">Your Cart</h1>
             </div>
-            <div className="container-fluid">
               <div className="row">
                 <div className="col-sm-8">
                   {cart.length > 0 ? (
                     <div className="cart-table">
-                      <table className="table" cellsacing="10px" cellPadding="10px">
+                      <table className="w-100" cellsacing="10px" cellPadding="10px">
                         <thead className="text-center">
                           <tr>
-                            <th scope="col"></th>
+                            <th scope="col">Product</th>
                             <th scope="col"></th>
                             <th scope="col">PRICE</th>
-                            <th scope="col">QUANTITY</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">ACTION</th>
+                            <th scope="col" className="text-center">QUANTITY</th>
+                            <th scope="col" className="text-center">Total</th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -172,7 +167,7 @@ const Cart = () => {
 
                             return (
                               //  <Link to={"/SingleProduct/" + el.productid} >
-                              <tr key={ind1} className="cart-data mt-2">
+                              <tr key={ind1} className="cart-data">
                                 <td className="product-thumbnail">
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     
@@ -184,9 +179,9 @@ const Cart = () => {
                                     />
                                   </Link>
                                 </td>
-                                <td className="product-name text-left">
+                                <td className="product-name">
                                   <Link to={"/SingleProduct/" + el.productid}>
-                                    <div className="text-left">
+                                    <div className="text-start">
                                       {/* <StarsRating
                                         count={5}
                                         // onChange={ratingChanged}
@@ -201,10 +196,10 @@ const Cart = () => {
                                 <td className="product-price">
                                   <div className="amount">
                                     
-                                  <span className="new-price ml-1 fa fa-inr">
+                                  {/* <span className="new-price ml-1 fa fa-inr">
                                     <del>{el.mrp}</del>
-                                    </span>
-                                    <span className="unit-amount">
+                                    </span> */}
+                                    <span className="unit-amount fa fa-inr">
                                       {
                                         el.singleprice
                                         //   isNaN(
@@ -271,7 +266,7 @@ const Cart = () => {
                                   </div>
                                 </td>
                                 <td>
-                                  <Popconfirm className="bx bx-trash btn-danger btn-sm"
+                                  <Popconfirm className="bx bx-trash cart-delete-icon"
                                     title="Delete the Product"
                                     description="Are you sure to delete this Product?"
                                     style={{ margin: "0" }}
@@ -303,12 +298,12 @@ const Cart = () => {
                   )}
                 </div>
 
-                <div className="col-sm-4  mb-5">
+                <div className="col-sm-4">
                   <div className="cart-totals">
-                    <h3>Cart Totals</h3>
+                    <h3>Order Summary</h3>
                     <ul>
                       <li>
-                        Subtotal <span>₹{actualtotal}</span>
+                        Sub Total <span>₹{actualtotal}</span>
                       </li>
                       <li>
                         Discount <span>-₹{actualtotal - total1}</span>
@@ -316,19 +311,20 @@ const Cart = () => {
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total Amount <span>₹{total1}</span>
+                        Payable Amount <span>₹{total1}</span>
                       </li>
                     </ul>
+                  </div>
+                  <button className="default-btn1" type="button">
                     <Link
-                      className="default-btn1"
+                      className=""
                       to={Userdata ? "/UserDetails/"+ _id : "/register"}
                     >
                       <i className="flaticon-trolley"></i> Proceed to Checkout
                     </Link>
-                  </div>
+                    </button>
                 </div>
               </div>
-            </div>
           </form>
         </div>
       </section>

@@ -216,8 +216,8 @@ const UserDetails=(props)=>{
                                 <h4>Order For</h4>
                                     <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
                                     <label for="html" className='pr-3'>For Me</label>&nbsp;
-                                    <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
-                                    <label for="html">For Other</label>
+                                    {/* <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
+                                    <label for="html">For Other</label> */}
                                 </div>
                                 {/* {
                            cart.map((el,ind1)=>(
@@ -254,7 +254,7 @@ const UserDetails=(props)=>{
 
                       {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
-                        Total Amount <span>₹{Discount}</span>
+                        Payable Amount <span>₹{Discount}</span>
                       </li>
                     </ul>
                   </div>

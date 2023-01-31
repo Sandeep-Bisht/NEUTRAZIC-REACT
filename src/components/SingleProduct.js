@@ -39,6 +39,7 @@ const SingleProduct = (props) => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlist, setWishlist] = useState([]);
   const [MainImage, SetMainImage] = useState();
+  const [categoryid,setcategoryId] = useState();
   const history = useHistory();
   // let Wishlist = [];
   //let ImageData ;
@@ -427,6 +428,7 @@ const onNextStart = (currentItem, nextItem) => {
       .then((res) => res.json())
       .then(async (data) => {
         Setcategoryname(data.data[0].name);
+        setcategoryId(data.data[0]._id);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -630,8 +632,6 @@ const onNextStart = (currentItem, nextItem) => {
   }
   
 
-  
-
   return (
     <>
       <Header1 />
@@ -800,7 +800,7 @@ const onNextStart = (currentItem, nextItem) => {
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
-                  Category: <span> {categoryname}</span>
+                  Category: <Link to={"/Subcategories/" + categoryid}><span> {categoryname}</span></Link>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
@@ -1110,61 +1110,33 @@ const onNextStart = (currentItem, nextItem) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div className="row products-row p-4 ">
+        <div id="columns1" className="columns_5">
           {AllProduct.map((item, index) => {
             if (related < 4 && ProductCategory == item.category.name) {
               related = related + 1;
               return (
-                <div className="col-lg-2 col-md-12 col-sm-12 ">
-                  {/* <Link to={"/SingleProduct/" + el._id}> */}
-                  <div className="single-products-box border">
-                    <div className="row   product-div related-product">
-                      <div className="product-image-div align-items-center">
-                        <Link
-                          to={"/SingleProduct/" + item._id}
+<figure className="figure2">
+                  <Link to={"/SingleProduct/" + item._id}
                           className="product-image-link">
-                          <div className={`image hover-switch `}
-                          
-                          >
-                            <img
+                  <div>
+                  <img
                               src={defaultImage}
                               alt=""
                             />
-                            <img
+                  {/* <img
                               src={
                                 `${baseUrl}/` + item.image[0].path
                               }
                               onClick={()=>relatedImageHandler(item._id)}
                               alt=""
                               style={{ position: "absolute", left: "0" }}
-                            />
-                          </div>
-                        </Link>
-                      </div>
-                      <div className="pd-0 tranding product-image-content align-items-start">
-                        <div className="content product-content align-items-start">
-                          <Link to={"/SingleProduct/" + item._id}>
-                          <span className="displayed-text"
-                          onClick={()=>relatedImageHandler(item._id)}>
-                              {item.name}
-                            </span>
-                          </Link>
-                          {/* <div className="d-flex pb-2 pl-4"> */}
-                          {/* <i className="bx bxs-star"></i>
-                            <i className="bx bxs-star"></i>
-                            <i className="bx bxs-star"></i>
-                            <i className="bx bxs-star"></i>
-                            <i className="bx bxs-star"></i> */}
-                          {/* </div> */}
-                          {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
-                            <div className="discount-price-div">
-                              <span>{item.inrDiscount}%</span>
-                            </div>
-                            <div className="discount-price-div2">
-                              <span>off</span>
-                            </div>
-                          </div> */}
-                          <div className="price-div">
+                            /> */}
+                  </div>
+                  </Link>
+                  <figcaption><Link to={"/SingleProduct/" + item._id}>{item.name}</Link></figcaption>
+                  <div className="allproduct-price-div">
+                  <div className="row">
+                            <div className="col-6">
                             <span className="new-price">
                               {/* ${" "}
                               {isNaN(
@@ -1176,8 +1148,11 @@ const onNextStart = (currentItem, nextItem) => {
                                   (item.inrMrp * item.inrDiscount) / 100} */}
                               <i className="fa fa-inr"></i>{item.inrDiscount}
                             </span>
-                            <del className="new-price ml-1">{item.inrMrp}</del>
+                            {/* <del className="new-price ml-1">{item.inrMrp}</del> */}
+                            </div>
                             {Userdata ? (
+                              <>
+                              <div className="col-6">
                               <i
                                 className={`bx bxs-heart ml-3  ${checkWishlistItem(item._id)}`}
                                 id={item._id}
@@ -1194,9 +1169,12 @@ const onNextStart = (currentItem, nextItem) => {
                                     item.image
                                   );
                                 }}
-                              ></i>
+                              >Wishlist</i>
+                              </div>
+                              </>
                             ) : (
                               <>
+
                                 <i
                                   className="bx bxs-heart ml-3 pc-heart"
                                   data-bs-toggle="modal"
@@ -1209,10 +1187,12 @@ const onNextStart = (currentItem, nextItem) => {
                                 </Link>
                               </>
                             )}
-
-                            {Userdata ? (
-                              <i
-                                className="bx bx-cart"
+</div>
+                  </div>
+                  {Userdata ? (
+                              <button
+                                className="btn"
+                                type="button"
                                 onClick={() => {
                                   {
                                     Userdata !== null
@@ -1242,7 +1222,7 @@ const onNextStart = (currentItem, nextItem) => {
                                       );
                                   }
                                 }}
-                              ></i>
+                              >Add To Cart</button>
                             ) : (
                               <i
                                 className="bx bx-cart mr-1"
@@ -1256,33 +1236,8 @@ const onNextStart = (currentItem, nextItem) => {
                                 <Link to="/Register"></Link>
                               </i>
                             )}
-                          </div>
-                          {/* <div className="price mt-1">
-                              <div>
-                                 <span className="new-price">
-                                 $
-                                 {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                                 ? 0
-                                 : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
-                                 </span>
-                              </div>
-                           </div> */}
-                          {/* <div className="mt-2 mb-2">
-                              <button className="add-to-cart-button1 text-nowrap"  onClick={()=>{cartfunction(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image[0].path)}} data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}>Add to Cart</button>
-                           </div> */}
-                          {/* <div className="row">
-                              
-                              <div className="col-12">
-                                 <p className="bottom-icon text-nowrap" onClick={()=>{AddtoWishlist(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image)}}  data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}><i className='bx bx-heart' ></i>Wishlist</p>
-                              <div className="icon-wishlist"></div>
-                              </div>
-                           </div> */}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* </Link> */}
-                </div>
+                  
+                </figure>
               );
             }
           })}

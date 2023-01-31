@@ -643,7 +643,7 @@ const Header1 = (props) => {
         </div>
         {/* End login register Modal  */}
         {/* Logo div */}
-        <div className="row top-header-padding">
+        <div className="row mt-0 top-header-padding">
           <div className="col-sm-3">
             <Link className="navbar-brand" to="/">
               <img
@@ -654,9 +654,31 @@ const Header1 = (props) => {
             </Link>
           </div>
           {/* End Logo Div */}
-
+{/* Search Box Code */}
+<div className="col-sm-3" style={{ paddingLeft: "10px" }}>
+            <div className="login-div2">
+              <input
+                type="text"
+                onChange={(e) => setSearch(e.target.value.toLowerCase())}
+                // onKeyPress={(e) => {
+                //   if (e.key == "Enter") {
+                //     searchData(search);
+                //   }
+                // }}
+              />
+              <Link to={"/SearchResult/" + search}>
+                <button
+                  className="search mr-1"
+                  onClick={() => searchData(search)}
+                >
+                  <i className="bx bx-search-alt"></i>
+                </button>
+              </Link>
+            </div>
+          </div>
+          {/* End Of search Code */}
           {/* Start Login/Register div */}
-          <div className="col-sm-1">
+          <div className="col-sm-2">
             <div className="row login-div mt-4">
               <div className="col-sm-1">
                 <div className="option-item">
@@ -694,14 +716,14 @@ const Header1 = (props) => {
               <div className="col-sm-8 user-login">
                 {Userdata == null ? (
                   <>
-                    <span
+                    {/* <span
                       className="sp pl-2"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       style={{ cursor: "pointer" }}
                     >
                       Account
-                    </span>
+                    </span> */}
                     <br />
                     <span
                       className="Sp1 mt-5 pl-2"
@@ -714,13 +736,13 @@ const Header1 = (props) => {
                   </>
                 ) : (
                   <>
-                    <span className="sp" style={{ cursor: "pointer" }}>
+                    {/* <span className="sp" style={{ cursor: "pointer" }}>
                       Account
-                    </span>
-                    <br />
+                    </span> */}
+                    {/* <br /> */}
                     <div className="dropdown">
                       <button
-                        className="btn btn-white btn-sm dropdown-toggle"
+                        className="btn btn-white btn-sm dropdown-toggle user-dropdown-btn"
                         type="button"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
@@ -789,28 +811,6 @@ const Header1 = (props) => {
             </div>
           </div>
           {/* End Login/Register div */}
-          {/* Start Wishlidt div */}
-          <div className="col-sm-2  wishlist-div">
-            <Link to="/WishList">
-              <div className="row login-div mt-4">
-                <div className="col-sm-2">
-                  <div className="option-item">
-                    <div className="cart-btn">
-                      {/* <Link to="/Ordered"> */}
-                      <i className="bx bx-heart"></i>
-                      {/* </Link> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-8 user-login">
-                  <span className="sp">Wishlist</span>
-                  <br />
-                  <span className="Sp1">Edit your wishlist</span>
-                </div>
-              </div>
-            </Link>
-          </div>
-          {/* End Wishlist div */}
           {/* Cart div Start */}
           <div className="col-sm-1 cart-div">
             <Link to="/cart">
@@ -837,29 +837,28 @@ const Header1 = (props) => {
             </Link>
           </div>
           {/* Cart div End */}
-          {/* Search Box Code */}
-          <div className="col-sm-4  " style={{ paddingLeft: "10px" }}>
-            <div className="login-div2">
-              <input
-                type="text"
-                onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                // onKeyPress={(e) => {
-                //   if (e.key == "Enter") {
-                //     searchData(search);
-                //   }
-                // }}
-              />
-              <Link to={"/SearchResult/" + search}>
-                <button
-                  className="search mr-1"
-                  onClick={() => searchData(search)}
-                >
-                  <i className="bx bx-search-alt"></i>
-                </button>
-              </Link>
-            </div>
+          {/* Start Wishlidt div */}
+          <div className="col-sm-2">
+            <Link to="/WishList">
+              <div className="row justify-content-center mt-4">
+                <div className="col-sm-2">
+                  <div className="option-item">
+                    <div className="cart-btn">
+                      {/* <Link to="/Ordered"> */}
+                      <i className="bx bx-heart"></i>
+                      {/* </Link> */}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-sm-8 user-login">
+                  <span className="sp">Wishlist</span>
+                  {/* <br />
+                  <span className="Sp1">Edit your wishlist</span> */}
+                </div>
+              </div>
+            </Link>
           </div>
-          {/* End Of search Code */}
+          {/* End Wishlist div */}
           {/* Currancy Change code */}
           <div className="col-sm-1 d-flex align-items-center currancy">
             <select>
