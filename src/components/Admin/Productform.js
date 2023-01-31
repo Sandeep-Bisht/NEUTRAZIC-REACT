@@ -6,6 +6,7 @@ import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 var Userdata;
 // http://localhost:3010/api/product/add_product
 const Productform = (props) => {
@@ -303,20 +304,21 @@ const Productform = (props) => {
     for(let item of data.otherImage){
       await formData.append("otherImage", item);
     }
-    await fetch(`${baseUrl}/api/product/update_product_by_id`, {
-      method: "Put",
-      body: formData,
-    })
-    .then((res) =>{
-      history.push("/AllProductsDetails");
-      res.json()
-    })
-      .then(async (data) => {
-        GetData();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
+    try{
+      const response=await axios.put(`${baseUrl}/api/product/update_product_by_id`, formData)
+      if(response.status==200)
+      {
+        await GetData();
+        setTimeout(()=>{
+          history.push("/AllProductsDetails");
+        },1500);   
+      }
+    }
+    catch(error)
+    {
+       console.log(error);
+    }
+    
   };
 
 
@@ -364,7 +366,6 @@ const Productform = (props) => {
                             type="file"
                             name="image[]"                                                
                             className="form-control Dashborad-search"
-                            accept="image/png, .jpeg, .jpg"
                             //value={editableData  ? editableData.image[0].path : ""}
                             onChange={(e) => {
                               Setdata({ ...data, image: e.target.files[0] });
@@ -377,6 +378,7 @@ const Productform = (props) => {
                             type="file"
                             className="form-control Dashborad-search"
                             multiple
+                            name="otherImage[]"
                             // value={data.image}
                             onChange={(e) => {
                               Setdata({ ...data, otherImage: e.target.files });

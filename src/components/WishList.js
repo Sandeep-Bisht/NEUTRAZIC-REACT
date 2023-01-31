@@ -67,7 +67,7 @@ const WishList = ()=>{
       .then((res) => res.json())
       .then(async (data) => {
          Setwishlist("");
-        toast.error("Product removed success",{
+        toast.error("Product removed successfully",{
          position:"bottom-right",
          autoClose:2000,
         })

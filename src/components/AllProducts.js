@@ -145,7 +145,7 @@ const AllProducts = (props) => {
         
         CartById();
         //history.push("/Cart");
-        toast.success("Add to cart",{
+        toast.success("Added to cart",{
           position: "bottom-right",
           autoClose: 2000,
         })
@@ -324,7 +324,7 @@ const AllProducts = (props) => {
               .then((res) => res.json())
               .then(async (data) => {
                 // setWishlist(data.data[0]);
-                toast.success("Product is wishlisted",{
+                toast.success("Added to wishlist",{
                   position:"bottom-right",
                   autoClose:2000
                 })
@@ -362,7 +362,7 @@ const AllProducts = (props) => {
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
                   //add product to wishlist response is comming here
-                  toast.success("Product is wishlisted",{
+                  toast.success("Added to wishlist",{
                     position:"bottom-right",
                     autoClose:2000
                   })

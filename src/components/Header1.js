@@ -543,7 +543,7 @@ const Header1 = (props) => {
                               <p className="text-danger">
                                 Must have more than 8 characters, Must have
                                 atleast one number, Must have upper & lowercase
-                                letters, Must have atleast one special character
+                                letters, Must have atleast one special character.
                               </p>
                             )}
                           </div>
