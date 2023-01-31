@@ -4,18 +4,19 @@ import Footer from "./Footer";
 import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action"
 import { useDispatch } from "react-redux";
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 var Userdata;
 const AllProducts = (props) => {
 
   let dispatch = useDispatch()
   const [AllProduct, setAllProduct] = useState([]);
+  const [productLength, serProductLength] = useState();
   const [Categorydetails, setCategoryDetails] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
@@ -23,7 +24,7 @@ const AllProducts = (props) => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
-  const [wishlistData,Setwishlist]=useState([])
+  const [wishlistData, Setwishlist] = useState([])
   const [prev, SetPrev] = useState(0);
   const [next, SetNext] = useState(20);
   const [filter, setFilter] = useState("");
@@ -49,12 +50,12 @@ const AllProducts = (props) => {
       SetPrev(prev - 8);
     }
   };
-  const setNextValue = () => {
-    if (next < AllProduct.length) {
-      SetNext(next + 8);
-      SetPrev(prev + 8);
-    }
-  };
+  // const setNextValue = () => {
+  //   if (next < AllProduct.length) {
+  //     SetNext(next + 8);
+  //     SetPrev(prev + 8);
+  //   }
+  // };
   const cartfunction = async (
     productid,
     name,
@@ -100,7 +101,7 @@ const AllProducts = (props) => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
-          
+
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -142,10 +143,10 @@ const AllProducts = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        
+
         CartById();
         //history.push("/Cart");
-        toast.success("Added to cart",{
+        toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 2000,
         })
@@ -207,11 +208,18 @@ const AllProducts = (props) => {
     console.log(item, "filter");
   };
 
+
+
+
+
+  var page = 1;
   const ProductByCategory = async () => {
-    await fetch(`${baseUrl}/api/product/all_product`)
+    await fetch(`${baseUrl}/api/product/all_product?_page=${page}$_limit=10`)
       .then((res) => res.json())
       .then(async (data) => {
-        setAllProduct(data.data);
+        serProductLength(data.length);
+        setAllProduct([...AllProduct, ...data.data]);
+        page = page + 1;
       })
       .catch((err) => {
         console.log(err, "error");
@@ -232,7 +240,7 @@ const AllProducts = (props) => {
       .then(async (data) => {
         await setCategoryDetails(data.data[0]);
 
-        
+
       })
       .catch((err) => {
         console.log(err, "error");
@@ -241,32 +249,32 @@ const AllProducts = (props) => {
 
   const GetWishlist = async () => {
     let id;
-    if(Userdata){
-     id=Userdata._id
+    if (Userdata) {
+      id = Userdata._id
     }
-      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-       
-      userid: id,
-    }),
-  })
-    .then((res) => res.json())
-    .then(async (data) => {
-       if(data.data[0] !== undefined){
-     
-        Setwishlist(data.data)
-       }
-    })    
-    .catch((err) => {
-      console.log(err, "error");
-    });
-   
-};
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+        userid: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.data[0] !== undefined) {
+
+          Setwishlist(data.data)
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+
+  };
 
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
@@ -274,7 +282,7 @@ const AllProducts = (props) => {
         return "wishlisted"
       }
     }
-    }
+  }
 
   const AddtoWishlist = async (
     productid,
@@ -324,12 +332,12 @@ const AllProducts = (props) => {
               .then((res) => res.json())
               .then(async (data) => {
                 // setWishlist(data.data[0]);
-                toast.success("Added to wishlist",{
-                  position:"bottom-right",
-                  autoClose:2000
+                toast.success("Added to wishlist", {
+                  position: "bottom-right",
+                  autoClose: 2000
                 })
                 let wishList = document.getElementById(productid);
-               wishList.classList.add("wishlisted");
+                wishList.classList.add("wishlisted");
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -362,12 +370,12 @@ const AllProducts = (props) => {
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
                   //add product to wishlist response is comming here
-                  toast.success("Added to wishlist",{
-                    position:"bottom-right",
-                    autoClose:2000
+                  toast.success("Added to wishlist", {
+                    position: "bottom-right",
+                    autoClose: 2000
                   })
-               let wishList = document.getElementById(productid);
-               wishList.classList.add("wishlisted");
+                  let wishList = document.getElementById(productid);
+                  wishList.classList.add("wishlisted");
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -377,8 +385,8 @@ const AllProducts = (props) => {
             toast.error('Allready in wishlist !', {
               position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 2000,
-          });
-            
+            });
+
           }
         }
       });
@@ -669,22 +677,33 @@ const AllProducts = (props) => {
               <h2>All Products</h2>
             </div>
             <div>
-        <div id="columns" className="columns_5">
-          {AllProduct.map((el, ind1) => {
-            if (ind1 > prev && ind1 <= next) {
-              return (
-                <figure className="figure1">
-                  <Link Link to={"/SingleProduct/" + el._id}>
-                  <div>
-                  {/* {Categorydetails.image!==undefined? */}
-                  <img src={`${baseUrl}/` + el.image[0].path} />
-                  </div>
-                  <figcaption>{el.name}</figcaption>
-                  </Link>
-                  {/* :null} */}
-                  
-                  <div className="allproduct-price-div">
-                    {/* <div className="d-flex justify-content-center">
+              <div id="columns" className="columns_5">
+                <InfiniteScroll
+                  dataLength={AllProduct.length}
+                  next={ProductByCategory}
+                  hasMore={AllProduct.length <= productLength}
+                  loader={<h4>Loading...</h4>}
+                  endMessage={
+                    <p style={{ textAlign: 'center' }}>
+                      <b>Yay! You have seen it all</b>
+                    </p>
+                  }
+                >
+                  {AllProduct.map((el, ind1) => {
+                    if (ind1 > prev && ind1 <= next) {
+                      return (
+                        <figure className="figure1">
+                          <Link Link to={"/SingleProduct/" + el._id}>
+                            <div>
+                              {/* {Categorydetails.image!==undefined? */}
+                              <img src={`${baseUrl}/` + el.image[0].path} />
+                            </div>
+                            <figcaption>{el.name}</figcaption>
+                          </Link>
+                          {/* :null} */}
+
+                          <div className="allproduct-price-div">
+                            {/* <div className="d-flex justify-content-center">
                       <StarsRating
                         count={5}
                         // onChange={ratingChanged}
@@ -693,99 +712,99 @@ const AllProducts = (props) => {
                         value={4}
                       />
                     </div> */}
-                    <div className="row">
-                      {/* <div className="col-4 ">
+                            <div className="row">
+                              {/* <div className="col-4 ">
                               <Link to={"/SingleProduct/" + el._id}>  
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                    <div className="col-6">
-                      <span className="price">
-                      {" "}
-                      <i className="fa fa-inr"></i>{el.inrDiscount}
-                      {/* $
+                              <div className="col-6">
+                                <span className="price">
+                                  {" "}
+                                  <i className="fa fa-inr"></i>{el.inrDiscount}
+                                  {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
                         : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
-                    </span>
-                    </div>
-                      <div className="col-6 text-end">
-                        <p 
-                          className={`text-nowrap wishlist`}
-                          
-                        >
-                                 {Userdata ? (
-                            <i
-                              id={el._id}
-                              onClick={() => {
-                                AddtoWishlist(
+                                </span>
+                              </div>
+                              <div className="col-6 text-end">
+                                <p
+                                  className={`text-nowrap wishlist`}
+
+                                >
+                                  {Userdata ? (
+                                    <i
+                                      id={el._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        el._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null ? "#exampleModal" : null
+                                      }
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                                {/* <div className="icon-wishlist"></div> */}
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            className="button btn"
+                            onClick={() => {
+                              cartfunction
+                                (
                                   el._id,
                                   el.name,
                                   quantity,
                                   el.inrMrp,
                                   el.inrDiscount,
+                                  el.discount,
                                   el.description,
                                   el.category,
                                   el.manufacturer.name,
-                                  el.image
-                                );
-                              }}
-                              className={`bx bxs-heart ${checkWishlistItem(
-                                el._id
-                              )}`}
-                            ></i>
-                          ) : (
-                            <i
-                              className="bx bxs-heart "
-                              data-bs-toggle="modal"
-                              data-bs-target={
-                                Userdata == null ? "#exampleModal" : null
-                              }
-                            ></i>
-                          )}
-                                          Wishlist
-                        </p>
-                        {/* <div className="icon-wishlist"></div> */}
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    className="button btn"
-                    onClick={() => {
-                      cartfunction
-                      (
-                        el._id,
-                        el.name,
-                        quantity,
-                        el.inrMrp,
-                        el.inrDiscount,
-                        el.discount,
-                        el.description,
-                        el.category,
-                        el.manufacturer.name,
-                        el.image[0].path
-                      )
-                    }}
-                    data-bs-toggle={Userdata == null ? "modal" : null}
-                    data-bs-target={Userdata == null ? "#exampleModal" : null}
-                  >
-                    Add to Cart
-                  </button>
-                  
-                </figure>
-                
-              );
-            }
-          })}
-          
-        </div>
-      </div>
+                                  el.image[0].path
+                                )
+                            }}
+                            data-bs-toggle={Userdata == null ? "modal" : null}
+                            data-bs-target={Userdata == null ? "#exampleModal" : null}
+                          >
+                            Add to Cart
+                          </button>
+
+                        </figure>
+
+                      );
+                    }
+                  })}
+                </InfiniteScroll>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      
-      
+
+
       <div className="col-12 pagination text-center">
         {/* <IoIosArrowBack
           className="Prebutton"
@@ -793,15 +812,15 @@ const AllProducts = (props) => {
             setPreviousValue();
           }}
         /> */}
-        <button
+        {/* <button
           className="Nextbutton"
           onClick={() => {
             setNextValue();
           }}
         >
           Load More...
-        </button>
-        
+        </button> */}
+
       </div>
 
       {/* <div className="brands-area bg-f7f8fa pt-70 pb-40">
@@ -838,7 +857,7 @@ const AllProducts = (props) => {
                 </div>
             </div>
         </div> */}
-        <ToastContainer/>
+      <ToastContainer />
 
       <Footer />
     </>
