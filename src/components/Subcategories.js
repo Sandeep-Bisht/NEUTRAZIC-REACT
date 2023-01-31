@@ -9,7 +9,7 @@ import Header1 from ".././components/Header1";
 import { useHistory } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import { useDispatch } from "react-redux";
-import * as ACTIONS from '../CommonService/AddToCart/action'
+import * as ACTIONS from "../CommonService/AddToCart/action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
@@ -31,8 +31,8 @@ const Subcategories = (props) => {
   const [categoryname, Setcategoryname] = useState();
   const [getSubCategories, setGetSubCategories] = useState([]);
   const [filterData, setfilterData] = useState([]);
-  const [wishlistData, Setwishlist] = useState([])
-  const [cartItems, setCartItems] = useState(undefined)
+  const [wishlistData, Setwishlist] = useState([]);
+  const [cartItems, setCartItems] = useState(undefined);
 
   const history = useHistory();
 
@@ -49,18 +49,18 @@ const Subcategories = (props) => {
     GetWishlist();
     GetManufacturer();
     GetSubCategory();
-    $(document).ready(function () {
+    $(document).ready(function() {
       $(".frontimage").hide();
       $(".backimage").hide();
       //    $('.icon-wishlist').on('click', function(){
       //       $(this).toggleClass('in-wishlist');
 
       // })
-      $(".frontimage").mouseenter(function () {
+      $(".frontimage").mouseenter(function() {
         $(".backimage").hide();
       });
       const WishlistHeart = () => {
-        $(".icon-wishlist").on("click", function () {
+        $(".icon-wishlist").on("click", function() {
           $(this).toggleClass("in-wishlist");
         });
       };
@@ -239,7 +239,7 @@ const Subcategories = (props) => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-       // history.push("/Cart");
+        // history.push("/Cart");
       })
       .then((err) => console.log(err));
   };
@@ -260,7 +260,7 @@ const Subcategories = (props) => {
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems))
+          dispatch(ACTIONS.getCartItem(cartItems));
         })
         .catch((err) => {
           console.log(err, "error");
@@ -289,12 +289,11 @@ const Subcategories = (props) => {
           console.log(err, "error");
         });
     }
-   
   };
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
-      id = Userdata._id
+      id = Userdata._id;
     }
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
@@ -303,20 +302,18 @@ const Subcategories = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-
         userid: id,
       }),
     })
       .then((res) => res.json())
       .then(async (data) => {
         if (data.data[0] !== undefined) {
-          Setwishlist(data.data)
+          Setwishlist(data.data);
         }
       })
       .catch((err) => {
         console.log(err, "error");
       });
-
   };
 
   const AddtoWishlist = async (
@@ -423,26 +420,23 @@ const Subcategories = (props) => {
   const ProductsByCategory = () => {
     let Product = props.match.params._id;
     let filteronload = data.filter((value) => {
-      return value.category._id === Product
-    })
+      return value.category._id === Product;
+    });
 
     setData(filteronload);
-
-  }
+  };
 
   const GetSingleSubCategory = (id) => {
     const filteredData = data.filter((value) => {
-      return value.subcategory._id === id
-    })
+      return value.subcategory._id === id;
+    });
     setfilterData(filteredData);
-
-  }
+  };
 
   const GetallData = (Products) => {
     setfilterData("");
     setData(Products);
-
-  }
+  };
   // const Addclassactive = ()=>{
   //   let item = document.getElementById("List-item");
   //   for(let i = 0 ; i<=item.length; i++){
@@ -453,15 +447,15 @@ const Subcategories = (props) => {
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
       if (item.productId == productId) {
-        return "wishlisted"
+        return "wishlisted";
       }
     }
-  }
+  };
 
-  const activeParagraph=()=>{
+  const activeParagraph = () => {
     // const newActive=document.querySelectorAll(".paragraph");
     //  newActive
-  }
+  };
   return (
     <>
       <Header1 />
@@ -469,24 +463,46 @@ const Subcategories = (props) => {
       <div id="__next">
         {/* trending section  */}
 
-        <section className=" pb-40">
+        <section>
           <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-2 ps-0">
+            <div className="row mt-0">
+              <div className="col-md-2 px-0">
                 <div className="back-ground-subcategory-sidebar">
                   <div id="wrapper">
                     <div id="sidebar-wrapper">
-                      <ul class="sidebar-nav">
-                        <li class="sidebar-brand">
-                          <h4 className="mt-4">Subcategories</h4>
+                      <ul className="sidebar-nav">
+                        <li>
+                          <h1 className="browse-categories-header">
+                            Subcategories
+                          </h1>
                         </li>
-                        <li className="box mt-3" onClick={() => GetallData(data)} style={{ cursor: "pointer" }}><p className="paragraph" id="List-item" style={{ cursor: "pointer" }}>All SubCategories</p></li>
+                        <li
+                          className="box"
+                          onClick={() => GetallData(data)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <p
+                            className="active"
+                            id="List-item"
+                            style={{ cursor: "pointer" }}
+                          >
+                            All SubCategories
+                          </p>
+                        </li>
                         {getSubCategories.map((item) => {
                           if (item.category == props.match.params._id) {
                             return (
                               <>
-                                <li className="mt-3 box">
-                                  <p className="paragraph"  id="List-item" onClick={() => { GetSingleSubCategory(item._id) }} style={{ cursor: "pointer" }}>{item.name}</p>
+                                <li className="box">
+                                  <p
+                                    id="List-item"
+                                    onClick={() => {
+                                      GetSingleSubCategory(item._id);
+                                    }}
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    {item.name}
+                                  </p>
                                 </li>
                               </>
                             );
@@ -498,30 +514,14 @@ const Subcategories = (props) => {
                 </div>
               </div>
               <div className="col-10">
-                <section className="trending-section  mb-5">
-                  <div className="container-fluid h-100">
-                    <div className="row h-100">
-                      <div className="col-12 p-0">
-                        <div className="align-items-center position-relative h-100 d-flex w-100 ">
-                          { categories.map((item,ind)=>{
-                            if(item._id == props.match.params._id){
-                              console.log(item,"Category item");
-                              return(
-                          <h3 className="trendign-head">{item.name}</h3>
-                              )
-                        }})}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+                <div className="browse-categories-sub-heading">
+                  <h2>Subcategory Products</h2>
+                </div>
                 <section className="products-area pb-40">
                   <div className="container-fluid">
                     <div className="row">
                       {filterData && filterData.length > 0 ? (
-
                         filterData.map((item, ind) => {
-
                           return (
                             <div className="col-lg-2 col-md-12 col-sm-12 ">
                               <div className="single-products-box border">
@@ -529,29 +529,35 @@ const Subcategories = (props) => {
                                   <div className="col-md-12">
                                     <div className="product-div">
                                       <div className="product-image-div">
-                                      <Link
-                                    to={"/SingleProduct/" + item._id}
-                                    className="product-image-link"
-                                  >
-                                    <div className="image hover-switch">
-                                      <img
-                                      src={ item.otherImage && 
-                                        item.otherImage.length > 0 ? `${baseUrl}/` + item.otherImage[0].path :
-                                        require("../Images/products/Hintosulin (1).png")
-                                      }
-                                        // src={require("../../Images/products/Hintosulin (1).png")}
-                                        alt=""
-                                      />
-                                      <img
-                                        src={
-                                          `${baseUrl}/` +
-                                          item.image[0].path
-                                        }
-                                        alt=""
-                                        style={{ position: "absolute", left:"0" }}
-                                      />
-                                    </div>
-                                  </Link>
+                                        <Link
+                                          to={"/SingleProduct/" + item._id}
+                                          className="product-image-link"
+                                        >
+                                          <div className="image hover-switch">
+                                            <img
+                                              src={
+                                                item.otherImage &&
+                                                item.otherImage.length > 0
+                                                  ? `${baseUrl}/` +
+                                                    item.otherImage[0].path
+                                                  : require("../Images/products/Hintosulin (1).png")
+                                              }
+                                              // src={require("../../Images/products/Hintosulin (1).png")}
+                                              alt=""
+                                            />
+                                            <img
+                                              src={
+                                                `${baseUrl}/` +
+                                                item.image[0].path
+                                              }
+                                              alt=""
+                                              style={{
+                                                position: "absolute",
+                                                left: "0",
+                                              }}
+                                            />
+                                          </div>
+                                        </Link>
                                       </div>
                                       <div className="tranding product-image-content">
                                         <div className="content product-content">
@@ -592,7 +598,9 @@ const Subcategories = (props) => {
                                             </del>
                                             {Userdata ? (
                                               <i
-                                                className={`bx bxs-heart ml-3  ${checkWishlistItem(item._id)}`}
+                                                className={`bx bxs-heart ml-3  ${checkWishlistItem(
+                                                  item._id
+                                                )}`}
                                                 id={item._id}
                                                 onClick={() => {
                                                   AddtoWishlist(
@@ -634,29 +642,31 @@ const Subcategories = (props) => {
                                                     {
                                                       Userdata !== null
                                                         ? cartfunction(
-                                                          item._id,
-                                                          item.name,
-                                                          quantity,
-                                                          item.inrMrp,
-                                                          item.inrDiscount,
-                                                          item.discount,
-                                                          item.description,
-                                                          item.category,
-                                                          item.manufacturer.name,
-                                                          item.image[0].path
-                                                        )
+                                                            item._id,
+                                                            item.name,
+                                                            quantity,
+                                                            item.inrMrp,
+                                                            item.inrDiscount,
+                                                            item.discount,
+                                                            item.description,
+                                                            item.category,
+                                                            item.manufacturer
+                                                              .name,
+                                                            item.image[0].path
+                                                          )
                                                         : addToCartWithoutRegistration(
-                                                          item._id,
-                                                          item.name,
-                                                          quantity,
-                                                          item.inrMrp,
-                                                          item.inrDiscount,
-                                                          item.discount,
-                                                          item.description,
-                                                          item.category,
-                                                          item.manufacturer.name,
-                                                          item.image[0].path
-                                                        );
+                                                            item._id,
+                                                            item.name,
+                                                            quantity,
+                                                            item.inrMrp,
+                                                            item.inrDiscount,
+                                                            item.discount,
+                                                            item.description,
+                                                            item.category,
+                                                            item.manufacturer
+                                                              .name,
+                                                            item.image[0].path
+                                                          );
                                                     }
                                                   }}
                                                 ></i>
@@ -684,10 +694,9 @@ const Subcategories = (props) => {
                               {/* </Link> */}
                             </div>
                           );
-                        }
-                        )) : (
+                        })
+                      ) : (
                         <>
-
                           {data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
@@ -706,7 +715,7 @@ const Subcategories = (props) => {
                                                   src={
                                                     item.otherImage &&
                                                     `${baseUrl}/` +
-                                                    item.otherImage[0].path
+                                                      item.otherImage[0].path
                                                   }
                                                   alt=""
                                                 />
@@ -729,9 +738,13 @@ const Subcategories = (props) => {
                                             <div className="content product-content">
                                               {/* <Link to={"/SingleProduct/" + item._id}> */}
                                               <Link
-                                                to={"/SingleProduct/" + item._id}
+                                                to={
+                                                  "/SingleProduct/" + item._id
+                                                }
                                               >
-                                                <ReadMoreReact text={item.name} />
+                                                <ReadMoreReact
+                                                  text={item.name}
+                                                />
                                               </Link>
                                               {/* </Link> */}
                                               {/* <div className="d-flex pb-2 pl-4">
@@ -764,7 +777,9 @@ const Subcategories = (props) => {
                                                 </del>
                                                 {Userdata ? (
                                                   <i
-                                                    className={`bx bxs-heart ml-3  ${checkWishlistItem(item._id)}`}
+                                                    className={`bx bxs-heart ml-3  ${checkWishlistItem(
+                                                      item._id
+                                                    )}`}
                                                     id={item._id}
                                                     onClick={() => {
                                                       AddtoWishlist(
@@ -806,29 +821,35 @@ const Subcategories = (props) => {
                                                         {
                                                           Userdata !== null
                                                             ? cartfunction(
-                                                              item._id,
-                                                              item.name,
-                                                              quantity,
-                                                              item.inrMrp,
-                                                              item.inrDiscount,
-                                                              item.discount,
-                                                              item.description,
-                                                              item.category,
-                                                              item.manufacturer.name,
-                                                              item.image[0].path
-                                                            )
+                                                                item._id,
+                                                                item.name,
+                                                                quantity,
+                                                                item.inrMrp,
+                                                                item.inrDiscount,
+                                                                item.discount,
+                                                                item.description,
+                                                                item.category,
+                                                                item
+                                                                  .manufacturer
+                                                                  .name,
+                                                                item.image[0]
+                                                                  .path
+                                                              )
                                                             : addToCartWithoutRegistration(
-                                                              item._id,
-                                                              item.name,
-                                                              quantity,
-                                                              item.inrMrp,
-                                                              item.inrDiscount,
-                                                              item.discount,
-                                                              item.description,
-                                                              item.category,
-                                                              item.manufacturer.name,
-                                                              item.image[0].path
-                                                            );
+                                                                item._id,
+                                                                item.name,
+                                                                quantity,
+                                                                item.inrMrp,
+                                                                item.inrDiscount,
+                                                                item.discount,
+                                                                item.description,
+                                                                item.category,
+                                                                item
+                                                                  .manufacturer
+                                                                  .name,
+                                                                item.image[0]
+                                                                  .path
+                                                              );
                                                         }
                                                       }}
                                                     ></i>
@@ -858,7 +879,6 @@ const Subcategories = (props) => {
                               );
                             }
                           })}
-
                         </>
                       )}
                     </div>

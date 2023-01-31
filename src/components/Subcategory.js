@@ -279,20 +279,11 @@ const Subcategory = () => {
         {/* trending section  */}
 
         <section className="trending-section">
-          <div className="container h-100">
+          <div className="container m-auto h-100">
             <div className="row h-100">
-              <div className="col-5 p-0">
-                <div className="align-items-center position-relative h-100 d-flex text-center w-100 justify-content-center">
-                  <h1 className="trendign-head">Skin</h1>
-                  <h2 className="pl-4 product-head mb-0">Care</h2>
-                </div>
+              <div className="col-12 p-0">
+                  <h1 className="trendign-head text-start">Skin Care</h1>
               </div>
-              <div className="col-5 pl-0">
-                <div className="align-items-center position-relative h-100 d-flex text-center w-100 justify-content-center">
-                  <hr className="w-100 trending-product-hr" />
-                </div>
-              </div>
-              <div className="col-2 pl-0"></div>
             </div>
           </div>
         </section>

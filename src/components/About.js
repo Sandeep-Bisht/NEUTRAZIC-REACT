@@ -6,6 +6,7 @@ import About4 from "../Images/about/about-1.png";
 import Header1 from "./Header1";
 import Footer from "./Footer";
 import Baseline from "./Baseline";
+import '../components/About.css';
 
 
 const About = () => {
@@ -53,8 +54,8 @@ const About = () => {
     <>
     <Header1 />
       <section className="about-page">
-        <div className="container">
-          <div className="row align-items-center">
+        <div className="container m-auto">
+          <div className="row mt-0 align-items-center">
             <div className="col-md-6">
               <div className="about-left-image">
                 <img src={About1} alt="" className="img-fluid" />
@@ -62,7 +63,7 @@ const About = () => {
             </div>
             <div className="col-md-6">
               <div className="about-right-text">
-                <h1 className="common-heading-2">Our Story</h1>
+                <h1 className="about-common-heading">Our Story</h1>
                 <p className="common-para text-justify">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -80,18 +81,18 @@ const About = () => {
       </section>
 
       <section className="about-section-2">
-        <div className="container">
-          <div className="row">
+        <div className="container m-auto">
+          <div className="row mt-0">
             <div className="col-md-12">
               <div className="about-section-2-header">
-                <h2 className="common-heading">Who We Are</h2>
+                <h2 className="about-common-heading">Who We Are</h2>
               </div>
             </div>
           </div>
           <div className="row">
-            <div className="col-md-8 mx-auto">
+            <div className="col-md-12">
               <div className="about-section-2-para">
-                <p className="common-para text-center pb-5">
+                <p className="common-para text-center">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -104,22 +105,10 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-12">
-              <div className="about-section-2-image">
-                <img src={About2} alt="" className="img-fluid" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-section-3">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
+          <div className="row align-items-center">
+            <div className="col-md-6">
               <div className="our-team-left-text">
-                <h3 className="common-heading-2">Our Team</h3>
+                <h3 className="about-common-heading">Our Team</h3>
                 <p className="common-para text-justify">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -130,15 +119,12 @@ const About = () => {
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim id est laborum.
                 </p>
-                <button className="login-btn mt-3">View all Team</button>
+                <button className="login-btn mt-3">View all</button>
               </div>
             </div>
-            <div className="col-md-8">
-              <div className="our-team-right-carousel">
-                <div className="carousel-demo">
-                  <div className="card">
-                  </div>
-                </div>
+            <div className="col-md-6">
+              <div className="about-section-2-image">
+                <img src={About2} alt="" className="img-fluid" />
               </div>
             </div>
           </div>
@@ -146,7 +132,7 @@ const About = () => {
       </section>
 
       <section className="about-section-4">
-        <div className="container">
+        <div className="container m-auto">
           <div className="row align-items-center">
             <div className="col-md-6">
               <div className="our-vision-left-image">
@@ -155,7 +141,7 @@ const About = () => {
             </div>
             <div className="col-md-5 mx-auto">
               <div className="our-vision-right-text">
-                <h4 className="common-heading-2">Our Vision</h4>
+                <h4 className="about-common-heading">Our Vision</h4>
                 <p className="common-para text-justify">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -173,11 +159,11 @@ const About = () => {
       </section>
 
       <section className="about-section-5">
-        <div className="container">
+        <div className="container m-auto">
           <div className="row align-items-center">
             <div className="col-md-6">
               <div className="easy-payment-left-text">
-                <h5 className="common-heading-2">Easy payment method</h5>
+                <h5 className="about-common-heading">Easy payment method</h5>
                 <p className="common-para text-justify">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -198,31 +184,7 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* <section className="about-section-6">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="about-page-carousel">
-                <h6 className="common-heading">What is Everyone saying?</h6>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="about-main-carousel"></div>
-          </div>
-          <div className="carousel-demo">
-            <div className="card">
-            </div>
-          </div>
-        </div>
-      </section> */}
-      <Baseline />
-      <div className="go-top ">
-        <i className="bx bx-up-arrow-alt"></i>
-      </div>
       <Footer />
-      
     </>
   );
 };
