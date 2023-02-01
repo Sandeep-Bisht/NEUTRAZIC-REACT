@@ -41,9 +41,7 @@ const Dashboard = () => {
     GetOrders();
     GetProducts();
     GetLocalUserData();
-
-    // Subtotal1 =  localStorage.getItem("Subtotal")
-  }, []);
+  },[]);
 
   const GetLocalUserData = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -259,9 +257,11 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
-      ) : (
-        <>{/* <PageNotFound/> */}</>
-      )}
+    ):(
+      <PageNotFound/>
+    )
+}
+
     </>
   );
 };

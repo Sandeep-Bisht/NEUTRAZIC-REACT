@@ -9,7 +9,6 @@ import Header1 from './Header1'
 function PageNotFound() {
   return (
     <>
-    <Header1/>
       <section className="page-not-found-page">
         <div className="container m-auto">
           <div className="row">
@@ -29,7 +28,6 @@ function PageNotFound() {
               </div>
             </div>
           </div>
-          <Footer/>
         </div>
       </section>
     </>
