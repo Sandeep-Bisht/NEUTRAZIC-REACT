@@ -96,7 +96,7 @@ const breakPoints = [
   
     const onPrevStart = (currentItem, nextItem) => {
       if (currentItem.index === nextItem.index) {
-      carouselRef.current.goTo(data.otherImage.length);
+      carouselRef.current.goTo(data.otherImage);
       }
       };
 
@@ -751,7 +751,7 @@ const breakPoints = [
               disableArrowsOnEnd={false}
               // itemPadding={[0, 4]}
               >       
-              { categories && categories.map((item, index) => {                 
+              { categories && categories.length > 0  && categories.map((item, index) => {                 
                 if(item.featuredCategories == "Featured Categories"){
                 return(  
               <div className="col-md-12" key={index}>

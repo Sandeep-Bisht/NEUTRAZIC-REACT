@@ -276,7 +276,9 @@ const Dashboard = () => {
         </section>
     ):(
       <>
-      {/* <PageNotFound/> */}
+      {/* <div>
+      <PageNotFound/>
+      </div> */}
       </>
     )
 }
