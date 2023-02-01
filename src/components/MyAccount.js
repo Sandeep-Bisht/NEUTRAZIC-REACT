@@ -140,10 +140,9 @@ const MyAccount = () => {
         ):
         <div className="col-12 mt-4 text-center EMPTYWISHLIST-DIV">
             <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"  background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
- 
             </div>
-}
-      </div>
+          }
+      </div> 
       <Footer />
     </>
   );
