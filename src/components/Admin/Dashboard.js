@@ -148,7 +148,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Manufacturer </h6>
                                 </div>
                                 <div>
-                                  <span className="count">{Manufacturer}</span>
+                                  <span className="count1">{Manufacturer}</span>
                                 </div>
                               </div>
                             </div>
@@ -168,7 +168,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Users </h6>
                                 </div>
                                 <div>
-                                  <span className="count">{users}</span>
+                                  <span className="count1">{users}</span>
                                 </div>
                               </div>
                             </div>
@@ -188,7 +188,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Orders </h6>
                                 </div>
                                 <div>
-                                  <span className="count">{Orders}</span>
+                                  <span className="count1">{Orders}</span>
                                 </div>
                               </div>
                             </div>
@@ -207,7 +207,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Products </h6>
                                 </div>
                                 <div>
-                                  <span className="count">{products}</span>
+                                  <span className="count1">{products}</span>
                                 </div>
                               </div>
                             </div>
@@ -226,7 +226,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Category </h6>
                                 </div>
                                 <div>
-                                  <span className="count">{categories}</span>
+                                  <span className="count1">{categories}</span>
                                 </div>
                               </div>
                             </div>
@@ -245,7 +245,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Sub category</h6>
                                 </div>
                                 <div>
-                                  <span className="count">{subCategories}</span>
+                                  <span className="count1">{subCategories}</span>
                                 </div>
                               </div>
                             </div>
