@@ -45,6 +45,7 @@ const Subcategories = (props) => {
     window.scroll(0, 0);
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ProductsByCategory();
+    setfilterData("");
     GetData();
     CartById();
     GetCategory();
@@ -77,6 +78,7 @@ const Subcategories = (props) => {
       .then(async (data) => {
         setData(data.data);
         setfilterData("");
+        setsubcategoryId("All Categories");
       })
       .catch((err) => {
         console.log(err, "error");
@@ -435,6 +437,9 @@ const Subcategories = (props) => {
     });
     setfilterData(filteredData);
     setsubcategoryId(name); 
+    const ele = document.querySelectorAll(id);
+    ele.add.classList("active");
+    
   };
   
   const GetallData = (Products) => {
@@ -456,6 +461,7 @@ const Subcategories = (props) => {
       }
     }
   };
+  
 
   const activeParagraph = () => {
     // const newActive=document.querySelectorAll(".paragraph");
@@ -463,7 +469,9 @@ const Subcategories = (props) => {
   };
   return (
     <>
+    <div onClick={GetData}>
       <Header1 />
+      </div>
 
       <div id="__next">
         {/* trending section  */}
@@ -714,7 +722,7 @@ const Subcategories = (props) => {
                         })
                       ) : (
                         <>
-                          { data.map((item, ind) => {
+                          {data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
                                 <div className="col-lg-2 col-md-12 col-sm-12 ">

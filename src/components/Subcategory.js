@@ -279,9 +279,9 @@ const Subcategory = () => {
         {/* trending section  */}
 
         <section className="trending-section">
-          <div className="container m-auto h-100">
-            <div className="row h-100">
-              <div className="col-12 p-0">
+          <div className="container m-auto">
+            <div className="row mt-0">
+              <div className="col-12">
                   <h1 className="trendign-head text-start">Skin Care</h1>
               </div>
             </div>
