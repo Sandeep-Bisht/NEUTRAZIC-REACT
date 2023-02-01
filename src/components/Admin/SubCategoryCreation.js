@@ -115,7 +115,6 @@ const SubCategoryCreation = (props) => {
 
   const UpdateSubCategory = async (e, _id) => {
     e.preventDefault();
-    console.log(data.image)
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("name", data.name);

@@ -612,7 +612,7 @@ const breakPoints = [
                                 <div className="tranding product-image-content">
                                   <div className="content product-content">
                                     <Link to={"/SingleProduct/" + el._id}>
-                                      <ReadMoreReact text={el.name} />
+                                      <figcaption>{el.name}</figcaption>
                                     </Link>
                                     <div className="price-div">
                                       <span className="new-price">
@@ -741,17 +741,18 @@ const breakPoints = [
             <div className="row mt-0 featured-products">
               <Carousel // breakPoints={breakPoints} 
               enableAutoPlay
-              autoPlaySpeed={1500} 
+              autoPlaySpeed={3000} 
               itemsToShow={2}
               onPrevStart={onPrevStart}
               onNextStart={onNextStart}
+              infiniteLoop={true}
               // onChange={Loop}
               ref={carouselRef}
               disableArrowsOnEnd={false}
               // itemPadding={[0, 4]}
               >       
               { categories && categories.map((item, index) => {                 
-                if(item.featuredCategories == "Featured Categories" && index < 2){
+                if(item.featuredCategories == "Featured Categories"){
                 return(  
               <div className="col-md-12" key={index}>
                 <div className="cat-left-side">
@@ -842,7 +843,7 @@ const breakPoints = [
                               <div className="tranding product-image-content">
                                 <div className="content product-content">
                                   <Link to={"/SingleProduct/" + el._id}>
-                                    <ReadMoreReact text={el.name} />
+                                  <figcaption>{el.name}</figcaption>
                                   </Link>
                                   <div className="price-div">
                                     <span className="new-price">
@@ -999,7 +1000,7 @@ const breakPoints = [
                             <div className="tranding product-image-content">
                               <div className="content product-content">
                                 <Link to={"/SingleProduct/" + el._id}>
-                                  <ReadMoreReact text={el.name} />
+                                <figcaption>{el.name}</figcaption>
                                 </Link>
                                 <div className="price-div">
                                   <i className="fa fa-inr"></i>

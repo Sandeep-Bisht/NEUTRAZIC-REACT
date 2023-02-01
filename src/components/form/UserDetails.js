@@ -216,8 +216,8 @@ const UserDetails=(props)=>{
                                 <h4>Order For</h4>
                                     <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
                                     <label for="html" className='pr-3'>For Me</label>&nbsp;
-                                    <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
-                                    <label for="html">For Other</label>
+                                    {/* <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
+                                    <label for="html">For Other</label> */}
                                 </div>
                                 {/* {
                            cart.map((el,ind1)=>(
@@ -239,9 +239,9 @@ const UserDetails=(props)=>{
         </form>
               </div>
               
-              <div className='col-4 mt-3'>
-           
-          <div className="  mb-5">
+              <div className='col-4'>
+           <div className='row'>
+          <div className="container-fluid mt-4">
                   <div className="cart-totals">
                     <h3>Cart Totals</h3>
                     <ul>
@@ -258,7 +258,8 @@ const UserDetails=(props)=>{
                       </li>
                     </ul>
                   </div>
-                </div>   
+                </div>  
+                </div> 
         </div>
             </div>
           </div>

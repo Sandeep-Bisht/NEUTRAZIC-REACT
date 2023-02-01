@@ -218,7 +218,7 @@ const AllProducts = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         serProductLength(data.length);
-        setAllProduct([...AllProduct, ...data.data]);
+        setAllProduct([...AllProduct,...data.data]);
         page = page + 1;
       })
       .catch((err) => {
@@ -681,7 +681,7 @@ const AllProducts = (props) => {
                 <InfiniteScroll
                   dataLength={AllProduct.length}
                   next={ProductByCategory}
-                  hasMore={AllProduct.length <= productLength}
+                  hasMore={AllProduct.length < productLength}
                   loader={<h4>Loading...</h4>}
                   endMessage={
                     <p style={{ textAlign: 'center' }}>
