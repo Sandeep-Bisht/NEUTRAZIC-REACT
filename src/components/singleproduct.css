@@ -84,7 +84,7 @@ padding: 20px;
 	height: 110px;
     background: #f2f2f2;
     object-fit: contain;
-    width: 100%;
+    /* width: 100%; */
     border-radius: 5px;
     padding: 10px;
 }

@@ -18910,6 +18910,7 @@ letter-spacing: 0.50px;
 		margin-bottom: 0;
 		font-size: 1rem;
 		min-height: 300px;
+		text-align: justify;
 	}
 	.cat-left-side
 	{
@@ -18927,6 +18928,9 @@ letter-spacing: 0.50px;
 		height: 200px;
 		width: 100%;
 		object-fit: cover;
+		border: 1px solid #c7c7c769;
+		background-color: #f2f2f2;
+		padding: 10px;
 	}
 
 	/* categories section css ends */
@@ -19847,6 +19851,11 @@ margin: 40px 8px 15px 0px;
 	 /* height: 340px !important; */
 	 /* border-bottom: 1px solid black !important; */
  }
+
+ .browser-category-section
+ {
+	padding-bottom: 60px;
+ }
  .back-ground-subcategory-sidebar
  {
 	background-color: #fff;
@@ -19909,7 +19918,4 @@ margin: 40px 8px 15px 0px;
 .active{
 	color: red;
 }
-
-
  /* SubcategoryPage Css */
- 

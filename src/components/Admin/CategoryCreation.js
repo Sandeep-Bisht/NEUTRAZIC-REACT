@@ -217,7 +217,7 @@ const CategoryCreation = (props) => {
                           ></textarea>
                           <label for="floatingInputValue">Category Description</label>
                         </div>
-                        <div className="col-6 form-floating">
+                        <div className="col-6 p-1 form-floating">
                           <select
                             className="form-control Dashborad-search"
                             // defaultValue={editableData  ? editableData.typ : ""}
