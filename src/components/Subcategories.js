@@ -437,8 +437,6 @@ const Subcategories = (props) => {
     });
     setfilterData(filteredData);
     setsubcategoryId(name); 
-    const ele = document.querySelectorAll(id);
-    ele.add.classList("active");
     
   };
   
