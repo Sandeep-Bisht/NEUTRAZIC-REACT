@@ -401,22 +401,29 @@ a{
   color:#000;
   opacity: .3;
 }
-.all-manufacturer-head
+.all-manufacturer-head, .all-category-head, .sub-category-head, .all-products-head
 {
   position: relative;
 }
 .count{
-  font-size: 17px;
+  font-size: 16px;
+    padding-top: 4px;
     color: #1b97ff;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
     position: absolute;
-    height: 22px;
+    height: 25px;
     text-align: center;
-    width: 23px;
+    width: 26px;
     right: -30px;
     background: #c7c7c749;
     border-radius: 50%;
+}
+.count1{
+  font-size: 17px;
+    color: #1b97ff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
 }
 .table-sec{
   margin-top: 20px;
