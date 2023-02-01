@@ -19052,10 +19052,10 @@ letter-spacing: 0.50px;
   }
   
   div#columns .figure1 figcaption {
-	font-size: 1.0rem;
+	font-size: 0.9rem;
 	color: #444;
-	line-height: 2.4;
-	height:30px;
+	line-height: 1.4;
+	height:40px;
 	font-weight:600;
 	text-overflow:ellipsis;
 	display:flex;
