@@ -303,7 +303,7 @@ const Sidemenu = () => {
                       New Orders
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/" + "In Progress"}>
+                  <Link to={"/InProgressOrder/"}>
                     {" "}
                     <li>
                       {" "}
