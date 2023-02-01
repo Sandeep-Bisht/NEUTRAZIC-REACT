@@ -117,12 +117,12 @@ const WishlistHandler=()=>{
                   <li>
                     <Link to="/WishList" onClick={WishlistHandler}>Wishlist</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="contact.html">Newsletter</a>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <Link to="/returnRefund">Purchasing Policy</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
