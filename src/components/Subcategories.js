@@ -78,7 +78,7 @@ const Subcategories = (props) => {
       .then(async (data) => {
         setData(data.data);
         setfilterData("");
-        setsubcategoryId("All Categories");
+        setsubcategoryId("All Products");
       })
       .catch((err) => {
         console.log(err, "error");
@@ -445,7 +445,7 @@ const Subcategories = (props) => {
   const GetallData = (Products) => {
     setfilterData("");
     setData(Products);
-    setsubcategoryId("All Categories");
+    setsubcategoryId("All Products");
   };
   // const Addclassactive = ()=>{
   //   let item = document.getElementById("List-item");
@@ -485,30 +485,38 @@ const Subcategories = (props) => {
                     <div id="sidebar-wrapper">
                       <ul className="sidebar-nav">
                         <li>
+                          { categories.map((item,ind)=>{
+                            if(item._id === props.match.params._id){
+                            // if(item.category._id === props.match.params._id){
+                              return(
                           <h1 className="browse-categories-header">
-                            Subcategories
+                           {item.name}
                           </h1>
+                          )
+                        }
+                          })}
                         </li>
                         <li
                           className="box"
                           onClick={() => GetallData(data)}
                           style={{ cursor: "pointer" }}
                         >
-                          <NavLink to="#">
+                          
                           <p
+                          className="active"
                             id="List-item"
                             style={{ cursor: "pointer" }}
                           >
                             All SubCategories
                           </p>
-                          </NavLink>
+                          
                         </li>
-                        {getSubCategories.map((item) => {
+                        {getSubCategories.map((item,ind) => {
                           if (item.category == props.match.params._id) {
                             return (
                               <>
-                                <li className="box">
-                                  <NavLink to="#">
+                                <li className="box" key={ind}>
+                                  
                                   <p
                                     id="List-item"
                                     onClick={() => {
@@ -518,7 +526,7 @@ const Subcategories = (props) => {
                                   >
                                     {item.name}
                                   </p>
-                                  </NavLink>
+                                  
                                 </li>
                               </>
                             );
@@ -535,7 +543,7 @@ const Subcategories = (props) => {
                     if(ind < 1)
                     {
                       return(
-                  <h2>{SubcategoryId}</h2>
+                  <h2 key={ind}>{SubcategoryId}</h2>
                   )
                 }
                 })
@@ -548,7 +556,7 @@ const Subcategories = (props) => {
                         filterData.map((item, ind) => {
                           
                           return (
-                            <div className="col-lg-2 col-md-12 col-sm-12 ">
+                            <div className="col-lg-2 col-md-12 col-sm-12 " key={ind}>
                               <div className="single-products-box border">
                                 <div className="row">
                                   <div className="col-md-12">
@@ -726,7 +734,7 @@ const Subcategories = (props) => {
                           {data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
-                                <div className="col-lg-2 col-md-12 col-sm-12 ">
+                                <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
                                   <div className="single-products-box border">
                                     <div className="row">
                                       <div className="col-md-12">
