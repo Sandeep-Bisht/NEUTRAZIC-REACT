@@ -468,7 +468,7 @@ const Subcategories = (props) => {
       <div id="__next">
         {/* trending section  */}
 
-        <section>
+        <section className="browser-category-section">
           <div className="container-fluid">
             <div className="row mt-0">
               <div className="col-md-2 px-0">
