@@ -742,7 +742,7 @@ const breakPoints = [
           <div className="container m-auto">
             <div className="row mt-0 featured-products">
               <Carousel // breakPoints={breakPoints} 
-              enableAutoPlay
+              disableAutoPlay
               autoPlaySpeed={3000} 
               itemsToShow={2}
               onPrevStart={onPrevStart}
