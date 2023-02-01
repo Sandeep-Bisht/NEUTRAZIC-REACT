@@ -51,7 +51,6 @@ import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufac
 import MyAccount from "../components/MyAccount"
 import Success from '../components/Success';
 import AllUsers from "../components/Admin/AllUsers";
-import PageNotFound from "../components/PageNotFound";
 import PrivacyPolicy from "../components/PrivacyPolicy";
 import TermsConditions from "../components/TermsConditions";
 import ReturnRefund from "../components/ReturnRefund";
@@ -171,7 +170,7 @@ const Root = (props) => {
               component={SearchResult}
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
-            <Route path='/pageNotFound' component={PageNotFound} />
+            {/* <Route path='/PageNotFound' component={PageNotFound} /> */}
             <Route path='/privacyPolicy' component={PrivacyPolicy} />
             <Route path='/termConditions' component={TermsConditions} />
             <Route path='/returnRefund' component={ReturnRefund} />

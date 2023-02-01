@@ -23,7 +23,7 @@ const Cart = () => {
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
   const [cartItems, setCartItems] = useState();
-
+console.log(cart,"carttttttttttttttt");
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;
@@ -172,7 +172,7 @@ const Cart = () => {
                                     
                                     <img
                                       src={
-                                        `${baseUrl}/` + el.image
+                                        `${baseUrl}/` + el.image || el.manufacturer.image[0].path
                                       }
                                       alt="item"
                                     />
