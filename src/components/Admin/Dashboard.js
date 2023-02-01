@@ -16,7 +16,7 @@ import AllSubCategoriesDetails from "./AllSubCategory/AllSubCategoriesDetails";
 import AllProductsDetails from "./AllProducts/AllProductsDetails";
 import AllCategoriesDetails from "./AllCategory/AllCategoriesDetails";
 import DashboardHeaader from "./DashboardHeaader";
-import { baseUrl } from "../../utils/services"
+import { baseUrl } from "../../utils/services";
 import PageNotFound from "../PageNotFound";
 
 // var ManufacturerCount1='';
@@ -29,9 +29,8 @@ const Dashboard = () => {
   const [users, setUsers] = useState("");
   const [categories, setCategories] = useState("");
   const [subCategories, setSubCategories] = useState("");
-  const [localuser,setLocaluser] = useState("");
+  const [localuser, setLocaluser] = useState("");
   var Userdata;
-
 
   useEffect(() => {
     setCount();
@@ -42,24 +41,20 @@ const Dashboard = () => {
     GetOrders();
     GetProducts();
     GetLocalUserData();
-    
 
     // Subtotal1 =  localStorage.getItem("Subtotal")
   }, []);
 
-  const GetLocalUserData = ()=>{
-    Userdata = JSON.parse( localStorage.getItem("Userdata"));
+  const GetLocalUserData = () => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     const users = Userdata;
     setLocaluser(users);
-  }
-  
-
+  };
 
   const GetProducts = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        
         Setproducts(data.data.length);
       })
       .catch((err) => {
@@ -87,7 +82,7 @@ const Dashboard = () => {
         console.log(err, "error");
       });
   };
-  
+
   const GetUser = async () => {
     await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
@@ -109,8 +104,6 @@ const Dashboard = () => {
       });
   };
 
-  
-
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -118,7 +111,7 @@ const Dashboard = () => {
         setManufacturer(data.data.length);
       })
       .catch((err) => {
-        console.log(err,"errors");
+        console.log(err, "errors");
       });
   };
   const setCount = async () => {
@@ -132,155 +125,143 @@ const Dashboard = () => {
   };
   return (
     <>
-    
-    {
-    localuser && localuser.role === "superAdmin"  ? (
-      <section id="body-pd">
-        <div className="container-fluid">
-          <DashboardHeaader/>
-      
-        
-          <div className="row">
-            <div className="col-2 px-0">
-              <Sidemenu />
-            </div>
-            <div className="col-10">
-              <main className="main">
-                <div className="row cardsec-row">
-                  <div className="col-3">
-                    <Link to="/AllManufactureDetails">
-                      <div className="card cardsec">
-                        <div className="row">
-                          <div className="col-12">
-                            <div className="d-flex justify-content-between align-items-center">
-                              <div>
-                                <GiFactory className="cardicon" />
-                                <h6 className="cardheads">Manufacturer </h6>
-                              </div>
-                              <div>
-                                <span className="count">{Manufacturer}</span>
+      {localuser && localuser.role === "superAdmin" ? (
+        <section id="body-pd">
+          <div className="container-fluid">
+            <DashboardHeaader />
+
+            <div className="row">
+              <div className="col-2 px-0">
+                <Sidemenu />
+              </div>
+              <div className="col-10">
+                <main className="main">
+                  <div className="row cardsec-row">
+                    <div className="col-3">
+                      <Link to="/AllManufactureDetails">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <GiFactory className="cardicon" />
+                                  <h6 className="cardheads">Manufacturer </h6>
+                                </div>
+                                <div>
+                                  <span className="count">{Manufacturer}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
-                  </div>
-                  
-                  <div className="col-3">
-                  <Link to = "/AllUsers">
-                    <div className="card cardsec">
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="d-flex justify-content-between align-items-center">
-                            
-                            <div>
-                              <FiUserCheck className="cardicon" />
-                              <h6 className="cardheads">Users </h6>
-                            </div>
-                            <div>
-                              
-                                <span className="count">{users}</span>
-                              
-                            </div>
-                            
-                          </div>
-                        </div>
-                      </div>
+                      </Link>
                     </div>
-                    </Link>
-                  </div>
-                  
-                  
-                  <div className="col-3">
-                    <Link to="/Orders">
-                      <div className="card cardsec">
-                        <div className="row">
-                          <div className="col-12">
-                            <div className="d-flex justify-content-between align-items-center">
-                              <div>
-                                <BsCartPlus className="cardicon" />
-                                <h6 className="cardheads">Orders </h6>
-                              </div>
-                              <div>
-                                <span className="count">{Orders}</span>
+
+                    <div className="col-3">
+                      <Link to="/AllUsers">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <FiUserCheck className="cardicon" />
+                                  <h6 className="cardheads">Users </h6>
+                                </div>
+                                <div>
+                                  <span className="count">{users}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-3">
-                    <Link to="/AllProductsDetails">
-                      <div className="card cardsec">
-                        <div className="row">
-                          <div className="col-12">
-                            <div className="d-flex justify-content-between align-items-center">
-                              <div>
-                                <GiBoxUnpacking className="cardicon" />
-                                <h6 className="cardheads">Products </h6>
-                              </div>
-                              <div>
-                                <span className="count">{products}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-3 pt-4">
-                    <Link to="/AllCategoriesDetails">
-                      <div className="card cardsec">
-                        <div className="row">
-                          <div className="col-12">
-                            <div className="d-flex justify-content-between align-items-center">
-                              <div>
-                                <BiCategory className="cardicon" />
-                                <h6 className="cardheads">Category </h6>
-                              </div>
-                              <div>
-                                <span className="count">{categories}</span>
+                      </Link>
+                    </div>
+
+                    <div className="col-3">
+                      <Link to="/Orders">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <BsCartPlus className="cardicon" />
+                                  <h6 className="cardheads">Orders </h6>
+                                </div>
+                                <div>
+                                  <span className="count">{Orders}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-3 pt-4">
-                    <Link to="/AllSubCategoriesDetails">
-                      <div className="card cardsec">
-                        <div className="row">
-                          <div className="col-12">
-                            <div className="d-flex justify-content-between align-items-center">
-                              <div>
-                                <BsListNested className="cardicon" />
-                                <h6 className="cardheads">Sub category</h6>
-                              </div>
-                              <div>
-                                <span className="count">{subCategories}</span>
+                      </Link>
+                    </div>
+                    <div className="col-3">
+                      <Link to="/AllProductsDetails">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <GiBoxUnpacking className="cardicon" />
+                                  <h6 className="cardheads">Products </h6>
+                                </div>
+                                <div>
+                                  <span className="count">{products}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
+                    <div className="col-3 pt-4">
+                      <Link to="/AllCategoriesDetails">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <BiCategory className="cardicon" />
+                                  <h6 className="cardheads">Category </h6>
+                                </div>
+                                <div>
+                                  <span className="count">{categories}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className="col-3 pt-4">
+                      <Link to="/AllSubCategoriesDetails">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <BsListNested className="cardicon" />
+                                  <h6 className="cardheads">Sub category</h6>
+                                </div>
+                                <div>
+                                  <span className="count">{subCategories}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </main>
+                </main>
+              </div>
             </div>
           </div>
-        </div>
         </section>
-    ):(
-      <>
-      {/* <PageNotFound/> */}
-      </>
-    )
-}
-
+      ) : (
+        <>{/* <PageNotFound/> */}</>
+      )}
     </>
   );
 };

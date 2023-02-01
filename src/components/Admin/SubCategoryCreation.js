@@ -197,7 +197,6 @@ const SubCategoryCreation = (props) => {
                           <div className="col-6 p-1">
                             <input
                               type="file"
-                              
                               className="form-control Dashborad-search"
                               placeholder="SubCategory Name "
                               onChange={(e) => {
