@@ -19884,6 +19884,7 @@ margin: 40px 8px 15px 0px;
  .browse-categories-sub-heading h2
  {
 	margin-bottom: 0;
+	margin-left : 1rem;
 	font-size: 22px;
 	font-weight: 500;
 	color: #1e144f;

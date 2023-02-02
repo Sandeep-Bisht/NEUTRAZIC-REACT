@@ -16,6 +16,8 @@ import { useForm } from "react-hook-form";
 import { MdOutlineClose } from "react-icons/md";
 //import Button from './button';
 import { baseUrl } from "../utils/services";
+import * as ACTIONS from '../CommonService/CategoriesbyID/action'
+import { useDispatch } from "react-redux";
 
 let changeNavValue = 0;
 var header;
@@ -26,7 +28,11 @@ const errorEmail = "Please Enter a valid Email Address";
 
 // var userCart=[]
 const Header1 = (props) => {
+
+  let dispatch = useDispatch();
+
   const state = useSelector((state) => state.GetCartItemReducer);
+  
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -58,6 +64,10 @@ const Header1 = (props) => {
       repassword: "",
     },
   });
+
+  const CategoryDataHandler = ()=>{
+  
+  }
 
   useEffect(() => {
     if(state.noOfItemsInCart >= 0) {
@@ -401,6 +411,7 @@ const Header1 = (props) => {
                               data-bs-target="#flush-collapseOne"
                               aria-expanded="false"
                               aria-controls="flush-collapseOne"
+                              onClick={()=>CategoryDataHandler()}
                             >
                               {el.name}
                             </button>

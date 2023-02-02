@@ -8,7 +8,7 @@ import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
 import { useHistory,NavLink } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,16 +32,16 @@ const Subcategories = (props) => {
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
   const [getSubCategories, setGetSubCategories] = useState([]);
-  const [filterData, setfilterData] = useState([]);
+  const [filterData, setfilterData] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
- const [SubcategoryId , setsubcategoryId] = useState("All Categories");
+ const [SubcategoryId , setsubcategoryId] = useState("All Products");
   const history = useHistory();
 
   const dispatch = useDispatch();
   var CartDataWoLogin = [];
-
-  useEffect(() => {
+  const state = useSelector((state) => state.GetCategoriesReducer);
+  useEffect(() => {   
     window.scroll(0, 0);
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ProductsByCategory();
@@ -69,10 +69,8 @@ const Subcategories = (props) => {
       };
     });
   }, []);
-
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -437,10 +435,25 @@ const Subcategories = (props) => {
     const filteredData = data.filter((value) => {
       return value.subcategory._id === id;
     });
+    
     setfilterData(filteredData);
-    setsubcategoryId(name); 
+    setsubcategoryId(name);
+    if(state === []){
+      setfilterData("");
+    }
+     
     
   };
+
+  const checkidSubcategory = (id)=>{
+    
+  }
+
+  const GetOtherCategories = ()=>{
+    console.log(categories);
+    setData(categories);
+    setfilterData("");
+  }
   
   const GetallData = (Products) => {
     setfilterData("");
@@ -469,9 +482,9 @@ const Subcategories = (props) => {
   };
   return (
     <>
-    <div onClick={GetData}>
-      <Header1 />
-      </div>
+    
+      <Header1/>
+      
 
       <div id="__next">
         {/* trending section  */}
@@ -554,7 +567,7 @@ const Subcategories = (props) => {
                     <div className="row">
                       {filterData && filterData.length > 0 ? (
                         filterData.map((item, ind) => {
-                          
+
                           return (
                             <div className="col-lg-3 col-md-12 col-sm-12 " key={ind}>
                               <div className="single-products-box border">
