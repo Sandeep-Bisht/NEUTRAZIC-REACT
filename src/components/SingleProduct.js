@@ -412,10 +412,7 @@ const SingleProduct = (props) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Added to cart", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
+      
     }
 
   };
