@@ -726,9 +726,9 @@ const breakPoints = [
             </div>
             {/* hover Button */}
             <div className="wrapperbtn pt-0">
-              <Link to="/AllProducts" className="btn10">
-                <span>Show More</span>
-                <div className="transition"></div>
+              <Link to="/AllProducts">
+                <button type="button" className="btn10">Show More</button>
+                {/* <div className="transition"></div> */}
               </Link>
             </div>
             {/* Hover Button End */}
@@ -953,9 +953,9 @@ const breakPoints = [
             {/* hover Button */}
 
             <div className="wrapperbtn pt-3 pb-4">
-              <Link to="/AllProducts" className="btn10">
-                <span>Show More</span>
-                <div className="transition"></div>
+            <Link to="/AllProducts">
+                <button type="button" className="btn10">Show More</button>
+                {/* <div className="transition"></div> */}
               </Link>
             </div>
             {/* Hover Button End */}
@@ -1246,9 +1246,9 @@ const breakPoints = [
             </div>
             {/* hover Button */}
             <div className="wrapperbtn pt-3 pb-4">
-              <Link to="/Subcategory" className="btn10">
-                <span>Show More</span>
-                <div className="transition"></div>
+              <Link to="/Subcategory">
+                <button type="button" className="btn10">Show More</button>
+                {/* <div className="transition"></div> */}
               </Link>
             </div>
             {/* Hover Button End */}
