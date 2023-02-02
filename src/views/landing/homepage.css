@@ -19876,12 +19876,12 @@ margin: 40px 8px 15px 0px;
  {
 	margin-top: 32px;
 	margin-bottom: 26px;
-	text-decoration: underline;
 	letter-spacing: 0.25px;
  }
  .browse-categories-sub-heading h2
  {
 	margin-bottom: 0;
+	margin-left : 1rem;
 	font-size: 22px;
 	font-weight: 500;
 	color: #1e144f;

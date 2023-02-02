@@ -643,7 +643,7 @@ const SingleProduct = (props) => {
       <div className="first-nav container-fluid">
         <span>
           <Link to="/">Home</Link>/
-          <Link to={"/Allcategory/" + data.category}>{categoryname}</Link>/
+          <Link to={"/SubCategories/" + categoryid}>{categoryname}</Link>/
           {data.name}
         </span>
       </div>

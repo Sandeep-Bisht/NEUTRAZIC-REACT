@@ -1246,10 +1246,21 @@ const breakPoints = [
             </div>
             {/* hover Button */}
             <div className="wrapperbtn pt-3 pb-4">
-              <Link to="/Subcategory" className="btn10">
+            {data.filter((item) => item.category.name == "Weight Management").map((el,index)=>{
+              
+              if(index<1){
+              return(
+              <Link to={"/SubCategories/"+ el.category._id} className="btn10">
                 <span>Show More</span>
                 <div className="transition"></div>
               </Link>
+              
+              )
+            }
+            }
+            )
+         
+          }
             </div>
             {/* Hover Button End */}
           </div>
