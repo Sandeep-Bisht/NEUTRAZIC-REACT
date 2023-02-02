@@ -66,7 +66,7 @@ const Header1 = (props) => {
   });
 
   const CategoryDataHandler = ()=>{
-  
+     dispatch(ACTIONS.getCategories([]))
   }
 
   useEffect(() => {
