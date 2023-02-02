@@ -753,7 +753,7 @@ font-family: 'Roboto', sans-serif;
 {
   padding-top: 60px;
   background-color: #f1f4f6;
-  height: 100vh;
+  height: 100%;
 }
 
 /* End Dashboard header image css */
