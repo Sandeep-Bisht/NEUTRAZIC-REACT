@@ -12058,9 +12058,9 @@ textarea.form-control {
 .single-products-box .product-div .product-image-div
 {
 	height: 100%;
-    align-items: center;
+    /* align-items: center;
     display: flex;
-	justify-content: center;
+	justify-content: center; */
 	border: 1px solid #c7c7c769;
 	padding: 15px;
 	background-color: #fff;
@@ -12097,7 +12097,7 @@ textarea.form-control {
 } */
 .single-products-box .image img {
 	transition: var(--transition);
-	height:140px;
+	height:160px;
 	width:100%;
 	object-fit: cover;
 }

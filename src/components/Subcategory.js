@@ -293,7 +293,7 @@ const Subcategory = () => {
               {data.map((el, ind) => {
                 if (el.subcategory == "6133469ff51d5a1242de049a") {
                   return (
-                    <div className="col-6 col-md-3 col-sm-12 ">
+                    <div className="col-6 col-lg-3 col-md-3 col-sm-12 ">
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row p-4 align-items-center .product-div">

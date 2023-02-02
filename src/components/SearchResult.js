@@ -782,7 +782,7 @@ const SearchResult = (props) => {
                   count = count + 1;
                   return (
                     <>
-                      <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
+                      <div className="col-lg-3 col-md-12 col-sm-12" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
@@ -808,7 +808,7 @@ const SearchResult = (props) => {
                                           el.image[0].path
                                         }
                                         alt=""
-                                        style={{ position: "absolute", left:"0" }}
+                                        style={{ position: "absolute", left:"0", top:"0" }}
                                       />
                                     </div>
                                   </Link>
@@ -824,7 +824,7 @@ const SearchResult = (props) => {
                                         {el.inrDiscount}
                                       </span>
                                       <del className="new-price ml-1">
-                                        {el.inrMrp}
+                                      <i className="fa fa-inr"></i>{el.inrMrp}
                                       </del>
                                       {Userdata ? (
                                         <i
