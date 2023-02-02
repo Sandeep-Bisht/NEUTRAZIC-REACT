@@ -410,7 +410,7 @@ const ProductByManufacturer = (props) => {
                                       {el.inrDiscount}
                                 </span>
                                 <del className="new-price ml-1">
-                                  {el.inrMrp}
+                                <i className="fa fa-inr"></i>{el.inrMrp}
                                 </del>
                                 {Userdata ? (
                                   <i

@@ -414,7 +414,7 @@ const Subcategories = (props) => {
                 });
             }
           } else {
-            toast.error("Allready in wishlist !", {
+            toast.error("Already in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 2000,
             });
@@ -569,7 +569,7 @@ const Subcategories = (props) => {
                         filterData.map((item, ind) => {
 
                           return (
-                            <div className="col-lg-2 col-md-12 col-sm-12 " key={ind}>
+                            <div className="col-lg-3 col-md-12 col-sm-12 " key={ind}>
                               <div className="single-products-box border">
                                 <div className="row">
                                   <div className="col-md-12">
@@ -599,7 +599,7 @@ const Subcategories = (props) => {
                                               alt=""
                                               style={{
                                                 position: "absolute",
-                                                left: "0",
+                                                left: "0", top: "0"
                                               }}
                                             />
                                           </div>
@@ -642,7 +642,7 @@ const Subcategories = (props) => {
                                             </span>
 
                                             <del className="new-price ml-1">
-                                              {item.inrMrp}
+                                            <i className="fa fa-inr"></i>{item.inrMrp}
                                             </del>
                                             {Userdata ? (
                                               <i
@@ -747,7 +747,7 @@ const Subcategories = (props) => {
                           {data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
-                                <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
+                                <div className="col-lg-3 col-md-12 col-sm-12" key={ind}>
                                   <div className="single-products-box border">
                                     <div className="row">
                                       <div className="col-md-12">
@@ -820,7 +820,7 @@ const Subcategories = (props) => {
                                                 </span>
 
                                                 <del className="new-price ml-1">
-                                                  {item.inrMrp}
+                                                <i className="fa fa-inr"></i> {item.inrMrp}
                                                 </del>
                                                 {Userdata ? (
                                                   <i

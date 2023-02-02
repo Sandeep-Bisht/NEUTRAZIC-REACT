@@ -12058,9 +12058,9 @@ textarea.form-control {
 .single-products-box .product-div .product-image-div
 {
 	height: 100%;
-    align-items: center;
+    /* align-items: center;
     display: flex;
-	justify-content: center;
+	justify-content: center; */
 	border: 1px solid #c7c7c769;
 	padding: 15px;
 	background-color: #fff;
@@ -12097,7 +12097,7 @@ textarea.form-control {
 } */
 .single-products-box .image img {
 	transition: var(--transition);
-	height:140px;
+	height:160px;
 	width:100%;
 	object-fit: cover;
 }
@@ -18931,6 +18931,7 @@ letter-spacing: 0.50px;
 		border: 1px solid #c7c7c769;
 		background-color: #f2f2f2;
 		padding: 10px;
+		border-radius: 3px;
 	}
 
 	/* categories section css ends */
@@ -19240,9 +19241,9 @@ ul
   
   .wrapperbtn .btn10:hover{
 	background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
-	border: 2px solid #1b97ff;
+	border: none;
 	color: #fff;
-	padding: 8px 40px;
+	padding: 10px 40px;
   }
   
 :where(.css-dev-only-do-not-override-k83k30).ant-btn.ant-btn-sm
@@ -19786,7 +19787,8 @@ margin: 40px 8px 15px 0px;
 .btn-div .btn:hover
 {
 	background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
-	border: 2px solid #1b97ff;
+	border: none;
+	padding: 10px 32px;
 	color: #fff;	
 }
 .btn-div .btn svg
@@ -19870,6 +19872,7 @@ margin: 40px 8px 15px 0px;
 	margin-bottom: 12px;
 	color: #000;
 	opacity: .8;
+	padding-left: 16px;
 	text-transform: capitalize;
  }
  .browse-categories-sub-heading
@@ -19894,6 +19897,7 @@ margin: 40px 8px 15px 0px;
     margin-right: 10px;
     font-weight: 500;
     padding: 10px 0;
+	padding-left: 16px;
     border-bottom: 1px solid #f2f2f2;
     letter-spacing: 0.15px;
     text-transform: capitalize;

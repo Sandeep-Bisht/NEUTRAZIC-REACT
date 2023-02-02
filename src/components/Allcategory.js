@@ -399,7 +399,8 @@ const Allcategory = (props) => {
                                   (item.inrMrp * item.inrDiscount) / 100} */}
                                   {item.inrDiscount}
                             </span>
-                            <del className="new-price ml-1">{item.inrMrp}</del>
+                            <del className="new-price ml-1">
+                            <i className="fa fa-inr"></i>{item.inrMrp}</del>
                             {Userdata ? (
                               <i
                                 className="bx bxs-heart ml-3"

@@ -752,6 +752,7 @@ font-family: 'Roboto', sans-serif;
 #body-pd
 {
   padding-top: 60px;
+  padding-bottom: 20px;
   background-color: #f1f4f6;
   height: 100vh;
 }
@@ -893,6 +894,8 @@ font-family: 'Roboto', sans-serif;
     font-size: 0.8rem;
     color: #000;
     opacity: .8;
+    display: flex;
+    align-items: center;
 }
 .Configration-List li:hover
 {
