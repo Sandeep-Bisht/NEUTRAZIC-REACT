@@ -604,7 +604,7 @@ const breakPoints = [
                                           el.image[0].path
                                         }
                                         alt=""
-                                        style={{ position: "absolute", left:"0" }}
+                                        style={{ position: "absolute", left:"0", top: "0" }}
                                       />
                                     </div>
                                   </Link>
@@ -837,7 +837,7 @@ const breakPoints = [
                                         el.image[0].path
                                       }
                                       alt=""
-                                      style={{ position: "absolute",left: "0" }}
+                                      style={{ position: "absolute",left: "0", top: "0" }}
                                     />
                                   </div>
                                 </Link>
@@ -995,7 +995,7 @@ const breakPoints = [
                                       el.image[0].path
                                     }
                                     alt=""
-                                    style={{ position: "absolute", left: "0" }}
+                                    style={{ position: "absolute", left: "0", top: "0" }}
                                   />
                                 </div>
                               </Link>
