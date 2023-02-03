@@ -117,7 +117,7 @@ console.log(cart,"carttttttttttttttt");
     const array = await cart.filter((e, i) => i !== index);
     await UpdateCart(array);
     await CartById();
-    toast.success("Product romoved successfully", {
+    toast.success("Product removed successfully", {
       position: "bottom-right",
       autoClose: 2000,
     })

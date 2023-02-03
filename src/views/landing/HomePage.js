@@ -1250,11 +1250,10 @@ const breakPoints = [
               
               if(index<1){
               return(
-              <Link to={"/SubCategories/"+ el.category._id} className="btn10">
-                <span>Show More</span>
-                <div className="transition"></div>
+              <Link to={"/SubCategories/"+ el.category._id}>
+                <button type="button" className="btn10">Show More</button>
+                {/* <div className="transition"></div> */}
               </Link>
-              
               )
             }
             }
