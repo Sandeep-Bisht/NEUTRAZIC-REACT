@@ -267,7 +267,7 @@ const Sidemenu = () => {
       </div> */}
 
       <div className="nav__list">
-        <Link to="Dashboard" className="nav__link active">
+        <Link to="/Dashboard" className="nav__link active">
           <RxDashboard className="nav__icon" />
           <span className="nav__name">Dashboard</span>
         </Link>
@@ -303,8 +303,7 @@ const Sidemenu = () => {
                       New Orders
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/"}>
-                    {" "}
+                  <Link to={"/InProgressOrder/"+"Progress"}>
                     <li>
                       {" "}
                       <GrInProgress className="configuration-icons-wrap" />
@@ -333,7 +332,6 @@ const Sidemenu = () => {
                     </li>
                   </Link>
                   <Link to={"/InProgressOrder/" + "Delivered"}>
-                    {" "}
                     <li>
                       {" "}
                       <MdRealEstateAgent className="configuration-icons-wrap" />
@@ -394,6 +392,13 @@ const Sidemenu = () => {
                                 <li>
                                   <BsListNested className="configuration-icons-wrap" />
                                   Add SubCategory
+                                </li>
+                              </Link>
+                              <Link to="/ProductForm">
+                                {" "}
+                                <li>
+                                <GiBoxUnpacking className="configuration-icons-wrap" />
+                                  Add Product
                                 </li>
                               </Link>
                               <Link to="/Roles">

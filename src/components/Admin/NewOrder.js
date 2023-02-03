@@ -132,9 +132,17 @@ const items = [
    },
    {
      key: '2',
-     label: 'InProgress',
+     label: (
+      <a onClick={(e)=>clickHandler(e)}>
+            inProgress
+      </a>
+     ),
    },
  ];
+
+ const clickHandler=(e)=>{
+  alert(e.status);
+ }
 
   const columns = [
    //  { title: "SR NO", dataIndex: "sr_no", key: "sr_no" },
