@@ -69,6 +69,12 @@ const Subcategories = (props) => {
       };
     });
   }, []);
+
+  useEffect(()=>{
+    setfilterData(state.array);
+    setsubcategoryId(state.allProduct);
+  },[state])
+
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
     await fetch(`${baseUrl}/api/product/all_product`)
@@ -438,9 +444,7 @@ const Subcategories = (props) => {
     
     setfilterData(filteredData);
     setsubcategoryId(name);
-    if(state === []){
-      setfilterData("");
-    }
+   
      
     
   };
