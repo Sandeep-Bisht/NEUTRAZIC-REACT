@@ -19863,6 +19863,9 @@ margin: 40px 8px 15px 0px;
 	background-color: #fff;
 	height: 100%;
 	color: #002752;
+	position: sticky;
+    top: 40px;
+    height: 100vh;
 	box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
  }
  .browse-categories-header
