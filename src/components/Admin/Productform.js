@@ -389,11 +389,14 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
+                            defaultValue={
+                              editableData ? editableData.name : ""
+                            }
                             onChange={(e) => {
                               Setdata({ ...data, category: e.target.value });
                             }}
                           >
-                            <option selected >{editableData  ? editableData.category.name : "Select Category"}</option>
+                            <option selected >{editableData  ? editableData.name : "Select Category"}</option>
                             {categories.map((el, ind) => (
                               <option value={el._id}>{el.name}</option>
                             ))}
@@ -402,11 +405,14 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
+                            defaultValue={
+                              editableData ? editableData.name : ""
+                            }
                            onChange={(e) => {
                               Setdata({ ...data, subcategory: e.target.value });
                             }}
                           >
-                            <option selected>{editableData  ? editableData.subcategory.name : "Select Sub Category"}</option>
+                            <option selected>{editableData  ? editableData.name : "Select Sub Category"}</option>
                             {subcategories.map((el, ind) => (
                               <option value={el._id}>{el.name}</option>
                             ))}
@@ -416,6 +422,9 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
+                            defaultValue={
+                              editableData ? editableData.name : ""
+                            }
                             onChange={(e) => {
                               Setdata({
                                 ...data,
@@ -423,7 +432,7 @@ const Productform = (props) => {
                               });
                             }}
                           >
-                            <option selected>{editableData  ? editableData.manufacturer.name : "Select Manufacturer"}</option>
+                            <option selected>{editableData  ? editableData.name : "Select Manufacturer"}</option>
                             {manufactureres.map((el, ind) =>
                               Userdata.role == "superAdmin" ? (
                                 <option value={el._id}>{el.name}</option>
@@ -527,7 +536,7 @@ const Productform = (props) => {
                         <div className="col-6 p-1">
                           <select
                             className="form-control Dashborad-search"
-                            defaultValue={editableData  ? editableData.typ : ""}
+                            defaultValue={editableData  ? editableData.type : ""}
                             onChange={(e) => {
                               Setdata({ ...data, type: e.target.value });
                             }}
