@@ -19890,7 +19890,7 @@ margin: 40px 8px 15px 0px;
 	color: #1e144f;
 	letter-spacing: 0.15px;
  }
- #List-item
+ .List-item
  {
 	color: #1e144f;
     font-size: 16px;
@@ -19902,13 +19902,16 @@ margin: 40px 8px 15px 0px;
     letter-spacing: 0.15px;
     text-transform: capitalize;
  }
+ .newActive{
+	color: #1b97ff;
+ }
  #List-item:hover
  {
 	color: #1b97ff !important;
  }
  .sidebar-nav .active
  {
-	color: #1b97ff !important;
+	color: #1e144f !important;
  }
  .trending-section{
 	 padding-left: 30px;
@@ -19919,7 +19922,5 @@ margin: 40px 8px 15px 0px;
  .product-div-subcategory{
 	margin-left: 10px;
  }
-.active{
-	color: red;
-}
+
  /* SubcategoryPage Css */

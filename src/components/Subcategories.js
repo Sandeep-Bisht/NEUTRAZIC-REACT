@@ -37,6 +37,8 @@ const Subcategories = (props) => {
   const [cartItems, setCartItems] = useState(undefined);
  const [SubcategoryId , setsubcategoryId] = useState("All Products");
   const history = useHistory();
+                     
+console.log(getSubCategories,"sub category");
 
   const dispatch = useDispatch();
   var CartDataWoLogin = [];
@@ -436,12 +438,15 @@ const Subcategories = (props) => {
 
     setData(filteronload);
   };
-
+  var activeItem=document.getElementById("List");
   const GetSingleSubCategory = (id,name) => {
-    const filteredData = data.filter((value) => {
-      return value.subcategory._id === id;
-    });
-    
+    let filteredData=[];
+    for(let item of data)
+    {
+      if(item.subcategory._id ===id)
+      filteredData.push(item);
+      activeItem.classList.add("newActive");
+    }
     setfilterData(filteredData);
     setsubcategoryId(name);
    
@@ -454,12 +459,13 @@ const Subcategories = (props) => {
   }
 
   const GetOtherCategories = ()=>{
-    console.log(categories);
     setData(categories);
     setfilterData("");
   }
-  
+
+  const allSubCateory=document.getElementById("allsub");
   const GetallData = (Products) => {
+    allSubCateory.classList.add("newActive");
     setfilterData("");
     setData(Products);
     setsubcategoryId("All Products");
@@ -478,12 +484,23 @@ const Subcategories = (props) => {
       }
     }
   };
-  
 
-  const activeParagraph = () => {
-    // const newActive=document.querySelectorAll(".paragraph");
-    //  newActive
+  
+   
+  const activeLinkSubCategory=(name) => {
+    
+      for(let newItem of filterData)
+      { 
+        if(name===newItem.subcategory.name)
+        {   
+          allSubCateory.classList.remove("newActive")
+          activeItem.classList.remove("newActive");
+          return "newActive"
+          
+        } 
+      }  ;
   };
+
   return (
     <>
     
@@ -520,8 +537,8 @@ const Subcategories = (props) => {
                         >
                           
                           <p
-                          className="active"
-                            id="List-item"
+                          className="List-item"
+                          id="allsub"
                             style={{ cursor: "pointer" }}
                           >
                             All SubCategories
@@ -535,7 +552,8 @@ const Subcategories = (props) => {
                                 <li className="box" key={ind}>
                                   
                                   <p
-                                    id="List-item"
+                                    className={`List-item ${activeLinkSubCategory(item.name)}`}
+                                    id="List"
                                     onClick={() => {
                                       GetSingleSubCategory(item._id,item.name);
                                     }}
