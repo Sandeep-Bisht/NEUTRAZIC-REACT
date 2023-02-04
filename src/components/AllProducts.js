@@ -717,7 +717,7 @@ const AllProducts = (props) => {
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                              <div className="col-6">
+                              <div className="col-6 text-start">
                                 <span className="price">
                                   {" "}
                                   <i className="fa fa-inr"></i>{el.inrDiscount}
