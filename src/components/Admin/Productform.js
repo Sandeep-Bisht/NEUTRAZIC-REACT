@@ -496,7 +496,7 @@ const Productform = (props) => {
                               Setdata({ ...data, dollerMrp: e.target.value });
                             }}
                           />
-                          <label for="floatingform">MRP In Doller</label>
+                          <label for="floatingform">MRP In Dollar</label>
                         </div>
 
                         <div className="col-3 p-1 form-floating">
@@ -515,23 +515,7 @@ const Productform = (props) => {
                               });
                             }}
                           />
-                          <label for="floatingform">Discount In Dollers</label>
-                        </div>
-
-                        <div className="col-6 p-1 form-floating">
-                          <textarea
-                            className="form-control"
-                            id="floatingform"
-                            placeholder="Product Description"
-                            defaultValue={
-                              editableData  ? editableData.description : ""
-                            }
-                            rows="3"
-                            onChange={(e) => {
-                              Setdata({ ...data, description: e.target.value });
-                            }}
-                          ></textarea>
-                          <label for="formfloating">Product Description</label>
+                          <label for="floatingform">Discount In Dollars</label>
                         </div>
                         <div className="col-6 p-1">
                           <select
@@ -548,6 +532,22 @@ const Productform = (props) => {
                             {/* <option></option> */}
                           </select>
                         </div>
+                        <div className="col-6 p-1 form-floating">
+                          <textarea
+                            className="form-control h-100"
+                            id="floatingform"
+                            placeholder="Product Description"
+                            defaultValue={
+                              editableData  ? editableData.description : ""
+                            }
+                            rows="6"
+                            onChange={(e) => {
+                              Setdata({ ...data, description: e.target.value });
+                            }}
+                          ></textarea>
+                          <label for="formfloating">Product Description</label>
+                        </div>
+                        
                         <div className="row">
                         {editableData  ? (
                           

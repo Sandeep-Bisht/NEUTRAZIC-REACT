@@ -242,10 +242,10 @@ const SubCategoryCreation = (props) => {
 
                           <div className="col-6 p-1 form-floating">
                             <textarea
-                              className="form-control"
+                              className="form-control h-100"
                               id="floatingInputValue"
                               placeholder="SubCategory Description"
-                              rows="5"
+                              rows="6"
                               defaultValue={
                                 editableData ? editableData.description : ""
                               }
