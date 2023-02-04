@@ -73,8 +73,10 @@ console.log(getSubCategories,"sub category");
   }, []);
 
   useEffect(()=>{
+    const allSubCateory=document.getElementById("allsub"); 
     setfilterData(state.array);
     setsubcategoryId(state.allProduct);
+    allSubCateory.classList.add("newActive");
   },[state])
 
   const GetData = async () => {
@@ -463,7 +465,7 @@ console.log(getSubCategories,"sub category");
     setfilterData("");
   }
 
-  const allSubCateory=document.getElementById("allsub");
+  const allSubCateory=document.getElementById("allsub"); 
   const GetallData = (Products) => {
     allSubCateory.classList.add("newActive");
     setfilterData("");
@@ -537,7 +539,7 @@ console.log(getSubCategories,"sub category");
                         >
                           
                           <p
-                          className="List-item"
+                          className="List-item newActive"
                           id="allsub"
                             style={{ cursor: "pointer" }}
                           >
