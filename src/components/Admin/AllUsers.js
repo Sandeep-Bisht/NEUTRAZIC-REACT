@@ -88,7 +88,7 @@ const columns = [
           <Typography.Link>
             <Link
               to={{
-                pathname: "/ProductForm",
+                pathname: "/Roles",
                 state: {
                   ...record,
                 },
