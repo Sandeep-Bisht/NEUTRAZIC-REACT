@@ -226,10 +226,10 @@ const ManufacturerCreation = (props) => {
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <textarea
-                              className="form-control"
+                              className="form-control h-100"
                               id="floatingInputValue"
                               placeholder="Manufacturer Description"
-                              rows="3"
+                              rows="6"
                               defaultValue={
                                 editableData ? editableData.description : ""
                               }

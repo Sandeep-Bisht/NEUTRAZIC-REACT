@@ -204,7 +204,7 @@ const CategoryCreation = (props) => {
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <textarea
-                            className="form-control"
+                            className="form-control h-100"
                             placeholder="Category Description"
                             id="floatingInputValue"
                             rows="5"
