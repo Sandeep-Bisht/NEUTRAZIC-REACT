@@ -666,7 +666,7 @@ const Header1 = (props) => {
           </div>
           {/* End Logo Div */}
 {/* Search Box Code */}
-<div className="col-sm-3" style={{ paddingLeft: "10px" }}>
+<div className="col-sm-3">
             <div className="login-div2">
               <input
                 type="text"
