@@ -122,11 +122,11 @@ const columns = [
             </div>
         <div className="col-10">
         <div className="all-manufacture-details-section">
-              <h3 className="all-manufacturer-head">All Users </h3>
+              <h3 className="all-manufacturer-head">All Users</h3>
               <div className="all-manufacturer-search-wrap">
-              <Link to="/UserProfile" className="add-icon">
+              {/* <Link to="/UserProfile" className="add-icon">
                   <MdPlaylistAdd/>Add
-                </Link>
+                </Link> */}
               <input
               type='text'
                 onChange={e => onChangeHandler(e)}
