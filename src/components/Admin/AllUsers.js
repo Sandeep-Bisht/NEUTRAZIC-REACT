@@ -73,6 +73,11 @@ const columns = [
     key: "email",
   },
   {
+    title: "Phone Number",
+    dataIndex: "phonenumber",
+    key: "phonenumber",
+  },
+  {
     title: "Action",
     dataIndex: "Action",
     width: "20%",
@@ -88,7 +93,7 @@ const columns = [
           <Typography.Link>
             <Link
               to={{
-                pathname: "/Roles",
+                pathname: "/UserProfile",
                 state: {
                   ...record,
                 },
@@ -119,6 +124,9 @@ const columns = [
         <div className="all-manufacture-details-section">
               <h3 className="all-manufacturer-head">All Users </h3>
               <div className="all-manufacturer-search-wrap">
+              <Link to="/UserProfile" className="add-icon">
+                  <MdPlaylistAdd/>Add
+                </Link>
               <input
               type='text'
                 onChange={e => onChangeHandler(e)}

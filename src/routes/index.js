@@ -48,6 +48,7 @@ import AllProductsDetails from "../components/Admin/AllProducts/AllProductsDetai
 import AllCategoriesDetails from "../components/Admin/AllCategory/AllCategoriesDetails";
 import AllSubCategoriesDetails from "../components/Admin/AllSubCategory/AllSubCategoriesDetails";
 import AllManufactureDetails from "../components/Admin/AllManufacture/AllManufactureDetails";
+import UserProfile from "../components/Admin/UserProfile";
 import MyAccount from "../components/MyAccount"
 import Success from '../components/Success';
 import AllUsers from "../components/Admin/AllUsers";
@@ -126,7 +127,8 @@ const Root = (props) => {
             <Route exact path="/ContactUs" component={ContactUs} />
             <Route exact path="/About" component={About} />
             <Route exact path="/Allcategory/:name" component={Allcategory} />
-            <Route exact path="/Ordered" component={Ordered} />
+            
+            <Route exact path="/UserProfile" component={UserProfile} />
             <Route
               exact
               path="/OrderDetails/:productid"
