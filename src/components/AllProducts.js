@@ -382,7 +382,7 @@ const AllProducts = (props) => {
                 });
             }
           } else {
-            toast.error('Allready in wishlist !', {
+            toast.error('Already in wishlist !', {
               position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 2000,
             });

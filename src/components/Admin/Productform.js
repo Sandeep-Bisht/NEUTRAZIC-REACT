@@ -515,7 +515,7 @@ const Productform = (props) => {
                               });
                             }}
                           />
-                          <label for="floatingform">Discount In Dollars</label>
+                          <label for="floatingform">Discount In Dollar</label>
                         </div>
                         <div className="col-6 p-1">
                           <select
