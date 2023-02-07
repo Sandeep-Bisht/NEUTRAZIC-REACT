@@ -401,9 +401,6 @@ const Header1 = (props) => {
                                alt=""
                              /> : ""
                             }
-                            
-                            
-                            
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -638,9 +635,8 @@ const Header1 = (props) => {
                           >
                             Login
                           </button>
-                          
                           <span>
-                            <p className="mt-2">Forget Password...</p>
+                          <p className="mt-3">Forgot Password?</p>
                           </span>
                         </div>
                       </div>
