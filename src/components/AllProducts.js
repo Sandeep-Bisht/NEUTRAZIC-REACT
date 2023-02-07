@@ -14,7 +14,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 var Userdata;
 const AllProducts = (props) => {
 
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   const [AllProduct, setAllProduct] = useState([]);
   const [productLength, serProductLength] = useState();
   const [Categorydetails, setCategoryDetails] = useState({});
