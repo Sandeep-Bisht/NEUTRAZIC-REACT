@@ -616,7 +616,7 @@ const breakPoints = [
                                     </Link>
                                     <div className="price-div">
                                       <span className="new-price">
-                                        <i className="fa fa-inr"></i>{" "}
+                                        <i className="fa fa-inr"></i>
                                         {el.inrDiscount}
                                       </span>
                                       
@@ -1006,10 +1006,10 @@ const breakPoints = [
                                 <figcaption>{el.name}</figcaption>
                                 </Link>
                                 <div className="price-div">
-                                  <i className="fa fa-inr"></i>
-                                  <span className="new-price">{el.inrDiscount}</span>
-                                 
-                                  <del className="new-price ml-1"><i className="fa fa-inr"></i>{el.inrMrp}</del>
+                                  
+                                  <span className="new-price">
+                                  <i className="fa fa-inr"></i>{el.inrDiscount}</span>
+                                                                   <del className="new-price ml-1"><i className="fa fa-inr"></i>{el.inrMrp}</del>
                                   {Userdata ? (
                                       <i
                                         className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
@@ -1250,11 +1250,10 @@ const breakPoints = [
               
               if(index<1){
               return(
-              <Link to={"/SubCategories/"+ el.category._id} className="btn10">
-                <span>Show More</span>
-                <div className="transition"></div>
+              <Link to={"/SubCategories/"+ el.category._id}>
+                <button type="button" className="btn10">Show More</button>
+                {/* <div className="transition"></div> */}
               </Link>
-              
               )
             }
             }

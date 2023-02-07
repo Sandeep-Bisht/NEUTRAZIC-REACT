@@ -19863,6 +19863,9 @@ margin: 40px 8px 15px 0px;
 	background-color: #fff;
 	height: 100%;
 	color: #002752;
+	position: sticky;
+    top: 40px;
+    height: 100vh;
 	box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
  }
  .browse-categories-header
@@ -19890,7 +19893,7 @@ margin: 40px 8px 15px 0px;
 	color: #1e144f;
 	letter-spacing: 0.15px;
  }
- #List-item
+ .List-item
  {
 	color: #1e144f;
     font-size: 16px;
@@ -19902,13 +19905,16 @@ margin: 40px 8px 15px 0px;
     letter-spacing: 0.15px;
     text-transform: capitalize;
  }
+ .newActive{
+	color: #1b97ff;
+ }
  #List-item:hover
  {
 	color: #1b97ff !important;
  }
  .sidebar-nav .active
  {
-	color: #1b97ff !important;
+	color: #1e144f !important;
  }
  .trending-section{
 	 padding-left: 30px;
@@ -19919,7 +19925,5 @@ margin: 40px 8px 15px 0px;
  .product-div-subcategory{
 	margin-left: 10px;
  }
-.active{
-	color: red;
-}
+
  /* SubcategoryPage Css */

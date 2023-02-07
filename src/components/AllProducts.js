@@ -26,7 +26,7 @@ const AllProducts = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [wishlistData, Setwishlist] = useState([])
   const [prev, SetPrev] = useState(0);
-  const [next, SetNext] = useState(20);
+  //  const [next, SetNext] = useState(false);
   const [filter, setFilter] = useState("");
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
@@ -44,12 +44,12 @@ const AllProducts = (props) => {
     GetManufacturer();
     // GetCategory();
   }, []);
-  const setPreviousValue = () => {
-    if (prev >= 7) {
-      SetNext(next - 8);
-      SetPrev(prev - 8);
-    }
-  };
+  // const setPreviousValue = () => {
+  //   if (prev >= 7) {
+  //     SetNext(next - 8);
+  //     SetPrev(prev - 8);
+  //   }
+  // };
   // const setNextValue = () => {
   //   if (next < AllProduct.length) {
   //     SetNext(next + 8);
@@ -214,7 +214,7 @@ const AllProducts = (props) => {
 
   var page = 1;
   const ProductByCategory = async () => {
-    await fetch(`${baseUrl}/api/product/all_product?_page=${page}$_limit=10`)
+    await fetch(`${baseUrl}/api/product/all_product?_page=${page}&_limit=10`)
       .then((res) => res.json())
       .then(async (data) => {
         serProductLength(data.length);
@@ -382,7 +382,7 @@ const AllProducts = (props) => {
                 });
             }
           } else {
-            toast.error('Allready in wishlist !', {
+            toast.error('Already in wishlist !', {
               position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 2000,
             });
@@ -690,7 +690,6 @@ const AllProducts = (props) => {
                   }
                 >
                   {AllProduct.map((el, ind1) => {
-                    if (ind1 > prev && ind1 <= next) {
                       return (
                         <figure className="figure1">
                           <Link Link to={"/SingleProduct/" + el._id}>
@@ -718,7 +717,7 @@ const AllProducts = (props) => {
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                              <div className="col-6">
+                              <div className="col-6 text-start">
                                 <span className="price">
                                   {" "}
                                   <i className="fa fa-inr"></i>{el.inrDiscount}
@@ -794,7 +793,7 @@ const AllProducts = (props) => {
                         </figure>
 
                       );
-                    }
+                    
                   })}
                 </InfiniteScroll>
               </div>

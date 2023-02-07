@@ -342,10 +342,10 @@ const SingleProduct = (props) => {
       .then((res) => {
         CartById();
         //history.push("/Cart");
-        //   toast.success("Add to cart",{
-        //   position:"bottom-right",
-        //   autoClose:5000,
-        // });
+          toast.success("Add to cart",{
+          position:"bottom-right",
+          autoClose:5000,
+        });
       })
       .then((err) => console.log(err, "inside update cart"));
   };
@@ -412,10 +412,7 @@ const SingleProduct = (props) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      toast.success("Added to cart", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
+      
     }
 
   };
@@ -1148,7 +1145,7 @@ const SingleProduct = (props) => {
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                              <div className="col-6">
+                              <div className="col-6 text-start">
                                 <span className="price">
                                   {" "}
                                   <i className="fa fa-inr"></i>{el.inrDiscount}
