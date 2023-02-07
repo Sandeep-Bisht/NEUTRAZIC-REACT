@@ -462,7 +462,7 @@ const Header1 = (props) => {
                       <div className="form-row">
                         <form
                           className="form-group col-lg-12"
-                          onSubmit={handleSubmit(RegisterUser)}
+                          onBlur={handleSubmit(RegisterUser)}
                         >
                           <div className="form-group">
                             <label>
