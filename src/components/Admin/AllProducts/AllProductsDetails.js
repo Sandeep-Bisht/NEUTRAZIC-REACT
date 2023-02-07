@@ -145,7 +145,7 @@ export default function AllProductsDetails() {
         <div className="all-products-details-section">
               <h3 className="all-products-head">All Products <span className="count">{products}</span></h3>
               <div className="all-products-search-wrap">
-                <Link to="/ProductForm" className="add-icon">
+                <Link to="/Productform" className="add-icon">
                   <MdPlaylistAdd/>Add
                 </Link>
               <input
