@@ -1,0 +1,104 @@
+.forgot-password-page .forgot-page-wrapper .key-logo
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.forgot-password-page .forgot-page-wrapper .key-icon-wrap
+{
+    background-color: #f3f3f3;
+    border-radius: 50%;
+    height: 54px;
+    width: 54px;
+    padding: 10px;
+    color: #1b97ff;
+    font-size: 16px;
+}
+.forgot-password-page .forgot-header h1
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 26px;
+    font-weight: 400 !important;
+    text-align: center;
+    margin: 12px 0;
+    letter-spacing: 0.25px;
+}
+.forgot-password-page .forgot-para p
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    padding-bottom: 30px;
+    color: #0006;
+    text-align: center;
+}
+.forgot-password-page .forgot-input label
+{
+    display: block;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+    color: rgb(0 0 0 / 71%);
+}
+.forgot-password-page .forgot-input .forgot-input-wrap
+{
+    padding: 8px;
+    width: 100%;
+    border-radius: 0.25rem;
+    border: 2px solid #f2f2f2;
+    background-color: transparent;
+    color: #000;
+}
+.forgot-password-page .forgot-input .forgot-input-wrap::placeholder
+{
+    color: rgba(0, 0, 0, 0.39);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+}
+.forgot-password-page .forgot-reset-btn
+{
+    padding-top: 20px;
+}
+.forgot-password-page .forgot-reset-btn .reset-btn-wrap
+{
+    width: auto;
+    background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+    padding: 10px;
+    letter-spacing: 0.25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+}
+.forgot-password-page .back-to-login-wrapper
+{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.forgot-password-page .back-to-login-wrapper svg
+{
+    height: 30px;
+    color: #0006;
+}
+.forgot-password-page .back-to-login-wrapper a
+{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0006;
+}
+.forgot-password-page .back-to-login-wrapper a:hover
+{
+    color: #1b97ff;
+}
