@@ -304,7 +304,7 @@ const ProductByManufacturer = (props) => {
                 });
             }
           } else {
-            alert("Allready in wishlist");
+            alert("Already in wishlist");
           }
         }
       });

@@ -342,10 +342,10 @@ const SingleProduct = (props) => {
       .then((res) => {
         CartById();
         //history.push("/Cart");
-        //   toast.success("Add to cart",{
-        //   position:"bottom-right",
-        //   autoClose:5000,
-        // });
+          toast.success("Add to cart",{
+          position:"bottom-right",
+          autoClose:5000,
+        });
       })
       .then((err) => console.log(err, "inside update cart"));
   };
