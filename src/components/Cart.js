@@ -26,6 +26,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
+  const [cartStatus,setCartStatus]=useState()
   const [cartItems, setCartItems] = useState();
   var total = 0;
   var actualtotal = 0;
@@ -74,6 +75,8 @@ const Cart = () => {
         .then((res) => res.json())
         .then(async (data) => {
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
+          console.log(data.data,"datatatttaatatatat");
+          setCartStatus(data.data[0].cartStatus)
           setCart(data.data[0].order);
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
@@ -100,6 +103,7 @@ const Cart = () => {
         _id: _id,
         userid: Userdata._id,
         order: array ? array : cart,
+        cartStatus
       }),
     })
       .then((res) => res.json())
@@ -163,7 +167,7 @@ const Cart = () => {
     // await formData.append("country", data.country);
     // formData.append("address", JSON.stringify(data.address));
     // await formData.append("pincode", data.pincode);
-    await formData.append("mobile", Userdata.mobile);
+    await formData.append("mobile", Userdata.phonenumber);
     await formData.append("email", Userdata.email);
     // await formData.append("orderfor", data.orderfor);
     await formData.append("order", JSON.stringify(neworder));
