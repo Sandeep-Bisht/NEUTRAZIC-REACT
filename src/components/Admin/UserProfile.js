@@ -17,7 +17,8 @@ const UserProfile = (props) => {
   const [data, Setdata] = useState({
     username: "",
     email: "",
-    phonenumber:""
+    phonenumber:"",
+    password:""
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
@@ -51,7 +52,8 @@ const UserProfile = (props) => {
             _id:data._id,
             username:data.username,
             email:data.email,
-            phonenumber:data.phonenumber
+            phonenumber:data.phonenumber,
+            password:data.password
         })
         if(response.status==200)
         {
@@ -159,6 +161,27 @@ const UserProfile = (props) => {
                             ></input>
                             <label for="floatingInputValue">
                               Role
+                            </label>
+                          </div>
+                          <div className="col-6 p-1 form-floating">
+                            <input
+                            type="text"
+                              className="form-control h-100"
+                              id="floatingInputValue"
+                              placeholder="User Role"
+                              rows="6"
+                              defaultValue={
+                                editableData ? editableData.password : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({
+                                  ...data,
+                                  password: e.target.value,
+                                });
+                              }}
+                            ></input>
+                            <label for="floatingInputValue">
+                              Password
                             </label>
                           </div>
                           {editableData && (

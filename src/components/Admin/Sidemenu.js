@@ -398,6 +398,12 @@ const Sidemenu = () => {
                                   Products
                                 </li>
                               </Link>
+                              <Link to="/AllWarehouseDetails">
+                                <li>
+                                  <GiBoxUnpacking className="configuration-icons-wrap" />
+                                  Warehouse
+                                </li>
+                              </Link>
                             </ul>
                           ) : (
                             <ul className="Configration-List">
