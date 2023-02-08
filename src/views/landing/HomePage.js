@@ -535,7 +535,7 @@ const breakPoints = [
                     <input
                       type="text"
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                      onKeyPress={(e) => {
+                      onKeyDown={(e) => {
                         if (e.key == "Enter") {
                           searchData(search);
                         }
