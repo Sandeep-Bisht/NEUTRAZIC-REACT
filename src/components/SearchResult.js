@@ -13,6 +13,13 @@ import * as ACTIONS from '../CommonService/AddToCart/action'
 import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import {BiCategory} from 'react-icons/bi';
+import {BsCardList} from 'react-icons/bs';
+import {TbBrandNotion} from 'react-icons/tb';
+import {GiPriceTag} from 'react-icons/gi';
+import {IoClose} from 'react-icons/io5';
+
+
 var CartDataWoLogin = [];
 var Userdata = "";
 let tranding = 0;
@@ -508,17 +515,15 @@ const SearchResult = (props) => {
           className="closebtn"
           onClick={() => closeNav()}
         >
-          &times;
+        <IoClose/>
         </Link>
 
         <div className="accordion accordion-flush" id="accordionFlushExample">
           <div className="accordion-item">
             <h2 className="accordion-header" id="flush-headingTwo">
               <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/categories-1.png")}
-                />
+                <BiCategory
+                  className="icons1"/>
                 <button
                   className="accordion-button collapsed button"
                   type="button"
@@ -549,7 +554,9 @@ const SearchResult = (props) => {
                         }}
                       />
 
-                      <span className="ml-3">{el.name}</span>
+                      <span className="ml-3" onChange={(e) => {
+                          FilterFunc(el.name, e);
+                        }}>{el.name}</span>
                     </li>
                   ))}
                 </ul>
@@ -559,10 +566,8 @@ const SearchResult = (props) => {
           <div className="accordion-item">
             <h2 className="accordion-header" id="flush-headingThree">
               <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/category.ico")}
-                />
+                <BsCardList
+                  className="icons1"/>
                 <button
                   className="accordion-button collapsed button"
                   type="button"
@@ -601,10 +606,8 @@ const SearchResult = (props) => {
           <div className="accordion-item">
             <h2 className="accordion-header" id="flush-headingFour">
               <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/manufacturer.ico")}
-                />
+                <TbBrandNotion
+                  className="icons1"/>
                 <button
                   className="accordion-button collapsed button"
                   type="button"
@@ -644,10 +647,8 @@ const SearchResult = (props) => {
           <div className="accordion-item">
             <h2 className="accordion-header" id="flush-headingFive">
               <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/price.ico")}
-                />
+                <GiPriceTag
+                  className="icons1"/>
                 <button
                   className="accordion-button collapsed button"
                   type="button"
@@ -735,20 +736,19 @@ const SearchResult = (props) => {
           style={{}}
         ></i>
       </div>
-      <div id="main"></div>
+      {/* <div id="main"></div> */}
 
       {/* end side bar Modal */}
 
       <div id="__next">
         {/* trending section  */}
 
-        <section className="trending-section mb-4">
-          <div className="container m-auto h-100">
-            <div className="row h-100">
-              <div className="col-12 p-0">
-                <div className="align-items-center position-relative h-100 d-flex text-center w-100 ">
-                  <h1 className="trendign-head">Showing</h1>
-                  <h2 className="pl-4 product-head mb-0">Results</h2>
+        <section className="trending-section">
+          <div className="container-fluid">
+            <div className="row mt-0">
+              <div className="col-12">
+                <div className="">
+                  <h1 className="trendign-head">Showing Results</h1>
                 </div>
               </div>
             </div>
@@ -756,7 +756,7 @@ const SearchResult = (props) => {
         </section>
         <section className="products-area pb-4">
           <div className="container-fluid">
-            <div className="row  m-2">
+            <div className="row mt-0">
               {filterdata && filterdata.length>0 && filterdata.map((el, ind) => {
                 if (
                   el.name.toLowerCase().includes(searchresults) ||
@@ -942,7 +942,6 @@ const SearchResult = (props) => {
         </section>
         <ToastContainer/>
       </div>
-      <Baseline />
       <Footer />
     </>
   );

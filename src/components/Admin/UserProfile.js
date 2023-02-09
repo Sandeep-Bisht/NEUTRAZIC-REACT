@@ -142,6 +142,27 @@ const UserProfile = (props) => {
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <input
+                            type="password"
+                              className="form-control h-100"
+                              id="floatingInputValue"
+                              placeholder="Password"
+                              rows="6"
+                              defaultValue={
+                                editableData ? editableData.phonenumber : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({
+                                  ...data,
+                                  description: e.target.value,
+                                });
+                              }}
+                            ></input>
+                            <label for="floatingInputValue">
+                              Password
+                            </label>
+                          </div>
+                          <div className="col-6 p-1 form-floating">
+                            <input
                             type="text"
                               className="form-control h-100"
                               id="floatingInputValue"

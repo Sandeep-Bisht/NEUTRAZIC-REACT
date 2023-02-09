@@ -616,8 +616,11 @@ font-family: 'Roboto', sans-serif;
 {
   background-color: #fff;
   position: fixed;
-  height: 100vh;
-  padding: 10px 6px;
+  top: 0;
+  bottom: 0;
+  padding: 0 6px;
+  padding-top: 80px;
+  overflow-y: scroll;
   box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
   z-index: 5;
 }
@@ -755,6 +758,7 @@ font-family: 'Roboto', sans-serif;
   padding-bottom: 20px;
   background-color: #f1f4f6;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 /* End Dashboard header image css */
