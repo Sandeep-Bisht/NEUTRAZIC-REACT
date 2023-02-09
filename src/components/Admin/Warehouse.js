@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 var Userdata;
 const Warehouse = (props) => {
@@ -21,6 +22,7 @@ const Warehouse = (props) => {
     const url = `${baseUrl}/api/warehouse/add_warehouse`;
      await fetch(url, {
     method: "POST",
+     headers: { "Content-Type": "application/json" },
       body:JSON.stringify({
         name:data.name,
         description:data.description,
@@ -62,19 +64,14 @@ const Warehouse = (props) => {
 
   const UpdateWarehouse = async (e, _id) => {
     e.preventDefault();
-    const formData = new FormData();
-    await formData.append("_id", data._id);
-    await formData.append("description", data.description);
-    await formData.append("name", data.name);
-    await fetch(`${baseUrl}/api/warehouse/update_warehouse_by_id`, {
-      method: "Put",
-      body: formData,
-    })
+    const formData = {
+        _id: data._id,
+        description: data.description,
+        name: data.name
+    }
+    await axios.put(`${baseUrl}/api/warehouse/update_warehouse_by_id`,formData,)
       .then((res) =>{
-        res.json()
         history.push("/AllWarehouseDetails");
-      })
-      .then(async (data) => {
         GetWarehouse();
       })
       .catch((err) => {
