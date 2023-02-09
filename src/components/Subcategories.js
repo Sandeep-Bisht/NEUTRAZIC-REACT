@@ -442,6 +442,7 @@ console.log(getSubCategories,"sub category");
   };
   var activeItem=document.getElementById("List");
   const GetSingleSubCategory = (id,name) => {
+    window.scroll(0,0);
     let filteredData=[];
     for(let item of data)
     {

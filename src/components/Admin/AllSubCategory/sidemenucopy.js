@@ -243,6 +243,10 @@ const Sidemenu = () => {
                                         {" "}
                                         <li>SubCategory</li>
                                       </Link>
+                                      {/* <Link to="/Warehouse">
+                                        {" "}
+                                        <li>Warehouse</li>
+                                      </Link> */}
                                       <Link to="/Roles">
                                         {" "}
                                         <li>User Roles</li>

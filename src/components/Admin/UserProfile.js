@@ -17,7 +17,9 @@ const UserProfile = (props) => {
   const [data, Setdata] = useState({
     username: "",
     email: "",
-    phonenumber:""
+    phonenumber:"",
+    password:"",
+    role:""
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
@@ -51,7 +53,9 @@ const UserProfile = (props) => {
             _id:data._id,
             username:data.username,
             email:data.email,
-            phonenumber:data.phonenumber
+            phonenumber:data.phonenumber,
+            password:data.password,
+            role:data.role
         })
         if(response.status==200)
         {
@@ -132,7 +136,7 @@ const UserProfile = (props) => {
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
-                                  description: e.target.value,
+                                  phonenumber: e.target.value,
                                 });
                               }}
                             ></input>
@@ -180,6 +184,25 @@ const UserProfile = (props) => {
                             ></input>
                             <label for="floatingInputValue">
                               Role
+                            </label>
+                          </div>
+                          <div className="col-6 p-1 form-floating">
+                            <input
+                            type="text"
+                              className="form-control h-100"
+                              id="floatingInputValue"
+                              placeholder="New Password"
+                              rows="6"
+                              defaultValue=""
+                              onChange={(e) => {
+                                Setdata({
+                                  ...data,
+                                  password: e.target.value,
+                                });
+                              }}
+                            ></input>
+                            <label for="floatingInputValue">
+                              New Password
                             </label>
                           </div>
                           {editableData && (

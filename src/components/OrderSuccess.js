@@ -23,9 +23,9 @@ function OrderSuccess() {
         <div className='success-thank-you'>
             <h2>Thank you for your purchase !</h2>
         </div>
-        <div className='success-order-id'>
+        {/* <div className='success-order-id'>
            <p>Your order ID is: 0123456789</p>
-        </div>
+        </div> */}
         <div className='success-email-confirm-msg'>
             <p>You will receive an order confirmation email with details of your order.</p>
         </div>

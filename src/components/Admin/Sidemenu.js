@@ -12,7 +12,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
 import { GrInProgress } from "react-icons/gr";
 import { BsBox } from "react-icons/bs";
-import { FaShippingFast } from "react-icons/fa";
+import { FaShippingFast,FaWarehouse } from "react-icons/fa";
 import { BsCartXFill } from "react-icons/bs";
 import { MdRealEstateAgent } from "react-icons/md";
 import { GrConfigure } from "react-icons/gr";
@@ -303,7 +303,7 @@ const Sidemenu = () => {
                       New Orders
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/"+"Progress"}>
+                  <Link to={"/InProgressOrder/" + "Progress"}>
                     <li>
                       {" "}
                       <GrInProgress className="configuration-icons-wrap" />
@@ -374,62 +374,34 @@ const Sidemenu = () => {
                         {Userdata != undefined ? (
                           Userdata.role == "superAdmin" ? (
                             <ul className="Configration-List">
-                              <Link to="/Manufacturer">
-                                <li>
-                                  <GiFactory className="configuration-icons-wrap" />
-                                  Add Manufacturer
-                                </li>
-                              </Link>
-                              <Link to="/Category">
-                                {" "}
-                                <li>
-                                  <BiCategory className="configuration-icons-wrap" />
-                                  Add Category
-                                </li>{" "}
-                              </Link>
-                              <Link to="/SubCategoryCreation">
-                                {" "}
-                                <li>
-                                  <BsListNested className="configuration-icons-wrap" />
-                                  Add SubCategory
-                                </li>
-                              </Link>
-                              <Link to="/ProductForm">
-                                {" "}
-                                <li>
-                                <GiBoxUnpacking className="configuration-icons-wrap" />
-                                  Add Product
-                                </li>
-                              </Link>
-                              <Link to="/Roles">
-                                {" "}
-                                <li>
-                                  <RiUserSettingsLine className="configuration-icons-wrap" />
-                                  User Roles
-                                </li>
-                              </Link>
                               <Link to="/AllManufactureDetails">
                                 <li className="nav-name">
                                   <GiFactory className="configuration-icons-wrap" />
-                                  All Manufacturer
+                                  Manufacturer
                                 </li>
                               </Link>
                               <Link to="/AllCategoriesDetails">
                                 <li>
                                   <BiCategory className="configuration-icons-wrap" />
-                                  All Category
+                                  Category
                                 </li>
                               </Link>
                               <Link to="/AllSubCategoriesDetails">
                                 <li>
                                   <BsListNested className="configuration-icons-wrap" />
-                                  All SubCategory
+                                  SubCategory
                                 </li>
                               </Link>
                               <Link to="/AllProductsDetails">
                                 <li>
                                   <GiBoxUnpacking className="configuration-icons-wrap" />
-                                  All Products
+                                  Products
+                                </li>
+                              </Link>
+                              <Link to="/AllWarehouseDetails">
+                                <li>
+                                  <FaWarehouse className="configuration-icons-wrap" />
+                                  Warehouse
                                 </li>
                               </Link>
                             </ul>
@@ -450,27 +422,51 @@ const Sidemenu = () => {
             </div>
           ) : null
         ) : null}
-        {/* <Link to="/AllManufactureDetails" className="nav__link">
-          <GiFactory className="nav__icon" />
-          <span className="nav__name">All Manufacturer</span>
-        </Link> */}
-        {/* <Link to="/AllCategoriesDetails" className="nav__link">
-          <BiCategory className="nav__icon" />
-          <span className="nav__name">All Category</span>
-        </Link> */}
-        {/* <Link to="/AllSubCategoriesDetails" className="nav__link">
-          <BsListNested className="nav__icon" />
-          <span className="nav__name">All SubCategory</span>
-        </Link> */}
-        {/* <Link to="/ProductForm" className="nav__link">
-          <FaBoxOpen className="nav__icon" />
-          <span className="nav__name">Products</span>
-        </Link> */}
-        <Link to="/AllUsers" className="nav__link">
-          
-          <AiOutlineUser className="nav__icon" />
-          <span className="nav__name">IAM</span>
-        </Link>
+
+        <div className="nav__link active">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="headingfour">
+              <div className="d-flex align-items-center justify-content-center div1">
+                <BsCartPlus className="nav__icon" />
+                <button
+                  className="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapsefour"
+                  aria-expanded="false"
+                  aria-controls="collapsefour"
+                >
+                  <span className="pl-3 nav__name">IAM</span>
+                </button>
+              </div>
+            </h2>
+            <div
+              id="collapsefour"
+              className="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="dashboard-accordion-body">
+                <ul className="Configration-List">
+                  <Link to="/AllUsers">
+                    <li>
+                      <AiOutlineUser className="configuration-icons-wrap" />
+                      Users
+                    </li>
+                  </Link>
+                  <Link to="/Roles">
+                    {" "}
+                    <li>
+                      <RiUserSettingsLine className="configuration-icons-wrap" />
+                      User Roles
+                    </li>
+                  </Link>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="nav__link" onClick={() => logout()}>
           <BiLogOut className="nav__icon" />
           <span className="nav__name" style={{ cursor: "pointer" }}>

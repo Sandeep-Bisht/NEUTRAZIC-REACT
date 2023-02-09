@@ -917,3 +917,8 @@ font-family: 'Roboto', sans-serif;
 .anticon svg{
   height: 13px !important;
 }
+.required label::after, 
+.required select~option::after{ 
+  content:"*"; 
+  color: red;
+}

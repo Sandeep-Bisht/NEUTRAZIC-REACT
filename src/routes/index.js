@@ -59,6 +59,8 @@ import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
 import OrderSuccess from "../components/OrderSuccess";
 import Forgot from "../components/Forgot";
+import Warehouse from "../components/Admin/Warehouse";
+import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
 
 var Userdata = "";
 const Root = (props) => {
@@ -89,6 +91,8 @@ const Root = (props) => {
             <Route exact path="/AllProducts" component={AllProducts} />
             <Route exact path="/" component={HomePage} />
             <Route exact path="/Register" component={Register} />
+            <Route exact path="/Warehouse" component={Warehouse} />
+            <Route exact path="/AllWarehouseDetails" component={AllWarehouseDetails} />
             {/* <Route exact path="/" component={HomePage} /> */}
             {/* <PrivateRoute path="/home" component={Home} /> */}
             {/* <Route exact path="/Register" component={Register} /> */}
