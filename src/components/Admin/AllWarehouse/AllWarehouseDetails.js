@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Table, Input, Space, Popconfirm, Typography } from "antd";
 import axios from "axios";
 // import { data } from "./columns";
-import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
@@ -28,7 +27,7 @@ export default function AllWarehouseDetails() {
 
   useEffect(() => {
     fetchUsers();
-    GetWarehouse();
+     GetWarehouse();
   }, []);
 
 
@@ -67,13 +66,16 @@ export default function AllWarehouseDetails() {
     setGetuser(filteredData);
   };
 
-  const handleDelete = async (_id) => {
+  const handleDelete= async (_id)=>{
     try{
-      const DeletedData=await axios.delete(`${baseUrl}/api/warehouse/delete_warehouse_by_id`,{data : {_id:_id}});
+      const DeletedData = await axios.delete(`${baseUrl}/api/warehouse/delete_warehouse_by_id`,{data: {_id:_id}});
       fetchUsers();
-    }catch(error){
+    }catch(error)
+    {
+      console.log(error, "error")
     }
-  };
+    
+  }
 
   const columns = [
     {
@@ -102,7 +104,7 @@ export default function AllWarehouseDetails() {
             <Typography.Link>
               <Link
                 to={{
-                  pathname: "/Category",
+                  pathname: "/Warehouse",
                   state: {
                     ...record,
                   },

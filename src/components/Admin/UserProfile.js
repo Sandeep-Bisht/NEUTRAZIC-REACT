@@ -18,7 +18,8 @@ const UserProfile = (props) => {
     username: "",
     email: "",
     phonenumber:"",
-    password:""
+    password:"",
+    role:""
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
@@ -53,7 +54,8 @@ const UserProfile = (props) => {
             username:data.username,
             email:data.email,
             phonenumber:data.phonenumber,
-            password:data.password
+            password:data.password,
+            role:data.role
         })
         if(response.status==200)
         {
@@ -134,7 +136,7 @@ const UserProfile = (props) => {
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
-                                  description: e.target.value,
+                                  phonenumber: e.target.value,
                                 });
                               }}
                             ></input>
@@ -168,11 +170,9 @@ const UserProfile = (props) => {
                             type="text"
                               className="form-control h-100"
                               id="floatingInputValue"
-                              placeholder="User Role"
+                              placeholder="New Password"
                               rows="6"
-                              defaultValue={
-                                editableData ? editableData.password : ""
-                              }
+                              defaultValue=""
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
@@ -181,7 +181,7 @@ const UserProfile = (props) => {
                               }}
                             ></input>
                             <label for="floatingInputValue">
-                              Password
+                              New Password
                             </label>
                           </div>
                           {editableData && (
