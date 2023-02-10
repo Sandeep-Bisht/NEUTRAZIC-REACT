@@ -11,6 +11,7 @@ import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
 
+
 const UserPage = () => {
 
 const [userdata,setUserdata] = useState([]);
@@ -28,8 +29,8 @@ const GetUserData = async()=>{
 await fetch(`${baseUrl}/api/auth/allusers`)
 .then((res)=>res.json())
 .then(async(data)=>{
-  const userfilter = data.data.filter((value)=>{ return value.role === "user"});
-   setUserdata(userfilter);
+  // const userfilter = data.data.filter((value)=>{ return value.role === "user"});
+   setUserdata(data.data);
 })
 .catch((err) => {
   console.log(err, "error");
@@ -77,6 +78,11 @@ const columns = [
     dataIndex: "phonenumber",
     key: "phonenumber",
   },
+  // {
+  //   title: "Password",
+  //   dataIndex: "password",
+  //   key: "password",
+  // },
   {
     title: "Action",
     dataIndex: "Action",

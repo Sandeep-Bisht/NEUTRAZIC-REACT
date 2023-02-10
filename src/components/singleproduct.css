@@ -145,9 +145,10 @@ font-weight: 300;
 	width:145px;
 	height:68px;
 	border: 1px solid #1e144f;
-	float: left;
-	border-radius: 7px;
-
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .content-div .quantity2
 {
@@ -166,12 +167,20 @@ font-weight: 300;
 	font-size: 25px;
 	color:#797979;
 }
+.content-div .quantity2 i:hover
+{
+	color: red;
+}
 .content-div .quantity1 .minus-single::before
 {
 	background-color: white;
 	color: black;
-	
 	font-weight: bold;
+}
+.content-div .minus-single:hover::before
+{
+	color: #1b97ff;
+	font-size: 20px;
 }
 
 .content-div .quantity1 p
@@ -228,33 +237,32 @@ input[type=number] {
 	font-weight:bold;
 }
 
+.content-div .add-cart-buttons
+{
+	display: flex;
+	align-items: center;
+}
 .content-div .add-to-cart 
 {
-	float:left;
-	width:220px;
-	height:68px;
-	border:1px solid #1e144f;
-	border-radius: 7px;
 	margin-left:10px;
 }
 .content-div .add-to-cart button
 {
-	border: none;
 	background-color: white;
-	height:100% !important;
-	width:100% !important;
+	padding: 15px 20px;
 	font-family: 'Roboto', sans-serif;
 	font-size:25px;
-	color: #1e144f;
-    margin:0;
-    padding: 0;
-    border-radius: 7px;
+	color: var(--optionalColor);
+    border-radius: 5px;
+	border: 1px solid #1e144f;
 }
 .content-div .add-to-cart button:hover 
 {
-	/* color: #FFFFFF;
-	background: #1b97ff;
-	 transition-delay:0s;
+	color: #fff;
+	background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+	border: none;
+	padding: 16px 21px;
+	 /* transition-delay:0s;
 	 transition-duration:1s; */
 }
 .content-div .add .wishlist

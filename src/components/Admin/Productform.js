@@ -14,6 +14,7 @@ const Productform = (props) => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
+  const [warehouse,setWarehouse]=useState([]);
   const [products, Setproducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [shwoTable, setShowTable] = useState(false);
@@ -22,9 +23,10 @@ const Productform = (props) => {
   let [data, Setdata] = useState({
     name: "",
     description: "",
-    storage: "",
+    warehouse: "",
     category: "",
     subcategory: "",
+    quantity:"",
     inrMrp: "",
     dollerMrp: "",
     inrDiscount: "",
@@ -42,9 +44,10 @@ const Productform = (props) => {
     const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
-    await formData.append("storage", data.storage);
+    await formData.append("warehouse", data.warehouse);
     await formData.append("category", data.category);
     await formData.append("subcategory", data.subcategory);
+    await formData.append("quantity",data.quantity);
     await formData.append("inrMrp", data.inrMrp);
     await formData.append("dollerMrp", data.dollerMrp);
     await formData.append("inrDiscount", data.inrDiscount);
@@ -73,6 +76,7 @@ const Productform = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    GetWarehouse();
     GetCategory();
     GetManufacturer();
     GetData();
@@ -86,6 +90,13 @@ const Productform = (props) => {
       });
     });
   }, []);
+
+  const GetWarehouse = async () => {
+    const response = await axios.get(
+      `${baseUrl}/api/warehouse/get_all_warehouse`
+    );
+    setWarehouse(response.data.data);
+  };
 
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
@@ -272,8 +283,9 @@ const Productform = (props) => {
       name: item.name,
       image: item.image,
       otherImage: item.otherImage,
-      storage: item.storage,
+      warehouse: item.warehouse,
       category: item.category,
+      quantity:item.quantity,
       inrMrp: item.inrMrp,
       inrDiscount: item.inrDiscount,
       dollerMrp: item.dollerMrp,
@@ -290,9 +302,10 @@ const Productform = (props) => {
     await formData.append("_id", data._id);
     await formData.append("description", data.description);
     await formData.append("name", data.name);
-    await formData.append("storage", data.storage);
+    await formData.append("warehouse", data.warehouse);
     await formData.append("category", data.category);
     await formData.append("subcategory", data.subcategory);
+    await formData.append("quantity",data.quantity);
     await formData.append("inrMrp", data.inrMrp);
     await formData.append("dollerMrp", data.dollerMrp);
     await formData.append("inrDiscount", data.inrDiscount);
@@ -347,7 +360,7 @@ const Productform = (props) => {
                             <h5>Product Creation</h5>
 
                             <div className="row">
-                              <div className="col-6 p-1 form-floating ">
+                              <div className="col-6 p-1 form-floating required">
                                 <input
                                   type="text"
                                   id="floatingform"
@@ -360,7 +373,7 @@ const Productform = (props) => {
                                     Setdata({ ...data, name: e.target.value });
                                   }}
                                 />
-                                <label for="floatingform">Product Name</label>
+                                <label for="floatingform" >Product Name</label>
                               </div>
                               <div className="col-6 p-1">
                                 <input
@@ -393,7 +406,7 @@ const Productform = (props) => {
                                 />
                               </div>
 
-                              <div className="col-6 p-1">
+                              <div className="col-6 p-1 required">
                                 <select
                                   className="form-control Dashborad-search"
                                   onChange={(e) => {
@@ -411,7 +424,7 @@ const Productform = (props) => {
                                   ))}
                                 </select>
                               </div>
-                              <div className="col-6 p-1">
+                              <div className="col-6 p-1 required">
                                 <select
                                   className="form-control Dashborad-search"
                                   onChange={(e) => {
@@ -430,7 +443,7 @@ const Productform = (props) => {
                                 </select>
                               </div>
 
-                              <div className="col-6 p-1">
+                              <div className="col-6 p-1 required">
                                 <select
                                   className="form-control Dashborad-search"
                                   onChange={(e) => {
@@ -454,23 +467,43 @@ const Productform = (props) => {
                                 </select>
                               </div>
 
-                              <div className="col-6 p-1 form-floating">
-                                <input
-                                  type="text"
-                                  id="floatingform"
+                              <div className="col-6 p-1 required">
+                                <select
                                   className="form-control Dashborad-search"
-                                  defaultValue={
-                                    editableData ? editableData.storage : ""
-                                  }
-                                  placeholder="Storage"
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
-                                      storage: e.target.value,
+                                      warehouse: e.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option selected disabled hidden>
+                                    Select Warehouse
+                                  </option>
+                                  {warehouse.map((el, ind) => (
+                                    <option value={el._id}>{el.name}</option>
+                                  ))}
+                                </select>
+                              </div>
+                              <div className="col-6 p-1 form-floating">
+                                <input
+                                  type="number"
+                                  id="floatingform"
+                                  className="form-control Dashborad-search"
+                                  defaultValue={
+                                    editableData ? editableData.quantity : ""
+                                  }
+                                  placeholder="Quantity of Product"
+                                  onChange={(e) => {
+                                    Setdata({
+                                      ...data,
+                                      quantity: e.target.value,
                                     });
                                   }}
                                 />
-                                <label for="floatingform">Storage</label>
+                                <label for="floatingform">
+                                  Quantity of Product
+                                </label>
                               </div>
                               <div className="col-3 p-1 form-floating">
                                 <input

@@ -163,7 +163,7 @@ const WishlistHandler=()=>{
               <div className="col-lg-6 col-md-6">
                 <p>
                   Designed & Developed by <i className="bx bx-copyright"></i>2023
-                  GIKSIndia.
+                  <a href="https://giksindia.com/" target='_blank' className="giks-link"> GIKSINDIA</a>
                 </p>
               </div>
               <div className="col-lg-6 col-md-6">

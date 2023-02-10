@@ -12,9 +12,13 @@ import * as ACTIONS from '../CommonService/AddToCart/action'
 import confirm, { Button, alert } from "react-alert-confirm";
 import { message, Popconfirm } from 'antd';
 import "../views/landing/homepage.css";
-
+import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
 import AllProducts from "./AllProducts";
+
+const stripePromise = loadStripe(
+  "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
+);
 var Userdata = "";
 
 const Cart = () => {
@@ -22,13 +26,30 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
+  const [cartStatus,setCartStatus]=useState()
   const [cartItems, setCartItems] = useState();
-console.log(cart,"carttttttttttttttt");
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;
 
   let dispatch = useDispatch()
+  const [data, Setdata] = useState({
+    mobile: "",    
+    email: "",
+    orderfor: "",
+    order: [],
+    userid: "",
+    justification: "",
+    delivery_time: "",
+    order_no: "",
+    status : "",
+    totalamount: "",
+    actualamount: "",
+    instruction: "",
+    addresstype: "shipping",
+    deliverytype: "",
+    username: "",
+  });
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -54,7 +75,10 @@ console.log(cart,"carttttttttttttttt");
         .then((res) => res.json())
         .then(async (data) => {
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
+          console.log(data.data,"datatatttaatatatat");
+          setCartStatus(data.data[0].cartStatus)
           setCart(data.data[0].order);
+          Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
           
@@ -68,8 +92,7 @@ console.log(cart,"carttttttttttttttt");
   };
 
   const UpdateCart = async (array) => {
-    const url = `${baseUrl}/api/cart/update_cart_by_id`;
-    
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;    
     await fetch(url, {
       method: "put",
       headers: {
@@ -80,6 +103,7 @@ console.log(cart,"carttttttttttttttt");
         _id: _id,
         userid: Userdata._id,
         order: array ? array : cart,
+        cartStatus
       }),
     })
       .then((res) => res.json())
@@ -123,6 +147,79 @@ console.log(cart,"carttttttttttttttt");
     })
   };
 
+  // checkout 
+
+  const submitData = async (e) => {
+    e.preventDefault();
+    console.log(Userdata,"inside submit data", data)
+    const stripe = await stripePromise;
+    let { order } = data;
+    let neworder = JSON.parse(order);
+    neworder.forEach(function(item) {
+      delete item.category;
+      delete item.description
+      delete item.delivery_time
+      delete item.justification
+      delete item.manufacturer
+      delete item.mrp
+    });
+    const formData = new FormData();
+    // await formData.append("country", data.country);
+    // formData.append("address", JSON.stringify(data.address));
+    // await formData.append("pincode", data.pincode);
+    await formData.append("mobile", Userdata.phonenumber);
+    await formData.append("email", Userdata.email);
+    // await formData.append("orderfor", data.orderfor);
+    await formData.append("order", JSON.stringify(neworder));
+    await formData.append("userid", Userdata._id);
+    await formData.append("status", data.status);
+    // await formData.append("justification", data.justification);
+    // await formData.append("delivery_time", data.delivery_time);
+    await formData.append("order_no", Math.floor(Math.random() * 1000000));
+    await formData.append("totalamount", total1);
+    await formData.append("actualamount", actualtotal);
+    await formData.append("instruction", data.instruction);
+    await formData.append("addresstype", data.addresstype);
+    // await formData.append("deliverytype", data.deliverytype);
+    await formData.append("username", Userdata.username);
+    // const url=`${baseUrl}/api/order/add_order`
+    const url = `${baseUrl}/api/order/create-checkout-session`;
+    await fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res, "rsponse of create");
+       // DeleteCart(res.url)
+       window.location.href = res.url;
+        // alert("cart Deleted")
+        
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const DeleteCart = async (url) => {
+    await fetch(`${baseUrl}/api/cart/delete_cart_by_id`, {
+      method: "delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id:Userdata._id,
+      }),
+    })
+      .then((res) => {
+        res.json()
+        localStorage.removeItem("Usercartdata")
+        window.location.href = url
+      })
+      .then(async (res) => {})
+      .catch((err) => {});
+  };
+
+
 
   return (
     <>
@@ -160,9 +257,9 @@ console.log(cart,"carttttttttttttttt");
                             // el.quantity;
                             total = el.singleprice * el.quantity;
                             total1 = total1 + (el.singleprice * el.quantity);
-                            localStorage.setItem("Subtotal", total1);
-                            actualtotal += el.mrp * el.quantity;
                             localStorage.setItem("ActualSubtotal", total1);
+                            actualtotal += el.mrp * el.quantity;
+                            localStorage.setItem("Subtotal", actualtotal);
 
                             return (
                               //  <Link to={"/SingleProduct/" + el.productid} >
@@ -313,15 +410,16 @@ console.log(cart,"carttttttttttttttt");
                         Payable Amount <span>₹{total1}</span>
                       </li>
                     </ul>
-                  </div>
-                  <button className="default-btn1" type="button">
-                    <Link
-                      className=""
-                      to={Userdata ? "/UserDetails/"+ _id : "/register"}
+                    <button
+                      className="default-btn1"
+                      // to={Userdata ? "/UserDetails/"+ _id : "/register"}                      
+                      onClick={(e) => {
+                        submitData(e);
+                      }}
                     >
                       <i className="flaticon-trolley"></i> Proceed to Checkout
-                    </Link>
                     </button>
+                  </div>
                 </div>
               </div>
           </form>

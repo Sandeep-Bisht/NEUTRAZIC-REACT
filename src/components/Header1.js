@@ -405,9 +405,6 @@ const Header1 = (props) => {
                                alt=""
                              /> : ""
                             }
-                            
-                            
-                            
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -442,7 +439,11 @@ const Header1 = (props) => {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-body">
-                <div className="row pt-4">
+                <div className="row mt-0">
+                  <div className="col-12">
+                    <div className="nutra-logo-in-login-form">
+                  <img src="/static/media/new-logo.8b4fa066.png" alt="nutrazik-logo"/></div>
+                  </div>
                   <div className="col-6 logiRegisterHeader1 pr-0">
                     <h3
                       onClick={() => {
@@ -470,6 +471,8 @@ const Header1 = (props) => {
                           className="form-group col-lg-12"
                           onBlur={handleSubmit(RegisterUser)}
                         >
+                          <div className="row mt-0">
+                            <div className="col-6">
                           <div className="form-group">
                             <label>
                               Username<span>*</span>
@@ -495,6 +498,8 @@ const Header1 = (props) => {
                             }}
                           /> */}
                           </div>
+                          </div>
+                          <div className="col-6">
                           <div className="form-group ">
                             <label>
                               Email<span>*</span>
@@ -519,24 +524,9 @@ const Header1 = (props) => {
                             )}
                             {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                           </div>
-                          <div className="form-group ">
-                            <label>
-                              Phone Number<span>*</span>
-                            </label>
-                            <input
-                              type="number"
-                              className="form-control "
-                              {...register("phonenumber", {
-                                required: true,
-                              })}
-                            />
-                            {errors?.phonenumber?.type === "required" && (
-                              <p className="text-danger">
-                                This field is required
-                              </p>
-                            )}
-                            {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                           </div>
+                          
+                          <div className="col-6">
                           <div className="form-group">
                             <label>
                               Password<span>*</span>
@@ -562,6 +552,8 @@ const Header1 = (props) => {
                               </p>
                             )}
                           </div>
+                          </div>
+                          <div className="col-6">
                           <div className="form-group ">
                             <label>
                               Confirm Password<span>*</span>
@@ -588,6 +580,28 @@ const Header1 = (props) => {
                                 Password does not match
                               </p>
                             )}
+                          </div>
+                          </div>
+                          <div className="col-6">
+                          <div className="form-group ">
+                            <label>
+                              Phone Number<span>*</span>
+                            </label>
+                            <input
+                              type="number"
+                              className="form-control "
+                              {...register("phonenumber", {
+                                required: true,
+                              })}
+                            />
+                            {errors?.phonenumber?.type === "required" && (
+                              <p className="text-danger">
+                                This field is required
+                              </p>
+                            )}
+                            {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
+                          </div>
+                          </div>
                           </div>
                           {/* <h5 className="Login-fail-msg">{}</h5> */}
                           {/* <div className="form-group col-lg-12">
@@ -642,9 +656,8 @@ const Header1 = (props) => {
                           >
                             Login
                           </button>
-                          
                           <span>
-                            <p className="mt-2">Forget Password...</p>
+                          <p className="mt-3">Forgot Password?</p>
                           </span>
                         </div>
                       </div>
