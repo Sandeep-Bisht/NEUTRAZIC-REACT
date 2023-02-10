@@ -4,16 +4,16 @@ import Footer from "./Footer";
 import Header1 from "./Header1";
 import Baseline from "./Baseline";
 import { baseUrl } from "../utils/services";
-var Userdata = "";
+
 const Ordered = () => {
+  var Userdata;
   window.scroll(0, 0);
   const [orderes, setOrderes] = useState([]);
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
     ordersDetails();
   }, []);
-
+  
   const ordersDetails = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/order/order_by_id`, {
@@ -26,10 +26,11 @@ const Ordered = () => {
           userid: Userdata._id,
         }),
       })
-        .then((res) => res.json())
+        .then(async(res) => res.json())
 
         .then(async (data) => {
-          if (data.data[0] != undefined) {
+          
+          if (data.data != undefined) {
             setOrderes(data.data);
           }
 
