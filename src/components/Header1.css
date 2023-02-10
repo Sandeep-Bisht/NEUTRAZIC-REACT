@@ -457,13 +457,21 @@ color:#1e144f;
 /* End wishlist code */
 .accordion-item .accordion-header .d-flex  button
 {
-    font-size:1.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #1e144f;
+    text-transform: capitalize;
+}
+.accordion-item .accordion-header .d-flex  button:hover
+{
+    color: #1b97ff;
 }
 .icons1
 {
- width: 60%;
- height: 60px;
- object-fit: contain;
+    height: 30px;
+    margin: 0 10px;
+    color: #1b97ff;
 }
 
 .Home-navbar ul li{
@@ -543,7 +551,7 @@ color:#1e144f;
 
 /* ----- MODAL STYLE ----- */
 .modal-content {
-    border-radius: 0;
+    border-radius: 5px;
     border: none;
 }
 
@@ -552,6 +560,13 @@ color:#1e144f;
     background-color: #FAFAFA;
 }
 
+.nutra-logo-in-login-form
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
+}
 /* ----- v CAN BE DELETED v ----- */
 
 

@@ -825,7 +825,7 @@ const SingleProduct = (props) => {
               </div>
             </div>
             <div className="mt-3 add-cart-buttons ml-3">
-              <div className="quantity1 mt-1 justify-content-center align-items-center d-flex">
+              <div className="quantity1 mt-1 ">
                 <i
                   className="bx bx-minus minus-single mr-2"
                   onClick={() => {
