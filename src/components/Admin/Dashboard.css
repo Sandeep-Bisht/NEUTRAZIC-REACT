@@ -754,8 +754,9 @@ font-family: 'Roboto', sans-serif;
   padding-top: 60px;
   padding-bottom: 20px;
   background-color: #f1f4f6;
-  height: 100vh;
+  min-height: 100vh;
 }
+
 
 /* End Dashboard header image css */
 
@@ -913,3 +914,20 @@ font-family: 'Roboto', sans-serif;
 .anticon svg{
   height: 13px !important;
 }
+
+
+/* Blog Css */
+
+.Blog-Heading{
+  text-decoration: none !important;
+  color: #1e144f;
+  font-size: 28px;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* .tox .tox-tbtn{
+  padding: 20px 10px 0 30px !important;
+}
+.tox .tox-tbtn__select-label,.tox-collection__item-caret svg{
+  margin: -22px 0 0px 0px !important;
+} */

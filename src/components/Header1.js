@@ -242,7 +242,10 @@ const Header1 = (props) => {
       });
   };
   const searchData = (e) => {
-    if (props.func) props.func(e);
+    
+    if(props.func){
+       props.func(e)
+      };
   };
   const cartfunction = async (newItemObj) => {
     var merged = false;
@@ -672,11 +675,13 @@ const Header1 = (props) => {
               <input
                 type="text"
                 onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                // onKeyPress={(e) => {
-                //   if (e.key == "Enter") {
-                //     searchData(search);
-                //   }
-                // }}
+                onKeyDown = {(e)=>{
+                  if(e.key === "Enter"){
+                    searchData(search);
+                    history.push("/SearchResult/" + search);
+                  }
+                }}
+                
               />
               <Link to={"/SearchResult/" + search}>
                 <button
@@ -942,6 +947,7 @@ const Header1 = (props) => {
                         Contact
                       </Link>
                     </li>
+                    <Link to={"/Blogs"}>
                     <li className="nav-item">
                       <a
                         className="nav-link nav-heading"
@@ -952,6 +958,7 @@ const Header1 = (props) => {
                         Blog
                       </a>
                     </li>
+                    </Link>
                   </ul>
                   <img
                     className="icons2"

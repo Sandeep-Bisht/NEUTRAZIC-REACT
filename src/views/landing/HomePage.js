@@ -535,11 +535,10 @@ const breakPoints = [
                     <input
                       type="text"
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                      onKeyPress={(e) => {
-                        if (e.key == "Enter") {
-                          searchData(search);
-                        }
-                      }}
+                      onKeyDown={(e)=>{ if(e.key === "Enter"){
+                        searchData(search);
+                        history.push("/SearchResult/" + search);
+                      }}}
                     />
                     <Link to={"/SearchResult/" + search}>
                       <button
