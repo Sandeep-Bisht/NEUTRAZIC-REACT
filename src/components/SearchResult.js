@@ -509,7 +509,7 @@ const SearchResult = (props) => {
       <Header1 func={Docsearch} />
 
       {/* <!-- Right side Modal --> */}
-      <div id="mySidenav" className="sidenav">
+      {/* <div id="mySidenav" className="sidenav">
         <Link
           href="javascript:void(0)"
           className="closebtn"
@@ -727,15 +727,15 @@ const SearchResult = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="filter-button-div">
+      {/* <div className="filter-button-div">
         <i
           className="bx bx-filter filter-button"
           onClick={() => openNav()}
           style={{}}
         ></i>
-      </div>
+      </div> */}
       {/* <div id="main"></div> */}
 
       {/* end side bar Modal */}
