@@ -4,7 +4,7 @@ import BlogImage from '../Images/blog-img.jpg';
 import Footer from "./Footer";
 import Header1 from './Header1'
 
-function Blog() {
+function Blogs() {
   return (
     <>
     <Header1/>
@@ -101,4 +101,4 @@ function Blog() {
   );
 }
 
-export default Blog;
+export default Blogs;

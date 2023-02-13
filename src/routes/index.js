@@ -58,12 +58,11 @@ import ReturnRefund from "../components/ReturnRefund";
 import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
 import OrderSuccess from "../components/OrderSuccess";
-import Blog from "../components/Admin/Blog";
-import Blogs from "../components/Blogs";
+import Blog from "../components/Admin/Blogs";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
-import Blog from "../components/Blog";
+import Blogs from "../components/Blog";
 
 var Userdata = "";
 const Root = (props) => {
@@ -110,11 +109,6 @@ const Root = (props) => {
               exact
               path="/Manufacturer"
               component={ManufacturerCreation}
-            />
-            <Route
-              exact
-              path="/Blogs"
-              component={Blogs}
             />
             <Route
               exact
@@ -199,7 +193,7 @@ const Root = (props) => {
             <Route path='/Faq' component={Faq} />
             <Route path='/orderSuccess' component={OrderSuccess} />
             <Route path='/forgotPassword' component={Forgot} />
-            <Route path='/blog' component={Blog} />
+            <Route path='/blogs' component={Blogs} />
 
           </Switch>
         </>
