@@ -63,6 +63,7 @@ import Blogs from "../components/Blogs";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
+import AllBlogs from "../components/Admin/AllBlogs/AllBlogs";
 
 var Userdata = "";
 const Root = (props) => {
@@ -114,6 +115,11 @@ const Root = (props) => {
               exact
               path="/Blogs"
               component={Blogs}
+            />
+            <Route
+              exact
+              path="/AllBlogs"
+              component={AllBlogs}
             />
             <Route
               exact

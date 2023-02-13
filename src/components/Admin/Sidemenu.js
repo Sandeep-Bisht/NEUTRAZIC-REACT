@@ -400,10 +400,16 @@ const Sidemenu = () => {
                                   Products
                                 </li>
                               </Link>
-                              <Link to="/Blog">
+                              {/* <Link to="/Blog">
                                 <li>
                                   <FaBlogger className="configuration-icons-wrap" />
                                   Blog
+                                  </li>
+                                  </Link> */}
+                              <Link to="/ALLBlogs">
+                                <li>
+                                  <FaBlogger className="configuration-icons-wrap" />
+                                  AllBlogs
                                   </li>
                                   </Link>
                               <Link to="/AllWarehouseDetails">

@@ -6,14 +6,16 @@ import $ from "jquery";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 
-const Blog = () => {
+const Blog = (props) => {
+  const [editableData] = useState(props.history.location.state);
+  console.log(editableData);
   const [data, setData] = useState({
     title: "",
     featuredImage: [],
     description: "",
     content: "",
   });
-  
+  console.log(data,"dataaa")
 const addBlogs = async(e)=>{
   e.preventDefault();
   const formData = new FormData();
@@ -36,6 +38,9 @@ const addBlogs = async(e)=>{
       .catch((err) => console.log(err));
   
 }
+const updateBlogs= (e)=>[
+  e.preventDefault()
+]
   return (
     <>
       <section id="body-pd">
@@ -57,6 +62,7 @@ const addBlogs = async(e)=>{
                           id="floatingInputValue"
                           className="form-control Dashborad-search"
                           placeholder="Title"
+                          defaultValue={editableData ? editableData.title : ""}
                           onChange={(e) =>
                             setData({ ...data, title: e.target.value })
                           }
@@ -80,6 +86,7 @@ const addBlogs = async(e)=>{
                           className="form-control h-100"
                           id="floatingInputValue"
                           placeholder="Description"
+                          defaultValue={editableData ? editableData.description : ""}
                           rows="4"
                           onChange={(e) =>
                             setData({ ...data, description: e.target.value })
@@ -90,7 +97,7 @@ const addBlogs = async(e)=>{
                       <div className="col-12">
                         <Editor
                         apiKey='3e3t370l1o9tq0i11p8ba9pnfv9le3omjw9zqsvm2tjgn3hn'
-                        initialValue="This is the initial content of the editor."
+                        initialValue={editableData ? editableData.content : "Create Content"}
                         textareaName="content"
                         
                         onEditorChange={(newText)=>setData({...data, content: newText})}
@@ -101,17 +108,27 @@ const addBlogs = async(e)=>{
                           plugins: [
                             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
+                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount','file',
                           ],
-                          toolbar: 'undo redo | blocks | ' +
+                          toolbar: 'undo redo | blocks | formatselect ' +
                             'bold italic forecolor | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'alignright alignjustify | bullist numlist outdent indent image | ' +
                             'removeformat | help',
                           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                         }}
                         outputFormat="text"
                         />
                       </div>
+                      { editableData ? (
+                         <div className="col-12 p-1">
+                         <button className="m-2 ps-2 btn btn-primary"
+                         onClick={(e)=>updateBlogs(e)}
+                         >
+                           Update
+                         </button>
+                       </div>
+                        ):
+                        (
                       <div className="col-12 p-1">
                         <button className="m-2 ps-2 btn btn-primary"
                         onClick={(e)=>addBlogs(e)}
@@ -119,6 +136,8 @@ const addBlogs = async(e)=>{
                           Submit
                         </button>
                       </div>
+                      )
+                      }
                     </div>
                   </div>
                 </div>

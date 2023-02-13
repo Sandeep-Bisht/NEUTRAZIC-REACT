@@ -929,12 +929,12 @@ font-family: 'Roboto', sans-serif;
   font-family: 'Roboto', sans-serif !important;
 }
 
-/* .tox .tox-tbtn{
+ .tox .tox-tbtn{
   padding: 20px 10px 0 30px !important;
-}
+} 
 .tox .tox-tbtn__select-label,.tox-collection__item-caret svg{
   margin: -22px 0 0px 0px !important;
-} */
+} 
 .required label::after, 
 .required select~option::after{ 
   content:"*"; 
