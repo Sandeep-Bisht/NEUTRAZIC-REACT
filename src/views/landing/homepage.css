@@ -2,6 +2,28 @@
 {
 	display: none;
 }
+.blog-section
+{
+	background-color: #f6f7fb;
+    padding-bottom: 60px;
+}
+.blog-section .Slxdj, .blog-section .kXteup
+{
+    font-size: 1em !important;
+    width: 40px !important;
+    height: 36px !important;
+    min-width: 4px !important;
+    line-height: 29px !important;
+}
+.blog-section .img-slides
+{
+	height: 110px;
+    background: #fff;
+    object-fit: contain;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+}
 .brands-area .Slxdj, .brands-area .kXteup
 {
     font-size: 1em !important;
