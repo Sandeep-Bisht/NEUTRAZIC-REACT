@@ -5,6 +5,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import $ from "jquery";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
@@ -15,8 +17,13 @@ const Blog = (props) => {
     description: "",
     content: "",
   });
-  console.log(data,"dataaa")
-const addBlogs = async(e)=>{
+  useEffect(()=>{
+    if (editableData) {
+      setData(editableData);
+    }
+  },[])
+  const history = useHistory();
+const addBlogs = async(e,_id)=>{
   e.preventDefault();
   const formData = new FormData();
   await formData.append("title",data.title);
@@ -38,9 +45,27 @@ const addBlogs = async(e)=>{
       .catch((err) => console.log(err));
   
 }
-const updateBlogs= (e)=>[
-  e.preventDefault()
-]
+const UpdateBlogs = async (e,_id) => {
+  e.preventDefault();
+  const formData = new FormData();
+  await formData.append("_id", data._id);
+  await formData.append("description", data.description);
+  await formData.append("title", data.title);
+  await formData.append("featuredImage", data.featuredImage);
+  await formData.append("content", data.content);
+    try{
+      const response = await axios.put(`${baseUrl}/api/blogs/update_slug_by_id`, formData)
+      if(response.status==200)
+      {
+        history.push("/AllBlogs");
+      }
+      addBlogs();
+      
+    }catch(error)
+    {
+      console.log(error);
+    }
+};
   return (
     <>
       <section id="body-pd">
@@ -122,7 +147,7 @@ const updateBlogs= (e)=>[
                       { editableData ? (
                          <div className="col-12 p-1">
                          <button className="m-2 ps-2 btn btn-primary"
-                         onClick={(e)=>updateBlogs(e)}
+                         onClick={(e)=>UpdateBlogs(e,data._id)}
                          >
                            Update
                          </button>
@@ -131,7 +156,7 @@ const updateBlogs= (e)=>[
                         (
                       <div className="col-12 p-1">
                         <button className="m-2 ps-2 btn btn-primary"
-                        onClick={(e)=>addBlogs(e)}
+                        onClick={(e)=>addBlogs(data._id)}
                         >
                           Submit
                         </button>

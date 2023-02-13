@@ -73,7 +73,7 @@ const AllBlogs = () => {
               <Typography.Link>
                 <Link
                   to={{
-                    pathname: "/Blog",
+                    pathname: "/CreateBlog",
                     state: {
                       ...record,
                     },
@@ -104,7 +104,7 @@ const AllBlogs = () => {
               <div className="all-products-details-section">
                 <h3 className="all-products-head">All Blogs</h3>
                 <div className="all-products-search-wrap">
-                  <Link to="/Blog" className="add-icon">
+                  <Link to="/CreateBlog" className="add-icon">
                     <MdPlaylistAdd />
                     Add
                   </Link>
