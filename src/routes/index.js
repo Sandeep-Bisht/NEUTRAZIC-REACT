@@ -58,6 +58,8 @@ import ReturnRefund from "../components/ReturnRefund";
 import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
 import OrderSuccess from "../components/OrderSuccess";
+import Blog from "../components/Admin/Blog";
+import Blogs from "../components/Blogs";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
@@ -103,15 +105,26 @@ const Root = (props) => {
             
             <Route exact path="/Productform" component={Productform} />
             <Route exact path="/Category" component={CategoryCreation} />
+            <Route exact path="/Blog" component={Blog}/>
             <Route
               exact
               path="/Manufacturer"
               component={ManufacturerCreation}
-            /> 
+            />
+            <Route
+              exact
+              path="/Blogs"
+              component={Blogs}
+            />
             <Route
               exact
               path="/AllManufactureDetails"
               component={AllManufactureDetails}
+            />
+            <Route
+              exact
+              path="/Ordered"
+              component={Ordered}
             />
             <Route
               exact
