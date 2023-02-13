@@ -61,6 +61,7 @@ import OrderSuccess from "../components/OrderSuccess";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
+import Blog from "../components/Blog";
 
 var Userdata = "";
 const Root = (props) => {
@@ -185,7 +186,8 @@ const Root = (props) => {
             <Route path='/Faq' component={Faq} />
             <Route path='/orderSuccess' component={OrderSuccess} />
             <Route path='/forgotPassword' component={Forgot} />
-          
+            <Route path='/blog' component={Blog} />
+
           </Switch>
         </>
       </Router>

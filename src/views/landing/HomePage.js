@@ -1265,6 +1265,49 @@ const breakPoints = [
           </div>
         </section>
 
+        <div className="blog-section">
+<div className="container m-auto">
+  <div className="row mt-0">
+    <div className="col-12">
+      <div className="trendign-head">
+        <span className="products-color">Blog</span>
+      </div>
+    </div>
+  </div>
+  <div className="row image-group">
+  <Carousel
+               // breakPoints={breakPoints} 
+              disableAutoPlay
+              autoPlaySpeed={1500} 
+              itemsToShow={5}
+              onPrevStart={onPrevStart}
+              onNextStart={onNextStart}
+              // onChange={Loop}
+              ref={carouselRef}
+              disableArrowsOnEnd={false}
+              // itemPadding={[0, 4]}
+               >
+              {Manufactureres &&
+                Manufactureres.length > 0 &&
+                Manufactureres.map((el, index) => (
+                  <>
+                  <div className="col" key={index}>
+                          <img className="img-slides"
+                            src={
+                              el.image && el.image.length > 0
+                                ? 
+                                `${baseUrl}/` + el.image[0].path
+                                : ""
+                            }
+                          />
+                  </div>
+                  </>
+                ))}
+                  </Carousel>
+  </div>
+</div>
+        </div>
+
         <div className="brands-area">
           <div className="container m-auto">
             <div className="trendign-head">
