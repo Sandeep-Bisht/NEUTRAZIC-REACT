@@ -12,7 +12,10 @@ const SingleBlog = (props)=>{
     
 
     useEffect(()=>{
+        window.scroll(0,0);
         getSingleBlog();
+
+
     },[])
     
 

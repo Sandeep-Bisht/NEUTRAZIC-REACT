@@ -4,19 +4,21 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Typography,Dropdown } from "antd";
+import { Table, Input, Space, Popconfirm, Typography,Dropdown,Modal } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import {MdPlaylistAdd} from 'react-icons/md'
 import {Link} from "react-router-dom";
 import { DownOutlined } from '@ant-design/icons';
 
-const InProgressOrder = () => {
+const ShippedOrder = () => {
   const [orders, setOrders] = useState([])
   const [OrderDetails, setOrderDetails] = useState([])
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [shippedOrder,setShippedOrder]=useState([]);
+  const [orderItem,setOrderItem]=useState([]);
   useEffect(() => {
     GetOrders();
   }, []);
@@ -29,13 +31,14 @@ const InProgressOrder = () => {
         let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="inProgress")
+            if(item.status=="Shipped")
 
             {
                arr.push(item);
             }
          }
          setOrderDetails(arr)
+        
       }
       )
       .catch((err) => {
@@ -43,7 +46,8 @@ const InProgressOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, status) => {
+  const UpdateOrderStatus = async (e,orderId, status) => {
+e.preventDefault();
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
@@ -57,8 +61,8 @@ const InProgressOrder = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        GetOrders();
-
+         GetOrders();
+        setIsModalVisible(false);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -102,49 +106,76 @@ const InProgressOrder = () => {
     });
     setOrders(filteredData);
   };
+  
+  
+
+  const showModal = (item) => {
+    setShippedOrder(item.address);
+    setOrderItem(item);
+    setIsModalVisible(true);
+    };
+
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
-    { title: "Transaction Id", dataIndex: "transaction_id", key: "transaction_id" },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     { title: "Payment Status", dataIndex: "payment_status", key: "payment_status" },
     {
-      title: "Status", 
-      render: (a, item) => (
-        <Space size="middle">
-          <Dropdown
-            menu={{
-              items: [
-                {
-                  key: '1',
-                  label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
-                      Cancel
-                    </a>
-                  ),
-                },
-                {
-                  key: '2',
-                  label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Packed")}>
-                      Packed
-                    </a>
-                  ),
-                },
-              ],
-            }}
-          >
-            <a>
-              InProgress <DownOutlined />
-            </a>
-          </Dropdown>
-        </Space>
-      ),
-    },
-  ]
+        title: 'Status',
+        key: 'action',
+        render: (_,item) => (
+              <a
+          onClick={()=>showModal(item)}>
+            Shipped
+          </a> 
+        ),
+      },
+  ];
+
 
   return (
     <>
+    {/* table modal */}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header float-right">
+        <h5>User details</h5>
+        <div class="text-right">
+          <i data-dismiss="modal" aria-label="Close" class="fa fa-close"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div>       
+        <Modal title="Shipped Details" visible={isModalVisible}>
+        <form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Address</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" value={shippedOrder.line1} aria-describedby="emailHelp" />
+  </div>
+  <div class="mb-3">
+  <label for="Blue Dart">Choose a Shipper</label>
+    <select className='m-1'>
+      <option value="Blue Dart">Blue Dart</option>
+      <option value="XpressBees">XpressBees</option>
+      <option value="DHL Shipping">DHL Shipping</option>
+      <option value="DTDC Courier">DTDC Courier</option>
+    </select>
+  </div>
+  <button className='btn btn-primary m-2' onClick={(e)=>UpdateOrderStatus(e,orderItem._id,"Delivered")}>Delivered</button>
+  <button className='btn btn-primary m-2'onClick={(e)=>UpdateOrderStatus(e,orderItem._id,"Cancel")}>Cancle</button>
+  {/* <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div> */}
+</form>
+                    </Modal> 
+ </div>
+      </div>
+    </div>
+  </div>
+</div>
+      {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
@@ -182,8 +213,27 @@ const InProgressOrder = () => {
           </div>
         </div>
       </section>
+      <div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
     </>
   );
 }
 
-export default InProgressOrder;
+export default ShippedOrder;

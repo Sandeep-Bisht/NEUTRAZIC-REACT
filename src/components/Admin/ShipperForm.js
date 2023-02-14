@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import axios from "axios";
 
 var Userdata;
-const Warehouse = (props) => {
+const ShipperForm = (props) => {
   const [warehouse,setWarehouse] = useState([]);
   const [update, setUpdate] = useState(false);
   const [data, Setdata] = useState({
@@ -18,7 +18,7 @@ const Warehouse = (props) => {
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
-    e.preventDefault();      
+    e.preventDefault();   
     const url = `${baseUrl}/api/warehouse/add_warehouse`;
      await fetch(url, {
     method: "POST",
@@ -28,20 +28,17 @@ const Warehouse = (props) => {
         description:data.description,
       }) 
     })
+      .then((res) =>{
+        res.json()
+        history.push("/AllWarehouseDetails");
+      } )
       .then((res) => {
-        res.json();
-        console.log(res,"resposneeeeeeeee")
-        //history.push('/AllManufactureDetails')
-      })
-      .then((res) => {
-       // GetManufacturer();
-       // this.getAddOn();
-      })
+        GetWarehouse();
 
+        this.getAddOn();
+      })
       .catch((err) => console.log(err));
-    //console.log(formData)
-    e.preventDefault();
-  };
+   };
 
  
   useEffect(() => {
@@ -166,4 +163,4 @@ const Warehouse = (props) => {
   );
 };
 
-export default Warehouse;
+export default ShipperForm;
