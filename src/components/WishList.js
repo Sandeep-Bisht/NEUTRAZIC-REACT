@@ -33,7 +33,7 @@ const WishList = ()=>{
       GetWishlist();
       
       GetData();
-      console.log(data,"This is data");
+     
      },[]);
      console.log(data);
      const GetData = async () => {

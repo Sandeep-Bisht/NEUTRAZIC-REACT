@@ -38,7 +38,7 @@ const Subcategories = (props) => {
  const [SubcategoryId , setsubcategoryId] = useState("All Products");
   const history = useHistory();
                      
-console.log(getSubCategories,"sub category");
+
 
   const dispatch = useDispatch();
   var CartDataWoLogin = [];

@@ -33,7 +33,7 @@
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p
 {
-    color: #fff;
+    color: #007bff;
     font-size: 22px;
     margin-top: 10px;
     font-weight: 600;
@@ -91,4 +91,7 @@
     padding: 12px;
     padding-left: 20px;
     letter-spacing: 0.25px;
+}
+.card-img-top{
+    cursor: pointer;
 }
