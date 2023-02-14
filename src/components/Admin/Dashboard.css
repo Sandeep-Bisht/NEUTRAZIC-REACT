@@ -616,8 +616,11 @@ font-family: 'Roboto', sans-serif;
 {
   background-color: #fff;
   position: fixed;
-  height: 100vh;
-  padding: 10px 6px;
+  top: 0;
+  bottom: 0;
+  padding: 0 6px;
+  padding-top: 80px;
+  overflow-y: scroll;
   box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
   z-index: 5;
 }
@@ -755,7 +758,9 @@ font-family: 'Roboto', sans-serif;
   padding-bottom: 20px;
   background-color: #f1f4f6;
   height: 100vh;
+  overflow-y: scroll;
 }
+
 
 /* End Dashboard header image css */
 
@@ -912,4 +917,26 @@ font-family: 'Roboto', sans-serif;
 }
 .anticon svg{
   height: 13px !important;
+}
+
+
+/* Blog Css */
+
+.Blog-Heading{
+  text-decoration: none !important;
+  color: #1e144f;
+  font-size: 28px;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+ .tox .tox-tbtn{
+  padding: 20px 10px 0 30px !important;
+} 
+.tox .tox-tbtn__select-label,.tox-collection__item-caret svg{
+  margin: -22px 0 0px 0px !important;
+} 
+.required label::after, 
+.required select~option::after{ 
+  content:"*"; 
+  color: red;
 }

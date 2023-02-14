@@ -245,12 +245,14 @@ const SingleProduct = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        await getWishlist();
         setData(data.data[0]);
         SetMainImage(data.data[0].image[0].path)
 
         //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         setProductCategory(data.data[0].category.name);
         categoryDetails(data.data[0].category);
+        
       })
       .catch((err) => {
         console.log(err, "error");
@@ -823,7 +825,7 @@ const SingleProduct = (props) => {
               </div>
             </div>
             <div className="mt-3 add-cart-buttons ml-3">
-              <div className="quantity1 mt-1 justify-content-center align-items-center d-flex">
+              <div className="quantity1 mt-1 ">
                 <i
                   className="bx bx-minus minus-single mr-2"
                   onClick={() => {
@@ -1176,9 +1178,7 @@ const SingleProduct = (props) => {
                                           el.image
                                         );
                                       }}
-                                      className={`bx bxs-heart ${checkWishlistItem(
-                                        el._id
-                                      )}`}
+                                      className={`bx bxs-heart ${checkWishlistItem(el._id)}`}
                                     ></i>
                                   ) : (
                                     <i

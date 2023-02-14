@@ -91,6 +91,11 @@ export default function AllProductsDetails() {
       key: "inrDiscount",
     },
     {
+      title: "Quantity",
+      dataIndex: "",
+      key: "",
+    },
+    {
       title: "Image",
       dataIndex: "image[0].path",
       width: 80,

@@ -16,12 +16,13 @@ import { useDispatch } from 'react-redux';
 
 var Userdata='';
 const WishList = ()=>{
+   const history = useHistory();
+   const dispatch = useDispatch()
    const [wishlistData,Setwishlist]=useState([])
    const [order, Setorder] = useState([]);
    const [userCart, setUserCart] = useState([]);
    const [quantity, setQuantity] = useState(1);
-   const dispatch = useDispatch();
-   const history = useHistory();
+
 
    useEffect(() => {
       Userdata =  JSON.parse(localStorage.getItem("Userdata"))   
