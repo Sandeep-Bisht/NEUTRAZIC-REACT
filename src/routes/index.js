@@ -62,8 +62,12 @@ import CreateBlog from "../components/Admin/CreateBlog";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
-import AllBlogs from "../components/Admin/AllBlogs/AllBlogs";
-import Blogs from "../components/Blog";
+import userOrder from "../components/userOrder";
+import PackedOrder from "../components/Admin/PackedOrder";
+import ShippedOrder from "../components/Admin/ShippedOrder";
+import CancelOrder from "../components/Admin/CancelOrder";
+import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
+import Blogs from "../components/Blog"
 
 var Userdata = "";
 const Root = (props) => {
@@ -96,6 +100,8 @@ const Root = (props) => {
             <Route exact path="/Register" component={Register} />
             <Route exact path="/Warehouse" component={Warehouse} />
             <Route exact path="/AllWarehouseDetails" component={AllWarehouseDetails} />
+            <Route exact path="/userOrder" component={userOrder} />
+
             {/* <Route exact path="/" component={HomePage} /> */}
             {/* <PrivateRoute path="/home" component={Home} /> */}
             {/* <Route exact path="/Register" component={Register} /> */}
@@ -167,8 +173,10 @@ const Root = (props) => {
             <Route exact path="/Orders" component={Orders} />
             <Route exact path="/NewOrder/:status" component={NewOrder} />
 
-            <Route exact path="/InProgressOrder/:status" component={InProgressOrder} />
-            {/* <Route exact path="/InProgressOrder/:status" component={PackedOrder} /> */}
+            <Route exact path="/InProgressOrderInProgress" component={InProgressOrder} />
+            <Route exact path="/InProgressOrderPacked" component={PackedOrder} />
+            <Route exact path="/InProgressOrderShipped" component={ShippedOrder} />
+            <Route exact path="/CanceledOrder" component={CancelOrder} />
 
             <Route exact path="/DeliveredOrder" component={DeliveredOrder} />
             <Route exact path="/Roles" component={Roles} />

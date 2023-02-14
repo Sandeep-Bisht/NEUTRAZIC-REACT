@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Header1 from "./Header1";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
 import "../components/Header1.css";
@@ -22,12 +22,14 @@ const stripePromise = loadStripe(
 var Userdata = "";
 
 const Cart = () => {
+
+  const history = useHistory()
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
   const [cartStatus,setCartStatus]=useState()
-  const [cartItems, setCartItems] = useState();
+  const [cartItems, setCartItems] = useState(undefined);
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;
@@ -410,6 +412,7 @@ const Cart = () => {
                         Payable Amount <span>₹{total1}</span>
                       </li>
                     </ul>
+                    { cartItems ?
                     <button
                       className="default-btn1"
                       // to={Userdata ? "/UserDetails/"+ _id : "/register"}                      
@@ -417,8 +420,15 @@ const Cart = () => {
                         submitData(e);
                       }}
                     >
-                      <i className="flaticon-trolley"></i> Proceed to Checkout
+                      <i className="flaticon-trolley"></i> Proceed To Checkout
+                    </button> :
+                    <button
+                      className="default-btn1"
+                      onClick={() => history.push("/AllProducts")}
+                    >
+                      <i className="flaticon-trolley"></i> Continue Shopping
                     </button>
+}
                   </div>
                 </div>
               </div>
@@ -524,12 +534,19 @@ const Cart = () => {
             </tr>
             <tr className="text-center">
               <td colSpan="2">
-                <Link
+                 <Link
                   className="default-btn1"
                   to={Userdata ? "/CheckOut" : "/register"}
                 >
                   <button>Proccess to CheckOut</button>
-                </Link>
+                </Link>  
+                {/* <Link
+                className="default-btn1"
+                to="/AllProducts"
+              >
+                <button>Continue Shopping</button>
+              </Link> */}
+              
               </td>
             </tr>
           </table>
