@@ -787,7 +787,7 @@ const Header1 = (props) => {
                               className="dropdown-item Logout-li"
                               style={{ cursor: "pointer" }}
                             >
-                              <Link to="/Ordered">
+                              <Link to="/UserOrder">
                                 <span className="pr-4">Orders</span>
                               </Link>
                             </li>
