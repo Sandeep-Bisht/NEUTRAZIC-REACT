@@ -58,6 +58,7 @@ import ReturnRefund from "../components/ReturnRefund";
 import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
 import OrderSuccess from "../components/OrderSuccess";
+import CreateBlog from "../components/Admin/CreateBlog";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
@@ -65,6 +66,8 @@ import userOrder from "../components/userOrder";
 import PackedOrder from "../components/Admin/PackedOrder";
 import ShippedOrder from "../components/Admin/ShippedOrder";
 import CancelOrder from "../components/Admin/CancelOrder";
+import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
+import Blogs from "../components/Blog"
 
 var Userdata = "";
 const Root = (props) => {
@@ -108,15 +111,31 @@ const Root = (props) => {
             
             <Route exact path="/Productform" component={Productform} />
             <Route exact path="/Category" component={CategoryCreation} />
+            <Route exact path="/CreateBlog" component={CreateBlog}/>
             <Route
               exact
               path="/Manufacturer"
               component={ManufacturerCreation}
-            /> 
+            />
+            <Route
+              exact
+              path="/Blogs"
+              component={Blogs}
+            />
+            <Route
+              exact
+              path="/AllBlogs"
+              component={AllBlogs}
+            />
             <Route
               exact
               path="/AllManufactureDetails"
               component={AllManufactureDetails}
+            />
+            <Route
+              exact
+              path="/Ordered"
+              component={Ordered}
             />
             <Route
               exact

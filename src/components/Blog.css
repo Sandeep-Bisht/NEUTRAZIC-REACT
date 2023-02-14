@@ -1,0 +1,94 @@
+.blog-box-wrapper .left-blog-image-wrap img
+{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+.blog-box-wrapper .left-blog-image-wrap
+{
+    position: relative;
+}
+.blog-box-wrapper .left-blog-image-wrap .top-heading-box-1
+{
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+}
+.blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button
+{
+    width: auto;
+    padding: 6px 40px;
+    color: var(--optionalColor);
+    border: 2px solid rgb(27 151 255 / 33%);
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+.blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button:hover
+{
+    background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+    border: none;
+    color: #fff;
+}
+.blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p
+{
+    color: #fff;
+    font-size: 22px;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+}
+
+.right-blog-image-wrapper img
+{
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+}
+.right-blog-image-wrapper .right-blog-image-wrap
+{
+    position: relative;
+    margin-bottom: 20px;
+}
+.right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2, .top-heading-box-3
+{
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+}
+.right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button, .top-heading-box-3 button
+{
+    width: auto;
+    padding: 6px 40px;
+    color: var(--optionalColor);
+    border: 2px solid rgb(27 151 255 / 33%);
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+.right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button:hover, .top-heading-box-3 button:hover
+{
+    background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+    border: none;
+    color: #fff;
+}
+.right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p, .top-heading-box-3 p
+{
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+}
+.blog-page-section-2 .latest-blogs-section h2
+{
+    color: #fff;
+    background-color: #1e144f;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px;
+    padding-left: 20px;
+    letter-spacing: 0.25px;
+}

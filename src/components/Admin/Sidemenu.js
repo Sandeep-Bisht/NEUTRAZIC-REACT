@@ -12,6 +12,8 @@ import { FaBoxOpen } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
 import { GrInProgress } from "react-icons/gr";
 import { BsBox } from "react-icons/bs";
+
+import { FaBlogger } from "react-icons/fa";
 import { FaShippingFast,FaWarehouse } from "react-icons/fa";
 import { BsCartXFill } from "react-icons/bs";
 import { MdRealEstateAgent } from "react-icons/md";
@@ -398,6 +400,18 @@ const Sidemenu = () => {
                                   Products
                                 </li>
                               </Link>
+                              {/* <Link to="/Blog">
+                                <li>
+                                  <FaBlogger className="configuration-icons-wrap" />
+                                  Blog
+                                  </li>
+                                  </Link> */}
+                              <Link to="/ALLBlogs">
+                                <li>
+                                  <FaBlogger className="configuration-icons-wrap" />
+                                  AllBlogs
+                                  </li>
+                                  </Link>
                               <Link to="/AllWarehouseDetails">
                                 <li>
                                   <FaWarehouse className="configuration-icons-wrap" />

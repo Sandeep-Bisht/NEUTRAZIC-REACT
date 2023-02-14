@@ -11,7 +11,6 @@ import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
 
-
 const UserPage = () => {
 
 const [userdata,setUserdata] = useState([]);
