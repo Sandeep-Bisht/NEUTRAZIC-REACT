@@ -10,7 +10,6 @@ import {BiSearchAlt} from 'react-icons/bi';
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
-var CryptoJS = require("crypto-js");
 
 const UserPage = () => {
 
@@ -62,11 +61,7 @@ const handleDelete=async (_id)=>{
   
 }
 
-const decryptPasswordHandler=(password)=>{
-  var decrypt  = CryptoJS.AES.decrypt(password, 'secret key 123');
-  var originalText = decrypt.toString(CryptoJS.enc.Utf8);
-  return originalText;
-}
+
 
 const columns = [
   {
@@ -113,7 +108,7 @@ const columns = [
               title="Edit"
               className='edit-icon-wrap'
               style={{ color: "blue" }}
-              onClick={()=>decryptPasswordHandler(record.password)}
+             //onClick={()=>decryptPasswordHandler(record.password)}
             >
               <MdOutlineEditNote/>
             </Link>

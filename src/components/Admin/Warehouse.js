@@ -17,26 +17,27 @@ const Warehouse = (props) => {
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
-    e.preventDefault();   
+    e.preventDefault();      
     const url = `${baseUrl}/api/warehouse/add_warehouse`;
-     await fetch(url, {
-    method: "POST",
-      body:JSON.stringify({
-        name:data.name,
-        description:data.description,
-      }) 
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: data.name, description: data.description })
     })
-      .then((res) =>{
-        res.json()
-        history.push("/AllWarehouseDetails");
-      } )
       .then((res) => {
-        GetWarehouse();
-
-        this.getAddOn();
+        res.json();
+        console.log(res,"resposneeeeeeeee")
+        //history.push('/AllManufactureDetails')
       })
+      .then((res) => {
+       // GetManufacturer();
+       // this.getAddOn();
+      })
+
       .catch((err) => console.log(err));
-   };
+    //console.log(formData)
+    e.preventDefault();
+  };
 
  
   useEffect(() => {
