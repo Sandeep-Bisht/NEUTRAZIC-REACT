@@ -58,10 +58,11 @@ import ReturnRefund from "../components/ReturnRefund";
 import ShippingPolicy from "../components/ShippingPolicy";
 import Faq from '../components/Faq';
 import OrderSuccess from "../components/OrderSuccess";
-import CreateBlog from "../components/Admin/CreateBlog";
+import Create from "../components/Admin/CreateBlog";
 import Forgot from "../components/Forgot";
 import Warehouse from "../components/Admin/Warehouse";
 import AllWarehouseDetails from "../components/Admin/AllWarehouse/AllWarehouseDetails";
+import SingleBlogPage from "../components/SingleBlogPage";
 import userOrder from "../components/userOrder";
 import PackedOrder from "../components/Admin/PackedOrder";
 import ShippedOrder from "../components/Admin/ShippedOrder";
@@ -99,6 +100,9 @@ const Root = (props) => {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/Register" component={Register} />
             <Route exact path="/Warehouse" component={Warehouse} />
+            <Route exact path="/SingleBlogPage/:slug" component={SingleBlogPage} />
+            
+
             <Route exact path="/AllWarehouseDetails" component={AllWarehouseDetails} />
             <Route exact path="/userOrder" component={userOrder} />
 
@@ -111,7 +115,7 @@ const Root = (props) => {
             
             <Route exact path="/Productform" component={Productform} />
             <Route exact path="/Category" component={CategoryCreation} />
-            <Route exact path="/CreateBlog" component={CreateBlog}/>
+            <Route exact path="/CreateBlog" component={Create}/>
             <Route
               exact
               path="/Manufacturer"

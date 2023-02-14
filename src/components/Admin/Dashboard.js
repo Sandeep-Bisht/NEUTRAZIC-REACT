@@ -176,17 +176,17 @@ const Dashboard = () => {
                     </div>
 
                     <div className="col-3">
-                      <Link to="/Orders">
+                      <Link to="/AllBlogs">
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
                               <div className="d-flex justify-content-between align-items-center">
                                 <div>
                                   <BsCartPlus className="cardicon" />
-                                  <h6 className="cardheads">Orders </h6>
+                                  <h6 className="cardheads">Blogs </h6>
                                 </div>
                                 <div>
-                                  <span className="count1">{Orders}</span>
+                                  <span className="count1"></span>
                                 </div>
                               </div>
                             </div>
