@@ -110,88 +110,38 @@ const UserOrder = () => {
   return (
     <>
       {/* table modal */}
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header float-right">
-              <h5>User details</h5>
-              <div class="text-right">
-                <i
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  class="fa fa-close"
-                ></i>
-              </div>
-            </div>
-            <div class="modal-body">
-              <div>
-                <Modal
-                  title="Order Details"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <table class="table">
-                    <thead>
-                      <tr>                        
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col" className="text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {prticularUserOrder &&
-                        prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
-                          console.log(item, "itemssss");
-                          return (
-                            <>
-                              <tr>                                
-                                <td className="width-adjust-of-td">
-                                  <div className="width-adjust-of-image">
-                                  <img
-                                    onClick={() => imageHandler(item.productid)}
-                                    style={{ cursor: "pointer" }}
-                                    src={`${baseUrl}/${item.image}`}
-                                  ></img>
-                                  </div>
-                                </td>
-                                <td >{item.name}</td>
-                                <td>{item.singleprice}</td>
-                                <td className="text-center">
-                                  <button onClick={()=>imageHandler(item.productid)} type="button" className="btn btn-primary">Re-Order</button>
-                                </td>
-                              </tr>
-                            </>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </Modal>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+     
+     
+  <Modal title="Order Details" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  { prticularUserOrder &&
+    prticularUserOrder.length>0 && prticularUserOrder.map((item)=>{
+      console.log(item,"itemssss");
+      return(
+        <>  
+        <tr>  
+    <td>{item.name}</td>
+    <td><img onClick={()=>imageHandler(item.productid)} style={{cursor:'pointer'}}src={`${baseUrl}/${item.image}`}></img></td>
+    <td>{item.singleprice}</td> 
+    </tr>               
+        </>
+      ) 
+    })
+  }
+   
+ </tbody>
+</table>
+ </Modal>
+
       {/* end modal */}
       <Header1 />
       <section id="body-pd">

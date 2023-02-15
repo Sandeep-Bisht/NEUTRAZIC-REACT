@@ -195,9 +195,10 @@ const SubCategoryCreation = (props) => {
                         <h5>SubCategory Creation</h5>
                         <div className="row">
                           <div className="col-6 p-1">
+                            <label className="featured-Image">SubCategory Image</label>
                             <input
                               type="file"
-                              className="form-control Dashborad-search"
+                              className="form-control Dashborad-search featured"
                               placeholder="SubCategory Name "
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
