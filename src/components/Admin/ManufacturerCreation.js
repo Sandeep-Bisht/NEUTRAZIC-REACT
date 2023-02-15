@@ -197,13 +197,10 @@ const ManufacturerCreation = (props) => {
                         <h5>Manufacturer Creation</h5>
                         <div className="row">
                           <div className="col-6 p-1">
-                            <label className="featured-Image">
-                              Manufacturer Image
-                            </label>
                             <input
                               type="file"
                               multiple
-                              className="form-control Dashborad-search featured"
+                              className="form-control Dashborad-search"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}

@@ -376,12 +376,9 @@ const Productform = (props) => {
                                 <label for="floatingform" >Product Name</label>
                               </div>
                               <div className="col-6 p-1">
-                                <label className="featured-Image">
-                                  Product Image
-                                </label>
                                 <input
                                   type="file"
-                                  className="form-control Dashborad-search featured"
+                                  className="form-control Dashborad-search"
                                   name="image[]"
                                   onChange={(e) => {
                                     Setdata({
@@ -392,12 +389,9 @@ const Productform = (props) => {
                                 />
                               </div>
                               <div className="col-6 p-1">
-                              <label className="featured-Image">
-                                  Other Images
-                                </label>
                                 <input
                                   type="file"
-                                  className="form-control Dashborad-search featured"
+                                  className="form-control Dashborad-search"
                                   multiple
                                   name="otherImage[]"
                                   // value={data.image}
