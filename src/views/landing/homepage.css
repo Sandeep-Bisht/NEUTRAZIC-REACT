@@ -18031,6 +18031,7 @@ letter-spacing: 0.50px;
 	height: 20px;
 	object-fit: cover;
 	width: 100%;
+	cursor: text;
 }
 
 .brands-area

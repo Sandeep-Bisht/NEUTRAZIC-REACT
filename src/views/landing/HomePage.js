@@ -519,7 +519,7 @@ const breakPoints = [
         {/* trending section  */}
         <section className="home-banner">
           <div className="container m-auto">
-            <div className="row">
+            <div className="row align-items-center">
               <div className="col-md-6">
                 <div className="home-banner-left">
                   <p className="home-banner-heading">
