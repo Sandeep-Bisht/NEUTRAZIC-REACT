@@ -77,7 +77,7 @@ const Cart = () => {
         .then((res) => res.json())
         .then(async (data) => {
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
-          console.log(data.data,"datatatttaatatatat");
+          
           setCartStatus(data.data[0].cartStatus)
           setCart(data.data[0].order);
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
@@ -153,7 +153,7 @@ const Cart = () => {
 
   const submitData = async (e) => {
     e.preventDefault();
-    console.log(Userdata,"inside submit data", data)
+    
     const stripe = await stripePromise;
     let { order } = data;
     let neworder = JSON.parse(order);

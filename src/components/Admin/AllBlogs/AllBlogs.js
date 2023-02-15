@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { MdPlaylistAdd } from "react-icons/md";
+import { BiSearchAlt } from "react-icons/bi";
 import axios from "axios";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState("");
+  const [searchVal,setSearchVal] = useState();
 
   useEffect(() => {
     getAllBlogs();
@@ -27,6 +29,19 @@ const AllBlogs = () => {
       });
   };
  
+  const onChangeHandler = (e) => {
+    setSearchVal(e.target.value);
+    if (e.target.value === "") {
+      getAllBlogs();
+    }
+  };
+
+  const searchHandler = () => {
+    const filteredData = blogs.filter((value) => {
+      return value.title.toLowerCase().includes(searchVal.toLowerCase());
+    });
+    setBlogs(filteredData);
+  };
     const handleDelete = async (_id) => {
         try{
           const DeletedData=await axios.delete(`${baseUrl}/api/blogs/delete_slug_by_id`,{data : {_id:_id}});
@@ -108,15 +123,15 @@ const AllBlogs = () => {
                     <MdPlaylistAdd />
                     Add
                   </Link>
-                  {/* <input
+                  <input
               type='text'
                 onChange={e => onChangeHandler(e)}
                 onKeyUp={searchHandler}
                 placeholder="Search.."
                 enterButton
                 style={{ position: "sticky", top: "0", left: "0" }}
-              /> */}
-                  {/* <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button> */}
+              />
+                  <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
                 </div>
               </div>
               <Table

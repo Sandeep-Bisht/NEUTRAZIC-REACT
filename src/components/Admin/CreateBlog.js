@@ -7,6 +7,7 @@ import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import slugify from "react-slugify";
 
 const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
@@ -23,14 +24,15 @@ const Blog = (props) => {
     }
   },[])
   const history = useHistory();
-const addBlogs = async(e,_id)=>{
+const addBlogs = async(e)=>{
   e.preventDefault();
   const formData = new FormData();
   await formData.append("title",data.title);
   await formData.append("description",data.description);
   await formData.append("featuredImage",data.featuredImage);
   await formData.append("content",data.content);
-  await formData.append("slug",data.title);
+  const slug = slugify(data.title);
+  await formData.append("slug",slugify(data.title));
   const url = `${baseUrl}/api/blogs/add_blog`;
     await fetch(url, {
       method: "POST",
@@ -53,6 +55,7 @@ const UpdateBlogs = async (e,_id) => {
   await formData.append("title", data.title);
   await formData.append("featuredImage", data.featuredImage);
   await formData.append("content", data.content);
+  await formData.append("slug",slugify(data.title));
     try{
       const response = await axios.put(`${baseUrl}/api/blogs/update_slug_by_id`, formData)
       if(response.status==200)
@@ -156,7 +159,7 @@ const UpdateBlogs = async (e,_id) => {
                         (
                       <div className="col-12 p-1">
                         <button className="m-2 ps-2 btn btn-primary"
-                        onClick={(e)=>addBlogs(data._id)}
+                        onClick={(e)=>addBlogs(e)}
                         >
                           Submit
                         </button>

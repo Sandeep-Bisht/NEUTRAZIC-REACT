@@ -205,7 +205,7 @@ const AllProducts = (props) => {
 
   const FilterItems = (item) => {
     setFilter(item);
-    console.log(item, "filter");
+   
   };
 
 
