@@ -1,47 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import DataTable from '@bit/adeoy.utils.data-table';
-import Sidemenu from './Sidemenu';
-import './Dashboard.css';
-import { baseUrl } from '../../utils/services';
-import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Typography,Dropdown } from "antd";
+import Sidemenu from "./Sidemenu";
+import "./Dashboard.css";
+import { baseUrl } from "../../utils/services";
+import DashboardHeaader from "./DashboardHeaader";
+import {
+  Table,
+  Input,
+  Space,
+  Popconfirm,
+  Modal,
+  Button,
+  Typography,
+  Dropdown,
+} from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import {MdPlaylistAdd} from 'react-icons/md'
-import {Link} from "react-router-dom";
-import { DownOutlined } from '@ant-design/icons';
+import { MdPlaylistAdd } from "react-icons/md";
+import { Link, useHistory } from "react-router-dom";
+import { DownOutlined } from "@ant-design/icons";
 
 const InProgressOrder = () => {
-  const [orders, setOrders] = useState([])
-  const [OrderDetails, setOrderDetails] = useState([])
+  const [orders, setOrders] = useState([]);
+  const [OrderDetails, setOrderDetails] = useState([]);
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  
+  const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const history = useHistory();
+
   useEffect(() => {
     GetOrders();
   }, []);
 
   const GetOrders = async () => {
-
     await fetch(`${baseUrl}/api/order/all_order`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(async (data) => {
-        let arr=[];
-         for(let item of data.data)
-         {
-            if(item.status=="inProgress")
-
-            {
-               arr.push(item);
-            }
-         }
-         setOrderDetails(arr)
-      }
-      )
+        let arr = [];
+        for (let item of data.data) {
+          if (item.status == "inProgress") {
+            arr.push(item);
+          }
+        }
+        setOrderDetails(arr);
+      })
       .catch((err) => {
         console.log(err, "errors");
       });
-  }
+  };
 
   const UpdateOrderStatus = async (orderId, status) => {
     await fetch(`${baseUrl}/api/order/update_order`, {
@@ -58,7 +65,6 @@ const InProgressOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
-
       })
       .catch((err) => {
         console.log(err, "error");
@@ -77,9 +83,7 @@ const InProgressOrder = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-
         GetOrders();
-
       })
       .catch((err) => {
         console.log(err, "error");
@@ -87,9 +91,8 @@ const InProgressOrder = () => {
   };
 
   const CaptureDetails = (orders) => {
-    setOrderDetails(orders)
-
-  }
+    setOrderDetails(orders);
+  };
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -105,28 +108,36 @@ const InProgressOrder = () => {
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
-    { title: "Transaction Id", dataIndex: "transaction_id", key: "transaction_id" },
-    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
-    { title: "Payment Status", dataIndex: "payment_status", key: "payment_status" },
     {
-      title: "Status", 
+      title: "Transaction Id",
+      dataIndex: "transaction_id",
+      key: "transaction_id",
+    },
+    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
+    {
+      title: "Payment Status",
+      dataIndex: "payment_status",
+      key: "payment_status",
+    },
+    {
+      title: "Status",
       render: (a, item) => (
         <Space size="middle">
           <Dropdown
             menu={{
               items: [
                 {
-                  key: '1',
+                  key: "1",
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
+                    <a onClick={() => UpdateOrderStatus(item._id, "Cancel")}>
                       Cancel
                     </a>
                   ),
                 },
                 {
-                  key: '2',
+                  key: "2",
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Packed")}>
+                    <a onClick={() => UpdateOrderStatus(item._id, "Packed")}>
                       Packed
                     </a>
                   ),
@@ -141,10 +152,119 @@ const InProgressOrder = () => {
         </Space>
       ),
     },
-  ]
+    {
+      title: "View Order",
+      key: "action",
+      render: (_, record) => (
+        <Button type="primary" onClick={() => showModal(record)}>
+          See Order
+        </Button>
+      ),
+    },
+  ];
+
+  const showModal = (order) => {
+    console.log(order, "order");
+    setPrticularUserOrder(order.order);
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const imageHandler = (id) => {
+    history.push("/SingleProduct/" + id);
+  };
 
   return (
     <>
+      {/* table modal */}
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header float-right">
+              <h5>User details</h5>
+              <div class="text-right">
+                <i
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  class="fa fa-close"
+                ></i>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div>
+                <Modal
+                  title="Order Details"
+                  visible={isModalVisible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prticularUserOrder &&
+                        prticularUserOrder.length > 0 &&
+                        prticularUserOrder.map((item) => {
+                          console.log(item, "itemssss");
+                          return (
+                            <>
+                              <tr>
+                                <td className="width-adjust-of-td">
+                                  <div className="width-adjust-of-image">
+                                    <img
+                                      onClick={() =>
+                                        imageHandler(item.productid)
+                                      }
+                                      style={{ cursor: "pointer" }}
+                                      src={`${baseUrl}/${item.image}`}
+                                    ></img>
+                                  </div>
+                                </td>
+                                <td>{item.name}</td>
+                                <td>{item.singleprice}</td>
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </Modal>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
@@ -160,20 +280,26 @@ const InProgressOrder = () => {
                     <MdPlaylistAdd />Add
                   </Link> */}
                   <input
-                    type='text'
-                    onChange={e => onChangeHandler(e)}
+                    type="text"
+                    onChange={(e) => onChangeHandler(e)}
                     onKeyUp={searchHandler}
                     placeholder="Search.."
                     enterButton
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
-                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                  <button type="button" className="dashboard-search-btn">
+                    <BiSearchAlt />
+                  </button>
                 </div>
               </div>
 
               <Table
                 rowKey="name"
-                dataSource={filteredData && filteredData.length ? filteredData : OrderDetails}
+                dataSource={
+                  filteredData && filteredData.length
+                    ? filteredData
+                    : OrderDetails
+                }
                 columns={columns}
                 loading={loading}
                 pagination={false}
@@ -184,6 +310,6 @@ const InProgressOrder = () => {
       </section>
     </>
   );
-}
+};
 
 export default InProgressOrder;

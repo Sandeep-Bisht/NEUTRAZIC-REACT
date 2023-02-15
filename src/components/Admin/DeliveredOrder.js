@@ -4,10 +4,10 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Typography,Dropdown } from "antd";
+import { Table, Input, Space, Popconfirm,Modal,Button, Typography,Dropdown } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import {MdPlaylistAdd} from 'react-icons/md'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { DownOutlined } from '@ant-design/icons';
 
 const DeliveredOrder = () => {
@@ -16,6 +16,10 @@ const DeliveredOrder = () => {
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
+  const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const history =  useHistory();
+
   useEffect(() => {
     GetOrders();
   }, []);
@@ -112,13 +116,119 @@ const DeliveredOrder = () => {
       title: "Status", dataIndex: "status", key: "stauts"
       
     },
+    {
+      title: "View Order",
+      key: "action",
+      render: (_, record) => (
+        <Button type="primary" onClick={() => showModal(record)}>
+          See Order
+        </Button>
+      ),
+    },
 
   ];
+
+  const showModal = (order) => {
+    console.log(order, "order");
+    setPrticularUserOrder(order.order);
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const imageHandler = (id) => {
+    history.push("/SingleProduct/" + id);
+  };
 
 
   return (
     <>
-    
+    {/* table modal */}
+    <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header float-right">
+              <h5>User details</h5>
+              <div class="text-right">
+                <i
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  class="fa fa-close"
+                ></i>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div>
+                <Modal
+                  title="Order Details"
+                  visible={isModalVisible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <table class="table">
+                    <thead>
+                      <tr>                        
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prticularUserOrder &&
+                        prticularUserOrder.length > 0 &&
+                        prticularUserOrder.map((item) => {
+                          console.log(item, "itemssss");
+                          return (
+                            <>
+                              <tr>                                
+                                <td className="width-adjust-of-td">
+                                  <div className="width-adjust-of-image">
+                                  <img
+                                    onClick={() => imageHandler(item.productid)}
+                                    style={{ cursor: "pointer" }}
+                                    src={`${baseUrl}/${item.image}`}
+                                  ></img>
+                                  </div>
+                                </td>
+                                <td >{item.name}</td>
+                                <td>{item.singleprice}</td>                                
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </Modal>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />

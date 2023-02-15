@@ -7,6 +7,7 @@ import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
   Input,
+  Button,
   Space,
   Popconfirm,
   Typography,
@@ -15,7 +16,7 @@ import {
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { MdPlaylistAdd } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const ShippedOrder = () => {
@@ -27,6 +28,9 @@ const ShippedOrder = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [shippedOrder, setShippedOrder] = useState([]);
   const [orderItem, setOrderItem] = useState([]);
+  const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const history =  useHistory();
+
   useEffect(() => {
     GetOrders();
   }, []);
@@ -125,6 +129,15 @@ const ShippedOrder = () => {
       key: "action",
       render: (_, item) => <a onClick={() => showModal(item)}>Shipped</a>,
     },
+    {
+      title: "View Order",
+      key: "action",
+      render: (_, record) => (
+        <Button type="primary" onClick={() => showModal(record)}>
+          See Order
+        </Button>
+      ),
+    },
   ];
   const handleOk = () => {
     setIsModalVisible(false);
@@ -133,8 +146,91 @@ const ShippedOrder = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const imageHandler = (id) => {
+    history.push("/SingleProduct/" + id);
+  };
   return (
     <>
+    {/* table modal */}
+    <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header float-right">
+              <h5>User details</h5>
+              <div class="text-right">
+                <i
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  class="fa fa-close"
+                ></i>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div>
+                <Modal
+                  title="Order Details"
+                  visible={isModalVisible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <table class="table">
+                    <thead>
+                      <tr>                        
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prticularUserOrder &&
+                        prticularUserOrder.length > 0 &&
+                        prticularUserOrder.map((item) => {
+                          console.log(item, "itemssss");
+                          return (
+                            <>
+                              <tr>                                
+                                <td className="width-adjust-of-td">
+                                  <div className="width-adjust-of-image">
+                                  <img
+                                    onClick={() => imageHandler(item.productid)}
+                                    style={{ cursor: "pointer" }}
+                                    src={`${baseUrl}/${item.image}`}
+                                  ></img>
+                                  </div>
+                                </td>
+                                <td >{item.name}</td>
+                                <td>{item.singleprice}</td>                                
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </Modal>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* end modal */}
       {/* table modal */}
       
        
@@ -239,7 +335,7 @@ const ShippedOrder = () => {
                         UpdateOrderStatus(e, orderItem._id, "Cancel")
                       }
                     >
-                      Cancle
+                      Cancel
                     </button>
                     
                   </form>
