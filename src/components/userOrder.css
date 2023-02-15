@@ -1,0 +1,18 @@
+.table .width-adjust-of-td
+{
+    width: 30%;
+}
+.table td
+{
+    vertical-align: middle;
+}
+.table td img
+{
+    height: 100px;
+    width: 100%;
+    object-fit: contain;
+}
+.width-adjust-of-image
+{
+    width: 30%;
+}
