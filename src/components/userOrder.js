@@ -109,7 +109,7 @@ const UserOrder = () => {
 
   return (
     <>
-      {/* table modal */}
+       {/* table modal */}
       <div
         class="modal fade"
         id="exampleModal"
@@ -192,13 +192,12 @@ const UserOrder = () => {
           </div>
         </div>
       </div>
-      {/* end modal */}
+     {/* end modal */}
       <Header1 />
       <section id="body-pd">
         <div className="container-fluid">
-          {/* <DashboardHeaader /> */}
           <div className="row">
-            <div className="col-1 px-0">{/* <Sidemenu /> */}</div>
+            <div className="col-1 px-0"></div>
             <div className="col-10">
             { OrderDetails  && OrderDetails.length > 0 ? (
               <>
