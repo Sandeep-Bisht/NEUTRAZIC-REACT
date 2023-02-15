@@ -952,3 +952,15 @@ font-family: 'Roboto', sans-serif;
 :where(.css-dev-only-do-not-override-k83k30).ant-modal .ant-modal-footer {
   display: none !important;
 }
+
+
+.featured-Image p{
+  font-size: 0.8rem;
+  color: #000;
+  font-weight: bold;
+ 
+}
+.featured{
+  position: relative;
+  bottom: 7%;
+}
