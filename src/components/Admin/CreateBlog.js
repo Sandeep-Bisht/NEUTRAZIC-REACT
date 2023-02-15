@@ -97,10 +97,11 @@ const UpdateBlogs = async (e,_id) => {
                         />
                         <label for="floatingInputValue">Title</label>
                       </div>
-                      <div className="col-5 p-1 m-2 form-floating">
+                      <div className="col-5">
+                        <label className="featured-Image"><p>Featured Image:</p></label>
                         <input
                           type="file"
-                          className="form-control Dashborad-search"
+                          className="form-control Dashborad-search featured"
                           onChange={(e) =>
                             setData({
                               ...data,
@@ -124,7 +125,7 @@ const UpdateBlogs = async (e,_id) => {
                       </div>
                       <div className="col-12">
                         <Editor
-                        apiKey='3e3t370l1o9tq0i11p8ba9pnfv9le3omjw9zqsvm2tjgn3hn'
+                        apiKey='rmrbxpovag9am2ddn70yzgxnmbk49511uom4gfkaanyg1qjq'
                         initialValue={editableData ? editableData.content : "Create Content"}
                         textareaName="content"
                         
@@ -137,12 +138,13 @@ const UpdateBlogs = async (e,_id) => {
                             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                             'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount','file',
+                            
                           ],
                           toolbar: 'undo redo | blocks | formatselect ' +
                             'bold italic forecolor | alignleft aligncenter ' +
                             'alignright alignjustify | bullist numlist outdent indent image | ' +
                             'removeformat | help',
-                          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                          // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                         }}
                         outputFormat="text"
                         />

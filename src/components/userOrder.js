@@ -1,113 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import DataTable from '@bit/adeoy.utils.data-table';
 // import Sidemenu from './Sidemenu';
 // import './Dashboard.css';
 import Baseline from "../components/Baseline";
-import { baseUrl } from '../utils/services';
-import { useHistory } from 'react-router-dom';
+import { baseUrl } from "../utils/services";
+import { useHistory } from "react-router-dom";
+import "../components/userOrder.css"
 // import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Typography,Dropdown, Modal, Button } from "antd";
+import {
+  Table,
+  Input,
+  Space,
+  Popconfirm,
+  Typography,
+  Dropdown,
+  Modal,
+  Button,
+} from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import {MdPlaylistAdd} from 'react-icons/md'
-import {Link} from "react-router-dom";
-import Orders from '../Orders';
-import { DownOutlined } from '@ant-design/icons';
-import { render } from 'react-dom';
+import { MdPlaylistAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
+import Orders from "../Orders";
+import { DownOutlined } from "@ant-design/icons";
+import { render } from "react-dom";
 import Header1 from "../components/Header1";
 import Footer from "../components/Footer";
 
-
 var Userdata = "";
 const UserOrder = () => {
-  const [orders, setOrders] = useState([])
-  const [OrderDetails, setOrderDetails] = useState([])
+  const [orders, setOrders] = useState([]);
+  const [OrderDetails, setOrderDetails] = useState([]);
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  const [PendingOrders,setPendingOrders]=useState([]);
+  const [PendingOrders, setPendingOrders] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [prticularUserOrder,setPrticularUserOrder]=useState([]);
+  const [prticularUserOrder, setPrticularUserOrder] = useState([]);
 
-
-  const history=useHistory();
+  const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
+    window.scrollTo(0, 0);
   }, []);
 
-
-console.log(Userdata,"userDATA");
   const GetOrders = async () => {
-
     await fetch(`${baseUrl}/api/order/all_order`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(async (data) => {
-         let arr=[];
-         for(let item of data.data)
-         {
-            if(item.userid===Userdata._id)
-
-            {
-               arr.push(item);
-            }
-         }
-         setOrderDetails(arr);
-      }
-      )
+        let arr = [];
+        for (let item of data.data) {
+          if (item.userid === Userdata._id) {
+            arr.push(item);
+          }
+        }
+        setOrderDetails(arr);
+      })
       .catch((err) => {
         console.log(err, "errors");
       });
-  }
-
-  const updateUserOrder = async (productId, status) => {
-    await fetch(`${baseUrl}/api/order/update_order`, {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-        status: status,
-        justification: '',
-        delivery_time: ''
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetOrders();
-
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-
-        GetOrders();
-
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
   };
 
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders)
-
-  }
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -121,46 +74,38 @@ console.log(Userdata,"userDATA");
     setOrders(filteredData);
   };
 
-  const handleDelete=(id)=>{
-alert(id);
-  }
-
-
- 
   const showModal = (order) => {
-    console.log(order,"order");
+    console.log(order, "order");
     setPrticularUserOrder(order.order);
     setIsModalVisible(true);
-    };
+  };
 
-    const handleOk = () => {
-      setIsModalVisible(false);
-      };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
 
-      const handleCancel = () => {
-        setIsModalVisible(false);
-        };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const columns = [
-
-    { title: "Order No.", dataIndex: "order_no", key: "order_no",
-      },
+    { title: "Order No.", dataIndex: "order_no", key: "order_no" },
     { title: "Actual Amount.", dataIndex: "actualamount", key: "actualamount" },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     {
-      title: '',
-      key: 'action',
+      title: "View Order",
+      key: "action",
       render: (_, record) => (
-           <Button type="primary" 
-        onClick={()=>showModal(record)}>
-            Check Details</Button>
+        <Button type="primary" onClick={() => showModal(record)}>
+          See Order
+        </Button>
       ),
     },
   ];
 
-  const imageHandler=(id)=>{
-history.push("/SingleProduct/"+id);
-  }
+  const imageHandler = (id) => {
+    history.push("/SingleProduct/" + id);
+  };
 
   return (
     <>
@@ -198,40 +143,64 @@ history.push("/SingleProduct/"+id);
  </Modal>
 
       {/* end modal */}
-      <Header1/>
+      <Header1 />
       <section id="body-pd">
         <div className="container-fluid">
           {/* <DashboardHeaader /> */}
           <div className="row">
-            <div className="col-1 px-0">
-              {/* <Sidemenu /> */}
-            </div>
+            <div className="col-1 px-0">{/* <Sidemenu /> */}</div>
             <div className="col-10">
+            { OrderDetails  && OrderDetails.length > 0 ? (
+              <>
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
-                  {/* <Link to="/Category" className="add-icon">
-                    <MdPlaylistAdd />Add
-                  </Link> */}
                   <input
-                    type='text'
-                    onChange={e => onChangeHandler(e)}
+                    type="text"
+                    onChange={(e) => onChangeHandler(e)}
                     onKeyUp={searchHandler}
                     placeholder="Search.."
                     enterButton
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
-                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                  <button type="button" className="dashboard-search-btn">
+                    <BiSearchAlt />
+                  </button>
                 </div>
               </div>
-
+              
               <Table
                 rowKey="name"
-                dataSource={filteredData && filteredData.length ? filteredData : OrderDetails}
+                dataSource={
+                  filteredData && filteredData.length
+                    ? filteredData
+                    : OrderDetails
+                }
                 columns={columns}
                 loading={loading}
                 pagination={false}
               />
+              </> ) : (
+                <>
+                <lottie-player
+                  src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                  background="transparent"
+                  speed="1"
+                  style={{
+                    width: "300px",
+                    height: "300px",
+                    margin: "auto",
+                  }}
+                  loop
+                  autoplay
+                ></lottie-player>
+                <div className="row">
+                  <div className="col-md-12">
+                    <p className="text-center mt-3">No Order Placed yet</p>
+                  </div>
+                  </div>
+                  </>
+              ) }
             </div>
           </div>
         </div>
@@ -240,6 +209,6 @@ history.push("/SingleProduct/"+id);
       <Footer />
     </>
   );
-}
+};
 
 export default UserOrder;

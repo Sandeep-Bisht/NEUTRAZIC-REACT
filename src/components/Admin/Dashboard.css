@@ -1,3 +1,12 @@
+/* Modal css */
+:where(.css-dev-only-do-not-override-k83k30)[class^="ant-modal"] [class^="ant-modal"]{
+  width: auto !important;
+}
+:where(.css-dev-only-do-not-override-k83k30).ant-modal .ant-modal-content{
+  /* background-color: red !important; */
+  width: 850px !important;
+  margin: auto;
+}
 /*===== GOOGLE FONTS =====*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
@@ -942,4 +951,16 @@ font-family: 'Roboto', sans-serif;
 }
 :where(.css-dev-only-do-not-override-k83k30).ant-modal .ant-modal-footer {
   display: none !important;
+}
+
+
+.featured-Image p{
+  font-size: 0.8rem;
+  color: #000;
+  font-weight: bold;
+ 
+}
+.featured{
+  position: relative;
+  bottom: 7%;
 }
