@@ -15,6 +15,7 @@ const SingleBlog = (props)=>{
         window.scroll(0,0);
         getSingleBlog();
 
+        
 
     },[])
     
