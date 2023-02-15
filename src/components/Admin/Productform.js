@@ -14,7 +14,7 @@ const Productform = (props) => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
-  const [warehouse,setWarehouse]=useState([]);
+  const [warehouse, setWarehouse] = useState([]);
   const [products, Setproducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [shwoTable, setShowTable] = useState(false);
@@ -26,7 +26,7 @@ const Productform = (props) => {
     warehouse: "",
     category: "",
     subcategory: "",
-    quantity:"",
+    quantity: "",
     inrMrp: "",
     dollerMrp: "",
     inrDiscount: "",
@@ -47,7 +47,7 @@ const Productform = (props) => {
     await formData.append("warehouse", data.warehouse);
     await formData.append("category", data.category);
     await formData.append("subcategory", data.subcategory);
-    await formData.append("quantity",data.quantity);
+    await formData.append("quantity", data.quantity);
     await formData.append("inrMrp", data.inrMrp);
     await formData.append("dollerMrp", data.dollerMrp);
     await formData.append("inrDiscount", data.inrDiscount);
@@ -84,8 +84,8 @@ const Productform = (props) => {
     if (editableData) {
       Setdata(editableData);
     }
-    $(document).ready(function() {
-      $(".update").click(function() {
+    $(document).ready(function () {
+      $(".update").click(function () {
         $(".update-btn").css("display", "block");
       });
     });
@@ -285,7 +285,7 @@ const Productform = (props) => {
       otherImage: item.otherImage,
       warehouse: item.warehouse,
       category: item.category,
-      quantity:item.quantity,
+      quantity: item.quantity,
       inrMrp: item.inrMrp,
       inrDiscount: item.inrDiscount,
       dollerMrp: item.dollerMrp,
@@ -305,7 +305,7 @@ const Productform = (props) => {
     await formData.append("warehouse", data.warehouse);
     await formData.append("category", data.category);
     await formData.append("subcategory", data.subcategory);
-    await formData.append("quantity",data.quantity);
+    await formData.append("quantity", data.quantity);
     await formData.append("inrMrp", data.inrMrp);
     await formData.append("dollerMrp", data.dollerMrp);
     await formData.append("inrDiscount", data.inrDiscount);
@@ -376,11 +376,13 @@ const Productform = (props) => {
                                 <label for="floatingform" >Product Name</label>
                               </div>
                               <div className="col-6 p-1">
+                                <label className="featured-Image">
+                                  Product Image
+                                </label>
                                 <input
                                   type="file"
+                                  className="form-control Dashborad-search featured"
                                   name="image[]"
-                                  className="form-control Dashborad-search"
-                                  //value={editableData  ? editableData.image[0].path : ""}
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
@@ -389,11 +391,13 @@ const Productform = (props) => {
                                   }}
                                 />
                               </div>
-
                               <div className="col-6 p-1">
+                              <label className="featured-Image">
+                                  Other Images
+                                </label>
                                 <input
                                   type="file"
-                                  className="form-control Dashborad-search"
+                                  className="form-control Dashborad-search featured"
                                   multiple
                                   name="otherImage[]"
                                   // value={data.image}

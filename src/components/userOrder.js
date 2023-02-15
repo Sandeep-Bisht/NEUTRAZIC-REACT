@@ -165,18 +165,8 @@ history.push("/SingleProduct/"+id);
   return (
     <>
       {/* table modal */}
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header float-right">
-        <h5>User details</h5>
-        <div class="text-right">
-          <i data-dismiss="modal" aria-label="Close" class="fa fa-close"></i>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div>
-         
+     
+     
   <Modal title="Order Details" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
   <table class="table table-bordered">
   <thead>
@@ -206,15 +196,7 @@ history.push("/SingleProduct/"+id);
  </tbody>
 </table>
  </Modal>
- </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
       {/* end modal */}
       <Header1/>
       <section id="body-pd">
