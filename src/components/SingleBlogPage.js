@@ -44,9 +44,9 @@ const SingleBlog = (props)=>{
         <>
         <Header1/>
         
-        <div className="container-fluid product-div mt-5">
-        <div className="row ">
-            <div className="col-md-10 ms-1">
+        <div className="container m-auto product-div">
+        <div className="row">
+            <div className="col-md-12">
                 {
                     blog && blog.map((item)=>{
                         
@@ -55,11 +55,11 @@ const SingleBlog = (props)=>{
                     
                         <>
                         <div className="row">
-                        <div className="col-md-6">
-                        <div dangerouslySetInnerHTML={{ __html: item.content }} />
+                        <div className="col-md-12">
+                        <img className="single-blog-image" src={item.featuredImage && `${baseUrl}/`+ item.featuredImage[0].path}></img>
                         </div>
-                        <div className="col-md-6">
-                        <img src={item.featuredImage && `${baseUrl}/`+ item.featuredImage[0].path}></img>
+                        <div className="col-md-12">
+                        <div className="single-blog-page-header" dangerouslySetInnerHTML={{ __html: item.content }} />
                         </div>
                         </div>
                         </>
