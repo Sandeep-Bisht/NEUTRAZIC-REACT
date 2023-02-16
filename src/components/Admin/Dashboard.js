@@ -127,7 +127,6 @@ const Dashboard = () => {
         <section id="body-pd">
           <div className="container-fluid">
             <DashboardHeaader />
-
             <div className="row">
               <div className="col-2 px-0">
                 <Sidemenu />
