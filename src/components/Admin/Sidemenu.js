@@ -14,7 +14,7 @@ import { GrInProgress } from "react-icons/gr";
 import { BsBox } from "react-icons/bs";
 
 import { FaBlogger } from "react-icons/fa";
-import { FaShippingFast,FaWarehouse } from "react-icons/fa";
+import { FaShippingFast, FaWarehouse } from "react-icons/fa";
 import { BsCartXFill } from "react-icons/bs";
 import { MdRealEstateAgent } from "react-icons/md";
 import { GrConfigure } from "react-icons/gr";
@@ -326,18 +326,18 @@ const Sidemenu = () => {
                       Shipped
                     </li>
                   </Link>
-                  <Link to={"/CanceledOrder"}>
-                    <li>
-                      {" "}
-                      <BsCartXFill className="configuration-icons-wrap" />
-                      Cancel Order
-                    </li>
-                  </Link>
-                  <Link to={"/DeliveredOrder"}>
+                  <Link to={"/InProgressOrder/" + "Delivered"}>
                     <li>
                       {" "}
                       <MdRealEstateAgent className="configuration-icons-wrap" />
                       Delivered
+                    </li>
+                  </Link>
+                  <Link to={"/InProgressOrder/" + "Cancel"}>
+                    <li>
+                      {" "}
+                      <BsCartXFill className="configuration-icons-wrap" />
+                      Cancel Order
                     </li>
                   </Link>
                 </ul>
@@ -406,12 +406,7 @@ const Sidemenu = () => {
                                   Blog
                                   </li>
                                   </Link> */}
-                              <Link to="/ALLBlogs">
-                                <li>
-                                  <FaBlogger className="configuration-icons-wrap" />
-                                  AllBlogs
-                                  </li>
-                                  </Link>
+
                               <Link to="/AllWarehouseDetails">
                                 <li>
                                   <FaWarehouse className="configuration-icons-wrap" />
@@ -478,6 +473,14 @@ const Sidemenu = () => {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="nav__link active">
+          <div className="d-flex align-items-center justify-content-center div1">
+            <Link to="/ALLBlogs">
+              <FaBlogger className="nav__icon" />
+              <span className="pl-3 nav__name"> Blogs</span>
+            </Link>
           </div>
         </div>
 

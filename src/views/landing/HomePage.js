@@ -55,7 +55,7 @@ const HomePage = () => {
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
   const [wishlistData, Setwishlist] = useState([]);
-  const [blogs,setBlogs] = useState();
+  const [blogs, setBlogs] = useState();
 
   const history = useHistory();
 
@@ -282,7 +282,7 @@ const HomePage = () => {
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
     }
   };
@@ -410,7 +410,7 @@ const HomePage = () => {
               .then(async (data) => {
                 toast.error("Added to wishlist", {
                   position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 2000,
+                  autoClose: 1000,
                 });
 
                 //add product to wishlist response is comming here
@@ -448,7 +448,7 @@ const HomePage = () => {
                 .then(async (data) => {
                   toast.error("Added to wishlist", {
                     position: toast.POSITION.BOTTOM_RIGHT,
-                    autoClose: 2000,
+                    autoClose: 1000,
                   });
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
@@ -463,7 +463,7 @@ const HomePage = () => {
           } else {
             toast.error("Already in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 2000,
+              autoClose: 1000,
             });
           }
         }
@@ -517,7 +517,7 @@ const HomePage = () => {
         {/* trending section  */}
         <section className="home-banner">
           <div className="container m-auto">
-            <div className="row">
+            <div className="row align-items-center">
               <div className="col-md-6">
                 <div className="home-banner-left">
                   <p className="home-banner-heading">
@@ -1293,7 +1293,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        <div className="blog-section">
+        {/* <div className="blog-section">
           <div className="container m-auto">
             <div className="row mt-0">
               <div className="col-12">
@@ -1321,17 +1321,15 @@ const HomePage = () => {
                     <>
                       <div className="col" key={index}>
                         <Link to={"/SingleBlogPage/" + el.slug}>
-                        <img
-                          className="img-slides"
-                          src={
-                            el.featuredImage && el.featuredImage.length > 0
-                              ? `${baseUrl}/` + el.featuredImage[0].path
-                              : ""
-                          }
-                        />
-                        <p>
-                          {el.title}
-                        </p>
+                          <img
+                            className="img-slides"
+                            src={
+                              el.featuredImage && el.featuredImage.length > 0
+                                ? `${baseUrl}/` + el.featuredImage[0].path
+                                : ""
+                            }
+                          />
+                          <p>{el.title}</p>
                         </Link>
                       </div>
                     </>
@@ -1339,7 +1337,7 @@ const HomePage = () => {
               </Carousel>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="brands-area">
           <div className="container m-auto">
@@ -1430,6 +1428,95 @@ const HomePage = () => {
           </div>
           <ToastContainer />
         </section>
+        <div className="blog-section">
+        <div className="container m-auto">
+          <div className="row">
+            <div className="col-md-12">
+            <h1 className="trendign-head">
+            <span className="products-color">Blogs</span>
+          </h1>
+              <div className="blog-box-wrapper">
+                <div className="row">
+                  <div className="col-md-7">
+                    {blogs && blogs.map((item,ind)=>{
+                      if(ind<1)
+                      return(
+                    <div className="left-blog-image-wrap">
+                      <img src={item.featuredImage && `${baseUrl}/`+ item.featuredImage[0].path} alt="" className="" />
+                      <div className="top-heading-box-1">
+                        <Link to = {"/SingleBlogPage/" + item.slug}>
+                        <button>Read More</button>
+                        </Link>
+                        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+                      </div>
+                    </div>
+                    )})}
+                  </div>
+                  <div className="col-md-5 ps-0">
+                    <div className="right-blog-image-wrapper">
+                      {blogs && blogs.map((item,ind)=>{
+                        if(ind<2)
+                        return (
+                      <div className="right-blog-image-wrap" key={ind}>
+                        <img src={item.featuredImage && `${baseUrl}/` + item.featuredImage[0].path} alt="" className="" />
+                        <div className="top-heading-box-2">
+                        <Link to = {"/SingleBlogPage/" + item.slug}>
+                          <button>Read More</button>
+                          </Link>
+                          <p>{item.description}</p>
+                        </div>
+                      </div>
+                      )})}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="blog-page-section-2">
+            
+              <div className="row">
+              
+                <div className="col-md-12">
+             
+                  <div className="latest-blogs-section">
+                    <div className="row">
+                      { blogs && blogs.map((item)=>{
+                        return(
+                      <div className="col-md-3">
+                        <div class="card">
+                          <Link to = {"/SingleBlogPage/" + item.slug}>
+                          
+                          <img
+                            src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
+                            class="card-img-top"
+                            alt="blog-image"
+                          />
+                          </Link>
+                          <div class="card-body">
+                          <p class="card-text">
+                          {/* <ReadMoreReact
+                                text=
+                                min={100}
+                                ideal={100}
+                                max={100}
+                                readMoreText={"...Read More"}
+                              /> */}
+                            
+                            {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
         <Baseline />
         <Footer />
       </div>

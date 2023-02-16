@@ -33,7 +33,7 @@
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p
 {
-    color: #007bff;
+    color: #fff;
     font-size: 22px;
     margin-top: 10px;
     font-weight: 600;
@@ -92,6 +92,35 @@
     padding-left: 20px;
     letter-spacing: 0.25px;
 }
-.card-img-top{
+.blog-page-section-2 .card-img-top{
     cursor: pointer;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.blog-page-section-2 .card-img-link
+{
+    height: 230px;
+}
+.blog-page-section-2 .card
+{
+    margin-bottom: 20px;
+}
+.blog-page-section-2 .card-body
+{
+    height: 180px;
+}
+
+/* Single-blog-css */
+
+.single-blog-image
+{
+    height: 460px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.single-blog-page-header
+{
+    padding-bottom: 30px;
 }
