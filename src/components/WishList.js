@@ -75,7 +75,7 @@ const WishList = ()=>{
          Setwishlist("");
         toast.error("Product removed successfully",{
          position:"bottom-right",
-         autoClose:2000,
+         autoClose:1000,
         })
          GetWishlist()
 
@@ -163,7 +163,7 @@ const WishList = ()=>{
           history.push("/Cart");
             toast.success("Add to cart",{
             position:"bottom-right",
-            autoClose:5000,
+            autoClose:1000,
           });
         })
         .then((err) => console.log(err, "inside update cart"));

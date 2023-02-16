@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../components/Blog.css";
 import BlogImage from "../Images/blog-img.jpg";
 import Footer from "./Footer";
@@ -8,12 +8,11 @@ import { Link } from "react-router-dom";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
 function Blogs() {
-
   const [data, setData] = useState([]);
   useEffect(() => {
     getAllBlog();
   }, []);
-  
+
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())
@@ -25,7 +24,6 @@ function Blogs() {
       });
   };
 
-
   return (
     <>
       <Header1 />
@@ -36,31 +34,56 @@ function Blogs() {
               <div className="blog-box-wrapper">
                 <div className="row">
                   <div className="col-md-7">
-                    <div className="left-blog-image-wrap">
-                      <img src={BlogImage} alt="" className="" />
-                      <div className="top-heading-box-1">
-                        <button>Food</button>
-                        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-                      </div>
-                    </div>
+                    {data &&
+                      data.map((item, ind) => {
+                        if (ind < 1)
+                          return (
+                            <div className="left-blog-image-wrap" key={ind}>
+                              <img
+                                src={
+                                  item.featuredImage &&
+                                  `${baseUrl}/` + item.featuredImage[0].path
+                                }
+                                alt=""
+                                className=""
+                              />
+                              <div className="top-heading-box-1">
+                                <Link to = {"/SingleBlogPage/"+ item.slug}>
+                                <button>Read More</button>
+                                </Link>
+                                <p>{item.description}</p>
+                              </div>
+                            </div>
+                          );
+                      })}
                   </div>
                   <div className="col-md-5 ps-0">
-                    <div className="right-blog-image-wrapper">
-                      <div className="right-blog-image-wrap">
-                        <img src={BlogImage} alt="" className="" />
-                        <div className="top-heading-box-2">
-                          <button>Food</button>
-                          <p>Lorem, ipsum dolor sit amet consectetur.</p>
-                        </div>
-                      </div>
-                      <div className="right-blog-image-wrap mb-0">
-                        <img src={BlogImage} alt="" className="" />
-                        <div className="top-heading-box-3">
-                          <button>Food</button>
-                          <p>Lorem, ipsum dolor sit amet consectetur.</p>
-                        </div>
-                      </div>
-                    </div>
+                    {data &&
+                      data.map((item, ind) => {
+                        if (ind < 2)
+                          return (
+                            <div className="right-blog-image-wrapper" key={ind}>
+                              <div className="right-blog-image-wrap">
+                                <img
+                                  src={
+                                    item.featuredImage &&
+                                    `${baseUrl}/` + item.featuredImage[0].path
+                                  }
+                                  alt=""
+                                  className=""
+                                />
+                                <div className="top-heading-box-2">
+                                <Link to = {"/SingleBlogPage/"+ item.slug}>
+                                  <button>Read More</button>
+                                  </Link>
+                                  <p>
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                      })}
                   </div>
                 </div>
               </div>
@@ -71,80 +94,36 @@ function Blogs() {
                   <div className="latest-blogs-section">
                     <h2>Latest Blogs</h2>
                     <div className="row">
-                      { data && data.map((item)=>{
-                        return(
-                      <div className="col-md-3">
-                        <div class="card">
-                          <Link to = {"/SingleBlogPage/" + item.slug}>
-                          
-                          <img
-                            src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
-                            class="card-img-top"
-                            alt="blog-image"
-                          />
-                          </Link>
-                          <div class="card-body">
-                          <p class="card-text">
-                          <ReadMoreReact
-                                text={item.description}
-                                min={100}
-                                ideal={100}
-                                max={100}
-                                readMoreText={"...Read More"}
-                              />
-                            
-                              
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      )
-                      })}
-                      {/* <div className="col-md-3">
-                        <div class="card">
-                          <img
-                            src={BlogImage}
-                            class="card-img-top"
-                            alt="blog-image"
-                          />
-                          <div class="card-body">
-                            <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-3">
-                        <div class="card">
-                          <img
-                            src={BlogImage}
-                            class="card-img-top"
-                            alt="blog-image"
-                          />
-                          <div class="card-body">
-                            <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-3">
-                        <div class="card">
-                          <img
-                            src={BlogImage}
-                            class="card-img-top"
-                            alt="blog-image"
-                          />
-                          <div class="card-body">
-                            <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
-                            </p>
-                          </div>
-                        </div>
-                      </div> */}
+                      {data &&
+                        data.map((item) => {
+                          return (
+                            <div className="col-md-3">
+                              <div class="card">
+                                <Link to={"/SingleBlogPage/" + item.slug}>
+                                  <img
+                                    src={
+                                      item.featuredImage &&
+                                      `${baseUrl}/` + item.featuredImage[0].path
+                                    }
+                                    class="card-img-top"
+                                    alt="blog-image"
+                                  />
+                                </Link>
+                                <div class="card-body">
+                                  <p class="card-text">
+                                    <ReadMoreReact
+                                      text={item.description}
+                                      min={100}
+                                      ideal={100}
+                                      max={100}
+                                      readMoreText={"...Read More"}
+                                    />
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
