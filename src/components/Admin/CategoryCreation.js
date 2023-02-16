@@ -180,10 +180,9 @@ const CategoryCreation = (props) => {
                       <h5>Category Creation</h5>
                       <div className="row">
                         <div className="col-6 p-1">
-                          <label className="featured-Image">Category Image</label>
                           <input
                             type="file"
-                            className="form-control Dashborad-search featured"
+                            className="form-control Dashborad-search"
                             // onChange={SelectImage}
                             onChange={(e) => {
                               Setdata({ ...data, image: e.target.files[0] });
