@@ -40,7 +40,9 @@
     "redux": "^4.2.0",
     "stars-rating": "^1.1.0",
     "styled-components": "^5.3.6",
-    "tinymce": "^6.3.1"
+    "tinymce": "^6.3.1",
+    "webpack": "^4.42.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
