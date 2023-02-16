@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import DashboardHeaader from "./DashboardHeaader";
 import Sidemenu from "./Sidemenu";
-import { Editor } from "@tinymce/tinymce-react";
 import $ from "jquery";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import slugify from "react-slugify";
+import JoditEditor from "jodit-react";
 
 const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
@@ -31,7 +31,6 @@ const addBlogs = async(e)=>{
   await formData.append("description",data.description);
   await formData.append("featuredImage",data.featuredImage);
   await formData.append("content",data.content);
-  const slug = slugify(data.title);
   await formData.append("slug",slugify(data.title));
   const url = `${baseUrl}/api/blogs/add_blog`;
     await fetch(url, {
@@ -101,7 +100,7 @@ const UpdateBlogs = async (e,_id) => {
                         <label className="featured-Image"><p>Featured Image:</p></label>
                         <input
                           type="file"
-                          className="form-control Dashborad-search featured"
+                          className="form-control Dashborad-search featured"  
                           onChange={(e) =>
                             setData({
                               ...data,
@@ -111,6 +110,7 @@ const UpdateBlogs = async (e,_id) => {
                         />
                       </div>
                       <div className="col-5 p-1 m-2 form-floating">
+                          
                         <textarea
                           className="form-control h-100"
                           id="floatingInputValue"
@@ -124,46 +124,26 @@ const UpdateBlogs = async (e,_id) => {
                         <label for="floatingInputValue">Description</label>
                       </div>
                       <div className="col-12">
-                        <Editor
-                        apiKey='rmrbxpovag9am2ddn70yzgxnmbk49511uom4gfkaanyg1qjq'
-                        initialValue={editableData ? editableData.content : "Create Content"}
-                        textareaName="content"
-                        
-                        onEditorChange={(newText)=>setData({...data, content: newText})}
-                        init={{
-                          height: 500,
-                          mode: 'textareas',
-                          menubar: true,
-                          plugins: [
-                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount','file',
-                            
-                          ],
-                          toolbar: 'undo redo | blocks | formatselect ' +
-                            'bold italic forecolor | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent image | ' +
-                            'removeformat | help',
-                          // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                        }}
-                        outputFormat="text"
+                        <JoditEditor
+                        value={editableData ? editableData.content : ""}
+                        onChange={(newText)=> setData({...data, content: newText})}
                         />
                       </div>
                       { editableData ? (
-                         <div className="col-12 p-1">
-                         <button className="m-2 ps-2 btn btn-primary"
-                         onClick={(e)=>UpdateBlogs(e,data._id)}
-                         >
-                           Update
-                         </button>
-                       </div>
+                        <div className="col-12 p-1">
+                        <button className="m-2 ps-2 btn btn-primary"
+                        onClick={(e)=>UpdateBlogs(e,data._id)}
+                        >
+                          Update
+                        </button>
+                      </div>
                         ):
                         (
                       <div className="col-12 p-1">
                         <button className="m-2 ps-2 btn btn-primary"
                         onClick={(e)=>addBlogs(e)}
                         >
-                          Submit
+                        Submit
                         </button>
                       </div>
                       )

@@ -24,6 +24,8 @@ var CartDataWoLogin = [];
 var Userdata = "";
 let tranding = 0;
 const SearchResult = (props) => {
+  console.log(props);
+  const SearchedText = props.match.params.Search;
   var count = 0;
   const params = useParams();
   const [data, setData] = useState([]);
@@ -748,7 +750,7 @@ const SearchResult = (props) => {
             <div className="row mt-0">
               <div className="col-12">
                 <div className="">
-                  <h1 className="trendign-head">Showing Results</h1>
+                  <h1 className="trendign-head">Showing Results for "{SearchedText}"</h1>
                 </div>
               </div>
             </div>
