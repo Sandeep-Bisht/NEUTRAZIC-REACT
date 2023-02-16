@@ -305,21 +305,21 @@ const Sidemenu = () => {
                       New Orders
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/" + "Progress"}>
+                  <Link to={"/InProgressOrderInProgress"}>
                     <li>
                       {" "}
                       <GrInProgress className="configuration-icons-wrap" />
                       In Progress
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/" + "Packed"}>
+                  <Link to={"/InProgressOrderPacked"}>
                     <li>
                       {" "}
                       <BsBox className="configuration-icons-wrap" />
                       Packed
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/" + "Shipped"}>
+                  <Link to={"/InProgressOrderShipped"}>
                     <li>
                       {" "}
                       <FaShippingFast className="configuration-icons-wrap" />
@@ -400,10 +400,16 @@ const Sidemenu = () => {
                                   Products
                                 </li>
                               </Link>
-                              <Link to="/Blog">
+                              {/* <Link to="/Blog">
                                 <li>
                                   <FaBlogger className="configuration-icons-wrap" />
                                   Blog
+                                  </li>
+                                  </Link> */}
+                              <Link to="/ALLBlogs">
+                                <li>
+                                  <FaBlogger className="configuration-icons-wrap" />
+                                  AllBlogs
                                   </li>
                                   </Link>
                               <Link to="/AllWarehouseDetails">

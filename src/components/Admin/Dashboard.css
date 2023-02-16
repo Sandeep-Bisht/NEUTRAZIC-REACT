@@ -1,3 +1,12 @@
+/* Modal css */
+:where(.css-dev-only-do-not-override-k83k30)[class^="ant-modal"] [class^="ant-modal"]{
+  width: auto !important;
+}
+:where(.css-dev-only-do-not-override-k83k30).ant-modal .ant-modal-content{
+  /* background-color: red !important; */
+  width: 850px !important;
+  margin: auto;
+}
 /*===== GOOGLE FONTS =====*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
@@ -929,14 +938,29 @@ font-family: 'Roboto', sans-serif;
   font-family: 'Roboto', sans-serif !important;
 }
 
-/* .tox .tox-tbtn{
+ .tox .tox-tbtn{
   padding: 20px 10px 0 30px !important;
-}
+} 
 .tox .tox-tbtn__select-label,.tox-collection__item-caret svg{
   margin: -22px 0 0px 0px !important;
-} */
+} 
 .required label::after, 
 .required select~option::after{ 
   content:"*"; 
   color: red;
+}
+:where(.css-dev-only-do-not-override-k83k30).ant-modal .ant-modal-footer {
+  display: none !important;
+}
+
+
+.featured-Image p{
+  font-size: 0.8rem;
+  color: #000;
+  font-weight: bold;
+ 
+}
+.featured{
+  position: relative;
+  bottom: 7%;
 }

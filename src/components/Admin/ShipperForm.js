@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import axios from "axios";
 
 var Userdata;
-const Warehouse = (props) => {
+const ShipperForm = (props) => {
   const [warehouse,setWarehouse] = useState([]);
   const [update, setUpdate] = useState(false);
   const [data, Setdata] = useState({
@@ -18,7 +18,7 @@ const Warehouse = (props) => {
   const [editableData]=useState(props.history.location.state);
 
   const submitData = async (e) => {
-    e.preventDefault();      
+    e.preventDefault();   
     const url = `${baseUrl}/api/warehouse/add_warehouse`;
      await fetch(url, {
     method: "POST",
@@ -28,20 +28,17 @@ const Warehouse = (props) => {
         description:data.description,
       }) 
     })
+      .then((res) =>{
+        res.json()
+        history.push("/AllWarehouseDetails");
+      } )
       .then((res) => {
-        res.json();
-        console.log(res,"resposneeeeeeeee")
-        //history.push('/AllManufactureDetails')
-      })
-      .then((res) => {
-       // GetManufacturer();
-       // this.getAddOn();
-      })
+        GetWarehouse();
 
+        this.getAddOn();
+      })
       .catch((err) => console.log(err));
-    //console.log(formData)
-    e.preventDefault();
-  };
+   };
 
  
   useEffect(() => {
@@ -116,31 +113,6 @@ const Warehouse = (props) => {
                           <label for="floatingInputValue">Warehouse Name</label>
                         </div>
                         <div className="col-6 p-1 form-floating">
-                          <input
-                            type="text"
-                            id="floatingInputValue"
-                            className="form-control Dashborad-search"
-                            placeholder="Warehouse Contact"
-                            defaultValue={editableData ? editableData.name : ""}
-                          />
-                          <label for="floatingInputValue">Warehouse Contact</label>
-                        </div>
-                        <div className="col-6 p-1 form-floating">
-                          <textarea
-                            className="form-control h-100"
-                            placeholder="Warehouse Address"
-                            id="floatingInputValue"
-                            rows="5"
-                            defaultValue={
-                              editableData ? editableData.description : ""
-                            }
-                            onChange={(e) => {
-                              Setdata({ ...data, description: e.target.value });
-                            }}
-                          ></textarea>
-                          <label for="floatingInputValue">Warehouse Address</label>
-                        </div>
-                        <div className="col-6 p-1 form-floating">
                           <textarea
                             className="form-control h-100"
                             placeholder="Warehouse Description"
@@ -157,6 +129,7 @@ const Warehouse = (props) => {
                         </div>
                         {editableData ? (
                           <div className="col-12 p-1">
+                            
                             <button
                               className="btn btn-primary"
                               onClick={(e) => UpdateWarehouse(e, data._id)}
@@ -190,4 +163,4 @@ const Warehouse = (props) => {
   );
 };
 
-export default Warehouse;
+export default ShipperForm;

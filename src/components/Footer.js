@@ -112,7 +112,7 @@ const WishlistHandler=()=>{
                   <Link to="/MyAccount">My Account</Link>
                   </li>
                   <li>
-                    <Link to="/Ordered">Order History</Link>
+                    <Link to="/UserOrder">Order History</Link>
                   </li>
                   <li>
                     <Link to="/WishList" onClick={WishlistHandler}>Wishlist</Link>

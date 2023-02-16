@@ -14,7 +14,7 @@ import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as ACTIONS from '../../CommonService/AddToCart/action'
+import * as ACTIONS from "../../CommonService/AddToCart/action";
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 import Carousel from "react-elastic-carousel";
@@ -24,7 +24,6 @@ import $ from "jquery";
 var Userdata = "";
 var CartDataWoLogin = [];
 const HomePage = () => {
-
   let dispatch = useDispatch();
   const images = [
     "../../Images/categories/categories-img1.png",
@@ -35,12 +34,12 @@ const HomePage = () => {
     "../../Images/categories/categories-img6.png",
   ];
 
-const breakPoints = [
-{ width : 1, itemsToShow : 1},
-{ width : 550, itemsToShow : 2},
-{ width : 768, itemsToShow : 4},
-{ width : 1200, itemToShow : 6},
-];
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2 },
+    { width: 768, itemsToShow: 4 },
+    { width: 1200, itemToShow: 6 },
+  ];
 
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -51,24 +50,36 @@ const breakPoints = [
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
-  const [cartItems, setCartItems] = useState(undefined)
+  const [cartItems, setCartItems] = useState(undefined);
   const [order, Setorder] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
   const [categoryname, Setcategoryname] = useState();
-  const [wishlistData,Setwishlist]=useState([])
+  const [wishlistData, Setwishlist] = useState([]);
+  const [blogs,setBlogs] = useState();
 
   const history = useHistory();
 
   // useEffect(() => {
-    
+
   // },[])
+  const getAllBlog = async () => {
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setBlogs(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
 
   useEffect(() => {
     // Userdata = localStorage.getItem("Userdata");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetData();
+    getAllBlog();
     CartById();
-    GetWishlist();    
+    GetWishlist();
     GetCategory();
     GetManufacturer();
     $(document).ready(function() {
@@ -90,51 +101,49 @@ const breakPoints = [
 
   const onNextStart = (currentItem, nextItem) => {
     if (currentItem.index === nextItem.index) {
-    carouselRef.current.goTo(0);
+      carouselRef.current.goTo(0);
     }
-  }
-  
-    const onPrevStart = (currentItem, nextItem) => {
-      if (currentItem.index === nextItem.index) {
-      carouselRef.current.goTo(data.otherImage);
-      }
-      };
+  };
 
-      const Loop = (currentItem) => {
-        if (currentItem.index == data.otherImage.length - 1) {
-        setTimeout(() => {
+  const onPrevStart = (currentItem, nextItem) => {
+    if (currentItem.index === nextItem.index) {
+      carouselRef.current.goTo(data.otherImage);
+    }
+  };
+
+  const Loop = (currentItem) => {
+    if (currentItem.index == data.otherImage.length - 1) {
+      setTimeout(() => {
         carouselRef.current.goTo(0);
-        }, 1000);
-        }
-        };
+      }, 1000);
+    }
+  };
 
   const GetWishlist = async () => {
     let id;
-    if(Userdata){
-     id=Userdata._id
+    if (Userdata) {
+      id = Userdata._id;
     }
-      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-       
-      userid: id,
-    }),
-  })
-    .then((res) => res.json())
-    .then(async (data) => {
-       if(data.data[0] !== undefined){
-        Setwishlist(data.data)
-       }
-    })    
-    .catch((err) => {
-      console.log(err, "error");
-    });
-   
-};
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userid: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.data[0] !== undefined) {
+          Setwishlist(data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
 
   const GetData = async () => {
     // Userdata = await (localStorage.getItem("Userdata"));
@@ -253,7 +262,6 @@ const breakPoints = [
           setQuantity(1);
           await AddtoCart();
           await CartById();
-          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -295,13 +303,13 @@ const breakPoints = [
     })
       .then((res) => res.json())
       .then((res) => {
-         CartById();
+        CartById();
         //history.push("/Cart");
         //window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
-  
+
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
@@ -319,7 +327,7 @@ const breakPoints = [
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems))
+          dispatch(ACTIONS.getCartItem(cartItems));
         })
         .catch((err) => {
           console.log(err, "error");
@@ -344,7 +352,7 @@ const breakPoints = [
         .then(async (data) => {
           setUserCart(data.data);
           CartById();
-          
+
           // setCartItems(data.data[0].order.length);
           // history.push("/Cart");
         })
@@ -366,8 +374,7 @@ const breakPoints = [
     category,
     manufacturer,
     image
-  ) => { 
-    
+  ) => {
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -382,9 +389,45 @@ const breakPoints = [
       .then(async (data) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
-            await fetch(
-              `${baseUrl}/api/wishlist/add_to_wishlist`,
-              {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userid: Userdata._id,
+                image: image,
+                name: name,
+                productId: productid,
+                rating: "5",
+                category: category,
+                manufacturer: manufacturer,
+                description: description,
+              }),
+            })
+              .then((res) => res.json())
+              .then(async (data) => {
+                toast.error("Added to wishlist", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 2000,
+                });
+
+                //add product to wishlist response is comming here
+                let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
+                wishList.classList.add("wishlisted");
+                GetWishlist();
+                // setWishlist(data.data[0]);
+              })
+              .catch((err) => {
+                console.log(err, "error e");
+              });
+          }
+        } else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -400,50 +443,7 @@ const breakPoints = [
                   manufacturer: manufacturer,
                   description: description,
                 }),
-              }
-            )
-              .then((res) => res.json())
-              .then(async (data) => {
-                toast.error("Added to wishlist", {
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 2000,
-                });
-                
-                //add product to wishlist response is comming here
-                let wishList = document.getElementById(productid);
-                wishList.classList.add("in-wishlist");
-                wishList.classList.add("wishlisted");
-                 GetWishlist();
-                // setWishlist(data.data[0]);
               })
-              .catch((err) => {
-                console.log(err, "error e");
-              });
-          }
-        } 
-        else {
-          if (!JSON.stringify(data.data).includes(productid) && data.data) {
-            if (!Userdata == []) {
-              await fetch(
-                `${baseUrl}/api/wishlist/add_to_wishlist`,
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userid: Userdata._id,
-                    image: image,
-                    name: name,
-                    productId: productid,
-                    rating: "5",
-                    category: category,
-                    manufacturer: manufacturer,
-                    description: description,
-                  }),
-                }
-              )
                 .then((res) => res.json())
                 .then(async (data) => {
                   toast.error("Added to wishlist", {
@@ -459,7 +459,6 @@ const breakPoints = [
                 .catch((err) => {
                   console.log(err, "error e");
                 });
-                
             }
           } else {
             toast.error("Already in wishlist !", {
@@ -505,15 +504,14 @@ const breakPoints = [
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
       if (item.productId == productId) {
-        return "wishlisted"
+        return "wishlisted";
       }
     }
-    }
-  
+  };
 
   return (
     <>
-      <Header1/>
+      <Header1 />
       {/* <Carouselcomp /> */}
       <div id="">
         {/* trending section  */}
@@ -535,10 +533,12 @@ const breakPoints = [
                     <input
                       type="text"
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                      onKeyDown={(e)=>{ if(e.key === "Enter"){
-                        searchData(search);
-                        history.push("/SearchResult/" + search);
-                      }}}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          searchData(search);
+                          history.push("/SearchResult/" + search);
+                        }
+                      }}
                     />
                     <Link to={"/SearchResult/" + search}>
                       <button
@@ -573,8 +573,7 @@ const breakPoints = [
           <div className="container m-auto">
             <div className="row">
               {data.map((el, ind) => {
-                if(ind<6)
-                {
+                if (ind < 6) {
                   return (
                     <>
                       <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
@@ -590,20 +589,24 @@ const breakPoints = [
                                   >
                                     <div className="image hover-switch">
                                       <img
-                                      src={ el.otherImage && 
-                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path :
-                                        require("../../Images/products/Hintosulin (1).png")
-                                      }
+                                        src={
+                                          el.otherImage &&
+                                          el.otherImage.length > 0
+                                            ? `${baseUrl}/` +
+                                              el.otherImage[0].path
+                                            : require("../../Images/products/Hintosulin (1).png")
+                                        }
                                         // src={require("../../Images/products/Hintosulin (1).png")}
                                         alt=""
                                       />
                                       <img
-                                        src={
-                                          `${baseUrl}/` +
-                                          el.image[0].path
-                                        }
+                                        src={`${baseUrl}/` + el.image[0].path}
                                         alt=""
-                                        style={{ position: "absolute", left:"0", top: "0" }}
+                                        style={{
+                                          position: "absolute",
+                                          left: "0",
+                                          top: "0",
+                                        }}
                                       />
                                     </div>
                                   </Link>
@@ -618,14 +621,16 @@ const breakPoints = [
                                         <i className="fa fa-inr"></i>
                                         {el.inrDiscount}
                                       </span>
-                                      
+
                                       <del className="new-price ml-1">
-                                      <i className="fa fa-inr"></i>
+                                        <i className="fa fa-inr"></i>
                                         {el.inrMrp}
                                       </del>
                                       {Userdata ? (
                                         <i
-                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(
+                                            el._id
+                                          )}`}
                                           id={el._id}
                                           onClick={() => {
                                             AddtoWishlist(
@@ -726,7 +731,9 @@ const breakPoints = [
             {/* hover Button */}
             <div className="wrapperbtn pt-0">
               <Link to="/AllProducts">
-                <button type="button" className="btn10">Show More</button>
+                <button type="button" className="btn10">
+                  Show More
+                </button>
                 {/* <div className="transition"></div> */}
               </Link>
             </div>
@@ -735,71 +742,68 @@ const breakPoints = [
         </section>
 
         <section className="categories-section">
-        <h1 className="trendign-head">
+          <h1 className="trendign-head">
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
             <div className="row mt-0 featured-products">
-              <Carousel // breakPoints={breakPoints} 
-              disableAutoPlay
-              autoPlaySpeed={3000} 
-              itemsToShow={2}
-              onPrevStart={onPrevStart}
-              onNextStart={onNextStart}
-              infiniteLoop={true}
-              // onChange={Loop}
-              ref={carouselRef}
-              disableArrowsOnEnd={false}
-              // itemPadding={[0, 4]}
-              >       
-              { categories && categories.length > 0  && categories.map((item, index) => {                 
-                if(item.featuredCategories == "Featured Categories"){
-                return(  
-              <div className="col-md-12" key={index}>
-                <div className="cat-left-side">
-                  <div className="row mt-0 align-items-center">
-                  <h1 className="cat-heading">{item.name}</h1>
-                    <div className="col-md-6">
-                      <p className="cat-para">
-                       {item.description}
-                      </p>
-                      <Link to={"/Subcategories/" + item._id}>
-                      <button className="btn btn cosmetic-shop-now">
-                        Shop Now
-                      </button>
-                      </Link>
-                    </div>
-                    <div className="col-md-6">
-                      <Link to={"/Subcategories/" + item._id}>
-                        <div className="category-div">
-                          <figure>
-                            
-                            {/* <img
+              <Carousel // breakPoints={breakPoints}
+                disableAutoPlay
+                autoPlaySpeed={3000}
+                itemsToShow={2}
+                onPrevStart={onPrevStart}
+                onNextStart={onNextStart}
+                infiniteLoop={true}
+                // onChange={Loop}
+                ref={carouselRef}
+                disableArrowsOnEnd={false}
+                // itemPadding={[0, 4]}
+              >
+                {categories &&
+                  categories.length > 0 &&
+                  categories.map((item, index) => {
+                    if (item.featuredCategories == "Featured Categories") {
+                      return (
+                        <div className="col-md-12" key={index}>
+                          <div className="cat-left-side">
+                            <div className="row mt-0 align-items-center">
+                              <h1 className="cat-heading">{item.name}</h1>
+                              <div className="col-md-6">
+                                <p className="cat-para">{item.description}</p>
+                                <Link to={"/Subcategories/" + item._id}>
+                                  <button className="btn btn cosmetic-shop-now">
+                                    Shop Now
+                                  </button>
+                                </Link>
+                              </div>
+                              <div className="col-md-6">
+                                <Link to={"/Subcategories/" + item._id}>
+                                  <div className="category-div">
+                                    <figure>
+                                      {/* <img
                               // src={require("../../Images/Nutraceutical-image 1.png")} cosmatic-healthcare.jpeg
                               src={require("../../Images/cosmatic-healthcare.jpeg")}
                               className="front-img img-fluid"
                             /> */}
-                            <img
-                                      src={
-                                        item.image && 
-                                        `${baseUrl}/` +
-                                        item.image[0].path
-                                      }
-                                      alt=""
-                                      className="cat-left-side-image"
-                                    />
-                
-                          </figure>
+                                      <img
+                                        src={
+                                          item.image &&
+                                          `${baseUrl}/` + item.image[0].path
+                                        }
+                                        alt=""
+                                        className="cat-left-side-image"
+                                      />
+                                    </figure>
+                                  </div>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                )}
-
-              })}   
-              </Carousel>          
+                      );
+                    }
+                  })}
+              </Carousel>
             </div>
           </div>
         </section>
@@ -824,19 +828,25 @@ const breakPoints = [
                                   to={"/SingleProduct/" + el._id}
                                   className="product-image-link"
                                 >
-                                  <div className="image hover-switch">                                  
+                                  <div className="image hover-switch">
                                     <img
-                                      src={el.otherImage &&
-                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
+                                      src={
+                                        el.otherImage &&
+                                        el.otherImage.length > 0
+                                          ? `${baseUrl}/` +
+                                            el.otherImage[0].path
+                                          : require("../../Images/products/Hintosulin (1).png")
+                                      }
                                       alt=""
                                     />
                                     <img
-                                      src={
-                                        `${baseUrl}/` +
-                                        el.image[0].path
-                                      }
+                                      src={`${baseUrl}/` + el.image[0].path}
                                       alt=""
-                                      style={{ position: "absolute",left: "0", top: "0" }}
+                                      style={{
+                                        position: "absolute",
+                                        left: "0",
+                                        top: "0",
+                                      }}
                                     />
                                   </div>
                                 </Link>
@@ -844,35 +854,42 @@ const breakPoints = [
                               <div className="tranding product-image-content">
                                 <div className="content product-content">
                                   <Link to={"/SingleProduct/" + el._id}>
-                                  <figcaption>{el.name}</figcaption>
+                                    <figcaption>{el.name}</figcaption>
                                   </Link>
                                   <div className="price-div">
                                     <span className="new-price">
-                                    <i className="fa fa-inr"></i>{el.inrDiscount}</span>
-                                    
-                                    <del className="new-price ml-1"><i className="fa fa-inr"></i>{el.inrMrp}</del>
+                                      <i className="fa fa-inr"></i>
+                                      {el.inrDiscount}
+                                    </span>
+
+                                    <del className="new-price ml-1">
+                                      <i className="fa fa-inr"></i>
+                                      {el.inrMrp}
+                                    </del>
                                     {Userdata ? (
-                                        <i
-                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
-                                          id={el._id}
-                                          onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
-                                          }}
-                                          // onClick={() => {
-                                          //   wishList(el)
-                                          // }}
-                                        ></i>
-                                      ) : (
+                                      <i
+                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(
+                                          el._id
+                                        )}`}
+                                        id={el._id}
+                                        onClick={() => {
+                                          AddtoWishlist(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image
+                                          );
+                                        }}
+                                        // onClick={() => {
+                                        //   wishList(el)
+                                        // }}
+                                      ></i>
+                                    ) : (
                                       <>
                                         <i
                                           className="bx bxs-heart ml-3 pc-heart"
@@ -952,8 +969,10 @@ const breakPoints = [
             {/* hover Button */}
 
             <div className="wrapperbtn pt-3 pb-4">
-            <Link to="/AllProducts">
-                <button type="button" className="btn10">Show More</button>
+              <Link to="/AllProducts">
+                <button type="button" className="btn10">
+                  Show More
+                </button>
                 {/* <div className="transition"></div> */}
               </Link>
             </div>
@@ -966,147 +985,157 @@ const breakPoints = [
           </h1>
           <div className="container m-auto">
             <div className="row">
-              {data.filter((item) => item.category.name == "Weight Management").map((el,index)=>{
-                if(index < 6){
-                  return(
-
-                    <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
-                    {/* <Link to={"/SingleProduct/" + el._id}> */}
-                    <div className="single-products-box border">
-                      <div className="row">
-                        <div className="col-md-12">
-                          <div className="product-div">
-                            <div className="product-image-div">
-                              <Link
-                                to={"/SingleProduct/" + el._id}
-                                className="product-image-link" 
-                              >
-                                
-                                <div className="image hover-switch">
-                                  <img
-                                    src={el.otherImage &&
-                                      el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
-                                    alt=""
-                                  />
-                                  <img
-                                    src={
-                                      `${baseUrl}/` +
-                                      el.image[0].path
-                                    }
-                                    alt=""
-                                    style={{ position: "absolute", left: "0", top: "0" }}
-                                  />
-                                </div>
-                              </Link>
-                            </div>
-                            <div className="tranding product-image-content">
-                              <div className="content product-content">
-                                <Link to={"/SingleProduct/" + el._id}>
-                                <figcaption>{el.name}</figcaption>
-                                </Link>
-                                <div className="price-div">
-                                  
-                                  <span className="new-price">
-                                  <i className="fa fa-inr"></i>{el.inrDiscount}</span>
-                                                                   <del className="new-price ml-1"><i className="fa fa-inr"></i>{el.inrMrp}</del>
-                                  {Userdata ? (
-                                      <i
-                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
-                                        id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
+              {data
+                .filter((item) => item.category.name == "Weight Management")
+                .map((el, index) => {
+                  if (index < 6) {
+                    return (
+                      <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
+                        {/* <Link to={"/SingleProduct/" + el._id}> */}
+                        <div className="single-products-box border">
+                          <div className="row">
+                            <div className="col-md-12">
+                              <div className="product-div">
+                                <div className="product-image-div">
+                                  <Link
+                                    to={"/SingleProduct/" + el._id}
+                                    className="product-image-link"
+                                  >
+                                    <div className="image hover-switch">
+                                      <img
+                                        src={
+                                          el.otherImage &&
+                                          el.otherImage.length > 0
+                                            ? `${baseUrl}/` +
+                                              el.otherImage[0].path
+                                            : require("../../Images/products/Hintosulin (1).png")
+                                        }
+                                        alt=""
+                                      />
+                                      <img
+                                        src={`${baseUrl}/` + el.image[0].path}
+                                        alt=""
+                                        style={{
+                                          position: "absolute",
+                                          left: "0",
+                                          top: "0",
                                         }}
-                                        // onClick={() => {
-                                        //   wishList(el)
-                                        // }}
-                                      ></i>
-                                    ) : (
-                                    <>
-                                      <i
-                                        className="bx bxs-heart ml-3 pc-heart"
-                                        data-bs-toggle="modal"
-                                        data-bs-target={
-                                          Userdata == null
-                                            ? "#exampleModal"
-                                            : null
-                                        }
-                                      ></i>
-                                      <Link to="/Register">
-                                        <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                      </Link>
-                                    </>
-                                  )}
+                                      />
+                                    </div>
+                                  </Link>
+                                </div>
+                                <div className="tranding product-image-content">
+                                  <div className="content product-content">
+                                    <Link to={"/SingleProduct/" + el._id}>
+                                      <figcaption>{el.name}</figcaption>
+                                    </Link>
+                                    <div className="price-div">
+                                      <span className="new-price">
+                                        <i className="fa fa-inr"></i>
+                                        {el.inrDiscount}
+                                      </span>
+                                      <del className="new-price ml-1">
+                                        <i className="fa fa-inr"></i>
+                                        {el.inrMrp}
+                                      </del>
+                                      {Userdata ? (
+                                        <i
+                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(
+                                            el._id
+                                          )}`}
+                                          id={el._id}
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          // onClick={() => {
+                                          //   wishList(el)
+                                          // }}
+                                        ></i>
+                                      ) : (
+                                        <>
+                                          <i
+                                            className="bx bxs-heart ml-3 pc-heart"
+                                            data-bs-toggle="modal"
+                                            data-bs-target={
+                                              Userdata == null
+                                                ? "#exampleModal"
+                                                : null
+                                            }
+                                          ></i>
+                                          <Link to="/Register">
+                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                                          </Link>
+                                        </>
+                                      )}
 
-                                  
-                                  {Userdata ? (
-                                    <i
-                                      className="bx bx-cart"
-                                      onClick={() => {
-                                        {
-                                          Userdata !== null
-                                            ? cartfunction(
-                                                el._id,
-                                                el.name,
-                                                quantity,
-                                                el.inrMrp,
-                                                el.inrDiscount,
-                                                el.discount,
-                                                el.description,
-                                                el.category,
-                                                el.manufacturer.name,
-                                                el.image[0].path
-                                              )
-                                            : addToCartWithoutRegistration(
-                                                el._id,
-                                                el.name,
-                                                quantity,
-                                                el.inrMrp,
-                                                el.inrDiscount,
-                                                el.discount,
-                                                el.description,
-                                                el.category,
-                                                el.manufacturer.name,
-                                                el.image[0].path
-                                              );
-                                        }
-                                      }}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="bx bx-cart mr-1"
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null
-                                          ? "#exampleModal"
-                                          : null
-                                      }
-                                    >
-                                      <Link to="/Register"></Link>
-                                    </i>
-                                  )}
+                                      {Userdata ? (
+                                        <i
+                                          className="bx bx-cart"
+                                          onClick={() => {
+                                            {
+                                              Userdata !== null
+                                                ? cartfunction(
+                                                    el._id,
+                                                    el.name,
+                                                    quantity,
+                                                    el.inrMrp,
+                                                    el.inrDiscount,
+                                                    el.discount,
+                                                    el.description,
+                                                    el.category,
+                                                    el.manufacturer.name,
+                                                    el.image[0].path
+                                                  )
+                                                : addToCartWithoutRegistration(
+                                                    el._id,
+                                                    el.name,
+                                                    quantity,
+                                                    el.inrMrp,
+                                                    el.inrDiscount,
+                                                    el.discount,
+                                                    el.description,
+                                                    el.category,
+                                                    el.manufacturer.name,
+                                                    el.image[0].path
+                                                  );
+                                            }
+                                          }}
+                                        ></i>
+                                      ) : (
+                                        <i
+                                          className="bx bx-cart mr-1"
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
+                                        >
+                                          <Link to="/Register"></Link>
+                                        </i>
+                                      )}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  )
-                }
-              })}
-              
-              
+                    );
+                  }
+                })}
+
               {/* {data.map((el, i) => {
                 if (i > 0 && el.category.name === "Weight Management" && weightManagement < 6) {
                   weightManagement = weightManagement + 1;
@@ -1245,67 +1274,24 @@ const breakPoints = [
             </div>
             {/* hover Button */}
             <div className="wrapperbtn pt-3 pb-4">
-            {data.filter((item) => item.category.name == "Weight Management").map((el,index)=>{
-              
-              if(index<1){
-              return(
-              <Link to={"/SubCategories/"+ el.category._id}>
-                <button type="button" className="btn10">Show More</button>
-                {/* <div className="transition"></div> */}
-              </Link>
-              )
-            }
-            }
-            )
-         
-          }
+              {data
+                .filter((item) => item.category.name == "Weight Management")
+                .map((el, index) => {
+                  if (index < 1) {
+                    return (
+                      <Link to={"/SubCategories/" + el.category._id}>
+                        <button type="button" className="btn10">
+                          Show More
+                        </button>
+                        {/* <div className="transition"></div> */}
+                      </Link>
+                    );
+                  }
+                })}
             </div>
             {/* Hover Button End */}
           </div>
         </section>
-
-        <div className="blog-section">
-<div className="container m-auto">
-  <div className="row mt-0">
-    <div className="col-12">
-      <div className="trendign-head">
-        <span className="products-color">Blog</span>
-      </div>
-    </div>
-  </div>
-  <div className="row image-group">
-  <Carousel
-               // breakPoints={breakPoints} 
-              disableAutoPlay
-              autoPlaySpeed={1500} 
-              itemsToShow={5}
-              onPrevStart={onPrevStart}
-              onNextStart={onNextStart}
-              // onChange={Loop}
-              ref={carouselRef}
-              disableArrowsOnEnd={false}
-              // itemPadding={[0, 4]}
-               >
-              {Manufactureres &&
-                Manufactureres.length > 0 &&
-                Manufactureres.map((el, index) => (
-                  <>
-                  <div className="col" key={index}>
-                          <img className="img-slides"
-                            src={
-                              el.image && el.image.length > 0
-                                ? 
-                                `${baseUrl}/` + el.image[0].path
-                                : ""
-                            }
-                          />
-                  </div>
-                  </>
-                ))}
-                  </Carousel>
-  </div>
-</div>
-        </div>
 
         <div className="brands-area">
           <div className="container m-auto">
@@ -1314,36 +1300,35 @@ const breakPoints = [
             </div>
             <div className="row image-group">
               <Carousel
-               // breakPoints={breakPoints} 
-              disableAutoPlay
-              autoPlaySpeed={1500} 
-              itemsToShow={5}
-              onPrevStart={onPrevStart}
-              onNextStart={onNextStart}
-              // onChange={Loop}
-              ref={carouselRef}
-              disableArrowsOnEnd={false}
-              // itemPadding={[0, 4]}
-               >
-            
-              {Manufactureres &&
-                Manufactureres.length > 0 &&
-                Manufactureres.map((el, index) => (
-                  <>
-                  <div className="col" key={index}>
-                          <img className="img-slides"
-                            src={
-                              el.image && el.image.length > 0
-                                ? 
-                                `${baseUrl}/` + el.image[0].path
-                                : ""
-                            }
-                          />
-                  </div>
-                  </>
-                ))}
-                  </Carousel>
-                  </div>
+                // breakPoints={breakPoints}
+                disableAutoPlay
+                autoPlaySpeed={1500}
+                itemsToShow={5}
+                onPrevStart={onPrevStart}
+                onNextStart={onNextStart}
+                // onChange={Loop}
+                ref={carouselRef}
+                disableArrowsOnEnd={false}
+                // itemPadding={[0, 4]}
+              >
+                {Manufactureres &&
+                  Manufactureres.length > 0 &&
+                  Manufactureres.map((el, index) => (
+                    <>
+                      <div className="col" key={index}>
+                        <img
+                          className="img-slides"
+                          src={
+                            el.image && el.image.length > 0
+                              ? `${baseUrl}/` + el.image[0].path
+                              : ""
+                          }
+                        />
+                      </div>
+                    </>
+                  ))}
+              </Carousel>
+            </div>
           </div>
         </div>
         <section className="mobile-app">
@@ -1397,10 +1382,57 @@ const breakPoints = [
           </div>
           <ToastContainer />
         </section>
+
+        <div className="blog-section">
+          <div className="container m-auto">
+            <div className="row mt-0">
+              <div className="col-12">
+                <div className="trendign-head">
+                  <span className="products-color">Blogs</span>
+                </div>
+              </div>
+            </div>
+            <div className="row image-group">
+              <Carousel
+                // breakPoints={breakPoints}
+                disableAutoPlay
+                autoPlaySpeed={1500}
+                itemsToShow={5}
+                onPrevStart={onPrevStart}
+                onNextStart={onNextStart}
+                // onChange={Loop}
+                ref={carouselRef}
+                disableArrowsOnEnd={false}
+                // itemPadding={[0, 4]}
+              >
+                {blogs &&
+                  blogs.length > 0 &&
+                  blogs.map((el, index) => (
+                    <>
+                      <div className="col" key={index}>
+                        <Link to={"/SingleBlogPage/" + el.slug}>
+                        <img
+                          className="img-slides"
+                          src={
+                            el.featuredImage && el.featuredImage.length > 0
+                              ? `${baseUrl}/` + el.featuredImage[0].path
+                              : ""
+                          }
+                        />
+                        <p className="text-center">
+                          {el.title}
+                        </p>
+                        </Link>
+                      </div>
+                    </>
+                  ))}
+              </Carousel>
+            </div>
+          </div>
+        </div>
         <Baseline />
-      <Footer />
+        <Footer />
       </div>
-      
     </>
   );
 };
