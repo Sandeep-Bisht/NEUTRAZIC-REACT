@@ -39,7 +39,7 @@ const InProgressOrder = () => {
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
-          if (item.status == "inProgress") {
+          if (item.status == "In-Progress") {
             arr.push(item);
           }
         }
@@ -130,7 +130,7 @@ const InProgressOrder = () => {
                   key: "1",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item._id, "Cancel")}>
-                      Cancel
+                      Cancel Order
                     </a>
                   ),
                 },
@@ -138,7 +138,7 @@ const InProgressOrder = () => {
                   key: "2",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item._id, "Packed")}>
-                      Packed
+                     Move for Packing
                     </a>
                   ),
                 },
@@ -146,7 +146,7 @@ const InProgressOrder = () => {
             }}
           >
             <a>
-              InProgress <DownOutlined />
+              In-Progress <DownOutlined />
             </a>
           </Dropdown>
         </Space>

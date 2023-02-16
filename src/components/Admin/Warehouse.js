@@ -12,38 +12,13 @@ const Warehouse = (props) => {
   const [update, setUpdate] = useState(false);
   const [data, Setdata] = useState({
     name: "",
+    warehouseContactNo:"",
+    warehouseAddress:"",
     description: "",    
   });
   const history=useHistory();
   const [editableData]=useState(props.history.location.state);
 
-  const submitData = async (e) => {
-    e.preventDefault();      
-    const url = `${baseUrl}/api/warehouse/add_warehouse`;
-     await fetch(url, {
-    method: "POST",
-     headers: { "Content-Type": "application/json" },
-      body:JSON.stringify({
-        name:data.name,
-        description:data.description,
-      }) 
-    })
-      .then((res) => {
-        res.json();
-        console.log(res,"resposneeeeeeeee")
-        //history.push('/AllManufactureDetails')
-      })
-      .then((res) => {
-       // GetManufacturer();
-       // this.getAddOn();
-      })
-
-      .catch((err) => console.log(err));
-    //console.log(formData)
-    e.preventDefault();
-  };
-
- 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetWarehouse();
@@ -52,7 +27,28 @@ const Warehouse = (props) => {
     }
   }, []);
 
-// 
+  const submitData = async (e) => {
+    e.preventDefault();      
+    const url = `${baseUrl}/api/warehouse/add_warehouse`;
+     await fetch(url, {
+    method: "POST",
+     headers: { "Content-Type": "application/json" },
+      body:JSON.stringify(data) 
+    })
+      .then((res) => {
+        res.json();
+        history.push('/AllWarehouseDetails')        
+      })
+      .then((res) => {
+        
+       // GetManufacturer();
+       // this.getAddOn();
+      })
+
+      .catch((err) => console.log(err));
+    //console.log(formData)
+    e.preventDefault();
+  }; 
 
   const GetWarehouse = async () => {
     await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
@@ -80,10 +76,7 @@ const Warehouse = (props) => {
       .catch((err) => {
         console.log(err, "error");
       });
-  };
-
-
-  
+  }; 
 
   return (
     <>
@@ -115,6 +108,33 @@ const Warehouse = (props) => {
                           />
                           <label for="floatingInputValue">Warehouse Name</label>
                         </div>
+                        
+                        <div className="col-6 p-1 form-floating">
+                          <input
+                            type="text"
+                            id="floatingInputValue"
+                            className="form-control Dashborad-search"
+                            placeholder="Warehouse Contact No"
+                            defaultValue={editableData ? editableData.warehouseContactNo : ""}
+                            onChange={(e) => {
+                              Setdata({ ...data, warehouseContactNo: e.target.value });
+                            }}
+                          />
+                          <label for="floatingInputValue">Warehouse Contact No</label>
+                        </div>
+                        <div className="col-6 p-1 form-floating">
+                          <input
+                            type="text"
+                            id="floatingInputValue"
+                            className="form-control Dashborad-search"
+                            placeholder="Warehouse Address"
+                            defaultValue={editableData ? editableData.warehouseAddress : ""}
+                            onChange={(e) => {
+                              Setdata({ ...data, warehouseAddress: e.target.value });
+                            }}
+                          />
+                          <label for="floatingInputValue">Warehouse Address</label>
+                        </div>
                         <div className="col-6 p-1 form-floating">
                           <textarea
                             className="form-control h-100"
@@ -128,7 +148,7 @@ const Warehouse = (props) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
-                          <label for="floatingInputValue">Warehouse Description</label>
+                          <label for="floatingInputValue">Additional Information About Warehouse</label>
                         </div>
                         {editableData ? (
                           <div className="col-12 p-1">

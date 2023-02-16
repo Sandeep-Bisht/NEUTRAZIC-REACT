@@ -125,9 +125,37 @@ const ShippedOrder = () => {
       key: "payment_status",
     },
     {
-      title: "Status",
-      key: "action",
-      render: (_, item) => <a onClick={() => showModal(item)}>Shipped</a>,
+      title: "Status", 
+      render: (a, item) => (
+        <Space size="middle">
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  key: '1',
+                  label: (
+                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
+                      Cancel Order
+                    </a>
+                  ),
+                },
+                {
+                  key: '2',
+                  label: (
+                    <a onClick={() =>UpdateOrderStatus(item._id,"Delivered")}>
+                     Mark as Delivered
+                    </a>
+                  ),
+                },
+              ],
+            }}
+          >
+            <a>
+              Shipped <DownOutlined />
+            </a>
+          </Dropdown>
+        </Space>
+      ),
     },
     {
       title: "View Order",
@@ -231,119 +259,7 @@ const ShippedOrder = () => {
         </div>
       </div>
       {/* end modal */}
-      {/* table modal */}
-      
-       
-            <div class="modal-body">
-              <div>
-                <Modal title="Shipped Details" aria-hidden="true" visible={isModalVisible} onOk={handleOk}
-                  onCancel={handleCancel}>
-                  <form>
-                    <div className="row">
-                    <div class="col-md-4 mb-3">
-                      <label for="line1" class="form-label">
-                        Line 1
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="line1"
-                        value={shippedOrder.line1}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    { shippedOrder && shippedOrder.line2 &&
-                    <div class="col-md-4 mb-3">
-                      <label for="line2" class="form-label">
-                        Line 2
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="line2"
-                        value={shippedOrder.line2}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    }
-                    <div class="col-md-4 mb-3">
-                      <label for="city" class="form-label">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="city"
-                        value={shippedOrder.city}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="state" class="form-label">
-                        State
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="state"
-                        value={shippedOrder.state}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <label className="form-label">Postal Code</label>
-                      <input
-                      type="text"
-                      className="form-control"
-                      value={shippedOrder.postal_code}
-                      //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="country" class="form-label">
-                        Country
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="country"
-                        value={shippedOrder.country}
-                        aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="Blue Dart" class="form-label">Choose a Shipper</label>
-                      <select className="m-1 form-control">
-                        <option value="Blue Dart">Blue Dart</option>
-                        <option value="XpressBees">XpressBees</option>
-                        <option value="DHL Shipping">DHL Shipping</option>
-                        <option value="DTDC Courier">DTDC Courier</option>
-                      </select>
-                    </div>
-                    </div>
-                    <button
-                      className="btn btn-primary m-2"
-                      onClick={(e) =>
-                        UpdateOrderStatus(e, orderItem._id, "Delivered")
-                      }
-                    >
-                      Delivered
-                    </button>
-                    <button
-                      className="btn btn-primary m-2"
-                      onClick={(e) =>
-                        UpdateOrderStatus(e, orderItem._id, "Cancel")
-                      }
-                    >
-                      Cancel
-                    </button>
-                    
-                  </form>
-                </Modal>
-              </div>
-            
-      </div>
-      {/* end modal */}
+
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />

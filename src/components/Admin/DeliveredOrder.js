@@ -109,13 +109,11 @@ const DeliveredOrder = () => {
   
 
   const columns = [
-    { title: "Order No.", dataIndex: "order_no", key: "order_no" },
-    { title: "Actual Amount.", dataIndex: "actualamount", key: "actualamount" },
-    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
-    {
-      title: "Status", dataIndex: "status", key: "stauts"
-      
-    },
+    { title: "Order No", dataIndex: "order_no", key: "order_no" },
+    { title: "Status", dataIndex: "status", key: "stauts" },
+    { title: "Delivered Date", dataIndex: "delivery_date", key: "delivery_date" },
+    { title: "Paid Amount", dataIndex: "totalamount", key: "totalamount" },
+    
     {
       title: "View Order",
       key: "action",

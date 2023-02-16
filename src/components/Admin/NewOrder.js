@@ -144,15 +144,15 @@ const NewOrder = () => {
                   key: '1',
                   label: (
                     <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
-                      Cancel
+                      Cancel Order
                     </a>
                   ),
                 },
                 {
                   key: '2',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"inProgress")}>
-                      inProgress
+                    <a onClick={() =>UpdateOrderStatus(item._id,"In-Progress")}>
+                      Move to In-progress
                     </a>
                   ),
                 },
