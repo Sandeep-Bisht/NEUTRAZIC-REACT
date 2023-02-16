@@ -19143,7 +19143,7 @@ letter-spacing: 0.50px;
 	#columns .figure1 { width: 49%;}
   }
   @media screen and (max-width: 500px) {
-	#columns .figure1 { width: 100%;}
+	/* #columns .figure1 { width: 100%;} */
   }
 
 .Category-div .row .col-5 hr
@@ -19539,6 +19539,7 @@ ul
 
 /* Responsive for Phone  */
 @media only screen and (min-width: 360px) and (max-width: 815px) {
+
 	.cart-page
 	{
 		display: block;
@@ -19966,3 +19967,217 @@ margin: 40px 8px 15px 0px;
  }
 
  /* SubcategoryPage Css */
+
+ /* media query Deepak */
+ @media only screen and (max-width : 1399px){
+	/* .contact-form form label{
+		font-size: 22px;
+	} */
+	.cosmetic-shop-now{
+		border: 2px solid rgb(27 151 255 / 33%) !important;
+	}
+	.newsletter-form input::placeholder{
+		font-size: 15px !important;
+	}
+   
+ }
+ @media only screen and (max-width : 1024px) {
+   
+ }
+ 
+ @media only screen and (max-width :991px) {
+   
+ }
+
+
+ 
+ @media only screen and (max-width : 767px) {
+	
+.single-contact-info-box p a{
+	font-size: 22px;
+}
+.single-contact-info-box p{
+	font-size: 20px;
+}
+.single-footer-widget .link-list li a{
+	font-size: 20px;
+} 
+.single-footer-widget .footer-contact-info li a{
+	font-size: 20px;
+}
+.Subscribe{
+	font-size: 20px;
+}
+.footer-bottom-area p{
+	font-size: 20px;
+}
+.footer-bottom-area .payment-types ul li{
+	font-size: 20px;
+}
+.footer-area .social i{
+	font-size: 30px;
+}
+   
+ }
+ @media only screen and (max-width : 575.98px) {
+	.contact-form form label{
+		font-size: 25px;
+	}
+	.single-contact-info-box p a{
+		font-size: 26px;
+	}
+	.single-contact-info-box p{
+		font-size: 22px;
+	}
+	.single-footer-widget .link-list li a{
+		font-size: 22px;
+	} 
+	.single-footer-widget .footer-contact-info li a{
+		font-size: 22px;
+	}
+	.Subscribe{
+		font-size: 22px;
+	}
+	.footer-bottom-area p{
+		font-size: 22px;
+	}
+	.footer-bottom-area .payment-types ul li{
+		font-size: 22px;
+	}
+	.footer-area .social i{
+		font-size: 30px;
+	}
+	.single-footer-widget .logo img {
+		height: 50px;
+	}
+	.single-contact-info-box h3{
+		font-size: 35px;
+	}
+	.contact-form .sub-title{
+		font-size: 40px;
+	}
+	.cosmetic-shop-now{
+		font-size: 25px;
+	}
+	.single-footer-widget .newsletter-form .default-btn 
+	{
+		font-size: 25px;
+	}
+	.newsletter-form input::placeholder{
+		font-size: 25px !important;
+	}
+ 
+ }
+ 
+ 
+ 
+ @media only screen and (max-width : 480px) {
+  
+	.contact-form form label{
+		font-size: 34px;
+	}
+	.single-contact-info-box p a{
+		font-size: 37px;
+	}
+	.single-contact-info-box p{
+		font-size: 35px;
+	}
+	.single-footer-widget .link-list li a{
+		font-size: 34px;
+	} 
+	.single-footer-widget .footer-contact-info li a{
+		font-size: 34px;
+	}
+	.Subscribe{
+		font-size: 34px;
+	}
+	.footer-bottom-area p{
+		font-size: 30px;
+	}
+	.footer-bottom-area .payment-types ul li{
+		font-size: 30px;
+	}
+	.footer-area .social i{
+		font-size: 34px;
+	}
+	.single-footer-widget .logo img {
+		height: 86px;
+	}
+	.single-contact-info-box h3{
+		font-size: 50px;
+	}
+	.contact-form .sub-title{
+		font-size: 57px;
+	}
+	.cosmetic-shop-now{
+		font-size: 32px;
+	}
+	.single-footer-widget .newsletter-form .default-btn 
+	{
+		height: 76px;
+		font-size: 37px;
+	}
+	.single-contact-info-box{
+		height:260px;
+	}
+	.contact-form h2{
+		font-size: 44px;
+	}
+	.form-control{
+		height:60px;
+	}
+	.single-footer-widget .footer-contact-info li span {
+		font-size: 40px;
+	}
+	.footer-area .social i{
+		font-size: 45px;
+	}
+	.single-footer-widget h3{
+		font-size: 45px;
+	}
+	.single-footer-widget .newsletter-form .input-newsletter{
+		height: 65px;
+	}
+	.newsletter-form input::placeholder{
+		font-size: 30px !important;
+	}
+	
+ 
+ }
+ @media only screen and (max-width : 430px)
+ {
+	#columns .figure1{
+		width: 100%;
+		
+	}
+	div#columns .figure1 img{
+		height: 400px;
+	}
+	div#columns .figure1 figcaption {
+		font-size: 45px;
+	}
+	.text-nowrap{
+		font-size: 35px;
+		padding-right: 20px;
+	}
+	.allproduct-price-div i{
+		font-size: 35px;
+	}
+	.allproduct-price-div {
+		font-size: 40px;
+	}
+	figure .button{
+		font-size: 35px;
+	}
+   }
+ 
+ @media only screen and (max-width : 320px) {
+ 
+   
+ 
+ }
+ 
+ 
+ 
+ 
+ 
