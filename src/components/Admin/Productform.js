@@ -8,7 +8,6 @@ import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 var Userdata;
-// http://localhost:3010/api/product/add_product
 const Productform = (props) => {
   var productCount = 0;
   const [categories, setCategories] = useState([]);
@@ -86,12 +85,7 @@ const Productform = (props) => {
       {category ? restData.category = category._id : restData.category = ""}
       {subcategory? restData.subcategory=subcategory._id:restData.subcategory=""}
       {manufacturer? restData.manufacturer=manufacturer._id:restData.manufacturer=""}
-      // {warehouse? restData.warehouse=warehouse.:restData.warehouse=""}
       {type? restData.type=type._id:restData.type=""}
-      // restData.subcategory = subcategory._id;
-      // restData.manufacturer = manufacturer._id;
-      // restData.warehouse = warehouse._id;
-      // restData.type = type._id;
       console.log(restData,"rest data ");
       Setdata(restData);
     }
@@ -422,7 +416,7 @@ const Productform = (props) => {
 
                               <div className="col-6 p-1 required">
                                 <select
-                                  className="form-control Dashborad-search"
+                                  className="form-control Dashborad-search custom-select"
                                   value={data.category}
                                   // value={editableData ? editableData.category._id : ''}
                                   onChange={(e) => {
@@ -443,7 +437,7 @@ const Productform = (props) => {
                               </div>
                               <div className="col-6 p-1 required">
                                 <select
-                                  className="form-control Dashborad-search"
+                                  className="form-control Dashborad-search custom-select"
                                   value={data.subcategory}
                                   onChange={(e) => {
                                     Setdata({
@@ -461,9 +455,41 @@ const Productform = (props) => {
                                 </select>
                               </div>
 
+                              { Userdata.role == "superAdmin" ? (
+                                <div className="col-6 p-1 required">
+                                <select
+                                  className="form-control Dashborad-search custom-select"
+                                  value={data.subcategory}
+                                  onChange={(e) => {
+                                    Setdata({
+                                      ...data,
+                                      subcategory: e.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option value='' disabled hidden>
+                                    Select Vendor
+                                  </option>
+                                  {subcategories.map((el, ind) => (
+                                    <option value={el._id}>{el.name}</option>
+                                  ))}
+                                </select>
+                              </div>
+                              ) : <div className="col-6 p-1 form-floating required">
+                              <input
+                                type="text"
+                                id="floatingform"
+                                className="form-control Dashborad-search"
+                                placeholder="Product Name"
+                                value={Userdata && Userdata.username}
+                              />
+                            </div> }
+
+                              
+
                               <div className="col-6 p-1 required">
                                 <select
-                                  className="form-control Dashborad-search"
+                                  className="form-control Dashborad-search custom-select"
                                   value={data.manufacturer}
                                   onChange={(e) => {
                                     Setdata({
@@ -478,17 +504,17 @@ const Productform = (props) => {
                                   {manufactureres.map((el, ind) =>
                                     Userdata.role == "superAdmin" ? (
                                       <option value={el._id}>{el.name}</option>
-                                    ) : Userdata.organization == el.name &&
+                                    ) : Userdata._id == el.creatorId &&
                                       Userdata.role == "Vendor" ? (
                                       <option value={el._id}>{el.name}</option>
                                     ) : null
                                   )}
                                 </select>
-                              </div>
+                              </div>                            
 
                               <div className="col-6 p-1 required">
                                 <select
-                                  className="form-control Dashborad-search"
+                                  className="form-control Dashborad-search custom-select"
                                   value={data.warehouse}
                                   onChange={(e) => {
                                     Setdata({
@@ -501,10 +527,13 @@ const Productform = (props) => {
                                     Select warehouse
                                   </option>
                                   {warehouse.map((el, ind) =>
-                                   
+                                    Userdata.role == "superAdmin" ? (
                                       <option value={el._id}>{el.name}</option>
-                                    
-                                  )}
+                                    ) : Userdata._id == el.creatorId &&
+                                      Userdata.role == "Vendor" ? (
+                                      <option value={el._id}>{el.name}</option>
+                                    ) : null
+                                  )}                                 
                                 </select>
                               </div>
                               <div className="col-6 p-1 form-floating">
@@ -623,7 +652,7 @@ const Productform = (props) => {
                               </div>
                               <div className="col-6 p-1">
                                 <select
-                                  className="form-control Dashborad-search"
+                                  className="form-control Dashborad-search custom-select"
                                   value={
                                     data.type
                                   }

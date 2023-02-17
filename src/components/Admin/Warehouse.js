@@ -15,6 +15,7 @@ const Warehouse = (props) => {
     warehouseContactNo:"",
     warehouseAddress:"",
     description: "",    
+    creatorId : ""
   });
   const history=useHistory();
   const [editableData]=useState(props.history.location.state);
@@ -29,6 +30,7 @@ const Warehouse = (props) => {
 
   const submitData = async (e) => {
     e.preventDefault();      
+    data.creatorId = Userdata._id;
     const url = `${baseUrl}/api/warehouse/add_warehouse`;
      await fetch(url, {
     method: "POST",
@@ -89,7 +91,7 @@ const Warehouse = (props) => {
         </div>
         <div className="col-10 px-0">
         {Userdata != undefined ? (
-          Userdata.role == "superAdmin" ? (
+          Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form>
                   <div className="col-12 px-0">
                     <div className="card p-4 m-2 product-form">

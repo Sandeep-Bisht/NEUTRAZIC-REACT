@@ -348,7 +348,7 @@ const Sidemenu = () => {
           </div>
         </div>
         {Userdata != undefined ? (
-          Userdata.role == "superAdmin" || Userdata.role == "Manager" ? (
+          Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <div className="nav__link">
               <span className="nav__name">
                 <div className="accordion" id="accordionExample">
@@ -376,7 +376,8 @@ const Sidemenu = () => {
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="dashboard-accordion-body">
+                      <div className="dashboard-accordion-body">                    
+                              
                         {Userdata != undefined ? (
                           Userdata.role == "superAdmin" ? (
                             <ul className="Configration-List">
@@ -425,6 +426,24 @@ const Sidemenu = () => {
                             </ul>
                           ) : (
                             <ul className="Configration-List">
+                              <Link to="/AllManufactureDetails">
+                                <li className="nav-name">
+                                  <GiFactory className="configuration-icons-wrap" />
+                                  Manufacturer
+                                </li>
+                              </Link>
+                              <Link to="/AllProductsDetails">
+                                <li>
+                                  <GiBoxUnpacking className="configuration-icons-wrap" />
+                                  Products
+                                </li>
+                              </Link>
+                              <Link to="/AllWarehouseDetails">
+                                <li>
+                                  <FaWarehouse className="configuration-icons-wrap" />
+                                  Warehouse
+                                </li>
+                              </Link>
                               <Link to="/Roles">
                                 {" "}
                                 <li>User Roles</li>
