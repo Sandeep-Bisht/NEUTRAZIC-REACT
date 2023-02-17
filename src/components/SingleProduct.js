@@ -346,7 +346,7 @@ const SingleProduct = (props) => {
         //history.push("/Cart");
           toast.success("Add to cart",{
           position:"bottom-right",
-          autoClose:5000,
+          autoClose:1000,
         });
       })
       .then((err) => console.log(err, "inside update cart"));
@@ -571,7 +571,7 @@ const SingleProduct = (props) => {
                 getWishlist();
                 toast.success('Added to wishlist', {
                   position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 2000,
+                  autoClose: 1000,
                 });
               })
               .catch((err) => {
@@ -609,7 +609,7 @@ const SingleProduct = (props) => {
                   getWishlist();
                   toast.success('Added to wishlist', {
                     position: toast.POSITION.BOTTOM_RIGHT,
-                    autoClose: 2000,
+                    autoClose: 1000,
 
                   })
                 })
@@ -620,7 +620,7 @@ const SingleProduct = (props) => {
           } else {
             toast.error('Already in wishlist !', {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 2000,
+              autoClose: 1000,
             });
 
           }

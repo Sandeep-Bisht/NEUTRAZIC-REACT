@@ -138,6 +138,31 @@ const Warehouse = (props) => {
                           <label for="floatingInputValue">Warehouse Address</label>
                         </div>
                         <div className="col-6 p-1 form-floating">
+                          <input
+                            type="text"
+                            id="floatingInputValue"
+                            className="form-control Dashborad-search"
+                            placeholder="Warehouse Contact"
+                            defaultValue={editableData ? editableData.name : ""}
+                          />
+                          <label for="floatingInputValue">Warehouse Contact</label>
+                        </div>
+                        <div className="col-6 p-1 form-floating">
+                          <textarea
+                            className="form-control h-100"
+                            placeholder="Warehouse Address"
+                            id="floatingInputValue"
+                            rows="5"
+                            defaultValue={
+                              editableData ? editableData.description : ""
+                            }
+                            onChange={(e) => {
+                              Setdata({ ...data, description: e.target.value });
+                            }}
+                          ></textarea>
+                          <label for="floatingInputValue">Warehouse Address</label>
+                        </div>
+                        <div className="col-6 p-1 form-floating">
                           <textarea
                             className="form-control h-100"
                             placeholder="Warehouse Description"
@@ -154,7 +179,6 @@ const Warehouse = (props) => {
                         </div>
                         {editableData ? (
                           <div className="col-12 p-1">
-                            
                             <button
                               className="btn btn-primary"
                               onClick={(e) => UpdateWarehouse(e, data._id)}
