@@ -1,4 +1,5 @@
 import { get, map } from 'jquery';
+import "../components/WishList.css"
 import React,{useState,useEffect} from 'react'
 import StarsRating from 'stars-rating'
 import Baseline from './Baseline';
@@ -264,7 +265,7 @@ const WishList = ()=>{
          <div className="row mt-0">
          {wishlistData.length >0 ? 
             wishlistData.map((item,ind)=>(
-               <div className="col-6">
+               <div className="col-lg-6 col-md-6 col-sm-10">
                <div className='wishlistDiv'>
                   <div className='row'>
                <div className='col-4'>

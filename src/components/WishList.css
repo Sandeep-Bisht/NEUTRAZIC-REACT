@@ -1,0 +1,83 @@
+@media only screen and (max-width : 1399px){
+
+    .wishlist-heading2{
+        font-size: 1rem;
+    }
+    .word-wrapping{
+        font-size: 0.9rem;
+    }
+    .wishlist-btn{
+        font-size: 1rem;
+    }
+
+}
+@media only screen and (max-width : 1024px) {
+    .wishlist-heading2{
+        font-size: 1.2rem;
+    }
+    .word-wrapping{
+        font-size: 1rem;
+    }
+    .wishlist-btn{
+        font-size: 1rem;
+    }
+  
+}
+
+@media only screen and (max-width :991px) {
+    .wishlist-heading2{
+        font-size: 1.1rem;
+    }
+    .word-wrapping{
+        font-size: 1rem;
+    }
+    .wishlist-btn{
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width : 767px) {
+    .wishlist-heading2{
+        font-size: 1.7rem;
+    }
+    .word-wrapping{
+        font-size: 1.6rem;
+    }
+    .wishlist-btn{
+        font-size: 1.4rem;
+    }
+    .col-sm-10{
+        flex:none;
+        max-width: none;
+    }
+    .wishlistDiv img{
+        height:210px;
+        width: 60%;
+    }
+    .wishlist-header{      
+        font-size: 2.6rem;
+    }
+  
+}
+@media only screen and (max-width : 575.98px) {
+  
+.wishlist-heading2{
+        font-size: 1.8rem;
+    }
+    .word-wrapping{
+        font-size: 1.7rem;
+    }
+    .wishlist-btn{
+        font-size: 1.5rem;
+    }
+    .col-sm-10{
+        flex:none;
+        max-width: none;
+    }
+    .wishlistDiv img{
+        height:210px;
+        width: 60%;
+    }
+    .wishlist-close-icon svg{
+        height: 45px;
+    }
+} 

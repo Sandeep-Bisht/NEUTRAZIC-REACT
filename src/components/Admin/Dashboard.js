@@ -30,6 +30,7 @@ const Dashboard = () => {
   const [categories, setCategories] = useState("");
   const [subCategories, setSubCategories] = useState("");
   const [localuser, setLocaluser] = useState("");
+  const [blogs,setBlogs] = useState("");
   var Userdata;
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Dashboard = () => {
     GetOrders();
     GetProducts();
     GetLocalUserData();
+    GetBlogs();
   },[]);
 
   const GetLocalUserData = () => {
@@ -59,6 +61,13 @@ const Dashboard = () => {
         console.log(err, "error");
       });
   };
+  const GetBlogs = async()=>{
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+    .then((res)=>res.json())
+    .then(async (data)=>{
+      setBlogs(data.data.length);
+    })
+  }
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -185,7 +194,7 @@ const Dashboard = () => {
                                   <h6 className="cardheads">Blogs </h6>
                                 </div>
                                 <div>
-                                  <span className="count1"></span>
+                                  <span className="count1">{blogs}</span>
                                 </div>
                               </div>
                             </div>

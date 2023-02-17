@@ -17,7 +17,7 @@ const AllBlogs = () => {
   useEffect(() => {
     getAllBlogs();
   }, []);
-
+  console.log(blogs);
   const getAllBlogs = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())
