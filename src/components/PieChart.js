@@ -5,12 +5,13 @@ import { Pie } from '@ant-design/plots';
 const PieChart = () => {
 
     const data = [
-        { type: 'Red', value: 27},
-        { type: 'Yellow', value: 25},
-        { type: 'Green', value: 18 },
-        { type: 'pink',value: 15, },
-        { type: 'lotte',value: 10 },
-        { type: 'Sachin', value: 5},
+        { type: 'Users', value: 27},
+        { type: 'Manufacturer', value: 5},
+        { type: 'Products', value: 25},
+        { type: 'Category', value: 18 },
+        { type: 'Sub-category',value: 15, },
+        { type: 'Warehouse',value: 10 },
+        
       ];
   
       const config = {

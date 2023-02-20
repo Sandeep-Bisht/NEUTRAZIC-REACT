@@ -32,7 +32,7 @@ const DeliveredOrder = () => {
         let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Delivered")
+            if(item.orderStatus=="Delivered")
 
             {
                arr.push(item);
@@ -47,7 +47,7 @@ const DeliveredOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, status) => {
+  const UpdateOrderStatus = async (orderId, orderStatus) => {
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
@@ -56,7 +56,7 @@ const DeliveredOrder = () => {
       },
       body: JSON.stringify({
         _id: orderId,
-        status: status,
+        orderStatus: orderStatus,
       }),
     })
       .then((res) => res.json())
@@ -110,7 +110,7 @@ const DeliveredOrder = () => {
 
   const columns = [
     { title: "Order No", dataIndex: "order_no", key: "order_no" },
-    { title: "Status", dataIndex: "status", key: "stauts" },
+    { title: "Status", dataIndex: "orderStatus", key: "stauts" },
     { title: "Delivered Date", dataIndex: "delivery_date", key: "delivery_date" },
     { title: "Paid Amount", dataIndex: "totalamount", key: "totalamount" },
     

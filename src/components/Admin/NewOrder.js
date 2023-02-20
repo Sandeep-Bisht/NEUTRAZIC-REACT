@@ -36,7 +36,7 @@ const NewOrder = () => {
          let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Pending")
+            if(item.orderStatus=="Pending")
 
             {
                arr.push(item);
@@ -52,17 +52,16 @@ const NewOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, status) => {
+  const UpdateOrderStatus = async (order, orderStatus) => {
+    delete order.createdAt;
+    order.orderStatus = orderStatus;
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        _id: orderId,
-        status: status,
-      }),
+      body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then(async (data) => {
@@ -143,7 +142,7 @@ const NewOrder = () => {
                 {
                   key: '1',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
+                    <a onClick={() =>UpdateOrderStatus(item,"Cancel")}>
                       Cancel Order
                     </a>
                   ),
@@ -151,7 +150,7 @@ const NewOrder = () => {
                 {
                   key: '2',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"In-Progress")}>
+                    <a onClick={() =>UpdateOrderStatus(item,"In-Progress")}>
                       Move to In-progress
                     </a>
                   ),

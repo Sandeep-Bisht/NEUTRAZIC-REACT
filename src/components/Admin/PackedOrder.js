@@ -22,6 +22,7 @@ const InProgressOrder = () => {
   const [shippedOrder, setShippedOrder] = useState([]);
   const [orderItem, setOrderItem] = useState([]);
   const [startDate, setStartDate] = useState('');
+  const [shipper,setShipper] = useState("Blue Dart")
   const [endDate, setEndDate] = useState('');
 
   // Get today's date in the YYYY-MM-DD format
@@ -40,7 +41,7 @@ const InProgressOrder = () => {
         let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Packed")
+            if(item.orderStatus=="Packed")
 
             {
                arr.push(item);
@@ -55,17 +56,22 @@ const InProgressOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, status) => {
+  const UpdateOrderStatus = async (e,order, orderStatus) => {
+    e.preventDefault()
+    // console.log(order, "inside updateeee",shipper,startDate,endDate ,orderStatus)
+    order.shipperName = shipper;
+    order.shippingDate = startDate;
+    order.delivery_time = endDate;
+    order.orderStatus = orderStatus;
+    delete order.createdAt;
+    console.log("before api", order, "status",orderStatus)
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        _id: orderId,
-        status: status,
-      }),
+      body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then(async (data) => {
@@ -122,9 +128,12 @@ const InProgressOrder = () => {
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     { title: "Payment Status", dataIndex: "payment_status", key: "payment_status" },
     {
-      title: "Status",
-      key: "status",
-      render: (_, item) => <a onClick={() => moveForShipping(item)}>Packed</a>,
+      title: "Action",
+      key: "orderStatus",
+      render: (_, item) => 
+      <Button type="primary" onClick={() => moveForShipping(item)}>
+      Move for Shipping
+    </Button>
     },
     
     {
@@ -333,13 +342,17 @@ const InProgressOrder = () => {
                         type="text"
                         class="form-control"
                         id="country"
-                        value={shippedOrder.country}
+                        value={shippedOrder.country == "IN" && "India" }
                         aria-describedby="emailHelp"
                       />
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="Blue Dart" class="form-label">Choose a Shipper</label>
-                      <select className="m-1 form-control">
+                      <select className="m-1 form-control custom-select"
+                      
+                      onChange={(e) => {
+                                setShipper(e.target.value);
+                              }}>
                         <option value="Blue Dart">Blue Dart</option>
                         <option value="XpressBees">XpressBees</option>
                         <option value="DHL Shipping">DHL Shipping</option>
@@ -374,7 +387,7 @@ const InProgressOrder = () => {
                     <button
                       className="btn btn-primary m-2"
                       onClick={(e) =>
-                        UpdateOrderStatus(e, orderItem._id, "Delivered")
+                        UpdateOrderStatus(e, orderItem, "Shipping")
                       }
                     >
                       Proceed for Shipping

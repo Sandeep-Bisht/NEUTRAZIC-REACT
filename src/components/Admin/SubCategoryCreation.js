@@ -135,46 +135,6 @@ const SubCategoryCreation = (props) => {
         },1500);
       }
   };
-
-  // const data1 = [];
-  // {
-  //   subcategories.map((item, index) => {
-  //     data1.push({
-  //       sr_no: index + 1,
-  //       name: item.name,
-  //       Action:
-  //         Userdata != undefined && Userdata.role == "superAdmin" ? (
-  //           <>
-  //             <button
-  //               className="btnbtn-danger"
-  //               onClick={(e) => {
-  //                 if (window.confirm("Are you sure ?")) {
-  //                   DeleteSubCategory(item._id, e);
-  //                 } else {
-  //                   return false;
-  //                 }
-  //               }}
-  //             >
-  //               <i className="bx bx-trash"></i>
-  //             </button>
-  //             <button
-  //               className="ml-2 btnbtn-danger"
-  //               onClick={() => {
-  //                 EditSubCategory(item);
-  //                 setUpdate(true);
-  //               }}
-  //             >
-  //               <i className="bx bx-edit"></i>
-  //             </button>
-  //           </>
-  //         ) : (
-  //           <button>
-  //             <i className="bx bx-show"></i>
-  //           </button>
-  //         ),
-  //     });
-  //   });
-  // }
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Sub Category Name", data: "name" },
