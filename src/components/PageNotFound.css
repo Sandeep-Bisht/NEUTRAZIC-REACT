@@ -50,3 +50,63 @@
 {
     color: #fff;
 }
+
+/* styles for mobile devices */
+@media only screen and (max-width: 600px) {
+    .page-not-found-page {
+      padding: 10px;
+    }
+  
+    .error-image {
+      width: 100%;
+      height: auto;
+    }
+  
+    .error-1 {
+      font-size: 24px;
+    }
+  
+    .error-message {
+      font-size: 16px;
+    }
+    .error-home-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+    
+      .error-home-btn button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+    /* styles for larger devices */
+@media only screen and (min-width: 601px) {
+    .page-not-found-page {
+      padding: 50px;
+    }
+  
+    .error-image {
+      width: 50%;
+      height: auto;
+      margin: 0 auto;
+    }
+  
+    .error-1 {
+      font-size: 36px;
+    }
+  
+    .error-message {
+      font-size: 20px;
+    }
+    .error-home-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+    
+      .error-home-btn button {
+        padding: 15px 30px;
+        font-size: 20px;
+      }
+    }

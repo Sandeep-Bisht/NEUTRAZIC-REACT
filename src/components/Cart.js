@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import { Link, useHistory } from "react-router-dom";
-import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
 import "../components/Header1.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
 import * as ACTIONS from '../CommonService/AddToCart/action'
-import confirm, { Button, alert } from "react-alert-confirm";
 import { message, Popconfirm } from 'antd';
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
-import AllProducts from "./AllProducts";
 
 const stripePromise = loadStripe(
   "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
@@ -58,9 +55,7 @@ const Cart = () => {
     CartById();
     window.scroll(0, 0);
   }, []);
-  // const Subtotal=()=>{
-  //    subtotal=subtotal+
-  // }
+ 
 
   const CartById = async () => {
     if (Userdata) {
@@ -117,22 +112,14 @@ const Cart = () => {
 
   const Minusquantity = async (quantity, price, index) => {
     if (quantity > 1) {
-      //  isquantity = true
       cart[index].quantity = quantity - 1;
-      //  newquantity = quantity
-
-      //  totalamount = totalamount - price
       await UpdateCart();
       await CartById();
     }
   };
   const Plusquantity = async (quantity, price, index) => {
     if (quantity >= 1) {
-      //  isquantity = true
       cart[index].quantity = quantity + 1;
-      //  newquantity = quantity
-
-      //  totalamount = totalamount - price
       await UpdateCart();
       await CartById();
     }
@@ -149,8 +136,6 @@ const Cart = () => {
     })
   };
 
-  // checkout 
-
   const submitData = async (e) => {
     e.preventDefault();
     
@@ -166,25 +151,17 @@ const Cart = () => {
       delete item.mrp
     });
     const formData = new FormData();
-    // await formData.append("country", data.country);
-    // formData.append("address", JSON.stringify(data.address));
-    // await formData.append("pincode", data.pincode);
     await formData.append("mobile", Userdata.phonenumber);
     await formData.append("email", Userdata.email);
-    // await formData.append("orderfor", data.orderfor);
     await formData.append("order", JSON.stringify(neworder));
     await formData.append("userid", Userdata._id);
     await formData.append("status", data.status);
-    // await formData.append("justification", data.justification);
-    // await formData.append("delivery_time", data.delivery_time);
     await formData.append("order_no", Math.floor(Math.random() * 1000000));
     await formData.append("totalamount", total1);
     await formData.append("actualamount", actualtotal);
     await formData.append("instruction", data.instruction);
     await formData.append("addresstype", data.addresstype);
-    // await formData.append("deliverytype", data.deliverytype);
     await formData.append("username", Userdata.username);
-    // const url=`${baseUrl}/api/order/add_order`
     const url = `${baseUrl}/api/order/create-checkout-session`;
     await fetch(url, {
       method: "POST",
@@ -192,10 +169,7 @@ const Cart = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res, "rsponse of create");
-       // DeleteCart(res.url)
        window.location.href = res.url;
-        // alert("cart Deleted")
         
       })
       .catch((err) => console.log(err));
@@ -254,9 +228,6 @@ const Cart = () => {
                         </thead>
                         <tbody>
                           {cart.map((el, ind1) => {
-                            // total = total + (el.singleprice * el.quantity) ;
-                            // (el.mrp - (el.mrp * el.discountprice) / 100) *
-                            // el.quantity;
                             total = el.singleprice * el.quantity;
                             total1 = total1 + (el.singleprice * el.quantity);
                             localStorage.setItem("ActualSubtotal", total1);
@@ -264,7 +235,6 @@ const Cart = () => {
                             localStorage.setItem("Subtotal", actualtotal);
 
                             return (
-                              //  <Link to={"/SingleProduct/" + el.productid} >
                               <tr key={ind1} className="cart-data">
                                 <td className="product-thumbnail">
                                   <Link to={"/SingleProduct/" + el.productid}>
@@ -280,13 +250,6 @@ const Cart = () => {
                                 <td className="product-name">
                                   <Link to={"/SingleProduct/" + el.productid}>
                                     <div className="text-start">
-                                      {/* <StarsRating
-                                        count={5}
-                                        // onChange={ratingChanged}
-                                        size={17}
-                                        color2={"#ffd700"}
-                                        value={3.5}
-                                      /> */}
                                       {el.name}
                                     </div>
                                   </Link>
@@ -300,13 +263,6 @@ const Cart = () => {
                                     <span className="unit-amount fa fa-inr">
                                       {
                                         el.singleprice
-                                        //   isNaN(
-                                        //     el.mrp -
-                                        //       (el.mrp * el.discountprice) / 100
-                                        //   )
-                                        //     ? 0
-                                        //     : el.mrp -
-                                        //       (el.mrp * el.discountprice) / 100
                                       }
                                     </span>
                                   </div>
@@ -347,13 +303,6 @@ const Cart = () => {
                                     </div>
                                   </div>
                                 </td>
-                                {/* <td className="product-subtotal">
-                                  <div className="amount">
-                                    <span className="subtotal-amount mt-4">
-                                        {(el.mrp-el.singleprice)*el.quantity}
-                                    </span>
-                                  </div>
-                                </td> */}
                                 <td className="product-subtotal">
                                   <div className="amount">
                                    <span className="subtotal-amount mt-4 fa fa-inr">
@@ -371,10 +320,8 @@ const Cart = () => {
                                     onConfirm={(e)=>Sliceorder(ind1, e)}
                                   >
                                   </Popconfirm>
-                                  {/* <Button onClick={handleClickBasic}>Basic</Button> */}
                                 </td>
                               </tr>
-                              //     </Link>
                             );
                           })}
                         </tbody>
@@ -407,7 +354,6 @@ const Cart = () => {
                         Discount <span>-₹{actualtotal - total1}</span>
                       </li>
 
-                      {/* <li>Shipping <span>$30.00</span></li> */}
                       <li>
                         Payable Amount <span>₹{total1}</span>
                       </li>
@@ -415,7 +361,6 @@ const Cart = () => {
                     { cartItems ?
                     <button
                       className="default-btn1"
-                      // to={Userdata ? "/UserDetails/"+ _id : "/register"}                      
                       onClick={(e) => {
                         submitData(e);
                       }}
@@ -438,7 +383,7 @@ const Cart = () => {
 
       {/* mobile responsive cart */}
 
-      <div className="small-container cart-page cart-table mt-3">
+      {/* <div className="small-container cart-page cart-table mt-3">
         <table>
           <thead>
             <tr>
@@ -466,13 +411,6 @@ const Cart = () => {
                         Price ₹{" "}
                         {
                           el.mrp
-                          //   isNaN(
-                          //     el.mrp -
-                          //       (el.mrp * el.discountprice) / 100
-                          //   )
-                          //     ? 0
-                          //     : el.mrp -
-                          //       (el.mrp * el.discountprice) / 100
                         }
                       </small>
                       <br />
@@ -547,12 +485,12 @@ const Cart = () => {
                 <button>Continue Shopping</button>
               </Link> */}
               
-              </td>
+              {/* </td>
             </tr>
           </table>
         </div>
-      </div>
-      <ToastContainer />
+      </div> */}
+      {/* <ToastContainer /> */} 
       {/*  End mobile responsive cart */}
       <Baseline />
       <Footer />

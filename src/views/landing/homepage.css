@@ -1,3 +1,6 @@
+.my-input-field::placeholder {
+	color: gray;
+  }
 .cVXxbE
 {
 	display: none;
@@ -19531,10 +19534,38 @@ ul
 	background-color: #f6f7fb;
 }
 
+/* Cart Responsive */
+@media only screen and (max-width : 1399px){
+  .cart-table table tbody tr td.product-thumbnail a img{
+	height: 120px;
+	width: 100%;
+  }
+}
+@media only screen and (max-width : 1024px) {
+	.cart-table table tbody tr td.product-thumbnail a img{
+		height: 120px;
+		width: 100%;
+	  }
+	  .cart-table table thead tr th{
+		font-size: 1.2rem;
+		opacity: 0.6;
+	  }
+}
+@media only screen and (max-width :991px) {
+  .cart-table table thead tr th{
+	font-size: 1.2rem;
+	opacity: 0.6;
+  }
+  .text-start{
+	font-size: 1.4rem;
+  }
+  .cart-table table tbody tr td.product-thumbnail a img{
+	height: 120px;
+	width: 100%;
+  }
+}
 
-
-
-
+/* End of Cart Responsive */
 
 
 /* Responsive for Phone  */
@@ -19966,3 +19997,5 @@ margin: 40px 8px 15px 0px;
  }
 
  /* SubcategoryPage Css */
+
+ 

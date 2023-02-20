@@ -532,6 +532,8 @@ const HomePage = () => {
                   <div className="login-div2 clearfix mb-5">
                     <input
                       type="text"
+                      className="my-input-field"
+                      placeholder="Search..."
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {

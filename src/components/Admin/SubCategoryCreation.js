@@ -23,6 +23,18 @@ const SubCategoryCreation = (props) => {
   
   const [editableData] = useState(props.history.location.state);
   const history=useHistory();
+
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    GetSubCategory();
+    GetCategory();
+    if (editableData) {
+      let {category, ...restData} = editableData
+      {category ? restData.category = category._id : restData.category = ""}
+      console.log(restData,"rest data");
+      Setdata(restData);
+    }
+  }, []);
   
   
   const submitData = async (e) => {
@@ -49,14 +61,7 @@ const SubCategoryCreation = (props) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    GetSubCategory();
-    GetCategory();
-    if(editableData){
-      Setdata(editableData);
-    }
-  }, []);
+
  
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
@@ -206,7 +211,7 @@ const SubCategoryCreation = (props) => {
                           </div>
                           <div className="col-6 p-1">
                             <select
-                              className="form-control Dashborad-search"
+                              className="form-control Dashborad-search custom-select"
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }

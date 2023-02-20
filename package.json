@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
+    "@ant-design/flowchart": "^1.2.2",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.1",
@@ -38,7 +40,10 @@
     "read-more-react": "^1.0.10",
     "redux": "^4.2.0",
     "stars-rating": "^1.1.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "tinymce": "^6.3.1",
+    "webpack": "^4.42.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "eslint": "^6.1.0",

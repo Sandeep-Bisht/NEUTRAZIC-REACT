@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
+//import "@ant - design/flowchart/dist/index.css";
 import $ from "jquery";
 import DataTable from "datatables.net";
 import Sidemenu from "./Sidemenu";
@@ -10,14 +11,11 @@ import { FiUserCheck } from "react-icons/fi";
 import { GiBoxUnpacking } from "react-icons/gi";
 import { BiCategory } from "react-icons/bi";
 import { BsListNested } from "react-icons/bs";
-import UserImg from "../../Images/user3.jpg";
-import AllManufactureDetails from "./AllManufacture/AllManufactureDetails";
-import AllSubCategoriesDetails from "./AllSubCategory/AllSubCategoriesDetails";
-import AllProductsDetails from "./AllProducts/AllProductsDetails";
-import AllCategoriesDetails from "./AllCategory/AllCategoriesDetails";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import PageNotFound from "../PageNotFound";
+import LineChart from "../../LineChart";
+import PieChart from "../PieChart";
 
 // var ManufacturerCount1='';
 // var productCount1=''
@@ -30,12 +28,17 @@ const Dashboard = () => {
   const [categories, setCategories] = useState("");
   const [subCategories, setSubCategories] = useState("");
   const [localuser, setLocaluser] = useState("");
-  const [blogs,setBlogs] = useState("");
+  const [blogs, setBlogs] = useState("");
+  const [warehouse, setWarehouse] = useState("")
   var Userdata;
+
+   
 
   useEffect(() => {
     setCount();
     GetUser();
+    getAllBlogs();
+    GetWarehouse();
     GetCategory();
     GetSubCategory();
     GetManufacturer();
@@ -73,6 +76,28 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
+  const GetWarehouse = async () => {
+    await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setWarehouse(data.data.length); 
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
+  const getAllBlogs = async () => {
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setBlogs(data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -132,7 +157,7 @@ const Dashboard = () => {
   };
   return (
     <>
-      {localuser && localuser.role === "superAdmin" ? (
+      {localuser && localuser.role === "superAdmin" || localuser.role === "Vendor" ? (
         <section id="body-pd">
           <div className="container-fluid">
             <DashboardHeaader />
@@ -259,10 +284,37 @@ const Dashboard = () => {
                         </div>
                       </Link>
                     </div>
+                    <div className="col-3 pt-4">
+                      <Link to="/AllSubCategoriesDetails">
+                        <div className="card cardsec">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                  <BsListNested className="cardicon" />
+                                  <h6 className="cardheads">Warehouse</h6>
+                                </div>
+                                <div>
+                                  <span className="count1">{warehouse}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
                 </main>
-              </div>
-            </div>
+                <div className='row my-5'>
+                <div className='col-md-6'>
+                    <PieChart />
+                  </div>
+                  <div className='col-md-6'>
+                    <LineChart />
+                    </div> 
+                    </div>
+              </div>   
+                </div>
           </div>
         </section>
     ):(

@@ -20,6 +20,7 @@ const Roles = (props) => {
   const history = useHistory();
   const [email, setemail] = useState("");
   const [username, setUsername] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
   const [password, setPassword] = useState("");
   const [manufactureres, setManufactureres] = useState([]);
   const [role, setRole] = useState("");
@@ -69,6 +70,7 @@ const Roles = (props) => {
       body: JSON.stringify({
         username: username,
         password: password,
+        phonenumber: phonenumber,
         email: email,
         role: role,
         organization: organization,
@@ -103,7 +105,6 @@ const Roles = (props) => {
             history.push("/dashboard");
           }
           window.location.reload();
-
         });
     } else {
       alert("Please Enter a Valid Data");
@@ -126,7 +127,7 @@ const Roles = (props) => {
         Email: item.email,
         company: item.organization,
         Role: (
-          <select value={item.role} className="form-control">
+          <select defaultValue={item.role} className="form-control">
             <option value={item.role}>{item.role}</option>
             <option>Admin</option>
             <option>Manager</option>
@@ -154,143 +155,156 @@ const Roles = (props) => {
     { title: "Organization", data: "company" },
     { title: "Action", data: "Action" },
   ];
-  
 
   return (
     <>
-    <section id="body-pd">
-      <div className="container-fluid">
-        <DashboardHeaader/>
-      
-<div className="row">
-  <div className="col-2 px-0">
-        <Sidemenu />
-        </div>
-        <div className="col-10">
-        {/* login Register Modal  */}
-        <div className="form-row de-flex items-align-center justify-content-center">
-          <div className="container justify-content-center align-items-center d-flex pt-4 m-auto">
-            <div
-              className="col-10 mx-auto dashboardroles-register-form-wrap">
-              <div className="form-group col-6">
-                {/* <h1>Sale</h1> */}
-                <img src={require("../../Images/woman-laptop.jpg")} />
-              </div>
-              <div className="form-group col-6">
-                <div className="form-group col-lg-12 p-1  form-floating">
-                  {/* <label>Username<span>*</span></label> */}
-                  <input
-                    type="text"
-                    id="floatingform"
-                    className="form-control input-text "
-                    placeholder="Username*"
-                    required
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                    }}
-                  />
-                  <label for="floatingform">Username*</label>
-                </div>
-                <div className="form-group col-lg-12 p-1 form-floating">
-                  {/* <label>Email<span>*</span></label> */}
-                  <input
-                    type="email"
-                    id="floatingform"
-                    className="form-control input-text"
-                    placeholder="Email*"
-                    required
-                    onChange={(e) => {
-                      setemail(e.target.value);
-                    }}
-                  />
-                  <label for="floatingform">Email*</label>
-                </div>
-                <div className="form-group col-lg-12 p-1 form-floating">
-                  {/* <label>Password<span>*</span></label> */}
-                  <input
-                    className="form-control input-text"
-                    id="formfloating"
-                    placeholder="Password*"
-                    required
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                  <label for="formfloating">Password*</label>
-                </div>
-                <div className="form-group col-lg-12 p-1 form-floating">
-                  {/* <label>Confirm Password<span>*</span></label> */}
-                  <input
-                    className="form-control input-text"
-                    id="formfloating"
-                    placeholder="Confirm Password*"
-                    required
-                  />
-                  <label for="formfloating">Confirm Password*</label>
-                </div>
-                {Userdata != undefined && Userdata.role == "superAdmin" ? (
-                  <div className="form-group col-lg-12 p-1">
-                    {/* <label>User Roles<span>*</span></label> */}
-                    <select
-                      className="form-control custom-select"
-                      onChange={(e) => {
-                        setRole(e.target.value);
-                      }}
-                    >
-                      <option>Select User Role From Here</option>
-                      <option value="Manager">Manager</option>
-                      <option value="Vendor">Vendor</option>
-                      <option value="user">User</option>:null
-                    </select>
-                  </div>
-                ) : Userdata.role == "Manager" ? (
-                  <div className="form-group col-lg-12 p-1">
-                    {/* <label>User Roles<span>*</span></label> */}
+      <section id="body-pd">
+        <div className="container-fluid">
+          <DashboardHeaader />
 
-                    <select
-                      className="form-control"
-                      onChange={(e) => {
-                        setRole(e.target.value);
-                      }}
-                    >
-                      <option>Select User Role From Here</option>
-                      <option value="Vendor">Vendor</option>
-                      <option value="user">User</option>:null
-                    </select>
+          <div className="row">
+            <div className="col-2 px-0">
+              <Sidemenu />
+            </div>
+            <div className="col-10">
+              {/* login Register Modal  */}
+              <div className="form-row de-flex items-align-center justify-content-center">
+                <div className="container justify-content-center align-items-center d-flex pt-4 m-auto">
+                  <div className="col-10 mx-auto dashboardroles-register-form-wrap">
+                    <div className="form-group col-6">
+                      {/* <h1>Sale</h1> */}
+                      <img src={require("../../Images/woman-laptop.jpg")} />
+                    </div>
+                    <div className="form-group col-6">
+                      <div className="form-group col-lg-12 p-1  form-floating">
+                        {/* <label>Username<span>*</span></label> */}
+                        <input
+                          type="text"
+                          id="floatingform"
+                          className="form-control input-text "
+                          placeholder="Username*"
+                          required
+                          onChange={(e) => {
+                            setUsername(e.target.value);
+                          }}
+                        />
+                        <label htmlFor="floatingform">Username*</label>
+                      </div>
+                      <div className="form-group col-lg-12 p-1  form-floating">
+                        {/* <label>Username<span>*</span></label> */}
+                        <input
+                          type="text"
+                          id="floatingform"
+                          className="form-control input-text"
+                          placeholder="Phone Number*"
+                          required
+                          onChange={(e) => {
+                            setPhonenumber(e.target.value);
+                          }}
+                        />
+                        <label htmlFor="floatingform">Phone Number*</label>
+                      </div>
+                      <div className="form-group col-lg-12 p-1 form-floating">
+                        {/* <label>Email<span>*</span></label> */} 
+                        <input
+                          type="email"
+                          id="floatingform"
+                          className="form-control input-text"
+                          placeholder="Email*"
+                          required
+                          onChange={(e) => {
+                            setemail(e.target.value);
+                          }}
+                        />
+                        <label htmlFor="floatingform">Email*</label>
+                      </div>
+                      <div className="form-group col-lg-12 p-1 form-floating">
+                        {/* <label>Password<span>*</span></label> */}
+                        <input
+                          className="form-control input-text"
+                          id="formfloating"
+                          placeholder="Password*"
+                          required
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
+                        />
+                        <label htmlFor="formfloating">Password*</label>
+                      </div>
+                      <div className="form-group col-lg-12 p-1 form-floating">
+                        {/* <label>Confirm Password<span>*</span></label> */}
+                        <input
+                          className="form-control input-text"
+                          id="formfloating"
+                          placeholder="Confirm Password*"
+                          required
+                        />
+                        <label htmlFor="formfloating">Confirm Password*</label>
+                      </div>
+                      {Userdata != undefined &&
+                      Userdata.role == "superAdmin" ? (
+                        <div className="form-group col-lg-12 p-1">
+                          {/* <label>User Roles<span>*</span></label> */}
+                          <select
+                            className="form-control custom-select"
+                            onChange={(e) => {
+                              setRole(e.target.value);
+                            }}
+                          >
+                            <option>Select User Role From Here</option>
+                            <option defaultValue="Manager">Manager</option>
+                            <option defaultValue="Vendor">Vendor</option>
+                            <option defaultValue="user">User</option>:null
+                          </select>
+                        </div>
+                      ) : Userdata.role == "Manager" ? (
+                        <div className="form-group col-lg-12 p-1">
+                          {/* <label>User Roles<span>*</span></label> */}
+
+                          <select
+                            className="form-control"
+                            onChange={(e) => {
+                              setRole(e.target.value);
+                            }}
+                          >
+                            <option>Select User Role From Here</option>
+                            <option defaultValue="Vendor">Vendor</option>
+                            <option defaultValue="user">User</option>:null
+                          </select>
+                        </div>
+                      ) : null}
+                      {/* <div className="form-group col-lg-12 p-1">
+                        <select
+                          className="form-control custom-select"
+                          onChange={(e) => {
+                            setOrganization(e.target.value);
+                          }}
+                        >
+                          <option selected>
+                            Select Vendor Organization Form Here
+                          </option>
+                          {manufactureres.map((el, ind) => (
+                            <option defaultValue={el.name}>{el.name}</option>
+                          ))}
+                        </select>
+                      </div> */}
+                      <div className="form-group col-lg-12 p-1">
+                        <button
+                          className="btn btn-registration btn-lg"
+                          onClick={(e) => {
+                            RegisterUser(e);
+                          }}
+                        >
+                          Register
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                ) : null}
-                <div className="form-group col-lg-12 p-1">
-                  {/* <label>Vendor Organization<span>*</span></label> */}
-                  <select
-                    className="form-control custom-select"
-                    onChange={(e) => {
-                      setOrganization(e.target.value);
-                    }}
-                  >
-                    <option selected>Select Vendor Organization Form Here</option>
-                    {manufactureres.map((el, ind) => (
-                      <option value={el.name}>{el.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group col-lg-12 p-1">
-                  <button
-                    className="btn btn-registration btn-lg"
-                    onClick={(e) => {
-                      RegisterUser(e);
-                    }}
-                  >
-                    Register
-                  </button>
                 </div>
               </div>
             </div>
-           
           </div>
         </div>
-        </div>
-      </div>
-      </div>
       </section>
     </>
   );

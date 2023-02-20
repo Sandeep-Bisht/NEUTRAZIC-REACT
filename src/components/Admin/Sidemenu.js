@@ -276,15 +276,17 @@ const Sidemenu = () => {
         <div className="nav__link active">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingThree">
-              <div className="d-flex align-items-center justify-content-center div1">
+              <div className="d-flex align-items-center justify-content-center div1"
+               type="button"
+               data-bs-toggle="collapse"
+               data-bs-target="#collapseTwo"
+               aria-expanded="false"
+               aria-controls="collapseTwo"
+               >
                 <BsCartPlus className="nav__icon" />
                 <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
+                   className="accordion-button collapsed"
+                   type="button"
                 >
                   <span className="pl-3 nav__name">Orders</span>
                 </button>
@@ -346,21 +348,23 @@ const Sidemenu = () => {
           </div>
         </div>
         {Userdata != undefined ? (
-          Userdata.role == "superAdmin" || Userdata.role == "Manager" ? (
+          Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <div className="nav__link">
               <span className="nav__name">
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingThree">
-                      <div className="d-flex align-items-center justify-content-center div1">
+                      <div className="d-flex align-items-center justify-content-center div1"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                      >
                         <GrConfigure className="nav__icon" />
                         <button
                           className="accordion-button collapsed"
                           type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseThree"
-                          aria-expanded="false"
-                          aria-controls="collapseThree"
+                          
                         >
                           <span className="pl-3 nav__name">Configuration</span>
                         </button>
@@ -372,7 +376,8 @@ const Sidemenu = () => {
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="dashboard-accordion-body">
+                      <div className="dashboard-accordion-body">                    
+                              
                         {Userdata != undefined ? (
                           Userdata.role == "superAdmin" ? (
                             <ul className="Configration-List">
@@ -416,6 +421,24 @@ const Sidemenu = () => {
                             </ul>
                           ) : (
                             <ul className="Configration-List">
+                              <Link to="/AllManufactureDetails">
+                                <li className="nav-name">
+                                  <GiFactory className="configuration-icons-wrap" />
+                                  Manufacturer
+                                </li>
+                              </Link>
+                              <Link to="/AllProductsDetails">
+                                <li>
+                                  <GiBoxUnpacking className="configuration-icons-wrap" />
+                                  Products
+                                </li>
+                              </Link>
+                              <Link to="/AllWarehouseDetails">
+                                <li>
+                                  <FaWarehouse className="configuration-icons-wrap" />
+                                  Warehouse
+                                </li>
+                              </Link>
                               <Link to="/Roles">
                                 {" "}
                                 <li>User Roles</li>
@@ -435,15 +458,18 @@ const Sidemenu = () => {
         <div className="nav__link active">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingfour">
-              <div className="d-flex align-items-center justify-content-center div1">
+              <div className="d-flex align-items-center justify-content-center div1"
+               data-bs-toggle="collapse"
+               data-bs-target="#collapsefour"
+               aria-expanded="false"
+               aria-controls="collapsefour"
+               >
+
                 <BsCartPlus className="nav__icon" />
                 <button
                   className="accordion-button collapsed"
                   type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapsefour"
-                  aria-expanded="false"
-                  aria-controls="collapsefour"
+                 
                 >
                   <span className="pl-3 nav__name">IAM</span>
                 </button>
