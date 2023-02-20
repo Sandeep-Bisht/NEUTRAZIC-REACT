@@ -831,10 +831,7 @@ body {
 {
     display: none;
 }
-.mobile-top-navbar
-{
-    display: none;
-}
+
 .Login-fail-msg
 {
     color:red;
@@ -849,18 +846,8 @@ body {
 /* mobile responsive header css */
 
 @media only screen and (min-width: 360px) and (max-width: 815px){
-    .mobile-nav-bar
-    {
-        display: block;
-    }
-.top-nav
-{
-    display: none;
-}
-.main-nav
-{
-    display: none;
-}
+   
+
 .mobile-nav-bar .mobile-nav-list
 {
     /* justify-content: center;
@@ -917,7 +904,6 @@ body {
 }
 .login-div2 .search {
     position: relative;
-    background-color: #006837;
     height: 25px;
     width: 35px;
     float: left;
