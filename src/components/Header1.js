@@ -999,7 +999,7 @@ const Header1 = (props) => {
 
       {/* phone resposive header */}
       {/* phone top-navbar */}
-      <div className=" mobile-top-navbar">
+      {/* <div className=" mobile-top-navbar">
         <div>
           <div className="col-sm-4  " style={{ paddingLeft: "10px" }}>
             <div className="login-div2">
@@ -1102,12 +1102,12 @@ const Header1 = (props) => {
           )}
         </div>
         
-      </div>
+      </div> */}
       <ToastContainer/>
       {/* end phone top-navbar */}
 
       {/* phone main-navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light mobile-nav-bar">
+      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light mobile-nav-bar">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img className="pl-2" src={require("../Images/logo1.png")} />
@@ -1198,7 +1198,7 @@ const Header1 = (props) => {
             </ul>
           </div>
         </div>
-      </nav>
+      </nav> */}
       
       {/* end phone responsive header */}
     </>
