@@ -155,7 +155,7 @@ const ContactUs = () => {
                       </div>
                     </div>
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                      <button type="submit" className="btn btn cosmetic-shop-now">
+                      <button type="submit" className="cosmetic-shop-now">
                         Send Message
                       </button>
                     </div>
@@ -171,6 +171,7 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
+      <div className="container">
       <div id="maps">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.613646880765!2d78.00991851445086!3d30.33350551181559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092a9d312d2add%3A0x2881f11554c636b7!2sGIKS%20INDIA%20PRIVATE%20LIMITED!5e0!3m2!1sen!2sin!4v1627904731571!5m2!1sen!2sin"
@@ -178,6 +179,7 @@ const ContactUs = () => {
           height="450"
           style={{ border: "0", allowfullscreen: "", loading: "lazy" }}
         ></iframe>
+      </div>
       </div>
       <Baseline />
       <div className="go-top ">
