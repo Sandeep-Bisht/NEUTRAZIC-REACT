@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { MdOutlineClose } from "react-icons/md";
 //import Button from './button';
 import { baseUrl } from "../utils/services";
-import * as ACTIONS from '../CommonService/CategoriesbyID/action'
+import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import { useDispatch } from "react-redux";
 
 let changeNavValue = 0;
@@ -28,11 +28,10 @@ const errorEmail = "Please Enter a valid Email Address";
 
 // var userCart=[]
 const Header1 = (props) => {
-
   let dispatch = useDispatch();
 
   const state = useSelector((state) => state.GetCartItemReducer);
-  
+
   // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -48,7 +47,7 @@ const Header1 = (props) => {
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
-  const [usermodal,setUsermodal]=useState();
+  const [usermodal, setUsermodal] = useState();
 
   const {
     register,
@@ -59,19 +58,19 @@ const Header1 = (props) => {
     defaultValues: {
       username: "",
       email: "",
-      phonenumber:"",
+      phonenumber: "",
       password: "",
       repassword: "",
     },
   });
 
-  const CategoryDataHandler = ()=>{
-     dispatch(ACTIONS.getCategories([]))
-  }
+  const CategoryDataHandler = () => {
+    dispatch(ACTIONS.getCategories([]));
+  };
 
   useEffect(() => {
-    if(state.noOfItemsInCart >= 0) {
-      setCartItems(state.noOfItemsInCart)
+    if (state.noOfItemsInCart >= 0) {
+      setCartItems(state.noOfItemsInCart);
     }
   }, [state.noOfItemsInCart]);
 
@@ -124,10 +123,9 @@ const Header1 = (props) => {
       data.password &&
       data.repassword &&
       data.username &&
-      data.phonenumber&&
+      data.phonenumber &&
       data.password == data.repassword
     ) {
-      
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -137,18 +135,17 @@ const Header1 = (props) => {
         body: JSON.stringify({
           username: data.username,
           password: data.password,
-          phonenumber:data.phonenumber,
+          phonenumber: data.phonenumber,
           email: data.email,
           role: "user",
         }),
       })
         .then((res) => res.json())
         .then((data) => {
-          
-          toast.success("Registered Successfully",{
-            position:"bottom-right",
+          toast.success("Registered Successfully", {
+            position: "bottom-right",
             autoClose: 2000,
-          })
+          });
           window.location.reload();
         });
     }
@@ -169,20 +166,18 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (res) => {
-          
           if (res.role === "user") {
             Userdata = res;
-           await localStorage.setItem("Userdata", JSON.stringify(res));
+            await localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
-            
+
             // history.push("/");
-           
+
             window.location.reload();
             toast.success("Login successfully", {
               position: "bottom-right",
               autoClose: 2000,
             });
-            
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||
@@ -191,7 +186,7 @@ const Header1 = (props) => {
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
             history.push("/Dashboard");
-            
+
             window.location.reload();
           } else if (Userdata == undefined) {
             setMsg("User Name Or PassWord is not Valid");
@@ -242,10 +237,9 @@ const Header1 = (props) => {
       });
   };
   const searchData = (e) => {
-    
-    if(props.func){
-       props.func(e)
-      };
+    if (props.func) {
+      props.func(e);
+    }
   };
   const cartfunction = async (newItemObj) => {
     var merged = false;
@@ -270,7 +264,6 @@ const Header1 = (props) => {
             userCart.order[i].quantity += newItemObj.quantity;
             userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-
           }
           if (!merged) {
             userCart.order.push(newItemObj);
@@ -395,16 +388,15 @@ const Header1 = (props) => {
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           >
-
-                            {
-                               el.image && el.image.length > 0 ? <img
-                               className="icons1"
-                               src={
-                                 `${baseUrl}/`+ el.image[0].path
-                               }
-                               alt=""
-                             /> : ""
-                            }
+                            {el.image && el.image.length > 0 ? (
+                              <img
+                                className="icons1"
+                                src={`${baseUrl}/` + el.image[0].path}
+                                alt=""
+                              />
+                            ) : (
+                              ""
+                            )}
                             <button
                               className="accordion-button collapsed button"
                               type="button"
@@ -412,7 +404,7 @@ const Header1 = (props) => {
                               data-bs-target="#flush-collapseOne"
                               aria-expanded="false"
                               aria-controls="flush-collapseOne"
-                              onClick={()=>CategoryDataHandler()}
+                              onClick={() => CategoryDataHandler()}
                             >
                               {el.name}
                             </button>
@@ -442,7 +434,11 @@ const Header1 = (props) => {
                 <div className="row mt-0">
                   <div className="col-12">
                     <div className="nutra-logo-in-login-form">
-                  <img src="/static/media/new-logo.8b4fa066.png" alt="nutrazik-logo"/></div>
+                      <img
+                        src="/static/media/new-logo.8b4fa066.png"
+                        alt="nutrazik-logo"
+                      />
+                    </div>
                   </div>
                   <div className="col-6 logiRegisterHeader1 pr-0">
                     <h3
@@ -473,23 +469,23 @@ const Header1 = (props) => {
                         >
                           <div className="row mt-0">
                             <div className="col-6">
-                          <div className="form-group">
-                            <label>
-                              Username<span>*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              {...register("username", {
-                                required: true,
-                              })}
-                            />
-                            {errors?.username?.type === "required" && (
-                              <p className="text-danger">
-                                This field is required
-                              </p>
-                            )}
-                            {/* <input
+                              <div className="form-group">
+                                <label>
+                                  Username<span>*</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  {...register("username", {
+                                    required: true,
+                                  })}
+                                />
+                                {errors?.username?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {/* <input
                             type="text"
                             className="form-control "
                             
@@ -497,111 +493,112 @@ const Header1 = (props) => {
                               setUsername(e.target.value);
                             }}
                           /> */}
-                          </div>
-                          </div>
-                          <div className="col-6">
-                          <div className="form-group ">
-                            <label>
-                              Email<span>*</span>
-                            </label>
-                            <input
-                              type="email"
-                              className="form-control "
-                              {...register("email", {
-                                required: true,
-                                pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                              })}
-                            />
-                            {errors?.email?.type === "required" && (
-                              <p className="text-danger">
-                                This field is required
-                              </p>
-                            )}
-                            {errors?.email?.type === "pattern" && (
-                              <p className="text-danger">
-                                Please enter the valid Email
-                              </p>
-                            )}
-                            {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
-                          </div>
-                          </div>
-                          
-                          <div className="col-6">
-                          <div className="form-group">
-                            <label>
-                              Password<span>*</span>
-                            </label>
-                            <input
-                              type="password"
-                              className="form-control "
-                              {...register("password", {
-                                required: true,
-                                pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                              })}
-                            />
-                            {errors?.password?.type === "required" && (
-                              <p className="text-danger">
-                                This field is required
-                              </p>
-                            )}
-                            {errors?.password?.type === "pattern" && (
-                              <p className="text-danger">
-                                Must have more than 8 characters, Must have
-                                atleast one number, Must have upper & lowercase
-                                letters, Must have atleast one special character.
-                              </p>
-                            )}
-                          </div>
-                          </div>
-                          <div className="col-6">
-                          <div className="form-group ">
-                            <label>
-                              Confirm Password<span>*</span>
-                            </label>
-                            <input
-                              type="password"
-                              className="form-control "
-                              {...register("repassword", {
-                                required: true,
-                                validate: (val) => {
-                                  if (watch("password") !== val) {
-                                    return "Your Password Does not Match";
-                                  }
-                                },
-                              })}
-                            />
-                            {errors?.repassword?.type === "required" && (
-                              <p className="text-danger">
-                                This field is required
-                              </p>
-                            )}
-                            {errors?.repassword?.type === "validate" && (
-                              <p className="text-danger">
-                                Password does not match
-                              </p>
-                            )}
-                          </div>
-                          </div>
-                          <div className="col-6">
-                          <div className="form-group ">
-                            <label>
-                              Phone Number<span>*</span>
-                            </label>
-                            <input
-                              type="number"
-                              className="form-control "
-                              {...register("phonenumber", {
-                                required: true,
-                              })}
-                            />
-                            {errors?.phonenumber?.type === "required" && (
-                              <p className="text-danger">
-                                This field is required
-                              </p>
-                            )}
-                            {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
-                          </div>
-                          </div>
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group ">
+                                <label>
+                                  Email<span>*</span>
+                                </label>
+                                <input
+                                  type="email"
+                                  className="form-control "
+                                  {...register("email", {
+                                    required: true,
+                                    pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                                  })}
+                                />
+                                {errors?.email?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.email?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Please enter the valid Email
+                                  </p>
+                                )}
+                                {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
+                              </div>
+                            </div>
+
+                            <div className="col-6">
+                              <div className="form-group">
+                                <label>
+                                  Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control "
+                                  {...register("password", {
+                                    required: true,
+                                    pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                                  })}
+                                />
+                                {errors?.password?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.password?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Must have more than 8 characters, Must have
+                                    atleast one number, Must have upper &
+                                    lowercase letters, Must have atleast one
+                                    special character.
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group ">
+                                <label>
+                                  Confirm Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control "
+                                  {...register("repassword", {
+                                    required: true,
+                                    validate: (val) => {
+                                      if (watch("password") !== val) {
+                                        return "Your Password Does not Match";
+                                      }
+                                    },
+                                  })}
+                                />
+                                {errors?.repassword?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.repassword?.type === "validate" && (
+                                  <p className="text-danger">
+                                    Password does not match
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group ">
+                                <label>
+                                  Phone Number<span>*</span>
+                                </label>
+                                <input
+                                  type="number"
+                                  className="form-control "
+                                  {...register("phonenumber", {
+                                    required: true,
+                                  })}
+                                />
+                                {errors?.phonenumber?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
+                              </div>
+                            </div>
                           </div>
                           {/* <h5 className="Login-fail-msg">{}</h5> */}
                           {/* <div className="form-group col-lg-12">
@@ -657,7 +654,7 @@ const Header1 = (props) => {
                             Login
                           </button>
                           <span>
-                          <p className="mt-3">Forgot Password?</p>
+                            <p className="mt-3">Forgot Password?</p>
                           </span>
                         </div>
                       </div>
@@ -682,19 +679,20 @@ const Header1 = (props) => {
             </Link>
           </div>
           {/* End Logo Div */}
-{/* Search Box Code */}
-<div className="col-sm-3">
+          {/* Search Box Code */}
+          <div className="col-sm-3">
             <div className="login-div2">
               <input
                 type="text"
+                className="my-input-field"
+                placeholder="Search..."
                 onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                onKeyDown = {(e)=>{
-                  if(e.key === "Enter"){
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
                     searchData(search);
                     history.push("/SearchResult/" + search);
                   }
                 }}
-                
               />
               <Link to={"/SearchResult/" + search}>
                 <button
@@ -712,10 +710,9 @@ const Header1 = (props) => {
             <div className="row login-div mt-4">
               <div className="col-sm-1">
                 <div className="option-item">
-                  <div className="cart-btn">        
-                   { Userdata == null ?
-                      (
-                        <>
+                  <div className="cart-btn">
+                    {Userdata == null ? (
+                      <>
                         <span
                           className="sp"
                           data-bs-toggle="modal"
@@ -735,11 +732,8 @@ const Header1 = (props) => {
                     ) : (
                       <>
                         <i className="user-icon bx bx-user"></i>
-                        </>
-                      )
-                      }                
-                    
-                    
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -854,11 +848,7 @@ const Header1 = (props) => {
                 </div>
 
                 <div className="col-8 user-login">
-                  { cartItems ? (             
-                  <h6 className="Total-Item">
-                      { cartItems} 
-                    </h6>
-                  ) : ""}
+                  {cartItems ? <h6 className="Total-Item">{cartItems}</h6> : ""}
                   <span className="sp">Cart</span>
                   <br />
                   {/* <span className="Sp1">₹ 0.0</span> */}
@@ -904,18 +894,18 @@ const Header1 = (props) => {
       <div className="container-fluid main-nav">
         <div className="row mt-0" id="myHeader">
           <div className="col-2 drop-category">
-              <div>
-                <div className="category ">
-                  <i
-                    className="fa fa-bars collapse-btn pt-1"
-                    data-bs-toggle="modal"
-                    data-bs-target="#myModal"
-                  ></i>
-                </div>
-                <div className="category">
-                  <span className="category-head">Browse Categories</span>
-                </div>
+            <div>
+              <div className="category ">
+                <i
+                  className="fa fa-bars collapse-btn pt-1"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal"
+                ></i>
               </div>
+              <div className="category">
+                <span className="category-head">Browse Categories</span>
+              </div>
+            </div>
           </div>
           <div className="col-10">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -961,16 +951,16 @@ const Header1 = (props) => {
                       </Link>
                     </li>
                     <Link to={"/Blogs"}>
-                    <li className="nav-item">
-                      <a
-                        className="nav-link nav-heading"
-                        href="#"
-                        tabIndex="-1"
-                        aria-disabled="true"
-                      >
-                        Blog
-                      </a>
-                    </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link nav-heading"
+                          href="#"
+                          tabIndex="-1"
+                          aria-disabled="true"
+                        >
+                          Blog
+                        </a>
+                      </li>
                     </Link>
                   </ul>
                   <img
@@ -1005,8 +995,10 @@ const Header1 = (props) => {
             <div className="login-div2">
               <input
                 type="text"
+                className="my-input-field"
+                placeholder="Search..."
                 onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                onKeyPress={(e) => {
+                onKeyDown={(e) => {
                   if (e.key == "Enter") {
                     searchData(search);
                   }

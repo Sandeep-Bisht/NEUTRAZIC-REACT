@@ -19,18 +19,29 @@ const ManufacturerCreation = (props) => {
     name: "",
     description: "",
     image: [],
+    creatorId : ""
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
 
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    console.log(Userdata, "usererr dasdaasdadad")
+    GetManufacturer();
+    if (editableData) {
+      Setdata(editableData);
+    }
+  }, []);
+
   const submitData = async (e) => {
     e.preventDefault();
+    data.creatorId = Userdata._id;
     const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     await formData.append("image", data.image);
     // await formData.append("featuredImage", []);
-    // await formData.append("slideShow", false);
+    await formData.append("creatorId", data.creatorId);
     const url = `${baseUrl}/api/manufacture/add_manufacture`;
     await fetch(url, {
       method: "POST",
@@ -49,32 +60,8 @@ const ManufacturerCreation = (props) => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    GetManufacturer();
-    if (editableData) {
-      Setdata(editableData);
-    }
-  }, []);
-  const DeleteManufacturer = async (_id) => {
-    await fetch(`${baseUrl}/api/manufacture/delete_manufacturer_by_id`, {
-      method: "Delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: _id,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetManufacturer();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
+ 
+  
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -121,66 +108,14 @@ const ManufacturerCreation = (props) => {
         console.log(error);
       }
   };
-
-  // const data1 = [];
-  // {
-  //   manufactureres.map((item, index) => {
-  //     data1.push({
-  //       sr_no: index + 1,
-  //       name: item.name,
-  //       Action:
-  //         Userdata !== undefined && Userdata.role == "superAdmin" ? (
-  //           <>
-  //             <button
-  //               className="btnbtn-danger"
-  //               onClick={() => {
-  //                 if (window.confirm("Are you sure ?")) {
-  //                   DeleteManufacturer(item._id);
-  //                 } else {
-  //                   return false;
-  //                 }
-  //               }}
-  //             >
-  //               <i className="bx bx-trash"></i>
-  //             </button>
-  //             <button
-  //               className="ml-2 btnbtn-danger"
-  //               onClick={() => {
-  //                 EditManufacturer(item);
-  //                 setUpdate(true);
-  //               }}
-  //             >
-  //               <i className="bx bx-edit"></i>
-  //             </button>
-  //           </>
-  //         ) : (
-  //           <button>
-  //             <i className="bx bx-show"></i>
-  //           </button>
-  //         ),
-  //     });
-  //   });
-  // }
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Manufacturer Name", data: "name" },
-    // { title: "Manufacturer", data: "manufacturer" },
     { title: "Action", data: "Action" },
   ];
-  const click = (row) => {
-  };
+ 
   return (
-    <>
-      {/* <div className="container-fluid">
-        {" "}
-        <Link href="#" className="nav__logo">
-          <img
-            src={require("../../Images/new-logo.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </Link>
-      </div> */}
+    <>     
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
@@ -190,7 +125,7 @@ const ManufacturerCreation = (props) => {
             </div>
             <div className="col-10 px-0">
               {Userdata != undefined ? (
-                Userdata.role == "superAdmin" ? (
+                Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
                   <form>
                     <div className="col-12 px-0">
                       <div className="card p-4 m-2 product-form">

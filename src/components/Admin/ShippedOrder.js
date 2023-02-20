@@ -7,6 +7,7 @@ import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
   Input,
+  Button,
   Space,
   Popconfirm,
   Typography,
@@ -15,7 +16,7 @@ import {
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { MdPlaylistAdd } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const ShippedOrder = () => {
@@ -27,6 +28,9 @@ const ShippedOrder = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [shippedOrder, setShippedOrder] = useState([]);
   const [orderItem, setOrderItem] = useState([]);
+  const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const history =  useHistory();
+
   useEffect(() => {
     GetOrders();
   }, []);
@@ -121,9 +125,46 @@ const ShippedOrder = () => {
       key: "payment_status",
     },
     {
-      title: "Status",
+      title: "Status", 
+      render: (a, item) => (
+        <Space size="middle">
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  key: '1',
+                  label: (
+                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
+                      Cancel Order
+                    </a>
+                  ),
+                },
+                {
+                  key: '2',
+                  label: (
+                    <a onClick={() =>UpdateOrderStatus(item._id,"Delivered")}>
+                     Mark as Delivered
+                    </a>
+                  ),
+                },
+              ],
+            }}
+          >
+            <a>
+              Shipped <DownOutlined />
+            </a>
+          </Dropdown>
+        </Space>
+      ),
+    },
+    {
+      title: "View Order",
       key: "action",
-      render: (_, item) => <a onClick={() => showModal(item)}>Shipped</a>,
+      render: (_, record) => (
+        <Button type="primary" onClick={() => showModal(record)}>
+          See Order
+        </Button>
+      ),
     },
   ];
   const handleOk = () => {
@@ -133,121 +174,92 @@ const ShippedOrder = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const imageHandler = (id) => {
+    history.push("/SingleProduct/" + id);
+  };
   return (
     <>
-      {/* table modal */}
-      
-       
+    {/* table modal */}
+    <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header float-right">
+              <h5>User details</h5>
+              <div class="text-right">
+                <i
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  class="fa fa-close"
+                ></i>
+              </div>
+            </div>
             <div class="modal-body">
               <div>
-                <Modal title="Shipped Details" aria-hidden="true" visible={isModalVisible} onOk={handleOk}
-                  onCancel={handleCancel}>
-                  <form>
-                    <div className="row">
-                    <div class="col-md-4 mb-3">
-                      <label for="line1" class="form-label">
-                        Line 1
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="line1"
-                        value={shippedOrder.line1}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    { shippedOrder && shippedOrder.line2 &&
-                    <div class="col-md-4 mb-3">
-                      <label for="line2" class="form-label">
-                        Line 2
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="line2"
-                        value={shippedOrder.line2}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    }
-                    <div class="col-md-4 mb-3">
-                      <label for="city" class="form-label">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="city"
-                        value={shippedOrder.city}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="state" class="form-label">
-                        State
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="state"
-                        value={shippedOrder.state}
-                        //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <label className="form-label">Postal Code</label>
-                      <input
-                      type="text"
-                      className="form-control"
-                      value={shippedOrder.postal_code}
-                      //aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="country" class="form-label">
-                        Country
-                      </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="country"
-                        value={shippedOrder.country}
-                        aria-describedby="emailHelp"
-                      />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="Blue Dart" class="form-label">Choose a Shipper</label>
-                      <select className="m-1 form-control">
-                        <option value="Blue Dart">Blue Dart</option>
-                        <option value="XpressBees">XpressBees</option>
-                        <option value="DHL Shipping">DHL Shipping</option>
-                        <option value="DTDC Courier">DTDC Courier</option>
-                      </select>
-                    </div>
-                    </div>
-                    <button
-                      className="btn btn-primary m-2"
-                      onClick={(e) =>
-                        UpdateOrderStatus(e, orderItem._id, "Delivered")
-                      }
-                    >
-                      Delivered
-                    </button>
-                    <button
-                      className="btn btn-primary m-2"
-                      onClick={(e) =>
-                        UpdateOrderStatus(e, orderItem._id, "Cancel")
-                      }
-                    >
-                      Cancle
-                    </button>
-                    
-                  </form>
+                <Modal
+                  title="Order Details"
+                  visible={isModalVisible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <table class="table">
+                    <thead>
+                      <tr>                        
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prticularUserOrder &&
+                        prticularUserOrder.length > 0 &&
+                        prticularUserOrder.map((item) => {
+                          console.log(item, "itemssss");
+                          return (
+                            <>
+                              <tr>                                
+                                <td className="width-adjust-of-td">
+                                  <div className="width-adjust-of-image">
+                                  <img
+                                    onClick={() => imageHandler(item.productid)}
+                                    style={{ cursor: "pointer" }}
+                                    src={`${baseUrl}/${item.image}`}
+                                  ></img>
+                                  </div>
+                                </td>
+                                <td >{item.name}</td>
+                                <td>{item.singleprice}</td>                                
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </tbody>
+                  </table>
                 </Modal>
               </div>
-            
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       {/* end modal */}
+
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
