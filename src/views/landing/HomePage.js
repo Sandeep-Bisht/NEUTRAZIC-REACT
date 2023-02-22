@@ -1435,7 +1435,7 @@ const HomePage = () => {
           <div className="row">
             <div className="col-md-12">
             <h1 className="trendign-head">
-            <span className="products-color">Blogs</span>
+            <span className="products-color">Our Blogs</span>
           </h1>
               <div className="blog-box-wrapper">
                 <div className="row">
@@ -1449,7 +1449,7 @@ const HomePage = () => {
                         <Link to = {"/SingleBlogPage/" + item.slug}>
                         <button>Read More</button>
                         </Link>
-                        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+                        <p>{item.description}</p>
                       </div>
                     </div>
                     )})}
@@ -1486,7 +1486,7 @@ const HomePage = () => {
                         return(
                       <div className="col-md-3">
                         <div class="card">
-                          <Link to = {"/SingleBlogPage/" + item.slug}>
+                          <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
                           
                           <img
                             src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
@@ -1496,14 +1496,6 @@ const HomePage = () => {
                           </Link>
                           <div class="card-body">
                           <p class="card-text">
-                          {/* <ReadMoreReact
-                                text=
-                                min={100}
-                                ideal={100}
-                                max={100}
-                                readMoreText={"...Read More"}
-                              /> */}
-                            
                             {item.description}
                             </p>
                           </div>

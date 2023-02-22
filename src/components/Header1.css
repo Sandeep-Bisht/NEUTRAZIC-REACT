@@ -960,6 +960,14 @@ body {
 
 
 /* responsive */
+.newheader{
+    position: fixed !important;
+    top: 0 !important;
+    background-color: #fff !important;
+    z-index: 200 !important;
+    width: 100% !important;
+
+}
 
 @media only screen and (max-width : 1399px){
     .drop-category .category-head{
@@ -973,11 +981,11 @@ body {
         padding-right: 14px;
     }
     .newheader{
-        position: fixed;
-        top: 0;
-        background-color: #fff;
-        z-index: 200;
-        width: 100%;
+        position: fixed !important;
+        top: 0 !important;
+        background-color: #fff !important;
+        z-index: 200 !important;
+        width: 100% !important;
 
     }
     

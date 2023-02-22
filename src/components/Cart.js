@@ -3,11 +3,12 @@ import Footer from "./Footer";
 import Header1 from "./Header1";
 import { Link, useHistory } from "react-router-dom";
 import Baseline from "./Baseline";
+import "./Cart";
 import "../components/Header1.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
-import * as ACTIONS from '../CommonService/AddToCart/action'
+import * as ACTIONS from '../CommonService/AddToCart/action';
 import { message, Popconfirm } from 'antd';
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
@@ -132,7 +133,7 @@ const Cart = () => {
     await CartById();
     toast.success("Product removed successfully", {
       position: "bottom-right",
-      autoClose: 2000,
+      autoClose: 1000,
     })
   };
 
@@ -212,7 +213,7 @@ const Cart = () => {
               <h1 className="cart-header">Your Cart</h1>
             </div>
               <div className="row">
-                <div className="col-sm-8">
+                <div className="col-lg-8">
                   {cart.length > 0 ? (
                     <div className="cart-table">
                       <table className="w-100" cellsacing="10px" cellPadding="10px">
@@ -343,7 +344,7 @@ const Cart = () => {
                   )}
                 </div>
 
-                <div className="col-sm-4">
+                <div className="col-lg-4">
                   <div className="cart-totals">
                     <h3>Order Summary</h3>
                     <ul>

@@ -1,0 +1,116 @@
+@media only screen and (max-width : 1399px){
+
+    .wishlistDiv img{
+        height: 180px;
+        width: 100%;
+    }
+
+}
+@media only screen and (max-width : 1024px) {
+   
+}
+
+@media only screen and (max-width :991px) {
+    .wishlist-btn{
+        
+        font-size: 12px;
+        padding: 8px 8px;
+    }
+    .wishlist-heading2{
+        font-size: 15px;
+    }
+    .wishlistDiv img{
+        height: 150px;
+        width: 100%;
+    }
+    .word-wrapping{
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width : 814px){
+    .wishlistDiv img{
+        height: 116px;
+        width: 100%;
+    }
+}
+@media only screen and (max-width : 767px) {
+    .wishlist-btn{
+        
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+    .wishlist-heading2{
+        font-size: 18px;
+    }
+    .wishlistDiv img{
+        height: 180px;
+        width: 70%;
+    }
+    .word-wrapping{
+        font-size: 16px;
+    }
+  
+}
+@media only screen and (max-width : 690px){
+    .wishlistDiv img{
+        height: 170px;
+        width: 83%;
+    }
+}
+@media only screen and (max-width : 575.98px) {
+  
+    .wishlist-btn{
+        
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+    .wishlist-heading2{
+        font-size: 16px;
+    }
+    .wishlistDiv img{
+        height: 150px;
+        width: 94%;
+    }
+    .word-wrapping{
+        font-size: 15px;
+    }
+    
+} 
+@media only screen and (max-width : 490px){
+    .wishlistDiv img{
+        height: 115px;
+        width: 100%;
+    }
+    .word-wrapping{
+        font-size: 13px;
+    }
+    .wishlist-heading2{
+        font-size: 16px;
+    }
+    .wishlist-btn{
+        
+        font-size: 13px;
+        padding: 8px 8px;
+    }
+    .buynow-details-btn-wrap{
+        padding-top: 17px;
+    }
+}
+@media only screen and (max-width : 430px){
+    .wishlistDiv img{
+        height: 100px;
+        width: 100%;
+    }
+    .wishlist-heading2{
+        font-size: 13px;
+    }
+    .word-wrapping{
+        font-size: 14px;
+    }
+    .wishlist-btn{
+        
+        font-size: 10px;
+        padding: 8px 8px;
+    }
+    
+}
