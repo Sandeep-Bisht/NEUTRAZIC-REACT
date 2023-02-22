@@ -5,12 +5,13 @@ import Footer from "./Footer";
 import Header1 from "./Header1";
 import { baseUrl } from "../utils/services";
 import { Link } from "react-router-dom";
+import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
 function Blogs() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     getAllBlog();
   }, []);
 
@@ -29,7 +30,7 @@ function Blogs() {
     <>
       <Header1 />
       <section className="blog-page">
-        <div className="container m-auto">
+        <div className="container-fluid m-auto">
           <div className="row">
             <div className="col-md-12">
               <div className="blog-box-wrapper">
@@ -49,8 +50,8 @@ function Blogs() {
                                 className=""
                               />
                               <div className="top-heading-box-1">
-                                <Link to = {"/SingleBlogPage/"+ item.slug}>
-                                <button>Read More</button>
+                                <Link to={"/SingleBlogPage/" + item.slug}>
+                                  <button>Read More</button>
                                 </Link>
                                 <p>{item.description}</p>
                               </div>
@@ -74,12 +75,10 @@ function Blogs() {
                                   className=""
                                 />
                                 <div className="top-heading-box-2">
-                                <Link to = {"/SingleBlogPage/"+ item.slug}>
-                                  <button>Read More</button>
+                                  <Link to={"/SingleBlogPage/" + item.slug}>
+                                    <button>Read More</button>
                                   </Link>
-                                  <p>
-                                    {item.description}
-                                  </p>
+                                  <p>{item.description}</p>
                                 </div>
                               </div>
                             </div>
@@ -98,9 +97,12 @@ function Blogs() {
                       {data &&
                         data.map((item) => {
                           return (
-                            <div className="col-md-3">
+                            <div className="col-md-6 col-lg-3">
                               <div class="card">
-                                <Link className="card-img-link" to={"/SingleBlogPage/" + item.slug}>
+                                <Link
+                                  className="card-img-link"
+                                  to={"/SingleBlogPage/" + item.slug}
+                                >
                                   <img
                                     src={
                                       item.featuredImage &&
@@ -111,15 +113,7 @@ function Blogs() {
                                   />
                                 </Link>
                                 <div class="card-body">
-                                  <p class="card-text">
-                                    <ReadMoreReact
-                                      text={item.description}
-                                      min={100}
-                                      ideal={100}
-                                      max={100}
-                                      readMoreText={"...Read More"}
-                                    />
-                                  </p>
+                                  <p class="card-text">{item.description}</p>
                                 </div>
                               </div>
                             </div>
@@ -159,6 +153,7 @@ function Blogs() {
           </div>
         </div>
       </section>
+      <Baseline/>
       <Footer />
     </>
   );

@@ -10,8 +10,7 @@ i
 width: 100%;
 height: 41px;
 left: 0px;
-top: 0px;
-
+top: 116px;
 background-color: #C4C4C4;
 }
 .first-nav span
@@ -1662,5 +1661,52 @@ left: 0;
 .single-products-box .product-div .product-image-content{
 	text-align: start !important;
 }
+
+
+/* responsive Deepak */
+
+@media only screen and (max-width : 1399px){
+  
+}
+@media only screen and (max-width : 1024px) {
+	
+  
+}
+
+@media only screen and (max-width :991px) {
+	
+  
+}
+@media only screen and (max-width : 767px) {
+  
+}
+@media only screen and (max-width : 575.98px) {
+
+
+
+
+}
+
+
+
+@media only screen and (max-width : 480px) {
+ 
+ 
+
+}
+@media only screen and (max-width : 430px)
+   { 
+ 
+  }
+
+@media only screen and (max-width : 320px) {
+
+  
+
+}
+
+
+
+
 
 
