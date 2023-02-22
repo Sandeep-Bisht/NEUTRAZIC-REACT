@@ -18664,6 +18664,7 @@ margin: 40px 8px 15px 0px;
 	margin-left: 10px;
  }
 
+
  /* SubcategoryPage Css */
 
  /* media query Deepak */
@@ -18672,6 +18673,8 @@ margin: 40px 8px 15px 0px;
 		font-size: 22px;
 	} */
 	/* contact page start */
+	
+	
 	.first-nav{
 		
 		top: 109px!important;
@@ -18682,6 +18685,10 @@ margin: 40px 8px 15px 0px;
 	}
 	.newsletter-form input::placeholder{
 		font-size: 15px !important;
+	}
+	.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+		padding-left: 15px;
+		padding-right: 15px;
 	}
    
  }
@@ -18694,6 +18701,17 @@ margin: 40px 8px 15px 0px;
  }
  
  @media only screen and (max-width :991px) {
+	.footer-area{
+		position: relative;
+		top: -22px;
+		 left: -23px;
+		}
+		.contact-area{
+			position: relative;
+			top: -22px;
+		 left: -25px;
+			}
+	
 	.newheader{
 		height: 95px;
 	}
@@ -18718,12 +18736,32 @@ padding-top: 72px;
 
  
  @media only screen and (max-width : 767px) {
+	.footer-area{
+	position: relative;
+	top: -22px;
+	 left: -30px;
+	}
+	.contact-area{
+		margin-left: -25px;
+	}
 	
 .single-contact-info-box p a{
-	font-size: 22px;
+	font-size: 17px;
 }
 .single-contact-info-box p{
+	font-size: 17px;
+}
+.single-contact-info-box {
+	height: 200px;
+}
+.single-contact-info-box h3 {
 	font-size: 20px;
+}
+.contact-form .sub-title{
+	font-size: 27px;
+}
+.contact-form h2{
+	font-size: 21px;
 }
 .first-nav{
 	position: absolute!important;
@@ -18731,71 +18769,121 @@ padding-top: 72px;
 	
 }
 .single-footer-widget .link-list li a{
-	font-size: 20px;
+	font-size: 15px;
 } 
 .single-footer-widget .footer-contact-info li a{
-	font-size: 20px;
+	font-size: 15px;
 }
 .Subscribe{
-	font-size: 20px;
+	font-size: 15px;
 }
 .footer-bottom-area p{
-	font-size: 20px;
+	font-size: 17px;
 }
 .footer-bottom-area .payment-types ul li{
-	font-size: 20px;
+	font-size: 18px;
 }
 .footer-area .social i{
 	font-size: 30px;
 }
+.link-footer-first p{
+	display: flex!important;
+	justify-content: center !important;
+	padding-bottom: 10px;
+	
+}
+.link-footer-second{
+	display: flex!important;
+	justify-content: center !important;
+}
    
  }
  @media only screen and (max-width : 575.98px) {
+	.footer-area{
+		position: relative;
+		top: -22px;
+		 left: 0px;
+		}
+		.contact-area{
+			position: relative;
+			top: -22px;
+		 left: 17px;
+			}
+	.newheader{
+    height: 202px;
+    padding-left: 0px;
+    margin-left: -5px;
+}
+.single-contact-info-box {
+	height: 165px;
+}
+.contact-card{
+	margin-top: 15px;
+}
+	
 	.contact-form form label{
-		font-size: 25px;
+		font-size: 15px;
 	}
 	.single-contact-info-box p a{
-		font-size: 26px;
+		font-size: 17px;
 	}
 	.single-contact-info-box p{
-		font-size: 22px;
+		font-size: 15px;
 	}
 	.single-footer-widget .link-list li a{
-		font-size: 22px;
+		font-size: 15px;
 	} 
 	.single-footer-widget .footer-contact-info li a{
-		font-size: 22px;
+		font-size: 15px;
+	}
+	.single-footer-widget .footer-contact-info li span {
+		font-size:17px;
 	}
 	.Subscribe{
-		font-size: 22px;
+		font-size: 15px;
 	}
 	.footer-bottom-area p{
-		font-size: 22px;
+		font-size: 15px;
 	}
 	.footer-bottom-area .payment-types ul li{
-		font-size: 22px;
+		font-size: 15px;
 	}
+	.single-footer-widget h3 {
+		margin-bottom: 6px;
+		font-size: 20px;
+	}
+	
 	.footer-area .social i{
-		font-size: 30px;
+		font-size: 20px;
 	}
 	.single-footer-widget .logo img {
 		height: 50px;
 	}
 	.single-contact-info-box h3{
-		font-size: 35px;
+		font-size: 21px;
 	}
 	.contact-form .sub-title{
-		font-size: 40px;
+		font-size: 24px;
+	}
+	.contact-form h2 {
+		font-size: 19px;
 	}
 	.cosmetic-shop-now{
-		font-size: 25px;
+		font-size: 13px;
 	}
 	.single-footer-widget .newsletter-form .default-btn 
 	{
-		font-size: 25px;
+		height: 35px;
+		font-size: 15px;
 	}
 	.newsletter-form input::placeholder{
-		font-size: 25px !important;
+		font-size: 15px !important;
+	}
+	.single-footer-widget .newsletter-form .input-newsletter{
+		height: 35px;
+	}
+	.footer-bottom-area .payment-types ul li img{
+		height: 15px;
 	}
  
  }
@@ -18805,74 +18893,69 @@ padding-top: 72px;
  @media only screen and (max-width : 480px) {
   
 	.contact-form form label{
-		font-size: 34px;
+		font-size: 14px;
 	}
 	.single-contact-info-box p a{
-		font-size: 37px;
+		font-size: 16px;
 	}
 	.single-contact-info-box p{
-		font-size: 35px;
+		font-size: 14px;
 	}
 	.single-footer-widget .link-list li a{
-		font-size: 34px;
+		font-size: 14px;
 	} 
 	.single-footer-widget .footer-contact-info li a{
-		font-size: 34px;
+		font-size: 14px;
+	}
+	.single-footer-widget .footer-contact-info li span {
+		font-size:16px;
 	}
 	.Subscribe{
-		font-size: 34px;
+		font-size: 14px;
 	}
 	.footer-bottom-area p{
-		font-size: 30px;
+		font-size: 14px;
 	}
 	.footer-bottom-area .payment-types ul li{
-		font-size: 30px;
+		font-size: 14px;
 	}
+	.single-footer-widget h3 {
+		margin-bottom: 6px;
+		font-size: 18px;
+	}
+	
 	.footer-area .social i{
-		font-size: 34px;
+		font-size: 18px;
 	}
 	.single-footer-widget .logo img {
-		height: 86px;
+		height: 45px;
 	}
 	.single-contact-info-box h3{
-		font-size: 50px;
+		font-size: 19px;
 	}
 	.contact-form .sub-title{
-		font-size: 57px;
+		font-size: 22px;
+	}
+	.contact-form h2 {
+		font-size: 17px;
 	}
 	.cosmetic-shop-now{
-		font-size: 32px;
+		font-size: 12px;
 	}
 	.single-footer-widget .newsletter-form .default-btn 
 	{
-		height: 76px;
-		font-size: 37px;
-	}
-	.single-contact-info-box{
-		height:260px;
-	}
-	.contact-form h2{
-		font-size: 44px;
-	}
-	.form-control{
-		height:60px;
-	}
-	.single-footer-widget .footer-contact-info li span {
-		font-size: 40px;
-	}
-	.footer-area .social i{
-		font-size: 45px;
-	}
-	.single-footer-widget h3{
-		font-size: 45px;
-	}
-	.single-footer-widget .newsletter-form .input-newsletter{
-		height: 65px;
+		height: 32px;
+		font-size: 14px;
 	}
 	.newsletter-form input::placeholder{
-		font-size: 30px !important;
+		font-size: 14px !important;
 	}
-	
+	.single-footer-widget .newsletter-form .input-newsletter{
+		height: 32px;
+	}
+	.footer-bottom-area .payment-types ul li img{
+		height: 14px;
+	}
  
  }
  @media only screen and (max-width : 430px)
@@ -18902,11 +18985,50 @@ padding-top: 72px;
 	}
    }
  
- @media only screen and (max-width : 320px) {
+ @media only screen and (max-width : 380px) {
  
-   
+   .contact-container{
+	position: relative;
+	top: 10px;
+	 left: 20px;
+   }
  
  }
+ @media only screen and (max-width : 359.98px) {
+ 
+	.contact-container{
+	position: relative;
+	top: 10px;
+	 left: 93px;
+	}
+	.contact-area{
+	position: relative;
+	top: 10px;
+	 left: 30px;
+	}
+	#maps{
+		position: relative;
+		width: 154%;
+		top: 10px;
+		left: 15px;
+	}
+	.facility-area{
+		position: relative;
+		width: 140%;
+		top: 10px;
+		left: 35px;
+	}
+	.facility-area .container .row .box p{
+		font-size: 15px;
+	}
+	.footer-area{
+		position: relative;
+	top: 10px;
+	 left: 30px;
+	}
+	
+}
+
  
  
  
