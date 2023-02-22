@@ -1,83 +1,116 @@
 @media only screen and (max-width : 1399px){
 
-    .wishlist-heading2{
-        font-size: 1rem;
-    }
-    .word-wrapping{
-        font-size: 0.9rem;
-    }
-    .wishlist-btn{
-        font-size: 1rem;
+    .wishlistDiv img{
+        height: 180px;
+        width: 100%;
     }
 
 }
 @media only screen and (max-width : 1024px) {
-    .wishlist-heading2{
-        font-size: 1.2rem;
-    }
-    .word-wrapping{
-        font-size: 1rem;
-    }
-    .wishlist-btn{
-        font-size: 1rem;
-    }
-  
+   
 }
 
 @media only screen and (max-width :991px) {
+    .wishlist-btn{
+        
+        font-size: 12px;
+        padding: 8px 8px;
+    }
     .wishlist-heading2{
-        font-size: 1.1rem;
+        font-size: 15px;
+    }
+    .wishlistDiv img{
+        height: 150px;
+        width: 100%;
     }
     .word-wrapping{
-        font-size: 1rem;
+        font-size: 14px;
     }
-    .wishlist-btn{
-        font-size: 1rem;
+}
+@media only screen and (max-width : 814px){
+    .wishlistDiv img{
+        height: 116px;
+        width: 100%;
     }
 }
 @media only screen and (max-width : 767px) {
-    .wishlist-heading2{
-        font-size: 1.7rem;
-    }
-    .word-wrapping{
-        font-size: 1.6rem;
-    }
     .wishlist-btn{
-        font-size: 1.4rem;
+        
+        font-size: 16px;
+        padding: 8px 12px;
     }
-    .col-sm-10{
-        flex:none;
-        max-width: none;
+    .wishlist-heading2{
+        font-size: 18px;
     }
     .wishlistDiv img{
-        height:210px;
-        width: 60%;
+        height: 180px;
+        width: 70%;
     }
-    .wishlist-header{      
-        font-size: 2.6rem;
+    .word-wrapping{
+        font-size: 16px;
     }
   
 }
+@media only screen and (max-width : 690px){
+    .wishlistDiv img{
+        height: 170px;
+        width: 83%;
+    }
+}
 @media only screen and (max-width : 575.98px) {
   
-.wishlist-heading2{
-        font-size: 1.8rem;
-    }
-    .word-wrapping{
-        font-size: 1.7rem;
-    }
     .wishlist-btn{
-        font-size: 1.5rem;
+        
+        font-size: 15px;
+        padding: 8px 12px;
     }
-    .col-sm-10{
-        flex:none;
-        max-width: none;
+    .wishlist-heading2{
+        font-size: 16px;
     }
     .wishlistDiv img{
-        height:210px;
-        width: 60%;
+        height: 150px;
+        width: 94%;
     }
-    .wishlist-close-icon svg{
-        height: 45px;
+    .word-wrapping{
+        font-size: 15px;
     }
+    
 } 
+@media only screen and (max-width : 490px){
+    .wishlistDiv img{
+        height: 115px;
+        width: 100%;
+    }
+    .word-wrapping{
+        font-size: 13px;
+    }
+    .wishlist-heading2{
+        font-size: 16px;
+    }
+    .wishlist-btn{
+        
+        font-size: 13px;
+        padding: 8px 8px;
+    }
+    .buynow-details-btn-wrap{
+        padding-top: 17px;
+    }
+}
+@media only screen and (max-width : 430px){
+    .wishlistDiv img{
+        height: 100px;
+        width: 100%;
+    }
+    .wishlist-heading2{
+        font-size: 13px;
+    }
+    .word-wrapping{
+        font-size: 14px;
+    }
+    .wishlist-btn{
+        
+        font-size: 10px;
+        padding: 8px 8px;
+    }
+    
+}
