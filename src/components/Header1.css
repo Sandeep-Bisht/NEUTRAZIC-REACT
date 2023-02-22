@@ -1088,6 +1088,9 @@ body {
     }
 }
 @media only screen and (max-width : 575.98px) {
+    .navbar-brand img{
+        margin-left: 50px!important;
+    }
 
     .drop-category .category-head {
         display: none;
@@ -1124,6 +1127,9 @@ body {
     .login-div{
         padding-left: 0;
        
+    }
+    .login-div2{
+        margin-left: 10px;
     }
     .currancy{
         padding-left: 45px;
