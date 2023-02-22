@@ -1,6 +1,3 @@
-.login-div2 .my-input-field::placeholder {
-	color: gray !important;
-  }
 /* width */
 ::-webkit-scrollbar {
     width: 2px;
@@ -292,11 +289,11 @@ color:#1e144f;
         padding-left: 0px !important;
         padding-right: 0px !important;
 }
-.sticky {
+/* .sticky {
     position: fixed;
     top: 0;
     width: 100%;
-  }
+  } */
 
 
 
@@ -831,7 +828,10 @@ body {
 {
     display: none;
 }
-
+.mobile-top-navbar
+{
+    display: none;
+}
 .Login-fail-msg
 {
     color:red;
@@ -846,47 +846,9 @@ body {
 /* mobile responsive header css */
 
 @media only screen and (min-width: 360px) and (max-width: 815px){
-   
-
-.mobile-nav-bar .mobile-nav-list
-{
-    /* justify-content: center;
-    align-items: center; */
-
-}
-.mobile-nav-bar .mobile-nav-list .nav-item .nav-link
-{
-    color:white;
-    font-family: 'Roboto', sans-serif;
-    font-style:normal;
-    font-weight: bold;
-    font-size: 17px;
-}
-.mobile-nav-bar .navbar-toggler
-{
-    background-color: transparent !important;
-    outline: 0px !important;
-    box-shadow: unset;
-}
-.mobile-nav-bar .navbar-toggler .navbar-toggler-icon
-{
-    outline: 0px;
-    color:white !important;
-}
-
-
-
 
 /* phone top-navbar */
-.mobile-top-navbar
-{
-    display: block;
-    width:100%;
-    height:45px;
-    align-items: center;
-    display: flex;
-    /* background-color: rgb(240, 238, 235); */
-}
+
 .login-div2 input[type="text"]
 {
     position: relative;
@@ -916,11 +878,7 @@ body {
     border: 0;
     outline: 0;
 }
-.mobile-top-navbar .mobile-icon-div i
-{
-        font-size: 22px;
-        color:#2D2D2D;
-}
+
 .dropdown .btn-sm
 {
     bottom:0px;
@@ -943,7 +901,7 @@ body {
     }
 }
 
-@media only screen and (min-width: 815px) and (max-width: 1024px){
+/* @media only screen and (min-width: 815px) and (max-width: 1024px){
 .top-header-padding
 {
     padding: 0 15px !important;
@@ -975,7 +933,7 @@ body {
         font-family: 'Roboto', sans-serif;
         left:4px;
     }
-}
+} */
 
 /* remove default css */
 .accordion-button::after{
@@ -997,3 +955,210 @@ body {
 .logged-In{
     font-size: 2rem;
 }
+
+
+
+
+/* responsive */
+
+@media only screen and (max-width : 1399px){
+    .drop-category .category-head{
+        font-size: 12px;
+    }
+    .drop-category i {
+        font-size: 15px;
+    }
+    .col-sm-1{
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .newheader{
+        position: fixed;
+        top: 0;
+        background-color: #fff;
+        z-index: 200;
+        width: 100%;
+
+    }
+    
+    .navbar .container-fluid{
+        padding:0px;
+        margin:0px;
+        justify-content: end;
+    }
+    
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+        padding-left: 0px;
+        padding-right:0px;
+    }
+  
+}
+@media only screen and (max-width : 1024px) {
+  
+}
+
+@media only screen and (max-width :991px) {
+    .navbar {
+        background-color: #1b97ff !important;
+        padding: 0px;
+        padding-right: 0;
+        position: fixed;
+        width: 100%;
+        left: 0;
+    }
+    .drop-category{
+        z-index: 500;
+        height: 44px;
+    }
+    .navbar-toggler:focus{
+        box-shadow: none;
+    }
+    .navbar-light .navbar-toggler{
+        background-color: #fff;
+    }
+    .mt-0 {
+        margin-top: 0!important;
+        padding-right: 34px;
+        margin-bottom: 10px;
+    }
+    .col-sm-1{
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+    .col-sm-2{
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .col-sm-3{
+        margin-left: -15px;
+    }
+    .login-div{
+        padding-right: 70px;
+    }
+    .drop-category .category-head{
+        font-size: 10px;
+    }
+    .drop-category i {
+        font-size: 13px;
+    }
+    .sp{
+        padding-left: 6px;
+    }
+    .cart-div{
+        padding-left: 6px;
+    }
+    .login-div2 input[type="text"]{
+        width: 150px;
+    }
+    
+  
+}
+@media only screen and (max-width : 815px) {
+    .dropdown .btn-sm{
+         display: none;
+    }
+    .sp{
+        display: none;
+    }
+    .login-div2 {
+        margin-top: 32px;
+    }
+     .user-login .Total-Item {
+        position: absolute;
+        bottom: 33px;
+        left: 25px;
+    }
+    .drop-category{
+        margin-left: -5px;
+        padding-right: 10px;
+    }
+    .login-div {
+        padding-left: 76px;
+    }
+    .drop-category .category-head {
+        display: none;
+    }
+}
+@media only screen and (max-width : 575.98px) {
+
+    .drop-category .category-head {
+        display: none;
+    }
+    /* ------pras css----------- */
+    .login-div2 input[type="text"]{
+        width: 100%;
+    }
+    .login-div{
+        padding-left: 0;
+    }
+    .currancy{
+        padding-left: 65px;
+    }
+    .col-sm-2 .login-div{
+        padding-left: 14px;
+    }
+    .bx-heart{
+        padding-left: 14px;
+    }
+    .main-navbar-head{
+        margin-top: -9px;
+    } 
+    .top-header-padding{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width : 450px) {
+ 
+    .login-div2 input[type="text"]{
+        width: 80%;
+    }
+    .login-div{
+        padding-left: 0;
+       
+    }
+    .currancy{
+        padding-left: 45px;
+    }
+    .col-sm-2 .login-div{
+        padding-left: 10px;
+    }
+    .bx-heart{
+        padding-left: 10px;
+    }
+    .main-navbar-head{
+        margin-top: -9px;
+    } 
+    /* .login-div{
+        width: 141px;
+    margin-left: 15px;
+    } */
+
+}
+@media only screen and (max-width : 359.98px)
+   { 
+    
+    .login-div{
+        width: 93px;
+    margin-left: -22px;
+  
+    }
+    .login-div2{
+        margin-top: 2px;
+        margin-left: 20px!important;
+        width: 80%;
+    }
+    .currancy{
+        padding-left: 27px;
+    }
+  }
+
+@media only screen and (max-width : 320px) {
+
+  
+
+}
+
+
+
+
