@@ -250,7 +250,7 @@ const WishList = () => {
         </span>
       </div>
 
-      <section className="wishlist-page">
+      <section className="wishlist-page m-auto">
         <div className="container m-auto">
           <div className="row mt-0">
             <div className="col-md-12">
@@ -260,7 +260,7 @@ const WishList = () => {
           <div className="row mt-0">
             {wishlistData.length > 0 ? (
               wishlistData.map((item, ind) => (
-                <div className="col-lg-6 col-md-6">
+                <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="wishlistDiv">
                     <div className="row">
                       <div className="col-4">

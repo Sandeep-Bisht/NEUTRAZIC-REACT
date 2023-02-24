@@ -3,13 +3,13 @@ import Footer from "./Footer";
 import Header1 from "./Header1";
 import { Link, useHistory } from "react-router-dom";
 import Baseline from "./Baseline";
-import "./Cart";
+import "../components/Cart.css";
 import "../components/Header1.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import * as ACTIONS from '../CommonService/AddToCart/action';
-import { message, Popconfirm } from 'antd';
+import * as ACTIONS from "../CommonService/AddToCart/action";
+import { message, Popconfirm } from "antd";
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
@@ -20,21 +20,20 @@ const stripePromise = loadStripe(
 var Userdata = "";
 
 const Cart = () => {
-
-  const history = useHistory()
+  const history = useHistory();
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
-  const [cartStatus,setCartStatus]=useState()
+  const [cartStatus, setCartStatus] = useState();
   const [cartItems, setCartItems] = useState(undefined);
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;
 
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   const [data, Setdata] = useState({
-    mobile: "",    
+    mobile: "",
     email: "",
     orderfor: "",
     order: [],
@@ -42,7 +41,7 @@ const Cart = () => {
     justification: "",
     delivery_time: "",
     order_no: "",
-    status : "",
+    status: "",
     totalamount: "",
     actualamount: "",
     instruction: "",
@@ -56,7 +55,6 @@ const Cart = () => {
     CartById();
     window.scroll(0, 0);
   }, []);
- 
 
   const CartById = async () => {
     if (Userdata) {
@@ -73,13 +71,13 @@ const Cart = () => {
         .then((res) => res.json())
         .then(async (data) => {
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
-          
-          setCartStatus(data.data[0].cartStatus)
+
+          setCartStatus(data.data[0].cartStatus);
           setCart(data.data[0].order);
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          
+
           dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })
@@ -90,7 +88,7 @@ const Cart = () => {
   };
 
   const UpdateCart = async (array) => {
-    const url = `${baseUrl}/api/cart/update_cart_by_id`;    
+    const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {
       method: "put",
       headers: {
@@ -101,13 +99,11 @@ const Cart = () => {
         _id: _id,
         userid: Userdata._id,
         order: array ? array : cart,
-        cartStatus
+        cartStatus,
       }),
     })
       .then((res) => res.json())
-      .then((res) => {
-        
-      })
+      .then((res) => {})
       .then((err) => console.log(err));
   };
 
@@ -134,22 +130,22 @@ const Cart = () => {
     toast.success("Product removed successfully", {
       position: "bottom-right",
       autoClose: 1000,
-    })
+    });
   };
 
   const submitData = async (e) => {
     e.preventDefault();
-    
+
     const stripe = await stripePromise;
     let { order } = data;
     let neworder = JSON.parse(order);
     neworder.forEach(function(item) {
       delete item.category;
-      delete item.description
-      delete item.delivery_time
-      delete item.justification
-      delete item.manufacturer
-      delete item.mrp
+      delete item.description;
+      delete item.delivery_time;
+      delete item.justification;
+      delete item.manufacturer;
+      delete item.mrp;
     });
     const formData = new FormData();
     await formData.append("mobile", Userdata.phonenumber);
@@ -170,8 +166,7 @@ const Cart = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-       window.location.href = res.url;
-        
+        window.location.href = res.url;
       })
       .catch((err) => console.log(err));
   };
@@ -184,19 +179,17 @@ const Cart = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        _id:Userdata._id,
+        _id: Userdata._id,
       }),
     })
       .then((res) => {
-        res.json()
-        localStorage.removeItem("Usercartdata")
-        window.location.href = url
+        res.json();
+        localStorage.removeItem("Usercartdata");
+        window.location.href = url;
       })
       .then(async (res) => {})
       .catch((err) => {});
   };
-
-
 
   return (
     <>
@@ -212,154 +205,151 @@ const Cart = () => {
             <div className="cart-buttons">
               <h1 className="cart-header">Your Cart</h1>
             </div>
-              <div className="row">
-                <div className="col-lg-8">
-                  {cart.length > 0 ? (
-                    <div className="cart-table">
-                      <table className="w-100" cellsacing="10px" cellPadding="10px">
-                        <thead className="text-center">
-                          <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col"></th>
-                            <th scope="col">PRICE</th>
-                            <th scope="col" className="text-center">QUANTITY</th>
-                            <th scope="col" className="text-center">Total</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {cart.map((el, ind1) => {
-                            total = el.singleprice * el.quantity;
-                            total1 = total1 + (el.singleprice * el.quantity);
-                            localStorage.setItem("ActualSubtotal", total1);
-                            actualtotal += el.mrp * el.quantity;
-                            localStorage.setItem("Subtotal", actualtotal);
+            <div className="row">
+              <div className="col-lg-8 col-md-8">
+                {cart.length > 0 ? (
+                  <div className="cart-table">
+                    <table
+                      className="w-100"
+                      cellsacing="10px"
+                      cellPadding="10px"
+                    >
+                      <thead className="text-center">
+                        <tr>
+                          <th scope="col">Product</th>
+                          <th scope="col"></th>
+                          <th scope="col">PRICE</th>
+                          <th scope="col" className="text-center">
+                            QUANTITY
+                          </th>
+                          <th scope="col" className="text-center">
+                            Total
+                          </th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cart.map((el, ind1) => {
+                          total = el.singleprice * el.quantity;
+                          total1 = total1 + el.singleprice * el.quantity;
+                          localStorage.setItem("ActualSubtotal", total1);
+                          actualtotal += el.mrp * el.quantity;
+                          localStorage.setItem("Subtotal", actualtotal);
 
-                            return (
-                              <tr key={ind1} className="cart-data">
-                                <td className="product-thumbnail">
-                                  <Link to={"/SingleProduct/" + el.productid}>
-                                    
-                                    <img
-                                      src={
-                                        `${baseUrl}/` + el.image || el.manufacturer.image[0].path
-                                      }
-                                      alt="item"
-                                    />
-                                  </Link>
-                                </td>
-                                <td className="product-name">
-                                  <Link to={"/SingleProduct/" + el.productid}>
-                                    <div className="text-start">
-                                      {el.name}
-                                    </div>
-                                  </Link>
-                                </td>
-                                <td className="product-price">
-                                  <div className="amount">
-                                    
+                          return (
+                            <tr key={ind1} className="cart-data">
+                              <td className="product-thumbnail">
+                                <Link to={"/SingleProduct/" + el.productid}>
+                                  <img
+                                    src={
+                                      `${baseUrl}/` + el.image ||
+                                      el.manufacturer.image[0].path
+                                    }
+                                    alt="item"
+                                  />
+                                </Link>
+                              </td>
+                              <td className="product-name">
+                                <Link to={"/SingleProduct/" + el.productid}>
+                                  <div className="text-start">{el.name}</div>
+                                </Link>
+                              </td>
+                              <td className="product-price">
+                                <div className="amount">
                                   <span className="unit-amount fa fa-inr">
                                     <del>{el.mrp}</del>
+                                  </span>
+                                  <span className="unit-amount fa fa-inr">
+                                    {el.singleprice}
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="product-quantity">
+                                <div className="amount">
+                                  {" "}
+                                  <div className="input-counter">
+                                    <span
+                                      className="minus-btn"
+                                      onClick={() => {
+                                        Minusquantity(
+                                          el.quantity,
+                                          el.mrp,
+                                          ind1
+                                        );
+                                      }}
+                                    >
+                                      <i className="bx bx-minus minus"></i>
                                     </span>
-                                    <span className="unit-amount fa fa-inr">
-                                      {
-                                        el.singleprice
-                                      }
-                                    </span>
-                                  </div>
-                                </td>
-                                <td className="product-quantity">
-                                  <div className="amount">
-                                    {" "}
-                                    <div className="input-counter">
-                                      <span
-                                        className="minus-btn"
-                                        onClick={() => {
-                                          Minusquantity(
-                                            el.quantity,
-                                            el.mrp,
-                                            ind1
-                                          );
-                                        }}
-                                      >
-                                        <i className="bx bx-minus minus"></i>
-                                      </span>
-                                      <input
-                                        type="text"
-                                        min="1"
-                                        value={el.quantity}
-                                      />
-                                      <span
-                                        className="plus-btn"
-                                        onClick={() => {
-                                          Plusquantity(
-                                            el.quantity,
-                                            el.mrp,
-                                            ind1
-                                          );
-                                        }}
-                                      >
-                                        <i className="bx bx-plus  minus"></i>
-                                      </span>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td className="product-subtotal">
-                                  <div className="amount">
-                                   <span className="subtotal-amount mt-4 fa fa-inr">
-                                         {
-                                          el.singleprice*el.quantity
-                                         }
+                                    <input
+                                      type="text"
+                                      min="1"
+                                      value={el.quantity}
+                                    />
+                                    <span
+                                      className="plus-btn"
+                                      onClick={() => {
+                                        Plusquantity(el.quantity, el.mrp, ind1);
+                                      }}
+                                    >
+                                      <i className="bx bx-plus  minus"></i>
                                     </span>
                                   </div>
-                                </td>
-                                <td>
-                                  <Popconfirm className="bx bx-trash cart-delete-icon"
-                                    title="Delete the Product"
-                                    description="Are you sure to delete this Product?"
-                                    style={{ margin: "0" }}
-                                    onConfirm={(e)=>Sliceorder(ind1, e)}
-                                  >
-                                  </Popconfirm>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  ) : (
-                    <lottie-player
-                      src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
-                      background="transparent"
-                      speed="1"
-                      style={{
-                        width: "300px",
-                        height: "300px",
-                        margin: "auto",
-                      }}
-                      loop
-                      autoplay
-                    ></lottie-player>
-                  )}
-                </div>
+                                </div>
+                              </td>
+                              <td className="product-subtotal">
+                                <div className="amount">
+                                  <span className="subtotal-amount mt-4 fa fa-inr">
+                                    {el.singleprice * el.quantity}
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <Popconfirm
+                                  className="bx bx-trash cart-delete-icon"
+                                  title="Delete the Product"
+                                  description="Are you sure to delete this Product?"
+                                  style={{ margin: "0" }}
+                                  onConfirm={(e) => Sliceorder(ind1, e)}
+                                ></Popconfirm>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <lottie-player
+                    src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                    background="transparent"
+                    speed="1"
+                    style={{
+                      width: "300px",
+                      height: "300px",
+                      margin: "auto",
+                    }}
+                    loop
+                    autoplay
+                  ></lottie-player>
+                )}
+              </div>
 
-                <div className="col-lg-4">
-                  <div className="cart-totals">
-                    <h3>Order Summary</h3>
-                    <ul>
-                      <li>
-                        Sub Total <span>₹{actualtotal}</span>
-                      </li>
-                      <li>
-                        Discount <span>-₹{actualtotal - total1}</span>
-                      </li>
+              <div className="col-lg-4 col-md-12">
+                <div className="cart-totals">
+                  <h3>Order Summary</h3>
+                  <ul>
+                    <li>
+                      Sub Total <span>₹{actualtotal}</span>
+                    </li>
+                    <li>
+                      Discount <span>-₹{actualtotal - total1}</span>
+                    </li>
 
-                      <li>
-                        Payable Amount <span>₹{total1}</span>
-                      </li>
-                    </ul>
-                    { cartItems ?
+                    <li>
+                      Payable Amount <span>₹{total1}</span>
+                    </li>
+                  </ul>
+                  {cartItems ? (
                     <button
                       className="default-btn1"
                       onClick={(e) => {
@@ -367,17 +357,18 @@ const Cart = () => {
                       }}
                     >
                       <i className="flaticon-trolley"></i> Proceed To Checkout
-                    </button> :
+                    </button>
+                  ) : (
                     <button
                       className="default-btn1"
                       onClick={() => history.push("/AllProducts")}
                     >
                       <i className="flaticon-trolley"></i> Continue Shopping
                     </button>
-}
-                  </div>
+                  )}
                 </div>
               </div>
+            </div>
           </form>
         </div>
       </section>
@@ -485,13 +476,13 @@ const Cart = () => {
               >
                 <button>Continue Shopping</button>
               </Link> */}
-              
-              {/* </td>
+
+      {/* </td>
             </tr>
           </table>
         </div>
       </div> */}
-      {/* <ToastContainer /> */} 
+      {/* <ToastContainer /> */}
       {/*  End mobile responsive cart */}
       <Baseline />
       <Footer />
