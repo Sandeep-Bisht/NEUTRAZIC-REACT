@@ -18231,14 +18231,7 @@ ul
 /* Responsive for Phone  */
 @media only screen and (min-width: 360px) and (max-width: 815px) {
 
-	.cart-page
-	{
-		display: block;
-	}
-	.pc-cart
-	{
-		display: none;
-	}
+
 
 	/* .cart-area
 {
@@ -18872,7 +18865,7 @@ padding-top: 72px;
 		font-size: 18px;
 	}
 	.home-banner{
-		margin-bottom: -100px;
+		margin-bottom: -100px!important;
 	}
 	/* end homepage */
 	
@@ -19151,6 +19144,9 @@ padding-top: 72px;
 	.single-products-box .content .price-div .bxs-heart {
 		font-size: 15px!important;
 	}
+	.products-color {
+		font-size: 20px;
+	}
 	.mobile-app .cat-heading {
 		font-size: 20px;
 	}
@@ -19185,7 +19181,7 @@ padding-top: 72px;
 		font-size: 15px;
 	}
 	.drop-category{
-		height: 45px!important;
+		height: 45px;
 	}
 	/* end homepage */
   
