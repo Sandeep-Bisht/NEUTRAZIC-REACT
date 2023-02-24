@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect }  from "react";
 import "../components/Blog.css";
 import BlogImage from "../Images/blog-img.jpg";
 import Footer from "./Footer";
