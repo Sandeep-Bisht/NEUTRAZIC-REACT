@@ -660,7 +660,7 @@ const Header1 = (props) => {
         {/* Logo div */}
         <div className="newheader">
         <div className="row mt-0 top-header-padding">
-          <div className="col-sm-3 col-12 ">
+          <div className="col-sm-3 col-12 logo-main-div">
             <Link className="navbar-brand" to="/">
               <img
                 src={require("../Images/new-logo.png")}

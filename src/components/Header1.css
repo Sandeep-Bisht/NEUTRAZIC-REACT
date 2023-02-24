@@ -1005,6 +1005,12 @@ body {
         position: fixed;
         width: 100%;
         left: 0;
+        height: 45px;
+    }
+    .navbar-collapse{
+        background-color: #1b97ff !important;
+        margin-top: -3px;
+        /* height: 210px; */
     }
     .drop-category{
         z-index: 500;
@@ -1015,6 +1021,8 @@ body {
     }
     .navbar-light .navbar-toggler{
         background-color: #fff;
+        padding: 7px 12px;
+        border-color: none;
     }
     .mt-0 {
         margin-top: 0!important;
@@ -1054,6 +1062,9 @@ body {
   
 }
 @media only screen and (max-width : 815px) {
+    .logo-main-div{
+         padding-top: 8px;
+    }
     .dropdown .btn-sm{
          display: none;
     }
@@ -1071,6 +1082,7 @@ body {
     .drop-category{
         margin-left: -5px;
         padding-right: 10px;
+        height: 43px;
     }
     .login-div {
         padding-left: 76px;
@@ -1080,6 +1092,17 @@ body {
     }
 }
 @media only screen and (max-width : 575.98px) {
+    /* responsive homepage */
+    .home-banner {
+        padding-top: 250px;
+    }
+    .single-products-box .image img {
+        transition: var(--transition);
+        height: 197px;
+        width: 26%;
+        object-fit: cover;
+    }
+    /* end homepage */
     .navbar-brand img{
         margin-left: 50px!important;
     }
@@ -1093,6 +1116,9 @@ body {
     }
     .login-div{
         padding-left: 0;
+    }
+    .login-div2{
+        margin-left: 8px!important;
     }
     .currancy{
         padding-left: 65px;
@@ -1143,6 +1169,16 @@ body {
 }
 @media only screen and (max-width : 359.98px)
    { 
+    .navbar-toggler{
+height: 30px;
+    }
+    .drop-category {
+        height: 33px;
+    }
+    .navbar-toggler-icon{
+        font-size: 14px;
+    }
+    
     
     .login-div{
         width: 93px;
@@ -1151,11 +1187,14 @@ body {
     }
     .login-div2{
         margin-top: 2px;
-        margin-left: 20px!important;
+        margin-left: 27px!important;
         width: 80%;
     }
     .currancy{
-        padding-left: 27px;
+        padding-left: 40px;
+    }
+    .drop-category{
+        padding-left: 46px;
     }
   }
 
