@@ -578,7 +578,7 @@ const HomePage = () => {
                 if (ind < 6) {
                   return (
                     <>
-                      <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
+                      <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
@@ -590,7 +590,7 @@ const HomePage = () => {
                                     className="product-image-link"
                                   >
                                     <div className="image hover-switch">
-                                      <img
+                                      <img className="hoverimage"
                                         src={
                                           el.otherImage &&
                                           el.otherImage.length > 0
@@ -819,7 +819,7 @@ const HomePage = () => {
               {data.map((el, index) => {
                 if (index < 6) {
                   return (
-                    <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
+                    <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
@@ -992,7 +992,7 @@ const HomePage = () => {
                 .map((el, index) => {
                   if (index < 6) {
                     return (
-                      <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
+                      <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
@@ -1439,7 +1439,7 @@ const HomePage = () => {
           </h1>
               <div className="blog-box-wrapper">
                 <div className="row">
-                  <div className="col-md-7">
+                  <div className="col-lg-7 col-md-12">
                     {blogs && blogs.map((item,ind)=>{
                       if(ind<1)
                       return(
@@ -1454,11 +1454,11 @@ const HomePage = () => {
                     </div>
                     )})}
                   </div>
-                  <div className="col-md-5 ps-0">
-                    <div className="right-blog-image-wrapper">
+                  <div className="col-lg-5 col-md-12 right-image-blog">
                       {blogs && blogs.map((item,ind)=>{
                         if(ind<2)
                         return (
+                          <div className="right-blog-image-wrapper">
                       <div className="right-blog-image-wrap" key={ind}>
                         <img src={item.featuredImage && `${baseUrl}/` + item.featuredImage[0].path} alt="" className="" />
                         <div className="top-heading-box-2">
@@ -1468,9 +1468,10 @@ const HomePage = () => {
                           <p>{item.description}</p>
                         </div>
                       </div>
+                      </div>
+                 
                       )})}
-                    </div>
-                  </div>
+                     </div>
                 </div>
               </div>
             </div>
@@ -1484,7 +1485,7 @@ const HomePage = () => {
                     <div className="row">
                       { blogs && blogs.map((item)=>{
                         return(
-                      <div className="col-md-3">
+                      <div className="col-lg-3 col-md-6">
                         <div class="card">
                           <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
                           

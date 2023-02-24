@@ -44,3 +44,69 @@
 {
     text-decoration: underline;
 }
+.about-page{
+    margin-top: 100px;
+}
+p{
+    font-size: 17px;
+}
+@media only screen and (max-width : 1399px){
+  
+}
+@media only screen and (max-width : 1024px) {
+  
+}
+
+@media only screen and (max-width :991px) {
+  
+}
+@media only screen and (max-width : 767px) {
+  
+}
+@media only screen and (max-width : 575.98px) {
+    .about-page{
+        margin-top: 180px;
+    }
+    .about-common-heading {
+        font-size: 25px;
+    }
+    .about-right-text p{
+        line-height: 28px;
+    }
+    .about-section-2-para p{
+        line-height: 28px;
+    }
+
+    .our-team-left-text p{
+        line-height: 28px;
+    }
+    .our-vision-right-text p{
+        line-height: 28px;
+    }
+    .easy-payment-left-text p{
+        line-height: 28px;
+    }
+    .our-team-left-text .login-btn {
+        padding: 4px 11px;
+    }
+}
+
+
+
+@media only screen and (max-width : 480px) {
+    .about-common-heading {
+        font-size: 22px;
+    }
+   
+
+}
+@media only screen and (max-width : 430px)
+   { 
+     
+ 
+  }
+
+@media only screen and (max-width : 360px) {
+
+  
+}
