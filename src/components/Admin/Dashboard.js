@@ -45,6 +45,7 @@ const Dashboard = () => {
     GetOrders();
     GetProducts();
     GetLocalUserData();
+    GetBlogs();
   },[]);
 
   const GetLocalUserData = () => {
@@ -63,6 +64,13 @@ const Dashboard = () => {
         console.log(err, "error");
       });
   };
+  const GetBlogs = async()=>{
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+    .then((res)=>res.json())
+    .then(async (data)=>{
+      setBlogs(data.data.length);
+    })
+  }
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())

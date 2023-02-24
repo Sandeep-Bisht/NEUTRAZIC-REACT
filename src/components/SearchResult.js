@@ -232,7 +232,7 @@ const SearchResult = (props) => {
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
     }
   };
@@ -359,7 +359,7 @@ const SearchResult = (props) => {
               .then(async (data) => {
                 toast.error("Added to wishlist", {
                   position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 2000,
+                  autoClose: 1000,
                 });
                 
                 //add product to wishlist response is comming here
@@ -401,7 +401,7 @@ const SearchResult = (props) => {
                 .then(async (data) => {
                   toast.error("Added to wishlist", {
                     position: toast.POSITION.BOTTOM_RIGHT,
-                    autoClose: 2000,
+                    autoClose: 1000,
                   });
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
@@ -417,7 +417,7 @@ const SearchResult = (props) => {
           } else {
             toast.error("Already in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 2000,
+              autoClose: 1000,
             });
           }
         }

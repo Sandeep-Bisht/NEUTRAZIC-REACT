@@ -14,7 +14,7 @@ const MyAccount = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     setData(Userdata);
   }, []);
-
+  console.log(data,"This is data");
   const {
     register,
     handleSubmit,
@@ -23,6 +23,7 @@ const MyAccount = () => {
   const onsubmit = (data) => {
     
   };
+  
   return (
     <>
       <Header1 />
@@ -76,6 +77,7 @@ const MyAccount = () => {
                       <p className="ps-1">Mobile Number:</p>
                       <input
                         type="number"
+                        value={data.phonenumber}
                         className="form-control bg-light"
                         rows="3"
                         name="mobileNumber"

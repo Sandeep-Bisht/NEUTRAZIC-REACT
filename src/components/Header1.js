@@ -884,7 +884,8 @@ const Header1 = (props) => {
       
       <div className="container-fluid main-nav">
         <div className="row mt-0" id="myHeader">
-          <div className="col-2 drop-category">
+          <div className="col-2 drop-category Browse-Category" data-bs-toggle="modal"
+                  data-bs-target="#myModal">
             <div>
               <div className="category ">
                 <i
@@ -894,7 +895,7 @@ const Header1 = (props) => {
                 ></i>
               </div>
               <div className="category">
-                <span className="category-head">Browse Categories</span>
+                <span className="category-head" >Browse Categories</span>
               </div>
             </div>
           </div>
