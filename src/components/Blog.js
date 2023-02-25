@@ -12,7 +12,7 @@ import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 function Blogs() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    window.scroll(0, 0);
+    window.scroll(0,0);
     getAllBlog();
   }, []);
 
