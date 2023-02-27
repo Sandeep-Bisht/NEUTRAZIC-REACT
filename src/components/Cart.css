@@ -82,13 +82,13 @@
     margin-top: 200px !important;
   }
   .product-price .amount {
-    white-space: normal;
+    /* white-space: normal; */
     font-size: 16px;
   }
-  .cart-table table tbody tr td {
+  /* .cart-table table tbody tr td {
     white-space: normal;
     
-  }
+  } */
 }
 @media only screen and (max-width: 567.99px) {
   .cart-table table thead tr th {

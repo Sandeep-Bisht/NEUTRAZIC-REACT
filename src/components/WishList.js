@@ -1,6 +1,6 @@
 import { get, map } from "jquery";
 import "../components/WishList.css";
-import "../views/landing/homepage.css";
+// import "../views/landing/homepage.css";
 import React, { useState, useEffect } from "react";
 import StarsRating from "stars-rating";
 import Baseline from "./Baseline";

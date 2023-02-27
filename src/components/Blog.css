@@ -129,7 +129,7 @@
 /* Media Query For Blog Page */
 @media only screen and (max-width: 1399px) {
   .blog-page-section-2 .card-body {
-    height: 148px;
+    height: 166px;
   }
   /* .blog-box-wrapper .left-blog-image-wrap img {
     object-fit: fill;

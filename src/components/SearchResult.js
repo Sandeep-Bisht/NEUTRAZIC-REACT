@@ -13,6 +13,7 @@ import * as ACTIONS from '../CommonService/AddToCart/action'
 import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import "../components/SearchResult.css";
 import {BiCategory} from 'react-icons/bi';
 import {BsCardList} from 'react-icons/bs';
 import {TbBrandNotion} from 'react-icons/tb';
@@ -741,7 +742,7 @@ const SearchResult = (props) => {
       {/* <div id="main"></div> */}
 
       {/* end side bar Modal */}
-
+      <div className="container">
       <div id="__next">
         {/* trending section  */}
 
@@ -784,7 +785,7 @@ const SearchResult = (props) => {
                   count = count + 1;
                   return (
                     <>
-                      <div className="col-lg-3 col-md-12 col-sm-12" key={ind}>
+                      <div className="col-lg-3 col-md-4 col-sm-4 col-6" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
@@ -943,6 +944,7 @@ const SearchResult = (props) => {
           </div>
         </section>
         <ToastContainer/>
+      </div>
       </div>
       <Footer />
     </>

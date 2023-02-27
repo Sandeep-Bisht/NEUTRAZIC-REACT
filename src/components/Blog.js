@@ -119,32 +119,6 @@ function Blogs() {
                             </div>
                           );
                         })}
-                      {/* { data && data.map((item)=>{
-                        return(
-                      <div className="col-md-3">
-                        <div class="card">
-                          <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
-                          <img
-                            src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
-                            class="card-img-top"
-                            alt="blog-image"
-                          />
-                          </Link>
-                          <div class="card-body">
-                          <p class="card-text">
-                          <ReadMoreReact
-                                text={item.description}
-                                min={100}
-                                ideal={100}
-                                max={100}
-                                readMoreText={"...Read More"}
-                              />                              
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      )
-                      })} */}
                     </div>
                   </div>
                 </div>
