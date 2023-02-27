@@ -97,6 +97,7 @@
 font-size:16px;
 position: relative;
 color:#1e144f;
+padding-left: 5px;
 }
 .Sp1{
     color: #1e144f;
@@ -963,6 +964,7 @@ body {
 .newheader{
     position: fixed !important;
     top: 0 !important;
+    right: 0!important;
     background-color: #fff !important;
     z-index: 200 !important;
     width: 100% !important;
@@ -976,18 +978,18 @@ body {
     .drop-category i {
         font-size: 15px;
     }
-    .col-sm-1{
+    /* .col-sm-1{
         padding-left: 14px;
         padding-right: 14px;
-    }
-    .newheader{
+    } */
+    /* .newheader{
         position: fixed !important;
         top: 0 !important;
         background-color: #fff !important;
         z-index: 200 !important;
         width: 100% !important;
 
-    }
+    } */
     
     .navbar .container-fluid{
         padding:0px;
@@ -999,13 +1001,22 @@ body {
         padding-left: 0px;
         padding-right:0px;
     }
+    .currancy{
+        margin-left: 110px!important;
+    }
   
 }
 @media only screen and (max-width : 1024px) {
+      .currancy{
+        margin-left: 60px!important;
+      }
   
 }
 
 @media only screen and (max-width :991px) {
+      .currancy{
+        margin-left: 54px!important;
+      }
     .navbar {
         background-color: #1b97ff !important;
         padding: 0px;
@@ -1013,6 +1024,12 @@ body {
         position: fixed;
         width: 100%;
         left: 0;
+        height: 45px;
+    }
+    .navbar-collapse{
+        background-color: #1b97ff !important;
+        margin-top: -3px;
+        /* height: 210px; */
     }
     .drop-category{
         z-index: 500;
@@ -1023,13 +1040,15 @@ body {
     }
     .navbar-light .navbar-toggler{
         background-color: #fff;
+        padding: 7px 12px;
+        border-color: none;
     }
     .mt-0 {
         margin-top: 0!important;
         padding-right: 34px;
         margin-bottom: 10px;
     }
-    .col-sm-1{
+    /* .col-sm-1{
         padding-left: 13px;
         padding-right: 13px;
     }
@@ -1039,7 +1058,7 @@ body {
     }
     .col-sm-3{
         margin-left: -15px;
-    }
+    } */
     .login-div{
         padding-right: 70px;
     }
@@ -1052,9 +1071,9 @@ body {
     .sp{
         padding-left: 6px;
     }
-    .cart-div{
+    /* .cart-div{
         padding-left: 6px;
-    }
+    } */
     .login-div2 input[type="text"]{
         width: 150px;
     }
@@ -1062,6 +1081,12 @@ body {
   
 }
 @media only screen and (max-width : 815px) {
+    .currancy{
+        margin-left: 30px!important;
+    }
+    .logo-main-div{
+         padding-top: 8px;
+    }
     .dropdown .btn-sm{
          display: none;
     }
@@ -1079,6 +1104,7 @@ body {
     .drop-category{
         margin-left: -5px;
         padding-right: 10px;
+        height: 43px;
     }
     .login-div {
         padding-left: 76px;
@@ -1088,8 +1114,19 @@ body {
     }
 }
 @media only screen and (max-width : 575.98px) {
+    /* responsive homepage */
+    .home-banner {
+        padding-top: 250px;
+    }
+    .single-products-box .image img {
+        transition: var(--transition);
+        height: 197px;
+        width: 26%;
+        object-fit: cover;
+    }
+    /* end homepage */
     .navbar-brand img{
-        margin-left: 50px!important;
+        margin-left: 22px!important;
     }
 
     .drop-category .category-head {
@@ -1102,8 +1139,11 @@ body {
     .login-div{
         padding-left: 0;
     }
+    .login-div2{
+        margin-left: 8px!important;
+    }
     .currancy{
-        padding-left: 65px;
+        margin-right: -30px!important;
     }
     .col-sm-2 .login-div{
         padding-left: 14px;
@@ -1132,17 +1172,22 @@ body {
         margin-left: 10px;
     }
     .currancy{
-        padding-left: 45px;
+        margin-left: 37px!important;
     }
     .col-sm-2 .login-div{
         padding-left: 10px;
     }
     .bx-heart{
-        padding-left: 10px;
+        padding-left: 27px;
     }
+   
     .main-navbar-head{
         margin-top: -9px;
-    } 
+        margin-left: -14px!important;
+        margin-right: -1px!important;
+        width: 41%;
+    }
+    
     /* .login-div{
         width: 141px;
     margin-left: 15px;
@@ -1151,6 +1196,24 @@ body {
 }
 @media only screen and (max-width : 359.98px)
    { 
+    .cart-div {
+        padding-left: 13px;
+    }
+    .heart-div{
+        padding-left: 10px;
+    }
+   
+    
+    .navbar-toggler{
+height: 30px;
+    }
+    .drop-category {
+        height: 33px;
+    }
+    .navbar-toggler-icon{
+        font-size: 14px;
+    }
+    
     
     .login-div{
         width: 93px;
@@ -1159,11 +1222,23 @@ body {
     }
     .login-div2{
         margin-top: 2px;
-        margin-left: 20px!important;
+        margin-left: 27px!important;
         width: 80%;
     }
     .currancy{
-        padding-left: 27px;
+        margin-left: 0px;
+    }
+    .drop-category{
+        padding-left: 46px;
+    }
+    .top-header-padding .logo-main-div{
+        margin-left: -20px!important;
+    }
+    .main-navbar-head {
+        margin-top: -9px;
+    margin-left: -14px!important;
+    margin-right: 15px!important;
+    width: 41%;
     }
   }
 

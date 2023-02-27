@@ -1484,10 +1484,10 @@ font-size: 15px;
 .first-nav span
 {
     position: relative;
-width: 402px;
-height: 17px;
-left: 0;
-}
+/* width: 402px; */
+/* height: 17px;
+left: 0; */
+
 
 .mobile-heart
 {
@@ -1496,7 +1496,7 @@ left: 0;
 .pc-heart{
 	display: none;
 }
-}  */
+  */
 /* End phone single page css for responsive  start */
 
 /* Media Query Responsive for Desktop */

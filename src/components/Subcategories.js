@@ -512,11 +512,10 @@ const Subcategories = (props) => {
 
       <div id="__next">
         {/* trending section  */}
-
         <section className="browser-category-section">
           <div className="container-fluid">
             <div className="row mt-0">
-              <div className="col-md-2 px-0">
+              <div className="col-lg-2 col-md-3 col-sm-3 px-0">
                 <div className="back-ground-subcategory-sidebar">
                   <div id="wrapper">
                     <div id="sidebar-wrapper">
@@ -575,7 +574,7 @@ const Subcategories = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-9 col-sm-9 subcategory-container">
                 <div className="browse-categories-sub-heading">
                   {getSubCategories.map((item,ind)=>{
                     if(ind < 1)
@@ -594,7 +593,7 @@ const Subcategories = (props) => {
                         filterData.map((item, ind) => {
 
                           return (
-                            <div className="col-lg-3 col-md-12 col-sm-12 " key={ind}>
+                            <div className="col-lg-3 col-md-6 col-sm-6 " key={ind}>
                               <div className="single-products-box border">
                                 <div className="row">
                                   <div className="col-md-12">
@@ -772,10 +771,10 @@ const Subcategories = (props) => {
                           {data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
-                                <div className="col-lg-3 col-md-12 col-sm-12" key={ind}>
+                                <div className="col-lg-3 col-md-6 col-sm-6" key={ind}>
                                   <div className="single-products-box border">
                                     <div className="row">
-                                      <div className="col-md-12">
+                                      <div className="col-md-12 product-div-card">
                                         <div className="product-div">
                                           <div className="product-image-div">
                                             <Link

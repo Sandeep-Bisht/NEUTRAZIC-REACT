@@ -328,14 +328,14 @@ const Sidemenu = () => {
                       Shipped
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/" + "Delivered"}>
+                  <Link to={"/DeliveredOrder"}>
                     <li>
                       {" "}
                       <MdRealEstateAgent className="configuration-icons-wrap" />
                       Delivered
                     </li>
                   </Link>
-                  <Link to={"/InProgressOrder/" + "Cancel"}>
+                  <Link to={"/CanceledOrder"}>
                     <li>
                       {" "}
                       <BsCartXFill className="configuration-icons-wrap" />
