@@ -1,0 +1,35 @@
+.singleblog-card-image{
+    height: 200px !important;
+}
+.Single-Blog-Heading h1{
+    color: rgba(33, 37, 41,0.8);
+    font-size: 2rem;
+}
+.blog-container{
+    margin-top: 50px !important;
+}
+.Single-Blog-Heading{
+    background-color: rgba(30, 20, 79);;
+    padding: 12px;
+    width: 100%;
+    color: #fff;
+}
+.Single-Blog-Heading .Blog-para,.blog-heading1{
+    color: white !important;
+    letter-spacing: 0.2rem;
+}
+@media  only screen and (max-width : 1399px){
+    .blog-container{
+        margin-top: 30px !important;
+    }
+}
+@media  only screen and (max-width : 990.98px){
+    .blog-container{
+        margin-top: 10px !important;
+    }
+}
+@media  only screen and (max-width : 575.98px){
+    .blog-container{
+        margin-top: 65px !important;
+    }
+}

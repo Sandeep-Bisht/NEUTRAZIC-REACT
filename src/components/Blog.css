@@ -114,7 +114,7 @@
   padding: 0 30px;
 }
 
-/ Single-blog-css /
+/* / Single-blog-css / */
 
 .single-blog-image {
   height: 460px;
@@ -126,10 +126,10 @@
   padding-bottom: 30px;
 }
 
-/ Media Query For Blog Page /
+ /* Media Query For Blog Page  */
 @media only screen and (max-width: 1399px) {
   .blog-page-section-2 .card-body {
-    height: 148px;
+    height: 166px;
   }
   /* .blog-box-wrapper .left-blog-image-wrap img {
     object-fit: fill;

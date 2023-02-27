@@ -278,17 +278,16 @@ label {
 	margin-bottom: .5rem
 }
 .first-nav {
-    
-    width: 100%;
-    height: 41px;
-	position: relative!important;
-    left: -3px;
-    top: 116px;
-    background-color: #C4C4C4;
+  width: 100%;
+  height: 41px;
+  position: relative !important;
+  left: -3px;
+  top: 116px;
+  background-color: #c4c4c4;
 }
 
-.contact-container{
-margin-top: 130px !important;
+.contact-container {
+  margin-top: 130px !important;
 }
 button {
 	border-radius: 0
@@ -4093,7 +4092,6 @@ input[type=submit].btn-block {
 		transition: none
 	}
 }
-
 
 .card {
 	position: relative;
@@ -9337,66 +9335,64 @@ a.text-dark:hover {
 }
 
 @media print {
-	*,
-	:after,
-	:before {
-		text-shadow: none!important;
-		box-shadow: none!important
-	}
-	a:not(.btn) {
-		text-decoration: underline
-	}
-	abbr[title]:after {
-		content: " (" attr(title) ")"
-	}
-	
-	img,
-	tr {
-		page-break-inside: avoid
-	}
-	h2,
-	h3,
-	p {
-		orphans: 3;
-		widows: 3
-	}
-	h2,
-	h3 {
-		page-break-after: avoid
-	}
-	@page {
-		size: a3
-	}
-	
+  *,
+  :after,
+  :before {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+  a:not(.btn) {
+    text-decoration: underline;
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
 
-	
-	.badge {
-		border: 1px solid #000
-	}
-	.table {
-		border-collapse: collapse!important
-	}
-	.table td,
-	.table th {
-		background-color: #fff!important
-	}
-	.table-bordered td,
-	.table-bordered th {
-		border: 1px solid #dee2e6!important
-	}
-	.table-dark {
-		color: inherit
-	}
-	.table-dark tbody+tbody,
-	.table-dark td,
-	.table-dark th,
-	.table-dark thead th {
-		border-color: #dee2e6
-	}
-	.table .thead-dark th {
-		color: inherit;
-		border-color: #dee2e6
-	}
+  img,
+  tr {
+    page-break-inside: avoid;
+  }
+  h2,
+  h3,
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  @page {
+    size: a3;
+  }
+
+  .badge {
+    border: 1px solid #000;
+  }
+  .table {
+    border-collapse: collapse !important;
+  }
+  .table td,
+  .table th {
+    background-color: #fff !important;
+  }
+  .table-bordered td,
+  .table-bordered th {
+    border: 1px solid #dee2e6 !important;
+  }
+  .table-dark {
+    color: inherit;
+  }
+  .table-dark tbody + tbody,
+  .table-dark td,
+  .table-dark th,
+  .table-dark thead th {
+    border-color: #dee2e6;
+  }
+  .table .thead-dark th {
+    color: inherit;
+    border-color: #dee2e6;
+  }
 }
 
 :root {
@@ -9512,8 +9508,11 @@ p:last-child {
 	padding-bottom: 40px
 }
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 008b3b3e0828aae98d78e4cf6e5c6f09310536ef
 .bg-f7f8fa {
 	background-color: #f7f8fa
 }
@@ -12186,13 +12185,19 @@ letter-spacing: 0.50px;
 	margin-bottom: 20px
 }
 
-
-.products-details-desc .products-details-accordion .accordion .accordion-content .review-form-wrapper form .rating label {
-	float: right;
-	position: relative;
-	width: 23px;
-	height: 23px;
-	cursor: pointer
+.products-details-desc
+  .products-details-accordion
+  .accordion
+  .accordion-content
+  .review-form-wrapper
+  form
+  .rating
+  label {
+  float: right;
+  position: relative;
+  width: 23px;
+  height: 23px;
+  cursor: pointer;
 }
 
 .products-details-desc .products-details-accordion .accordion .accordion-content .review-form-wrapper form .rating label:not(:first-of-type) {
@@ -18525,10 +18530,9 @@ margin: 40px 8px 15px 0px;
 }
 
 /* --------------prashant css for home page additional section---------------- */
-.home-banner
-{
-	padding: 150px 0;
-	background-color: #fff;
+.home-banner {
+  padding: 150px 0;
+  background-color: #fff;
 }
 /* .home-banner .home-banner-left{
 	padding-left: 40px;
@@ -18801,7 +18805,32 @@ padding-top: 72px;
 	}
 	 
 
- }
+  .first-nav {
+    top: 109px !important;
+  }
+  /* contact page end */
+  .cosmetic-shop-now {
+    border: 2px solid rgb(27 151 255 / 33%) !important;
+  }
+  .newsletter-form input::placeholder {
+    font-size: 15px !important;
+  }
+  .container,
+  .container-fluid,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .first-nav {
+    top: 107px !important;
+  }
+}
 
  
  @media only screen and (max-width : 767px) {
@@ -18898,11 +18927,72 @@ padding-top: 72px;
 .single-contact-info-box p a{
 	font-size: 17px;
 }
-.single-contact-info-box p{
-	font-size: 17px;
+@media only screen and (max-width: 815px) {
+  .first-nav {
+    position: absolute !important;
+    margin-top: 25px !important;
+  }
 }
-.single-contact-info-box {
-	height: 200px;
+
+@media only screen and (max-width: 767px) {
+  .footer-area {
+    position: relative;
+    top: -22px;
+    left: -30px;
+  }
+  .contact-area {
+    margin-left: -25px;
+  }
+
+  .single-contact-info-box p a {
+    font-size: 17px;
+  }
+  .single-contact-info-box p {
+    font-size: 17px;
+  }
+  .single-contact-info-box {
+    height: 200px;
+  }
+  .single-contact-info-box h3 {
+    font-size: 20px;
+  }
+  .contact-form .sub-title {
+    font-size: 27px;
+  }
+  .contact-form h2 {
+    font-size: 21px;
+  }
+  .first-nav {
+    position: absolute !important;
+    margin-top: 25px !important;
+  }
+  .single-footer-widget .link-list li a {
+    font-size: 15px;
+  }
+  .single-footer-widget .footer-contact-info li a {
+    font-size: 15px;
+  }
+  .Subscribe {
+    font-size: 15px;
+  }
+  .footer-bottom-area p {
+    font-size: 17px;
+  }
+  .footer-bottom-area .payment-types ul li {
+    font-size: 18px;
+  }
+  .footer-area .social i {
+    font-size: 30px;
+  }
+  .link-footer-first p {
+    display: flex !important;
+    justify-content: center !important;
+    padding-bottom: 10px;
+  }
+  .link-footer-second {
+    display: flex !important;
+    justify-content: center !important;
+  }
 }
 .single-contact-info-box h3 {
 	font-size: 20px;

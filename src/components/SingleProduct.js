@@ -9,23 +9,20 @@ import StarsRating from "stars-rating";
 import ReactImageZoom from "react-image-zoom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
-import defaultImage from "../Images/products/Hintosulin (1).png"
-import * as ACTIONS from "../CommonService/AddToCart/action"
+import defaultImage from "../Images/products/Hintosulin (1).png";
+import * as ACTIONS from "../CommonService/AddToCart/action";
 import { useDispatch } from "react-redux";
 import Carousel from "react-elastic-carousel";
-
+import "../components/Header1.css";
 
 var Userdata = "";
 var CartDataWoLogin = [];
 
-
-
 const SingleProduct = (props) => {
-
   let dispatch = useDispatch();
   let prodId = props.match.params.id;
   let related = 0;
@@ -40,7 +37,7 @@ const SingleProduct = (props) => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlist, setWishlist] = useState([]);
   const [MainImage, SetMainImage] = useState();
-  const [categoryid,setcategoryId] = useState();
+  const [categoryid, setcategoryId] = useState();
   const history = useHistory();
   // let Wishlist = [];
   //let ImageData ;
@@ -53,7 +50,7 @@ const SingleProduct = (props) => {
   ];
 
   //     const carouselRef = React.useRef(null);
-  // 
+  //
   // };
 
   let carouselRef = useRef(null);
@@ -62,7 +59,7 @@ const SingleProduct = (props) => {
     if (currentItem.index === nextItem.index) {
       carouselRef.current.goTo(0);
     }
-  }
+  };
 
   const onPrevStart = (currentItem, nextItem) => {
     if (currentItem.index === nextItem.index) {
@@ -82,19 +79,19 @@ const SingleProduct = (props) => {
     related = 0;
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
 
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     Getsingledata();
     getWishlist();
     CartById();
     ProductByCategory();
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $("#comments-button-div").css("visibility", "hidden");
       $("#submit-review-div").hide();
       $("#Reviewdiv").hide();
       $("#Technicaldiv").hide();
       $("#Description").css("background", "none");
-      $("#Review").click(function () {
+      $("#Review").click(function() {
         $("#Reviewdiv").show();
         $("#Descriptiondiv").hide();
         $("#Technicaldiv").hide();
@@ -121,7 +118,7 @@ const SingleProduct = (props) => {
         $("#Description > .button2").css("color", "white");
         $("#Technical > .button1").css("color", "white");
       });
-      $("#Description").click(function () {
+      $("#Description").click(function() {
         $("#Reviewdiv").hide();
         $("#Descriptiondiv").show();
         $("#Technicaldiv").hide();
@@ -144,7 +141,7 @@ const SingleProduct = (props) => {
         $("#Description > .button2").css("color", "#00B560");
         $("#Technical > .button1").css("color", "white");
       });
-      $("#Technical").click(function () {
+      $("#Technical").click(function() {
         $("#Technicaldiv").show();
         $("#Descriptiondiv").hide();
         $("#Reviewdiv").hide();
@@ -167,13 +164,13 @@ const SingleProduct = (props) => {
         $("#Description > .button2").css("color", "white");
         $("#Technical > .button1").css("color", "#00B560");
       });
-      $("#Comments").click(function () {
+      $("#Comments").click(function() {
         $("#submit-review-div").hide();
         $("#commtent-div").show();
         $("#comments-button-div").css("visibility", "hidden");
         $("#SubmitComments-button-div").css("visibility", "visible");
       });
-      $("#SubmitComments").click(function () {
+      $("#SubmitComments").click(function() {
         $("#commtent-div").hide();
         $("#submit-review-div").show();
         $("#comments-button-div").css("visibility", "inherit");
@@ -221,7 +218,7 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data[0]);
-        SetMainImage(data.data[0].image[0].path)
+        SetMainImage(data.data[0].image[0].path);
 
         //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         setProductCategory(data.data[0].category.name);
@@ -247,12 +244,11 @@ const SingleProduct = (props) => {
       .then(async (data) => {
         await getWishlist();
         setData(data.data[0]);
-        SetMainImage(data.data[0].image[0].path)
+        SetMainImage(data.data[0].image[0].path);
 
         //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         setProductCategory(data.data[0].category.name);
         categoryDetails(data.data[0].category);
-        
       })
       .catch((err) => {
         console.log(err, "error");
@@ -276,8 +272,7 @@ const SingleProduct = (props) => {
         .then(async (data) => {
           setUserCart(data.data[0]);
           let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems))
-
+          dispatch(ACTIONS.getCartItem(cartItems));
         })
         .catch((err) => {
           console.log(err, "error");
@@ -311,7 +306,6 @@ const SingleProduct = (props) => {
         .catch((err) => {
           console.log(err, "error");
         });
-
     }
     // else{
     //   history.push('/Register')
@@ -323,8 +317,7 @@ const SingleProduct = (props) => {
   const ImageHandler = (m, i) => {
     let Imagestore = m.path;
     SetMainImage(Imagestore);
-  }
-
+  };
 
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
@@ -344,9 +337,9 @@ const SingleProduct = (props) => {
       .then((res) => {
         CartById();
         //history.push("/Cart");
-          toast.success("Add to cart",{
-          position:"bottom-right",
-          autoClose:1000,
+        toast.success("Add to cart", {
+          position: "bottom-right",
+          autoClose: 1000,
         });
       })
       .then((err) => console.log(err, "inside update cart"));
@@ -414,9 +407,7 @@ const SingleProduct = (props) => {
         //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
         //   newamount = 0;
       }
-      
     }
-
   };
 
   const categoryDetails = async (id) => {
@@ -483,7 +474,7 @@ const SingleProduct = (props) => {
   const getWishlist = async () => {
     let id;
     if (Userdata) {
-      id = Userdata._id
+      id = Userdata._id;
     }
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
@@ -492,7 +483,6 @@ const SingleProduct = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-
         userid: id,
       }),
     })
@@ -500,12 +490,12 @@ const SingleProduct = (props) => {
       .then(async (data) => {
         if (data.data[0] !== undefined) {
           let prodId = props.match.params.id;
-          setWishlist(data.data)
+          setWishlist(data.data);
           let response = data.data;
           for (let item of response) {
             if (props.match.params.id == item.productId) {
               let alreadyWishlist = document.getElementById(prodId);
-              alreadyWishlist.classList.add("wishlisted")
+              alreadyWishlist.classList.add("wishlisted");
             }
           }
         }
@@ -513,7 +503,6 @@ const SingleProduct = (props) => {
       .catch((err) => {
         console.log(err, "error");
       });
-
   };
 
   // ======================================= Add to Wishlist =========================
@@ -543,9 +532,42 @@ const SingleProduct = (props) => {
       .then(async (data) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
-            await fetch(
-              `${baseUrl}/api/wishlist/add_to_wishlist`,
-              {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userid: Userdata._id,
+                image: image,
+                name: name,
+                productId: productid,
+                rating: "5",
+                category: category,
+                manufacturer: manufacturer,
+                description: description,
+              }),
+            })
+              .then((res) => res.json())
+              .then(async (data) => {
+                // setWishlist(data.data[0]);
+                let wishlist = document.getElementById(productid);
+                wishlist.classList.add("wishlisted");
+                getWishlist();
+                toast.success("Added to wishlist", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 1000,
+                });
+              })
+              .catch((err) => {
+                console.log(err, "error e");
+              });
+          }
+        } else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -561,68 +583,27 @@ const SingleProduct = (props) => {
                   manufacturer: manufacturer,
                   description: description,
                 }),
-              }
-            )
-              .then((res) => res.json())
-              .then(async (data) => {
-                // setWishlist(data.data[0]);
-                let wishlist = document.getElementById(productid)
-                wishlist.classList.add("wishlisted");
-                getWishlist();
-                toast.success('Added to wishlist', {
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 1000,
-                });
               })
-              .catch((err) => {
-                console.log(err, "error e");
-              });
-          }
-        } else {
-          if (!JSON.stringify(data.data).includes(productid) && data.data) {
-            if (!Userdata == []) {
-              await fetch(
-                `${baseUrl}/api/wishlist/add_to_wishlist`,
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userid: Userdata._id,
-                    image: image,
-                    name: name,
-                    productId: productid,
-                    rating: "5",
-                    category: category,
-                    manufacturer: manufacturer,
-                    description: description,
-                  }),
-                }
-              )
                 .then((res) => res.json())
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
-                  let wishlist = document.getElementById(productid)
+                  let wishlist = document.getElementById(productid);
                   wishlist.classList.add("wishlisted");
                   getWishlist();
-                  toast.success('Added to wishlist', {
+                  toast.success("Added to wishlist", {
                     position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 1000,
-
-                  })
+                  });
                 })
                 .catch((err) => {
                   console.log(err, "error e");
                 });
             }
           } else {
-            toast.error('Already in wishlist !', {
+            toast.error("Already in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 1000,
             });
-
           }
         }
       });
@@ -631,10 +612,10 @@ const SingleProduct = (props) => {
   const checkWishlistItem = (productId) => {
     for (let item of wishlist) {
       if (item.productId == productId) {
-        return "wishlisted"
+        return "wishlisted";
       }
     }
-  }
+  };
 
   return (
     <>
@@ -646,25 +627,23 @@ const SingleProduct = (props) => {
           {data.name}
         </span>
       </div>
+      <div className="container">
       <div className="container-fluid product-div mt-5">
         <div className="row ">
-
-          <div className="col-sm-6 pd-0 picture-div justify-content-center align-items-center ">
-
+          <div className="col-sm-12 col-md-12 col-lg-6 pd-0 picture-div justify-content-center align-items-center ">
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image && data.image.length > 0 ?
-                (
-                  <img src={
-                    `${baseUrl}/` + MainImage
-                  } />
-                ) : <img src={require("../../src/Images/products/facewash1.png")} />}
+              {data.image && data.image.length > 0 ? (
+                <img src={`${baseUrl}/` + MainImage} />
+              ) : (
+                <img src={require("../../src/Images/products/facewash1.png")} />
+              )}
             </div>
 
             {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
               <Carousel
-                // breakPoints={breakPoints} 
+                // breakPoints={breakPoints}
                 enableAutoPlay
                 autoPlaySpeed={1500}
                 itemsToShow={4}
@@ -673,9 +652,9 @@ const SingleProduct = (props) => {
                 // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-              // itemPadding={[0, 4]}
+                // itemPadding={[0, 4]}
               >
-                {data.otherImage && data.otherImage.length > 0 ?
+                {data.otherImage && data.otherImage.length > 0 ? (
                   data.otherImage.map((item, ind) => (
                     <div className="col" key={ind}>
                       <img
@@ -683,10 +662,13 @@ const SingleProduct = (props) => {
                         src={`${baseUrl}/` + item.path}
                         onMouseOver={() => ImageHandler(item, ind)}
                       />
-
                     </div>
-                  )) : <img src={require("../../src/Images/products/facewash1.png")} />
-                }
+                  ))
+                ) : (
+                  <img
+                    src={require("../../src/Images/products/facewash1.png")}
+                  />
+                )}
               </Carousel>
             </div>
 
@@ -721,17 +703,27 @@ const SingleProduct = (props) => {
               <div className="carousel-inner">
                 <div className="carousel-item active">
                   <img
-                    src={require("../../src/Images/products/facewash1.png")}
+                    src={
+                      data && data.image && `${baseUrl}/` + data.image[0].path
+                    }
                   />
                 </div>
                 <div className="carousel-item">
                   <img
-                    src={require("../../src/Images/products/facewash1.png")}
+                    src={
+                      data &&
+                      data.otherImage &&
+                      `${baseUrl}/` + data.otherImage[0].path
+                    }
                   />
                 </div>
                 <div className="carousel-item">
                   <img
-                    src={require("../../src/Images/products/facewash1.png")}
+                    src={
+                      data &&
+                      data.otherImage &&
+                      `${baseUrl}/` + data.otherImage[1].path
+                    }
                   />
                 </div>
               </div>
@@ -763,7 +755,7 @@ const SingleProduct = (props) => {
 
             {/* end phone single page careousel */}
           </div>
-          <div className="col-sm-6 content-div">
+          <div className="col-12 col-sm-12 col-lg-6 col-md-12 content-div">
             <div className="row ml-2">
               <div className="details pt-2">
                 <span>{data.name}</span>
@@ -784,7 +776,17 @@ const SingleProduct = (props) => {
               <div className="price pt-2">
                 <span className="price-detail">
                   <i className="fa fa-inr"></i>
-                  {data.inrDiscount} <del><i className="fa fa-inr"></i>{data.inrMrp}</del> <span>{Math.ceil(((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100)}% OFF</span>
+                  {data.inrDiscount}{" "}
+                  <del>
+                    <i className="fa fa-inr"></i>
+                    {data.inrMrp}
+                  </del>{" "}
+                  <span>
+                    {Math.ceil(
+                      ((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100
+                    )}
+                    % OFF
+                  </span>
                 </span>
               </div>
 
@@ -804,7 +806,10 @@ const SingleProduct = (props) => {
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
-                  Category: <Link to={"/Subcategories/" + categoryid}><span> {categoryname}</span></Link>
+                  Category:{" "}
+                  <Link to={"/Subcategories/" + categoryid}>
+                    <span> {categoryname}</span>
+                  </Link>
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
@@ -849,13 +854,12 @@ const SingleProduct = (props) => {
                 ></i>
               </div>
               <div className="add-to-cart mt-1">
-                {
-                  Userdata ?
-                    <button
-                      onClick={() => {
-                        {
-                          Userdata != null
-                            ? cartfunction(
+                {Userdata ? (
+                  <button
+                    onClick={() => {
+                      {
+                        Userdata != null
+                          ? cartfunction(
                               data._id,
                               data.name,
                               quantity,
@@ -867,7 +871,7 @@ const SingleProduct = (props) => {
                               data.manufacturer.name,
                               data.image[0].path
                             )
-                            : addToCartWithoutRegistration(
+                          : addToCartWithoutRegistration(
                               data._id,
                               data.name,
                               quantity,
@@ -879,23 +883,20 @@ const SingleProduct = (props) => {
                               data.manufacturer.name,
                               data.image[0].path
                             );
-                        }
-                      }}
-
-
-                    >
-                      Add to Cart
-                    </button> :
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target={Userdata == null ? "#exampleModal" : null}>
-                      <Link to="/Register">
-                      </Link>
-                      Add to Cart
-                    </button>
-
-                }
-
+                      }
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                ) : (
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target={Userdata == null ? "#exampleModal" : null}
+                  >
+                    <Link to="/Register"></Link>
+                    Add to Cart
+                  </button>
+                )}
               </div>
 
               <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
@@ -931,7 +932,6 @@ const SingleProduct = (props) => {
                 )}
 
                 <ToastContainer />
-
               </div>
             </div>
           </div>
@@ -1114,25 +1114,29 @@ const SingleProduct = (props) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div id="columns" className="columns_5 d-flex">
-        {AllProduct.map((el, ind1) => {
-                    if (ind1<5) {
-                      return (
-                        <figure className="figure1">
-                          <Link Link to={"/SingleProduct/" + el._id}>
-                            <div >
-                              {/* {Categorydetails.image!==undefined? */}
-                              <img src={`${baseUrl}/` + el.image[0].path}
-                              onClick={()=>relatedImageHandler(el._id)}
-                              alt=""/>
-                              <figcaption onClick={()=>relatedImageHandler(el._id)}>{el.name}</figcaption>
-                            </div>
-                            
-                          </Link>
-                          {/* :null} */}
+        <div id="columns" className="columns_5 d-flex related-Prod-single-product">
+          {AllProduct.map((el, ind1) => {
+            if (ind1 < 5) {
+              return (
+                
+                  <figure className="figure1">
+                    <Link Link to={"/SingleProduct/" + el._id}>
+                      <div>
+                        {/* {Categorydetails.image!==undefined? */}
+                        <img
+                          src={`${baseUrl}/` + el.image[0].path}
+                          onClick={() => relatedImageHandler(el._id)}
+                          alt=""
+                        />
+                        <figcaption onClick={() => relatedImageHandler(el._id)}>
+                          {el.name}
+                        </figcaption>
+                      </div>
+                    </Link>
+                    {/* :null} */}
 
-                          <div className="allproduct-price-div">
-                            {/* <div className="d-flex justify-content-center">
+                    <div className="allproduct-price-div">
+                      {/* <div className="d-flex justify-content-center">
                       <StarsRating
                         count={5}
                         // onChange={ratingChanged}
@@ -1141,88 +1145,86 @@ const SingleProduct = (props) => {
                         value={4}
                       />
                     </div> */}
-                            <div className="row">
-                              {/* <div className="col-4 ">
+                      <div className="row">
+                        {/* <div className="col-4 ">
                               <Link to={"/SingleProduct/" + el._id}>  
                                <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
                                </Link> 
                               </div> */}
-                              <div className="col-6 text-start">
-                                <span className="price">
-                                  {" "}
-                                  <i className="fa fa-inr"></i>{el.inrDiscount}
-                                  {/* $
+                        <div className="col-lg-6 col-md-12 text-start">
+                          <span className="price">
+                            {" "}
+                            <i className="fa fa-inr"></i>
+                            {el.inrDiscount}
+                            {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
                         : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
-                                </span>
-                              </div>
-                              <div className="col-6 text-end">
-                                <p
-                                  className={`text-nowrap wishlist`}
-
-                                >
-                                  {Userdata ? (
-                                    <i
-                                      id={el._id}
-                                      onClick={() => {
-                                        AddtoWishlist(
-                                          el._id,
-                                          el.name,
-                                          quantity,
-                                          el.inrMrp,
-                                          el.inrDiscount,
-                                          el.description,
-                                          el.category,
-                                          el.manufacturer.name,
-                                          el.image
-                                        );
-                                      }}
-                                      className={`bx bxs-heart ${checkWishlistItem(el._id)}`}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="bx bxs-heart "
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null ? "#exampleModal" : null
-                                      }
-                                    ></i>
-                                  )}
-                                  Wishlist
-                                </p>
-                                {/* <div className="icon-wishlist"></div> */}
-                              </div>
-                            </div>
-                          </div>
-                          <button
-                            className="button btn"
-                            onClick={() => {
-                              cartfunction
-                                (
-                                  el._id,
-                                  el.name,
-                                  quantity,
-                                  el.inrMrp,
-                                  el.inrDiscount,
-                                  el.discount,
-                                  el.description,
-                                  el.category,
-                                  el.manufacturer.name,
-                                  el.image[0].path
-                                )
-                            }}
-                            data-bs-toggle={Userdata == null ? "modal" : null}
-                            data-bs-target={Userdata == null ? "#exampleModal" : null}
-                          >
-                            Add to Cart
-                          </button>
-
-                        </figure>
-
-                      );
-                    }
-                  })}
+                          </span>
+                        </div>
+                        <div className="col-lg-6 col-md-12  text-end">
+                          <p className={`text-nowrap wishlist`}>
+                            {Userdata ? (
+                              <i
+                                id={el._id}
+                                onClick={() => {
+                                  AddtoWishlist(
+                                    el._id,
+                                    el.name,
+                                    quantity,
+                                    el.inrMrp,
+                                    el.inrDiscount,
+                                    el.description,
+                                    el.category,
+                                    el.manufacturer.name,
+                                    el.image
+                                  );
+                                }}
+                                className={`bx bxs-heart ${checkWishlistItem(
+                                  el._id
+                                )}`}
+                              ></i>
+                            ) : (
+                              <i
+                                className="bx bxs-heart "
+                                data-bs-toggle="modal"
+                                data-bs-target={
+                                  Userdata == null ? "#exampleModal" : null
+                                }
+                              ></i>
+                            )}
+                            Wishlist
+                          </p>
+                          {/* <div className="icon-wishlist"></div> */}
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      className="button btn"
+                      onClick={() => {
+                        cartfunction(
+                          el._id,
+                          el.name,
+                          quantity,
+                          el.inrMrp,
+                          el.inrDiscount,
+                          el.discount,
+                          el.description,
+                          el.category,
+                          el.manufacturer.name,
+                          el.image[0].path
+                        );
+                      }}
+                      data-bs-toggle={Userdata == null ? "modal" : null}
+                      data-bs-target={Userdata == null ? "#exampleModal" : null}
+                    >
+                      Add to Cart
+                    </button>
+                  </figure>
+               
+              );
+            }
+          })}
         </div>
       </div>
 
@@ -1410,8 +1412,11 @@ const SingleProduct = (props) => {
       </div>
       {/* end submit review div */}
       {/* End Review section for mobile */}
+      
       <Baseline />
       <Footer />
+      </div>
+      
     </>
   );
 };
