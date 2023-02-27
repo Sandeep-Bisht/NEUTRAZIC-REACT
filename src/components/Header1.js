@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
 
-import "../components/Header1.css";
+ import "../components/Header1.css";
 import "../components/Carouselcomp";
 import $ from "jquery";
 import b from "./Admin/CategoryCreation";
@@ -660,7 +660,7 @@ const Header1 = (props) => {
         {/* Logo div */}
         <div className="newheader">
         <div className="row mt-0 top-header-padding">
-          <div className="col-sm-3 col-12 logo-main-div">
+          <div className="col-md-3 col-sm-3 col-12 logo-main-div">
             <Link className="navbar-brand" to="/">
               <img
                 src={require("../Images/new-logo.png")}
@@ -697,7 +697,7 @@ const Header1 = (props) => {
           </div>
           {/* End Of search Code */}
           {/* Start Login/Register div */}
-          <div className="col-sm-2 col-1">
+          <div className="col-md-2 col-sm-2 account-div col-1">
             <div className="row login-div mt-4">
               <div className="col-sm-1">
                 <div className="option-item">
@@ -827,7 +827,7 @@ const Header1 = (props) => {
           </div>
           {/* End Login/Register div */}
           {/* Cart div Start */}
-          <div className="col-sm-1 cart-div col-1">
+          <div className="col-md-1 col-sm-1 cart-div col-1">
             <Link to="/cart">
               <div className="row login-div1 mt-4">
                 <div className="col-sm-1">
@@ -849,7 +849,7 @@ const Header1 = (props) => {
           </div>
           {/* Cart div End */}
           {/* Start Wishlidt div */}
-          <div className="col-sm-2 col-1">
+          <div className="col-md-1 col-sm-1 heart-div col-1">
             <Link to="/WishList">
               <div className="row justify-content-center mt-4">
                 <div className="col-sm-2">
@@ -871,7 +871,7 @@ const Header1 = (props) => {
           </div>
           {/* End Wishlist div */}
           {/* Currancy Change code */}
-          <div className="col-sm-1 d-flex align-items-center currancy col-3">
+          <div className="col-md-1 col-sm-1 d-flex align-items-center currancy col-3">
             <select>
               <option>INR</option>
               <i className="bx bx-chevron-down"></i>

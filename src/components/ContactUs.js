@@ -15,7 +15,7 @@ const ContactUs = () => {
           <Link to="/">Home</Link>/ Contact Us
         </span>
       </div>
-     <section className="container">
+     <section className="container contact-container-div">
       <div className="contact-info-area pt-70 pb-40">
         <div className="container-fluid contact-container">
           <div className="row">

@@ -16,9 +16,8 @@ background-color: #C4C4C4;
 .first-nav span
 {
     position: relative;
-width: 402px;
+/* width: 402px; */
 height: 17px;
-left: 139px;
 top: 12px;
 display: flex;
 align-items: center;
@@ -1599,7 +1598,7 @@ font-size: 15px;
 .first-nav span
 {
     position: relative;
-width: 402px;
+/* width: 402px; */
 height: 17px;
 left: 0;
 }

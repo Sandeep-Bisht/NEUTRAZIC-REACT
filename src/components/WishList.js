@@ -250,7 +250,7 @@ const WishList = () => {
         </span>
       </div>
 
-      <section className="wishlist-page m-auto">
+      <section className="wishlist-page m-auto" style={{overflow:"hidden"}}>
         <div className="container m-auto">
           <div className="row mt-0">
             <div className="col-md-12">

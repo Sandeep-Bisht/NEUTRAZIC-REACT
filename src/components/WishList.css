@@ -119,9 +119,6 @@
     .wishlist-heading2{
         font-size: 13px;
     }
-    .wishlist-header{
-        margin-left: 45px;
-    }
     .word-wrapping{
         font-size: 12px;
     }
@@ -131,12 +128,14 @@
         padding: 8px 8px;
     }
     .wishlist-page .wishlistDiv{
-        margin-left: 22px;
-        width: 324px;
+        overflow: hidden;
     }
     
 }
 @media only screen and (max-width : 359.98px){
+    .first-nav{
+        display: none
+    }
     .wishlistDiv img{
         height: 100px;
         width: 100%;
