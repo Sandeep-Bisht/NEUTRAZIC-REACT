@@ -1,79 +1,169 @@
 import React from "react";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Header1 from "./Header1";
 import Footer from "./Footer";
 import Baseline from "./Baseline";
 import { baseUrl } from "../utils/services";
+import "../components/SingleBlogPage.css";
+import { Link } from "react-router-dom";
 
-const SingleBlog = (props)=>{
-   const blogSlug = props.match.params.slug;
-    const [blog,setSingleBlog] = useState();
-    
+const SingleBlog = (props) => {
+  const blogSlug = props.match.params.slug;
+  const [blog, setSingleBlog] = useState();
+  const [otherblogs, setOtherBlogs] = useState();
+  const [data, setData] = useState();
+  const [titleforheader, setTitleforHeader] = useState();
+  const history = useHistory();
 
-    useEffect(()=>{
-        window.scroll(0,0);
-        getSingleBlog();
+  useEffect(() => {
+    window.scroll(0, 0);
+    getSingleBlog();
+    otherBlog();
+  }, []);
 
-        
+  const ChangeBlog = async (id) => {
+    await fetch(`${baseUrl}/api/blogs/find_blog_by_slug`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        setSingleBlog(data.data);
+        history.push(id);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+    window.scroll(0, 0);
+  };
 
-    },[])
-    
+  const getSingleBlog = async () => {
+    await fetch(`${baseUrl}/api/blogs/find_blog_by_slug`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: props.match.params.slug,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        setSingleBlog(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+  const otherBlog = async () => {
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setData(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+  console.log(blog, "This is Blog");
+  return (
+    <>
+      <Header1 />
 
-    const getSingleBlog =async ()=>{
-        await fetch(`${baseUrl}/api/blogs/find_blog_by_slug`, {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              slug: props.match.params.slug,
-            }),
-          })
-            .then((res) => res.json())
-            .then(async (data) => {
-                setSingleBlog(data.data);
-            })
-            .catch((err) => {
-              console.log(err, "error");
-            });
-        };
-        
-    return(
-        <>
-        <Header1/>
-        
-        <div className="container m-auto product-div">
+      <div className="container product-div blog-container">
         <div className="row">
-            <div className="col-md-12">
-                {
-                    blog && blog.map((item)=>{
-                        
-                        return(
-
-                    
-                        <>
-                        <div className="row">
-                        <div className="col-md-12">
-                        <img className="single-blog-image" src={item.featuredImage && `${baseUrl}/`+ item.featuredImage[0].path}></img>
-                        </div>
-                        <div className="col-md-12">
-                        <div className="single-blog-page-header" dangerouslySetInnerHTML={{ __html: item.content }} />
-                        </div>
-                        </div>
-                        </>
-                    )})
-                }
+          <div className="col-md-12">
+            <div className="Single-Blog-Heading ps-5">
+              {blog &&
+                blog.map((item, ind) => {
+                  return (
+                    <>
+                      <h1 className="blog-heading1">{item.title}</h1>
+                      <p className="Blog-para">"{item.description}"</p>
+                    </>
+                  );
+                })}
             </div>
+          </div>
         </div>
+        <div className="row">
+          <div className="col-md-12">
+            {blog &&
+              blog.map((item) => {
+                return (
+                  <>
+                    <div className="row">
+                      <div className="col-md-12">
+                        <img
+                          className="single-blog-image"
+                          src={
+                            item.featuredImage &&
+                            `${baseUrl}/` + item.featuredImage[0].path
+                          }
+                        ></img>
+                      </div>
+                      <div className="col-md-12">
+                        <div
+                          className="single-blog-page-header"
+                          dangerouslySetInnerHTML={{ __html: item.content }}
+                        />
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+          </div>
         </div>
-            
-        
-        <Baseline/>
-        <Footer/>
-        </>
-    )
+        <div className="row">
+          <div className="blog-page-section-2">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="latest-blogs-section">
+                  <h2>Other Blogs</h2>
+                  <div className="row">
+                    {data &&
+                      data
+                        .filter((data) => data.slug != props.match.params.slug)
+                        .map((item, ind) => {
+                          return (
+                            <div className="col-md-6 col-lg-3">
+                              <div class="card">
+                                <img
+                                  onClick={() => ChangeBlog(item.slug)}
+                                  src={
+                                    item.featuredImage &&
+                                    `${baseUrl}/` + item.featuredImage[0].path
+                                  }
+                                  class="card-img-top singleblog-card-image"
+                                  alt="blog-image"
+                                />
+                                <div class="card-body">
+                                  <p class="card-text">{item.description}</p>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-}
+      <Baseline />
+      <Footer />
+    </>
+  );
+};
 export default SingleBlog;
