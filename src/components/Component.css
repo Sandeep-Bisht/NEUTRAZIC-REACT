@@ -340,7 +340,9 @@ width:100%;
     border-left:1px solid red;
 } */
 
-
+.Myacount-Page{
+    margin-top: 80px;
+}
 .caresouel-4-p-div
 {
     background-color:#00D872;
@@ -413,7 +415,18 @@ width:100%;
 }
 
 }
-
+@media only screen and (max-width:575.98px){
+    .Myacount-Page{
+        margin-top: 165px!important;
+    }
+    .Myacount-heading{
+        font-size: 30px!important;
+    }
+    .col-12 button {
+        width: 7rem!important;
+        padding: 5px!important;
+    }
+}
 
 /* End Media Query Responsive for Desktop */
 
