@@ -18659,10 +18659,10 @@ margin: 40px 8px 15px 0px;
 
 
  /* madal css */
- .top-nav .show{
+ /* .top-nav .show{
 	display: flex!important;
 	 justify-content: center;
- }
+ } */
 
  /* media query Deepak */
  @media only screen and (max-width : 1399px){
