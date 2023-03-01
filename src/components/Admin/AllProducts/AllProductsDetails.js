@@ -144,7 +144,7 @@ export default function AllProductsDetails() {
     <DashboardHeaader/>
 
     <div className="row">
-      <div className="col-2 px-0">
+      <div className="col-2 sidebar-dashboard px-0">
               <Sidemenu />
             </div>
         <div className="col-10">
