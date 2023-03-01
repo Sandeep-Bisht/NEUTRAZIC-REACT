@@ -597,7 +597,7 @@ const Subcategories = (props) => {
                               <div className="single-products-box border">
                                 <div className="row">
                                   <div className="col-md-12">
-                                    <div className="product-div">
+                                    <div className="product-home-div">
                                       <div className="product-image-div">
                                         <Link
                                           to={"/SingleProduct/" + item._id}
@@ -774,8 +774,8 @@ const Subcategories = (props) => {
                                 <div className="col-lg-3 col-md-6 col-sm-6" key={ind}>
                                   <div className="single-products-box border">
                                     <div className="row">
-                                      <div className="col-md-12 product-div-card">
-                                        <div className="product-div">
+                                      <div className="col-md-12 product-home-div-card">
+                                        <div className="product-home-div">
                                           <div className="product-image-div">
                                             <Link
                                               to={"/SingleProduct/" + item._id}
