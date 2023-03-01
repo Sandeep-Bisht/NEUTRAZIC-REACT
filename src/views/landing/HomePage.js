@@ -583,7 +583,7 @@ const HomePage = () => {
                         <div className="single-products-box border">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="product-div">
+                              <div className="product-home-div">
                                 <div className="product-image-div">
                                   <Link
                                     to={"/SingleProduct/" + el._id}
@@ -824,7 +824,7 @@ const HomePage = () => {
                       <div className="single-products-box border">
                         <div className="row">
                           <div className="col-md-12">
-                            <div className="product-div">
+                            <div className="product-home-div">
                               <div className="product-image-div">
                                 <Link
                                   to={"/SingleProduct/" + el._id}
@@ -997,7 +997,7 @@ const HomePage = () => {
                         <div className="single-products-box border">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="product-div">
+                              <div className="product-home-div">
                                 <div className="product-image-div">
                                   <Link
                                     to={"/SingleProduct/" + el._id}

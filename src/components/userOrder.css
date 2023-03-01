@@ -16,3 +16,11 @@
 {
     width: 30%;
 }
+.user-order-div{
+    margin-top: 80px!important;
+}
+@media only screen and (max-width:575.98px){
+    .user-order-div{
+        margin-top: 150px!important;
+    } 
+}

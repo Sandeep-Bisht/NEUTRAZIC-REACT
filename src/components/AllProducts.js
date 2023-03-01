@@ -691,7 +691,7 @@ const AllProducts = (props) => {
                 >
                   {AllProduct.map((el, ind1) => {
                       return (
-                        <figure className="figure1">
+                        <figure className="figure allproduct-figure">
                           <Link Link to={"/SingleProduct/" + el._id}>
                             <div>
                               {/* {Categorydetails.image!==undefined? */}
@@ -701,7 +701,7 @@ const AllProducts = (props) => {
                           </Link>
                           {/* :null} */}
 
-                          <div className="allproduct-price-div">
+                          <div className="contanier allproduct-price-div">
                             {/* <div className="d-flex justify-content-center">
                       <StarsRating
                         count={5}

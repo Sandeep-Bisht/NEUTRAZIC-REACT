@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import "../components/singleproduct.css";
-import "../views/landing/homepage.css";
+
 import { useHistory } from "react-router-dom";
 import StarsRating from "stars-rating";
 import ReactImageZoom from "react-image-zoom";
