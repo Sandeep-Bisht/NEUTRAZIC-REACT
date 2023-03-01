@@ -427,6 +427,17 @@ width:100%;
         padding: 5px!important;
     }
 }
+@media only screen and (max-width:379.98px){
+    .animation-container{
+        height:70%!important;
+    }
+    .myAccount-empty-div{
+         margin-top: 227px!important;
+         margin-bottom: 5px!important;
+         padding: 10px 10px!important;
+    }
+   
+}
 
 /* End Media Query Responsive for Desktop */
 

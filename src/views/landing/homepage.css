@@ -18657,6 +18657,13 @@ margin: 40px 8px 15px 0px;
 }
  /* SubcategoryPage Css */
 
+
+ /* madal css */
+ .top-nav .show{
+	display: flex!important;
+	 justify-content: center;
+ }
+
  /* media query Deepak */
  @media only screen and (max-width : 1399px){
 	/*responsive homepage */
@@ -18808,6 +18815,7 @@ padding-top: 72px;
 
  
  @media only screen and (max-width : 767px) {
+	
 	/* responsive homepage */
 	.brands-area{
 		display: none;
@@ -19341,6 +19349,7 @@ padding-top: 72px;
 	}
 	.drop-category{
 		height: 34px!important;
+		margin-left: -13px!important;
 	}
 	.navbar-light .navbar-toggler {
 		padding: 6px 10px!important;
