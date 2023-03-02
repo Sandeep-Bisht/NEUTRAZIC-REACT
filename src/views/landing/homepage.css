@@ -19408,7 +19408,9 @@ padding-top: 72px;
 	.brands-area {
 		display: none;
 	}
-
+	.back-ground-subcategory-sidebar{
+		margin-left: -25px;
+	}
 	/* end All product page */
 	.contact-container-div{
 		overflow: hidden!important;
