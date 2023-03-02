@@ -997,7 +997,7 @@ body {
         justify-content: end;
     }
     
-    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+    .container{
         padding-left: 0px;
         padding-right:0px;
     }
@@ -1005,6 +1005,11 @@ body {
         margin-left: 110px!important;
     }
   
+}
+@media only screen and (max-width : 1299px){
+    .currancy{
+        margin-left: 65px!important;
+      }
 }
 @media only screen and (max-width : 1024px) {
       .currancy{
@@ -1015,7 +1020,7 @@ body {
 
 @media only screen and (max-width :991px) {
       .currancy{
-        margin-left: 54px!important;
+        margin-left: 26px!important;
       }
     .navbar {
         background-color: #1b97ff !important;
@@ -1070,12 +1075,31 @@ body {
     }
     .sp{
         padding-left: 6px;
+        font-size: 14px;
+    }
+    .dropdown .btn-sm{
+        font-size: 14px;
     }
     /* .cart-div{
         padding-left: 6px;
     } */
     .login-div2 input[type="text"]{
         width: 150px;
+    }
+    .user-icon{
+        font-size: 25px;
+    }
+    .option-item .cart-btn{
+        font-size: 25px;
+    }
+    .account-div{
+        padding-left: 2px!important;
+    }
+    .cart-div{
+        padding-left: 2px;
+    }
+    .heart-div{
+        padding-left: 2px;
     }
     
   
@@ -1104,17 +1128,41 @@ body {
     .drop-category{
         margin-left: -5px;
         padding-right: 10px;
-        height: 43px;
+        height: 45px;
     }
     .login-div {
         padding-left: 76px;
     }
-    .drop-category .category-head {
-        display: none;
+    .category i{
+        display: none!important;
     }
+    .drop-category .category-head {
+        font-size: 12px;
+    }
+  
+}
+@media only screen and (max-width : 775.98px){
+    .currancy {
+        margin-left: 6px!important;
+    }
+    /* login / register modal */
+	.logiRegisterHeader2{
+		padding-right: 35px!important;
+	}
+    .modal-dialog .login-register-modal{
+        width: 80%;
+        margin: 30px auto;
+    }
+    .modal-backdrop.show 
+{
+    width: 100%;
+    height: 100%;
+}	/* end modal */
+
 }
 @media only screen and (max-width : 575.98px) {
     /* responsive homepage */
+    
     .home-banner {
         padding-top: 250px;
     }
@@ -1130,7 +1178,7 @@ body {
     }
 
     .drop-category .category-head {
-        display: none;
+        font-size: 11px;
     }
     /* ------pras css----------- */
     .login-div2 input[type="text"]{
@@ -1143,7 +1191,7 @@ body {
         margin-left: 8px!important;
     }
     .currancy{
-        margin-right: -30px!important;
+        padding-left: 50px!important;
     }
     .col-sm-2 .login-div{
         padding-left: 14px;
@@ -1153,6 +1201,7 @@ body {
     }
     .main-navbar-head{
         margin-top: -9px;
+        width: 40%;
     } 
     .top-header-padding{
         text-align: center;
@@ -1172,7 +1221,7 @@ body {
         margin-left: 10px;
     }
     .currancy{
-        margin-left: 37px!important;
+        margin-left: 11px!important;
     }
     .col-sm-2 .login-div{
         padding-left: 10px;
@@ -1193,6 +1242,43 @@ body {
     margin-left: 15px;
     } */
 
+}
+@media only screen and (max-width : 380px){
+    /* login register modal */
+    .logiRegisterContentDiv {
+        margin: 0px;
+        padding: 0px;
+    }
+    .logiRegisterHeader1 {
+        padding-left: 35px;
+    }
+    .logiRegisterHeader2 {
+        padding-right: 9px!important;
+    }
+    .start-login-form{
+        margin-top: 17px!important;
+    }
+    .logiRegisterContentDiv .btn {
+        font-size: 17px;
+        padding: 14px;
+        margin-top: 0px;
+    }
+    .form-control-login{
+        height: 25px!important;
+    }
+    .start-register-form{
+        margin-top: 17px!important;
+    }
+    /* end */
+    .drop-category .category-head {
+        font-size: 10px;
+    }
+    .category{
+        width: 100px;
+    }
+    .currancy {
+        margin-left: 5px!important;
+    }
 }
 @media only screen and (max-width : 359.98px)
    { 
@@ -1226,7 +1312,7 @@ height: 30px;
         width: 80%;
     }
     .currancy{
-        margin-left: 0px;
+        margin-left: 3px;
     }
     .drop-category{
         padding-left: 46px;

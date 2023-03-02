@@ -30,15 +30,15 @@ const MyAccount = () => {
       <div id="Myacount-Page">
         {Userdata ?(
         <form onSubmit={handleSubmit(onsubmit)}>
-          <div className="container mt-5 mb-5">
+          <div className="container mt-5 mb-4">
             <div className="row">
-              <div className="col-12">
-                <div className="card p-5 m-2">
+              <div className="col-12 Myacount-Page">
+                <div className="card p-4 m-2">
                   <h4 className="Myacount-heading text-center pb-3">
                     My Account
                   </h4>
                   <div className="row">
-                    <div className="col-6 p-1">
+                    <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Name:</p>
                       <input
                         type="text"
@@ -52,7 +52,7 @@ const MyAccount = () => {
                       {/* {errors?.name?.type === "required" && <p className="text-danger">Name is Required</p>} */}
                     </div>
 
-                    <div className="col-6 p-1">
+                    <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Address:</p>
                       <input
                         type="text"
@@ -63,7 +63,7 @@ const MyAccount = () => {
                       />
                       {/* {errors?.address?.type === "required" && <p className="text-danger">Address is Required</p>} */}
                     </div>
-                    <div className="col-6 p-1">
+                    <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Pincode:</p>
                       <input
                         type="number"
@@ -73,7 +73,7 @@ const MyAccount = () => {
                       />
                       {/* {errors?.pincode?.type === "required" && <p className="text-danger">Pincode is Required</p>} */}
                     </div>
-                    <div className="col-6 p-1">
+                    <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Mobile Number:</p>
                       <input
                         type="number"
@@ -87,7 +87,7 @@ const MyAccount = () => {
                       {/* {errors?.mobileNumber?.type === "maxLength" && (<p className="text-danger">Please Enter a Valid Mobile Number</p>)}
                       {errors?.mobileNumber?.type === "minLength" && (<p className="text-danger">Please Enter a Valid Mobile Number 23</p>)} */}
                     </div>
-                    <div className="col-6 p-1">
+                    <div className="col-md-6 col-12 p-1">
                       <p className="ps1">Email:</p>
                       <input
                         type="email"
@@ -109,7 +109,7 @@ const MyAccount = () => {
                         </p>
                       )} */}
                     </div>
-                    <div className="col-6 p-1">
+                    <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Alternative Number</p>
                       <input
                         type="text"
@@ -125,7 +125,7 @@ const MyAccount = () => {
                       {errors?.alternativeNumber?.type === "minLength" && (<p className="text-danger">Please Enter a Valid Mobile Number 23</p>)} */}
                     </div>
 
-                    <div className="col-12 d-flex justify-content-center mt-5 p-2">
+                    <div className="col-12 d-flex justify-content-center mt-4 p-2">
                       <button
                         className="Myacount-button btn btn-primary"
                         type="submit"
@@ -140,8 +140,8 @@ const MyAccount = () => {
           </div>
         </form>
         ):
-        <div className="col-12 mt-4 text-center EMPTYWISHLIST-DIV">
-            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"  background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
+        <div className="col-12 mt-4 text-center EMPTYWISHLIST-DIV myAccount-empty-div">
+            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json" className="lottie-myAccount" background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
             </div>
           }
       </div> 

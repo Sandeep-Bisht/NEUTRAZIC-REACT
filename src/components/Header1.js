@@ -422,14 +422,14 @@ const Header1 = (props) => {
       <div className="container-fluid top-nav">
         {/* login Register Modal  */}
         <div
-          className="modal fade"
+          className="modal fade login-register-main"
           id="exampleModal"
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
           <div className="modal-dialog">
-            <div className="modal-content">
+            <div className="modal-content login-register-modal">
               <div className="modal-body">
                 <div className="row mt-0">
                   <div className="col-12">
@@ -467,15 +467,15 @@ const Header1 = (props) => {
                           className="form-group col-lg-12"
                           onBlur={handleSubmit(RegisterUser)}
                         >
-                          <div className="row mt-0">
-                            <div className="col-6">
+                          <div className="row mt-0 start-register-form">
+                            <div className="col-md-6 col-12">
                               <div className="form-group">
                                 <label>
                                   Username<span>*</span>
                                 </label>
                                 <input
                                   type="text"
-                                  className="form-control"
+                                  className="form-control form-control-login"
                                   {...register("username", {
                                     required: true,
                                   })}
@@ -488,14 +488,14 @@ const Header1 = (props) => {
                                 
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12">
                               <div className="form-group ">
                                 <label>
                                   Email<span>*</span>
                                 </label>
                                 <input
                                   type="email"
-                                  className="form-control "
+                                  className="form-control form-control-login "
                                   {...register("email", {
                                     required: true,
                                     pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
@@ -515,14 +515,14 @@ const Header1 = (props) => {
                               </div>
                             </div>
 
-                            <div className="col-6">
+                            <div className="col-md-6 col-12">
                               <div className="form-group">
                                 <label>
                                   Password<span>*</span>
                                 </label>
                                 <input
                                   type="password"
-                                  className="form-control "
+                                  className="form-control form-control-login "
                                   {...register("password", {
                                     required: true,
                                     pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -543,14 +543,14 @@ const Header1 = (props) => {
                                 )}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12">
                               <div className="form-group ">
                                 <label>
                                   Confirm Password<span>*</span>
                                 </label>
                                 <input
                                   type="password"
-                                  className="form-control "
+                                  className="form-control form-control-login "
                                   {...register("repassword", {
                                     required: true,
                                     validate: (val) => {
@@ -572,14 +572,14 @@ const Header1 = (props) => {
                                 )}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12">
                               <div className="form-group ">
                                 <label>
                                   Phone Number<span>*</span>
                                 </label>
                                 <input
                                   type="number"
-                                  className="form-control "
+                                  className="form-control form-control-login "
                                   {...register("phonenumber", {
                                     required: true,
                                   })}
@@ -608,12 +608,16 @@ const Header1 = (props) => {
                   ) : (
                     <div className="col-lg-12 logiRegisterContentDiv">
                       <div className="form-row">
+                      <form
+                          className="form-group col-lg-12"
+                          >
+                            <div className="row mt-0 start-login-form">
                         <div className="form-group col-lg-12">
                           <label>
                             Username<span>*</span>
                           </label>
                           <input
-                            className="form-control "
+                            className="form-control form-control-login"
                             onChange={(e) => {
                               setUsername(e.target.value);
                             }}
@@ -626,7 +630,7 @@ const Header1 = (props) => {
                           </label>
                           <input
                             type="password"
-                            className="form-control "
+                            className="form-control form-control-login "
                             onChange={(e) => {
                               setPassword(e.target.value);
                             }}
@@ -647,6 +651,8 @@ const Header1 = (props) => {
                             <p className="mt-3">Forgot Password?</p>
                           </span>
                         </div>
+                        </div>
+                        </form>
                       </div>
                     </div>
                   )}
@@ -884,7 +890,7 @@ const Header1 = (props) => {
       
       <div className="container-fluid main-nav">
         <div className="row mt-0" id="myHeader">
-          <div className="col-2 drop-category Browse-Category" data-bs-toggle="modal"
+          <div className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category" data-bs-toggle="modal"
                   data-bs-target="#myModal">
             <div>
               <div className="category ">
@@ -899,7 +905,7 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-          <div className="col-10">
+          <div className="col-lg-10 col-md-10 col-sm-9 col-8 ps-0">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <div className="container-fluid mb-1">
                 <button
