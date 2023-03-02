@@ -162,10 +162,10 @@ const Dashboard = () => {
           <div className="container-fluid">
             <DashboardHeaader />
             <div className="row px-0 dashboard-container">
-              <div className="col-2 sidebar-dashboard">
+              <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 sidebar-dashboard">
                 <Sidemenu />
               </div>
-              <div className="col-10">
+              <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
                 <main className="main graph-main-div">
                   <div className="row cardsec-row">
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">

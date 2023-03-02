@@ -111,11 +111,11 @@ const AllBlogs = () => {
         <div className="container-fluid">
           <DashboardHeaader />
 
-          <div className="row">
-            <div className="col-2 sidebar-dashboard px-0">
+          <div className="row px-0 dashboard-container">
+            <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 sidebar-dashboard">
               <Sidemenu />
             </div>
-            <div className="col-10">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
               <div className="all-products-details-section">
                 <h3 className="all-products-head">All Blogs</h3>
                 <div className="all-products-search-wrap">

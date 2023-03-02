@@ -315,6 +315,11 @@ a{
 } */
 
 /* ===== MEDIA QUERIES=====*/
+@media screen and (min-width: 1199px){
+  .sidebar-dashboard .nav__list{
+  padding-left: 0px!important;
+}
+}
 @media screen and (min-width: 768px){
   /* body{
     margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -630,8 +635,7 @@ font-family: 'Roboto', sans-serif;
   position: sticky;
   top: 0;
   bottom: 0;
-  padding: 0 6px;
-  padding-top: 80px;
+  padding-top: 44px;
   z-index: 5;
 }
 .sidebar-dashboard{
