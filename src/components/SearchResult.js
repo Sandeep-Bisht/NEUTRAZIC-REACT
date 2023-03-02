@@ -790,7 +790,7 @@ const SearchResult = (props) => {
                         <div className="single-products-box border">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="product-div">
+                              <div className="product-div search-product-div">
                                 <div className="product-image-div">
                                   <Link
                                     to={"/SingleProduct/" + el._id}
@@ -917,6 +917,7 @@ const SearchResult = (props) => {
                                       </div>
                                     </div>
                                   </div>
+                                  <hr/>
                                 </div>
                               </div>
                             </div>
@@ -941,6 +942,7 @@ const SearchResult = (props) => {
                         autoplay
                       ></lottie-player>}
             </div>
+            
           </div>
         </section>
         <ToastContainer/>

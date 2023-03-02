@@ -30,8 +30,9 @@ function Blogs() {
   return (
     <>
       <Header1 />
+
       <section className="blog-page">
-        <div className="container-fluid m-auto">
+        <div className="container m-auto">
           <div className="row">
             <div className="col-md-12">
               <div className="blog-box-wrapper">

@@ -82,7 +82,7 @@ const SingleBlog = (props) => {
       <div className="container product-div blog-container">
         <div className="row">
           <div className="col-md-12">
-            <div className="Single-Blog-Heading ps-5">
+            <div className="Single-Blog-Heading">
               {blog &&
                 blog.map((item, ind) => {
                   return (

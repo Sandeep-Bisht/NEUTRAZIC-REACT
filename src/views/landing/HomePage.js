@@ -1437,7 +1437,7 @@ const HomePage = () => {
             <h1 className="trendign-head">
             <span className="products-color">Our Blogs</span>
           </h1>
-              <div className="blog-box-wrapper">
+              {/* <div className="blog-box-wrapper">
                 <div className="row">
                   <div className="col-lg-7 col-md-12">
                     {blogs && blogs.map((item,ind)=>{
@@ -1473,7 +1473,7 @@ const HomePage = () => {
                       )})}
                      </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="blog-page-section-2">
             

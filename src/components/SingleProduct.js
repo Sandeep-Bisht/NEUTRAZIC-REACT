@@ -628,16 +628,14 @@ const SingleProduct = (props) => {
         </span>
       </div>
       <div className="container">
-      <div className="container-fluid product-div mt-5">
+      <div className=" product-div single-page mt-5">
         <div className="row ">
           <div className="col-sm-12 col-md-12 col-lg-6 pd-0 picture-div justify-content-center align-items-center ">
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image && data.image.length > 0 ? (
+              {data.image && data.image.length > 0 &&
                 <img src={`${baseUrl}/` + MainImage} />
-              ) : (
-                <img src={require("../../src/Images/products/facewash1.png")} />
-              )}
+               }
             </div>
 
             {/* <ReactImageZoom {...ImageData} /> */}
@@ -654,7 +652,7 @@ const SingleProduct = (props) => {
                 disableArrowsOnEnd={false}
                 // itemPadding={[0, 4]}
               >
-                {data.otherImage && data.otherImage.length > 0 ? (
+                {data.otherImage && data.otherImage.length > 0 &&
                   data.otherImage.map((item, ind) => (
                     <div className="col" key={ind}>
                       <img
@@ -664,11 +662,8 @@ const SingleProduct = (props) => {
                       />
                     </div>
                   ))
-                ) : (
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                )}
+                
+                }
               </Carousel>
             </div>
 
@@ -937,10 +932,11 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
+      </div>
       <div className="container-fluid description">
         <div className="row main-div p-4">
           <div>
-            <div className="row heading mt-4 jutify-content-center align-items-center">
+            <div className="row heading mt-4 jutify-content-center">
               {/* <div className="col-sm-1"></div> */}
               <div className="col-sm-2 title" id="Description">
                 <button className="button2">Description</button>
@@ -1114,12 +1110,12 @@ const SingleProduct = (props) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div id="columns" className="columns_5 d-flex related-Prod-single-product">
+        <div id="columns" className="columns_5 d-flex justify-content-between related-Prod-single-product">
           {AllProduct.map((el, ind1) => {
             if (ind1 < 5) {
               return (
                 
-                  <figure className="figure1">
+                  <figure className="figure1 single-product-figure">
                     <Link Link to={"/SingleProduct/" + el._id}>
                       <div>
                         {/* {Categorydetails.image!==undefined? */}
@@ -1232,7 +1228,7 @@ const SingleProduct = (props) => {
       <div className="review-sec">
         <div className="cmt-button-sec">
           <div
-            className="col-sm-6  align-items-center d-flex"
+            className="col-sm-6  align-items-center single-prod-page d-flex"
             id="comments-button-div"
           >
             <span>Review Form</span>
@@ -1241,7 +1237,7 @@ const SingleProduct = (props) => {
             </button>
           </div>
           <div
-            className="col-sm-6  align-items-center d-flex"
+            className="col-sm-6  align-items-center single-prod-page d-flex"
             id="SubmitComments-button-div"
           >
             <span>Rating & Review</span>
@@ -1415,8 +1411,6 @@ const SingleProduct = (props) => {
       
       <Baseline />
       <Footer />
-      </div>
-      
     </>
   );
 };

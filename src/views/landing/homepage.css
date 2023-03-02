@@ -18402,11 +18402,11 @@ ul
 
 /* Media Query Responsive for Desktop */
 @media only screen and (min-width: 815px) and (max-width: 1024px){
-	.single-products-box .content .price-div span
+	/* .single-products-box .content .price-div span
 	{
 		font-size: 14px;
 		margin-left: 0.5rem !important;
-	}
+	} */
 	.single-products-box .content .price-div del
 	{
 		font-size: 11px;
@@ -19004,7 +19004,7 @@ padding-top: 72px;
 		margin: -22px 0px 15px 2px;
 	}
 	p {
-		line-height: 2.8;
+		line-height: 1.6
 	}
 	
 	/* end All product page */
