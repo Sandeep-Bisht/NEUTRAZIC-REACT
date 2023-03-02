@@ -932,6 +932,7 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
+      </div>
       <div className="container-fluid description">
         <div className="row main-div p-4">
           <div>
@@ -1109,7 +1110,7 @@ const SingleProduct = (props) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div id="columns" className="columns_5 related-Prod-single-product">
+        <div id="columns" className="columns_5 d-flex justify-content-between related-Prod-single-product">
           {AllProduct.map((el, ind1) => {
             if (ind1 < 5) {
               return (
@@ -1407,7 +1408,7 @@ const SingleProduct = (props) => {
       </div>
       {/* end submit review div */}
       {/* End Review section for mobile */}
-      </div>
+      
       <Baseline />
       <Footer />
     </>
