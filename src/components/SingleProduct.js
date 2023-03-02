@@ -633,11 +633,9 @@ const SingleProduct = (props) => {
           <div className="col-sm-12 col-md-12 col-lg-6 pd-0 picture-div justify-content-center align-items-center ">
             <div className="single-img-div justify-content-center align-items-center d-flex">
               {" "}
-              {data.image && data.image.length > 0 ? (
+              {data.image && data.image.length > 0 &&
                 <img src={`${baseUrl}/` + MainImage} />
-              ) : (
-                <img src={require("../../src/Images/products/facewash1.png")} />
-              )}
+               }
             </div>
 
             {/* <ReactImageZoom {...ImageData} /> */}
@@ -654,7 +652,7 @@ const SingleProduct = (props) => {
                 disableArrowsOnEnd={false}
                 // itemPadding={[0, 4]}
               >
-                {data.otherImage && data.otherImage.length > 0 ? (
+                {data.otherImage && data.otherImage.length > 0 &&
                   data.otherImage.map((item, ind) => (
                     <div className="col" key={ind}>
                       <img
@@ -664,11 +662,8 @@ const SingleProduct = (props) => {
                       />
                     </div>
                   ))
-                ) : (
-                  <img
-                    src={require("../../src/Images/products/facewash1.png")}
-                  />
-                )}
+                
+                }
               </Carousel>
             </div>
 
@@ -1114,7 +1109,7 @@ const SingleProduct = (props) => {
           </div>
         </div>
         {/* End Related product heading for phone view */}
-        <div id="columns" className="columns_5 d-flex related-Prod-single-product">
+        <div id="columns" className="columns_5 related-Prod-single-product">
           {AllProduct.map((el, ind1) => {
             if (ind1 < 5) {
               return (
