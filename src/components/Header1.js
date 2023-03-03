@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
 
- import "../components/Header1.css";
+import "../components/Header1.css";
 import "../components/Carouselcomp";
 import $ from "jquery";
 import b from "./Admin/CategoryCreation";
@@ -78,10 +78,10 @@ const Header1 = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     GetSubCategory();
-    $(document).ready(function() {
+    $(document).ready(function () {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
-      window.onscroll = function() {
+      window.onscroll = function () {
         headerFunction();
       };
       // $('.collapse-btn').click(function(){
@@ -98,7 +98,7 @@ const Header1 = (props) => {
       //                 $('.content').addClass('col-sm-10');
       //               }
       //   });
-      $(".arrow").click(function() {
+      $(".arrow").click(function () {
         $(".sublist").slideUp();
       });
     });
@@ -485,7 +485,7 @@ const Header1 = (props) => {
                                     This field is required
                                   </p>
                                 )}
-                                
+
                               </div>
                             </div>
                             <div className="col-md-6 col-12">
@@ -511,7 +511,7 @@ const Header1 = (props) => {
                                     Please enter the valid Email
                                   </p>
                                 )}
-                                
+
                               </div>
                             </div>
 
@@ -593,7 +593,7 @@ const Header1 = (props) => {
                               </div>
                             </div>
                           </div>
-                        
+
                           <div className="form-group ">
                             <button
                               className="btn btn-success btn-lg"
@@ -608,50 +608,50 @@ const Header1 = (props) => {
                   ) : (
                     <div className="col-lg-12 logiRegisterContentDiv">
                       <div className="form-row">
-                      <form
+                        <form
                           className="form-group col-lg-12"
-                          >
-                            <div className="row mt-0 start-login-form">
-                        <div className="form-group col-lg-12">
-                          <label>
-                            Username<span>*</span>
-                          </label>
-                          <input
-                            className="form-control form-control-login"
-                            onChange={(e) => {
-                              setUsername(e.target.value);
-                            }}
-                            required
-                          />
-                        </div>
-                        <div className="form-group col-lg-12">
-                          <label>
-                            Password<span>*</span>
-                          </label>
-                          <input
-                            type="password"
-                            className="form-control form-control-login "
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                            required
-                          />
-                        </div>
-                        <h5 className="Login-fail-msg">{msg}</h5>
-                        <div className="form-group col-lg-12 justify-content-center">
-                          <button
-                            className="btn btn-success btn-lg"
-                            onClick={(e) => {
-                              LoginUser(e);
-                            }}
-                          >
-                            Login
-                          </button>
-                          <span>
-                            <p className="mt-3">Forgot Password?</p>
-                          </span>
-                        </div>
-                        </div>
+                        >
+                          <div className="row mt-0 start-login-form">
+                            <div className="form-group col-lg-12">
+                              <label>
+                                Username<span>*</span>
+                              </label>
+                              <input
+                                className="form-control form-control-login"
+                                onChange={(e) => {
+                                  setUsername(e.target.value);
+                                }}
+                                required
+                              />
+                            </div>
+                            <div className="form-group col-lg-12">
+                              <label>
+                                Password<span>*</span>
+                              </label>
+                              <input
+                                type="password"
+                                className="form-control form-control-login "
+                                onChange={(e) => {
+                                  setPassword(e.target.value);
+                                }}
+                                required
+                              />
+                            </div>
+                            <h5 className="Login-fail-msg">{msg}</h5>
+                            <div className="form-group col-lg-12 justify-content-center">
+                              <button
+                                className="btn btn-success btn-lg"
+                                onClick={(e) => {
+                                  LoginUser(e);
+                                }}
+                              >
+                                Login
+                              </button>
+                              <span>
+                                <p className="mt-3">Forgot Password?</p>
+                              </span>
+                            </div>
+                          </div>
                         </form>
                       </div>
                     </div>
@@ -665,326 +665,334 @@ const Header1 = (props) => {
         {/* End login register Modal  */}
         {/* Logo div */}
         <div className="newheader">
-        <div className="row mt-0 top-header-padding">
-          <div className="col-md-3 col-sm-3 col-12 logo-main-div">
-            <Link className="navbar-brand" to="/">
-              <img
-                src={require("../Images/new-logo.png")}
-                alt="logo"
-                className="logo2"
-              />
-            </Link>
-          </div>
-          {/* End Logo Div */}
-          {/* Search Box Code */}
-          <div className="col-sm-3 main-navbar-head col-6">
-            <div className="login-div2">
-              <input
-                type="text"
-                className="my-input-field"
-                placeholder="Search..."
-                onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    searchData(search);
-                    history.push("/SearchResult/" + search);
-                  }
-                }}
-              />
-              <Link to={"/SearchResult/" + search}>
-                <button
-                  className="search mr-1"
-                  onClick={() => searchData(search)}
-                >
-                  <i className="bx bx-search-alt"></i>
-                </button>
-              </Link>
-            </div>
-          </div>
-          {/* End Of search Code */}
-          {/* Start Login/Register div */}
-          <div className="col-md-2 col-sm-2 account-div col-1">
-            <div className="row login-div mt-4">
-              <div className="col-sm-1">
-                <div className="option-item">
-                  <div className="cart-btn">
-                    {Userdata == null ? (
-                      <>
-                        <span
-                          className="sp"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                          style={{ cursor: "pointer" }}
-                        >
-                          <i className="user-icon bx bx-user"></i>
-                        </span>
-                        <br />
-                        <span
-                          className="Sp1 mt-5"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                          style={{ cursor: "pointer" }}
-                        ></span>
-                      </>
-                    ) : (
-                      <>
-                        <i className="user-icon bx bx-user"></i>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-8 user-login">
-                {Userdata == null ? (
-                  <>
-                    {/* <span
-                      className="sp pl-2"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      style={{ cursor: "pointer" }}
-                    >
-                      Account
-                    </span> */}
-                    <br />
-                    <span
-                      className="Sp1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      style={{ cursor: "pointer" }}
-                    >
-                      Login/Register
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    {/* <span className="sp" style={{ cursor: "pointer" }}>
-                      Account
-                    </span> */}
-                    {/* <br /> */}
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-white btn-sm dropdown-toggle user-dropdown-btn"
-                        type="button"
-                        id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        {Userdata && Userdata.username}
-                      </button>
+          <div className="row mt-0 top-header-padding">
+            <div className="col-md-12">
 
-                      <ul
-                        className="dropdown-menu Logout-ul"
-                        aria-labelledby="dropdownMenuButton1"
-                      >
-                        <div>
-                          <div className="Logout-div d-flex align-items-center">
-                            <i className="bx bx-file pl-2"></i>{" "}
-                            <li
-                              className="dropdown-item Logout-li"
-                              style={{ cursor: "pointer" }}
-                            >
-                              <Link to="/UserOrder">
-                                <span className="pr-4">Orders</span>
-                              </Link>
-                            </li>
-                          </div>
-                        </div>
-                        <Link to="/Cart">
-                          <div className="Logout-div d-flex align-items-center">
-                            <i className="bx bx-cart pl-2"></i>{" "}
-                            <li
-                              className="dropdown-item Logout-li"
-                              style={{ cursor: "pointer" }}
-                            >
-                              <span className="pr-4">Cart</span>
-                              {/* <span className="text-danger">item</span> */}
-                            </li>
-                          </div>
-                        </Link>
-                        <Link to="/Wishlist">
-                          <div className="Logout-div d-flex align-items-center">
-                            <i className="bx bx-heart pl-2"></i>{" "}
-                            <li
-                              className="dropdown-item Logout-li"
-                              style={{ cursor: "pointer" }}
-                            >
-                              <span className="pr-4">Wishlist</span>
-                            </li>
-                          </div>
-                        </Link>
-                        <div className="Logout-div d-flex align-items-center">
-                          <i className="bx bx-log-out pl-2"></i>{" "}
-                          <li
-                            className="dropdown-item Logout-li"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => {
-                              logout();
-                            }}
-                          >
-                            <span className="pr-4">Logout</span>
-                          </li>
-                        </div>
-                      </ul>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-          {/* End Login/Register div */}
-          {/* Cart div Start */}
-          <div className="col-md-1 col-sm-1 cart-div col-1">
-            <Link to="/cart">
-              <div className="row login-div1 mt-4">
-                <div className="col-sm-1">
-                  <div className="option-item">
-                    <div className="cart-btn">
-                      <i className="bx bx-cart"></i>
-                    </div>
-                  </div>
-                </div>
+              <div className="heaader-wrapper">
 
-                <div className="col-8 user-login">
-                  {cartItems ? <h6 className="Total-Item">{cartItems}</h6> : ""}
-                  <span className="sp">Cart</span>
-                  <br />
-                  {/* <span className="Sp1">₹ 0.0</span> */}
-                </div>
-              </div>
-            </Link>
-          </div>
-          {/* Cart div End */}
-          {/* Start Wishlidt div */}
-          <div className="col-md-1 col-sm-1 heart-div col-1">
-            <Link to="/WishList">
-              <div className="row justify-content-center mt-4">
-                <div className="col-sm-2">
-                  <div className="option-item">
-                    <div className="cart-btn">
-                      {/* <Link to="/Ordered"> */}
-                      <i className="bx bx-heart"></i>
-                      {/* </Link> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-8 user-login">
-                  <span className="sp">Wishlist</span>
-                  {/* <br />
-                  <span className="Sp1">Edit your wishlist</span> */}
-                </div>
-              </div>
-            </Link>
-          </div>
-          {/* End Wishlist div */}
-          {/* Currancy Change code */}
-          <div className="col-md-1 col-sm-1 d-flex align-items-center currancy col-3">
-            <select>
-              <option>INR</option>
-              <i className="bx bx-chevron-down"></i>
-
-              <option>Dollar</option>
-            </select>
-          </div>
-          {/* End Of Currancy Change */}
-        </div>
-      
-      <div className="container-fluid main-nav">
-        <div className="row mt-0" id="myHeader">
-          <div className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category" data-bs-toggle="modal"
-                  data-bs-target="#myModal">
-            <div>
-              <div className="category ">
-                <i
-                  className="fa fa-bars collapse-btn pt-1"
-                  data-bs-toggle="modal"
-                  data-bs-target="#myModal"
-                ></i>
-              </div>
-              <div className="category">
-                <span className="category-head" >Browse Categories</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-10 col-md-10 col-sm-9 col-8 ps-0">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <div className="container-fluid mb-1">
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarTogglerDemo03"
-                  aria-controls="navbarTogglerDemo03"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon"></span>
-                </button>
-                <div
-                  className="collapse navbar-collapse Home-navbar"
-                  id="navbarTogglerDemo03"
-                >
-                  <ul className="navbar-nav me-auto mb-2 mb-lg-0  ml-5">
-                    <li className="nav-item">
-                      <Link
-                        className="nav-link nav-heading"
-                        aria-current="page"
-                        to="/"
-                      >
-                        Home
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link nav-heading" to="/AllProducts">
-                        Shop
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link
-                        className="nav-link nav-heading"
-                        to="/ContactUs"
-                        tabIndex="-1"
-                        aria-disabled="true"
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                    <Link to={"/Blogs"}>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link nav-heading"
-                          href="#"
-                          tabIndex="-1"
-                          aria-disabled="true"
-                        >
-                          Blog
-                        </a>
-                      </li>
+                <div className="header-wrapper-left">
+                  <div className=" logo-main-div">
+                    <Link className="navbar-brand" to="/">
+                      <img
+                        src={require("../Images/new-logo.png")}
+                        alt="logo"
+                        className="logo2"
+                      />
                     </Link>
-                  </ul>
-                  <img
-                    className="icons2"
-                    src={require("../Images/Icons/akar-icons_phone.png")}
-                  />{" "}
-                  <span className="contact">+91-7055872014</span>
-                  <img
-                    src={require("../Images/Icons/carbon_email-new.png")}
-                    className="icons2 ml-3"
-                  />{" "}
-                  <span className="contact  mr-5">info@nutrazik.com</span>
+                  </div>
+
+                  <div className=" main-navbar-head ">
+                    <div className="login-div2">
+                      <input
+                        type="text"
+                        className="my-input-field"
+                        placeholder="Search..."
+                        onChange={(e) => setSearch(e.target.value.toLowerCase())}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            searchData(search);
+                            history.push("/SearchResult/" + search);
+                          }
+                        }}
+                      />
+                      <Link to={"/SearchResult/" + search}>
+                        <button
+                          className="search mr-1"
+                          onClick={() => searchData(search)}
+                        >
+                          <i className="bx bx-search-alt"></i>
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="header-wrapper-right">
+                  <div className="left-part">
+                    <div className="  account-div ">
+                        <div className=" login-div ">
+                      
+                          <div className="option-item">
+                            <div className="cart-btn">
+                              {Userdata == null ? (
+                                <>
+                                  <span
+                                    className="sp"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="user-icon bx bx-user"></i>
+                                  </span>
+
+                                  <span
+                                    className="Sp1 "
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                    style={{ cursor: "pointer" }}
+                                  ></span>
+                                </>
+                              ) : (
+                                <>
+                                  <i className="user-icon bx bx-user"></i>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        <div className=" user-login">
+                          {Userdata == null ? (
+                            <>
+
+
+                              <span
+                                className="Sp1"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                style={{ cursor: "pointer" }}
+                              >
+                                Login/Register
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              {/* <span className="sp" style={{ cursor: "pointer" }}>
+                      Account
+                    </span> */}
+                              {/* <br /> */}
+                              <div className="dropdown">
+                                <button
+                                  className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn"
+                                  type="button"
+                                  id="dropdownMenuButton1"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  {Userdata && Userdata.username}
+                                </button>
+
+                                <ul
+                                  className="dropdown-menu Logout-ul"
+                                  aria-labelledby="dropdownMenuButton1"
+                                >
+                                  <div>
+                                    <div className="Logout-div d-flex align-items-center">
+                                      <i className="bx bx-file pl-2"></i>{" "}
+                                      <li
+                                        className="dropdown-item Logout-li"
+                                        style={{ cursor: "pointer" }}
+                                      >
+                                        <Link to="/UserOrder">
+                                          <span className="pr-4">Orders</span>
+                                        </Link>
+                                      </li>
+                                    </div>
+                                  </div>
+                                  <Link to="/Cart">
+                                    <div className="Logout-div d-flex align-items-center">
+                                      <i className="bx bx-cart pl-2"></i>{" "}
+                                      <li
+                                        className="dropdown-item Logout-li"
+                                        style={{ cursor: "pointer" }}
+                                      >
+                                        <span className="pr-4">Cart</span>
+                                        {/* <span className="text-danger">item</span> */}
+                                      </li>
+                                    </div>
+                                  </Link>
+                                  <Link to="/Wishlist">
+                                    <div className="Logout-div d-flex align-items-center">
+                                      <i className="bx bx-heart pl-2"></i>{" "}
+                                      <li
+                                        className="dropdown-item Logout-li"
+                                        style={{ cursor: "pointer" }}
+                                      >
+                                        <span className="pr-4">Wishlist</span>
+                                      </li>
+                                    </div>
+                                  </Link>
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-log-out pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() => {
+                                        logout();
+                                      }}
+                                    >
+                                      <span className="pr-4">Logout</span>
+                                    </li>
+                                  </div>
+                                </ul>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      
+                    </div>
+
+                    <div className="cart-div">
+                      <Link to="/cart">
+                        <div className=" login-div1">
+                          <div className="">
+                            <div className="option-item">
+                              <div className="cart-btn">
+                                <i className="bx bx-cart"></i>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className=" user-login">
+                            {cartItems ? <h6 className="Total-Item">{cartItems}</h6> : ""}
+                            <span className="sp">Cart</span>
+                            <br />
+                            {/* <span className="Sp1">₹ 0.0</span> */}
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+
+                    <div className=" heart-div ">
+                      <Link to="/WishList">
+                        <div className="  heart-div-inner">
+                          <div className="">
+                            <div className="option-item">
+                              <div className="cart-btn">
+                                {/* <Link to="/Ordered"> */}
+                                <i className="bx bx-heart"></i>
+                                {/* </Link> */}
+                              </div>
+                            </div>
+                          </div>
+                          <div className=" user-login">
+                            <span className="sp">Wishlist</span>
+                            {/* <br />
+                  <span className="Sp1">Edit your wishlist</span> */}
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="right-part">
+                    <div className=" d-flex align-items-center currancy ">
+                      <select>
+                        <option>INR</option>
+                        <i className="bx bx-chevron-down"></i>
+
+                        <option>Dollar</option>
+                      </select>
+                    </div>
+                  </div>
+
+
+
+
+
                 </div>
               </div>
-            </nav>
+
+
+
+            </div>
+
           </div>
-        </div>
-      </div>     
-      <div className="container-fluid p-0">
-        <div className="row side-nav">
-          <div className=" col-sm-12 p-0 content">
-            <React.Fragment>{props.children}</React.Fragment>
+
+          <div className="container-fluid main-nav">
+            <div className="row mt-0" id="myHeader">
+              <div className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category" data-bs-toggle="modal"
+                data-bs-target="#myModal">
+                <div>
+                  <div className="category ">
+                    <i
+                      className="fa fa-bars collapse-btn pt-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#myModal"
+                    ></i>
+                  </div>
+                  <div className="category">
+                    <span className="category-head" >Browse Categories</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-10 col-md-10 col-sm-9 col-8 ps-0">
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                  <div className="container-fluid mb-1">
+                    <button
+                      className="navbar-toggler"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#navbarTogglerDemo03"
+                      aria-controls="navbarTogglerDemo03"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation"
+                    >
+                      <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div
+                      className="collapse navbar-collapse Home-navbar"
+                      id="navbarTogglerDemo03"
+                    >
+                      <ul className="navbar-nav me-auto mb-2 mb-lg-0  ml-5">
+                        <li className="nav-item">
+                          <Link
+                            className="nav-link nav-heading"
+                            aria-current="page"
+                            to="/"
+                          >
+                            Home
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link className="nav-link nav-heading" to="/AllProducts">
+                            Shop
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            className="nav-link nav-heading"
+                            to="/ContactUs"
+                            tabIndex="-1"
+                            aria-disabled="true"
+                          >
+                            Contact
+                          </Link>
+                        </li>
+                        <Link to={"/Blogs"}>
+                          <li className="nav-item">
+                            <a
+                              className="nav-link nav-heading"
+                              href="#"
+                              tabIndex="-1"
+                              aria-disabled="true"
+                            >
+                              Blog
+                            </a>
+                          </li>
+                        </Link>
+                      </ul>
+                      <img
+                        className="icons2"
+                        src={require("../Images/Icons/akar-icons_phone.png")}
+                      />{" "}
+                      <span className="contact">+91-7055872014</span>
+                      <img
+                        src={require("../Images/Icons/carbon_email-new.png")}
+                        className="icons2 ml-3"
+                      />{" "}
+                      <span className="contact  mr-5">info@nutrazik.com</span>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </div></div>
+          <div className="container-fluid p-0">
+            <div className="row side-nav">
+              <div className=" col-sm-12 p-0 content">
+                <React.Fragment>{props.children}</React.Fragment>
+              </div>
+            </div>
+          </div>
+        </div></div>
 
       {/* phone resposive header */}
       {/* phone top-navbar */}
@@ -1094,7 +1102,7 @@ const Header1 = (props) => {
         </div>
         
       </div> */}
-      <ToastContainer/>
+      <ToastContainer />
       {/* end phone top-navbar */}
 
       {/* phone main-navbar */}
@@ -1190,7 +1198,7 @@ const Header1 = (props) => {
           </div>
         </div>
       </nav> */}
-      
+
       {/* end phone responsive header */}
     </>
   );

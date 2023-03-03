@@ -206,7 +206,7 @@ const Cart = () => {
               <h1 className="cart-header">Your Cart</h1>
             </div>
             <div className="row">
-              <div className="col-lg-8 col-md-8">
+              <div className="col-lg-8 col-md-12">
                 {cart.length > 0 ? (
                   <div className="cart-table">
                     <table
