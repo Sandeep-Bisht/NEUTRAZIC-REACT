@@ -38,6 +38,9 @@
     .Single-Blog-Heading .Blog-para{
         font-size: 0.8rem !important;
     }
+    .single-page{
+        padding-top: 124px;
+    }
 }
 @media  only screen and (max-width : 575.98px){
     .blog-container{
@@ -49,5 +52,8 @@
     .Single-Blog-Heading .Blog-para{
         font-size: 0.6rem !important;
         line-height: 2 !important;
+    }
+    .single-page{
+        padding-top: 80px;
     }
 }

@@ -18590,7 +18590,7 @@ margin: 40px 8px 15px 0px;
 	height: 100%;
 	color: #002752;
 	position: sticky;
-    top: 120px;
+    top: 107px;
     height: 100vh;
 	box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
  }
@@ -18601,7 +18601,6 @@ margin: 40px 8px 15px 0px;
 	margin-bottom: 12px;
 	color: #000;
 	opacity: .8;
-	padding-left: 16px;
 	text-transform: capitalize;
  }
  .browse-categories-sub-heading
@@ -18626,7 +18625,6 @@ margin: 40px 8px 15px 0px;
     margin-right: 10px;
     font-weight: 500;
     padding: 10px 0;
-	padding-left: 16px;
     border-bottom: 1px solid #f2f2f2;
     letter-spacing: 0.15px;
     text-transform: capitalize;
@@ -18649,8 +18647,8 @@ margin: 40px 8px 15px 0px;
 	margin-left: 10px;
  }
  .browser-category-section{
-	margin-top: 115px;
-	margin-right:20px;
+	margin-top: -17px;
+	/* margin-right:20px; */
 }
 .blog-box-wrapper .left-blog-image-wrap img{
 	height: 25px;
@@ -18704,7 +18702,7 @@ margin: 40px 8px 15px 0px;
  @media only screen and (max-width : 1024px) {
 	.first-nav{
 		
-		top: 107px!important;
+		top: 101px!important;
 	}
 	/* responsive homepage */
 	.home-banner .home-banner-left .home-banner-heading{
@@ -18749,6 +18747,7 @@ margin: 40px 8px 15px 0px;
 		padding-top: 3px;
 		letter-spacing: 0.25px;
 	}
+	
 	#para {
 		line-height: 30px;
 	}
@@ -18767,6 +18766,12 @@ margin: 40px 8px 15px 0px;
 	.blog-page-section-2 .card-img-top{
 		height: 250px!important;
 	}
+	.trendign-head {
+		margin-top: -50px!important;
+	}
+	.contact-container{
+		margin-top: 90px!important;
+	}
 	/* end homepage */
 	.footer-area{
 		position: relative;
@@ -18779,16 +18784,15 @@ margin: 40px 8px 15px 0px;
 		 left: -25px;
 			}
 	
-	.newheader{
-		height: 95px;
-	}
 	.first-nav{
-		position: absolute!important;
-		margin-top: 5px!important;
+		display: none;
 		
 	}
 	.contact-info-area{
 padding-top: 72px;
+	}
+	.home-banner{
+      margin-top: 30px;
 	}
 
 	/* responsive All product page */
@@ -18800,16 +18804,32 @@ padding-top: 72px;
 	.columns_5 .figure{
        width: 32%;
 	}
+	.browser-category-section {
+		margin-top: 142px!important;
+	}
+	.back-ground-subcategory-sidebar{
+		top: 139px;
+		margin-left: -9px;
+		padding-left: 5px;
+	}
 	/* end All product page */
    
  }
  @media only screen and (max-width : 815px){
-	.first-nav{
-		position: absolute!important;
-		margin-top: 25px!important;
-		
+	.home-banner .home-banner-right img {
+		height: 370px;
 	}
-	 
+	.contact-container {
+		margin-top: 69px!important;
+	}
+	
+	.browser-category-section {
+		margin-top: 138px!important;
+	}
+	.back-ground-subcategory-sidebar {
+		margin-left: -20px;
+		padding-left: 5px;
+	}
 
  }
 
@@ -18955,6 +18975,9 @@ padding-top: 72px;
 	justify-content: center !important;
 }
 /* responsive subcategory */
+.back-ground-subcategory-sidebar{
+	margin-left: -16px!important;
+}
 .sidebar-nav li{
 	padding-left: 0px!important;
 }
@@ -18987,10 +19010,22 @@ padding-top: 72px;
 /* end subcategory */
    
  }
+ @media only screen and (max-width : 767px){
+	.contact-container {
+		margin-top: 98px!important;
+	}
+ }
+
  @media only screen and (max-width : 575.98px) {
 	/* reponsive homepage */
+	.home-banner {
+        padding-top: 165px;
+    }
 	.single-products-box .image img {
 		width: 100%!important;
+	}
+	.contact-container {
+		margin-top: 80px!important;
 	}
 	
 	/* end homepage */
@@ -18998,7 +19033,7 @@ padding-top: 72px;
 	/* responsive All product page */
 	
      .Category-div{
-		margin-top: 201px!important;
+		margin-top: -78px!important;
 	 }
 	 div#columns .figure {
 		margin: -22px 0px 15px 2px;
@@ -19018,11 +19053,7 @@ padding-top: 72px;
 			top: -22px;
 		 left: 17px;
 			}
-	.newheader{
-    height: 202px;
-    padding-left: 0px;
-    margin-left: -5px;
-}
+	
 .single-contact-info-box {
 	height: 165px;
 }
@@ -19100,7 +19131,7 @@ padding-top: 72px;
     height: 100%!important;
     color: #002752;
     position: fixed;
-    top: 110px;
+    top: 52px;
     height: 46vh;
 	margin-left: -12px;
     margin-top: 88px;
@@ -19110,7 +19141,7 @@ padding-top: 72px;
 	}
 	.subcategory-container{
 		position: relative;
-    top: -17px;
+    top: -220px;
     margin-left: 158px;
     width: 65%;
 	}
@@ -19202,6 +19233,12 @@ padding-top: 72px;
 	.drop-category{
 		height: 45px;
 	}
+	.home-banner-heading{
+		margin-top: -30px;
+	}
+	.trendign-head {
+        margin-top: 0px!important;
+	}
 	/* end homepage */
   
 	.contact-form form label{
@@ -19268,6 +19305,10 @@ padding-top: 72px;
 	.footer-bottom-area .payment-types ul li img{
 		height: 14px;
 	}
+	.subcategory-container {
+		margin-left: 143px;
+		width: 64%;
+	}
 	/* subcategory responsive */
 	.browse-categories-sub-heading h2{
          font-size: 18px;
@@ -19314,12 +19355,17 @@ padding-top: 72px;
 		font-size: 12px!important;
 	}
 	/* end homepage */
+	.contact-container-div{
+		overflow: hidden!important;
+	}
 	
    }
  
  @media only screen and (max-width : 380px) {
 	.product-home-div{
-         width: 120px;
+        
+		 width: 155px;
+    margin-left: -15px!important;
 	}
 	.single-products-box{
 		margin-right: 48px;
@@ -19412,6 +19458,9 @@ padding-top: 72px;
 		margin-left: -25px;
 	}
 	/* end All product page */
+	.contact-container {
+		margin-top: 68px!important;
+	}
 	.contact-container-div{
 		overflow: hidden!important;
 	}
@@ -19420,6 +19469,9 @@ padding-top: 72px;
 	}
 	.first-nav{
 		display: none!important;
+	}
+	.home-banner-heading{
+		margin-top: -110px;
 	}
    /* .contact-container{
 	position: relative;
@@ -19434,7 +19486,8 @@ padding-top: 72px;
    font-size: 16px;
 }
 .subcategory-container{
-   margin-left: 145px
+   margin-left: 128px;
+   width: 70%!important;
 }
 /* end subcategory responsive */
  
@@ -19497,7 +19550,7 @@ padding-top: 72px;
 		position: relative;
 		top: 79px;
 		margin-left: 202px;
-		width: 40%;
+		width: 40%!important;
 		}
 		/* end subcategory page */
 		/* baseline */
@@ -19507,6 +19560,8 @@ padding-top: 72px;
 		.allproduct-price-div i {
 			font-size: 11px!important;
 		}
+		
+		
 		/* baseline */
 
 	
