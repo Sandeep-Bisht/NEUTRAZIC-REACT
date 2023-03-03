@@ -8,6 +8,7 @@ import Baseline from "./Baseline";
 import { baseUrl } from "../utils/services";
 import "../components/SingleBlogPage.css";
 import { Link } from "react-router-dom";
+import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
 const SingleBlog = (props) => {
   const blogSlug = props.match.params.slug;
@@ -88,7 +89,6 @@ const SingleBlog = (props) => {
                   return (
                     <>
                       <h1 className="blog-heading1">{item.title}</h1>
-                      <p className="Blog-para">"{item.description}"</p>
                     </>
                   );
                 })}
@@ -147,7 +147,13 @@ const SingleBlog = (props) => {
                                   alt="blog-image"
                                 />
                                 <div class="card-body">
-                                  <p class="card-text">{item.description}</p>
+                                  <p class="card-text"><ReadMoreReact
+                                text={item.description}
+                                min={80}
+                                ideal={80}
+                                max={80}
+                                readMoreText={"...Read More"}
+                              /></p>
                                 </div>
                               </div>
                             </div>

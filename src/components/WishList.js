@@ -28,6 +28,7 @@ const WishList = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetWishlist();
     CartById();
+    window.scroll(0,0);
   }, []);
 
   const GetWishlist = async () => {

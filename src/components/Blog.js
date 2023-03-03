@@ -115,7 +115,15 @@ function Blogs() {
                                   />
                                 </Link>
                                 <div class="card-body">
-                                  <p class="card-text">{item.description}</p>
+                                  <p class="card-text">
+                                  <ReadMoreReact
+                                text={item.description}
+                                min={80}
+                                ideal={80}
+                                max={80}
+                                readMoreText={"...Read More"}
+                              />
+                                  </p>
                                 </div>
                               </div>
                             </div>

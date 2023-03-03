@@ -1483,7 +1483,8 @@ const HomePage = () => {
              
                   <div className="latest-blogs-section">
                     <div className="row">
-                      { blogs && blogs.map((item)=>{
+                      { blogs && blogs.map((item,ind)=>{
+                        if(ind<4)
                         return(
                       <div className="col-lg-3 col-md-6">
                         <div class="card">
