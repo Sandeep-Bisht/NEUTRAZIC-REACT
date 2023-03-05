@@ -1165,6 +1165,9 @@ body {
     .heaader-wrapper .account-div, .heaader-wrapper .cart-div, .heaader-wrapper .heart-div{
         padding: 0 10px;
     }
+    .newheader{
+        height: 135px;
+    }
   
 }
 @media only screen and (max-width : 815px) {
@@ -1210,7 +1213,7 @@ body {
         width: auto;
     }
     .newheader{
-        height: 120px;
+        height: 108px;
     }
   
 }
@@ -1375,6 +1378,16 @@ body {
             left: -10px;
             font-size: 12px;
         }
+        .newheader{
+            height: 125px;
+        }
+        .width-adjust-of-image .width-adjust-of-image {
+            width: 100%!important;
+            
+        }
+        .table td{
+            padding: 3px!important;
+        }
 }
 
 
@@ -1464,6 +1477,13 @@ height: 30px;
     margin-left: -14px!important;
     margin-right: 15px!important;
     width: 41%;
+    }
+    .width-adjust-of-image .width-adjust-of-image {
+        width: 100%!important;
+        
+    }
+    .table td{
+        padding: 3px!important;
     }
   }
 

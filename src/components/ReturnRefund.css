@@ -1,7 +1,7 @@
 .return-policy-section
 {
     background-color: #fff;
-    padding-top: 140px;
+    padding-top: 164px;
 }
 .return-policy-section h1, h2
 {
@@ -33,7 +33,7 @@
 
     .return-policy-section
     {
-        padding-top: 220px;
+        padding-top: 165px;
     }
     .return-policy-section p{
         line-height: 37px;
@@ -71,6 +71,7 @@
     .return-policy-section
     {
         padding-left: 8px;
+        padding-top: 154px;
     }
 
 }

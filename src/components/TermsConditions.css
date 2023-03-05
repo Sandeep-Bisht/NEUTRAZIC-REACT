@@ -1,7 +1,7 @@
 .terms-condition-page
 {
     background-color: #fff;
-    padding-top: 140px;
+    padding-top: 164px;
 }
 .terms-condition-page h1, h2
 {
@@ -32,7 +32,7 @@
 
     .terms-condition-page
     {
-        padding-top: 220px;
+        padding-top: 165px;
     }
     .terms-condition-page p{
         line-height: 37px;
@@ -70,6 +70,7 @@
     .terms-condition-page
     {
         padding-left: 8px;
+        padding-top: 154px;
     }
 
 }
