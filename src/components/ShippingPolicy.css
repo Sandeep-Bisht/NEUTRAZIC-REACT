@@ -2,7 +2,7 @@
 .shipping-policy-page
 {
     background-color: #fff;
-    padding-top: 140px;
+    padding-top: 164px;
 }
 .shipping-policy-page h1, h2
 {
@@ -34,7 +34,7 @@
 
     .shipping-policy-page
     {
-        padding-top: 220px;
+        padding-top: 165px;
     }
     .shipping-policy-page p{
         line-height: 37px;
@@ -72,6 +72,7 @@
     .shipping-policy-page
     {
         padding-left: 8px;
+        padding-top: 154px;
     }
 
 }
