@@ -167,7 +167,7 @@ const ManufacturerCreation = (props) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
-                            <p>{formerror.name}</p>
+                            <p className="formerror">{formerror.name}</p>
                             <label for="floatingInputValue">
                               Manufacturer Name
                             </label>

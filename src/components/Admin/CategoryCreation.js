@@ -207,7 +207,7 @@ const CategoryCreation = (props) => {
                               Setdata({ ...data, image: e.target.files[0] });
                             }}
                           />
-                          <p>{formerror.image}</p>
+                          <p className="formerror">{formerror.image}</p>
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <input
@@ -220,7 +220,7 @@ const CategoryCreation = (props) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
                           />
-                          <p>{formerror.name}</p>
+                          <p className="formerror">{formerror.name}</p>
                           <label for="floatingInputValue">Category Name</label>
                         </div>
                         <div className="col-6 p-1 form-floating">
@@ -252,7 +252,7 @@ const CategoryCreation = (props) => {
                             </option>
                             {/* <option></option> */}
                           </select>
-                          <p>{formerror.featuredCategories}</p>
+                          <p className="formerror">{formerror.featuredCategories}</p>
                         </div>
                         {editableData ? (
                           <div className="col-12 p-1">

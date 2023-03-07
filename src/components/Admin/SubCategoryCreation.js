@@ -224,7 +224,7 @@ const SubCategoryCreation = (props) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
                             />
-                            <p>{formerror.image}</p>
+                            <p className="formerror">{formerror.image}</p>
                           </div>
                           <div className="col-6 p-1">
                             <select
@@ -245,7 +245,7 @@ const SubCategoryCreation = (props) => {
                                 <option value={el._id}>{el.name}</option>
                               ))}
                             </select>
-                            <p>{formerror.category}</p>
+                            <p className="formerror">{formerror.category}</p>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <input
@@ -260,7 +260,7 @@ const SubCategoryCreation = (props) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
-                            <p>{formerror.name}</p>
+                            <p className="formerror">{formerror.name}</p>
 
                             <label for="floatingInputValue">
                               SubCategory Name
