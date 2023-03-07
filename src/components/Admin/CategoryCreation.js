@@ -10,6 +10,7 @@ const CategoryCreation = (props) => {
   var categoryCount = 0;
   const [categories, setCategories] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [formerror,setFormerror] = useState({});
   const [data, Setdata] = useState({
     name: "",
     description: "",
@@ -18,9 +19,26 @@ const CategoryCreation = (props) => {
   });
   const history=useHistory();
   const [editableData]=useState(props.history.location.state);
+ 
+  const ValidationFrom = (value)=>{
+    const error = {};
+    if(!value.name){
+      error.name = "This field is required";
+    }
+    if(value.image.length === 0){
+      error.image = "This field is required";
+    }
+    if(!value.featuredCategories){
+      error.featuredCategories = "This field is required";
+    }
+    return error;
+  }
 
   const submitData = async (e) => {
     e.preventDefault();
+    const errors = ValidationFrom(data);
+    setFormerror(errors);
+    if(Object.keys(errors).length === 0){
     const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
@@ -42,6 +60,7 @@ const CategoryCreation = (props) => {
         this.getAddOn();
       })
       .catch((err) => console.log(err));
+    }
    };
 
   const SelectImage = (e) => {
@@ -188,6 +207,7 @@ const CategoryCreation = (props) => {
                               Setdata({ ...data, image: e.target.files[0] });
                             }}
                           />
+                          <p>{formerror.image}</p>
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <input
@@ -200,6 +220,7 @@ const CategoryCreation = (props) => {
                               Setdata({ ...data, name: e.target.value });
                             }}
                           />
+                          <p>{formerror.name}</p>
                           <label for="floatingInputValue">Category Name</label>
                         </div>
                         <div className="col-6 p-1 form-floating">
@@ -231,6 +252,7 @@ const CategoryCreation = (props) => {
                             </option>
                             {/* <option></option> */}
                           </select>
+                          <p>{formerror.featuredCategories}</p>
                         </div>
                         {editableData ? (
                           <div className="col-12 p-1">

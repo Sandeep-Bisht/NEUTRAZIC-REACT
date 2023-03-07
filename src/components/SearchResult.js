@@ -751,7 +751,7 @@ const SearchResult = (props) => {
             <div className="row mt-0">
               <div className="col-12">
                 <div className="">
-                  <h1 className="trendign-head">Showing Results for "{SearchedText}"</h1>
+                  <h1 className="Search-Result">Showing Results for "{SearchedText}"</h1>
                 </div>
               </div>
             </div>

@@ -160,7 +160,7 @@ const Warehouse = (props) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
-                          <label for="floatingInputValue">Warehouse Address</label>
+                          <label for="floatingInputValue">Description</label>
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <textarea
