@@ -17,6 +17,8 @@ const Productform = (props) => {
   const [products, Setproducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [shwoTable, setShowTable] = useState(false);
+  const [formErrors,setFormErrors]=useState({});
+  //const [validate,setValidate]=useState(true);
   const [editableData] = useState(props.history.location.state);
 
   let [data, Setdata] = useState({
@@ -38,9 +40,43 @@ const Productform = (props) => {
 
   const history = useHistory();
 
-  const submitData = async (e) => {
+  const validateForm=(Value)=>{
+    const error={};
+    if(!Value.name){
+      error.name="This field is required";
+    }
+    if(!Value.warehouse){
+      error.warehouse="This field is required";
+    }
+    if(!Value.category){
+      error.category="This field is required";
+    }
+     if(!Value.subcategory){
+      error.subcategory="This field is required";
+    }
+    if(!Value.manufacturer){
+      error.manufacturer="This field is required";
+    }
+    if(Value.image.length===0)
+    {
+      error.image="This field is required";
+    }
+    if(Value.otherImage.length===0)
+    {
+      error.otherImage="This field is required";
+    }
+    return error;
+  }
+   console.log(formErrors,"erroroasssssss");
+   
+   const submitData =async(e) => {
     e.preventDefault();
-    const formData = new FormData();
+
+
+    const errors = validateForm(data)
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      const formData = new FormData();
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     await formData.append("warehouse", data.warehouse);
@@ -71,6 +107,10 @@ const Productform = (props) => {
         this.getAddOn();
       })
       .catch((err) => console.log(err));
+    } else {
+      console.log('Form has errors. Please correct them.');
+    } 
+    
   };
 
   useEffect(() => {
@@ -357,7 +397,7 @@ const Productform = (props) => {
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
               {Userdata != undefined ? (
                 Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
-                  <form encType="multipart/form-data">
+                  <form encType="multipart/form-data" onSubmit={(e)=>submitData(e)}>
                     <div className="container-fluid">
                       <div className="row px-0">
                         {/* <div className="col-1"></div> */}
@@ -383,6 +423,7 @@ const Productform = (props) => {
                                     Setdata({ ...data, name: e.target.value });
                                   }}
                                 />
+                                <p className="formerror">{formErrors.name}</p>
                                 <label for="floatingform" >Product Name</label>
                               </div>
                               <div className="col-6 p-1">
@@ -397,7 +438,9 @@ const Productform = (props) => {
                                     });
                                   }}
                                 />
+                                <p className="formerror">{formErrors.image}</p>
                               </div>
+                              
                               <div className="col-6 p-1">
                                 <input
                                   type="file"
@@ -412,7 +455,9 @@ const Productform = (props) => {
                                     });
                                   }}
                                 />
+                                <p className="formerror">{formErrors.otherImage}</p>
                               </div>
+                              
 
                               <div className="col-6 p-1 required">
                                 <select
@@ -426,14 +471,13 @@ const Productform = (props) => {
                                     });
                                   }}
                                 >
-                                  {/* <option  hidden value={editableData.category ? editableData.category : data.category}>
-                                  {editableData.category ? categories.find(el => el._id == editableData.category).name : 'select category'}
-                                  </option> */}
+                                 
                                   <option value='' hidden defaultChecked>Select Category</option>
                                   {categories.map((el, ind) => (
                                     <option value={el._id} >{el.name}</option>
                                   ))}
                                 </select>
+                                <p className="formerror">{formErrors.category}</p>
                               </div>
                               <div className="col-6 p-1 required">
                                 <select
@@ -453,6 +497,7 @@ const Productform = (props) => {
                                     <option value={el._id}>{el.name}</option>
                                   ))}
                                 </select>
+                                <p className="formerror">{formErrors.subcategory}</p>
                               </div>
 
                               { Userdata.role == "superAdmin" ? (
@@ -510,6 +555,7 @@ const Productform = (props) => {
                                     ) : null
                                   )}
                                 </select>
+                                <p className="formerror">{formErrors.manufacturer}</p>
                               </div>                            
 
                               <div className="col-6 p-1 required">
@@ -535,6 +581,7 @@ const Productform = (props) => {
                                     ) : null
                                   )}                                 
                                 </select>
+                                <p className="formerror">{formErrors.warehouse}</p>
                               </div>
                               <div className="col-6 p-1 form-floating">
                                 <input
@@ -710,7 +757,7 @@ const Productform = (props) => {
                                   <div className="col-6 p-1">
                                     <button
                                       className="btn btn-primary submit"
-                                      onClick={(e) => submitData(e)}
+                                      type="submit"
                                     >
                                       Submit
                                     </button>

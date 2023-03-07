@@ -378,7 +378,10 @@ a{
   margin-bottom: 0;
   text-transform: capitalize;
 }
-
+.formerror{
+  font-size: 14px;
+  color: red;
+}
 .main{
   padding-top: 10px;
 }
