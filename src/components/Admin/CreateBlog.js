@@ -38,13 +38,14 @@ const addBlogs = async(e)=>{
       body: formData,
     })
       .then((res) => {
+        
         res.json();
       })
       .then((res) => {
         
       })
       .catch((err) => console.log(err));
-  
+      history.push("/AllBlogs");
 }
 const UpdateBlogs = async (e,_id) => {
   e.preventDefault();
@@ -57,16 +58,14 @@ const UpdateBlogs = async (e,_id) => {
   await formData.append("slug",slugify(data.title));
     try{
       const response = await axios.put(`${baseUrl}/api/blogs/update_slug_by_id`, formData)
-      if(response.status==200)
-      {
-        history.push("/AllBlogs");
-      }
-      addBlogs();
+      
+      await addBlogs();
       
     }catch(error)
     {
       console.log(error);
     }
+    history.push("/AllBlogs");
 };
   return (
     <>
@@ -132,7 +131,7 @@ const UpdateBlogs = async (e,_id) => {
                       { editableData ? (
                         <div className="col-12 p-1">
                         <button className="m-2 ps-2 btn btn-primary"
-                        onClick={(e)=>UpdateBlogs(e,data._id)}
+                        onClick={(e)=>UpdateBlogs(e)}
                         >
                           Update
                         </button>

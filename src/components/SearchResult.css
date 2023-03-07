@@ -1,8 +1,20 @@
 #__next {
   margin-top: 122px;
 }
+.Search-Result {
+  font-size: 2rem;
+  padding: 20px 0;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  color: #1e144f;
+  margin-bottom: 0;
+  text-align: center;
+}
 .search-product-div {
   padding-top: 20px !important;
+}
+.trending-section {
+  margin-bottom: 20px !important;
 }
 @media only screen and (max-width: 1399px) {
 }
@@ -10,8 +22,14 @@
 }
 
 @media only screen and (max-width: 991px) {
+  #__next {
+    margin-top: 160px;
+  }
 }
 @media only screen and (max-width: 767px) {
+  #__next {
+    margin-top: 150px;
+  }
   .displayed-text {
     font-size: 12px;
   }
@@ -27,10 +45,10 @@
     width: 100% !important;
   }
   #__next {
-    margin-top: 210px;
-    padding: 4px;
+    margin-top: 156px;
+    
   }
-  .trendign-head {
+  .Search-Result {
     font-size: 1.5rem;
   }
   .single-products-box .content .price-div span {
