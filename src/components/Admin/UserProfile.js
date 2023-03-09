@@ -86,7 +86,7 @@ const UserProfile = (props) => {
                 Userdata.role == "superAdmin" ? (
                   <form>
                     <div className="col-12 px-0">
-                      <div className="card p-4 m-2 product-form">
+                      <div className="card p-4 m-2 mt-4 product-form">
                         <h5>User Profile</h5>
                         <div className="row">
                           <div className="col-6 p-1 form-floating">

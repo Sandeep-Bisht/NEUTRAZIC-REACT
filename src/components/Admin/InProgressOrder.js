@@ -39,7 +39,7 @@ const InProgressOrder = () => {
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
-          if (item.status == "In-Progress") {
+          if (item.orderStatus == "In-Progress") {
             arr.push(item);
           }
         }
@@ -59,7 +59,7 @@ const InProgressOrder = () => {
       },
       body: JSON.stringify({
         _id: orderId,
-        status: status,
+        orderStatus: status,
       }),
     })
       .then((res) => res.json())
@@ -272,7 +272,7 @@ const InProgressOrder = () => {
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
