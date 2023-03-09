@@ -591,14 +591,13 @@ font-family: 'Roboto', sans-serif;
   font-family: 'Roboto', sans-serif;
   font-weight:400 !important;
   font-size: 25px !important;
-  text-decoration: underline;
 }
 .product-form .row div input,select,textarea
 {
   font-family: 'Roboto', sans-serif;
   border-radius: 0;
 }
-.product-form .row div button
+.product-form .row div .btn-primary
 {
   color: #fff;
   background-color: #1e144f;

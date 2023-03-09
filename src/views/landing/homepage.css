@@ -12881,13 +12881,10 @@ letter-spacing: 0.50px;
 }
 .cart-buttons .cart-header
 {
-	text-align: center;
 	font-size: 34px;
 	font-weight: 400 !important;
 	color: #000;
 	margin-bottom: 0;
-	text-decoration: underline;
-	opacity: .8;
 }
 
 .cart-buttons .shopping-coupon-code {
@@ -17756,6 +17753,7 @@ letter-spacing: 0.50px;
 	  margin: 0 0px 15px;
 	  -webkit-column-break-inside: avoid;
 	  -moz-column-break-inside: avoid;
+	  border-top: 2px solid #eaedff;
 	  /* column-break-inside: avoid; */
 	  padding: 15px;
 	  padding-bottom: 5px;
@@ -18527,7 +18525,8 @@ margin: 40px 8px 15px 0px;
 /* --------------prashant css for home page additional section---------------- */
 .home-banner
 {
-	padding: 150px 0;
+	padding: 100px 0;
+	margin-top: 100px;
 	background-color: #fff;
 }
 /* .home-banner .home-banner-left{
@@ -18792,7 +18791,7 @@ margin: 40px 8px 15px 0px;
 padding-top: 72px;
 	}
 	.home-banner{
-      margin-top: 30px;
+      margin-top: 123px;
 	}
 
 	/* responsive All product page */
@@ -18813,6 +18812,7 @@ padding-top: 72px;
 		padding-left: 5px;
 	}
 	/* end All product page */
+	
    
  }
  @media only screen and (max-width : 815px){
@@ -19036,7 +19036,7 @@ padding-top: 72px;
 		margin-top: 126px!important;
 	 }
 	 div#columns .figure {
-		margin: -22px 0px 15px 2px;
+		margin: 0px 0px 15px 2px;
 	}
 	p {
 		line-height: 1.6
@@ -19328,7 +19328,7 @@ padding-top: 72px;
  }
  @media only screen and (max-width : 430px)
  {
-	.text-start {
+	.text-start .price{
 		font-size: 11px !important;
 	}
 	/* reponsive homepage */
@@ -19396,10 +19396,7 @@ padding-top: 72px;
 		padding: 1px 4px!important;
 		font-size: 16px!important;
 	}
-	.drop-category{
-		height: 34px!important;
-		margin-left: -13px!important;
-	}
+	
 	.navbar-light .navbar-toggler {
 		padding: 6px 10px!important;
 	}
@@ -19410,7 +19407,7 @@ padding-top: 72px;
 		font-size: 20px;
 	}
 	div#columns .figure {
-		margin: -22px 0px 15px 0px;
+		margin: 0px 0px 10px 0px;
 	}
 	div#columns .figure{
 		width: 49%!important;

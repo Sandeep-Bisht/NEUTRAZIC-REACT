@@ -32,7 +32,7 @@ const ShippedOrder = () => {
         let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Cancel")
+            if(item.orderStatus=="Cancel")
 
             {
                arr.push(item);
@@ -56,7 +56,7 @@ const ShippedOrder = () => {
       },
       body: JSON.stringify({
         _id: orderId,
-        status: status,
+        orderStatus: status,
       }),
     })
       .then((res) => res.json())
@@ -262,7 +262,7 @@ const ShippedOrder = () => {
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
