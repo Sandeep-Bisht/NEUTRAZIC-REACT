@@ -18647,7 +18647,7 @@ margin: 40px 8px 15px 0px;
 	margin-left: 10px;
  }
  .browser-category-section{
-	margin-top: -17px;
+	margin-top: 107px;
 	/* margin-right:20px; */
 }
 .blog-box-wrapper .left-blog-image-wrap img{
@@ -19033,7 +19033,7 @@ padding-top: 72px;
 	/* responsive All product page */
 	
      .Category-div{
-		margin-top: -78px!important;
+		margin-top: 126px!important;
 	 }
 	 div#columns .figure {
 		margin: -22px 0px 15px 2px;
@@ -19144,6 +19144,9 @@ padding-top: 72px;
     top: -220px;
     margin-left: 158px;
     width: 65%;
+	}
+	.browser-category-section {
+		margin-top: 358px!important;
 	}
 	/* end subcategory page */
  
@@ -19510,7 +19513,7 @@ padding-top: 72px;
 	top: 10px;
 	 left: 30px;
 	}
-	#maps{
+	#maps__next{
 		position: relative;
 		width: 154%;
 		top: 10px;

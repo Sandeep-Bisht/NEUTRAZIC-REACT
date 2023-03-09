@@ -1,4 +1,4 @@
-#__next {
+#__next_search {
   margin-top: 122px;
 }
 .Search-Result {
@@ -22,12 +22,12 @@
 }
 
 @media only screen and (max-width: 991px) {
-  #__next {
+  #__next_search {
     margin-top: 160px;
   }
 }
 @media only screen and (max-width: 767px) {
-  #__next {
+  #__next_search {
     margin-top: 150px;
   }
   .displayed-text {
@@ -44,7 +44,7 @@
   .single-products-box .image img {
     width: 100% !important;
   }
-  #__next {
+  #__next_search {
     margin-top: 156px;
   }
   .Search-Result {
@@ -59,7 +59,7 @@
   }
 }
 @media only screen and (max-width: 359.98px) {
-  #__next {
+  #__next_search {
     margin-top: 210px;
     padding-left: 44px;
     margin-left: 10px;

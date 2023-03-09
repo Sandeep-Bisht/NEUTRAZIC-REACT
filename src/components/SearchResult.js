@@ -743,7 +743,7 @@ const SearchResult = (props) => {
 
       {/* end side bar Modal */}
       <div className="container">
-      <div id="__next">
+      <div id="__next_search">
         {/* trending section  */}
 
         <section className="trending-section">
