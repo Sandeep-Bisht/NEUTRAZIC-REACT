@@ -570,8 +570,8 @@ font-family: 'Roboto', sans-serif;
 
 /* Product Form */
 #Allproduct-form{
-  height: 610px !important;
-  width: 117%;
+  height: 100% !important;
+  width: 100%;
   
 }
 
