@@ -401,7 +401,7 @@ const Productform = (props) => {
                     <div className="container-fluid">
                       <div className="row px-0">
                         {/* <div className="col-1"></div> */}
-                        <div className="col-10 px-0">
+                        {/* <div className="col-10 px-0"> */}
                           <div
                             className="card p-4 m-2 product-form"
                             id="Allproduct-form"
@@ -728,7 +728,7 @@ const Productform = (props) => {
                                   defaultValue={
                                     data.description
                                   }
-                                  rows="6"
+                                  rows="3"
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
@@ -766,7 +766,7 @@ const Productform = (props) => {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        {/* </div> */}
                       </div>
                     </div>
                   </form>
