@@ -31,7 +31,7 @@
     margin-top: 150px;
   }
   .displayed-text {
-    font-size: 12px;
+    font-size: 11px;
   }
   .search-product-div .price-div .new-price {
     font-size: 11px !important;
@@ -46,7 +46,6 @@
   }
   #__next {
     margin-top: 156px;
-    
   }
   .Search-Result {
     font-size: 1.5rem;
@@ -55,7 +54,8 @@
     font-size: 13px;
   }
   .displayed-text {
-    font-size: 11px;
+    font-size: 8px;
+    display: block;
   }
 }
 @media only screen and (max-width: 359.98px) {
@@ -71,7 +71,7 @@
     font-size: 11px;
   }
   .displayed-text {
-    font-size: 12px;
+    font-size: 10px;
   }
   .single-products-box .content .price-div del {
     font-size: 10px;

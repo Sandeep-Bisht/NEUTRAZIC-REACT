@@ -19449,7 +19449,7 @@ padding-top: 72px;
 	}
 	.single-products-box .content .price-div .new-price {
 		font-size: 11px!important;
-		line-height: 0;
+		line-height: 1;
 	}
 	.brands-area {
 		display: none;

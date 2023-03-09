@@ -493,7 +493,7 @@ const SingleProduct = (props) => {
           setWishlist(data.data);
           let response = data.data;
           for (let item of response) {
-            if (props.match.params.id == item.productId) {
+            if (props.match.params.id === item.productId) {
               let alreadyWishlist = document.getElementById(prodId);
               alreadyWishlist.classList.add("wishlisted");
             }

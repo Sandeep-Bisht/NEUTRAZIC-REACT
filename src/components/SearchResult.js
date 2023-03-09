@@ -761,22 +761,21 @@ const SearchResult = (props) => {
           <div className="container-fluid">
             <div className="row mt-0">
               {filterdata && filterdata.length>0 && filterdata.map((el, ind) => {
-                if (
-                  el.name.toLowerCase().includes(searchresults) ||
-                  el.manufacturer.name.toLowerCase().includes(searchresults) ||
-                  el.category.name.toLowerCase().includes(searchresults) ||
-                  (el.subcategory &&
-                    el.subcategory.name
-                      .toLowerCase()
-                      .includes(searchresults)) ||
-                  (el.type && el.type.toLowerCase().includes(searchresults)) ||
-                  dataForFilter.includes(el.category && el.category.name) ||
-                  dataForFilter.includes(
-                    el.subcategory && el.subcategory.name
-                  ) ||
-                  dataForFilter.includes(
-                    el.manufacturer && el.manufacturer.name
-                  ) ||
+                if (el.name.toLowerCase().startsWith(searchresults) ||
+                  // el.manufacturer.name.toLowerCase().includes(searchresults) ||
+                  // el.category.name.toLowerCase().includes(searchresults) ||
+                  // (el.subcategory &&
+                  //   el.subcategory.name
+                  //     .toLowerCase()
+                  //     .includes(searchresults)) ||
+                  // (el.type && el.type.toLowerCase().includes(searchresults)) ||
+                  // dataForFilter.includes(el.category && el.category.name) ||
+                  // dataForFilter.includes(
+                  //   el.subcategory && el.subcategory.name
+                  // ) ||
+                  // dataForFilter.includes(
+                  //   el.manufacturer && el.manufacturer.name
+                  // ) ||
                   (minprice != "" &&
                     maxprice != "" &&
                     parseInt(el.inrMrp) >= minprice &&
