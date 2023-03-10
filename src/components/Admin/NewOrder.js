@@ -7,7 +7,6 @@ import DashboardHeaader from './DashboardHeaader';
 import { BiSearchAlt } from "react-icons/bi";
 import {MdPlaylistAdd} from 'react-icons/md'
 import {Link, useHistory} from "react-router-dom";
-import Orders from '../Orders';
 import { DownOutlined } from '@ant-design/icons';
 import { render } from 'react-dom';
 import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} from "antd";
@@ -61,7 +60,7 @@ const NewOrder = () => {
       },
       body: JSON.stringify({
         _id: orderId,
-        status: status,
+        orderStatus: status,
       }),
     })
       .then((res) => res.json())

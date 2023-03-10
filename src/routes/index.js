@@ -29,9 +29,8 @@ import Checkout from "../components/Checkout";
 import UserDetails from "../components/form/UserDetails";
 import Header1 from "../components/Header1";
 import WishList from "../components/WishList";
-import AddressPage from "../components/AddressPage";
+// import AddressPage from "../components/AddressPage";
 import ShippingAddress from "../components/ShippingAddress";
-import Orders from "../components/Orders";
 import Vieworder from "../components/Admin/NewOrder";
 import NewOrder from "../components/Admin/NewOrder";
 import InProgressOrder from "../components/Admin/InProgressOrder";
@@ -68,7 +67,8 @@ import PackedOrder from "../components/Admin/PackedOrder";
 import ShippedOrder from "../components/Admin/ShippedOrder";
 import CancelOrder from "../components/Admin/CancelOrder";
 import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
-import Blogs from "../components/Blog"
+import Blogs from "../components/Blog";
+import PageNotFound from "../components/PageNotFound";
 
 var Userdata = "";
 const Root = (props) => {
@@ -173,8 +173,7 @@ const Root = (props) => {
             <Route exact path="/UserDetails/:_id" component={UserDetails} />
             <Route exact path="/Header1" component={Header1} />
             <Route exact path="/WishList" component={WishList} />
-            <Route exact path="/AddressPage" component={AddressPage} />
-            <Route exact path="/Orders" component={Orders} />
+            {/* <Route exact path="/AddressPage" component={AddressPage} /> */}
             <Route exact path="/NewOrder/:status" component={NewOrder} />
 
             <Route exact path="/InProgressOrderInProgress" component={InProgressOrder} />
@@ -208,7 +207,7 @@ const Root = (props) => {
               component={SearchResult}
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
-            {/* <Route path='/PageNotFound' component={PageNotFound} /> */}
+            <Route path='/PageNotFound' component={PageNotFound} />
             <Route path='/privacyPolicy' component={PrivacyPolicy} />
             <Route path='/termConditions' component={TermsConditions} />
             <Route path='/returnRefund' component={ReturnRefund} />
