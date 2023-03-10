@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
+import "../components/Subcategories.css";
 // import "../../sass/whislist.css";
 // import Carouselcomp from "../../components/Carouselcomp";
 import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
-import { useHistory,NavLink } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../CommonService/AddToCart/action";
@@ -35,15 +36,13 @@ const Subcategories = (props) => {
   const [filterData, setfilterData] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
- const [SubcategoryId , setsubcategoryId] = useState("All Products");
+  const [SubcategoryId, setsubcategoryId] = useState("All Products");
   const history = useHistory();
-                     
-
 
   const dispatch = useDispatch();
   var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
-  useEffect(() => {   
+  useEffect(() => {
     window.scroll(0, 0);
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ProductsByCategory();
@@ -72,12 +71,12 @@ const Subcategories = (props) => {
     });
   }, []);
 
-  useEffect(()=>{
-    const allSubCateory=document.getElementById("allsub"); 
+  useEffect(() => {
+    const allSubCateory = document.getElementById("allsub");
     setfilterData(state.array);
     setsubcategoryId(state.allProduct);
     allSubCateory.classList.add("newActive");
-  },[state])
+  }, [state]);
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));
@@ -212,7 +211,6 @@ const Subcategories = (props) => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
-          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -440,33 +438,26 @@ const Subcategories = (props) => {
 
     setData(filteronload);
   };
-  var activeItem=document.getElementById("List");
-  const GetSingleSubCategory = (id,name) => {
-    window.scroll(0,0);
-    let filteredData=[];
-    for(let item of data)
-    {
-      if(item.subcategory._id ===id)
-      filteredData.push(item);
+  var activeItem = document.getElementById("List");
+  const GetSingleSubCategory = (id, name) => {
+    window.scroll(0, 0);
+    let filteredData = [];
+    for (let item of data) {
+      if (item.subcategory._id === id) filteredData.push(item);
       activeItem.classList.add("newActive");
     }
     setfilterData(filteredData);
     setsubcategoryId(name);
-   
-     
-    
   };
 
-  const checkidSubcategory = (id)=>{
-    
-  }
+  const checkidSubcategory = (id) => {};
 
-  const GetOtherCategories = ()=>{
+  const GetOtherCategories = () => {
     setData(categories);
     setfilterData("");
-  }
+  };
 
-  const allSubCateory=document.getElementById("allsub"); 
+  const allSubCateory = document.getElementById("allsub");
   const GetallData = (Products) => {
     allSubCateory.classList.add("newActive");
     setfilterData("");
@@ -488,27 +479,19 @@ const Subcategories = (props) => {
     }
   };
 
-  
-   
-  const activeLinkSubCategory=(name) => {
-    
-      for(let newItem of filterData)
-      { 
-        if(name===newItem.subcategory.name)
-        {   
-          allSubCateory.classList.remove("newActive")
-          activeItem.classList.remove("newActive");
-          return "newActive"
-          
-        } 
-      }  ;
+  const activeLinkSubCategory = (name) => {
+    for (let newItem of filterData) {
+      if (name === newItem.subcategory.name) {
+        allSubCateory.classList.remove("newActive");
+        activeItem.classList.remove("newActive");
+        return "newActive";
+      }
+    }
   };
 
   return (
     <>
-    
-      <Header1/>
-      
+      <Header1 />
 
       <div id="__next">
         {/* trending section  */}
@@ -521,15 +504,15 @@ const Subcategories = (props) => {
                     <div id="sidebar-wrapper">
                       <ul className="sidebar-nav">
                         <li>
-                          { categories.map((item,ind)=>{
-                            if(item._id === props.match.params._id){
-                            // if(item.category._id === props.match.params._id){
-                              return(
-                          <h1 className="browse-categories-header">
-                           {item.name}
-                          </h1>
-                          )
-                        }
+                          {categories.map((item, ind) => {
+                            if (item._id === props.match.params._id) {
+                              // if(item.category._id === props.match.params._id){
+                              return (
+                                <h1 className="browse-categories-header">
+                                  {item.name}
+                                </h1>
+                              );
+                            }
                           })}
                         </li>
                         <li
@@ -537,33 +520,31 @@ const Subcategories = (props) => {
                           onClick={() => GetallData(data)}
                           style={{ cursor: "pointer" }}
                         >
-                          
                           <p
-                          className="List-item newActive"
-                          id="allsub"
+                            className="List-item newActive"
+                            id="allsub"
                             style={{ cursor: "pointer" }}
                           >
                             All SubCategories
                           </p>
-                          
                         </li>
-                        {getSubCategories.map((item,ind) => {
+                        {getSubCategories.map((item, ind) => {
                           if (item.category == props.match.params._id) {
                             return (
                               <>
                                 <li className="box" key={ind}>
-                                  
                                   <p
-                                    className={`List-item ${activeLinkSubCategory(item.name)}`}
+                                    className={`List-item ${activeLinkSubCategory(
+                                      item.name
+                                    )}`}
                                     id="List"
                                     onClick={() => {
-                                      GetSingleSubCategory(item._id,item.name);
+                                      GetSingleSubCategory(item._id, item.name);
                                     }}
                                     style={{ cursor: "pointer" }}
                                   >
                                     {item.name}
                                   </p>
-                                  
                                 </li>
                               </>
                             );
@@ -576,376 +557,418 @@ const Subcategories = (props) => {
               </div>
               <div className="col-lg-10 col-md-9 col-sm-9 col-8 subcategory-container">
                 <div className="browse-categories-sub-heading">
-                  {getSubCategories.map((item,ind)=>{
-                    if(ind < 1)
-                    {
-                      return(
-                  <h2 key={ind}>{SubcategoryId}</h2>
-                  )
-                }
-                })
-                }
+                  {getSubCategories.map((item, ind) => {
+                    if (ind < 1) {
+                      return <h2 key={ind}>{SubcategoryId}</h2>;
+                    }
+                  })}
                 </div>
-                <section className="products-area pb-40">
-                  <div className="container-fluid">
+                <section className="pb-40">
+                  <div className="container">
                     <div className="row">
-                      {filterData && filterData.length > 0 ? (
-                        filterData.map((item, ind) => {
+                      <div id="columns" className="columns_5 subcategory-columns">
+                        {filterData && filterData.length > 0 ? (
+                          filterData.map((item, ind) => {
+                            return (
+                              <figure
+                                className="figure subcategory-figure"
+                                key={ind}
+                              >
+                                <Link
+                                  to={"/SingleProduct/" + item._id}
+                                  className="product-image-link"
+                                >
+                                  <div>
+                                    <img
+                                      src={`${baseUrl}/` + item.image[0].path}
+                                      alt=""
+                                    />
+                                  </div>
 
-                          return (
-                            <div className="col-lg-3 col-md-6 col-sm-6 " key={ind}>
-                              <div className="single-products-box border">
-                                <div className="row">
-                                  <div className="col-md-12">
-                                    <div className="product-home-div">
-                                      <div className="product-image-div">
-                                        <Link
-                                          to={"/SingleProduct/" + item._id}
-                                          className="product-image-link"
-                                        >
-                                          <div className="image hover-switch">
-                                            <img
-                                              src={
-                                                item.otherImage &&
-                                                item.otherImage.length > 0
-                                                  ? `${baseUrl}/` +
-                                                    item.otherImage[0].path
-                                                  : ""
-                                              }
-                                              // src={require("../../Images/products/Hintosulin (1).png")}
-                                              alt=""
-                                            />
-                                            <img
-                                              src={
-                                                `${baseUrl}/` +
-                                                item.image[0].path
-                                              }
-                                              alt=""
-                                              style={{
-                                                position: "absolute",
-                                                left: "0", top: "0"
-                                              }}
-                                            />
-                                          </div>
-                                        </Link>
-                                      </div>
-                                      <div className="tranding product-image-content">
-                                        <div className="content product-content">
-                                          {/* <Link to={"/SingleProduct/" + item._id}> */}
-                                          <Link
-                                            to={"/SingleProduct/" + item._id}
-                                          >
-                                            <ReadMoreReact
-                                           text={item.name}
-                                            />
-                                          </Link>
-                                          {/* </Link> */}
-                                          {/* <div className="d-flex pb-2 pl-4">
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                            </div> */}
-                                          {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
-                              <div className="discount-price-div">
-                                <span>{item.inrDiscount}%</span>
-                              </div>
-                              <div className="discount-price-div2">
-                                <span>off</span>
-                              </div>
-                            </div> */}
+                                  <figcaption>{item.name}</figcaption>
+                                </Link>
 
-                                          {/* <div className="hr-div">
-                              <hr />
-                            </div> */}
-                                          <div className="price-div">
-                                            <span className="new-price ">
-                                              <i className="fa fa-inr"></i>{" "}
-                                              {item.inrDiscount}
-                                            </span>
-
-                                            <del className="new-price ml-1">
-                                            <i className="fa fa-inr"></i>{item.inrMrp}
-                                            </del>
-                                            {Userdata ? (
-                                              <i
-                                                className={`bx bxs-heart ml-3  ${checkWishlistItem(
-                                                  item._id
-                                                )}`}
-                                                id={item._id}
-                                                onClick={() => {
-                                                  AddtoWishlist(
-                                                    item._id,
-                                                    item.name,
-                                                    quantity,
-                                                    item.inrMrp,
-                                                    item.inrDiscount,
-                                                    item.description,
-                                                    item.category,
-                                                    item.manufacturer.name,
-                                                    item.image
-                                                  );
-                                                }}
-                                              ></i>
-                                            ) : (
-                                              <>
-                                                <i
-                                                  className="bx bxs-heart ml-3 pc-heart"
-                                                  data-bs-toggle="modal"
-                                                  data-bs-target={
-                                                    Userdata == null
-                                                      ? "#exampleModal"
-                                                      : null
-                                                  }
-                                                ></i>
-
-                                                <Link to="/Register">
-                                                  <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                                </Link>
-                                              </>
-                                            )}
-
-                                            <div>
-                                            {Userdata ? (
+                                <div className="contanier subcategory-price-div">
+                                  <div className="row">
+                                    <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
+                                      <span className="price">
+                                        {" "}
+                                        <i className="fa fa-inr"></i>
+                                        {item.inrDiscount}
+                                      </span>
+                                    </div>
+                                    <div className="col-6 text-end ">
+                                      <p className={`text-nowrap wishlist`}>
+                                        {Userdata ? (
                                           <i
-                                            className="bx bx-cart"
+                                            id={item._id}
                                             onClick={() => {
-                                              {
-                                                Userdata !== null
-                                                  ? cartfunction(
-                                                      item._id,
-                                                      item.name,
-                                                      quantity,
-                                                      item.inrMrp,
-                                                      item.inrDiscount,
-                                                      item.discount,
-                                                      item.description,
-                                                      item.category,
-                                                      item.manufacturer.name,
-                                                      item.image[0].path
-                                                    )
-                                                  : addToCartWithoutRegistration(
-                                                      item._id,
-                                                      item.name,
-                                                      quantity,
-                                                      item.inrMrp,
-                                                      item.inrDiscount,
-                                                      item.discount,
-                                                      item.description,
-                                                      item.category,
-                                                      item.manufacturer.name,
-                                                      item.image[0].path
-                                                    );
-                                              }
+                                              AddtoWishlist(
+                                                item._id,
+                                                item.name,
+                                                quantity,
+                                                item.inrMrp,
+                                                item.inrDiscount,
+                                                item.description,
+                                                item.category,
+                                                item.manufacturer.name,
+                                                item.image
+                                              );
                                             }}
+                                            className={`bx bxs-heart ${checkWishlistItem(
+                                              item._id
+                                            )}`}
                                           ></i>
                                         ) : (
                                           <i
-                                            className="bx bx-cart mr-1"
+                                            className="bx bxs-heart "
                                             data-bs-toggle="modal"
                                             data-bs-target={
                                               Userdata == null
                                                 ? "#exampleModal"
                                                 : null
                                             }
-                                          >
-                                            <Link to="/Register"></Link>
-                                          </i>
+                                          ></i>
                                         )}
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+                                        Wishlist
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              {/* </Link> */}
-                            </div>
-                          );
-                          
-                        })
-                      ) : (
-                        <>
-                          {data.map((item, ind) => {
-                            if (item.category._id == props.match.params._id) {
-                              return (
-                                <div className="col-lg-3 col-md-6 col-sm-6" key={ind}>
-                                  <div className="single-products-box border">
-                                    <div className="row">
-                                      <div className="col-md-12 product-home-div-card">
-                                        <div className="product-home-div">
-                                          <div className="product-image-div">
-                                            <Link
-                                              to={"/SingleProduct/" + item._id}
-                                              className="product-image-link"
-                                            >
-                                              <div className="image hover-switch">
-                                                <img
-                                                  src={
-                                                    item.otherImage &&
-                                                    `${baseUrl}/` +
-                                                      item.otherImage[0].path
-                                                  }
-                                                  alt=""
-                                                />
-                                                <img
-                                                  src={
-                                                    `${baseUrl}/` +
-                                                    item.image[0].path
-                                                  }
-                                                  alt=""
-                                                  style={{
-                                                    position: "absolute",
-                                                    left: "0",
-                                                    top: "0",
-                                                  }}
-                                                />
-                                              </div>
-                                            </Link>
-                                          </div>
-                                          <div className="tranding product-image-content">
-                                            <div className="content product-content">
-                                              {/* <Link to={"/SingleProduct/" + item._id}> */}
-                                              <Link
-                                                to={
-                                                  "/SingleProduct/" + item._id
-                                                }
-                                              >
-                                                <ReadMoreReact
-                                                  text={item.name}
-                                                />
-                                              </Link>
-                                              {/* </Link> */}
-                                              {/* <div className="d-flex pb-2 pl-4">
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                              <i className="bx bxs-star"></i>
-                            </div> */}
-                                              {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
-                              <div className="discount-price-div">
-                                <span>{item.inrDiscount}%</span>
-                              </div>
-                              <div className="discount-price-div2">
-                                <span>off</span>
-                              </div>
-                            </div> */}
 
-                                              {/* <div className="hr-div">
-                              <hr />
-                            </div> */}
-                                              <div className="price-div">
-                                                <span className="new-price ">
-                                                  <i className="fa fa-inr"></i>{" "}
-                                                  {item.inrDiscount}
-                                                </span>
+                                {Userdata ? (
+                                <button
+                                  className="button btn"
+                                  onClick={() => {
+                                    cartfunction(
+                                      item._id,
+                                      item.name,
+                                      quantity,
+                                      item.inrMrp,
+                                      item.inrDiscount,
+                                      item.discount,
+                                      item.description,
+                                      item.category,
+                                      item.manufacturer.name,
+                                      item.image[0].path
+                                    );
+                                  }}
+                                  data-bs-toggle={
+                                    Userdata == null ? "modal" : null
+                                  }
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              ) : (
+                                <button
+                                  className="button btn"
+                                  data-bs-toggle="modal"
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              )}
+                              </figure>
+                            );
+                          })
+                        ) : (
+                          <>
+                            {data.map((item, ind) => {
+                              if (item.category._id == props.match.params._id) {
+                                return (
+                                  <figure
+                                className="figure subcategory-figure"
+                                key={ind}
+                              >
+                                <Link
+                                  to={"/SingleProduct/" + item._id}
+                                  className="product-image-link"
+                                >
+                                  <div>
+                                    <img
+                                      src={`${baseUrl}/` + item.image[0].path}
+                                      alt=""
+                                    />
+                                  </div>
 
-                                                <del className="new-price ml-1">
-                                                <i className="fa fa-inr"></i> {item.inrMrp}
-                                                </del>
-                                                {Userdata ? (
-                                                  <i
-                                                    className={`bx bxs-heart ml-3  ${checkWishlistItem(
-                                                      item._id
-                                                    )}`}
-                                                    id={item._id}
-                                                    onClick={() => {
-                                                      AddtoWishlist(
-                                                        item._id,
-                                                        item.name,
-                                                        quantity,
-                                                        item.inrMrp,
-                                                        item.inrDiscount,
-                                                        item.description,
-                                                        item.category,
-                                                        item.manufacturer.name,
-                                                        item.image
-                                                      );
-                                                    }}
-                                                  ></i>
-                                                ) : (
-                                                  <>
-                                                    <i
-                                                      className="bx bxs-heart ml-3 pc-heart"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target={
-                                                        Userdata == null
-                                                          ? "#exampleModal"
-                                                          : null
-                                                      }
-                                                    ></i>
+                                  <figcaption>{item.name}</figcaption>
+                                </Link>
 
-                                                    <Link to="/Register">
-                                                      <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                                    </Link>
-                                                  </>
-                                                )}
-
-                                                <div>
-                                                  {Userdata ? (
-                                                    <i
-                                                      className="bx bx-cart"
-                                                      onClick={() => {
-                                                        {
-                                                          Userdata !== null
-                                                            ? cartfunction(
-                                                                item._id,
-                                                                item.name,
-                                                                quantity,
-                                                                item.inrMrp,
-                                                                item.inrDiscount,
-                                                                item.discount,
-                                                                item.description,
-                                                                item.category,
-                                                                item.name,
-                                                                item.image[0].path
-                                                              )
-                                                            : addToCartWithoutRegistration(
-                                                              item._id,
-                                                              item.name,
-                                                              quantity,
-                                                              item.inrMrp,
-                                                              item.inrDiscount,
-                                                              item.discount,
-                                                              item.description,
-                                                              item.category,
-                                                              item.name,
-                                                              item.image[0].path
-                                                              );
-                                                        }
-                                                      }}
-                                                    ></i>
-                                                  ) : (
-                                                    <i
-                                                      className="bx bx-cart mr-1"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target={
-                                                        Userdata == null
-                                                          ? "#exampleModal"
-                                                          : null
-                                                      }
-                                                    >
-                                                      <Link to="/Register"></Link>
-                                                    </i>
-                                                  )}
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+                                <div className="contanier subcategory-price-div">
+                                  <div className="row">
+                                    <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
+                                      <span className="price">
+                                        {" "}
+                                        <i className="fa fa-inr"></i>
+                                        {item.inrDiscount}
+                                      </span>
+                                    </div>
+                                    <div className="col-6 text-end ">
+                                      <p className={`text-nowrap wishlist`}>
+                                        {Userdata ? (
+                                          <i
+                                            id={item._id}
+                                            onClick={() => {
+                                              AddtoWishlist(
+                                                item._id,
+                                                item.name,
+                                                quantity,
+                                                item.inrMrp,
+                                                item.inrDiscount,
+                                                item.description,
+                                                item.category,
+                                                item.manufacturer.name,
+                                                item.image
+                                              );
+                                            }}
+                                            className={`bx bxs-heart ${checkWishlistItem(
+                                              item._id
+                                            )}`}
+                                          ></i>
+                                        ) : (
+                                          <i
+                                            className="bx bxs-heart "
+                                            data-bs-toggle="modal"
+                                            data-bs-target={
+                                              Userdata == null
+                                                ? "#exampleModal"
+                                                : null
+                                            }
+                                          ></i>
+                                        )}
+                                        Wishlist
+                                      </p>
                                     </div>
                                   </div>
-                                  {/* </Link> */}
                                 </div>
-                              );
-                            }
-                          })}
-                        </>
-                      )}
+
+                                {Userdata ? (
+                                <button
+                                  className="button btn"
+                                  onClick={() => {
+                                    cartfunction(
+                                      item._id,
+                                      item.name,
+                                      quantity,
+                                      item.inrMrp,
+                                      item.inrDiscount,
+                                      item.discount,
+                                      item.description,
+                                      item.category,
+                                      item.manufacturer.name,
+                                      item.image[0].path
+                                    );
+                                  }}
+                                  data-bs-toggle={
+                                    Userdata == null ? "modal" : null
+                                  }
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              ) : (
+                                <button
+                                  className="button btn"
+                                  data-bs-toggle="modal"
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              )}
+                              </figure>
+                            //       <div
+                            //         className="col-lg-3 col-md-6 col-sm-6 col-12"
+                            //         key={ind}
+                            //       >
+                            //         <div className=" mb-4  subcategory-box border">
+                            //           <div className="row">
+                            //             <div className="col-md-12 product-home-div-card">
+                            //               <div className="product-home-div">
+                            //                 <div className="product-image-div">
+                            //                   <Link
+                            //                     to={
+                            //                       "/SingleProduct/" + item._id
+                            //                     }
+                            //                     className="product-image-link"
+                            //                   >
+                            //                     <div className="image">
+                            //                       <img
+                            //                         src={
+                            //                           `${baseUrl}/` +
+                            //                           item.image[0].path
+                            //                         }
+                            //                         alt=""
+                            //                       />
+                            //                       {/* <img
+                            //                       src={
+                            //                         `${baseUrl}/` +
+                            //                         item.image[0].path
+                            //                       }
+                            //                       alt=""
+                            //                       style={{
+                            //                         position: "absolute",
+                            //                         left: "0",
+                            //                         top: "0",
+                            //                       }}
+                            //                     /> */}
+                            //                     </div>
+                            //                   </Link>
+                            //                 </div>
+                            //                 <div className="tranding product-image-content">
+                            //                   <div className="content product-content">
+                            //                     {/* <Link to={"/SingleProduct/" + item._id}> */}
+                            //                     <Link
+                            //                       to={
+                            //                         "/SingleProduct/" + item._id
+                            //                       }
+                            //                     >
+                            //                       <ReadMoreReact
+                            //                         text={item.name}
+                            //                       />
+                            //                     </Link>
+                            //                     {/* </Link> */}
+                            //                     {/* <div className="d-flex pb-2 pl-4">
+                            //   <i className="bx bxs-star"></i>
+                            //   <i className="bx bxs-star"></i>
+                            //   <i className="bx bxs-star"></i>
+                            //   <i className="bx bxs-star"></i>
+                            //   <i className="bx bxs-star"></i>
+                            // </div> */}
+                            //                     {/* <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
+                            //   <div className="discount-price-div">
+                            //     <span>{item.inrDiscount}%</span>
+                            //   </div>
+                            //   <div className="discount-price-div2">
+                            //     <span>off</span>
+                            //   </div>
+                            // </div> */}
+
+                            //                     {/* <div className="hr-div">
+                            //   <hr />
+                            // </div> */}
+                            //                     <div className="price-div">
+                            //                       <span className="new-price ">
+                            //                         <i className="fa fa-inr"></i>{" "}
+                            //                         {item.inrDiscount}
+                            //                       </span>
+
+                            //                       <del className="new-price ml-1">
+                            //                         <i className="fa fa-inr"></i>{" "}
+                            //                         {item.inrMrp}
+                            //                       </del>
+                            //                       {Userdata ? (
+                            //                         <i
+                            //                           className={`bx bxs-heart ml-3  ${checkWishlistItem(
+                            //                             item._id
+                            //                           )}`}
+                            //                           id={item._id}
+                            //                           onClick={() => {
+                            //                             AddtoWishlist(
+                            //                               item._id,
+                            //                               item.name,
+                            //                               quantity,
+                            //                               item.inrMrp,
+                            //                               item.inrDiscount,
+                            //                               item.description,
+                            //                               item.category,
+                            //                               item.manufacturer
+                            //                                 .name,
+                            //                               item.image
+                            //                             );
+                            //                           }}
+                            //                         ></i>
+                            //                       ) : (
+                            //                         <>
+                            //                           <i
+                            //                             className="bx bxs-heart ml-3 pc-heart"
+                            //                             data-bs-toggle="modal"
+                            //                             data-bs-target={
+                            //                               Userdata == null
+                            //                                 ? "#exampleModal"
+                            //                                 : null
+                            //                             }
+                            //                           ></i>
+
+                            //                           <Link to="/Register">
+                            //                             <i className="bx bxs-heart ml-3 mobile-heart"></i>
+                            //                           </Link>
+                            //                         </>
+                            //                       )}
+
+                            //                       <div>
+                            //                         {Userdata ? (
+                            //                           <i
+                            //                             className="bx bx-cart"
+                            //                             onClick={() => {
+                            //                               {
+                            //                                 Userdata !== null
+                            //                                   ? cartfunction(
+                            //                                       item._id,
+                            //                                       item.name,
+                            //                                       quantity,
+                            //                                       item.inrMrp,
+                            //                                       item.inrDiscount,
+                            //                                       item.discount,
+                            //                                       item.description,
+                            //                                       item.category,
+                            //                                       item.name,
+                            //                                       item.image[0]
+                            //                                         .path
+                            //                                     )
+                            //                                   : addToCartWithoutRegistration(
+                            //                                       item._id,
+                            //                                       item.name,
+                            //                                       quantity,
+                            //                                       item.inrMrp,
+                            //                                       item.inrDiscount,
+                            //                                       item.discount,
+                            //                                       item.description,
+                            //                                       item.category,
+                            //                                       item.name,
+                            //                                       item.image[0]
+                            //                                         .path
+                            //                                     );
+                            //                               }
+                            //                             }}
+                            //                           ></i>
+                            //                         ) : (
+                            //                           <i
+                            //                             className="bx bx-cart mr-1"
+                            //                             data-bs-toggle="modal"
+                            //                             data-bs-target={
+                            //                               Userdata == null
+                            //                                 ? "#exampleModal"
+                            //                                 : null
+                            //                             }
+                            //                           >
+                            //                             <Link to="/Register"></Link>
+                            //                           </i>
+                            //                         )}
+                            //                       </div>
+                            //                     </div>
+                            //                   </div>
+                            //                 </div>
+                            //               </div>
+                            //             </div>
+                            //           </div>
+                            //         </div>
+                            //         {/* </Link> */}
+                            //       </div>
+                                );
+                              }
+                            })}
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </section>

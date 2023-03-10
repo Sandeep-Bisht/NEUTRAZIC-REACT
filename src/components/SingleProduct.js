@@ -337,7 +337,7 @@ const SingleProduct = (props) => {
       .then((res) => {
         CartById();
         //history.push("/Cart");
-        toast.success("Add to cart", {
+        toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 1000,
         });
@@ -493,7 +493,7 @@ const SingleProduct = (props) => {
           setWishlist(data.data);
           let response = data.data;
           for (let item of response) {
-            if (props.match.params.id == item.productId) {
+            if (props.match.params.id === item.productId) {
               let alreadyWishlist = document.getElementById(prodId);
               alreadyWishlist.classList.add("wishlisted");
             }

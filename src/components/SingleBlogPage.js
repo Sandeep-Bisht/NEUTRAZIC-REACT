@@ -136,9 +136,8 @@ const SingleBlog = (props) => {
                         .map((item, ind) => {
                           return (
                             <div className="col-md-6 col-lg-3">
-                              <div class="card">
+                              <div class="card" onClick={() => ChangeBlog(item.slug)}>
                                 <img
-                                  onClick={() => ChangeBlog(item.slug)}
                                   src={
                                     item.featuredImage &&
                                     `${baseUrl}/` + item.featuredImage[0].path
@@ -146,13 +145,14 @@ const SingleBlog = (props) => {
                                   class="card-img-top singleblog-card-image"
                                   alt="blog-image"
                                 />
-                                <div class="card-body">
-                                  <p class="card-text"><ReadMoreReact
+                                <div class="card-body" style = {{cursor:"pointer"}}>
+                                  <h6 className="blog-title-text">{item.title}</h6>
+                                  <p class="card-text" ><ReadMoreReact
                                 text={item.description}
-                                min={80}
-                                ideal={80}
-                                max={80}
-                                readMoreText={"...Read More"}
+                                min={40}
+                                ideal={40}
+                                max={40}
+                                readMoreText={"..."}
                               /></p>
                                 </div>
                               </div>

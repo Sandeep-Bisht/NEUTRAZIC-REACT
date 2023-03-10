@@ -18997,9 +18997,7 @@ padding-top: 72px;
 {
 	font-size: 12px;
 }
-.displayed-text{
-	font-size: 14px;
-}
+
 .product-content .display-text-group {
 	height: 42px;
 }
@@ -19031,6 +19029,15 @@ padding-top: 72px;
 	/* end homepage */
 	
 	/* responsive All product page */
+	.allproduct-price-div .text-start,.text-end {
+		
+		width: 100%;
+		text-align: center;
+	}
+
+	.allproduct-price-div .text-start .price{
+		font-size: 13px;
+	 }
 	
      .Category-div{
 		margin-top: 126px!important;
@@ -19041,7 +19048,9 @@ padding-top: 72px;
 	p {
 		line-height: 1.6
 	}
-	
+	.figure .button{
+		width: 100% !important;
+	}
 	/* end All product page */
 	.footer-area{
 		position: relative;
@@ -19166,8 +19175,9 @@ padding-top: 72px;
 			margin-left: -13px;
 		}
 		.figure .button{
-			width: 100%!important;
+			width: 100% !important;
 		}
+		
 	
 	/* responsive homepage */
 	.home-banner .home-banner-left .home-banner-heading {
@@ -19324,12 +19334,19 @@ padding-top: 72px;
 		width: 50%;
 	}
 	/* end subcategory responsive */
- 
+	/* All Product */
+	.allproduct-price-div .text-start,.text-end {
+		
+		width: 100%;
+		text-align: center;
+	}
  }
  @media only screen and (max-width : 430px)
  {
-	.text-start .price{
-		font-size: 11px !important;
+	.allproduct-price-div .text-start,.text-end {
+		font-size: 10px !important;
+		width: 100%;
+		text-align: center;
 	}
 	/* reponsive homepage */
 	.single-products-box .image img {
@@ -19361,6 +19378,10 @@ padding-top: 72px;
 	.contact-container-div{
 		overflow: hidden!important;
 	}
+	div#columns .figure figcaption {
+		font-size: 0.8rem !important;
+	}
+	
 	
    }
  
@@ -19369,6 +19390,9 @@ padding-top: 72px;
         
 		 width: 155px;
     margin-left: -15px!important;
+	}
+	.Search-Result-Box{
+		margin-right: 0px !important;
 	}
 	.single-products-box{
 		margin-right: 48px;
@@ -19410,16 +19434,16 @@ padding-top: 72px;
 		margin: 0px 0px 10px 0px;
 	}
 	div#columns .figure{
-		width: 49%!important;
+		width: 49%;
 	}
 	.infinite-scroll-component .div#columns .allproduct-figure {
-      width: 49%!important;
+      width: 49%;
 	}
 	div#columns .figure img{
 		height: 200px;
 	}
 	div#columns .figure figcaption {
-		font-size: 13px;
+		font-size: 0.7rem !important;
 	}
 	.text-nowrap{
 		font-size: 12px!important;
@@ -19434,6 +19458,11 @@ padding-top: 72px;
 	}
 	figure .button{
 		font-size: 15px;
+	}
+	.allproduct-price-div .text-start {
+		font-size: 10px !important;
+		width: 100%;
+		text-align: center;
 	} 
 	.home-banner .home-banner-right img {
 		margin-bottom: -39px;
@@ -19449,7 +19478,7 @@ padding-top: 72px;
 	}
 	.single-products-box .content .price-div .new-price {
 		font-size: 11px!important;
-		line-height: 0;
+		line-height: 1;
 	}
 	.brands-area {
 		display: none;
@@ -19569,6 +19598,14 @@ padding-top: 72px;
 
  
  
- 
+ /* Blog Css */
+ .card-title{
+	font-size: 1.1rem;
+    text-decoration: underline;
+}
+ /* All Product */
+ .allproduct-price-div .text-start{
+	color: rgba(0,0,0,0.6);
+ }
  
  

@@ -285,7 +285,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllSubCategoriesDetails">
+                      <Link to="/AllWarehouseDetails">
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">

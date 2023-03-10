@@ -270,7 +270,7 @@ const InProgressOrder = () => {
           <DashboardHeaader />
           <div className="row px-0 dashboard-container">
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
-              <Sidemenu />
+              <Sidemenu/>
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">

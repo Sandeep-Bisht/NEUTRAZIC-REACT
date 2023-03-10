@@ -1,6 +1,11 @@
 .singleblog-card-image{
     height: 200px !important;
 }
+.blog-title-text{
+    color:rgba(0,0,0,0.5);
+    font-size: 1rem;
+    text-decoration: underline;
+}
 /* .Single-Blog-Heading h1{
     font-size: 2rem;
 } */
