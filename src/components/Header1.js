@@ -19,6 +19,7 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import { useDispatch } from "react-redux";
 
+
 let changeNavValue = 0;
 var header;
 var sticky;
