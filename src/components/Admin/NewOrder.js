@@ -36,7 +36,7 @@ const NewOrder = () => {
          let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Pending")
+            if(item.orderStatus=="Pending")
 
             {
                arr.push(item);

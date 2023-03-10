@@ -18997,9 +18997,7 @@ padding-top: 72px;
 {
 	font-size: 12px;
 }
-.displayed-text{
-	font-size: 14px;
-}
+
 .product-content .display-text-group {
 	height: 42px;
 }
@@ -19041,7 +19039,9 @@ padding-top: 72px;
 	p {
 		line-height: 1.6
 	}
-	
+	.figure .button{
+		width: 100% !important;
+	}
 	/* end All product page */
 	.footer-area{
 		position: relative;
@@ -19166,8 +19166,9 @@ padding-top: 72px;
 			margin-left: -13px;
 		}
 		.figure .button{
-			width: 100%!important;
+			width: 100% !important;
 		}
+		
 	
 	/* responsive homepage */
 	.home-banner .home-banner-left .home-banner-heading {
@@ -19328,8 +19329,8 @@ padding-top: 72px;
  }
  @media only screen and (max-width : 430px)
  {
-	.text-start {
-		font-size: 11px !important;
+	.allproduct-price-div .text-start {
+		font-size: 10px !important;
 	}
 	/* reponsive homepage */
 	.single-products-box .image img {
@@ -19361,6 +19362,10 @@ padding-top: 72px;
 	.contact-container-div{
 		overflow: hidden!important;
 	}
+	div#columns .figure figcaption {
+		font-size: 0.8rem !important;
+	}
+	
 	
    }
  
@@ -19369,6 +19374,9 @@ padding-top: 72px;
         
 		 width: 155px;
     margin-left: -15px!important;
+	}
+	.Search-Result-Box{
+		margin-right: 0px !important;
 	}
 	.single-products-box{
 		margin-right: 48px;
@@ -19422,7 +19430,7 @@ padding-top: 72px;
 		height: 200px;
 	}
 	div#columns .figure figcaption {
-		font-size: 13px;
+		font-size: 0.7rem !important;
 	}
 	.text-nowrap{
 		font-size: 12px!important;
@@ -19437,6 +19445,9 @@ padding-top: 72px;
 	}
 	figure .button{
 		font-size: 15px;
+	}
+	.allproduct-price-div .text-start {
+		font-size: 10px !important;
 	} 
 	.home-banner .home-banner-right img {
 		margin-bottom: -39px;
@@ -19572,6 +19583,11 @@ padding-top: 72px;
 
  
  
+ /* Blog Css */
+ .card-title{
+	font-size: 1.1rem;
+    text-decoration: underline;
+}
  
  
  

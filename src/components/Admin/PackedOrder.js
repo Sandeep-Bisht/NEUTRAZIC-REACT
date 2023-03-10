@@ -40,7 +40,7 @@ const InProgressOrder = () => {
         let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Packed")
+            if(item.orderStatus=="Packed")
 
             {
                arr.push(item);

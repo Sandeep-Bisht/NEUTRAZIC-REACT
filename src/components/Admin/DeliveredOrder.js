@@ -32,7 +32,7 @@ const DeliveredOrder = () => {
         let arr=[];
          for(let item of data.data)
          {
-            if(item.status=="Delivered")
+            if(item.orderStatus=="Delivered")
 
             {
                arr.push(item);

@@ -63,6 +63,7 @@ const SearchResult = (props) => {
     GetCategory();
     GetManufacturer();
     GetSubCategory();
+    window.scroll(0,0);
     
 
     $(document).ready(function() {
@@ -757,7 +758,7 @@ const SearchResult = (props) => {
             </div>
           </div>
         </section>
-        <section className="products-area pb-4">
+        <section className="pb-4">
           <div className="container-fluid">
             <div className="row mt-0">
               {filterdata && filterdata.length>0 && filterdata.map((el, ind) => {
@@ -784,9 +785,9 @@ const SearchResult = (props) => {
                   count = count + 1;
                   return (
                     <>
-                      <div className="col-lg-3 col-md-4 col-sm-4 col-6" key={ind}>
+                      <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
-                        <div className="single-products-box border">
+                        <div className="Search-Result-Box mb-2 figure border">
                           <div className="row">
                             <div className="col-md-12">
                               <div className="product-div search-product-div">
@@ -795,23 +796,23 @@ const SearchResult = (props) => {
                                     to={"/SingleProduct/" + el._id}
                                     className="product-image-link"
                                   >
-                                    <div className="image hover-switch">
+                                    <div className="image">
                                       <img
-                                      src={ el.otherImage && 
-                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path :
-                                        require("../Images/products/Hintosulin (1).png")
+                                      src={
+                                        `${baseUrl}/` +
+                                        el.image[0].path
                                       }
                                         // src={require("../../Images/products/Hintosulin (1).png")}
                                         alt=""
                                       />
-                                      <img
+                                      {/* <img
                                         src={
                                           `${baseUrl}/` +
                                           el.image[0].path
                                         }
                                         alt=""
-                                        style={{ position: "absolute", left:"0", top:"0" }}
-                                      />
+                                        style={{ position: "absolute", left:"0", top:"30px" }}
+                                      /> */}
                                     </div>
                                   </Link>
                                 </div>

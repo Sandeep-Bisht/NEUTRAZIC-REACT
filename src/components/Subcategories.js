@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
+import "../components/Subcategories.css";
 // import "../../sass/whislist.css";
 // import Carouselcomp from "../../components/Carouselcomp";
 import Baseline from ".././components/Baseline";
@@ -586,15 +587,15 @@ const Subcategories = (props) => {
                 })
                 }
                 </div>
-                <section className="products-area pb-40">
+                <section className="pb-40">
                   <div className="container-fluid">
                     <div className="row">
                       {filterData && filterData.length > 0 ? (
                         filterData.map((item, ind) => {
 
                           return (
-                            <div className="col-lg-3 col-md-6 col-sm-6 " key={ind}>
-                              <div className="single-products-box border">
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-12 " key={ind}>
+                              <div className="mb-4 figure subcategory-box border">
                                 <div className="row">
                                   <div className="col-md-12">
                                     <div className="product-home-div">
@@ -603,19 +604,16 @@ const Subcategories = (props) => {
                                           to={"/SingleProduct/" + item._id}
                                           className="product-image-link"
                                         >
-                                          <div className="image hover-switch">
+                                          <div className="image">
                                             <img
-                                              src={
-                                                item.otherImage &&
-                                                item.otherImage.length > 0
-                                                  ? `${baseUrl}/` +
-                                                    item.otherImage[0].path
-                                                  : ""
+                                               src={
+                                                `${baseUrl}/` +
+                                                item.image[0].path
                                               }
                                               // src={require("../../Images/products/Hintosulin (1).png")}
                                               alt=""
                                             />
-                                            <img
+                                            {/* <img
                                               src={
                                                 `${baseUrl}/` +
                                                 item.image[0].path
@@ -625,12 +623,12 @@ const Subcategories = (props) => {
                                                 position: "absolute",
                                                 left: "0", top: "0"
                                               }}
-                                            />
+                                            /> */}
                                           </div>
                                         </Link>
                                       </div>
                                       <div className="tranding product-image-content">
-                                        <div className="content product-content">
+                                        <div className="content product-content text-center">
                                           {/* <Link to={"/SingleProduct/" + item._id}> */}
                                           <Link
                                             to={"/SingleProduct/" + item._id}
@@ -771,8 +769,8 @@ const Subcategories = (props) => {
                           {data.map((item, ind) => {
                             if (item.category._id == props.match.params._id) {
                               return (
-                                <div className="col-lg-3 col-md-6 col-sm-6" key={ind}>
-                                  <div className="single-products-box border">
+                                <div className="col-lg-3 col-md-6 col-sm-6 col-12" key={ind}>
+                                  <div className=" mb-4 figure subcategory-box border">
                                     <div className="row">
                                       <div className="col-md-12 product-home-div-card">
                                         <div className="product-home-div">
@@ -781,16 +779,15 @@ const Subcategories = (props) => {
                                               to={"/SingleProduct/" + item._id}
                                               className="product-image-link"
                                             >
-                                              <div className="image hover-switch">
+                                              <div className="image">
                                                 <img
                                                   src={
-                                                    item.otherImage &&
                                                     `${baseUrl}/` +
-                                                      item.otherImage[0].path
+                                                    item.image[0].path
                                                   }
                                                   alt=""
                                                 />
-                                                <img
+                                                {/* <img
                                                   src={
                                                     `${baseUrl}/` +
                                                     item.image[0].path
@@ -801,7 +798,7 @@ const Subcategories = (props) => {
                                                     left: "0",
                                                     top: "0",
                                                   }}
-                                                />
+                                                /> */}
                                               </div>
                                             </Link>
                                           </div>

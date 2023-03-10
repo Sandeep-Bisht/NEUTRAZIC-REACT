@@ -39,7 +39,7 @@ const InProgressOrder = () => {
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
-          if (item.status == "In-Progress") {
+          if (item.orderStatus == "In-Progress") {
             arr.push(item);
           }
         }

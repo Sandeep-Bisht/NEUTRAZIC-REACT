@@ -1487,21 +1487,30 @@ const HomePage = () => {
                         if(ind<4)
                         return(
                       <div className="col-lg-3 col-md-6">
+                        <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
                         <div class="card">
-                          <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
+                          
                           
                           <img
                             src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
                             class="card-img-top"
                             alt="blog-image"
                           />
-                          </Link>
+                          
                           <div class="card-body">
-                          <p class="card-text">
-                            {item.description}
-                            </p>
+                          <h6 class="card-title">
+                            {item.title}
+                            </h6>
+                            <p class="card-text" ><ReadMoreReact
+                                text={item.description}
+                                min={60}
+                                ideal={60}
+                                max={60}
+                                readMoreText={"..."}
+                              /></p>
                           </div>
                         </div>
+                        </Link>
                       </div>
                       )
                       })}

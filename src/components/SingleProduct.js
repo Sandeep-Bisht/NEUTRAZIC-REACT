@@ -337,7 +337,7 @@ const SingleProduct = (props) => {
       .then((res) => {
         CartById();
         //history.push("/Cart");
-        toast.success("Add to cart", {
+        toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 1000,
         });

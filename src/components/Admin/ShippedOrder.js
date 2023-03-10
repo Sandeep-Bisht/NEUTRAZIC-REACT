@@ -41,7 +41,7 @@ const ShippedOrder = () => {
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
-          if (item.status == "Shipped") {
+          if (item.orderStatus == "Shipped") {
             arr.push(item);
           }
         }
