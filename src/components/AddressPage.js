@@ -4,7 +4,6 @@ import Footer from './Footer';
 import { Link } from "react-router-dom";
 import '../components/singleproduct.css'
 import ShippingAddress from './ShippingAddress';
-import Orders from './Orders';
 import $ from 'jquery';
 import Header1 from './Header1';
 const AddressPage = (props)=>{
