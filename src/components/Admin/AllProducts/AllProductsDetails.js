@@ -147,7 +147,7 @@ export default function AllProductsDetails() {
       <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-        <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
+        <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
         <div className="all-products-details-section">
               <h3 className="all-products-head">All Products <span className="count">{products}</span></h3>
               <div className="all-products-search-wrap">

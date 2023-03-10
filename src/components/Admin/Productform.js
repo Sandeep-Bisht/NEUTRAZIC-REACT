@@ -395,21 +395,14 @@ const Productform = (props) => {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
-              {Userdata != undefined ? (
+            {Userdata != undefined ? (
                 Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
-                  <form encType="multipart/form-data" onSubmit={(e)=>submitData(e)}>
-                    <div className="container-fluid">
-                      <div className="row px-0">
-                        {/* <div className="col-1"></div> */}
-                        {/* <div className="col-10 px-0"> */}
-                          <div
-                            className="card p-4 m-2 product-form"
-                            id="Allproduct-form"
-                          >
-                            <h5>Product Creation</h5>
-
-                            <div className="row">
-                              <div className="col-6 p-1 form-floating required">
+                  <form>
+                    <div className="col-12 px-0">
+                      <div className="card p-4 m-2 mt-4 product-form">
+                        <h5>Product Creation</h5>
+                        <div className="row">
+                          <div className="col-6 p-1">
                                 <input
                                   type="text"
                                   id="floatingform"
@@ -768,7 +761,6 @@ const Productform = (props) => {
                           </div>
                         {/* </div> */}
                       </div>
-                    </div>
                   </form>
                 ) : null
               ) : null}

@@ -9,17 +9,16 @@ import Header1 from ".././components/Header1";
 import { useHistory, useParams } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import { ToastContainer, toast } from "react-toastify";
-import * as ACTIONS from '../CommonService/AddToCart/action'
+import * as ACTIONS from "../CommonService/AddToCart/action";
 import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import "../components/SearchResult.css";
-import {BiCategory} from 'react-icons/bi';
-import {BsCardList} from 'react-icons/bs';
-import {TbBrandNotion} from 'react-icons/tb';
-import {GiPriceTag} from 'react-icons/gi';
-import {IoClose} from 'react-icons/io5';
-
+import { BiCategory } from "react-icons/bi";
+import { BsCardList } from "react-icons/bs";
+import { TbBrandNotion } from "react-icons/tb";
+import { GiPriceTag } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
 
 var CartDataWoLogin = [];
 var Userdata = "";
@@ -47,12 +46,12 @@ const SearchResult = (props) => {
   let [dataForFilter, setDataForFilter] = useState([]);
   let [minprice, setMinPrice] = useState();
   let [maxprice, setMaxPrice] = useState();
-  const [wishlistData,Setwishlist]=useState([]);
-  const [cartItems, setCartItems] = useState(undefined)
-  
+  const [wishlistData, Setwishlist] = useState([]);
+  const [cartItems, setCartItems] = useState(undefined);
+
   const history = useHistory();
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -63,8 +62,7 @@ const SearchResult = (props) => {
     GetCategory();
     GetManufacturer();
     GetSubCategory();
-    window.scroll(0,0);
-    
+    window.scroll(0, 0);
 
     $(document).ready(function() {
       //    $('.icon-wishlist').on('click', function(){
@@ -96,31 +94,29 @@ const SearchResult = (props) => {
   };
   const GetWishlist = async () => {
     let id;
-    if(Userdata){
-     id=Userdata._id
+    if (Userdata) {
+      id = Userdata._id;
     }
-      await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-       
-      userid: id,
-    }),
-  })
-    .then((res) => res.json())
-    .then(async (data) => {
-       if(data.data[0] !== undefined){
-        Setwishlist(data.data)
-       }
-    })    
-    .catch((err) => {
-      console.log(err, "error");
-    });
-   
-};
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userid: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.data[0] !== undefined) {
+          Setwishlist(data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
 
   const GetData = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
@@ -213,7 +209,6 @@ const SearchResult = (props) => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
-          
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -276,7 +271,7 @@ const SearchResult = (props) => {
           setUserCart(data.data[0]);
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems))
+          dispatch(ACTIONS.getCartItem(cartItems));
         })
         .catch((err) => {
           console.log(err, "error");
@@ -321,8 +316,7 @@ const SearchResult = (props) => {
     category,
     manufacturer,
     image
-  ) => { 
-    
+  ) => {
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
       headers: {
@@ -337,9 +331,45 @@ const SearchResult = (props) => {
       .then(async (data) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
-            await fetch(
-              `${baseUrl}/api/wishlist/add_to_wishlist`,
-              {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userid: Userdata._id,
+                image: image,
+                name: name,
+                productId: productid,
+                rating: "5",
+                category: category,
+                manufacturer: manufacturer,
+                description: description,
+              }),
+            })
+              .then((res) => res.json())
+              .then(async (data) => {
+                toast.error("Added to wishlist", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 1000,
+                });
+
+                //add product to wishlist response is comming here
+                let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
+                wishList.classList.add("wishlisted");
+                GetWishlist();
+                // setWishlist(data.data[0]);
+              })
+              .catch((err) => {
+                console.log(err, "error e");
+              });
+          }
+        } else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -355,50 +385,7 @@ const SearchResult = (props) => {
                   manufacturer: manufacturer,
                   description: description,
                 }),
-              }
-            )
-              .then((res) => res.json())
-              .then(async (data) => {
-                toast.error("Added to wishlist", {
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 1000,
-                });
-                
-                //add product to wishlist response is comming here
-                let wishList = document.getElementById(productid);
-                wishList.classList.add("in-wishlist");
-                wishList.classList.add("wishlisted");
-                 GetWishlist();
-                // setWishlist(data.data[0]);
               })
-              .catch((err) => {
-                console.log(err, "error e");
-              });
-          }
-        } 
-        else {
-          if (!JSON.stringify(data.data).includes(productid) && data.data) {
-            if (!Userdata == []) {
-              await fetch(
-                `${baseUrl}/api/wishlist/add_to_wishlist`,
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userid: Userdata._id,
-                    image: image,
-                    name: name,
-                    productId: productid,
-                    rating: "5",
-                    category: category,
-                    manufacturer: manufacturer,
-                    description: description,
-                  }),
-                }
-              )
                 .then((res) => res.json())
                 .then(async (data) => {
                   toast.error("Added to wishlist", {
@@ -414,7 +401,6 @@ const SearchResult = (props) => {
                 .catch((err) => {
                   console.log(err, "error e");
                 });
-                
             }
           } else {
             toast.error("Already in wishlist !", {
@@ -501,10 +487,10 @@ const SearchResult = (props) => {
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
       if (item.productId == productId) {
-        return "wishlisted"
+        return "wishlisted";
       }
     }
-    }
+  };
 
   // End Filter Function //
 
@@ -744,94 +730,81 @@ const SearchResult = (props) => {
 
       {/* end side bar Modal */}
       <div className="container">
-      <div id="__next_search">
-        {/* trending section  */}
+        <div id="__next_search">
+          {/* trending section  */}
 
-        <section className="trending-section">
-          <div className="container-fluid">
-            <div className="row mt-0">
-              <div className="col-12">
-                <div className="">
-                  <h1 className="Search-Result">Showing Results for "{SearchedText}"</h1>
+          <section className="trending-section">
+            <div className="container-fluid">
+              <div className="row mt-0">
+                <div className="col-12">
+                  <div className="">
+                    <h1 className="Search-Result p-3">
+                      Showing Results for "{SearchedText}"
+                    </h1>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section className="pb-4">
-          <div className="container-fluid">
-            <div className="row mt-0">
-              {filterdata && filterdata.length>0 && filterdata.map((el, ind) => {
-                if (el.name.toLowerCase().startsWith(searchresults) ||
-                  // el.manufacturer.name.toLowerCase().includes(searchresults) ||
-                  // el.category.name.toLowerCase().includes(searchresults) ||
-                  // (el.subcategory &&
-                  //   el.subcategory.name
-                  //     .toLowerCase()
-                  //     .includes(searchresults)) ||
-                  // (el.type && el.type.toLowerCase().includes(searchresults)) ||
-                  // dataForFilter.includes(el.category && el.category.name) ||
-                  // dataForFilter.includes(
-                  //   el.subcategory && el.subcategory.name
-                  // ) ||
-                  // dataForFilter.includes(
-                  //   el.manufacturer && el.manufacturer.name
-                  // ) ||
-                  (minprice != "" &&
-                    maxprice != "" &&
-                    parseInt(el.inrMrp) >= minprice &&
-                    parseInt(el.inrMrp) <= maxprice)
-                ) {
-                  count = count + 1;
-                  return (
-                    <>
-                      <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={ind}>
-                        {/* <Link to={"/SingleProduct/" + el._id}> */}
-                        <div className="Search-Result-Box mb-2 figure border">
-                          <div className="row">
-                            <div className="col-md-12">
-                              <div className="product-div search-product-div">
-                                <div className="product-image-div">
-                                  <Link
-                                    to={"/SingleProduct/" + el._id}
-                                    className="product-image-link"
-                                  >
-                                    <div className="image">
-                                      <img
-                                      src={
-                                        `${baseUrl}/` +
-                                        el.image[0].path
-                                      }
-                                        // src={require("../../Images/products/Hintosulin (1).png")}
-                                        alt=""
-                                      />
-                                      {/* <img
-                                        src={
-                                          `${baseUrl}/` +
-                                          el.image[0].path
-                                        }
-                                        alt=""
-                                        style={{ position: "absolute", left:"0", top:"30px" }}
-                                      /> */}
-                                    </div>
-                                  </Link>
+          </section>
+          <section className="pb-4">
+            <div className="container-fluid">
+              <div className="row mt-0">
+                <div id="columns" className="columns_5">
+                  {filterdata &&
+                    filterdata.length > 0 &&
+                    filterdata.map((el, ind) => {
+                      if (
+                        el.name.toLowerCase().startsWith(searchresults) ||
+                        // el.manufacturer.name.toLowerCase().includes(searchresults) ||
+                        // el.category.name.toLowerCase().includes(searchresults) ||
+                        // (el.subcategory &&
+                        //   el.subcategory.name
+                        //     .toLowerCase()
+                        //     .includes(searchresults)) ||
+                        // (el.type && el.type.toLowerCase().includes(searchresults)) ||
+                        // dataForFilter.includes(el.category && el.category.name) ||
+                        // dataForFilter.includes(
+                        //   el.subcategory && el.subcategory.name
+                        // ) ||
+                        // dataForFilter.includes(
+                        //   el.manufacturer && el.manufacturer.name
+                        // ) ||
+                        (minprice != "" &&
+                          maxprice != "" &&
+                          parseInt(el.inrMrp) >= minprice &&
+                          parseInt(el.inrMrp) <= maxprice)
+                      ) {
+                        count = count + 1;
+                        return (
+                          <>
+                            <figure className="figure search-figure" key={ind}>
+                              <Link
+                                to={"/SingleProduct/" + el._id}
+                                className="product-image-link"
+                              >
+                                <div>
+                                  <img
+                                    src={`${baseUrl}/` + el.image[0].path}
+                                    alt=""
+                                  />
                                 </div>
-                                <div className="tranding product-image-content">
-                                  <div className="content product-content">
-                                    <Link to={"/SingleProduct/" + el._id}>
-                                      <ReadMoreReact text={el.name} />
-                                    </Link>
-                                    <div className="price-div">
-                                      <span className="new-price">
-                                        <i className="fa fa-inr"></i>{" "}
-                                        {el.inrDiscount}
-                                      </span>
-                                      <del className="new-price ml-1">
-                                      <i className="fa fa-inr"></i>{el.inrMrp}
-                                      </del>
+
+                                <figcaption>{el.name}</figcaption>
+                              </Link>
+                              <div className="contanier Search-price-div">
+                                <div className="row">
+                                  <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start search-text-start">
+                                    <span className="price">
+                                      {" "}
+                                      <i className="fa fa-inr"></i>
+                                      {el.inrDiscount}
+                                    </span>
+                                  </div>
+                                  
+                                  <div className="col-6 text-end">
+                                    <p className={`text-nowrap wishlist search-result-wishlist`}>
                                       {Userdata ? (
                                         <i
-                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
                                           id={el._id}
                                           onClick={() => {
                                             AddtoWishlist(
@@ -846,107 +819,88 @@ const SearchResult = (props) => {
                                               el.image
                                             );
                                           }}
-                                          // onClick={() => {
-                                          //   wishList(el)
-                                          // }}
+                                          className={`bx bxs-heart ${checkWishlistItem(
+                                            el._id
+                                          )}`}
                                         ></i>
                                       ) : (
-                                        <>
-                                          <i
-                                            className="bx bxs-heart ml-3 pc-heart"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-
-                                          <Link to="/Register">
-                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                          </Link>
-                                        </>
+                                        <i
+                                          className="bx bxs-heart "
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
+                                        ></i>
                                       )}
-                                      <div>
-                                        {Userdata ? (
-                                          <i
-                                            className="bx bx-cart"
-                                            onClick={() => {
-                                              {
-                                                Userdata !== null
-                                                  ? cartfunction(
-                                                      el._id,
-                                                      el.name,
-                                                      quantity,
-                                                      el.inrMrp,
-                                                      el.inrDiscount,
-                                                      el.discount,
-                                                      el.description,
-                                                      el.category,
-                                                      el.manufacturer.name,
-                                                      el.image[0].path
-                                                    )
-                                                  : addToCartWithoutRegistration(
-                                                      el._id,
-                                                      el.name,
-                                                      quantity,
-                                                      el.inrMrp,
-                                                      el.inrDiscount,
-                                                      el.discount,
-                                                      el.description,
-                                                      el.category,
-                                                      el.manufacturer.name,
-                                                      el.image[0].path
-                                                    );
-                                              }
-                                            }}
-                                          ></i>
-                                        ) : (
-                                          <i
-                                            className="bx bx-cart mr-1"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          >
-                                            <Link to="/Register"></Link>
-                                          </i>
-                                        )}
-                                      </div>
-                                    </div>
+                                      Wishlist
+                                    </p>
                                   </div>
-                                  <hr/>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                        {/* </Link> */}
-                      </div>
-                    </>
-                  );
-                }
-              })}
-              {count == 0 && <lottie-player
-                        src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
-                        background="transparent"
-                        speed="1"
-                        style={{
-                          width: "300px",
-                          height: "300px",
-                          margin: "auto",
-                        }}
-                        loop
-                        autoplay
-                      ></lottie-player>}
+                              {Userdata ? (
+                                <button
+                                  className="button btn"
+                                  onClick={() => {
+                                    cartfunction(
+                                      el._id,
+                                      el.name,
+                                      quantity,
+                                      el.inrMrp,
+                                      el.inrDiscount,
+                                      el.discount,
+                                      el.description,
+                                      el.category,
+                                      el.manufacturer.name,
+                                      el.image[0].path
+                                    );
+                                  }}
+                                  data-bs-toggle={
+                                    Userdata == null ? "modal" : null
+                                  }
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              ) : (
+                                <button
+                                  className="button btn"
+                                  data-bs-toggle="modal"
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              )}
+                            </figure>
+                          </>
+                        );
+                      }
+                    })}
+                  {count == 0 && (
+                    <lottie-player
+                      src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                      background="transparent"
+                      speed="1"
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        margin: "auto",
+                      }}
+                      loop
+                      autoplay
+                    ></lottie-player>
+                  )}
+                </div>
+              </div>
             </div>
-            
-          </div>
-        </section>
-        <ToastContainer/>
-      </div>
+          </section>
+          <ToastContainer />
+        </div>
       </div>
       <Footer />
     </>

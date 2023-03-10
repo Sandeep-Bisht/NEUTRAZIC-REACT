@@ -78,13 +78,11 @@ const UpdateBlogs = async (e,_id) => {
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
               <form>
-                <div className="container-fluid">
-                  <div className="row px-0">
-                <div className="col-12">
-                  <div className="card p-3">
-                    <h5 className="Blog-Heading">Create Blog</h5>
-                    <div className="row">
-                      <div className="col-5 p-1 m-2 form-floating">
+              <div className="col-12 px-0">
+                      <div className="card p-4 m-2 mt-4 product-form">
+                        <h5>Create Blog</h5>
+                        <div className="row">
+                          <div className="col-6 p-1 m-2 form-floating">
                         <input
                           type="text"
                           id="floatingInputValue"
@@ -151,8 +149,6 @@ const UpdateBlogs = async (e,_id) => {
                       }
                     </div>
                   </div>
-                </div>
-                </div>
                 </div>
               </form>
             </div>
