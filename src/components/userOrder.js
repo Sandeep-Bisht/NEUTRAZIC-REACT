@@ -20,7 +20,6 @@ import {
 import { BiSearchAlt } from "react-icons/bi";
 import { MdPlaylistAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
-import Orders from "../Orders";
 import { DownOutlined } from "@ant-design/icons";
 import { render } from "react-dom";
 import Header1 from "../components/Header1";

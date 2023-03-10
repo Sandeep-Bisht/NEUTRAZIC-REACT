@@ -268,6 +268,7 @@ a{
   color: var(--first-color-light);
   margin-bottom: 1rem;
   transition: .3s;
+  width: 180px;
 }
 .nav__link .nav_name Link{
   color:green;
@@ -280,8 +281,8 @@ a{
 .nav__icon{
   height: 20px;
   width: auto;
-  color:#000;
-  opacity: .3;
+  color:#007bff;
+  opacity: .6;
 }
 .nav__icon:hover{
   color: #1e144f;
@@ -418,8 +419,8 @@ a{
 .cardicon{
   height: 30px;
   width: auto;
-  color:#000;
-  opacity: .3;
+  color:#007bff;
+  opacity: .6;
 }
 .all-manufacturer-head, .all-category-head, .sub-category-head, .all-products-head
 {
@@ -912,9 +913,15 @@ font-family: 'Roboto', sans-serif;
 {
     height: 18px;
     width: auto;
-    color: #000;
+    color: #007bff;
     opacity: .6;
     padding-right: 8px;
+}
+.accordion-header svg path{
+  stroke: #007bff!important;
+}
+.Configration-List .configuration-icons-wrap path{
+  stroke: #007bff!important;
 }
 .Configration-List li
 {
