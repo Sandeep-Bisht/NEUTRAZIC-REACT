@@ -16,6 +16,8 @@ import { baseUrl } from "../../utils/services";
 import PageNotFound from "../PageNotFound";
 import LineChart from "../../LineChart";
 import PieChart from "../PieChart";
+import Header1 from "../Header1";
+
 
 // var ManufacturerCount1='';
 // var productCount1=''
@@ -157,7 +159,8 @@ const Dashboard = () => {
   };
   return (
     <>
-      {localuser && localuser.role === "superAdmin" || localuser.role === "Vendor" ? (
+      {Userdata != undefined ? (
+          Userdata.role == "superAdmin" || Userdata.role == "Vendor" ?  (
         <section id="body-pd">
           <div className="container-fluid">
             <DashboardHeaader />
@@ -319,7 +322,9 @@ const Dashboard = () => {
                 </div>
                 </div>
         </section>
-    ):(
+    ):
+     (<PageNotFound/>)
+    ):( 
       <PageNotFound/>
     )
 }

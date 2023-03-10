@@ -12,7 +12,7 @@ function PageNotFound() {
           <div className="row mt-0">
             <div className="col-8 mx-auto">
               <div className="d-flex justify-content-center align-items-center">
-                <div className="pt-5">
+                <div className="">
                   <img src={pageNotFound} alt="" className="error-image" />
                   <p className="error-1">Page Not Found</p>
                   <p className="error-message">
