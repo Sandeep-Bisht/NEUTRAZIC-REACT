@@ -875,9 +875,10 @@ const Header1 = (props) => {
                   </div>
                   <div className="right-part">
                     <div className=" d-flex align-items-center currancy ">
+                    
                       <select>
                         <option>INR</option>
-                        <i className="bx bx-chevron-down"></i>
+                        
 
                         <option>Dollar</option>
                       </select>
