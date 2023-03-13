@@ -20,6 +20,7 @@ import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import { useDispatch } from "react-redux";
 
 
+
 let changeNavValue = 0;
 var header;
 var sticky;
@@ -49,6 +50,7 @@ const Header1 = (props) => {
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
   const [usermodal, setUsermodal] = useState();
+  
 
   const {
     register,
@@ -479,11 +481,17 @@ const Header1 = (props) => {
                                   className="form-control form-control-login"
                                   {...register("username", {
                                     required: true,
+                                    pattern:/^[a-z0-9]+$/,
                                   })}
                                 />
                                 {errors?.username?.type === "required" && (
                                   <p className="text-danger">
                                     This field is required
+                                  </p>
+                                )}
+                                {errors?.username?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Please enter the valid username
                                   </p>
                                 )}
 

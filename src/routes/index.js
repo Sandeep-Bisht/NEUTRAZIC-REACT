@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -70,8 +70,16 @@ import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
 import Blogs from "../components/Blog";
 import PageNotFound from "../components/PageNotFound";
 
+
 var Userdata = "";
 const Root = (props) => {
+  
+  
+  const [currancyType,setCurrancyType] = useState("")
+
+  useEffect(()=>{
+
+  },[])
   // const initialState = {
   //   auth: AUTH_INITIAL_STATE,
   //   product: PRODUCT_INITIAL_STATE,

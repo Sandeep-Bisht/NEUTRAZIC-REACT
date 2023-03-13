@@ -129,7 +129,9 @@ body
 a{
   text-decoration: none;
 }
-
+:where(.css-dev-only-do-not-override-diro6f).ant-modal .ant-modal-close{
+  padding-right: 39px!important;
+}
 /*===== HEADER =====*/
 .headsec:after {
     content: '';
