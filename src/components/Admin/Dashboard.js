@@ -17,6 +17,7 @@ import PageNotFound from "../PageNotFound";
 import LineChart from "../../LineChart";
 import PieChart from "../PieChart";
 import Header1 from "../Header1";
+import HomePage from "../../views/landing/HomePage";
 
 
 // var ManufacturerCount1='';
@@ -157,10 +158,11 @@ const Dashboard = () => {
     localStorage.setItem("Userdata", null);
     window.location.replace("/");
   };
+
   return (
     <>
-      {Userdata != undefined ? (
-          Userdata.role == "superAdmin" || Userdata.role == "Vendor" ?  (
+      {localuser !== null ? (
+          localuser.role == "superAdmin" || localuser.role == "Vendor" ?  (
         <section id="body-pd">
           <div className="container-fluid">
             <DashboardHeaader />
@@ -325,7 +327,7 @@ const Dashboard = () => {
     ):
      (<PageNotFound/>)
     ):( 
-      <PageNotFound/>
+      (<PageNotFound/>)
     )
 }
 
