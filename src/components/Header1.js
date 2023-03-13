@@ -722,7 +722,7 @@ const Header1 = (props) => {
                                     data-bs-target="#exampleModal"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <i className="user-icon bx bx-user"></i>
+                                    <i className="user-icon bx bx-user-pin"></i>
                                   </span>
 
                                   <span
@@ -734,7 +734,7 @@ const Header1 = (props) => {
                                 </>
                               ) : (
                                 <>
-                                  <i className="user-icon bx bx-user"></i>
+                                  <i className="user-icon bx bx-user-pin"></i>
                                 </>
                               )}
                             </div>
@@ -974,7 +974,7 @@ const Header1 = (props) => {
                         className="icons2"
                         src={require("../Images/Icons/akar-icons_phone.png")}
                       />{" "}
-                      <span className="contact">+91-7055872014</span>
+                      <span className="contact">+91-7500872014</span>
                       <img
                         src={require("../Images/Icons/carbon_email-new.png")}
                         className="icons2 ml-3"
