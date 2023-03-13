@@ -574,172 +574,156 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row">
-              {data.map((el, ind) => {
-                if (ind < 6) {
-                  return (
-                    <>
-                      <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={ind}>
-                        {/* <Link to={"/SingleProduct/" + el._id}> */}
-                        <div className="single-products-box border">
-                          <div className="row">
-                            <div className="col-md-12">
-                              <div className="product-home-div">
-                                <div className="product-image-div">
-                                  <Link
-                                    to={"/SingleProduct/" + el._id}
-                                    className="product-image-link"
-                                  >
-                                    <div className="image hover-switch">
-                                      <img className="hoverimage"
-                                        src={
-                                          el.otherImage &&
-                                          el.otherImage.length > 0
-                                            ? `${baseUrl}/` +
-                                              el.otherImage[0].path
-                                            : require("../../Images/products/Hintosulin (1).png")
-                                        }
-                                        // src={require("../../Images/products/Hintosulin (1).png")}
-                                        alt=""
-                                      />
-                                      <img
-                                        src={`${baseUrl}/` + el.image[0].path}
-                                        alt=""
-                                        style={{
-                                          position: "absolute",
-                                          left: "0",
-                                          top: "0",
-                                        }}
-                                      />
-                                    </div>
-                                  </Link>
+              <div id="column" className="columns_5">
+                {data
+                  .filter((item) => item.type == "Trending Product")
+                  .map((el, ind) => {
+                    if (ind < 5) {
+                      return (
+                        <>
+                          <figure
+                            className="figure homepage-trending-figure"
+                            key={ind}
+                          >
+                            {/* <Link to={"/SingleProduct/" + el._id}> */}
+
+                            <Link to={"/SingleProduct/" + el._id}>
+                              <div
+                                className="image hover-switch-homepage"
+                                style={{ position: "relative" }}
+                              >
+                                <img
+                                  className="hoverimage"
+                                  src={
+                                    el.otherImage &&
+                                    el.otherImage.length > 0 &&
+                                    `${baseUrl}/` + el.otherImage[0].path
+                                  }
+                                  // src={require("../../Images/products/Hintosulin (1).png")}
+                                  alt=""
+                                />
+                                <img
+                                  className="main-Image"
+                                  src={`${baseUrl}/` + el.image[0].path}
+                                  alt=""
+                                  style={{
+                                    position: "absolute",
+                                    top: "0",
+                                    left: "0",
+                                  }}
+                                />
+                              </div>
+                              <Link to={"/SingleProduct/" + el._id}>
+                                <figcaption className="Product-name-home">
+                                  {el.name}
+                                </figcaption>
+                              </Link>
+                            </Link>
+
+                            <div className="contanier homepage-product-price-div">
+                              <div className="row mt-2">
+                                <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                                  <span className="price">
+                                    {" "}
+                                    <i className="fa fa-inr"></i>
+                                    {el.inrDiscount}
+                                  </span>
                                 </div>
-                                <div className="tranding product-image-content">
-                                  <div className="content product-content">
-                                    <Link to={"/SingleProduct/" + el._id}>
-                                      <figcaption>{el.name}</figcaption>
-                                    </Link>
-                                    <div className="price-div">
-                                      <span className="new-price">
-                                        <i className="fa fa-inr"></i>
-                                        {el.inrDiscount}
-                                      </span>
-
-                                      <del className="new-price ml-1">
-                                        <i className="fa fa-inr"></i>
-                                        {el.inrMrp}
-                                      </del>
-                                      {Userdata ? (
-                                        <i
-                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(
-                                            el._id
-                                          )}`}
-                                          id={el._id}
-                                          onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
-                                          }}
-                                          // onClick={() => {
-                                          //   wishList(el)
-                                          // }}
-                                        ></i>
-                                      ) : (
-                                        <>
-                                          <i
-                                            className="bx bxs-heart ml-3 pc-heart"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-
-                                          <Link to="/Register">
-                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                          </Link>
-                                        </>
-                                      )}
-                                      <div>
-                                        {Userdata ? (
-                                          <i
-                                            className="bx bx-cart"
-                                            onClick={() => {
-                                              {
-                                                Userdata !== null
-                                                  ? cartfunction(
-                                                      el._id,
-                                                      el.name,
-                                                      quantity,
-                                                      el.inrMrp,
-                                                      el.inrDiscount,
-                                                      el.discount,
-                                                      el.description,
-                                                      el.category,
-                                                      el.manufacturer.name,
-                                                      el.image[0].path
-                                                    )
-                                                  : addToCartWithoutRegistration(
-                                                      el._id,
-                                                      el.name,
-                                                      quantity,
-                                                      el.inrMrp,
-                                                      el.inrDiscount,
-                                                      el.discount,
-                                                      el.description,
-                                                      el.category,
-                                                      el.manufacturer.name,
-                                                      el.image[0].path
-                                                    );
-                                              }
-                                            }}
-                                          ></i>
-                                        ) : (
-                                          <i
-                                            className="bx bx-cart mr-1"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          >
-                                            <Link to="/Register"></Link>
-                                          </i>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
+                                <div className="col-6 text-end">
+                                  <p className={`text-nowrap wishlist`}>
+                                    {Userdata ? (
+                                      <i
+                                        id={el._id}
+                                        onClick={() => {
+                                          AddtoWishlist(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image
+                                          );
+                                        }}
+                                        className={`bx bxs-heart ${checkWishlistItem(
+                                          el._id
+                                        )}`}
+                                      ></i>
+                                    ) : (
+                                      <i
+                                        className="bx bxs-heart "
+                                        data-bs-toggle="modal"
+                                        data-bs-target={
+                                          Userdata == null
+                                            ? "#exampleModal"
+                                            : null
+                                        }
+                                      ></i>
+                                    )}
+                                    Wishlist
+                                  </p>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        {/* </Link> */}
-                      </div>
-                    </>
-                  );
-                }
-              })}
+
+                            {Userdata ? (
+                              <button
+                                className="button btn"
+                                onClick={() => {
+                                  cartfunction(
+                                    el._id,
+                                    el.name,
+                                    quantity,
+                                    el.inrMrp,
+                                    el.inrDiscount,
+                                    el.discount,
+                                    el.description,
+                                    el.category,
+                                    el.manufacturer.name,
+                                    el.image[0].path
+                                  );
+                                }}
+                                data-bs-toggle={
+                                  Userdata == null ? "modal" : null
+                                }
+                                data-bs-target={
+                                  Userdata == null ? "#exampleModal" : null
+                                }
+                              >
+                                Add to Cart
+                              </button>
+                            ) : (
+                              <button
+                                className="button btn"
+                                data-bs-toggle="modal"
+                                data-bs-target={
+                                  Userdata == null ? "#exampleModal" : null
+                                }
+                              >
+                                Add to Cart
+                              </button>
+                            )}
+
+                            {/* </Link> */}
+                          </figure>
+                        </>
+                      );
+                    }
+                  })}
+              </div>
+              {/* hover Button */}
+              <div className="wrapperbtn pt-0">
+                <Link to="/AllProducts">
+                  <button type="button" className="btn10">
+                    Show More
+                  </button>
+                  {/* <div className="transition"></div> */}
+                </Link>
+              </div>
+              {/* Hover Button End */}
             </div>
-            {/* hover Button */}
-            <div className="wrapperbtn pt-0">
-              <Link to="/AllProducts">
-                <button type="button" className="btn10">
-                  Show More
-                </button>
-                {/* <div className="transition"></div> */}
-              </Link>
-            </div>
-            {/* Hover Button End */}
           </div>
         </section>
 
@@ -811,174 +795,160 @@ const HomePage = () => {
         </section>
 
         <section className="products-area ">
-          <h1 className="trendign-head">
+          <h1 className="trendign-head Product-div-homepage">
             <span className="products-color">Products</span>
           </h1>
           <div className="container m-auto py-4">
             <div className="row ">
-              {data.map((el, index) => {
-                if (index < 6) {
-                  return (
-                    <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
-                      <div className="single-products-box border">
-                        <div className="row">
-                          <div className="col-md-12">
-                            <div className="product-home-div">
-                              <div className="product-image-div">
-                                <Link
-                                  to={"/SingleProduct/" + el._id}
-                                  className="product-image-link"
-                                >
-                                  <div className="image hover-switch">
-                                    <img
-                                      src={
-                                        el.otherImage &&
-                                        el.otherImage.length > 0
-                                          ? `${baseUrl}/` +
-                                            el.otherImage[0].path
-                                          : require("../../Images/products/Hintosulin (1).png")
-                                      }
-                                      alt=""
-                                    />
-                                    <img
-                                      src={`${baseUrl}/` + el.image[0].path}
-                                      alt=""
-                                      style={{
-                                        position: "absolute",
-                                        left: "0",
-                                        top: "0",
-                                      }}
-                                    />
-                                  </div>
-                                </Link>
-                              </div>
-                              <div className="tranding product-image-content">
-                                <div className="content product-content">
-                                  <Link to={"/SingleProduct/" + el._id}>
-                                    <figcaption>{el.name}</figcaption>
-                                  </Link>
-                                  <div className="price-div">
-                                    <span className="new-price">
-                                      <i className="fa fa-inr"></i>
-                                      {el.inrDiscount}
-                                    </span>
+              <div id="column" className="columns_5">
+                {data
+                  .filter((item) => item.type == "")
+                  .map((el, ind) => {
+                    if (ind < 5) {
+                      return (
+                        <figure
+                          className="figure homepage-trending-figure"
+                          key={ind}
+                        >
+                          {/* <Link to={"/SingleProduct/" + el._id}> */}
 
-                                    <del className="new-price ml-1">
-                                      <i className="fa fa-inr"></i>
-                                      {el.inrMrp}
-                                    </del>
-                                    {Userdata ? (
-                                      <i
-                                        className={`bx bxs-heart ml-3  ${checkWishlistItem(
-                                          el._id
-                                        )}`}
-                                        id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
-                                        }}
-                                        // onClick={() => {
-                                        //   wishList(el)
-                                        // }}
-                                      ></i>
-                                    ) : (
-                                      <>
-                                        <i
-                                          className="bx bxs-heart ml-3 pc-heart"
-                                          data-bs-toggle="modal"
-                                          data-bs-target={
-                                            Userdata == null
-                                              ? "#exampleModal"
-                                              : null
-                                          }
-                                        ></i>
-                                        <Link to="/Register">
-                                          <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                        </Link>
-                                      </>
-                                    )}
-                                    <div>
-                                      {Userdata ? (
-                                        <i
-                                          className="bx bx-cart"
-                                          onClick={() => {
-                                            {
-                                              Userdata !== null
-                                                ? cartfunction(
-                                                    el._id,
-                                                    el.name,
-                                                    quantity,
-                                                    el.inrMrp,
-                                                    el.inrDiscount,
-                                                    el.discount,
-                                                    el.description,
-                                                    el.category,
-                                                    el.manufacturer.name,
-                                                    el.image[0].path
-                                                  )
-                                                : addToCartWithoutRegistration(
-                                                    el._id,
-                                                    el.name,
-                                                    quantity,
-                                                    el.inrMrp,
-                                                    el.inrDiscount,
-                                                    el.discount,
-                                                    el.description,
-                                                    el.category,
-                                                    el.manufacturer.name,
-                                                    el.image[0].path
-                                                  );
-                                            }
-                                          }}
-                                        ></i>
-                                      ) : (
-                                        <i
-                                          className="bx bx-cart mr-1"
-                                          data-bs-toggle="modal"
-                                          data-bs-target={
-                                            Userdata == null
-                                              ? "#exampleModal"
-                                              : null
-                                          }
-                                        >
-                                          <Link to="/Register"></Link>
-                                        </i>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
+                          <Link to={"/SingleProduct/" + el._id}>
+                            <div
+                              className="image hover-switch-homepage"
+                              style={{ position: "relative" }}
+                            >
+                              <img
+                                className="hoverimage"
+                                src={
+                                  el.otherImage &&
+                                  el.otherImage.length > 0 &&
+                                  `${baseUrl}/` + el.otherImage[0].path
+                                }
+                                // src={require("../../Images/products/Hintosulin (1).png")}
+                                alt=""
+                              />
+                              <img
+                                className="main-Image"
+                                src={`${baseUrl}/` + el.image[0].path}
+                                alt=""
+                                style={{
+                                  position: "absolute",
+                                  top: "0",
+                                  left: "0",
+                                }}
+                              />
+                            </div>
+                            <Link to={"/SingleProduct/" + el._id}>
+                              <figcaption className="Product-name-home">
+                                {el.name}
+                              </figcaption>
+                            </Link>
+                          </Link>
+                          <div className="contanier homepage-product-price-div">
+                            <div className="row mt-2">
+                              <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                                <span className="price">
+                                  {" "}
+                                  <i className="fa fa-inr"></i>
+                                  {el.inrDiscount}
+                                </span>
+                              </div>
+                              <div className="col-6 text-end">
+                                <p className={`text-nowrap wishlist`}>
+                                  {Userdata ? (
+                                    <i
+                                      id={el._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        el._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null
+                                          ? "#exampleModal"
+                                          : null
+                                      }
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                              </div>
+                              <div>
+                                {Userdata ? (
+                                  <button
+                                    className="button btn"
+                                    onClick={() => {
+                                      cartfunction(
+                                        el._id,
+                                        el.name,
+                                        quantity,
+                                        el.inrMrp,
+                                        el.inrDiscount,
+                                        el.discount,
+                                        el.description,
+                                        el.category,
+                                        el.manufacturer.name,
+                                        el.image[0].path
+                                      );
+                                    }}
+                                    data-bs-toggle={
+                                      Userdata == null ? "modal" : null
+                                    }
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="button btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      {/* </Link> */}
-                    </div>
-                  );
-                }
-              })}
-            </div>
-            {/* hover Button */}
 
-            <div className="wrapperbtn pt-3 pb-4">
-              <Link to="/AllProducts">
-                <button type="button" className="btn10">
-                  Show More
-                </button>
-                {/* <div className="transition"></div> */}
-              </Link>
+                          {/* </Link> */}
+                        </figure>
+                      );
+                    }
+                  })}
+              </div>
+              {/* hover Button */}
+
+              <div className="wrapperbtn pt-3 pb-4">
+                <Link to="/AllProducts">
+                  <button type="button" className="btn10">
+                    Show More
+                  </button>
+                  {/* <div className="transition"></div> */}
+                </Link>
+              </div>
+              {/* Hover Button End */}
             </div>
-            {/* Hover Button End */}
           </div>
         </section>
         <section className="products-area">
@@ -987,158 +957,142 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row">
-              {data
-                .filter((item) => item.category.name == "Weight Management")
-                .map((el, index) => {
-                  if (index < 6) {
-                    return (
-                      <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
-                        {/* <Link to={"/SingleProduct/" + el._id}> */}
-                        <div className="single-products-box border">
-                          <div className="row">
-                            <div className="col-md-12">
-                              <div className="product-home-div">
-                                <div className="product-image-div">
-                                  <Link
-                                    to={"/SingleProduct/" + el._id}
-                                    className="product-image-link"
-                                  >
-                                    <div className="image hover-switch">
-                                      <img
-                                        src={
-                                          el.otherImage &&
-                                          el.otherImage.length > 0
-                                            ? `${baseUrl}/` +
-                                              el.otherImage[0].path
-                                            : require("../../Images/products/Hintosulin (1).png")
-                                        }
-                                        alt=""
-                                      />
-                                      <img
-                                        src={`${baseUrl}/` + el.image[0].path}
-                                        alt=""
-                                        style={{
-                                          position: "absolute",
-                                          left: "0",
-                                          top: "0",
-                                        }}
-                                      />
-                                    </div>
-                                  </Link>
-                                </div>
-                                <div className="tranding product-image-content">
-                                  <div className="content product-content">
-                                    <Link to={"/SingleProduct/" + el._id}>
-                                      <figcaption>{el.name}</figcaption>
-                                    </Link>
-                                    <div className="price-div">
-                                      <span className="new-price">
-                                        <i className="fa fa-inr"></i>
-                                        {el.inrDiscount}
-                                      </span>
-                                      <del className="new-price ml-1">
-                                        <i className="fa fa-inr"></i>
-                                        {el.inrMrp}
-                                      </del>
-                                      {Userdata ? (
-                                        <i
-                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(
-                                            el._id
-                                          )}`}
-                                          id={el._id}
-                                          onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
-                                          }}
-                                          // onClick={() => {
-                                          //   wishList(el)
-                                          // }}
-                                        ></i>
-                                      ) : (
-                                        <>
-                                          <i
-                                            className="bx bxs-heart ml-3 pc-heart"
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-                                          <Link to="/Register">
-                                            <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                          </Link>
-                                        </>
-                                      )}
-
-                                      {Userdata ? (
-                                        <i
-                                          className="bx bx-cart"
-                                          onClick={() => {
-                                            {
-                                              Userdata !== null
-                                                ? cartfunction(
-                                                    el._id,
-                                                    el.name,
-                                                    quantity,
-                                                    el.inrMrp,
-                                                    el.inrDiscount,
-                                                    el.discount,
-                                                    el.description,
-                                                    el.category,
-                                                    el.manufacturer.name,
-                                                    el.image[0].path
-                                                  )
-                                                : addToCartWithoutRegistration(
-                                                    el._id,
-                                                    el.name,
-                                                    quantity,
-                                                    el.inrMrp,
-                                                    el.inrDiscount,
-                                                    el.discount,
-                                                    el.description,
-                                                    el.category,
-                                                    el.manufacturer.name,
-                                                    el.image[0].path
-                                                  );
-                                            }
-                                          }}
-                                        ></i>
-                                      ) : (
-                                        <i
-                                          className="bx bx-cart mr-1"
-                                          data-bs-toggle="modal"
-                                          data-bs-target={
-                                            Userdata == null
-                                              ? "#exampleModal"
-                                              : null
-                                          }
-                                        >
-                                          <Link to="/Register"></Link>
-                                        </i>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
+              <div id="column" className="columns_5">
+                {data
+                  .filter((item) => item.category.name == "Weight Management")
+                  .map((el, ind) => {
+                    if (ind < 5) {
+                      return (
+                        <figure
+                          className="figure homepage-trending-figure"
+                          key={ind}
+                        >
+                          {/* <Link to={"/SingleProduct/" + el._id}> */}
+                          <Link to={"/SingleProduct/" + el._id}>
+                            <div
+                              className="image hover-switch-homepage"
+                              style={{ position: "relative" }}
+                            >
+                              <img
+                                className="hoverimage"
+                                src={
+                                  el.otherImage &&
+                                  el.otherImage.length > 0 &&
+                                  `${baseUrl}/` + el.otherImage[0].path
+                                }
+                                // src={require("../../Images/products/Hintosulin (1).png")}
+                                alt=""
+                              />
+                              <img
+                                className="main-Image"
+                                src={`${baseUrl}/` + el.image[0].path}
+                                alt=""
+                                style={{
+                                  position: "absolute",
+                                  top: "0",
+                                  left: "0",
+                                }}
+                              />
+                            </div>
+                            <Link to={"/SingleProduct/" + el._id}>
+                              <figcaption className="Product-name-home">
+                                {el.name}
+                              </figcaption>
+                            </Link>
+                          </Link>
+                          <div className="contanier homepage-product-price-div">
+                            <div className="row mt-2">
+                              <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                                <span className="price">
+                                  {" "}
+                                  <i className="fa fa-inr"></i>
+                                  {el.inrDiscount}
+                                </span>
                               </div>
+                              <div className="col-6 text-end">
+                                <p className={`text-nowrap wishlist`}>
+                                  {Userdata ? (
+                                    <i
+                                      id={el._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        el._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null
+                                          ? "#exampleModal"
+                                          : null
+                                      }
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                              </div>
+
+                              <div>
+                                {Userdata ? (
+                                  <button
+                                    className="button btn"
+                                    onClick={() => {
+                                      cartfunction(
+                                        el._id,
+                                        el.name,
+                                        quantity,
+                                        el.inrMrp,
+                                        el.inrDiscount,
+                                        el.discount,
+                                        el.description,
+                                        el.category,
+                                        el.manufacturer.name,
+                                        el.image[0].path
+                                      );
+                                    }}
+                                    data-bs-toggle={
+                                      Userdata == null ? "modal" : null
+                                    }
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="button btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                )}
+                                </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
+                        </figure>
+                      );
+                    }
+                  })}
 
-              {/* {data.map((el, i) => {
+                {/* {data.map((el, i) => {
                 if (i > 0 && el.category.name === "Weight Management" && weightManagement < 6) {
                   weightManagement = weightManagement + 1;
                   return (
@@ -1273,25 +1227,26 @@ const HomePage = () => {
                   );
                 }
               })} */}
+              </div>
+              {/* hover Button */}
+              <div className="wrapperbtn pt-3 pb-4">
+                {data
+                  .filter((item) => item.category.name == "Weight Management")
+                  .map((el, index) => {
+                    if (index < 1) {
+                      return (
+                        <Link to={"/SubCategories/" + el.category._id}>
+                          <button type="button" className="btn10">
+                            Show More
+                          </button>
+                          {/* <div className="transition"></div> */}
+                        </Link>
+                      );
+                    }
+                  })}
+              </div>
+              {/* Hover Button End */}
             </div>
-            {/* hover Button */}
-            <div className="wrapperbtn pt-3 pb-4">
-              {data
-                .filter((item) => item.category.name == "Weight Management")
-                .map((el, index) => {
-                  if (index < 1) {
-                    return (
-                      <Link to={"/SubCategories/" + el.category._id}>
-                        <button type="button" className="btn10">
-                          Show More
-                        </button>
-                        {/* <div className="transition"></div> */}
-                      </Link>
-                    );
-                  }
-                })}
-            </div>
-            {/* Hover Button End */}
           </div>
         </section>
 
@@ -1431,13 +1386,13 @@ const HomePage = () => {
           <ToastContainer />
         </section>
         <div className="blog-section">
-        <div className="container m-auto">
-          <div className="row">
-            <div className="col-md-12">
-            <h1 className="trendign-head">
-            <span className="products-color">Our Blogs</span>
-          </h1>
-              {/* <div className="blog-box-wrapper">
+          <div className="container m-auto">
+            <div className="row">
+              <div className="col-md-12">
+                <h1 className="trendign-head">
+                  <span className="products-color">Our Blogs</span>
+                </h1>
+                {/* <div className="blog-box-wrapper">
                 <div className="row">
                   <div className="col-lg-7 col-md-12">
                     {blogs && blogs.map((item,ind)=>{
@@ -1474,53 +1429,58 @@ const HomePage = () => {
                      </div>
                 </div>
               </div> */}
-            </div>
-            <div className="blog-page-section-2">
-            
-              <div className="row">
-              
-                <div className="col-md-12">
-             
-                  <div className="latest-blogs-section">
-                    <div className="row">
-                      { blogs && blogs.map((item,ind)=>{
-                        if(ind<4)
-                        return(
-                      <div className="col-lg-3 col-md-6">
-                        <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
-                        <div class="card">
-                          
-                          
-                          <img
-                            src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
-                            class="card-img-top"
-                            alt="blog-image"
-                          />
-                          
-                          <div class="card-body">
-                          <h6 class="card-title">
-                            {item.title}
-                            </h6>
-                            <p class="card-text" ><ReadMoreReact
-                                text={item.description}
-                                min={60}
-                                ideal={60}
-                                max={60}
-                                readMoreText={"..."}
-                              /></p>
-                          </div>
-                        </div>
-                        </Link>
+              </div>
+              <div className="blog-page-section-2">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="latest-blogs-section">
+                      <div className="row">
+                        {blogs &&
+                          blogs.map((item, ind) => {
+                            if (ind < 4)
+                              return (
+                                <div className="col-lg-3 col-md-6">
+                                  <Link
+                                    className="card-img-link"
+                                    to={"/SingleBlogPage/" + item.slug}
+                                  >
+                                    <div className="card">
+                                      <img
+                                        src={
+                                          item.featuredImage &&
+                                          `${baseUrl}/` +
+                                            item.featuredImage[0].path
+                                        }
+                                        className="card-img-top"
+                                        alt="blog-image"
+                                      />
+
+                                      <div className="card-body">
+                                        <h6 className="card-title">
+                                          {item.title}
+                                        </h6>
+                                        <p className="card-text">
+                                          <ReadMoreReact
+                                            text={item.description}
+                                            min={60}
+                                            ideal={60}
+                                            max={60}
+                                            readMoreText={"..."}
+                                          />
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </Link>
+                                </div>
+                              );
+                          })}
                       </div>
-                      )
-                      })}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <Baseline />
         <Footer />

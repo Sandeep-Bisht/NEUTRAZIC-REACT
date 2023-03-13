@@ -50,27 +50,27 @@ const WishlistHandler=()=>{
                 </ul>
                 <ul className="social">
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://www.facebook.com/Nutrazik" target="_blank">
                       <i className="bx bxl-facebook-square"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://twitter.com/nutrazik" target="_blank">
                       <i className="bx bxl-twitter"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://www.instagram.com/nutrazik/" target="_blank">
                       <i className="bx bxl-instagram-alt"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://www.linkedin.com/company/70941207/admin/" target="_blank">
                       <i className="bx bxl-linkedin-square"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://in.pinterest.com/nutrazik/" target="_blank">
                       <i className="bx bxl-pinterest"></i>
                     </a>
                   </li>
