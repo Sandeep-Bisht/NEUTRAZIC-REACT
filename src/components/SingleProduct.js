@@ -810,7 +810,7 @@ const SingleProduct = (props) => {
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
                   <i className="search-btn bx bxl-facebook "></i>
                 </a>
-                <a href="https://www.instagram.com/soulnutra/" target="_blank">
+                <a href="https://www.instagram.com/nutrazik/" target="_blank">
                   <i className="search-btn bx bxl-instagram "></i>
                 </a>
                 <a href="https://twitter.com/nutrazik" target="_blank">
