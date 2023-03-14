@@ -11339,7 +11339,12 @@ textarea.form-control {
   padding-right: 5px;
   padding-top: 10px;
 }
-
+.blog-page-section-2 .card-img-homepage{
+  cursor: pointer;
+  width: 100%;
+  object-fit: cover;
+  height: 150px;
+}
 .products-details-image
   .products-details-image-slides-owl-thumbs
   .owl-thumb-item
@@ -19881,7 +19886,6 @@ svg {
   }
   .Product-name-home {
     font-size: 0.8rem;
-    text-align: center;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -19903,7 +19907,6 @@ svg {
   }
   .Product-name-home {
     font-size: 0.8rem;
-    text-align: center;
   }
 
   /* end homepage */
@@ -19956,7 +19959,7 @@ svg {
   .home-banner .home-banner-content {
     line-height: 30px;
   }
-  .blog-page-section-2 .card-img-homepage {
+  .blog-page-section-2 .card-img-top {
     height: 250px !important;
   }
   .trendign-head {
@@ -20776,13 +20779,3 @@ svg {
 .allproduct-price-div .text-start {
   color: rgba(0, 0, 0, 0.6);
 }
-
-
-
-/* Homepage Blog Section Css */
-.blog-page-section-2 .card-img-homepage{
-	cursor: pointer;
-	height: 150px;
-	width: 100%;
-	object-fit: cover;
-  }

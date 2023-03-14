@@ -148,7 +148,7 @@ const UpdateBlogs = async (e,_id) => {
                       )
                       }
                     </div>
-                  </div>
+                  </div>                
                 </div>
               </form>
             </div>

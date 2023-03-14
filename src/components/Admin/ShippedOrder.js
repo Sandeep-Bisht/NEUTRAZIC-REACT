@@ -52,18 +52,16 @@ const ShippedOrder = () => {
       });
   };
 
-  const UpdateOrderStatus = async (e, orderId, status) => {
-    e.preventDefault();
+  const UpdateOrderStatus = async (order, orderStatus) => {
+    delete order.createdAt;
+    order.orderStatus = orderStatus;
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        _id: orderId,
-        orderStatus: status,
-      }),
+      body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then(async (data) => {
@@ -111,6 +109,8 @@ const ShippedOrder = () => {
   };
 
   const showModal = (item) => {
+    console.log(item, "itemmmmmm")
+    setPrticularUserOrder(item.order)
     setShippedOrder(item.address);
     setPrticularUserOrder(item.order);
     setOrderItem(item);
@@ -135,7 +135,7 @@ const ShippedOrder = () => {
                 {
                   key: '1',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
+                    <a onClick={() =>UpdateOrderStatus(item,"Cancel")}>
                       Cancel Order
                     </a>
                   ),
@@ -143,7 +143,7 @@ const ShippedOrder = () => {
                 {
                   key: '2',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Delivered")}>
+                    <a onClick={() =>UpdateOrderStatus(item,"Delivered")}>
                      Mark as Delivered
                     </a>
                   ),

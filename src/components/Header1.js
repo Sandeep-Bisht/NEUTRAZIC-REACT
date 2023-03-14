@@ -69,6 +69,19 @@ const Header1 = (props) => {
       password: "",
       repassword: "",
     },
+    mode: "onBlur"
+  });
+  const {
+   register : register2,
+   handleSubmit : handleLoginSubmit,
+    formState: { errors : loginErrors },
+  } = useForm({
+    defaultValues: {
+      username: "",   
+      password: "",
+     
+    },
+    mode: "onBlur"
   });
 
   const CategoryDataHandler = () => {
@@ -140,11 +153,7 @@ const Header1 = (props) => {
     window.location.replace("/");
   };
 
-  const RegisterUser = (data) => {
-    // setUsername(data.username);
-    // setemail(data.email);
-    // setPassword(data.password);
-    // setRePassword(data.repassword);
+  const RegisterUser = (data) => {    
     if (
       data.email &&
       data.password &&
@@ -153,6 +162,7 @@ const Header1 = (props) => {
       data.phonenumber &&
       data.password == data.repassword
     ) {
+      let username = data.username.toLowerCase();
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -160,7 +170,7 @@ const Header1 = (props) => {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: data.username,
+          username: username,
           password: data.password,
           phonenumber: data.phonenumber,
           email: data.email,
@@ -177,9 +187,9 @@ const Header1 = (props) => {
         });
     }
   };
-  const LoginUser = (e) => {
-    e.preventDefault();
-    if (username && password) {
+  const LoginUser = (data) => {
+    if (data.username && data.password) {
+      console.log(data, "insid elogin user");
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -187,8 +197,8 @@ const Header1 = (props) => {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          password: password,
+          username: data.username,
+          password: data.password,
         }),
       })
         .then((res) => res.json())
@@ -232,9 +242,10 @@ const Header1 = (props) => {
       //   position: toast.POSITION.BOTTOM_RIGHT,
       //   autoClose: 5000,
       // });
-    } else {
-      setMsg("Please Enter a Valid Data");
     }
+    //  else {
+    //   setMsg("Please Enter a Valid Data");
+    // }
   };
   const headerFunction = async () => {
     if (window.pageYOffset > sticky) {
@@ -492,7 +503,7 @@ const Header1 = (props) => {
                       <div className="form-row">
                         <form
                           className="form-group col-lg-12"
-                          onBlur={handleSubmit(RegisterUser)}
+                          onSubmit={handleSubmit(RegisterUser)}
                         >
                           <div className="row mt-0 start-register-form">
                             <div className="col-md-6 col-12">
@@ -501,21 +512,15 @@ const Header1 = (props) => {
                                   Username<span>*</span>
                                 </label>
                                 <input
-                                  type="text"
+                                  type="text"                                  
                                   className="form-control form-control-login"
                                   {...register("username", {
-                                    required: true,
-                                    pattern:/^[a-z0-9]+$/,
+                                    required: true,                                  
                                   })}
                                 />
                                 {errors?.username?.type === "required" && (
                                   <p className="text-danger">
                                     This field is required
-                                  </p>
-                                )}
-                                {errors?.username?.type === "pattern" && (
-                                  <p className="text-danger">
-                                    Must have lowercase letters without space
                                   </p>
                                 )}
 
@@ -643,9 +648,10 @@ const Header1 = (props) => {
                       <div className="form-row">
                         <form
                           className="form-group col-lg-12"
+                          onSubmit={handleLoginSubmit(LoginUser)}
                         >
                           <div className="row mt-0 start-login-form">
-                            <div className="form-group col-lg-12">
+                            {/* <div className="form-group col-lg-12">
                               <label>
                                 Username<span>*</span>
                               </label>
@@ -656,8 +662,50 @@ const Header1 = (props) => {
                                 }}
                                 required
                               />
+                            </div> */}
+                            <div className="col-md-12 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Username<span>*</span>
+                                </label>
+                                <input
+                                  type="text"                                  
+                                  className="form-control form-control-login"
+                                  {...register2("username", {
+                                    required: true,                                  
+                                  })}
+                                />
+                                {loginErrors?.username?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+
+                              </div>
                             </div>
-                            <div className="form-group col-lg-12">
+                            <div className="col-md-12 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control form-control-login "
+                                  {...register2("password", {
+                                    required: true,
+                              
+                                  })}
+                                />
+                                {loginErrors?.password?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                
+                              
+                              </div>
+                            </div>
+                            {/* <div className="form-group col-lg-12">
                               <label>
                                 Password<span>*</span>
                               </label>
@@ -669,7 +717,7 @@ const Header1 = (props) => {
                                 }}
                                 required
                               />
-                            </div>
+                            </div> */}
                             <h5 className="Login-fail-msg">{msg}</h5>
                             <div className="form-group col-lg-12 justify-content-center">
                               <button
@@ -754,7 +802,7 @@ const Header1 = (props) => {
                                     data-bs-target="#exampleModal"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <i className="user-icon bx bx-user-pin"></i>
+                                    <i className="user-icon bx bx-log-in"></i>
                                   </span>
 
                                   <span
@@ -898,8 +946,7 @@ const Header1 = (props) => {
                           </div>
                           <div className=" user-login">
                             <span className="sp">Wishlist</span>
-                            {/* <br />
-                  <span className="Sp1">Edit your wishlist</span> */}
+                            
                           </div>
                         </div>
                       </Link>
@@ -1026,212 +1073,9 @@ const Header1 = (props) => {
           </div>
         </div></div>
 
-      {/* phone resposive header */}
-      {/* phone top-navbar */}
-      {/* <div className=" mobile-top-navbar">
-        <div>
-          <div className="col-sm-4  " style={{ paddingLeft: "10px" }}>
-            <div className="login-div2">
-              <input
-                type="text"
-                className="my-input-field"
-                placeholder="Search..."
-                onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                onKeyDown={(e) => {
-                  if (e.key == "Enter") {
-                    searchData(search);
-                  }
-                }}
-              />
-              <Link to={"/SearchResult/" + search}>
-                <button
-                  className="search mr-1"
-                  onClick={() => searchData(search)}
-                >
-                  <i className="bx bx-search-alt"></i>
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="mobile-icon-div ml-4">
-          <Link to="/Cart">
-            <i className="bx bx-cart"></i>
-          </Link>
-        </div>
-        <div className="mobile-icon-div ml-2">
-          <i className="bx bx-heart"></i>
-        </div>
-        <div className="mobile-icon-div ml-2">
-          {Userdata == undefined ? (
-            <Link to="/Register">
-              <i className="bx bx-log-in"></i>
-            </Link>
-          ) : (
-            <div className="dropdown">
-              <button
-                className="btn btn-white btn-sm dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {Userdata && Userdata.username}
-              </button>
-
-              <ul
-                className="dropdown-menu Logout-ul"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <Link to="/Ordered">
-                  <div className="Logout-div d-flex align-items-center">
-                    <i className="bx bx-file pl-2"></i>{" "}
-                    <li
-                      className="dropdown-item Logout-li"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <span className="pr-4">Orders</span>
-                    </li>
-                  </div>
-                </Link>
-                <Link to="/Cart">
-                  <div className="Logout-div d-flex align-items-center">
-                    <i className="bx bx-cart pl-2"></i>{" "}
-                    <li
-                      className="dropdown-item Logout-li"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <span className="pr-4">Cart</span>
-                    </li>
-                  </div>
-                </Link>
-                <Link to="/Wishlist">
-                  <div className="Logout-div d-flex align-items-center">
-                    <i className="bx bx-heart pl-2"></i>{" "}
-                    <li
-                      className="dropdown-item Logout-li"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <span className="pr-4">Wishlist</span>
-                    </li>
-                  </div>
-                </Link>
-                <div className="Logout-div d-flex align-items-center">
-                  <i className="bx bx-log-out pl-2"></i>{" "}
-                  <li
-                    className="dropdown-item Logout-li"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      logout();
-                    }}
-                  >
-                    <span className="pr-4">Logout</span>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          )}
-        </div>
-        
-      </div> */}
+      
       <ToastContainer />
-      {/* end phone top-navbar */}
-
-      {/* phone main-navbar */}
-      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light mobile-nav-bar">
-        <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <img className="pl-2" src={require("../Images/logo1.png")} />
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 ml-3 mb-lg-0 mobile-nav-list">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/AllProducts">
-                  Shop
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/ContactUs">
-                  Contact Us
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Blog
-                </Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Category
-                </a>
-                <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
-                  {categories.map((el, ind) => (
-                    <li key={ind}>
-                      <Link
-                        className="dropdown-item"
-                        to={"/categories/" + el._id}
-                      >
-                        {el.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Sub Category
-                </a>
-                <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
-                  {subcategories.map((el, ind) => (
-                    <li key={ind}>
-                      {" "}
-                      <Link
-                        to={"/Subcategories/" + el._id}
-                        className="dropdown-item"
-                      >
-                        {el.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> */}
-
-      {/* end phone responsive header */}
+      
     </>
   );
 };

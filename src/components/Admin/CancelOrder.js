@@ -47,7 +47,7 @@ const ShippedOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, status) => {
+  const UpdateOrderStatus = async (orderId, orderStatus) => {
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
@@ -56,7 +56,7 @@ const ShippedOrder = () => {
       },
       body: JSON.stringify({
         _id: orderId,
-        orderStatus: status,
+        orderStatus: orderStatus,
       }),
     })
       .then((res) => res.json())
@@ -111,36 +111,7 @@ const ShippedOrder = () => {
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
     { title: "Actual Amount.", dataIndex: "actualamount", key: "actualamount" },
-    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
-    // {
-    //   title: "Status", 
-    //   render: (a, item) => (
-    //     <Space size="middle">
-    //       <Dropdown
-    //         menu={{
-    //           items: [
-    //             {
-    //               key: '1',
-    //               label: 'Cancel',
-    //             },
-    //             {
-    //               key: '2',
-    //               label: (
-    //                 <a onClick={() =>UpdateOrderStatus(item._id,"Delivered")}>
-    //                   Delivered
-    //                 </a>
-    //               ),
-    //             },
-    //           ],
-    //         }}
-    //       >
-    //         <a>
-    //           Pending <DownOutlined />
-    //         </a>
-    //       </Dropdown>
-    //     </Space>
-    //   ),
-    // },
+    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },   
     {
       title: "View Order",
       key: "action",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect }  from "react";
 import "../components/Blog.css";
 import BlogImage from "../Images/blog-img.jpg";
 import Footer from "./Footer";
@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/services";
 import { Link } from "react-router-dom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
+
 
 function Blogs() {
   const [data, setData] = useState([]);

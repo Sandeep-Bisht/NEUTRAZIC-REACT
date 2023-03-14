@@ -22,6 +22,7 @@ const InProgressOrder = () => {
   const [shippedOrder, setShippedOrder] = useState([]);
   const [orderItem, setOrderItem] = useState([]);
   const [startDate, setStartDate] = useState('');
+  const [shipper,setShipper] = useState("Blue Dart")
   const [endDate, setEndDate] = useState('');
 
   // Get today's date in the YYYY-MM-DD format
@@ -55,17 +56,22 @@ const InProgressOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, status) => {
+  const UpdateOrderStatus = async (e,order, orderStatus) => {
+    e.preventDefault()
+    // console.log(order, "inside updateeee",shipper,startDate,endDate ,orderStatus)
+    order.shipperName = shipper;
+    order.shippingDate = startDate;
+    order.delivery_time = endDate;
+    order.orderStatus = orderStatus;
+    delete order.createdAt;
+    console.log("before api", order, "status",orderStatus)
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        _id: orderId,
-        orderStatus: status,
-      }),
+      body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then(async (data) => {
@@ -122,37 +128,12 @@ const InProgressOrder = () => {
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     { title: "Payment Status", dataIndex: "payment_status", key: "payment_status" },
     {
-      title: "Status", 
-      render: (a, item) => (
-        <Space size="middle">
-          <Dropdown
-            menu={{
-              items: [
-                {
-                  key: '1',
-                  label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
-                      Cancel Order
-                    </a>
-                  ),
-                },
-                {
-                  key: '2',
-                  label: (
-                    <a onClick={() =>UpdateOrderStatus(item._id,"Shipped")}>
-                      Move to Shipped
-                    </a>
-                  ),
-                },
-              ],
-            }}
-          >
-            <a>
-              Packed <DownOutlined />
-            </a>
-          </Dropdown>
-        </Space>
-      ),
+      title: "Action",
+      key: "orderStatus",
+      render: (_, item) => 
+      <Button type="primary" onClick={() => moveForShipping(item)}>
+      Move for Shipping
+    </Button>
     },
     
     {
@@ -283,6 +264,147 @@ const InProgressOrder = () => {
             </div>
           </div>
         </div>
+      </div>
+      {/* end modal */}
+
+      {/* table modal */}    
+       
+      <div class="modal-body">
+              <div>
+                <Modal title="Shipped Details" aria-hidden="true" visible={showShippingModal} onOk={handleShippingModal}
+                  onCancel={cancelShippingModal}>
+                  <form>
+                    <div className="row">
+                    <div class="col-md-4 mb-3">
+                      <label for="line1" class="form-label">
+                        Line 1
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="line1"
+                        value={shippedOrder.line1}
+                        //aria-describedby="emailHelp"
+                      />
+                    </div>
+                    { shippedOrder && shippedOrder.line2 &&
+                    <div class="col-md-4 mb-3">
+                      <label for="line2" class="form-label">
+                        Line 2
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="line2"
+                        value={shippedOrder.line2}
+                        //aria-describedby="emailHelp"
+                      />
+                    </div>
+                    }
+                    <div class="col-md-4 mb-3">
+                      <label for="city" class="form-label">
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="city"
+                        value={shippedOrder.city}
+                        //aria-describedby="emailHelp"
+                      />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="state" class="form-label">
+                        State
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="state"
+                        value={shippedOrder.state}
+                        //aria-describedby="emailHelp"
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <label className="form-label">Postal Code</label>
+                      <input
+                      type="text"
+                      className="form-control"
+                      value={shippedOrder.postal_code}
+                      //aria-describedby="emailHelp"
+                      />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="country" class="form-label">
+                        Country
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="country"
+                        value={shippedOrder.country == "IN" && "India" }
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="Blue Dart" class="form-label">Choose a Shipper</label>
+                      <select className="m-1 form-control custom-select"
+                      
+                      onChange={(e) => {
+                                setShipper(e.target.value);
+                              }}>
+                        <option value="Blue Dart">Blue Dart</option>
+                        <option value="XpressBees">XpressBees</option>
+                        <option value="DHL Shipping">DHL Shipping</option>
+                        <option value="DTDC Courier">DTDC Courier</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label htmlFor="start-date-input" className='form-labe'>Shipping date</label>
+                      <input 
+                      className='form-control'
+                        type="date" 
+                        id="start-date-input" 
+                        name="start-date-input" 
+                        min={today} 
+                        value={startDate} 
+                        onChange={(e) => setStartDate(e.target.value)} 
+                      />
+                      </div>
+                      <div class="col-md-4 mb-3">
+                      <label htmlFor="end-date-input" className='form-labe'>Delivery date</label>
+                      <input 
+                      className='form-control'
+                        type="date" 
+                        id="end-date-input" 
+                        name="end-date-input" 
+                        min={startDate} 
+                        value={endDate} 
+                        onChange={(e) => setEndDate(e.target.value)} 
+                      />
+                    </div>
+                    </div>
+                    <button
+                      className="btn btn-primary m-2"
+                      onClick={(e) =>
+                        UpdateOrderStatus(e, orderItem, "Shipping")
+                      }
+                    >
+                      Proceed for Shipping
+                    </button>
+                    <button
+                      className="btn btn-primary m-2"
+                      onClick={(e) =>
+                        UpdateOrderStatus(e, orderItem._id, "Cancel")
+                      }
+                    >
+                      Cancel Order
+                    </button>
+                    
+                  </form>
+                </Modal>
+              </div>
+            
       </div>
       {/* end modal */}
     
