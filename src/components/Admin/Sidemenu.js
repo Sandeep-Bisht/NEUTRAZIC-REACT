@@ -26,50 +26,50 @@ import $ from "jquery";
 var Userdata = "";
 
 const Sidemenu = () => {
-  const SidebarMenu = () => {
-    /*===== SHOW NAVBAR  =====*/
+  // const SidebarMenu = () => {
+  //   /*===== SHOW NAVBAR  =====*/
 
-    const showNavbar = (toggleId, navId, bodyId, headerId) => {
-      const toggle = document.getElementById(toggleId),
-        nav = document.getElementById(navId),
-        bodypd = document.getElementById(bodyId),
-        headerpd = document.getElementById(headerId);
+  //   const showNavbar = (toggleId, navId, bodyId, headerId) => {
+  //     const toggle = document.getElementById(toggleId),
+  //       nav = document.getElementById(navId),
+  //       bodypd = document.getElementById(bodyId),
+  //       headerpd = document.getElementById(headerId);
 
-      // Validate that all variables exist
-      if (toggle && nav && bodypd && headerpd) {
-        toggle.addEventListener("click", () => {
-          // show navbar
-          nav.classList.toggle("show");
-          // change icon
-          toggle.classList.toggle("bx-x");
-          // add padding to body
-          bodypd.classList.toggle("body-pd");
-          // add padding to header
-          // headerpd.classList.toggle('body-pd')
-        });
-      }
-    };
+  //     // Validate that all variables exist
+  //     if (toggle && nav && bodypd && headerpd) {
+  //       toggle.addEventListener("click", () => {
+  //         // show navbar
+  //         nav.classList.toggle("show");
+  //         // change icon
+  //         toggle.classList.toggle("bx-x");
+  //         // add padding to body
+  //         bodypd.classList.toggle("body-pd");
+  //         // add padding to header
+  //         // headerpd.classList.toggle('body-pd')
+  //       });
+  //     }
+  //   };
 
-    showNavbar("header-toggle", "nav-bar", "body-pd", "header");
+  //   showNavbar("header-toggle", "nav-bar", "body-pd", "header");
 
-    /*===== LINK ACTIVE  =====*/
+  //   /*===== LINK ACTIVE  =====*/
 
-    const linkColor = document.querySelectorAll(".nav__link");
-    function colorLink() {
-      if (linkColor) {
-        linkColor.forEach((l) => l.classList.remove("active"));
-        this.classList.add("active");
-      }
-    }
-    linkColor.forEach((l) => l.addEventListener("click", colorLink));
-    $(document).ready(function() {
-      $("#example").DataTable();
-    });
-  };
+  //   const linkColor = document.querySelectorAll(".nav__link");
+  //   function colorLink() {
+  //     if (linkColor) {
+  //       linkColor.forEach((l) => l.classList.remove("active"));
+  //       this.classList.add("active");
+  //     }
+  //   }
+  //   linkColor.forEach((l) => l.addEventListener("click", colorLink));
+  //   $(document).ready(function() {
+  //     $("#example").DataTable();
+  //   });
+  // };
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    SidebarMenu();
+    // SidebarMenu();
   });
 
   const logout = () => {
@@ -90,96 +90,94 @@ const Sidemenu = () => {
           <span className="nav__name">Dashboard</span>
         </Link>
         <div className="nav__link active">
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="headingThree">
-              <div className="d-flex align-items-center justify-content-center div1"
-               type="button"
-               data-bs-toggle="collapse"
-               data-bs-target="#collapseTwo"
-               aria-expanded="false"
-               aria-controls="collapseTwo"
-               >
-                <BsCartPlus className="nav__icon" />
-                <button
-                   className="accordion-button collapsed"
-                   type="button"
-                >
-                  <span className="pl-3 nav__name">Orders</span>
-                </button>
-              </div>
-            </h2>
-            <div
-              id="collapseTwo"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample"
-            >
-              <div className="dashboard-accordion-body">
-                <ul className="Configration-List">
-                  <Link to={"/NewOrder/" + "Pending"}>
-                    <li>
-                      {" "}
-                      <FaCartPlus className="configuration-icons-wrap" />
-                      New Orders
-                    </li>
-                  </Link>
-                  <Link to={"/InProgressOrderInProgress"}>
-                    <li>
-                      {" "}
-                      <GrInProgress className="configuration-icons-wrap" />
-                      In Progress
-                    </li>
-                  </Link>
-                  <Link to={"/InProgressOrderPacked"}>
-                    <li>
-                      {" "}
-                      <BsBox className="configuration-icons-wrap" />
-                      Packed
-                    </li>
-                  </Link>
-                  <Link to={"/InProgressOrderShipped"}>
-                    <li>
-                      {" "}
-                      <FaShippingFast className="configuration-icons-wrap" />
-                      Shipped
-                    </li>
-                  </Link>
-                  <Link to={"/DeliveredOrder"}>
-                    <li>
-                      {" "}
-                      <MdRealEstateAgent className="configuration-icons-wrap" />
-                      Delivered
-                    </li>
-                  </Link>
-                  <Link to={"/CanceledOrder"}>
-                    <li>
-                      {" "}
-                      <BsCartXFill className="configuration-icons-wrap" />
-                      Cancel Order
-                    </li>
-                  </Link>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div className="accordion-item">
+    <h2 className="accordion-header" id="headingThree">
+      <div className="d-flex align-items-center justify-content-center div1">
+        <BsCartPlus className="nav__icon" />
+        <button
+          className="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          <span className="pl-3 nav__name">Orders</span>
+        </button>
+      </div>
+    </h2>
+    <div
+      id="collapseTwo"
+      className="accordion-collapse collapse"
+      aria-labelledby="headingThree"
+      data-bs-parent="#accordionExample"
+    >
+      <div className="dashboard-accordion-body">
+        <ul className="Configration-List">
+          <Link to={"/NewOrder/" + "Pending"}>
+            <li>
+              {" "}
+              <FaCartPlus className="configuration-icons-wrap" />
+              New Orders
+            </li>
+          </Link>
+          <Link to={"/InProgressOrderInProgress"}>
+            <li>
+              {" "}
+              <GrInProgress className="configuration-icons-wrap" />
+              In Progress
+            </li>
+          </Link>
+          <Link to={"/InProgressOrderPacked"}>
+            <li>
+              {" "}
+              <BsBox className="configuration-icons-wrap" />
+              Packed
+            </li>
+          </Link>
+          <Link to={"/InProgressOrderShipped"}>
+            <li>
+              {" "}
+              <FaShippingFast className="configuration-icons-wrap" />
+              Shipped
+            </li>
+          </Link>
+          <Link to={"/DeliveredOrder"}>
+            <li>
+              {" "}
+              <MdRealEstateAgent className="configuration-icons-wrap" />
+              Delivered
+            </li>
+          </Link>
+          <Link to={"/CanceledOrder"}>
+            <li>
+              {" "}
+              <BsCartXFill className="configuration-icons-wrap" />
+              Cancel Order
+            </li>
+          </Link>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <div className="nav__link">
-              <span className="nav__name">
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingThree">
-                      <div className="d-flex align-items-center justify-content-center div1"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseThree"
-                      aria-expanded="false"
-                      aria-controls="collapseThree"
-                      >
-                        <GrConfigure className="nav__icon" />
+                      <div className="d-flex align-items-center justify-content-center div1">
+                      <GrConfigure className="nav__icon" /> 
                         <button
                           className="accordion-button collapsed"
                           type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseThree"
+                          aria-expanded="false"
+                          aria-controls="collapseThree"
                           
                         >
                           <span className="pl-3 nav__name">Configuration</span>
@@ -266,7 +264,6 @@ const Sidemenu = () => {
                     </div>
                   </div>
                 </div>
-              </span>
             </div>
           ) : null
         ) : null}
@@ -274,17 +271,19 @@ const Sidemenu = () => {
         <div className="nav__link active">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingfour">
-              <div className="d-flex align-items-center justify-content-center div1"
-               data-bs-toggle="collapse"
-               data-bs-target="#collapsefour"
-               aria-expanded="false"
-               aria-controls="collapsefour"
-               >
+              <div className="d-flex align-items-center justify-content-center div1">
+              <BsCartPlus className="nav__icon" />
+               
+               
 
-                <BsCartPlus className="nav__icon" />
+                
                 <button
                   className="accordion-button collapsed"
                   type="button"
+                  data-bs-toggle="collapse"
+               data-bs-target="#collapsefour"
+               aria-expanded="false"
+               aria-controls="collapsefour"
                  
                 >
                   <span className="pl-3 nav__name">IAM</span>

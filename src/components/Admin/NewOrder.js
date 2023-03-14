@@ -7,7 +7,6 @@ import DashboardHeaader from './DashboardHeaader';
 import { BiSearchAlt } from "react-icons/bi";
 import {MdPlaylistAdd} from 'react-icons/md'
 import {Link, useHistory} from "react-router-dom";
-import Orders from '../Orders';
 import { DownOutlined } from '@ant-design/icons';
 import { render } from 'react-dom';
 import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} from "antd";
@@ -274,7 +273,7 @@ const NewOrder = () => {
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">

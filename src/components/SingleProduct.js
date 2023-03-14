@@ -18,6 +18,7 @@ import * as ACTIONS from "../CommonService/AddToCart/action";
 import { useDispatch } from "react-redux";
 import Carousel from "react-elastic-carousel";
 import "../components/Header1.css";
+import Cookies from "universal-cookie";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -39,6 +40,16 @@ const SingleProduct = (props) => {
   const [MainImage, SetMainImage] = useState();
   const [categoryid, setcategoryId] = useState();
   const history = useHistory();
+
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[currancy])
   // let Wishlist = [];
   //let ImageData ;
 
@@ -337,7 +348,7 @@ const SingleProduct = (props) => {
       .then((res) => {
         CartById();
         //history.push("/Cart");
-        toast.success("Add to cart", {
+        toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 1000,
         });
@@ -493,7 +504,7 @@ const SingleProduct = (props) => {
           setWishlist(data.data);
           let response = data.data;
           for (let item of response) {
-            if (props.match.params.id == item.productId) {
+            if (props.match.params.id === item.productId) {
               let alreadyWishlist = document.getElementById(prodId);
               alreadyWishlist.classList.add("wishlisted");
             }
@@ -770,15 +781,18 @@ const SingleProduct = (props) => {
 
               <div className="price pt-2">
                 <span className="price-detail">
-                  <i className="fa fa-inr"></i>
-                  {data.inrDiscount}{" "}
+                {" "}
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? data.dollerDiscount : data.inrDiscount}
                   <del>
-                    <i className="fa fa-inr"></i>
-                    {data.inrMrp}
+                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? data.dollerMrp : data.inrMrp}
                   </del>{" "}
                   <span>
                     {Math.ceil(
-                      ((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100
+                      currancy == "Dollar" ? ((data.dollerMrp - data.dollerDiscount) / data.dollerMrp) * 100:((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100
                     )}
                     % OFF
                   </span>
@@ -810,7 +824,7 @@ const SingleProduct = (props) => {
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
                   <i className="search-btn bx bxl-facebook "></i>
                 </a>
-                <a href="https://www.instagram.com/soulnutra/" target="_blank">
+                <a href="https://www.instagram.com/nutrazik/" target="_blank">
                   <i className="search-btn bx bxl-instagram "></i>
                 </a>
                 <a href="https://twitter.com/nutrazik" target="_blank">
@@ -916,13 +930,10 @@ const SingleProduct = (props) => {
                 ) : (
                   <>
                     <i
-                      className="bx bxs-heart  pc-heart"
+                      className="bx bxs-heart"
                       data-bs-toggle="modal"
                       data-bs-target={Userdata == null ? "#exampleModal" : null}
                     ></i>
-                    <Link to="/Register">
-                      <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                    </Link>
                   </>
                 )}
 
@@ -1150,8 +1161,9 @@ const SingleProduct = (props) => {
                         <div className="col-lg-6 col-md-12 text-start">
                           <span className="price">
                             {" "}
-                            <i className="fa fa-inr"></i>
-                            {el.inrDiscount}
+                            {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? data.dollerDiscount : data.inrDiscount}
                             {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0

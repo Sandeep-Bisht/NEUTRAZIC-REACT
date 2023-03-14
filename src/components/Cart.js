@@ -13,6 +13,8 @@ import { message, Popconfirm } from "antd";
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
+import Cookies from "universal-cookie";
+
 
 const stripePromise = loadStripe(
   "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
@@ -27,6 +29,17 @@ const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [cartStatus, setCartStatus] = useState();
   const [cartItems, setCartItems] = useState(undefined);
+
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[currancy])
+
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;
@@ -251,7 +264,7 @@ const Cart = () => {
                               </td>
                               <td className="product-name">
                                 <Link to={"/SingleProduct/" + el.productid}>
-                                  <div className="text-start">{el.name}</div>
+                                  <div className="text-start cart-text">{el.name}</div>
                                 </Link>
                               </td>
                               <td className="product-price">
@@ -373,117 +386,7 @@ const Cart = () => {
         </div>
       </section>
 
-      {/* mobile responsive cart */}
-
-      {/* <div className="small-container cart-page cart-table mt-3">
-        <table>
-          <thead>
-            <tr>
-              <th className="text-center">Product</th>
-              <th className="text-center">Quantity</th>
-              <th className="text-center">Subtotal</th>
-            </tr>
-          </thead>
-          {cart.map((el, ind1) => {
-            return (
-              <tr className="pt-2">
-                <td>
-                  <div className="cart-info">
-                    <Link to={"/SingleProduct/" + el.productid}>
-                      <img
-                        src={`${baseUrl}/` + el.image}
-                        alt="item"
-                      />
-                    </Link>
-                    <div>
-                      <Link to={"/SingleProduct/" + el.productid}>
-                        <p>{el.name}</p>
-                      </Link>
-                      <small>
-                        Price ₹{" "}
-                        {
-                          el.mrp
-                        }
-                      </small>
-                      <br />
-                      <span
-                        onClick={(e) => {
-                          Sliceorder(ind1, e);
-                        }}
-                      >
-                        Remove
-                      </span>
-                    </div>
-                  </div>
-                </td>
-                <td className="text-center">
-                  <div className="amount">
-                    {" "}
-                    <div className="input-counter">
-                      <span
-                        className="minus-btn"
-                        onClick={() => {
-                          Minusquantity(el.quantity, el.mrp, ind1);
-                        }}
-                      >
-                        <i className="bx bx-minus minus mr-2"></i>
-                      </span>
-                      <input
-                        className="text-center"
-                        type="number"
-                        min="1"
-                        value={el.quantity}
-                      />
-                      <span
-                        className="plus-btn"
-                        onClick={() => {
-                          Plusquantity(el.quantity, el.mrp, ind1);
-                        }}
-                      >
-                        <i className="bx bx-plus  minus ml-2"></i>
-                      </span>
-                    </div>
-                  </div>
-                </td>
-                <td>{(el.mrp - el.discountprice) * el.quantity} </td>
-              </tr>
-            );
-          })}
-        </table>
-
-        <div className="total-price mt-5">
-          <table>
-            <tr>
-              <td className="footheading">Subtotal</td>
-              <td>₹{actualtotal}</td>
-            </tr>
-
-            <tr>
-              <td className="footheading">Total</td>
-              <td>₹{actualtotal}</td>
-            </tr>
-            <tr className="text-center">
-              <td colSpan="2">
-                 <Link
-                  className="default-btn1"
-                  to={Userdata ? "/CheckOut" : "/register"}
-                >
-                  <button>Proccess to CheckOut</button>
-                </Link>  
-                {/* <Link
-                className="default-btn1"
-                to="/AllProducts"
-              >
-                <button>Continue Shopping</button>
-              </Link> */}
-
-      {/* </td>
-            </tr>
-          </table>
-        </div>
-      </div> */}
-      {/* <ToastContainer /> */}
-      {/*  End mobile responsive cart */}
+     
       <Baseline />
       <Footer />
     </>

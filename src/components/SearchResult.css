@@ -1,17 +1,15 @@
 #__next_search {
   margin-top: 122px;
 }
-.Search-Result {
-  font-size: 2rem;
-  padding: 20px 0;
-  font-weight: bold;
-  font-family: "Roboto", sans-serif;
+.Search-Result{
   color: #1e144f;
-  margin-bottom: 0;
-  text-align: center;
 }
-.search-product-div {
-  padding-top: 20px !important;
+.Search-price-div .search-text-start,.text-end{
+  font-size: 14px !important;
+}
+.search-text-start .price{
+  font-weight: bold;
+  color: rgba(0,0,0,0.6);
 }
 .trending-section {
   margin-bottom: 20px !important;
@@ -19,19 +17,33 @@
 @media only screen and (max-width: 1399px) {
 }
 @media only screen and (max-width: 1024px) {
+  .Search-price-div{
+    font-weight: 600 !important;
+    font-size: 12px !important;
+  }
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991.98px) {
   #__next_search {
     margin-top: 160px;
   }
+  .Search-price-div{
+    font-weight: 600 !important;
+    font-size: 12px !important;
+  }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767.98px) {
   #__next_search {
     margin-top: 150px;
   }
+  .Product-name-home{
+    font-size: 0.7rem;
+  }
   .displayed-text {
     font-size: 12px;
+  }
+  .product-content .display-text-group {
+    text-align: center;
   }
   .search-product-div .price-div .new-price {
     font-size: 11px !important;
@@ -44,19 +56,30 @@
   .single-products-box .image img {
     width: 100% !important;
   }
+  .search-text-start .price{
+    font-size: 14px;
+  }
+  /* .search-product-div .price-div .new-price {
+    font-size: 16px !important ;
+  } */
   #__next_search {
     margin-top: 156px;
-    
   }
   .Search-Result {
     font-size: 1.5rem;
   }
-  .single-products-box .content .price-div span {
-    font-size: 13px;
+  .Search-price-div .search-text-start,.text-end{
+    font-size: 14px ;
+    width: 100%;
   }
-  .displayed-text {
-    font-size: 11px;
+  .search-result-wishlist{
+    font-size: 14px;
   }
+  .search-figure figcaption {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
 }
 @media only screen and (max-width: 359.98px) {
   #__next_search {

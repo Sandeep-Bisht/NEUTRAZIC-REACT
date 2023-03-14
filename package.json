@@ -22,6 +22,7 @@
     "primereact": "^8.7.3",
     "react": "^16.8.6",
     "react-alert-confirm": "^4.1.6",
+    "react-cookie": "^4.1.1",
     "react-dom": "^16.8.6",
     "react-elastic-carousel": "^0.11.5",
     "react-hook-form": "^7.41.5",
@@ -42,6 +43,7 @@
     "stars-rating": "^1.1.0",
     "styled-components": "^5.3.6",
     "tinymce": "^6.3.1",
+    "universal-cookie": "^4.0.4",
     "webpack": "^4.42.0",
     "yarn": "^1.22.19"
   },

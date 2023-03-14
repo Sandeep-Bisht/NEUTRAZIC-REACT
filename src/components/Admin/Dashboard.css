@@ -129,7 +129,9 @@ body
 a{
   text-decoration: none;
 }
-
+:where(.css-dev-only-do-not-override-diro6f).ant-modal .ant-modal-close{
+  padding-right: 39px!important;
+}
 /*===== HEADER =====*/
 .headsec:after {
     content: '';
@@ -268,6 +270,7 @@ a{
   color: var(--first-color-light);
   margin-bottom: 1rem;
   transition: .3s;
+  width: 180px;
 }
 .nav__link .nav_name Link{
   color:green;
@@ -280,8 +283,8 @@ a{
 .nav__icon{
   height: 20px;
   width: auto;
-  color:#000;
-  opacity: .3;
+  color:#007bff;
+  opacity: .6;
 }
 .nav__icon:hover{
   color: #1e144f;
@@ -418,8 +421,8 @@ a{
 .cardicon{
   height: 30px;
   width: auto;
-  color:#000;
-  opacity: .3;
+  color:#007bff;
+  opacity: .6;
 }
 .all-manufacturer-head, .all-category-head, .sub-category-head, .all-products-head
 {
@@ -591,14 +594,13 @@ font-family: 'Roboto', sans-serif;
   font-family: 'Roboto', sans-serif;
   font-weight:400 !important;
   font-size: 25px !important;
-  text-decoration: underline;
 }
 .product-form .row div input,select,textarea
 {
   font-family: 'Roboto', sans-serif;
   border-radius: 0;
 }
-.product-form .row div button
+.product-form .row div .btn-primary
 {
   color: #fff;
   background-color: #1e144f;
@@ -913,9 +915,15 @@ font-family: 'Roboto', sans-serif;
 {
     height: 18px;
     width: auto;
-    color: #000;
+    color: #007bff;
     opacity: .6;
     padding-right: 8px;
+}
+.accordion-header svg path{
+  stroke: #007bff!important;
+}
+.Configration-List .configuration-icons-wrap path{
+  stroke: #007bff!important;
 }
 .Configration-List li
 {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -29,9 +29,8 @@ import Checkout from "../components/Checkout";
 import UserDetails from "../components/form/UserDetails";
 import Header1 from "../components/Header1";
 import WishList from "../components/WishList";
-import AddressPage from "../components/AddressPage";
+// import AddressPage from "../components/AddressPage";
 import ShippingAddress from "../components/ShippingAddress";
-import Orders from "../components/Orders";
 import Vieworder from "../components/Admin/NewOrder";
 import NewOrder from "../components/Admin/NewOrder";
 import InProgressOrder from "../components/Admin/InProgressOrder";
@@ -68,10 +67,20 @@ import PackedOrder from "../components/Admin/PackedOrder";
 import ShippedOrder from "../components/Admin/ShippedOrder";
 import CancelOrder from "../components/Admin/CancelOrder";
 import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
-import Blogs from "../components/Blog"
+import Blogs from "../components/Blog";
+import PageNotFound from "../components/PageNotFound";
+import NeedSupport from "../components/NeedSupport";
+
 
 var Userdata = "";
 const Root = (props) => {
+  
+  
+  const [currancyType,setCurrancyType] = useState("")
+
+  useEffect(()=>{
+
+  },[])
   // const initialState = {
   //   auth: AUTH_INITIAL_STATE,
   //   product: PRODUCT_INITIAL_STATE,
@@ -159,7 +168,7 @@ const Root = (props) => {
             <Route exact path="/SingleProduct/:id" component={SingleProduct} />
             <Route exact path="/Cart" component={Cart} />
             <Route exact path="/ContactUs" component={ContactUs} />
-            <Route exact path="/About" component={About} />
+            <Route exact path="/aboutus" component={About} />
             <Route exact path="/Allcategory/:name" component={Allcategory} />
             
             <Route exact path="/UserProfile" component={UserProfile} />
@@ -173,8 +182,7 @@ const Root = (props) => {
             <Route exact path="/UserDetails/:_id" component={UserDetails} />
             <Route exact path="/Header1" component={Header1} />
             <Route exact path="/WishList" component={WishList} />
-            <Route exact path="/AddressPage" component={AddressPage} />
-            <Route exact path="/Orders" component={Orders} />
+            {/* <Route exact path="/AddressPage" component={AddressPage} /> */}
             <Route exact path="/NewOrder/:status" component={NewOrder} />
 
             <Route exact path="/InProgressOrderInProgress" component={InProgressOrder} />
@@ -208,14 +216,15 @@ const Root = (props) => {
               component={SearchResult}
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
-            {/* <Route path='/PageNotFound' component={PageNotFound} /> */}
-            <Route path='/privacyPolicy' component={PrivacyPolicy} />
-            <Route path='/termConditions' component={TermsConditions} />
-            <Route path='/returnRefund' component={ReturnRefund} />
+            <Route path='/PageNotFound' component={PageNotFound} />
+            <Route path='/privacypolicy' component={PrivacyPolicy} />
+            <Route path='/termsofservices' component={TermsConditions} />
+            <Route path='/crpolicy' component={ReturnRefund} />
             <Route path='/shippingPolicy' component={ShippingPolicy} />
             <Route path='/Faq' component={Faq} />
             <Route path='/orderSuccess' component={OrderSuccess} />
             <Route path='/forgotPassword' component={Forgot} />
+            <Route path='/support' component={NeedSupport}/>
           
           </Switch>
         </>

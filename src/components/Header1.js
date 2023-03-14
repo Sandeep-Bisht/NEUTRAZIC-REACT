@@ -18,11 +18,15 @@ import { MdOutlineClose } from "react-icons/md";
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
+
+
 
 let changeNavValue = 0;
 var header;
 var sticky;
 var Userdata = "";
+
 
 const errorEmail = "Please Enter a valid Email Address";
 
@@ -48,6 +52,9 @@ const Header1 = (props) => {
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
   const [usermodal, setUsermodal] = useState();
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
 
   const {
     register,
@@ -103,6 +110,26 @@ const Header1 = (props) => {
       });
     });
   }, []);
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[])
+
+  const currencyHandler=(e)=>{
+    // let location = history.location
+
+    // console.log(location.pathname,'path')
+    // navigate("/home");
+    cookies.set("CurrencyType", e.target.value,{ path: '/' });
+    setCurrency(e.target.value);
+
+    let location = history.location
+    history.push(location.pathname)
+  }
+
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
@@ -465,7 +492,7 @@ const Header1 = (props) => {
                       <div className="form-row">
                         <form
                           className="form-group col-lg-12"
-                          onBlur={handleSubmit(RegisterUser)}
+                          onClick={handleSubmit(RegisterUser)}
                         >
                           <div className="row mt-0 start-register-form">
                             <div className="col-md-6 col-12">
@@ -478,11 +505,17 @@ const Header1 = (props) => {
                                   className="form-control form-control-login"
                                   {...register("username", {
                                     required: true,
+                                    pattern:/^[a-z0-9]+$/,
                                   })}
                                 />
                                 {errors?.username?.type === "required" && (
                                   <p className="text-danger">
                                     This field is required
+                                  </p>
+                                )}
+                                {errors?.username?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Must have lowercase letters without space
                                   </p>
                                 )}
 
@@ -721,7 +754,7 @@ const Header1 = (props) => {
                                     data-bs-target="#exampleModal"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <i className="user-icon bx bx-user"></i>
+                                    <i className="user-icon bx bx-user-pin"></i>
                                   </span>
 
                                   <span
@@ -733,7 +766,7 @@ const Header1 = (props) => {
                                 </>
                               ) : (
                                 <>
-                                  <i className="user-icon bx bx-user"></i>
+                                  <i className="user-icon bx bx-user-pin"></i>
                                 </>
                               )}
                             </div>
@@ -865,8 +898,7 @@ const Header1 = (props) => {
                           </div>
                           <div className=" user-login">
                             <span className="sp">Wishlist</span>
-                            {/* <br />
-                  <span className="Sp1">Edit your wishlist</span> */}
+                            
                           </div>
                         </div>
                       </Link>
@@ -874,11 +906,10 @@ const Header1 = (props) => {
                   </div>
                   <div className="right-part">
                     <div className=" d-flex align-items-center currancy ">
-                      <select>
-                        <option>INR</option>
-                        <i className="bx bx-chevron-down"></i>
-
-                        <option>Dollar</option>
+                    
+                      <select onChange={(e)=>currencyHandler(e)} value={currancy}>
+                        <option value="INR">INR</option>
+                        <option value="Dollar">Dollar</option>
                       </select>
                     </div>
                   </div>
@@ -896,7 +927,7 @@ const Header1 = (props) => {
 
           </div>
 
-          <div className="container-fluid main-nav">
+          <div className="container-fluid main-nav px-0">
             <div className="row mt-0" id="myHeader">
               <div className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category" data-bs-toggle="modal"
                 data-bs-target="#myModal">
@@ -913,7 +944,7 @@ const Header1 = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-10 col-md-10 col-sm-9 col-8 ps-0">
+              <div className="col-lg-10 col-md-10 col-sm-9 col-8 p-0">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                   <div className="container-fluid mb-1">
                     <button
@@ -973,7 +1004,7 @@ const Header1 = (props) => {
                         className="icons2"
                         src={require("../Images/Icons/akar-icons_phone.png")}
                       />{" "}
-                      <span className="contact">+91-7055872014</span>
+                      <span className="contact">+91-7500872014</span>
                       <img
                         src={require("../Images/Icons/carbon_email-new.png")}
                         className="icons2 ml-3"
@@ -994,212 +1025,9 @@ const Header1 = (props) => {
           </div>
         </div></div>
 
-      {/* phone resposive header */}
-      {/* phone top-navbar */}
-      {/* <div className=" mobile-top-navbar">
-        <div>
-          <div className="col-sm-4  " style={{ paddingLeft: "10px" }}>
-            <div className="login-div2">
-              <input
-                type="text"
-                className="my-input-field"
-                placeholder="Search..."
-                onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                onKeyDown={(e) => {
-                  if (e.key == "Enter") {
-                    searchData(search);
-                  }
-                }}
-              />
-              <Link to={"/SearchResult/" + search}>
-                <button
-                  className="search mr-1"
-                  onClick={() => searchData(search)}
-                >
-                  <i className="bx bx-search-alt"></i>
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="mobile-icon-div ml-4">
-          <Link to="/Cart">
-            <i className="bx bx-cart"></i>
-          </Link>
-        </div>
-        <div className="mobile-icon-div ml-2">
-          <i className="bx bx-heart"></i>
-        </div>
-        <div className="mobile-icon-div ml-2">
-          {Userdata == undefined ? (
-            <Link to="/Register">
-              <i className="bx bx-log-in"></i>
-            </Link>
-          ) : (
-            <div className="dropdown">
-              <button
-                className="btn btn-white btn-sm dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {Userdata && Userdata.username}
-              </button>
-
-              <ul
-                className="dropdown-menu Logout-ul"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <Link to="/Ordered">
-                  <div className="Logout-div d-flex align-items-center">
-                    <i className="bx bx-file pl-2"></i>{" "}
-                    <li
-                      className="dropdown-item Logout-li"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <span className="pr-4">Orders</span>
-                    </li>
-                  </div>
-                </Link>
-                <Link to="/Cart">
-                  <div className="Logout-div d-flex align-items-center">
-                    <i className="bx bx-cart pl-2"></i>{" "}
-                    <li
-                      className="dropdown-item Logout-li"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <span className="pr-4">Cart</span>
-                    </li>
-                  </div>
-                </Link>
-                <Link to="/Wishlist">
-                  <div className="Logout-div d-flex align-items-center">
-                    <i className="bx bx-heart pl-2"></i>{" "}
-                    <li
-                      className="dropdown-item Logout-li"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <span className="pr-4">Wishlist</span>
-                    </li>
-                  </div>
-                </Link>
-                <div className="Logout-div d-flex align-items-center">
-                  <i className="bx bx-log-out pl-2"></i>{" "}
-                  <li
-                    className="dropdown-item Logout-li"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      logout();
-                    }}
-                  >
-                    <span className="pr-4">Logout</span>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          )}
-        </div>
-        
-      </div> */}
+      
       <ToastContainer />
-      {/* end phone top-navbar */}
-
-      {/* phone main-navbar */}
-      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light mobile-nav-bar">
-        <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <img className="pl-2" src={require("../Images/logo1.png")} />
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 ml-3 mb-lg-0 mobile-nav-list">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/AllProducts">
-                  Shop
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/ContactUs">
-                  Contact Us
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Blog
-                </Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Category
-                </a>
-                <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
-                  {categories.map((el, ind) => (
-                    <li key={ind}>
-                      <Link
-                        className="dropdown-item"
-                        to={"/categories/" + el._id}
-                      >
-                        {el.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Sub Category
-                </a>
-                <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
-                  {subcategories.map((el, ind) => (
-                    <li key={ind}>
-                      {" "}
-                      <Link
-                        to={"/Subcategories/" + el._id}
-                        className="dropdown-item"
-                      >
-                        {el.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> */}
-
-      {/* end phone responsive header */}
+      
     </>
   );
 };

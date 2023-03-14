@@ -50,27 +50,27 @@ const WishlistHandler=()=>{
                 </ul>
                 <ul className="social">
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://www.facebook.com/Nutrazik" target="_blank">
                       <i className="bx bxl-facebook-square"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://twitter.com/nutrazik" target="_blank">
                       <i className="bx bxl-twitter"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://www.instagram.com/nutrazik/" target="_blank">
                       <i className="bx bxl-instagram-alt"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://www.linkedin.com/company/70941207/admin/" target="_blank">
                       <i className="bx bxl-linkedin-square"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" target="_blank">
+                    <a href="https://in.pinterest.com/nutrazik/" target="_blank">
                       <i className="bx bxl-pinterest"></i>
                     </a>
                   </li>
@@ -82,22 +82,22 @@ const WishlistHandler=()=>{
                 <h3>Information</h3>
                 <ul className="link-list">
                   <li>
-                    <a href="/about">About Us</a>
+                    <a href="/aboutus">About Us</a>
                   </li>
                   <li>
                     <Link to="/ContactUs" onClick={ContactHandler}>Contact Us</Link>
                   </li>
                   <li>
-                    <Link to='/privacyPolicy'>Privacy Policy</Link>
+                    <Link to='/privacypolicy'>Privacy Policy</Link>
                   </li>
                   <li>
-                    <Link to="/termConditions">Terms &amp; Conditions</Link>
+                    <Link to="/termsofservices">Terms &amp; Conditions</Link>
                   </li>
                   <li>
                     <Link to="/shippingPolicy">Shipping Policy</Link>
                   </li>
                   <li>
-                  <Link to="/returnRefund">Return &amp; Refund</Link>
+                  <Link to="/crpolicy">Return & Refund</Link>
                   </li>
                 </ul>
               </div>
@@ -115,8 +115,12 @@ const WishlistHandler=()=>{
                   <li>
                     <Link to="/UserOrder">Order History</Link>
                   </li>
+                  
                   <li>
                     <Link to="/WishList" onClick={WishlistHandler}>Wishlist</Link>
+                  </li>
+                  <li>
+                    <Link to="/support">Need Support?</Link>
                   </li>
                   {/* <li>
                     <a href="contact.html">Newsletter</a>
