@@ -145,14 +145,14 @@ const SingleBlog = (props) => {
                                   class="card-img-top singleblog-card-image"
                                   alt="blog-image"
                                 />
-                                <div class="card-body" style = {{cursor:"pointer"}}>
+                                <div class="card-body single-blog-page-text" style = {{cursor:"pointer"}}>
                                   <h6 className="blog-title-text">{item.title}</h6>
                                   <p class="card-text" ><ReadMoreReact
                                 text={item.description}
-                                min={40}
-                                ideal={40}
-                                max={40}
-                                readMoreText={"..."}
+                                min={80}
+                                ideal={80}
+                                max={80}
+                                readMoreText={"...Read More"}
                               /></p>
                                 </div>
                               </div>

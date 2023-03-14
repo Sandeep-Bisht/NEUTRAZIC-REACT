@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import "../components/Blog.css";
 import BlogImage from "../Images/blog-img.jpg";
 import Footer from "./Footer";
@@ -8,11 +8,10 @@ import { Link } from "react-router-dom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
-
 function Blogs() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     getAllBlog();
   }, []);
 
@@ -26,13 +25,19 @@ function Blogs() {
         console.log(err, "error");
       });
   };
-
   return (
     <>
       <Header1 />
 
       <section className="blog-page">
         <div className="container m-auto">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="Single-Blog-Heading">
+                <h1 className="blog-heading1">Our Blogs</h1>
+              </div>
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-12">
               <div className="blog-box-wrapper">
@@ -64,7 +69,7 @@ function Blogs() {
                   <div className="col-md-5 ps-0">
                     {data &&
                       data.map((item, ind) => {
-                        if (ind < 2)
+                        if (ind >0 && ind< 3)
                           return (
                             <div className="right-blog-image-wrapper" key={ind}>
                               <div className="right-blog-image-wrap">
@@ -114,15 +119,21 @@ function Blogs() {
                                     alt="blog-image"
                                   />
                                 </Link>
-                                <div class="card-body">
+                                <div
+                                  class="card-body cart-text-body"
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <h6 className="blog-title-text">
+                                    {item.title}
+                                  </h6>
                                   <p class="card-text">
-                                  <ReadMoreReact
-                                text={item.description}
-                                min={80}
-                                ideal={80}
-                                max={80}
-                                readMoreText={"...Read More"}
-                              />
+                                    <ReadMoreReact
+                                      text={item.description}
+                                      min={80}
+                                      ideal={80}
+                                      max={80}
+                                      readMoreText={"...Read More"}
+                                    />
                                   </p>
                                 </div>
                               </div>
@@ -137,7 +148,7 @@ function Blogs() {
           </div>
         </div>
       </section>
-      <Baseline/>
+      <Baseline />
       <Footer />
     </>
   );
