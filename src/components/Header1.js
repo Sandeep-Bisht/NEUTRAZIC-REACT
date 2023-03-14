@@ -491,7 +491,7 @@ const Header1 = (props) => {
                                 )}
                                 {errors?.username?.type === "pattern" && (
                                   <p className="text-danger">
-                                    Please enter the valid username
+                                    Must have lowercase letters without space
                                   </p>
                                 )}
 
