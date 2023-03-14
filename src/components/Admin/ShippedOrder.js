@@ -112,6 +112,7 @@ const ShippedOrder = () => {
 
   const showModal = (item) => {
     setShippedOrder(item.address);
+    setPrticularUserOrder(item.order);
     setOrderItem(item);
     setIsModalVisible(true);
   };
@@ -201,7 +202,7 @@ const ShippedOrder = () => {
             </div>
             <div class="modal-body">
               <div>
-                <Modal
+              <Modal
                   title="Order Details"
                   visible={isModalVisible}
                   onOk={handleOk}
@@ -209,7 +210,7 @@ const ShippedOrder = () => {
                 >
                   <table class="table">
                     <thead>
-                      <tr>                        
+                      <tr>
                         <th scope="col">Image</th>
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
@@ -222,18 +223,20 @@ const ShippedOrder = () => {
                           console.log(item, "itemssss");
                           return (
                             <>
-                              <tr>                                
+                              <tr>
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
-                                  <img
-                                    onClick={() => imageHandler(item.productid)}
-                                    style={{ cursor: "pointer" }}
-                                    src={`${baseUrl}/${item.image}`}
-                                  ></img>
+                                    <img
+                                      onClick={() =>
+                                        imageHandler(item.productid)
+                                      }
+                                      style={{ cursor: "pointer" }}
+                                      src={`${baseUrl}/${item.image}`}
+                                    ></img>
                                   </div>
                                 </td>
-                                <td >{item.name}</td>
-                                <td>{item.singleprice}</td>                                
+                                <td>{item.name}</td>
+                                <td>{item.singleprice}</td>
                               </tr>
                             </>
                           );

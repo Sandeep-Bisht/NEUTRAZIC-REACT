@@ -122,9 +122,37 @@ const InProgressOrder = () => {
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     { title: "Payment Status", dataIndex: "payment_status", key: "payment_status" },
     {
-      title: "Status",
-      key: "orderStatus",
-      render: (_, item) => <a onClick={() => moveForShipping(item)}>Packed</a>,
+      title: "Status", 
+      render: (a, item) => (
+        <Space size="middle">
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  key: '1',
+                  label: (
+                    <a onClick={() =>UpdateOrderStatus(item._id,"Cancel")}>
+                      Cancel Order
+                    </a>
+                  ),
+                },
+                {
+                  key: '2',
+                  label: (
+                    <a onClick={() =>UpdateOrderStatus(item._id,"Shipped")}>
+                      Move to Shipped
+                    </a>
+                  ),
+                },
+              ],
+            }}
+          >
+            <a>
+              Packed <DownOutlined />
+            </a>
+          </Dropdown>
+        </Space>
+      ),
     },
     
     {
