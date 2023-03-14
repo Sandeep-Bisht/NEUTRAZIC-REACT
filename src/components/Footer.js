@@ -82,22 +82,22 @@ const WishlistHandler=()=>{
                 <h3>Information</h3>
                 <ul className="link-list">
                   <li>
-                    <a href="/about">About Us</a>
+                    <a href="/aboutus">About Us</a>
                   </li>
                   <li>
                     <Link to="/ContactUs" onClick={ContactHandler}>Contact Us</Link>
                   </li>
                   <li>
-                    <Link to='/privacyPolicy'>Privacy Policy</Link>
+                    <Link to='/privacypolicy'>Privacy Policy</Link>
                   </li>
                   <li>
-                    <Link to="/termConditions">Terms &amp; Conditions</Link>
+                    <Link to="/termsofservices">Terms &amp; Conditions</Link>
                   </li>
                   <li>
                     <Link to="/shippingPolicy">Shipping Policy</Link>
                   </li>
                   <li>
-                  <Link to="/returnRefund">Return &amp; Refund</Link>
+                  <Link to="/crpolicy">Return & Refund</Link>
                   </li>
                 </ul>
               </div>
@@ -115,8 +115,12 @@ const WishlistHandler=()=>{
                   <li>
                     <Link to="/UserOrder">Order History</Link>
                   </li>
+                  
                   <li>
                     <Link to="/WishList" onClick={WishlistHandler}>Wishlist</Link>
+                  </li>
+                  <li>
+                    <Link to="/support">Need Support?</Link>
                   </li>
                   {/* <li>
                     <a href="contact.html">Newsletter</a>

@@ -1536,7 +1536,7 @@ left: 0; */
 }
 
 .displayed-text {
-  color: #212121;
+  color: rgba(0,0,0,0.6);
   font-size: 14px;
   font-weight: 600;
 }
@@ -1677,7 +1677,7 @@ left: 0; */
 }
 @media only screen and (max-width: 575.98px) {
   .relate-products .related span {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
   .description .main-div .content1 .text {
     font-size: 14px !important;

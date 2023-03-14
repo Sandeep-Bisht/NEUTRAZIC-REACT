@@ -69,6 +69,7 @@ import CancelOrder from "../components/Admin/CancelOrder";
 import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
 import Blogs from "../components/Blog";
 import PageNotFound from "../components/PageNotFound";
+import NeedSupport from "../components/NeedSupport";
 
 
 var Userdata = "";
@@ -167,7 +168,7 @@ const Root = (props) => {
             <Route exact path="/SingleProduct/:id" component={SingleProduct} />
             <Route exact path="/Cart" component={Cart} />
             <Route exact path="/ContactUs" component={ContactUs} />
-            <Route exact path="/About" component={About} />
+            <Route exact path="/aboutus" component={About} />
             <Route exact path="/Allcategory/:name" component={Allcategory} />
             
             <Route exact path="/UserProfile" component={UserProfile} />
@@ -216,13 +217,14 @@ const Root = (props) => {
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
             <Route path='/PageNotFound' component={PageNotFound} />
-            <Route path='/privacyPolicy' component={PrivacyPolicy} />
-            <Route path='/termConditions' component={TermsConditions} />
-            <Route path='/returnRefund' component={ReturnRefund} />
+            <Route path='/privacypolicy' component={PrivacyPolicy} />
+            <Route path='/termsofservices' component={TermsConditions} />
+            <Route path='/crpolicy' component={ReturnRefund} />
             <Route path='/shippingPolicy' component={ShippingPolicy} />
             <Route path='/Faq' component={Faq} />
             <Route path='/orderSuccess' component={OrderSuccess} />
             <Route path='/forgotPassword' component={Forgot} />
+            <Route path='/support' component={NeedSupport}/>
           
           </Switch>
         </>

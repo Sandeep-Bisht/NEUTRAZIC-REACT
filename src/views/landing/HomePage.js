@@ -1456,7 +1456,7 @@ const HomePage = () => {
                               return (
                                 <div className="col-lg-3 col-md-6">
                                   <Link
-                                    className="card-img-link"
+                                    
                                     to={"/SingleBlogPage/" + item.slug}
                                   >
                                     <div className="card">
@@ -1466,12 +1466,12 @@ const HomePage = () => {
                                           `${baseUrl}/` +
                                             item.featuredImage[0].path
                                         }
-                                        className="card-img-top"
+                                        className="card-img-homepage"
                                         alt="blog-image"
                                       />
 
                                       <div className="card-body">
-                                        <h6 className="card-title">
+                                        <h6 className="blog-title-text">
                                           {item.title}
                                         </h6>
                                         <p className="card-text">
@@ -1480,7 +1480,7 @@ const HomePage = () => {
                                             min={60}
                                             ideal={60}
                                             max={60}
-                                            readMoreText={"..."}
+                                            readMoreText={"...Read More"}
                                           />
                                         </p>
                                       </div>
