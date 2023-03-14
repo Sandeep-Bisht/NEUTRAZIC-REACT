@@ -69,6 +69,19 @@ const Header1 = (props) => {
       password: "",
       repassword: "",
     },
+    mode: "onBlur"
+  });
+  const {
+   register : register2,
+   handleSubmit : handleLoginSubmit,
+    formState: { errors : loginErrors },
+  } = useForm({
+    defaultValues: {
+      username: "",   
+      password: "",
+     
+    },
+    mode: "onBlur"
   });
 
   const CategoryDataHandler = () => {
@@ -140,11 +153,7 @@ const Header1 = (props) => {
     window.location.replace("/");
   };
 
-  const RegisterUser = (data) => {
-    // setUsername(data.username);
-    // setemail(data.email);
-    // setPassword(data.password);
-    // setRePassword(data.repassword);
+  const RegisterUser = (data) => {    
     if (
       data.email &&
       data.password &&
@@ -153,6 +162,7 @@ const Header1 = (props) => {
       data.phonenumber &&
       data.password == data.repassword
     ) {
+      let username = data.username.toLowerCase();
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -160,7 +170,7 @@ const Header1 = (props) => {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: data.username,
+          username: username,
           password: data.password,
           phonenumber: data.phonenumber,
           email: data.email,
@@ -177,9 +187,9 @@ const Header1 = (props) => {
         });
     }
   };
-  const LoginUser = (e) => {
-    e.preventDefault();
-    if (username && password) {
+  const LoginUser = (data) => {
+    if (data.username && data.password) {
+      console.log(data, "insid elogin user");
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -187,8 +197,8 @@ const Header1 = (props) => {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          password: password,
+          username: data.username,
+          password: data.password,
         }),
       })
         .then((res) => res.json())
@@ -232,9 +242,10 @@ const Header1 = (props) => {
       //   position: toast.POSITION.BOTTOM_RIGHT,
       //   autoClose: 5000,
       // });
-    } else {
-      setMsg("Please Enter a Valid Data");
     }
+    //  else {
+    //   setMsg("Please Enter a Valid Data");
+    // }
   };
   const headerFunction = async () => {
     if (window.pageYOffset > sticky) {
@@ -492,7 +503,7 @@ const Header1 = (props) => {
                       <div className="form-row">
                         <form
                           className="form-group col-lg-12"
-                          onClick={handleSubmit(RegisterUser)}
+                          onSubmit={handleSubmit(RegisterUser)}
                         >
                           <div className="row mt-0 start-register-form">
                             <div className="col-md-6 col-12">
@@ -501,21 +512,15 @@ const Header1 = (props) => {
                                   Username<span>*</span>
                                 </label>
                                 <input
-                                  type="text"
+                                  type="text"                                  
                                   className="form-control form-control-login"
                                   {...register("username", {
-                                    required: true,
-                                    pattern:/^[a-z0-9]+$/,
+                                    required: true,                                  
                                   })}
                                 />
                                 {errors?.username?.type === "required" && (
                                   <p className="text-danger">
                                     This field is required
-                                  </p>
-                                )}
-                                {errors?.username?.type === "pattern" && (
-                                  <p className="text-danger">
-                                    Must have lowercase letters without space
                                   </p>
                                 )}
 
@@ -643,9 +648,10 @@ const Header1 = (props) => {
                       <div className="form-row">
                         <form
                           className="form-group col-lg-12"
+                          onSubmit={handleLoginSubmit(LoginUser)}
                         >
                           <div className="row mt-0 start-login-form">
-                            <div className="form-group col-lg-12">
+                            {/* <div className="form-group col-lg-12">
                               <label>
                                 Username<span>*</span>
                               </label>
@@ -656,8 +662,50 @@ const Header1 = (props) => {
                                 }}
                                 required
                               />
+                            </div> */}
+                            <div className="col-md-12 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Username<span>*</span>
+                                </label>
+                                <input
+                                  type="text"                                  
+                                  className="form-control form-control-login"
+                                  {...register2("username", {
+                                    required: true,                                  
+                                  })}
+                                />
+                                {loginErrors?.username?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+
+                              </div>
                             </div>
-                            <div className="form-group col-lg-12">
+                            <div className="col-md-12 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control form-control-login "
+                                  {...register2("password", {
+                                    required: true,
+                              
+                                  })}
+                                />
+                                {loginErrors?.password?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                
+                              
+                              </div>
+                            </div>
+                            {/* <div className="form-group col-lg-12">
                               <label>
                                 Password<span>*</span>
                               </label>
@@ -669,7 +717,7 @@ const Header1 = (props) => {
                                 }}
                                 required
                               />
-                            </div>
+                            </div> */}
                             <h5 className="Login-fail-msg">{msg}</h5>
                             <div className="form-group col-lg-12 justify-content-center">
                               <button
@@ -754,7 +802,7 @@ const Header1 = (props) => {
                                     data-bs-target="#exampleModal"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <i className="user-icon bx bx-user-pin"></i>
+                                    <i className="user-icon bx bx-log-in"></i>
                                   </span>
 
                                   <span

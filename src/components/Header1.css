@@ -955,7 +955,9 @@ body {
     font-size: 2rem;
 }
 
-
+.bx-log-in:hover{
+    color: #1b97ff;
+}
 
 /* ---------------------------prashant modified haeder css------------- */
 

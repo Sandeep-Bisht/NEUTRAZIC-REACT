@@ -11339,7 +11339,12 @@ textarea.form-control {
   padding-right: 5px;
   padding-top: 10px;
 }
-
+.blog-page-section-2 .card-img-homepage{
+  cursor: pointer;
+  width: 100%;
+  object-fit: cover;
+  height: 150px;
+}
 .products-details-image
   .products-details-image-slides-owl-thumbs
   .owl-thumb-item
