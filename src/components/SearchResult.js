@@ -13,6 +13,7 @@ import * as ACTIONS from '../CommonService/AddToCart/action'
 import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
+import "../components/SearchResult.css";
 import {BiCategory} from 'react-icons/bi';
 import {BsCardList} from 'react-icons/bs';
 import {TbBrandNotion} from 'react-icons/tb';
@@ -232,7 +233,7 @@ const SearchResult = (props) => {
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
     }
   };
@@ -359,7 +360,7 @@ const SearchResult = (props) => {
               .then(async (data) => {
                 toast.error("Added to wishlist", {
                   position: toast.POSITION.BOTTOM_RIGHT,
-                  autoClose: 2000,
+                  autoClose: 1000,
                 });
                 
                 //add product to wishlist response is comming here
@@ -401,7 +402,7 @@ const SearchResult = (props) => {
                 .then(async (data) => {
                   toast.error("Added to wishlist", {
                     position: toast.POSITION.BOTTOM_RIGHT,
-                    autoClose: 2000,
+                    autoClose: 1000,
                   });
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("in-wishlist");
@@ -417,7 +418,7 @@ const SearchResult = (props) => {
           } else {
             toast.error("Already in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 2000,
+              autoClose: 1000,
             });
           }
         }
@@ -741,8 +742,8 @@ const SearchResult = (props) => {
       {/* <div id="main"></div> */}
 
       {/* end side bar Modal */}
-
-      <div id="__next">
+      <div className="container">
+      <div id="__next_search">
         {/* trending section  */}
 
         <section className="trending-section">
@@ -750,7 +751,7 @@ const SearchResult = (props) => {
             <div className="row mt-0">
               <div className="col-12">
                 <div className="">
-                  <h1 className="trendign-head">Showing Results for "{SearchedText}"</h1>
+                  <h1 className="Search-Result">Showing Results for "{SearchedText}"</h1>
                 </div>
               </div>
             </div>
@@ -784,12 +785,12 @@ const SearchResult = (props) => {
                   count = count + 1;
                   return (
                     <>
-                      <div className="col-lg-3 col-md-12 col-sm-12" key={ind}>
+                      <div className="col-lg-3 col-md-4 col-sm-4 col-6" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="product-div">
+                              <div className="product-div search-product-div">
                                 <div className="product-image-div">
                                   <Link
                                     to={"/SingleProduct/" + el._id}
@@ -916,6 +917,7 @@ const SearchResult = (props) => {
                                       </div>
                                     </div>
                                   </div>
+                                  <hr/>
                                 </div>
                               </div>
                             </div>
@@ -940,9 +942,11 @@ const SearchResult = (props) => {
                         autoplay
                       ></lottie-player>}
             </div>
+            
           </div>
         </section>
         <ToastContainer/>
+      </div>
       </div>
       <Footer />
     </>

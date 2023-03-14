@@ -1,5 +1,5 @@
 .single-faq{
-    padding: 50px 0;
+    margin-top: 152px;
     text-align: center;
 }
 .accordion{
@@ -71,6 +71,11 @@
 
 
 /* -------------------faq responsive----------------------- */
+@media only screen and (max-width:575.98px){
+    .single-faq{
+        margin-top: 164px!important;
+    } 
+}
 @media only screen and (max-width:520px){
     .single-faq .accordion .accordion-header span.one{
         margin-right: 20px;

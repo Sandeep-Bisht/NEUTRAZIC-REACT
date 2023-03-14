@@ -34,8 +34,9 @@ body
 
 .container{
   margin-top: 10px;
-  width:100%;
+
 }
+
 /*===== BASE =====*/
 *,::before,::after{
   box-sizing: border-box;
@@ -286,6 +287,7 @@ a{
   color: #1e144f;
 }
 
+
 /*Show navbar movil*/
 .show{
   left: 0;
@@ -295,7 +297,9 @@ a{
 .body-pd{
   padding-left: calc(var(--nav-width) + 0.7rem);
 }
-
+.graph-main-div{
+  margin-top: 10px;
+}
 /*Active links*/
 /* .active{
   color: var(--white-color);
@@ -311,6 +315,11 @@ a{
 } */
 
 /* ===== MEDIA QUERIES=====*/
+@media screen and (min-width: 1199px){
+  .sidebar-dashboard .nav__list{
+  padding-left: 0px!important;
+}
+}
 @media screen and (min-width: 768px){
   /* body{
     margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -369,7 +378,10 @@ a{
   margin-bottom: 0;
   text-transform: capitalize;
 }
-
+.formerror{
+  font-size: 14px;
+  color: red;
+}
 .main{
   padding-top: 10px;
 }
@@ -558,8 +570,8 @@ font-family: 'Roboto', sans-serif;
 
 /* Product Form */
 #Allproduct-form{
-  height: 610px !important;
-  width: 117%;
+  height: 100% !important;
+  width: 100%;
   
 }
 
@@ -623,14 +635,19 @@ font-family: 'Roboto', sans-serif;
 .nav__list
 {
   background-color: #fff;
-  position: fixed;
+  position: sticky;
   top: 0;
   bottom: 0;
-  padding: 0 6px;
-  padding-top: 80px;
-  overflow-y: scroll;
-  box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
+  padding-top: 44px;
   z-index: 5;
+}
+.sidebar-dashboard{
+  min-height: 100vh;
+  background-color: #fff;
+  box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
+}
+.dashboard-container{
+  margin-left: -22px;
 }
 .nav__link
 {
@@ -763,7 +780,6 @@ font-family: 'Roboto', sans-serif;
 #body-pd
 {
   padding-top: 60px;
-  padding-bottom: 20px;
   background-color: #f1f4f6;
   height: 100vh;
   overflow-y: scroll;

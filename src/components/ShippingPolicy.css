@@ -1,10 +1,83 @@
+
 .shipping-policy-page
 {
-    padding-top: 30px;
     background-color: #fff;
+    padding-top: 164px;
 }
 .shipping-policy-page h1, h2
 {
     color: #1e144f;
     text-transform: capitalize;
 }
+.shipping-policy-page ul
+{
+    list-style: disc;
+}
+.shipping-policy-page p{
+    font-size: 17px;
+}
+
+@media only screen and (max-width : 1399px){
+  
+}
+@media only screen and (max-width : 1024px) {
+  
+}
+
+@media only screen and (max-width :991px) {
+  
+}
+@media only screen and (max-width : 767px) {
+  
+}
+@media only screen and (max-width : 575.98px) {
+
+    .shipping-policy-page
+    {
+        padding-top: 165px;
+    }
+    .shipping-policy-page p{
+        line-height: 37px;
+    }
+    shipping-policy-page p {
+        font-size: 14px;
+    }
+    .shipping-policy-page h1, h2 {
+        font-size: 25px;
+    }
+ 
+
+}
+
+
+
+@media only screen and (max-width : 480px) {
+ 
+    .shipping-policy-page h1, h2 {
+        font-size: 20px;
+    }
+    .shipping-policy-page p {
+        font-size: 15px;
+    }
+
+}
+@media only screen and (max-width : 430px)
+   { 
+     
+ 
+  }
+
+@media only screen and (max-width : 360px) {
+
+    .shipping-policy-page
+    {
+        padding-left: 8px;
+        padding-top: 154px;
+    }
+
+}
+
+
+
+
+

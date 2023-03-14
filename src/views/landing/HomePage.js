@@ -578,19 +578,19 @@ const HomePage = () => {
                 if (ind < 6) {
                   return (
                     <>
-                      <div className="col-lg-2 col-md-12 col-sm-12" key={ind}>
+                      <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={ind}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="product-div">
+                              <div className="product-home-div">
                                 <div className="product-image-div">
                                   <Link
                                     to={"/SingleProduct/" + el._id}
                                     className="product-image-link"
                                   >
                                     <div className="image hover-switch">
-                                      <img
+                                      <img className="hoverimage"
                                         src={
                                           el.otherImage &&
                                           el.otherImage.length > 0
@@ -819,12 +819,12 @@ const HomePage = () => {
               {data.map((el, index) => {
                 if (index < 6) {
                   return (
-                    <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
+                    <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
                       {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row">
                           <div className="col-md-12">
-                            <div className="product-div">
+                            <div className="product-home-div">
                               <div className="product-image-div">
                                 <Link
                                   to={"/SingleProduct/" + el._id}
@@ -992,12 +992,12 @@ const HomePage = () => {
                 .map((el, index) => {
                   if (index < 6) {
                     return (
-                      <div className="col-lg-2 col-md-12 col-sm-12" key={index}>
+                      <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
                         {/* <Link to={"/SingleProduct/" + el._id}> */}
                         <div className="single-products-box border">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="product-div">
+                              <div className="product-home-div">
                                 <div className="product-image-div">
                                   <Link
                                     to={"/SingleProduct/" + el._id}
@@ -1435,11 +1435,11 @@ const HomePage = () => {
           <div className="row">
             <div className="col-md-12">
             <h1 className="trendign-head">
-            <span className="products-color">Blogs</span>
+            <span className="products-color">Our Blogs</span>
           </h1>
-              <div className="blog-box-wrapper">
+              {/* <div className="blog-box-wrapper">
                 <div className="row">
-                  <div className="col-md-7">
+                  <div className="col-lg-7 col-md-12">
                     {blogs && blogs.map((item,ind)=>{
                       if(ind<1)
                       return(
@@ -1449,16 +1449,16 @@ const HomePage = () => {
                         <Link to = {"/SingleBlogPage/" + item.slug}>
                         <button>Read More</button>
                         </Link>
-                        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+                        <p>{item.description}</p>
                       </div>
                     </div>
                     )})}
                   </div>
-                  <div className="col-md-5 ps-0">
-                    <div className="right-blog-image-wrapper">
+                  <div className="col-lg-5 col-md-12 right-image-blog">
                       {blogs && blogs.map((item,ind)=>{
                         if(ind<2)
                         return (
+                          <div className="right-blog-image-wrapper">
                       <div className="right-blog-image-wrap" key={ind}>
                         <img src={item.featuredImage && `${baseUrl}/` + item.featuredImage[0].path} alt="" className="" />
                         <div className="top-heading-box-2">
@@ -1468,11 +1468,12 @@ const HomePage = () => {
                           <p>{item.description}</p>
                         </div>
                       </div>
+                      </div>
+                 
                       )})}
-                    </div>
-                  </div>
+                     </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="blog-page-section-2">
             
@@ -1482,11 +1483,12 @@ const HomePage = () => {
              
                   <div className="latest-blogs-section">
                     <div className="row">
-                      { blogs && blogs.map((item)=>{
+                      { blogs && blogs.map((item,ind)=>{
+                        if(ind<4)
                         return(
-                      <div className="col-md-3">
+                      <div className="col-lg-3 col-md-6">
                         <div class="card">
-                          <Link to = {"/SingleBlogPage/" + item.slug}>
+                          <Link className="card-img-link" to = {"/SingleBlogPage/" + item.slug}>
                           
                           <img
                             src={item.featuredImage && `${baseUrl}/`+item.featuredImage[0].path}
@@ -1496,14 +1498,6 @@ const HomePage = () => {
                           </Link>
                           <div class="card-body">
                           <p class="card-text">
-                          {/* <ReadMoreReact
-                                text=
-                                min={100}
-                                ideal={100}
-                                max={100}
-                                readMoreText={"...Read More"}
-                              /> */}
-                            
                             {item.description}
                             </p>
                           </div>

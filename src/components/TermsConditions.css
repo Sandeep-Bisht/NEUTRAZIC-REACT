@@ -1,9 +1,9 @@
 .terms-condition-page
 {
     background-color: #fff;
-    padding-top: 30px;
+    padding-top: 164px;
 }
-.terms-condition-page h1, h3
+.terms-condition-page h1, h2
 {
     color: #1e144f;
 }
@@ -11,3 +11,70 @@
 {
     list-style: disc;
 }
+.terms-condition-page p{
+    font-size: 17px;
+}
+
+@media only screen and (max-width : 1399px){
+  
+}
+@media only screen and (max-width : 1024px) {
+  
+}
+
+@media only screen and (max-width :991px) {
+  
+}
+@media only screen and (max-width : 767px) {
+  
+}
+@media only screen and (max-width : 575.98px) {
+
+    .terms-condition-page
+    {
+        padding-top: 165px;
+    }
+    .terms-condition-page p{
+        line-height: 37px;
+    }
+    terms-condition-page p {
+        font-size: 14px;
+    }
+    .terms-condition-page h1, h2 {
+        font-size: 25px;
+    }
+ 
+
+}
+
+
+
+@media only screen and (max-width : 480px) {
+ 
+    .terms-condition-page h1, h2 {
+        font-size: 20px;
+    }
+    .terms-condition-page p {
+        font-size: 15px;
+    }
+
+}
+@media only screen and (max-width : 430px)
+   { 
+     
+ 
+  }
+
+@media only screen and (max-width : 360px) {
+
+    .terms-condition-page
+    {
+        padding-left: 8px;
+        padding-top: 154px;
+    }
+
+}
+
+
+
+

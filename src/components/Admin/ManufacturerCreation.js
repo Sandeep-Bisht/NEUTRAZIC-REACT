@@ -15,53 +15,66 @@ const ManufacturerCreation = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [ManufacturerCount, setManufacturerCount] = useState(0);
   const [update, setUpdate] = useState(true);
+  const [formerror, setFormerror] = useState({});
   const [data, Setdata] = useState({
     name: "",
     description: "",
     image: [],
-    creatorId : ""
+    creatorId: "",
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "usererr dasdaasdadad")
+    console.log(Userdata, "usererr dasdaasdadad");
     GetManufacturer();
     if (editableData) {
       Setdata(editableData);
     }
   }, []);
 
+  const ValidattionForm = (value) => {
+    const error = {};
+    if (value.image.length === 0) {
+      error.image = "This field is required";
+    }
+    if (!value.name) {
+      error.name = "This field is required";
+    }
+    return error;
+  };
   const submitData = async (e) => {
     e.preventDefault();
-    data.creatorId = Userdata._id;
-    const formData = new FormData();
-    await formData.append("description", data.description);
-    await formData.append("name", data.name);
-    await formData.append("image", data.image);
-    // await formData.append("featuredImage", []);
-    await formData.append("creatorId", data.creatorId);
-    const url = `${baseUrl}/api/manufacture/add_manufacture`;
-    await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => {
-        res.json();
-        history.push('/AllManufactureDetails')
+    const errors = ValidattionForm(data);
+    console.log(Object.keys(errors).length);
+    setFormerror(errors);
+    if (Object.keys(errors).length === 0) {
+      data.creatorId = Userdata._id;
+      const formData = new FormData();
+      await formData.append("description", data.description);
+      await formData.append("name", data.name);
+      await formData.append("image", data.image);
+      // await formData.append("featuredImage", []);
+      await formData.append("creatorId", data.creatorId);
+      const url = `${baseUrl}/api/manufacture/add_manufacture`;
+      await fetch(url, {
+        method: "POST",
+        body: formData,
       })
-      .then((res) => {
-        GetManufacturer();
-        this.getAddOn();
-      })
+        .then((res) => {
+          res.json();
+          history.push("/AllManufactureDetails");
+        })
+        .then((res) => {
+          GetManufacturer();
+          this.getAddOn();
+        })
 
-      .catch((err) => console.log(err));
-    e.preventDefault();
+        .catch((err) => console.log(err));
+    }
   };
 
- 
-  
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -92,38 +105,37 @@ const ManufacturerCreation = (props) => {
     await formData.append("description", data.description);
     await formData.append("name", data.name);
     await formData.append("image", data.image);
-      try{
-        const response=await axios.put(`${baseUrl}/api/manufacture/update_manufacturer_by_id`, formData)
-        if(response.status==200)
-        {
-          await GetManufacturer();
-          setTimeout(()=>{
-            history.push("/AllManufactureDetails");
-          },1500)
-          
-        }
-        
-      }catch(error)
-      {
-        console.log(error);
+    try {
+      const response = await axios.put(
+        `${baseUrl}/api/manufacture/update_manufacturer_by_id`,
+        formData
+      );
+      if (response.status == 200) {
+        await GetManufacturer();
+        setTimeout(() => {
+          history.push("/AllManufactureDetails");
+        }, 1500);
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Manufacturer Name", data: "name" },
     { title: "Action", data: "Action" },
   ];
- 
+
   return (
-    <>     
+    <>
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
-          <div className="row">
-            <div className="col-2 px-0">
+          <div className="row px-0 dashboard-container">
+            <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-            <div className="col-10 px-0">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
               {Userdata != undefined ? (
                 Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
                   <form>
@@ -140,6 +152,7 @@ const ManufacturerCreation = (props) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
                             />
+                            <p className="formerror">{formerror.image}</p>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <input
@@ -154,6 +167,7 @@ const ManufacturerCreation = (props) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
+                            <p className="formerror">{formerror.name}</p>
                             <label for="floatingInputValue">
                               Manufacturer Name
                             </label>

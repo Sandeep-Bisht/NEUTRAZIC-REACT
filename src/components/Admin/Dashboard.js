@@ -45,6 +45,7 @@ const Dashboard = () => {
     GetOrders();
     GetProducts();
     GetLocalUserData();
+    GetBlogs();
   },[]);
 
   const GetLocalUserData = () => {
@@ -63,6 +64,13 @@ const Dashboard = () => {
         console.log(err, "error");
       });
   };
+  const GetBlogs = async()=>{
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+    .then((res)=>res.json())
+    .then(async (data)=>{
+      setBlogs(data.data.length);
+    })
+  }
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -153,14 +161,14 @@ const Dashboard = () => {
         <section id="body-pd">
           <div className="container-fluid">
             <DashboardHeaader />
-            <div className="row">
-              <div className="col-2 px-0">
+            <div className="row px-0 dashboard-container">
+              <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 sidebar-dashboard">
                 <Sidemenu />
               </div>
-              <div className="col-10">
-                <main className="main">
+              <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
+                <main className="main graph-main-div">
                   <div className="row cardsec-row">
-                    <div className="col-3">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                       <Link to="/AllManufactureDetails">
                         <div className="card cardsec">
                           <div className="row">
@@ -180,7 +188,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
 
-                    <div className="col-3">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                       <Link to="/AllUsers">
                         <div className="card cardsec">
                           <div className="row">
@@ -200,7 +208,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
 
-                    <div className="col-3">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                       <Link to="/AllBlogs">
                         <div className="card cardsec">
                           <div className="row">
@@ -219,7 +227,7 @@ const Dashboard = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="col-3">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                       <Link to="/AllProductsDetails">
                         <div className="card cardsec">
                           <div className="row">
@@ -238,7 +246,7 @@ const Dashboard = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="col-3 pt-4">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                       <Link to="/AllCategoriesDetails">
                         <div className="card cardsec">
                           <div className="row">
@@ -257,7 +265,7 @@ const Dashboard = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="col-3 pt-4">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                       <Link to="/AllSubCategoriesDetails">
                         <div className="card cardsec">
                           <div className="row">
@@ -276,8 +284,8 @@ const Dashboard = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="col-3 pt-4">
-                      <Link to="/AllWarehouseDetails">
+                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
+                      <Link to="/AllSubCategoriesDetails">
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -297,6 +305,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </main>
+                <div className="container">
                 <div className='row my-5'>
                 <div className='col-md-6'>
                     <PieChart />
@@ -305,9 +314,10 @@ const Dashboard = () => {
                     <LineChart />
                     </div> 
                     </div>
+                    </div>
               </div>   
                 </div>
-          </div>
+                </div>
         </section>
     ):(
       <PageNotFound/>

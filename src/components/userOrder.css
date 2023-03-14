@@ -16,3 +16,27 @@
 {
     width: 30%;
 }
+.user-order-div{
+    margin-top: 80px!important;
+}
+@media only screen and (max-width:575.98px){
+    .user-order-div{
+        margin-top: 94px!important;
+    } 
+}
+@media only screen and (max-width:430px)
+{
+    .col-12 button {
+        width: 5rem!important;
+        padding: 5px!important;
+    }
+    .all-category-search-wrap .dashboard-search-btn{
+        width: 38px!important;
+    }
+    .all-category-search-wrap input{
+        width: 100px!important;
+    }
+    :where(.css-dev-only-do-not-override-diro6f).ant-table-wrapper .ant-table-tbody>tr>td{
+        padding: 12px 9px!important;
+    }
+}

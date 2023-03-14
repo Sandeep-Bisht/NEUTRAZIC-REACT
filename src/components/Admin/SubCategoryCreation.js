@@ -13,6 +13,7 @@ const SubCategoryCreation = (props) => {
   const [subcategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [update, setUpdate] = useState(true);
+  const [formerror, Setformerror] = useState({});
   const [data, Setdata] = useState({
     name: "",
     description: "",
@@ -20,49 +21,66 @@ const SubCategoryCreation = (props) => {
     image: [],
   });
 
-  
   const [editableData] = useState(props.history.location.state);
-  const history=useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetSubCategory();
     GetCategory();
     if (editableData) {
-      let {category, ...restData} = editableData
-      {category ? restData.category = category._id : restData.category = ""}
-      console.log(restData,"rest data");
+      let { category, ...restData } = editableData;
+      {
+        category
+          ? (restData.category = category._id)
+          : (restData.category = "");
+      }
+      console.log(restData, "rest data");
       Setdata(restData);
     }
   }, []);
-  
-  
+
+  const ValidationFrom = (value) => {
+    const error = {};
+    if (!value.category) {
+      error.category = "This field is required";
+    }
+    if (!value.name) {
+      error.name = "This field is required";
+    }
+    if (value.image.length === 0) {
+      error.image = "This field is required";
+    }
+    return error;
+  };
   const submitData = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    await formData.append("description", data.description);
-    await formData.append("category", data.category);
-    await formData.append("name", data.name);
-    formData.append("image", data.image);
-    const url = `${baseUrl}/api/subcategory/add_subcategory`;
-    await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => {
-        res.json();
-        history.push("/AllSubCategoriesDetails")
+    const errors = ValidationFrom(data);
+    Setformerror(errors);
+    if (Object.keys(errors).length === 0) {
+      const formData = new FormData();
+      await formData.append("description", data.description);
+      await formData.append("category", data.category);
+      await formData.append("name", data.name);
+      formData.append("image", data.image);
+      const url = `${baseUrl}/api/subcategory/add_subcategory`;
+      await fetch(url, {
+        method: "POST",
+        body: formData,
       })
-      .then((res) => {
-        GetSubCategory();
+        .then((res) => {
+          res.json();
+          history.push("/AllSubCategoriesDetails");
+        })
+        .then((res) => {
+          GetSubCategory();
 
-        this.getAddOn();
-      })
-      .catch((err) => console.log(err));
+          this.getAddOn();
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
-
- 
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -75,19 +93,16 @@ const SubCategoryCreation = (props) => {
   };
 
   const DeleteSubCategory = async (_id) => {
-    await fetch(
-      `${baseUrl}/api/subcategory/delete_subcategory_by_id`,
-      {
-        method: "Delete",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          _id: _id,
-        }),
-      }
-    )
+    await fetch(`${baseUrl}/api/subcategory/delete_subcategory_by_id`, {
+      method: "Delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: _id,
+      }),
+    })
       .then((res) => res.json())
       .then(async (data) => {
         GetSubCategory();
@@ -115,7 +130,7 @@ const SubCategoryCreation = (props) => {
       image: item.image,
       name: item.name,
       description: item.description,
-    }; 
+    };
   };
 
   const UpdateSubCategory = async (e, _id) => {
@@ -126,32 +141,33 @@ const SubCategoryCreation = (props) => {
     await formData.append("description", data.description);
     await formData.append("category", data.category);
     await formData.append("image", data.image);
-    const response=await axios.put(`${baseUrl}/api/subcategory/update_subcategory_by_id`, formData)
-      if(response.status==200)
-      {
-        await GetSubCategory();
-        setTimeout(()=>{
-          history.push("/AllSubCategoriesDetails");
-        },1500);
-      }
+    const response = await axios.put(
+      `${baseUrl}/api/subcategory/update_subcategory_by_id`,
+      formData
+    );
+    if (response.status == 200) {
+      await GetSubCategory();
+      setTimeout(() => {
+        history.push("/AllSubCategoriesDetails");
+      }, 1500);
+    }
   };
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Sub Category Name", data: "name" },
     { title: "Action", data: "Action" },
   ];
-  
 
   return (
     <>
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
-          <div className="row">
-            <div className="col-2 px-0">
+          <div className="row px-0 dashboard-container">
+            <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard ">
               <Sidemenu />
             </div>
-            <div className="col-10 px-0">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
               {Userdata !== undefined ? (
                 Userdata.role == "superAdmin" ? (
                   <form>
@@ -168,6 +184,7 @@ const SubCategoryCreation = (props) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
                             />
+                            <p className="formerror">{formerror.image}</p>
                           </div>
                           <div className="col-6 p-1">
                             <select
@@ -188,6 +205,7 @@ const SubCategoryCreation = (props) => {
                                 <option value={el._id}>{el.name}</option>
                               ))}
                             </select>
+                            <p className="formerror">{formerror.category}</p>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <input
@@ -202,7 +220,11 @@ const SubCategoryCreation = (props) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
-                            <label for="floatingInputValue">SubCategory Name</label>
+                            <p className="formerror">{formerror.name}</p>
+
+                            <label for="floatingInputValue">
+                              SubCategory Name
+                            </label>
                           </div>
 
                           <div className="col-6 p-1 form-floating">
@@ -221,7 +243,9 @@ const SubCategoryCreation = (props) => {
                                 });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">SubCategory Description</label>
+                            <label for="floatingInputValue">
+                              SubCategory Description
+                            </label>
                           </div>
                           {editableData ? (
                             <div className="col-12 p-1">
@@ -232,8 +256,7 @@ const SubCategoryCreation = (props) => {
                                 Update
                               </button>
                             </div>
-                          ) : 
-                           (
+                          ) : (
                             <div className="col-12 p-1">
                               <button
                                 className="btn btn-primary"

@@ -195,10 +195,10 @@ const UserOrder = () => {
      {/* end modal */}
       <Header1 />
       <section id="body-pd">
-        <div className="container-fluid">
+        <div className="container user-order-div">
           <div className="row">
-            <div className="col-1 px-0"></div>
-            <div className="col-10">
+            <div className="col-md-1 col-sm-1  px-0"></div>
+            <div className="col-md-10 col-sm-10 col-12">
             { OrderDetails  && OrderDetails.length > 0 ? (
               <>
               <div className="category-details-section">
@@ -251,6 +251,7 @@ const UserOrder = () => {
                   </>
               ) }
             </div>
+            <div className="col-md-1 col-sm-1  px-0"></div>
           </div>
         </div>
       </section>

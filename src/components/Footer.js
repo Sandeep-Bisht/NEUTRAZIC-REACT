@@ -14,8 +14,9 @@ const WishlistHandler=()=>{
 
   return (
     <>
+    <div className="container">
       <footer className="footer-area">
-        <div className="container m-auto">
+        <div className="container-fluid m-auto">
           <div className="row">
             <div className="col-lg-3 col-sm-6 col-md-6">
               <div className="single-footer-widget">
@@ -157,16 +158,16 @@ const WishlistHandler=()=>{
             </div>
           </div>
         </div>
-        <div className="footer-bottom-area container m-auto">
+        <div className="footer-bottom-area container-fluid m-auto">
           <div className="container m-auto">
             <div className="row mt-0 align-items-center">
-              <div className="col-lg-6 col-md-6">
+              <div className="col-lg-6 col-md-6 link-footer-first">
                 <p>
                   Designed & Developed by <i className="bx bx-copyright"></i>2023
                   <a href="https://giksindia.com/" target='_blank' className="giks-link"> GIKSINDIA</a>
                 </p>
               </div>
-              <div className="col-lg-6 col-md-6">
+              <div className="col-lg-6 col-md-6 link-footer-second">
                 <div className="payment-types">
                   <ul className="d-flex align-items-center justify-content-end">
                     <li>We accept payment via:</li>
@@ -217,6 +218,7 @@ const WishlistHandler=()=>{
           </div>
         </div>
       </footer>
+      </div>
     </>
   );
 };

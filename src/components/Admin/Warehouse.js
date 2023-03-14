@@ -85,11 +85,11 @@ const Warehouse = (props) => {
     <section id="body-pd">
       <div className="container-fluid">
         <DashboardHeaader/>
-        <div className="row">
-          <div className="col-2 px-0">
+        <div className="row px-0 dashboard-container">
+          <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4   sidebar-dashboard">
         <Sidemenu />
         </div>
-        <div className="col-10 px-0">
+        <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
         {Userdata != undefined ? (
           Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
             <form>
@@ -160,7 +160,7 @@ const Warehouse = (props) => {
                               Setdata({ ...data, description: e.target.value });
                             }}
                           ></textarea>
-                          <label for="floatingInputValue">Warehouse Address</label>
+                          <label for="floatingInputValue">Description</label>
                         </div>
                         <div className="col-6 p-1 form-floating">
                           <textarea

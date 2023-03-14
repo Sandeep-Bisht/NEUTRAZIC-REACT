@@ -1,0 +1,101 @@
+
+.subcategory-columns  .figure figcaption{
+  font-size: 0.9rem;
+}
+.subcategory-text-start,.subcategory-price-div  .text-end p{
+  font-weight: bold;
+  color: rgba(0,0,0,0.6);
+}
+
+@media only screen and (max-width : 1399px){
+  .subcategory-columns  .figure figcaption{
+    font-size: 0.7rem !important;
+    margin-bottom: 8px;
+  }
+  .subcategory-price-div  .text-start{
+    font-size: 0.8rem;
+  }
+  .subcategory-price-div  .text-end p{
+    font-size: 0.8rem ; 
+  }
+}
+@media only screen and (max-width : 1024px){
+  .subcategory-columns  .figure figcaption{
+    font-size: 0.7rem !important;
+    margin-bottom: 8px;
+  }
+  .subcategory-price-div  .text-start{
+    font-size: 0.7rem;
+  }
+  .subcategory-price-div  .text-end p{
+    font-size: 0.7rem ; 
+  }
+  .subcategory-columns .figure{
+    width: 24% !important;
+  }
+}
+@media only screen and (max-width : 991.98px){
+  .subcategory-columns .figure{
+    width: 30% !important;
+  }
+  .sidebar-nav{
+    padding: 6px;
+  }
+}
+@media only screen and (max-width : 756.98px){
+  .subcategory-columns .figure{
+    width: 48% !important;
+  }
+  .sidebar-nav{
+    padding: 6px;
+  }
+}
+@media only screen and (max-width : 575.98px){
+  .subcategory-columns .figure{
+    width: 99% !important;
+  }
+  .subcategory-columns  .figure figcaption{
+    font-size: 0.9rem !important;
+    text-align: center;
+  }
+  .back-ground-subcategory-sidebar{
+    top:40px !important
+  }
+  .sidebar-nav{
+    padding: 6px;
+  }
+  .subcategory-price-div  .text-end{
+    width: 100%;
+  }
+  .subcategory-text-start,.subcategory-price-div  .text-end p{
+    font-size: 13px !important;
+  }
+}
+@media only screen and (max-width : 480px){
+  .subcategory-columns .figure{
+    width: 99% !important;
+  }
+  .subcategory-price-div  .text-end{
+    width: 100%;
+  }
+  .subcategory-columns{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .subcategory-container{
+    margin-left: 180px !important;
+  }
+}
+@media only screen and (max-width : 430px){
+  .subcategory-container{
+    margin-left: 172px !important;
+  }
+}
+@media only screen and (max-width: 380.98px){
+  .subcategory-container .subcategory-columns .subcategory-figure{
+    width: 90% !important;
+  }
+  .subcategory-container{
+    margin-left: 132px !important;
+  }
+}

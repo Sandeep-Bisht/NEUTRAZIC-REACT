@@ -1,6 +1,3 @@
-.login-div2 .my-input-field::placeholder {
-	color: gray !important;
-  }
 /* width */
 ::-webkit-scrollbar {
     width: 2px;
@@ -86,7 +83,7 @@
 {
   position: absolute;
   bottom: 10px;
-  left: -2px;
+  left: -15px;
   font-size: 14px;
 }
 
@@ -100,13 +97,14 @@
 font-size:16px;
 position: relative;
 color:#1e144f;
+padding-left: 5px;
 }
 .Sp1{
     color: #1e144f;
     font-size:16px;
     font-weight: 400;
-    position: relative;
-    bottom:22px;
+    /* position: relative;
+    bottom:22px; */
     font-family: 'Roboto', sans-serif;
 }
 .Sp1:hover
@@ -292,11 +290,11 @@ color:#1e144f;
         padding-left: 0px !important;
         padding-right: 0px !important;
 }
-.sticky {
+/* .sticky {
     position: fixed;
     top: 0;
     width: 100%;
-  }
+  } */
 
 
 
@@ -831,7 +829,10 @@ body {
 {
     display: none;
 }
-
+.mobile-top-navbar
+{
+    display: none;
+}
 .Login-fail-msg
 {
     color:red;
@@ -846,47 +847,9 @@ body {
 /* mobile responsive header css */
 
 @media only screen and (min-width: 360px) and (max-width: 815px){
-   
-
-.mobile-nav-bar .mobile-nav-list
-{
-    /* justify-content: center;
-    align-items: center; */
-
-}
-.mobile-nav-bar .mobile-nav-list .nav-item .nav-link
-{
-    color:white;
-    font-family: 'Roboto', sans-serif;
-    font-style:normal;
-    font-weight: bold;
-    font-size: 17px;
-}
-.mobile-nav-bar .navbar-toggler
-{
-    background-color: transparent !important;
-    outline: 0px !important;
-    box-shadow: unset;
-}
-.mobile-nav-bar .navbar-toggler .navbar-toggler-icon
-{
-    outline: 0px;
-    color:white !important;
-}
-
-
-
 
 /* phone top-navbar */
-.mobile-top-navbar
-{
-    display: block;
-    width:100%;
-    height:45px;
-    align-items: center;
-    display: flex;
-    /* background-color: rgb(240, 238, 235); */
-}
+
 .login-div2 input[type="text"]
 {
     position: relative;
@@ -916,11 +879,7 @@ body {
     border: 0;
     outline: 0;
 }
-.mobile-top-navbar .mobile-icon-div i
-{
-        font-size: 22px;
-        color:#2D2D2D;
-}
+
 .dropdown .btn-sm
 {
     bottom:0px;
@@ -943,7 +902,7 @@ body {
     }
 }
 
-@media only screen and (min-width: 815px) and (max-width: 1024px){
+/* @media only screen and (min-width: 815px) and (max-width: 1024px){
 .top-header-padding
 {
     padding: 0 15px !important;
@@ -975,7 +934,7 @@ body {
         font-family: 'Roboto', sans-serif;
         left:4px;
     }
-}
+} */
 
 /* remove default css */
 .accordion-button::after{
@@ -997,3 +956,548 @@ body {
 .logged-In{
     font-size: 2rem;
 }
+
+
+
+/* ---------------------------prashant modified haeder css------------- */
+
+.heaader-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-wrapper-left{
+    display: flex;
+}
+
+.header-wrapper-right{
+    display:flex;
+}
+
+.header-wrapper-right .left-part
+{
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+}
+.header-wrapper-right .right-part{
+    display: flex;
+    
+}
+.heaader-wrapper .account-div,.heaader-wrapper .cart-div,.heaader-wrapper .heart-div {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.heaader-wrapper .cart-div .login-div1{
+    display: flex;
+}
+
+.heaader-wrapper .heart-div .heart-div-inner{
+    display: flex;
+}
+.login-div2 input[type="text"],.login-div2 .search{
+    top:0;
+}
+.login-div2 input[type="text"]{
+    width: auto;
+}
+
+.header-wrapper-left .main-navbar-head {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+
+/* responsive */
+.newheader{
+    position: fixed !important;
+    top: 0 !important;
+    right: 0!important;
+    background-color: #fff !important;
+    z-index: 200 !important;
+    width: 100% !important;
+
+}
+
+@media only screen and (max-width : 1399px){
+    .drop-category .category-head{
+        font-size: 12px;
+    }
+    .drop-category i {
+        font-size: 15px;
+    }
+    /* .col-sm-1{
+        padding-left: 14px;
+        padding-right: 14px;
+    } */
+    /* .newheader{
+        position: fixed !important;
+        top: 0 !important;
+        background-color: #fff !important;
+        z-index: 200 !important;
+        width: 100% !important;
+
+    } */
+    
+    .navbar .container-fluid{
+        padding:0px;
+        margin:0px;
+        justify-content: end;
+    }
+    
+    .container{
+        padding-left: 0px;
+        padding-right:0px;
+    }
+    /* .currancy{
+        margin-left: 110px!important;
+    } */
+  
+}
+@media only screen and (max-width : 1299px){
+    .currancy{
+        margin-left: 65px!important;
+      }
+}
+@media only screen and (max-width : 1024px) {
+    .heaader-wrapper{
+        padding: 10px 0;
+    }
+      .currancy{
+        margin-left: 60px!important;
+      }
+  
+}
+
+@media only screen and (max-width :991px) {
+      .currancy{
+        margin-left: 26px!important;
+      }
+    .navbar {
+        background-color: #1b97ff !important;
+        padding: 0px;
+        padding-right: 0;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        height: 45px;
+    }
+    .navbar-collapse{
+        background-color: #1b97ff !important;
+        margin-top: -3px;
+        /* height: 210px; */
+    }
+    .drop-category{
+        z-index: 500;
+        height: 44px;
+    }
+    .navbar-toggler:focus{
+        box-shadow: none;
+    }
+    .navbar-light .navbar-toggler{
+        background-color: #fff;
+        padding: 7px 12px;
+        border-color: none;
+    }
+    .mt-0 {
+        margin-top: 0!important;
+        padding-right: 34px;
+        margin-bottom: 10px;
+    }
+    /* .col-sm-1{
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+    .col-sm-2{
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .col-sm-3{
+        margin-left: -15px;
+    } */
+    /* .login-div{
+        padding-right: 70px;
+    } */
+    .drop-category .category-head{
+        font-size: 10px;
+    }
+    .drop-category i {
+        font-size: 13px;
+    }
+    .sp{
+        padding-left: 6px;
+        font-size: 14px;
+    }
+    .dropdown .btn-sm{
+        font-size: 14px;
+    }
+    /* .cart-div{
+        padding-left: 6px;
+    } */
+    .login-div2 input[type="text"]{
+        width: 150px;
+    }
+    .user-icon{
+        font-size: 25px;
+    }
+    .option-item .cart-btn{
+        font-size: 25px;
+    }
+    .account-div{
+        padding-left: 2px!important;
+    }
+    .cart-div{
+        padding-left: 2px;
+    }
+    .heart-div{
+        padding-left: 2px;
+    }
+    .header-wrapper-right .left-part{
+        margin-right: 0;
+    }
+    .heaader-wrapper .account-div, .heaader-wrapper .cart-div, .heaader-wrapper .heart-div{
+        padding: 0 10px;
+    }
+    .newheader{
+        height: 135px;
+    }
+  
+}
+@media only screen and (max-width : 815px) {
+    .currancy{
+        margin-left: 30px!important;
+    }
+    /* .logo-main-div{
+         padding-top: 8px;
+    } */
+    /* .sp{
+        display: none;
+    } */
+    /* .login-div2 {
+        margin-top: 32px;
+    } */
+    .user-login .Total-Item {
+        position: absolute;
+        bottom: 7px;
+        left: -12px;
+        font-size: 14px;
+    }
+    .drop-category{
+        margin-left: -13px;
+        padding-right: 10px;
+        height: 45px;
+    }
+    /* .login-div {
+        padding-left: 76px;
+    } */
+    .category i{
+        display: none!important;
+    }
+    .drop-category .category-head {
+        font-size: 12px;
+    }
+    .user-icon,.option-item .cart-btn{
+        font-size: 18px;
+    }
+    .sp,.Sp1{
+        font-size: 14px;
+    }
+    .login-div2 input[type="text"]{
+        width: auto;
+    }
+    .newheader{
+        height: 108px;
+    }
+  
+}
+@media only screen and (max-width : 775.98px){
+    .currancy {
+        margin-left: 6px!important;
+    }
+    /* login / register modal */
+	.logiRegisterHeader2{
+		padding-right: 35px!important;
+	}
+    .modal-dialog .login-register-modal{
+        width: 80%;
+        margin: 30px auto;
+    }
+    .modal-backdrop.show 
+{
+    width: 100%;
+    height: 100%;
+}	/* end modal */
+
+}
+
+
+@media only screen and (max-width : 730.98px){
+    .heaader-wrapper{
+        flex-wrap: wrap;
+        padding: 4px 0;
+    }
+    .header-wrapper-left,.header-wrapper-right{
+        width: 100%;
+        justify-content: space-between;
+    }
+    .navbar-brand img{
+        height: 30px;
+    }
+    .header-wrapper-left, .header-wrapper-right{
+        margin: 5px 0;
+    }
+    .currancy select{
+        height: 25px;
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+@media only screen and (max-width : 575.98px) {
+    /* responsive homepage */
+    
+    
+    .single-products-box .image img {
+        transition: var(--transition);
+        height: 197px;
+        width: 26%;
+        object-fit: cover;
+    }
+    /* end homepage */
+    /* .navbar-brand img{
+        margin-left: 22px!important;
+    } */
+    .newheader{
+        height: 141px;
+        padding-left: 0px;
+        margin-left: -5px;
+    }
+    .drop-category .category-head {
+        font-size: 11px;
+    }
+    /* ------pras css----------- */
+    .login-div2 input[type="text"]{
+        width: 100%;
+    }
+    .login-div{
+        padding-left: 0;
+    }
+    .login-div2{
+        margin-left: 8px!important;
+    }
+    /* .currancy{
+        padding-left: 50px!important;
+    } */
+    .col-sm-2 .login-div{
+        padding-left: 14px;
+    }
+    /* .bx-heart{
+        padding-left: 14px;
+    } */
+    .main-navbar-head{
+        margin-top: -9px;
+        width: 40%;
+    } 
+    .top-header-padding{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width : 450px) {
+ 
+    .login-div2 input[type="text"]{
+        width: 80%;
+    }
+    .login-div{
+        padding-left: 0;
+       
+    }
+    .login-div2{
+        margin-left: 10px;
+    }
+    .currancy{
+        margin-left: 11px!important;
+    }
+    .col-sm-2 .login-div{
+        padding-left: 10px;
+    }
+    /* .bx-heart{
+        padding-left: 27px;
+    }
+    */
+    .main-navbar-head{
+        margin-top: -9px;
+        margin-left: -14px!important;
+        margin-right: -1px!important;
+        width: 41%;
+    }
+    
+    /* .login-div{
+        width: 141px;
+    margin-left: 15px;
+    } */
+
+}
+
+@media only screen and (max-width : 390px){
+    .heaader-wrapper .account-div, .heaader-wrapper .cart-div, .heaader-wrapper .heart-div{
+     padding: 0 4px;
+    }
+    .navbar-brand img{
+        height: 25px;
+    }
+    .login-div2 input[type="text"], .login-div2 .search{
+        height: 20px;
+    }
+    .sp, .Sp1{
+        font-size: 12px;
+    }
+    .user-icon, .option-item .cart-btn{
+        font-size: 14px;
+    }
+    .heaader-wrapper .cart-div .login-div1,.heaader-wrapper .heart-div .heart-div-inner{
+        align-items: center;
+    }
+    .currancy select {
+        height: 22px;
+        font-size: 10px;}
+        .user-login .Total-Item {
+            position: absolute;
+            bottom: 7px;
+            left: -10px;
+            font-size: 12px;
+        }
+        .newheader{
+            height: 125px;
+        }
+        .width-adjust-of-image .width-adjust-of-image {
+            width: 100%!important;
+            
+        }
+        .table td{
+            padding: 3px!important;
+        }
+}
+
+
+
+
+@media only screen and (max-width : 380px){
+    /* login register modal */
+    .logiRegisterContentDiv {
+        margin: 0px;
+        padding: 0px;
+    }
+    .logiRegisterHeader1 {
+        padding-left: 35px;
+    }
+    .logiRegisterHeader2 {
+        padding-right: 9px!important;
+    }
+    .start-login-form{
+        margin-top: 17px!important;
+    }
+    .logiRegisterContentDiv .btn {
+        font-size: 17px;
+        padding: 14px;
+        margin-top: 0px;
+    }
+    .form-control-login{
+        height: 25px!important;
+    }
+    .start-register-form{
+        margin-top: 17px!important;
+    }
+    /* end */
+    .drop-category .category-head {
+        font-size: 10px;
+    }
+    .category{
+        width: 100px;
+    }
+    .currancy {
+        margin-left: 5px!important;
+    }
+    .dropdown .login-btn{
+        font-size: 12px!important;
+        font-weight: bold;
+    }
+}
+@media only screen and (max-width : 359.98px)
+   { 
+    .cart-div {
+        padding-left: 13px;
+    }
+    .heart-div{
+        padding-left: 10px;
+    }
+    .navbar-toggler{
+height: 30px;
+    }
+    .drop-category {
+        height: 33px;
+    }
+    .navbar-toggler-icon{
+        font-size: 14px;
+    }
+    
+    
+    .login-div{
+        width: 93px;
+    margin-left: -22px;
+  
+    }
+    .login-div2{
+        margin-top: 2px;
+        margin-left: 27px!important;
+        width: 80%;
+    }
+    .currancy{
+        margin-left: 3px;
+    }
+    .drop-category{
+        padding-left: 46px;
+    }
+    .top-header-padding .logo-main-div{
+        margin-left: -20px!important;
+    }
+    .main-navbar-head {
+        margin-top: -9px;
+    margin-left: -14px!important;
+    margin-right: 15px!important;
+    width: 41%;
+    }
+    .width-adjust-of-image .width-adjust-of-image {
+        width: 100%!important;
+        
+    }
+    .table td{
+        padding: 3px!important;
+    }
+  }
+
+@media only screen and (max-width : 320px) {
+
+  
+
+}
+
+
+
+.Browse-Category{
+    cursor: pointer;
+}
+
+
+
