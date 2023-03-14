@@ -18,6 +18,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 
 
 
@@ -25,6 +26,7 @@ let changeNavValue = 0;
 var header;
 var sticky;
 var Userdata = "";
+
 
 const errorEmail = "Please Enter a valid Email Address";
 
@@ -50,7 +52,9 @@ const Header1 = (props) => {
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
   const [usermodal, setUsermodal] = useState();
-  
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
 
   const {
     register,
@@ -106,6 +110,26 @@ const Header1 = (props) => {
       });
     });
   }, []);
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[])
+
+  const currencyHandler=(e)=>{
+    // let location = history.location
+
+    // console.log(location.pathname,'path')
+    // navigate("/home");
+    cookies.set("CurrencyType", e.target.value,{ path: '/' });
+    setCurrency(e.target.value);
+
+    let location = history.location
+    history.push(location.pathname)
+  }
+
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
@@ -884,11 +908,9 @@ const Header1 = (props) => {
                   <div className="right-part">
                     <div className=" d-flex align-items-center currancy ">
                     
-                      <select>
-                        <option>INR</option>
-                        
-
-                        <option>Dollar</option>
+                      <select onChange={(e)=>currencyHandler(e)} value={currancy}>
+                        <option value="INR">INR</option>
+                        <option value="Dollar">Dollar</option>
                       </select>
                     </div>
                   </div>

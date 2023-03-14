@@ -10,11 +10,13 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action"
 import { useDispatch } from "react-redux";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Cookies from "universal-cookie";
 
 var Userdata;
 const AllProducts = (props) => {
 
   let dispatch = useDispatch();
+
   const [AllProduct, setAllProduct] = useState([]);
   const [productLength, serProductLength] = useState();
   const [Categorydetails, setCategoryDetails] = useState({});
@@ -31,6 +33,17 @@ const AllProducts = (props) => {
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
   const history = useHistory();
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[currancy])
+
+  console.log('all products is this')
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -720,7 +733,9 @@ const AllProducts = (props) => {
                               <div className="col-6 text-start">
                                 <span className="price">
                                   {" "}
-                                  <i className="fa fa-inr"></i>{el.inrDiscount}
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                   {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
