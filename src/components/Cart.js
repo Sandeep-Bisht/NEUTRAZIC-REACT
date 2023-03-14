@@ -13,6 +13,8 @@ import { message, Popconfirm } from "antd";
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
+import Cookies from "universal-cookie";
+
 
 const stripePromise = loadStripe(
   "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
@@ -27,6 +29,17 @@ const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [cartStatus, setCartStatus] = useState();
   const [cartItems, setCartItems] = useState(undefined);
+
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[currancy])
+
   var total = 0;
   var actualtotal = 0;
   var total1 = 0;

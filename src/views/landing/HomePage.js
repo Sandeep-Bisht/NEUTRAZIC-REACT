@@ -18,10 +18,12 @@ import * as ACTIONS from "../../CommonService/AddToCart/action";
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 import Carousel from "react-elastic-carousel";
+import Cookies from "universal-cookie";
 
 import $ from "jquery";
 
 var Userdata = "";
+let currentCurrencyType="";
 var CartDataWoLogin = [];
 const HomePage = () => {
   let dispatch = useDispatch();
@@ -58,6 +60,16 @@ const HomePage = () => {
   const [blogs, setBlogs] = useState();
 
   const history = useHistory();
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
+  useEffect(()=>{
+    currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar") 
+    }
+  },[currancy])
+
 
   // useEffect(() => {
 
@@ -625,8 +637,9 @@ const HomePage = () => {
                                 <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                   <span className="price">
                                     {" "}
-                                    <i className="fa fa-inr"></i>
-                                    {el.inrDiscount}
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                   </span>
                                 </div>
                                 <div className="col-6 text-end">
@@ -848,9 +861,10 @@ const HomePage = () => {
                             <div className="row mt-2">
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
-                                  {" "}
-                                  <i className="fa fa-inr"></i>
-                                  {el.inrDiscount}
+                                {" "}
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">
@@ -1004,9 +1018,10 @@ const HomePage = () => {
                             <div className="row mt-2">
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
-                                  {" "}
-                                  <i className="fa fa-inr"></i>
-                                  {el.inrDiscount}
+                                {" "}
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">

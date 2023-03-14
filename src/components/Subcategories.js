@@ -17,6 +17,7 @@ import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import { BsWindowSidebar } from "react-icons/bs";
 import { set } from "dotenv-save";
+import Cookies from "universal-cookie";
 var Userdata = "";
 let tranding = 0;
 const Subcategories = (props) => {
@@ -40,6 +41,17 @@ const Subcategories = (props) => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+
+  const [currancy,setCurrency]=useState("INR");
+  const cookies = new Cookies();
+
+  useEffect(()=>{
+    let currentCurrencyType = cookies.get("CurrencyType")
+    if(currentCurrencyType == "Dollar"){
+      setCurrency("Dollar")
+    }
+  },[currancy])
+
   var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
   useEffect(() => {
@@ -593,8 +605,9 @@ const Subcategories = (props) => {
                                     <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
                                       <span className="price">
                                         {" "}
-                                        <i className="fa fa-inr"></i>
-                                        {item.inrDiscount}
+                                        {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? item.dollerDiscount : item.inrDiscount}
                                       </span>
                                     </div>
                                     <div className="col-6 text-end ">
@@ -704,8 +717,9 @@ const Subcategories = (props) => {
                                     <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
                                       <span className="price">
                                         {" "}
-                                        <i className="fa fa-inr"></i>
-                                        {item.inrDiscount}
+                                        {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  
+                                  {currancy == "Dollar" ? item.dollerDiscount : item.inrDiscount}
                                       </span>
                                     </div>
                                     <div className="col-6 text-end ">
