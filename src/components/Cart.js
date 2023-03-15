@@ -243,12 +243,19 @@ const Cart = () => {
                       </thead>
                       <tbody>
                         {cart.map((el, ind1) => {
-                          total = el.singleprice * el.quantity;
-                          total1 = total1 + el.singleprice * el.quantity;
-                          localStorage.setItem("ActualSubtotal", total1);
-                          actualtotal += el.mrp * el.quantity;
-                          localStorage.setItem("Subtotal", actualtotal);
-
+                           if (currancy === "Dollar") {
+                            total = el.dollerDiscount * el.quantity;
+                            total1 = total1 + el.dollerDiscount * el.quantity;
+                            localStorage.setItem("ActualSubtotal", total1);
+                            actualtotal += el.dollerMrp * el.quantity;
+                            localStorage.setItem("Subtotal", actualtotal);
+                          } else {
+                            total = el.singleprice * el.quantity;
+                            total1 = total1 + el.singleprice * el.quantity;
+                            localStorage.setItem("ActualSubtotal", total1);
+                            actualtotal += el.mrp * el.quantity;
+                            localStorage.setItem("Subtotal", actualtotal);
+                          }
                           return (
                             <tr key={ind1} className="cart-data">
                               <td className="product-thumbnail">
@@ -269,11 +276,12 @@ const Cart = () => {
                               </td>
                               <td className="product-price">
                                 <div className="amount">
-                                  <span className="unit-amount fa fa-inr">
-                                    <del>{el.mrp}</del>
-                                  </span>
-                                  <span className="unit-amount fa fa-inr">
-                                    {el.singleprice}
+                                  <span className="unit-amount">
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                    <del>{currancy == "Dollar" ? el.dollerMrp : el.inrMrp}</del>
+                                    </span>
+                                    <span>
+                                    {currancy == "Dollar" ? el.dollerDiscount : el.singleprice}
                                   </span>
                                 </div>
                               </td>
@@ -311,8 +319,9 @@ const Cart = () => {
                               </td>
                               <td className="product-subtotal">
                                 <div className="amount">
-                                  <span className="subtotal-amount mt-4 fa fa-inr">
-                                    {el.singleprice * el.quantity}
+                                  <span className="subtotal-amount mt-4">
+                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                    {(currancy==="Dollar" ? el.dollerDiscount : el.singleprice) * el.quantity}
                                   </span>
                                 </div>
                               </td>
@@ -352,14 +361,14 @@ const Cart = () => {
                   <h3>Order Summary</h3>
                   <ul>
                     <li>
-                      Sub Total <span>₹{actualtotal}</span>
+                      Sub Total <span>{currancy==="Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}{actualtotal}</span>
                     </li>
                     <li>
-                      Discount <span>-₹{actualtotal - total1}</span>
+                      Discount <span>-{currancy==="Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}{actualtotal - total1}</span>
                     </li>
 
                     <li>
-                      Payable Amount <span>₹{total1}</span>
+                      Payable Amount <span>{currancy==="Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}{total1}</span>
                     </li>
                   </ul>
                   {cartItems ? (
