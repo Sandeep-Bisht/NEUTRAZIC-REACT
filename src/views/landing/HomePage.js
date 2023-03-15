@@ -23,7 +23,7 @@ import Cookies from "universal-cookie";
 import $ from "jquery";
 
 var Userdata = "";
-let currentCurrencyType="";
+let currentCurrencyType = "";
 var CartDataWoLogin = [];
 const HomePage = () => {
   let dispatch = useDispatch();
@@ -60,15 +60,18 @@ const HomePage = () => {
   const [blogs, setBlogs] = useState();
 
   const history = useHistory();
-  const [currancy,setCurrency]=useState("INR");
+  const [currancy, setCurrency] = useState("INR");
+
   const cookies = new Cookies();
 
-  useEffect(()=>{
+  useEffect(() => {
     currentCurrencyType = cookies.get("CurrencyType")
-    if(currentCurrencyType == "Dollar"){
-      setCurrency("Dollar") 
+    if (currentCurrencyType == "Dollar") {
+      setCurrency("Dollar")
+
     }
-  },[currancy])
+  }, [currancy])
+
 
 
   // useEffect(() => {
@@ -94,16 +97,16 @@ const HomePage = () => {
     GetWishlist();
     GetCategory();
     GetManufacturer();
-    $(document).ready(function() {
+    $(document).ready(function () {
       //    $('.icon-wishlist').on('click', function(){
       //       $(this).toggleClass('in-wishlist');
 
       // })
 
-      $(".frontimage").mouseover(function() {
+      $(".frontimage").mouseover(function () {
         alert("in");
       });
-      $(".frontimage").mouseleave(function() {
+      $(".frontimage").mouseleave(function () {
         alert("in");
       });
     });
@@ -235,6 +238,8 @@ const HomePage = () => {
     quantity,
     mrp,
     singleprice,
+    dollerMrp,
+    dollerDiscount,
     discount,
     description,
     category,
@@ -251,6 +256,8 @@ const HomePage = () => {
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         discountprice: discount,
+        dollerMrp: dollerMrp,
+        dollerDiscount: dollerDiscount,
         description: description,
         category: category,
         manufacturer: manufacturer,
@@ -637,9 +644,9 @@ const HomePage = () => {
                                 <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                   <span className="price">
                                     {" "}
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
+                                    {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+
+                                    {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                   </span>
                                 </div>
                                 <div className="col-6 text-end">
@@ -691,6 +698,8 @@ const HomePage = () => {
                                     quantity,
                                     el.inrMrp,
                                     el.inrDiscount,
+                                    el.dollerMrp,
+                                    el.dollerDiscount,
                                     el.discount,
                                     el.description,
                                     el.category,
@@ -756,7 +765,7 @@ const HomePage = () => {
                 // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
+              // itemPadding={[0, 4]}
               >
                 {categories &&
                   categories.length > 0 &&
@@ -861,9 +870,9 @@ const HomePage = () => {
                             <div className="row mt-2">
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
-                                {" "}
+                                  {" "}
                                   {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
+
                                   {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
@@ -914,6 +923,8 @@ const HomePage = () => {
                                         quantity,
                                         el.inrMrp,
                                         el.inrDiscount,
+                                        el.dollerMrp,
+                                        el.dollerDiscount,
                                         el.discount,
                                         el.description,
                                         el.category,
@@ -1018,9 +1029,9 @@ const HomePage = () => {
                             <div className="row mt-2">
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
-                                {" "}
+                                  {" "}
                                   {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
+
                                   {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
@@ -1072,6 +1083,8 @@ const HomePage = () => {
                                         quantity,
                                         el.inrMrp,
                                         el.inrDiscount,
+                                        el.dollerMrp,
+                                        el.dollerDiscount,
                                         el.discount,
                                         el.description,
                                         el.category,
@@ -1099,149 +1112,13 @@ const HomePage = () => {
                                     Add to Cart
                                   </button>
                                 )}
-                                </div>
+                              </div>
                             </div>
                           </div>
                         </figure>
                       );
                     }
                   })}
-
-                {/* {data.map((el, i) => {
-                if (i > 0 && el.category.name === "Weight Management" && weightManagement < 6) {
-                  weightManagement = weightManagement + 1;
-                  return (
-                    <div className="col-lg-2 col-md-12 col-sm-12" key={i}>
-                      <div className="single-products-box border">
-                        <div className="row">
-                          <div className="col-md-12">
-                            <div className="product-div">
-                              <div className="product-image-div">
-                                <Link
-                                  to={"/SingleProduct/" + el._id}
-                                  className="product-image-link"
-                                >
-                                  
-                                  <div className="image hover-switch">
-                                    <img
-                                      src={el.otherImage &&
-                                        el.otherImage.length > 0 ? `${baseUrl}/` + el.otherImage[0].path : require("../../Images/products/Hintosulin (1).png")}
-                                      alt=""
-                                    />
-                                    <img
-                                      src={
-                                        `${baseUrl}/` +
-                                        el.image[0].path
-                                      }
-                                      alt=""
-                                      style={{ position: "absolute", left: "0" }}
-                                    />
-                                  </div>
-                                </Link>
-                              </div>
-                              <div className="tranding product-image-content">
-                                <div className="content product-content">
-                                  <Link to={"/SingleProduct/" + el._id}>
-                                    <ReadMoreReact text={el.name} />
-                                  </Link>
-                                  <div className="price-div">
-                                    <i className="fa fa-inr"></i>
-                                    <span className="new-price">{el.inrDiscount}</span>
-                                    <del className="new-price ml-1">{el.inrMrp}</del>
-                                    {Userdata ? (
-                                        <i
-                                          className={`bx bxs-heart ml-3  ${checkWishlistItem(el._id)}`}
-                                          id={el._id}
-                                          onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
-                                          }}
-                                        ></i>
-                                      ) : (
-                                      <>
-                                        <i
-                                          className="bx bxs-heart ml-3 pc-heart"
-                                          data-bs-toggle="modal"
-                                          data-bs-target={
-                                            Userdata == null
-                                              ? "#exampleModal"
-                                              : null
-                                          }
-                                        ></i>
-                                        <Link to="/Register">
-                                          <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                        </Link>
-                                      </>
-                                    )}
-
-                                    
-                                    {Userdata ? (
-                                      <i
-                                        className="bx bx-cart"
-                                        onClick={() => {
-                                          {
-                                            Userdata !== null
-                                              ? cartfunction(
-                                                  el._id,
-                                                  el.name,
-                                                  quantity,
-                                                  el.inrMrp,
-                                                  el.inrDiscount,
-                                                  el.discount,
-                                                  el.description,
-                                                  el.category,
-                                                  el.manufacturer.name,
-                                                  el.image[0].path
-                                                )
-                                              : addToCartWithoutRegistration(
-                                                  el._id,
-                                                  el.name,
-                                                  quantity,
-                                                  el.inrMrp,
-                                                  el.inrDiscount,
-                                                  el.discount,
-                                                  el.description,
-                                                  el.category,
-                                                  el.manufacturer.name,
-                                                  el.image[0].path
-                                                );
-                                          }
-                                        }}
-                                      ></i>
-                                    ) : (
-                                      <i
-                                        className="bx bx-cart mr-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target={
-                                          Userdata == null
-                                            ? "#exampleModal"
-                                            : null
-                                        }
-                                      >
-                                        <Link to="/Register"></Link>
-                                      </i>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  );
-                }
-              })} */}
               </div>
               {/* hover Button */}
               <div className="wrapperbtn pt-3 pb-4">
@@ -1265,52 +1142,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* <div className="blog-section">
-          <div className="container m-auto">
-            <div className="row mt-0">
-              <div className="col-12">
-                <div className="trendign-head">
-                  <span className="products-color">Blogs</span>
-                </div>
-              </div>
-            </div>
-            <div className="row image-group">
-              <Carousel
-                // breakPoints={breakPoints}
-                disableAutoPlay
-                autoPlaySpeed={1500}
-                itemsToShow={5}
-                onPrevStart={onPrevStart}
-                onNextStart={onNextStart}
-                // onChange={Loop}
-                ref={carouselRef}
-                disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
-              >
-                {blogs &&
-                  blogs.length > 0 &&
-                  blogs.map((el, index) => (
-                    <>
-                      <div className="col" key={index}>
-                        <Link to={"/SingleBlogPage/" + el.slug}>
-                          <img
-                            className="img-slides"
-                            src={
-                              el.featuredImage && el.featuredImage.length > 0
-                                ? `${baseUrl}/` + el.featuredImage[0].path
-                                : ""
-                            }
-                          />
-                          <p>{el.title}</p>
-                        </Link>
-                      </div>
-                    </>
-                  ))}
-              </Carousel>
-            </div>
-          </div>
-        </div> */}
-
         <div className="brands-area">
           <div className="container m-auto">
             <div className="trendign-head">
@@ -1327,7 +1158,7 @@ const HomePage = () => {
                 // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
+              // itemPadding={[0, 4]}
               >
                 {Manufactureres &&
                   Manufactureres.length > 0 &&
@@ -1407,43 +1238,7 @@ const HomePage = () => {
                 <h1 className="trendign-head">
                   <span className="products-color">Our Blogs</span>
                 </h1>
-                {/* <div className="blog-box-wrapper">
-                <div className="row">
-                  <div className="col-lg-7 col-md-12">
-                    {blogs && blogs.map((item,ind)=>{
-                      if(ind<1)
-                      return(
-                    <div className="left-blog-image-wrap">
-                      <img src={item.featuredImage && `${baseUrl}/`+ item.featuredImage[0].path} alt="" className="" />
-                      <div className="top-heading-box-1">
-                        <Link to = {"/SingleBlogPage/" + item.slug}>
-                        <button>Read More</button>
-                        </Link>
-                        <p>{item.description}</p>
-                      </div>
-                    </div>
-                    )})}
-                  </div>
-                  <div className="col-lg-5 col-md-12 right-image-blog">
-                      {blogs && blogs.map((item,ind)=>{
-                        if(ind<2)
-                        return (
-                          <div className="right-blog-image-wrapper">
-                      <div className="right-blog-image-wrap" key={ind}>
-                        <img src={item.featuredImage && `${baseUrl}/` + item.featuredImage[0].path} alt="" className="" />
-                        <div className="top-heading-box-2">
-                        <Link to = {"/SingleBlogPage/" + item.slug}>
-                          <button>Read More</button>
-                          </Link>
-                          <p>{item.description}</p>
-                        </div>
-                      </div>
-                      </div>
-                 
-                      )})}
-                     </div>
-                </div>
-              </div> */}
+              
               </div>
               <div className="blog-page-section-2">
                 <div className="row">
@@ -1456,7 +1251,7 @@ const HomePage = () => {
                               return (
                                 <div className="col-lg-3 col-md-6">
                                   <Link
-                                    
+
                                     to={"/SingleBlogPage/" + item.slug}
                                   >
                                     <div className="card">
@@ -1464,7 +1259,7 @@ const HomePage = () => {
                                         src={
                                           item.featuredImage &&
                                           `${baseUrl}/` +
-                                            item.featuredImage[0].path
+                                          item.featuredImage[0].path
                                         }
                                         className="card-img-homepage"
                                         alt="blog-image"

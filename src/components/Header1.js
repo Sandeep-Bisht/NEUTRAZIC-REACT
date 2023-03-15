@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
@@ -53,8 +53,10 @@ const Header1 = (props) => {
   const [cartItems, setCartItems] = useState("");
   const [usermodal, setUsermodal] = useState();
   const [currancy,setCurrency]=useState("INR");
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
   const cookies = new Cookies();
-
+  const location=useLocation();
 
   const {
     register,
@@ -84,6 +86,8 @@ const Header1 = (props) => {
     mode: "onBlur"
   });
 
+ 
+
   const CategoryDataHandler = () => {
     dispatch(ACTIONS.getCategories([]));
   };
@@ -104,20 +108,6 @@ const Header1 = (props) => {
       window.onscroll = function () {
         headerFunction();
       };
-      // $('.collapse-btn').click(function(){
-      //     $('.insideNav').toggleClass('inactive');
-      //     if(changeNavValue==0){
-      //                 changeNavValue=1
-      //                 $('.insideNav').slideUp(500);
-      //                 $('.content').removeClass('col-sm-10');
-      //                 $('.content').addClass('col-12');
-      //               }else{
-      //                 changeNavValue=0
-      //                 $('.insideNav').slideDown(500);
-      //                 $('.content').removeClass('col-12');
-      //                 $('.content').addClass('col-sm-10');
-      //               }
-      //   });
       $(".arrow").click(function () {
         $(".sublist").slideUp();
       });
@@ -127,9 +117,20 @@ const Header1 = (props) => {
   useEffect(()=>{
     let currentCurrencyType = cookies.get("CurrencyType")
     if(currentCurrencyType == "Dollar"){
-      setCurrency("Dollar")
-    }
+      setCurrency("Dollar");
+     } 
   },[])
+  useEffect(() => {
+    if (shouldRefresh) {
+      console.log("helo refresh");
+      // history.push(location.pathname);
+      // history.go(location.pathname)
+      // history.replace(location.pathname);
+      setShouldRefresh(false);
+      
+    }
+    
+  }, [shouldRefresh]);
 
   const currencyHandler=(e)=>{
     // let location = history.location
@@ -138,9 +139,10 @@ const Header1 = (props) => {
     // navigate("/home");
     cookies.set("CurrencyType", e.target.value,{ path: '/' });
     setCurrency(e.target.value);
-
-    let location = history.location
-    history.push(location.pathname)
+    setShouldRefresh(true);
+    // let location = history.location
+    // console.log(location,"locationonononononon");
+      
   }
 
 
@@ -953,7 +955,7 @@ const Header1 = (props) => {
                     </div>
                   </div>
                   <div className="right-part">
-                    <div className=" d-flex align-items-center currancy ">
+                    <div className="d-flex align-items-center currancy">
                     
                       <select onChange={(e)=>currencyHandler(e)} value={currancy}>
                         <option value="INR">INR</option>
