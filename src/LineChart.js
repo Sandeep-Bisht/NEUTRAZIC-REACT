@@ -5,21 +5,24 @@ import { Line } from '@ant-design/charts';
 const LineChart =() => {
 
     const data = [
-        { year: '1991', value: 3 },
-        { year: '1992', value: 4 },
-        { year: '1993', value: 3.5 },
-        { year: '1994', value: 5 },
-        { year: '1995', value: 4.9 },
-        { year: '1996', value: 6 },
-        { year: '1997', value: 7 },
-        { year: '1998', value: 9 },
-        { year: '1999', value: 13 },
+        { Month: 'January', value: 3 },
+        { Month: 'February', value: 4 },
+        { Month: 'March', value: 3.5 },
+        { Month: 'April', value: 5 },
+        { Month: 'May', value: 4.9 },
+        { Month: 'June', value: 6 },
+        { Month: 'July', value: 7 },
+        { Month: 'August', value: 9 },
+        { Month: 'September', value: 13 },
+        { Month: 'October', value: 6 },
+        { Month: 'November', value: 10 },
+        { Month: 'December', value: 12 },
       ];
     
       const config = {
         data,
         height: 400,
-        xField: 'year',
+        xField: 'Month',
         yField: 'value',
         point: {
           size: 5,

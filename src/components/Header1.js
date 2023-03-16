@@ -124,7 +124,7 @@ const Header1 = (props) => {
     if (shouldRefresh) {
       console.log("helo refresh");
       // history.push(location.pathname);
-      // history.go(location.pathname)
+      history.go(location.pathname)
       // history.replace(location.pathname);
       setShouldRefresh(false);
       
@@ -179,16 +179,36 @@ const Header1 = (props) => {
           role: "user",
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 200 || res.status === 201) {
+            return res.json();
+          } else 
+            // throw new Error(res.status);
+            if(res.status === 400) {
+              console.log("data is already exits");
+            }
+          
+        })
         .then((data) => {
-          toast.success("Registered Successfully", {
-            position: "bottom-right",
-            autoClose: 2000,
-          });
-          window.location.reload();
+          if(data)
+          {
+            toast.success("Registered Successfully", {
+              position: "bottom-right",
+              autoClose: 2000,
+            });
+          }
+          else{
+            setMsg("Username is already exits")
+          }
+          // window.location.reload();
+        })
+        .catch((error) => {
+          console.log(`Error: ${error}`);
+          // handle error here
         });
     }
   };
+  
   const LoginUser = (data) => {
     if (data.username && data.password) {
       console.log(data, "insid elogin user");
@@ -514,15 +534,24 @@ const Header1 = (props) => {
                                   Username<span>*</span>
                                 </label>
                                 <input
-                                  type="text"                                  
+                                  type="text"                                 
                                   className="form-control form-control-login"
                                   {...register("username", {
-                                    required: true,                                  
+                                    required: true,  
+                                    pattern:/^[^\s]+$/,                              
                                   })}
+                                  onChange={(event) =>
+                                    event.target.value = event.target.value.toLowerCase()
+                                  }
                                 />
                                 {errors?.username?.type === "required" && (
                                   <p className="text-danger">
                                     This field is required
+                                  </p>
+                                )}
+                                {errors?.username?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Username does not contain space
                                   </p>
                                 )}
 
@@ -633,7 +662,7 @@ const Header1 = (props) => {
                               </div>
                             </div>
                           </div>
-
+                          <h5 className="Login-fail-msg">{msg}</h5>
                           <div className="form-group ">
                             <button
                               className="btn btn-success btn-lg"
