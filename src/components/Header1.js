@@ -129,7 +129,8 @@ const Header1 = (props) => {
     if(currentCurrencyType == "Dollar"){
       setCurrency("Dollar")
     }
-  },[])
+    
+  },[currancy])
 
   const currencyHandler=(e)=>{
     // let location = history.location
@@ -138,9 +139,7 @@ const Header1 = (props) => {
     // navigate("/home");
     cookies.set("CurrencyType", e.target.value,{ path: '/' });
     setCurrency(e.target.value);
-
-    let location = history.location
-    history.push(location.pathname)
+    history.push("/");
   }
 
 

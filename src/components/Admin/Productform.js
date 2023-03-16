@@ -751,6 +751,9 @@ const Productform = (props) => {
                                     <button
                                       className="btn btn-primary submit"
                                       type="submit"
+                                      onClick={(e) =>
+                                        submitData(e)
+                                      }
                                     >
                                       Submit
                                     </button>
