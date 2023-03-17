@@ -203,7 +203,7 @@ const Cart = () => {
       .then(async (res) => {})
       .catch((err) => {});
   };
-
+  console.log(cart,"THis is cart");
   return (
     <>
       <Header1 CartItems={cart} />
@@ -278,7 +278,7 @@ const Cart = () => {
                                 <div className="amount">
                                   <span className="unit-amount">
                                   {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                    <del>{currancy == "Dollar" ? el.dollerMrp : el.inrMrp}</del>
+                                    <del>{currancy == "Dollar" ? el.dollerMrp : el.mrp}</del>
                                     </span>
                                     <span>
                                     {currancy == "Dollar" ? el.dollerDiscount : el.singleprice}
