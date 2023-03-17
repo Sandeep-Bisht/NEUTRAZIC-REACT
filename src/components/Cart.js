@@ -271,7 +271,7 @@ const Cart = () => {
                               </td>
                               <td className="product-name">
                                 <Link to={"/SingleProduct/" + el.productid}>
-                                  <div className="text-start cart-text">{el.name}</div>
+                                  <div className="cart-text">{el.name}</div>
                                 </Link>
                               </td>
                               <td className="product-price">

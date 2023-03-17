@@ -416,9 +416,8 @@ const Productform = (props) => {
                                     Setdata({ ...data, name: e.target.value });
                                   }}
                                 />
-                                <label for="floatingform" >Product Name</label>
                                 <p className="formerror">{formErrors.name}</p>
-                                
+                                <label for="floatingform" >Product Name</label>
                               </div>
                               <div className="col-6 p-1">
                                 <input
@@ -752,9 +751,7 @@ const Productform = (props) => {
                                     <button
                                       className="btn btn-primary submit"
                                       type="submit"
-                                      onClick={(e) =>
-                                        submitData(e)
-                                      }
+                                      onClick={(e)=>submitData(e)}
                                     >
                                       Submit
                                     </button>
