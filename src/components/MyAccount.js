@@ -18,11 +18,17 @@ const MyAccount = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors },   
+  } = useForm(
+    {
+      mode:"onBlur"
+    },
+   
+  );
   const onsubmit = (data) => {
     
   };
+ 
   
   return (
     <>
@@ -49,7 +55,7 @@ const MyAccount = () => {
                         name="name"
                         {...register("name", { required: true, maxLength: 20 })}
                       />
-                      {/* {errors?.name?.type === "required" && <p className="text-danger">Name is Required</p>} */}
+                      {/* {errors?.name?.type === "required" && <p className="text-danger">This field is required</p>} */}
                     </div>
 
                     <div className="col-md-6 col-12 p-1">
@@ -61,7 +67,7 @@ const MyAccount = () => {
                         rows="3"
                         {...register("address", { required: true })}
                       />
-                      {/* {errors?.address?.type === "required" && <p className="text-danger">Address is Required</p>} */}
+                      {errors?.address?.type === "required" && <p className="text-danger">This field is required</p>}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Pincode:</p>
@@ -69,9 +75,16 @@ const MyAccount = () => {
                         type="number"
                         className="form-control bg-light"
                         name="pincode"
+                        onInput={(e)=>{
+                          if(e.target.value>e.target.maxLength)
+                          {
+                            e.target.value=e.target.value.slice(0,e.target.maxLength)
+                          }
+                        }}
+                        maxLength={6}
                         {...register("pincode", { required: true })}
                       />
-                      {/* {errors?.pincode?.type === "required" && <p className="text-danger">Pincode is Required</p>} */}
+                      {errors?.pincode?.type === "required" && <p className="text-danger">This field is required</p>}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Mobile Number:</p>
@@ -81,11 +94,16 @@ const MyAccount = () => {
                         className="form-control bg-light"
                         rows="3"
                         name="mobileNumber"
-                        {...register("mobileNumber", { required: true })}
+                      //   maxLength={10}
+                      //   onInput={(e)=>{
+                      //   if(e.target.value.length>e.target.maxLength)
+                      // {
+                      //     e.target.value=e.target.value.slice(0,e.target.maxLength)
+                      // }}}
+                      //   {...register("mobileNumber", { required: true })}
                       />
-                      {/* {errors?.mobileNumber?.type === "required" && <p className="text-danger">Mobile Number is Required</p>} */}
-                      {/* {errors?.mobileNumber?.type === "maxLength" && (<p className="text-danger">Please Enter a Valid Mobile Number</p>)}
-                      {errors?.mobileNumber?.type === "minLength" && (<p className="text-danger">Please Enter a Valid Mobile Number 23</p>)} */}
+                      {/* {errors?.mobileNumber?.type === "required" && <p className="text-danger">This field is required</p>} */}
+                      
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps1">Email:</p>
@@ -95,35 +113,40 @@ const MyAccount = () => {
                         value={data.email}
                         rows="3"
                         name="email"
-                        {...register("email", {
-                          required: true,
-                          pattern: /^\S+@\S+$/i,
-                        })}
+                        // {...register("email", {
+                        //   required: true,
+                        //   pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                        // })}
                       />
                       {/* {errors?.email?.type === "required" && (
-                        <p className="text-danger">Email is Reuired</p>
-                      )} */}
-                      {/* {errors?.email?.type === "pattern" && (
+                        <p className="text-danger">This field is required</p>
+                      )}
+                      {errors?.email?.type === "pattern" && (
                         <p className="text-danger">
-                          Please include an '@' in the Email Address
+                          Please enter the valid Email
                         </p>
                       )} */}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Alternative Number</p>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control bg-light"
                         rows="3"
                         name="alternativeNumber"
+                        onInput={(e)=>{
+                          if(e.target.value>e.target.maxLength)
+                          {
+                            e.target.value=e.target.value.slice(0,e.target.maxLength);
+                          }
+                        }}
+                        maxLength={10}
                         {...register("alternativeNumber", { required: true })}
                       />
-                      {/* {errors?.alternativeNumber?.type === "required" && (
-                        <p className="text-danger">Mobile Number is Required</p>
-                      )} */}
-                      {/* {errors?.alternativeNumber?.type === "maxLength" && (<p className="text-danger">Please Enter a Valid Mobile Number</p>)}
-                      {errors?.alternativeNumber?.type === "minLength" && (<p className="text-danger">Please Enter a Valid Mobile Number 23</p>)} */}
-                    </div>
+                      {errors?.alternativeNumber?.type === "required" && (
+                        <p className="text-danger">This field is required</p>
+                      )}
+                      </div>
 
                     <div className="col-12 d-flex justify-content-center mt-4 p-2">
                       <button

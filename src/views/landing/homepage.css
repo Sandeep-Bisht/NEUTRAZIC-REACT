@@ -13480,7 +13480,7 @@ textarea.form-control {
   top: 5px;
 }
 .product-price .amount {
-  height: 60px;
+  /* height: 60px; */
   width: 100%;
   color: #000;
   opacity: 0.7;
@@ -13492,11 +13492,11 @@ textarea.form-control {
   position: relative;
   top: 5px;
   font-size: 21px;
-  padding-left: 10px;
+  padding-left: 0px;
   padding-right: 10px;
 }
 .product-subtotal .amount {
-  height: 60px;
+  /* height: 60px; */
   width: 100%;
   color: #000;
   opacity: 0.7;

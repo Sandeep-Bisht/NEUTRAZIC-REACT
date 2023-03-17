@@ -5,7 +5,7 @@
 /* Cart Responsive Media Queries*/
 @media only screen and (max-width: 1399px) {
   .cart-totals {
-    margin: none;
+    margin-left: 42px;
   }
   .cart-table table tbody tr td.product-thumbnail a img {
     height: 120px;
@@ -14,7 +14,7 @@
 }
 @media only screen and (max-width: 1024px) {
   .cart-totals {
-    margin-left: 24px;
+    
   }
   .cart-table table tbody tr td.product-thumbnail a img {
     height: 120px;
@@ -99,8 +99,18 @@
   .cart-table table thead tr th {
     font-size: 13px;
   }
+  .product-price .amount span {
+    font-size: 18px;
+    padding-left: 9px;
+    padding-right: 2px;
+}
+.product-quantity .amount {
+  width: 70px;
+  margin-left: 10px;
+}
   .cart-text {
     font-size: 14px;
+    width: 70px;
   }
   .product-price .amount span {
     font-size: 13px;
@@ -121,6 +131,7 @@
   .cart-area {
     margin-top: 120px !important;
   }
+  
   .cart-buttons .cart-header {
     font-size: 26px!important;
   }
@@ -131,17 +142,25 @@
     font-size: 13px;
   }
   .cart-text {
-    font-size: 14px;
+    font-size: 11px;
   }
   .product-price .amount span {
     font-size: 13px;
+    padding-left: 0px!important;
+    padding-right: 8px;
   }
   .product-subtotal .amount span {
-    font-size: 16px;
+    padding-left: 0px!important;
+    padding-right: 0px!important;
   }
   .product-price .amount {
     white-space: normal;
-    font-size: 16px;
+    font-size: 11px;
+    width: 83px!important;
+  }
+  .cart-table table tbody tr td.product-quantity .input-counter input
+  {
+    font-size: 14px!important;
   }
   .cart-table table tbody tr td {
     white-space: normal;

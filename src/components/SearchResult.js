@@ -593,7 +593,7 @@ const SearchResult = (props) => {
                                       Wishlist
                                     </p>
                                   </div>
-                                  <hr/>
+                                 
                                 </div>
                               </div>
                               {Userdata ? (

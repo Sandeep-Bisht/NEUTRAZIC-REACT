@@ -1,0 +1,31 @@
+.Support-page-section {
+  margin-top: 150px;
+}
+.left-side-supportpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 370px;
+}
+.left-side-supportpage .left-Heading {
+  width: 80%;
+}
+.left-side-supportpage .left-Heading h1{
+    color: #1e144f;
+    font-size: 3rem;
+    font-family: "Roboto", sans-serif;
+}
+.left-side-supportpage .left-Heading .support-left-text p{
+  font-family: "Roboto", sans-serif;
+}
+.right-side-supportpage .support-page-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 370px;
+}
+.right-side-supportpage .support-page-image .support-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -194,7 +194,7 @@
   }
   .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
   .top-heading-box-3 p {
-    font-size: 0.9rem;
+    font-size:13px!important;
   }
   .blog-page {
     margin-top: 129px;

@@ -104,7 +104,7 @@ const SingleBlog = (props) => {
                     <div className="row">
                       <div className="col-md-12">
                         <img
-                          className="single-blog-image"
+                          className="single-blog-image1"
                           src={
                             item.featuredImage &&
                             `${baseUrl}/` + item.featuredImage[0].path

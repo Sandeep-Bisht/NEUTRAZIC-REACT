@@ -198,7 +198,7 @@ const Header1 = (props) => {
             });
           }
           else{
-            setMsg("Username is already exits")
+            setRegMsg("Username is already exits");
           }
           // window.location.reload();
         })
@@ -652,6 +652,14 @@ const Header1 = (props) => {
                                   {...register("phonenumber", {
                                     required: true,
                                   })}
+                                  onInput={(e) => {
+                                    if (e.target.value.length > e.target.maxLength)
+                                      e.target.value = e.target.value.slice(
+                                        0,
+                                        e.target.maxLength
+                                      );
+                                  }}
+                                  maxlength={10}
                                 />
                                 {errors?.phonenumber?.type === "required" && (
                                   <p className="text-danger">
@@ -662,7 +670,7 @@ const Header1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <h5 className="Login-fail-msg">{msg}</h5>
+                          <h5 className="Login-fail-msg">{regmsg}</h5>
                           <div className="form-group ">
                             <button
                               className="btn btn-success btn-lg"
@@ -749,7 +757,7 @@ const Header1 = (props) => {
                                 required
                               />
                             </div> */}
-                            <h5 className="Login-fail-msg">{msg}</h5>
+                            <h5 className="Login-fail-msg">{}</h5>
                             <div className="form-group col-lg-12 justify-content-center">
                               <button
                                 className="btn btn-success btn-lg"
