@@ -652,6 +652,14 @@ const Header1 = (props) => {
                                   {...register("phonenumber", {
                                     required: true,
                                   })}
+                                  onInput={(e) => {
+                                    if (e.target.value.length > e.target.maxLength)
+                                      e.target.value = e.target.value.slice(
+                                        0,
+                                        e.target.maxLength
+                                      );
+                                  }}
+                                  maxlength={10}
                                 />
                                 {errors?.phonenumber?.type === "required" && (
                                   <p className="text-danger">
