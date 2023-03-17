@@ -5,7 +5,7 @@
 /* Cart Responsive Media Queries*/
 @media only screen and (max-width: 1399px) {
   .cart-totals {
-    margin: none;
+    margin-left: 42px;
   }
   .cart-table table tbody tr td.product-thumbnail a img {
     height: 120px;
@@ -14,7 +14,7 @@
 }
 @media only screen and (max-width: 1024px) {
   .cart-totals {
-    margin-left: 24px;
+    
   }
   .cart-table table tbody tr td.product-thumbnail a img {
     height: 120px;

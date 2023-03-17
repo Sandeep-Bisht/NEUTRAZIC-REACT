@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
@@ -53,8 +53,10 @@ const Header1 = (props) => {
   const [cartItems, setCartItems] = useState("");
   const [usermodal, setUsermodal] = useState();
   const [currancy,setCurrency]=useState("INR");
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
   const cookies = new Cookies();
-
+  const location=useLocation();
 
   const {
     register,
@@ -84,6 +86,8 @@ const Header1 = (props) => {
     mode: "onBlur"
   });
 
+ 
+
   const CategoryDataHandler = () => {
     dispatch(ACTIONS.getCategories([]));
   };
@@ -104,20 +108,6 @@ const Header1 = (props) => {
       window.onscroll = function () {
         headerFunction();
       };
-      // $('.collapse-btn').click(function(){
-      //     $('.insideNav').toggleClass('inactive');
-      //     if(changeNavValue==0){
-      //                 changeNavValue=1
-      //                 $('.insideNav').slideUp(500);
-      //                 $('.content').removeClass('col-sm-10');
-      //                 $('.content').addClass('col-12');
-      //               }else{
-      //                 changeNavValue=0
-      //                 $('.insideNav').slideDown(500);
-      //                 $('.content').removeClass('col-12');
-      //                 $('.content').addClass('col-sm-10');
-      //               }
-      //   });
       $(".arrow").click(function () {
         $(".sublist").slideUp();
       });
@@ -127,10 +117,20 @@ const Header1 = (props) => {
   useEffect(()=>{
     let currentCurrencyType = cookies.get("CurrencyType")
     if(currentCurrencyType == "Dollar"){
-      setCurrency("Dollar")
+      setCurrency("Dollar");
+     } 
+  },[])
+  useEffect(() => {
+    if (shouldRefresh) {
+      console.log("helo refresh");
+      // history.push(location.pathname);
+      history.go(location.pathname)
+      // history.replace(location.pathname);
+      setShouldRefresh(false);
+      
     }
     
-  },[currancy])
+  }, [shouldRefresh]);
 
   const currencyHandler=(e)=>{
     // let location = history.location
@@ -139,7 +139,10 @@ const Header1 = (props) => {
     // navigate("/home");
     cookies.set("CurrencyType", e.target.value,{ path: '/' });
     setCurrency(e.target.value);
-    history.push("/");
+    setShouldRefresh(true);
+    // let location = history.location
+    // console.log(location,"locationonononononon");
+      
   }
 
 
@@ -176,16 +179,36 @@ const Header1 = (props) => {
           role: "user",
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 200 || res.status === 201) {
+            return res.json();
+          } else 
+            // throw new Error(res.status);
+            if(res.status === 400) {
+              console.log("data is already exits");
+            }
+          
+        })
         .then((data) => {
-          toast.success("Registered Successfully", {
-            position: "bottom-right",
-            autoClose: 2000,
-          });
-          window.location.reload();
+          if(data)
+          {
+            toast.success("Registered Successfully", {
+              position: "bottom-right",
+              autoClose: 2000,
+            });
+          }
+          else{
+            setRegMsg("Username is already exits");
+          }
+          // window.location.reload();
+        })
+        .catch((error) => {
+          console.log(`Error: ${error}`);
+          // handle error here
         });
     }
   };
+  
   const LoginUser = (data) => {
     if (data.username && data.password) {
       console.log(data, "insid elogin user");
@@ -511,15 +534,24 @@ const Header1 = (props) => {
                                   Username<span>*</span>
                                 </label>
                                 <input
-                                  type="text"                                  
+                                  type="text"                                 
                                   className="form-control form-control-login"
                                   {...register("username", {
-                                    required: true,                                  
+                                    required: true,  
+                                    pattern:/^[^\s]+$/,                              
                                   })}
+                                  onChange={(event) =>
+                                    event.target.value = event.target.value.toLowerCase()
+                                  }
                                 />
                                 {errors?.username?.type === "required" && (
                                   <p className="text-danger">
                                     This field is required
+                                  </p>
+                                )}
+                                {errors?.username?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Username does not contain space
                                   </p>
                                 )}
 
@@ -630,7 +662,7 @@ const Header1 = (props) => {
                               </div>
                             </div>
                           </div>
-
+                          <h5 className="Login-fail-msg">{regmsg}</h5>
                           <div className="form-group ">
                             <button
                               className="btn btn-success btn-lg"
@@ -717,7 +749,7 @@ const Header1 = (props) => {
                                 required
                               />
                             </div> */}
-                            <h5 className="Login-fail-msg">{msg}</h5>
+                            <h5 className="Login-fail-msg">{}</h5>
                             <div className="form-group col-lg-12 justify-content-center">
                               <button
                                 className="btn btn-success btn-lg"
@@ -952,7 +984,7 @@ const Header1 = (props) => {
                     </div>
                   </div>
                   <div className="right-part">
-                    <div className=" d-flex align-items-center currancy ">
+                    <div className="d-flex align-items-center currancy">
                     
                       <select onChange={(e)=>currencyHandler(e)} value={currancy}>
                         <option value="INR">INR</option>

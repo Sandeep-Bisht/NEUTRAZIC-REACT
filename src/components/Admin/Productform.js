@@ -402,7 +402,7 @@ const Productform = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Product Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-1 form-floating">
                                 <input
                                   type="text"
                                   id="floatingform"
@@ -416,8 +416,9 @@ const Productform = (props) => {
                                     Setdata({ ...data, name: e.target.value });
                                   }}
                                 />
-                                <p className="formerror">{formErrors.name}</p>
                                 <label for="floatingform" >Product Name</label>
+                                <p className="formerror">{formErrors.name}</p>
+                                
                               </div>
                               <div className="col-6 p-1">
                                 <input

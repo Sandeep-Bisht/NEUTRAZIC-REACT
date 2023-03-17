@@ -12,8 +12,10 @@ import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
+import Cookies from "universal-cookie";
 
 
+var currentCurrencyType="";
 
 export default function AllProductsDetails() {
 
@@ -22,14 +24,18 @@ export default function AllProductsDetails() {
   const [searchVal,setSearchVal]=useState("");
   const [filteredData]=useState([]);
   const [products, Setproducts] = useState("");
+  const cookies = new Cookies();
+
   
   const { Search } = Input;
 
   useEffect(()=>{
+    currentCurrencyType = cookies.get("CurrencyType")
     fetchUsers();
     GetProducts();
    },[])
 
+ 
 
    const GetProducts = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
@@ -83,12 +89,12 @@ export default function AllProductsDetails() {
     },
     {
       title: "Price",
-      dataIndex: "inrMrp",
+      dataIndex: currentCurrencyType==="Dollar"  ? "dollerMrp" : "inrMrp",
       key: "inrMrp",
     },
     {
       title: "Discount",
-      dataIndex: "inrDiscount",
+      dataIndex: currentCurrencyType==="Dollar"  ? "dollerDiscount" : "inrDiscount",
       key: "inrDiscount",
     },
     {
