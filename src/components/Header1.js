@@ -178,7 +178,7 @@ const Header1 = (props) => {
           phonenumber: data.phonenumber,
           email: data.email,
           role: "user",
-          userStatus:"Activate"
+          userStatus:"Activate",
         }),
       })
         .then((res) => {
