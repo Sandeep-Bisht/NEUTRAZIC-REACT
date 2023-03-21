@@ -19,6 +19,8 @@ import { BsCardList } from "react-icons/bs";
 import { TbBrandNotion } from "react-icons/tb";
 import { GiPriceTag } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import { useContext } from "react";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 
 var CartDataWoLogin = [];
 var Userdata = "";
@@ -48,10 +50,17 @@ const SearchResult = (props) => {
   let [maxprice, setMaxPrice] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
+  const [currancy,setCurrency] = useState("INR");
 
   const history = useHistory();
+  const state1 = useContext(CurrencyContext);
 
   const dispatch = useDispatch();
+  useEffect(()=>{
+    if(state1 == "1"){
+      setCurrency("Dollar");
+    }
+  },[currancy])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -170,6 +179,8 @@ const SearchResult = (props) => {
     quantity,
     mrp,
     singleprice,
+    dollerDiscount,
+    dollerMrp,
     discount,
     description,
     category,
@@ -185,6 +196,8 @@ const SearchResult = (props) => {
         quantity: quantity,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
+        dollerDiscount: dollerDiscount,
+        dollerMrp: dollerMrp,
         discountprice: discount,
         description: description,
         category: category,
@@ -491,12 +504,12 @@ const SearchResult = (props) => {
       }
     }
   };
-
+  console.log(filterdata);
   // End Filter Function //
 
   return (
     <>
-      <Header1 func={Docsearch} />  
+      <Header1 func={Docsearch} />
 
       {/* end side bar Modal */}
       <div className="container">
@@ -524,7 +537,7 @@ const SearchResult = (props) => {
                     filterdata.length > 0 &&
                     filterdata.map((el, ind) => {
                       if (
-                        el.name.toLowerCase().startsWith(searchresults) ||                        
+                        el.name.toLowerCase().startsWith(searchresults) ||
                         (minprice != "" &&
                           maxprice != "" &&
                           parseInt(el.inrMrp) >= minprice &&
@@ -552,13 +565,15 @@ const SearchResult = (props) => {
                                   <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start search-text-start">
                                     <span className="price">
                                       {" "}
-                                      <i className="fa fa-inr"></i>
-                                      {el.inrDiscount}
+                                      {state1.state1 =="1" ?<i class="fa fa-dollar-sign"></i>:<i className="fa fa-inr"></i>}
+                                      {state1.state1 =="1" ? el.dollerDiscount : el.inrDiscount }
                                     </span>
                                   </div>
-                                  
+
                                   <div className="col-6 text-end">
-                                    <p className={`text-nowrap wishlist search-result-wishlist`}>
+                                    <p
+                                      className={`text-nowrap wishlist search-result-wishlist`}
+                                    >
                                       {Userdata ? (
                                         <i
                                           id={el._id}
@@ -593,7 +608,6 @@ const SearchResult = (props) => {
                                       Wishlist
                                     </p>
                                   </div>
-                                 
                                 </div>
                               </div>
                               {Userdata ? (
@@ -606,6 +620,8 @@ const SearchResult = (props) => {
                                       quantity,
                                       el.inrMrp,
                                       el.inrDiscount,
+                                      el.dollerDiscount,
+                                      el.dollerMrp,
                                       el.discount,
                                       el.description,
                                       el.category,

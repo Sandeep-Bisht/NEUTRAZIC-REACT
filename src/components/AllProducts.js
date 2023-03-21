@@ -10,10 +10,13 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action"
 import { useDispatch } from "react-redux";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Cookies from "universal-cookie";
+import { useContext } from "react";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+// import Cookies from "universal-cookie";
 
 var Userdata;
 const AllProducts = (props) => {
+  const state1 = useContext(CurrencyContext);
 
   let dispatch = useDispatch();
 
@@ -34,16 +37,15 @@ const AllProducts = (props) => {
   const [data, setData] = useState([]);
   const history = useHistory();
   const [currancy,setCurrency]=useState("INR");
-  const cookies = new Cookies();
+  // const cookies = new Cookies();
 
   useEffect(()=>{
-    let currentCurrencyType = cookies.get("CurrencyType")
-    if(currentCurrencyType == "Dollar"){
+    if(state1 == "1"){
       setCurrency("Dollar")
     }
   },[currancy])
 
-  console.log('all products is this')
+  
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -75,6 +77,8 @@ const AllProducts = (props) => {
     quantity,
     mrp,
     singleprice,
+    dollerDiscount,
+    dollerMrp,
     discount,
     description,
     category,
@@ -90,6 +94,8 @@ const AllProducts = (props) => {
         quantity: quantity,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
+        dollerDiscount:dollerDiscount,
+        dollerMrp:dollerMrp,
         discountprice: discount,
         description: description,
         category: category,
@@ -733,9 +739,9 @@ const AllProducts = (props) => {
                               <div className="col-6 text-start">
                                 <span className="price">
                                   {" "}
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                   
-                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                   {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
@@ -792,6 +798,8 @@ const AllProducts = (props) => {
                                   quantity,
                                   el.inrMrp,
                                   el.inrDiscount,
+                                  el.dollerDiscount,
+                                  el.dollerMrp,
                                   el.discount,
                                   el.description,
                                   el.category,

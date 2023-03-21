@@ -18,6 +18,8 @@ import { baseUrl } from "../utils/services";
 import { BsWindowSidebar } from "react-icons/bs";
 import { set } from "dotenv-save";
 import Cookies from "universal-cookie";
+import { useContext } from "react";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 var Userdata = "";
 let tranding = 0;
 const Subcategories = (props) => {
@@ -41,16 +43,17 @@ const Subcategories = (props) => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+  const state1 = useContext(CurrencyContext);
 
-  const [currancy,setCurrency]=useState("INR");
-  const cookies = new Cookies();
+  const [currancy, setCurrency] = useState("INR");
+  // const cookies = new Cookies();
 
-  useEffect(()=>{
-    let currentCurrencyType = cookies.get("CurrencyType")
-    if(currentCurrencyType == "Dollar"){
-      setCurrency("Dollar")
+  useEffect(() => {
+    
+    if (state1 == "1") {
+      setCurrency("Dollar");
     }
-  },[currancy])
+  }, [currancy]);
 
   var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
@@ -184,6 +187,8 @@ const Subcategories = (props) => {
     quantity,
     mrp,
     singleprice,
+    dollerDiscount,
+    dollerMrp,
     discount,
     description,
     category,
@@ -199,6 +204,8 @@ const Subcategories = (props) => {
         quantity: quantity,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
+        dollerDiscount: dollerDiscount,
+        dollerMrp: dollerMrp,
         discountprice: discount,
         description: description,
         category: category,
@@ -578,9 +585,13 @@ const Subcategories = (props) => {
                 <section className="pb-40">
                   <div className="container">
                     <div className="row">
-                      <div id="columns" className="columns_5 subcategory-columns">
+                      <div
+                        id="columns"
+                        className="columns_5 subcategory-columns"
+                      >
                         {filterData && filterData.length > 0 ? (
                           filterData.map((item, ind) => {
+                            console.log(item.dollerDiscount, "Hello filter");
                             return (
                               <figure
                                 className="figure subcategory-figure"
@@ -605,9 +616,14 @@ const Subcategories = (props) => {
                                     <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
                                       <span className="price">
                                         {" "}
-                                        {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {currancy == "Dollar" ? item.dollerDiscount : item.inrDiscount}
+                                        {state1.state1 == "1" ? (
+                                          <i class="fa fa-dollar-sign"></i>
+                                        ) : (
+                                          <i className="fa fa-inr"></i>
+                                        )}
+                                        {state1.state1 == "1" 
+                                          ? item.dollerDiscount
+                                          : item.inrDiscount}
                                       </span>
                                     </div>
                                     <div className="col-6 text-end ">
@@ -620,6 +636,7 @@ const Subcategories = (props) => {
                                                 item._id,
                                                 item.name,
                                                 quantity,
+
                                                 item.inrMrp,
                                                 item.inrDiscount,
                                                 item.description,
@@ -650,42 +667,44 @@ const Subcategories = (props) => {
                                 </div>
 
                                 {Userdata ? (
-                                <button
-                                  className="button btn"
-                                  onClick={() => {
-                                    cartfunction(
-                                      item._id,
-                                      item.name,
-                                      quantity,
-                                      item.inrMrp,
-                                      item.inrDiscount,
-                                      item.discount,
-                                      item.description,
-                                      item.category,
-                                      item.manufacturer.name,
-                                      item.image[0].path
-                                    );
-                                  }}
-                                  data-bs-toggle={
-                                    Userdata == null ? "modal" : null
-                                  }
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                >
-                                  Add to Cart
-                                </button>
-                              ) : (
-                                <button
-                                  className="button btn"
-                                  data-bs-toggle="modal"
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                >
-                                  Add to Cart
-                                </button>
-                              )}
+                                  <button
+                                    className="button btn"
+                                    onClick={() => {
+                                      cartfunction(
+                                        item._id,
+                                        item.name,
+                                        quantity,
+                                        item.inrMrp,
+                                        item.inrDiscount,
+                                        item.dollerDiscount,
+                                        item.dollerMrp,
+                                        item.discount,
+                                        item.description,
+                                        item.category,
+                                        item.manufacturer.name,
+                                        item.image[0].path
+                                      );
+                                    }}
+                                    data-bs-toggle={
+                                      Userdata == null ? "modal" : null
+                                    }
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="button btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                )}
                               </figure>
                             );
                           })
@@ -695,111 +714,123 @@ const Subcategories = (props) => {
                               if (item.category._id == props.match.params._id) {
                                 return (
                                   <figure
-                                className="figure subcategory-figure"
-                                key={ind}
-                              >
-                                <Link
-                                  to={"/SingleProduct/" + item._id}
-                                  className="product-image-link"
-                                >
-                                  <div>
-                                    <img
-                                      src={`${baseUrl}/` + item.image[0].path}
-                                      alt=""
-                                    />
-                                  </div>
+                                    className="figure subcategory-figure"
+                                    key={ind}
+                                  >
+                                    <Link
+                                      to={"/SingleProduct/" + item._id}
+                                      className="product-image-link"
+                                    >
+                                      <div>
+                                        <img
+                                          src={
+                                            `${baseUrl}/` + item.image[0].path
+                                          }
+                                          alt=""
+                                        />
+                                      </div>
 
-                                  <figcaption>{item.name}</figcaption>
-                                </Link>
+                                      <figcaption>{item.name}</figcaption>
+                                    </Link>
 
-                                <div className="contanier subcategory-price-div">
-                                  <div className="row">
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
-                                      <span className="price">
-                                        {" "}
-                                        {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {currancy == "Dollar" ? item.dollerDiscount : item.inrDiscount}
-                                      </span>
+                                    <div className="contanier subcategory-price-div">
+                                      <div className="row">
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
+                                          <span className="price">
+                                            {" "}
+                                            {state1.state1 == "1"  ? (
+                                              <i class="fa fa-dollar-sign"></i>
+                                            ) : (
+                                              <i className="fa fa-inr"></i>
+                                            )}
+                                            {state1.state1 == "1" 
+                                              ? item.dollerDiscount
+                                              : item.inrDiscount}
+                                          </span>
+                                        </div>
+                                        <div className="col-6 text-end ">
+                                          <p className={`text-nowrap wishlist`}>
+                                            {Userdata ? (
+                                              <i
+                                                id={item._id}
+                                                onClick={() => {
+                                                  AddtoWishlist(
+                                                    item._id,
+                                                    item.name,
+                                                    quantity,
+                                                    item.inrMrp,
+                                                    item.inrDiscount,
+                                                    item.description,
+                                                    item.category,
+                                                    item.manufacturer.name,
+                                                    item.image
+                                                  );
+                                                }}
+                                                className={`bx bxs-heart ${checkWishlistItem(
+                                                  item._id
+                                                )}`}
+                                              ></i>
+                                            ) : (
+                                              <i
+                                                className="bx bxs-heart "
+                                                data-bs-toggle="modal"
+                                                data-bs-target={
+                                                  Userdata == null
+                                                    ? "#exampleModal"
+                                                    : null
+                                                }
+                                              ></i>
+                                            )}
+                                            Wishlist
+                                          </p>
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div className="col-6 text-end ">
-                                      <p className={`text-nowrap wishlist`}>
-                                        {Userdata ? (
-                                          <i
-                                            id={item._id}
-                                            onClick={() => {
-                                              AddtoWishlist(
-                                                item._id,
-                                                item.name,
-                                                quantity,
-                                                item.inrMrp,
-                                                item.inrDiscount,
-                                                item.description,
-                                                item.category,
-                                                item.manufacturer.name,
-                                                item.image
-                                              );
-                                            }}
-                                            className={`bx bxs-heart ${checkWishlistItem(
-                                              item._id
-                                            )}`}
-                                          ></i>
-                                        ) : (
-                                          <i
-                                            className="bx bxs-heart "
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-                                        )}
-                                        Wishlist
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
 
-                                {Userdata ? (
-                                <button
-                                  className="button btn"
-                                  onClick={() => {
-                                    cartfunction(
-                                      item._id,
-                                      item.name,
-                                      quantity,
-                                      item.inrMrp,
-                                      item.inrDiscount,
-                                      item.discount,
-                                      item.description,
-                                      item.category,
-                                      item.manufacturer.name,
-                                      item.image[0].path
-                                    );
-                                  }}
-                                  data-bs-toggle={
-                                    Userdata == null ? "modal" : null
-                                  }
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                >
-                                  Add to Cart
-                                </button>
-                              ) : (
-                                <button
-                                  className="button btn"
-                                  data-bs-toggle="modal"
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                >
-                                  Add to Cart
-                                </button>
-                              )}
-                              </figure>
-                          
+                                    {Userdata ? (
+                                      <button
+                                        className="button btn"
+                                        onClick={() => {
+                                          cartfunction(
+                                            item._id,
+                                            item.name,
+                                            quantity,
+                                            item.inrMrp,
+                                            item.inrDiscount,
+                                            item.dollerDiscount,
+                                            item.dollerMrp,
+                                            item.discount,
+                                            item.description,
+                                            item.category,
+                                            item.manufacturer.name,
+                                            item.image[0].path
+                                          );
+                                        }}
+                                        data-bs-toggle={
+                                          Userdata == null ? "modal" : null
+                                        }
+                                        data-bs-target={
+                                          Userdata == null
+                                            ? "#exampleModal"
+                                            : null
+                                        }
+                                      >
+                                        Add to Cart
+                                      </button>
+                                    ) : (
+                                      <button
+                                        className="button btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target={
+                                          Userdata == null
+                                            ? "#exampleModal"
+                                            : null
+                                        }
+                                      >
+                                        Add to Cart
+                                      </button>
+                                    )}
+                                  </figure>
                                 );
                               }
                             })}

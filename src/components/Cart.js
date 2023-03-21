@@ -13,8 +13,9 @@ import { message, Popconfirm } from "antd";
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
-import Cookies from "universal-cookie";
-
+// import Cookies from "universal-cookie";
+import { useContext } from "react";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 
 const stripePromise = loadStripe(
   "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
@@ -30,15 +31,16 @@ const Cart = () => {
   const [cartStatus, setCartStatus] = useState();
   const [cartItems, setCartItems] = useState(undefined);
 
-  const [currancy,setCurrency]=useState("INR");
-  const cookies = new Cookies();
-
-  useEffect(()=>{
-    let currentCurrencyType = cookies.get("CurrencyType")
-    if(currentCurrencyType == "Dollar"){
-      setCurrency("Dollar")
+  const [currancy, setCurrency] = useState("INR");
+  // const cookies = new Cookies();
+  const state1 = useContext(CurrencyContext);
+  
+  useEffect(() => {
+    
+    if (state1 == "1") {
+      setCurrency("Dollar");
     }
-  },[currancy])
+  }, [currancy]);
 
   var total = 0;
   var actualtotal = 0;
@@ -99,7 +101,7 @@ const Cart = () => {
         });
     }
   };
-
+  console.log(cart, "THis is cart");
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {
@@ -203,7 +205,7 @@ const Cart = () => {
       .then(async (res) => {})
       .catch((err) => {});
   };
-  console.log(cart,"THis is cart");
+  console.log(cart, "THis is cart");
   return (
     <>
       <Header1 CartItems={cart} />
@@ -243,7 +245,8 @@ const Cart = () => {
                       </thead>
                       <tbody>
                         {cart.map((el, ind1) => {
-                           if (currancy === "Dollar") {
+                          console.log(state1.state1, "This is el");
+                          if (state1.state1 == "1") {
                             total = el.dollerDiscount * el.quantity;
                             total1 = total1 + el.dollerDiscount * el.quantity;
                             localStorage.setItem("ActualSubtotal", total1);
@@ -277,11 +280,21 @@ const Cart = () => {
                               <td className="product-price">
                                 <div className="amount">
                                   <span className="unit-amount">
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                    <del>{currancy == "Dollar" ? el.dollerMrp : el.mrp}</del>
-                                    </span>
-                                    <span>
-                                    {currancy == "Dollar" ? el.dollerDiscount : el.singleprice}
+                                    {state1.state1 == "1" ? (
+                                      <i class="fa fa-dollar-sign"></i>
+                                    ) : (
+                                      <i className="fa fa-inr"></i>
+                                    )}
+                                    <del>
+                                      {state1.state1 == "1"
+                                        ? el.dollerMrp
+                                        : el.mrp}
+                                    </del>
+                                  </span>
+                                  <span>
+                                    {state1.state1 == "1"
+                                      ? el.dollerDiscount
+                                      : el.singleprice}
                                   </span>
                                 </div>
                               </td>
@@ -320,8 +333,14 @@ const Cart = () => {
                               <td className="product-subtotal">
                                 <div className="amount">
                                   <span className="subtotal-amount mt-4">
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                    {(currancy==="Dollar" ? el.dollerDiscount : el.singleprice) * el.quantity}
+                                    {state1.state1 == "1" ? (
+                                      <i class="fa fa-dollar-sign"></i>
+                                    ) : (
+                                      <i className="fa fa-inr"></i>
+                                    )}
+                                    {(state1.state1 == "1"
+                                      ? el.dollerDiscount
+                                      : el.singleprice) * el.quantity}
                                   </span>
                                 </div>
                               </td>
@@ -361,14 +380,39 @@ const Cart = () => {
                   <h3>Order Summary</h3>
                   <ul>
                     <li>
-                      Sub Total <span>{currancy==="Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}{actualtotal}</span>
+                      Sub Total{" "}
+                      <span>
+                        {state1.state1 == "1" ? (
+                          <i class="fa fa-dollar-sign"></i>
+                        ) : (
+                          <i className="fa fa-inr"></i>
+                        )}
+                        {actualtotal}
+                      </span>
                     </li>
                     <li>
-                      Discount <span>-{currancy==="Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}{actualtotal - total1}</span>
+                      Discount{" "}
+                      <span>
+                        -
+                        {state1.state1 == "1" ? (
+                          <i class="fa fa-dollar-sign"></i>
+                        ) : (
+                          <i className="fa fa-inr"></i>
+                        )}
+                        {actualtotal - total1}
+                      </span>
                     </li>
 
                     <li>
-                      Payable Amount <span>{currancy==="Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}{total1}</span>
+                      Payable Amount{" "}
+                      <span>
+                        {state1.state1 == "1" ? (
+                          <i class="fa fa-dollar-sign"></i>
+                        ) : (
+                          <i className="fa fa-inr"></i>
+                        )}
+                        {total1}
+                      </span>
                     </li>
                   </ul>
                   {cartItems ? (
@@ -394,8 +438,6 @@ const Cart = () => {
           </form>
         </div>
       </section>
-
-     
       <Baseline />
       <Footer />
     </>
