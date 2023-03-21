@@ -70,7 +70,7 @@ import AllBlogs from "../components/Admin/AllBlogs/AllBlogs"
 import Blogs from "../components/Blog";
 import PageNotFound from "../components/PageNotFound";
 import NeedSupport from "../components/NeedSupport";
-
+import CurrencyState from "./ContextApi/CurrencyState";
 
 var Userdata = "";
 const Root = (props) => {
@@ -101,6 +101,7 @@ const Root = (props) => {
   return (
     // <StateProvider initialState={initialState} reducer={reducers}>
       /* <BaseStyles /> */
+      <CurrencyState>
       <Provider store={store}>
       <Router>
         <>
@@ -230,6 +231,7 @@ const Root = (props) => {
         </>
       </Router>
       </Provider>
+      </CurrencyState>
     //* </StateProvider> */
   );
 };

@@ -19,6 +19,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 import Carousel from "react-elastic-carousel";
 import Cookies from "universal-cookie";
+import { useContext } from "react";
+import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
 
 import $ from "jquery";
 
@@ -58,15 +60,18 @@ const HomePage = () => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [blogs, setBlogs] = useState();
+  
 
   const history = useHistory();
-  const [currancy, setCurrency] = useState("INR");
+  const [currancy,setCurrency] = useState("INR")
 
   const cookies = new Cookies();
+  const state1 = useContext(CurrencyContext);
+  console.log(state1,"State");
 
   useEffect(() => {
-    currentCurrencyType = cookies.get("CurrencyType")
-    if (currentCurrencyType == "Dollar") {
+    let currentCurrencyType = cookies.get("Currency")
+    if (currentCurrencyType == "1") {
       setCurrency("Dollar")
 
     }
@@ -87,7 +92,11 @@ const HomePage = () => {
         console.log(err, "error");
       });
   };
-
+  useEffect(()=>{
+    if(state1 === "1"){
+      setCurrency("Dollar");
+    }
+  },[currancy]);
   useEffect(() => {
     // Userdata = localStorage.getItem("Userdata");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -644,9 +653,9 @@ const HomePage = () => {
                                 <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                   <span className="price">
                                     {" "}
-                                    {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                    {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
 
-                                    {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
+                                    {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                   </span>
                                 </div>
                                 <div className="col-6 text-end">
@@ -871,9 +880,9 @@ const HomePage = () => {
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
                                   {" "}
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
 
-                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">
@@ -1030,9 +1039,9 @@ const HomePage = () => {
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
                                   {" "}
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
 
-                                  {currancy == "Dollar" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">

@@ -19,20 +19,20 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
-
-
+import { useContext } from "react";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 
 let changeNavValue = 0;
 var header;
 var sticky;
 var Userdata = "";
 
-
 const errorEmail = "Please Enter a valid Email Address";
 
 // var userCart=[]
 const Header1 = (props) => {
   let dispatch = useDispatch();
+  let { state1, setState1 } = useContext(CurrencyContext);
 
   const state = useSelector((state) => state.GetCartItemReducer);
 
@@ -52,11 +52,11 @@ const Header1 = (props) => {
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
   const [usermodal, setUsermodal] = useState();
-  const [currancy,setCurrency]=useState("INR");
+  const [currancy, setCurrency] = useState("INR");
   const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  const cookies = new Cookies();
-  const location=useLocation();
+  // const cookies = new Cookies();
+  const location = useLocation();
 
   const {
     register,
@@ -71,22 +71,19 @@ const Header1 = (props) => {
       password: "",
       repassword: "",
     },
-    mode: "onBlur"
+    mode: "onBlur",
   });
   const {
-   register : register2,
-   handleSubmit : handleLoginSubmit,
-    formState: { errors : loginErrors },
+    register: register2,
+    handleSubmit: handleLoginSubmit,
+    formState: { errors: loginErrors },
   } = useForm({
     defaultValues: {
-      username: "",   
+      username: "",
       password: "",
-     
     },
-    mode: "onBlur"
+    mode: "onBlur",
   });
-
- 
 
   const CategoryDataHandler = () => {
     dispatch(ACTIONS.getCategories([]));
@@ -102,50 +99,54 @@ const Header1 = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     GetSubCategory();
-    $(document).ready(function () {
+    $(document).ready(function() {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
-      window.onscroll = function () {
+      window.onscroll = function() {
         headerFunction();
       };
-      $(".arrow").click(function () {
+      $(".arrow").click(function() {
         $(".sublist").slideUp();
       });
     });
   }, []);
 
-  useEffect(()=>{
-    let currentCurrencyType = cookies.get("CurrencyType")
-    if(currentCurrencyType == "Dollar"){
+  useEffect(() => {
+    
+    if (state1 == "1") {
       setCurrency("Dollar");
-     } 
-  },[])
+    }
+  }, [currancy]);
   useEffect(() => {
     if (shouldRefresh) {
       console.log("helo refresh");
       // history.push(location.pathname);
-      history.go(location.pathname)
+      history.go(location.pathname);
       // history.replace(location.pathname);
       setShouldRefresh(false);
-      
     }
-    
   }, [shouldRefresh]);
 
-  const currencyHandler=(e)=>{
-    // let location = history.location
+  const currencyHandler = (e) => {
+    // console.log(e.target.value,"Hello Value");
+    setCurrency(e.target.value);
+    if (currancy === "INR") {
+      setState1("1");
+    }
+    else{
+      setState1("0");
+    }
+
+    
 
     // console.log(location.pathname,'path')
     // navigate("/home");
-    cookies.set("CurrencyType", e.target.value,{ path: '/' });
-    setCurrency(e.target.value);
-    setShouldRefresh(true);
+    // cookies.set("CurrencyType", e.target.value, { path: "/" });
+    // setShouldRefresh(true);
     // let location = history.location
     // console.log(location,"locationonononononon");
-      
-  }
-
-
+  };
+  console.log(state1);
   const logout = () => {
     localStorage.setItem("Userdata", null);
     toast.success("Logout successfully", {
@@ -155,7 +156,7 @@ const Header1 = (props) => {
     window.location.replace("/");
   };
 
-  const RegisterUser = (data) => {    
+  const RegisterUser = (data) => {
     if (
       data.email &&
       data.password &&
@@ -182,22 +183,19 @@ const Header1 = (props) => {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             return res.json();
-          } else 
-            // throw new Error(res.status);
-            if(res.status === 400) {
-              console.log("data is already exits");
-            }
-          
+          }
+          // throw new Error(res.status);
+          else if (res.status === 400) {
+            console.log("data is already exits");
+          }
         })
         .then((data) => {
-          if(data)
-          {
+          if (data) {
             toast.success("Registered Successfully", {
               position: "bottom-right",
               autoClose: 2000,
             });
-          }
-          else{
+          } else {
             setRegMsg("Username is already exits");
           }
           window.location.reload();
@@ -208,7 +206,6 @@ const Header1 = (props) => {
         });
     }
   };
-  
 
   const LoginUser = (data) => {
     if (data.username && data.password) {
@@ -532,14 +529,14 @@ const Header1 = (props) => {
                                   Username<span>*</span>
                                 </label>
                                 <input
-                                  type="text"                                 
+                                  type="text"
                                   className="form-control form-control-login"
                                   {...register("username", {
-                                    required: true,  
-                                    pattern:/^[^\s]+$/,                              
+                                    required: true,
+                                    pattern: /^[^\s]+$/,
                                   })}
                                   onChange={(event) =>
-                                    event.target.value = event.target.value.toLowerCase()
+                                    (event.target.value = event.target.value.toLowerCase())
                                   }
                                 />
                                 {errors?.username?.type === "required" && (
@@ -552,7 +549,6 @@ const Header1 = (props) => {
                                     Username does not contain space
                                   </p>
                                 )}
-
                               </div>
                             </div>
                             <div className="col-md-6 col-12">
@@ -578,7 +574,6 @@ const Header1 = (props) => {
                                     Please enter the valid Email
                                   </p>
                                 )}
-
                               </div>
                             </div>
 
@@ -651,7 +646,9 @@ const Header1 = (props) => {
                                     required: true,
                                   })}
                                   onInput={(e) => {
-                                    if (e.target.value.length > e.target.maxLength)
+                                    if (
+                                      e.target.value.length > e.target.maxLength
+                                    )
                                       e.target.value = e.target.value.slice(
                                         0,
                                         e.target.maxLength
@@ -695,10 +692,10 @@ const Header1 = (props) => {
                                   Username<span>*</span>
                                 </label>
                                 <input
-                                  type="text"                                  
+                                  type="text"
                                   className="form-control form-control-login"
                                   {...register2("username", {
-                                    required: true,                                  
+                                    required: true,
                                   })}
                                 />
                                 {loginErrors?.username?.type === "required" && (
@@ -706,7 +703,6 @@ const Header1 = (props) => {
                                     This field is required
                                   </p>
                                 )}
-
                               </div>
                             </div>
                             <div className="col-md-12 col-12">
@@ -719,7 +715,6 @@ const Header1 = (props) => {
                                   className="form-control form-control-login "
                                   {...register2("password", {
                                     required: true,
-                              
                                   })}
                                 />
                                 {loginErrors?.password?.type === "required" && (
@@ -727,8 +722,6 @@ const Header1 = (props) => {
                                     This field is required
                                   </p>
                                 )}
-                                
-                              
                               </div>
                             </div>
                             <h5 className="Login-fail-msg">{msg}</h5>
@@ -761,9 +754,7 @@ const Header1 = (props) => {
         <div className="newheader">
           <div className="row mt-0 top-header-padding">
             <div className="col-md-12">
-
               <div className="heaader-wrapper">
-
                 <div className="header-wrapper-left">
                   <div className=" logo-main-div">
                     <Link className="navbar-brand" to="/">
@@ -781,7 +772,9 @@ const Header1 = (props) => {
                         type="text"
                         className="my-input-field"
                         placeholder="Search..."
-                        onChange={(e) => setSearch(e.target.value.toLowerCase())}
+                        onChange={(e) =>
+                          setSearch(e.target.value.toLowerCase())
+                        }
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
                             searchData(search);
@@ -803,125 +796,121 @@ const Header1 = (props) => {
                 <div className="header-wrapper-right">
                   <div className="left-part">
                     <div className="  account-div ">
-                        <div className=" login-div ">
-                      
-                          <div className="option-item">
-                            <div className="cart-btn">
-                              {Userdata == null ? (
-                                <>
-                                  <span
-                                    className="sp"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    style={{ cursor: "pointer" }}
-                                  >
-                                    <i className="user-icon bx bx-log-in"></i>
-                                  </span>
+                      <div className=" login-div ">
+                        <div className="option-item">
+                          <div className="cart-btn">
+                            {Userdata == null ? (
+                              <>
+                                <span
+                                  className="sp"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal"
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="user-icon bx bx-log-in"></i>
+                                </span>
 
-                                  <span
-                                    className="Sp1 "
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    style={{ cursor: "pointer" }}
-                                  ></span>
-                                </>
-                              ) : (
-                                <>
-                                  <i className="user-icon bx bx-user-pin"></i>
-                                </>
-                              )}
-                            </div>
+                                <span
+                                  className="Sp1 "
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal"
+                                  style={{ cursor: "pointer" }}
+                                ></span>
+                              </>
+                            ) : (
+                              <>
+                                <i className="user-icon bx bx-user-pin"></i>
+                              </>
+                            )}
                           </div>
                         </div>
-                        <div className=" user-login">
-                          {Userdata == null ? (
-                            <>
-
-
-                              <span
-                                className="Sp1"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                style={{ cursor: "pointer" }}
-                              >
-                                Login/Register
-                              </span>
-                            </>
-                          ) : (
-                            <>
-                              {/* <span className="sp" style={{ cursor: "pointer" }}>
+                      </div>
+                      <div className=" user-login">
+                        {Userdata == null ? (
+                          <>
+                            <span
+                              className="Sp1"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Login/Register
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            {/* <span className="sp" style={{ cursor: "pointer" }}>
                       Account
                     </span> */}
-                              {/* <br /> */}
-                              <div className="dropdown">
-                                <button
-                                  className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn"
-                                  type="button"
-                                  id="dropdownMenuButton1"
-                                  data-bs-toggle="dropdown"
-                                  aria-expanded="false"
-                                >
-                                  {Userdata && Userdata.username}
-                                </button>
+                            {/* <br /> */}
+                            <div className="dropdown">
+                              <button
+                                className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn"
+                                type="button"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                {Userdata && Userdata.username}
+                              </button>
 
-                                <ul
-                                  className="dropdown-menu Logout-ul"
-                                  aria-labelledby="dropdownMenuButton1"
-                                >
-                                  <div>
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <i className="bx bx-file pl-2"></i>{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <Link to="/UserOrder">
-                                          <span className="pr-4">Orders</span>
-                                        </Link>
-                                      </li>
-                                    </div>
-                                  </div>
-                                  <Link to="/Cart">
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <i className="bx bx-cart pl-2"></i>{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <span className="pr-4">Cart</span>
-                                        {/* <span className="text-danger">item</span> */}
-                                      </li>
-                                    </div>
-                                  </Link>
-                                  <Link to="/Wishlist">
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <i className="bx bx-heart pl-2"></i>{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <span className="pr-4">Wishlist</span>
-                                      </li>
-                                    </div>
-                                  </Link>
+                              <ul
+                                className="dropdown-menu Logout-ul"
+                                aria-labelledby="dropdownMenuButton1"
+                              >
+                                <div>
                                   <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-log-out pl-2"></i>{" "}
+                                    <i className="bx bx-file pl-2"></i>{" "}
                                     <li
                                       className="dropdown-item Logout-li"
                                       style={{ cursor: "pointer" }}
-                                      onClick={() => {
-                                        logout();
-                                      }}
                                     >
-                                      <span className="pr-4">Logout</span>
+                                      <Link to="/UserOrder">
+                                        <span className="pr-4">Orders</span>
+                                      </Link>
                                     </li>
                                   </div>
-                                </ul>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      
+                                </div>
+                                <Link to="/Cart">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-cart pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Cart</span>
+                                      {/* <span className="text-danger">item</span> */}
+                                    </li>
+                                  </div>
+                                </Link>
+                                <Link to="/Wishlist">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-heart pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Wishlist</span>
+                                    </li>
+                                  </div>
+                                </Link>
+                                <div className="Logout-div d-flex align-items-center">
+                                  <i className="bx bx-log-out pl-2"></i>{" "}
+                                  <li
+                                    className="dropdown-item Logout-li"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                      logout();
+                                    }}
+                                  >
+                                    <span className="pr-4">Logout</span>
+                                  </li>
+                                </div>
+                              </ul>
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </div>
 
                     <div className="cart-div">
@@ -936,7 +925,11 @@ const Header1 = (props) => {
                           </div>
 
                           <div className=" user-login">
-                            {cartItems ? <h6 className="Total-Item">{cartItems}</h6> : ""}
+                            {cartItems ? (
+                              <h6 className="Total-Item">{cartItems}</h6>
+                            ) : (
+                              ""
+                            )}
                             <span className="sp">Cart</span>
                             <br />
                             {/* <span className="Sp1">₹ 0.0</span> */}
@@ -959,7 +952,6 @@ const Header1 = (props) => {
                           </div>
                           <div className=" user-login">
                             <span className="sp">Wishlist</span>
-                            
                           </div>
                         </div>
                       </Link>
@@ -967,31 +959,27 @@ const Header1 = (props) => {
                   </div>
                   <div className="right-part">
                     <div className="d-flex align-items-center currancy">
-                    
-                      <select onChange={(e)=>currencyHandler(e)} value={currancy}>
-                        <option value="INR">INR</option>
+                      <select
+                        onChange={(e) => currencyHandler(e)}
+                        value={currancy}
+                      >
+                        <option value="INR" >INR</option>
                         <option value="Dollar">Dollar</option>
                       </select>
                     </div>
                   </div>
-
-
-
-
-
                 </div>
               </div>
-
-
-
             </div>
-
           </div>
 
           <div className="container-fluid main-nav px-0">
             <div className="row mt-0" id="myHeader">
-              <div className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category" data-bs-toggle="modal"
-                data-bs-target="#myModal">
+              <div
+                className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+              >
                 <div>
                   <div className="category ">
                     <i
@@ -1001,7 +989,7 @@ const Header1 = (props) => {
                     ></i>
                   </div>
                   <div className="category">
-                    <span className="category-head" >Browse Categories</span>
+                    <span className="category-head">Browse Categories</span>
                   </div>
                 </div>
               </div>
@@ -1034,7 +1022,10 @@ const Header1 = (props) => {
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link nav-heading" to="/AllProducts">
+                          <Link
+                            className="nav-link nav-heading"
+                            to="/AllProducts"
+                          >
                             Shop
                           </Link>
                         </li>
@@ -1084,11 +1075,10 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-        </div></div>
+        </div>
+      </div>
 
-      
       <ToastContainer />
-      
     </>
   );
 };
