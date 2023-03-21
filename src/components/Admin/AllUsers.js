@@ -5,11 +5,12 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import {Link} from "react-router-dom"
 import { baseUrl } from "../../utils/services";
-import { Table, Input, Typography, Popconfirm, Space } from "antd";
+import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} from "antd";
 import {BiSearchAlt} from 'react-icons/bi';
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
+import { DownOutlined } from '@ant-design/icons';
 
 const UserPage = () => {
 
@@ -60,6 +61,25 @@ const handleDelete=async (_id)=>{
   }
   
 }
+const UpdateUserStatus = async (userId, userStatus) => {
+  try {
+    const response = await fetch(`${baseUrl}/api/auth/update_user_by_id`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...userId, userStatus:userStatus }),
+    });
+    const data = await response.json();
+    console.log(data);
+    // Call your GetUserData function here or do something with the data
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 
 const columns = [
   {
@@ -112,6 +132,39 @@ const columns = [
           </Typography.Link>
         </Space>
       ) : null,
+  },
+  {
+    title: "Status", 
+    render: (a, item) => (
+      <Space size="middle">
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: '1',
+                label: (
+                  <a onClick={() =>UpdateUserStatus(item,"Activate")}>
+                  Activate
+                  </a>
+                ),
+              },
+              {
+                key: '2',
+                label: (
+                  <a onClick={() =>UpdateUserStatus(item,"De-Activate")}>
+                    De-Activate
+                  </a>
+                ),
+              },
+            ],
+          }}
+        >
+          <a>
+            Status <DownOutlined />
+          </a>
+        </Dropdown>
+      </Space>
+    ),
   },
 ];
  

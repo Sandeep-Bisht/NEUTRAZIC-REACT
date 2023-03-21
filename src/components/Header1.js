@@ -198,7 +198,7 @@ const Header1 = (props) => {
           } else {
             setRegMsg("Username is already exits");
           }
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           console.log(`Error: ${error}`);
@@ -209,7 +209,7 @@ const Header1 = (props) => {
 
   const LoginUser = (data) => {
     if (data.username && data.password) {
-      console.log(data, "insid elogin user");
+      console.log(data, "inside login user");
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -223,30 +223,33 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (res) => {
-          if (res.role === "user") {
-            Userdata = res;
-            await localStorage.setItem("Userdata", JSON.stringify(res));
-            await CartById();
-
-            // history.push("/");
-
-            window.location.reload();
-            toast.success("Login successfully", {
-              position: "bottom-right",
-              autoClose: 2000,
-            });
-          } else if (
-            res.role == "superAdmin" ||
-            res.role == "Vendor" ||
-            res.role == "Manager"
-          ) {
-            await localStorage.setItem("Userdata", JSON.stringify(res));
-            await localStorage.setItem("Userdata1", JSON.stringify(res.role));
-            history.push("/Dashboard");
-
-            window.location.reload();
-          } else if (Userdata == undefined) {
+          if (res && res.userStatus && res.userStatus === "Activate") {
+            if (res.role === "user") {
+              Userdata = res;
+              await localStorage.setItem("Userdata", JSON.stringify(res));
+              await CartById();
+              //  history.push("/");
+              window.location.reload();
+              toast.success("Login successfully", {
+                position: "bottom-right",
+                autoClose: 2000,
+              });
+            } else if (
+              res.role == "superAdmin" ||
+              res.role == "Vendor" ||
+              res.role == "Manager"
+            ) {
+              await localStorage.setItem("Userdata", JSON.stringify(res));
+              await localStorage.setItem("Userdata1", JSON.stringify(res.role));
+              history.push("/Dashboard");
+              window.location.reload();
+            } else {
+              setMsg("User Name Or PassWord is not Valid");
+            }
+          } else if (res && res.message === "Invalid username or password") {
             setMsg("User Name Or PassWord is not Valid");
+          } else {
+            setMsg("User is De-Activated");
           }
         })
         .then(async () => {
@@ -258,15 +261,9 @@ const Header1 = (props) => {
             );
           }
         });
-      // toast.success("Login successfull", {
-      //   position: toast.POSITION.BOTTOM_RIGHT,
-      //   autoClose: 5000,
-      // });
     }
-    //  else {
-    //   setMsg("Please Enter a Valid Data");
-    // }
   };
+  
   const headerFunction = async () => {
     if (window.pageYOffset > sticky) {
       header.classList.add("sticky");
@@ -688,18 +685,7 @@ const Header1 = (props) => {
                           onSubmit={handleLoginSubmit(LoginUser)}
                         >
                           <div className="row mt-0 start-login-form">
-                            {/* <div className="form-group col-lg-12">
-                              <label>
-                                Username<span>*</span>
-                              </label>
-                              <input
-                                className="form-control form-control-login"
-                                onChange={(e) => {
-                                  setUsername(e.target.value);
-                                }}
-                                required
-                              />
-                            </div> */}
+                           
                             <div className="col-md-12 col-12">
                               <div className="form-group">
                                 <label>
@@ -738,20 +724,7 @@ const Header1 = (props) => {
                                 )}
                               </div>
                             </div>
-                            {/* <div className="form-group col-lg-12">
-                              <label>
-                                Password<span>*</span>
-                              </label>
-                              <input
-                                type="password"
-                                className="form-control form-control-login "
-                                onChange={(e) => {
-                                  setPassword(e.target.value);
-                                }}
-                                required
-                              />
-                            </div> */}
-                            <h5 className="Login-fail-msg">{}</h5>
+                            <h5 className="Login-fail-msg">{msg}</h5>
                             <div className="form-group col-lg-12 justify-content-center">
                               <button
                                 className="btn btn-success btn-lg"
