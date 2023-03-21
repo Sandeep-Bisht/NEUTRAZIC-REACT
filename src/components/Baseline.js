@@ -27,7 +27,7 @@ const Baseline=()=>{
                     <i className="flaticon-headset"><MdSupportAgent/></i>
                   </div>
                   <h3>Support 24/7</h3>
-                  <p>Contact us 24 hours a day</p>
+                  <p>Contact us +91-7500872014</p>
                 </div>
               </div>
               <div className="col-lg-3 col-sm-6 col-md-3 col-6  box ">

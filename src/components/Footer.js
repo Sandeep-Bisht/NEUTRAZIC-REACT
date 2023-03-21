@@ -28,17 +28,15 @@ const WishlistHandler=()=>{
               />
                 </a>
                 <ul className="footer-contact-info">
-                  <li>
-                    <span>Hotline:</span> <a href="tel:16768">16768</a>
-                  </li>
+                  
                   <li>
                     <span>Phone:</span>{" "}
-                    <a href="tel:+91-135-2976990">+91-135-2976990/91</a>
+                    <a href="tel:+91-135-2976990">+91-7500872014</a>
                   </li>
                   <li>
                     <span>Email:</span>{" "}
                     <a href="cdn-cgi/l/email-protection.html#adc5c8c1c1c2edc0c8c9fc83cec2c0">
-                      info@ishaanagroup.com
+                    info@nutrazik.com
                     </a>
                   </li>
                   <li>

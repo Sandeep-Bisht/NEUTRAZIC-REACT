@@ -174,6 +174,8 @@ const WishList = () => {
         quantity: quantity,
         mrp: parseInt(data.inrMrp),
         singleprice: parseInt(data.inrDiscount),
+        dollerDiscount:data.dollerDiscount,
+        dollerMrp:data.dollerMrp,
         discountprice: data.discount,
         description: data.description,
         category: data.category,

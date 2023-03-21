@@ -19,12 +19,15 @@ import { useDispatch } from "react-redux";
 import Carousel from "react-elastic-carousel";
 import "../components/Header1.css";
 import Cookies from "universal-cookie";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import { useContext } from "react";
 
 var Userdata = "";
 var CartDataWoLogin = [];
 
 const SingleProduct = (props) => {
   let dispatch = useDispatch();
+  const state1 = useContext(CurrencyContext);
   let prodId = props.match.params.id;
   let related = 0;
   let careouselImage = 0;
@@ -45,8 +48,7 @@ const SingleProduct = (props) => {
   const cookies = new Cookies();
 
   useEffect(()=>{
-    let currentCurrencyType = cookies.get("CurrencyType")
-    if(currentCurrencyType == "Dollar"){
+    if(state1 == "1"){
       setCurrency("Dollar")
     }
   },[currancy])
@@ -89,7 +91,6 @@ const SingleProduct = (props) => {
   useEffect(() => {
     related = 0;
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
     window.scrollTo(0, 0);
     Getsingledata();
     getWishlist();
@@ -361,6 +362,8 @@ const SingleProduct = (props) => {
     quantity,
     mrp,
     singleprice,
+    dollerDiscount,
+    dollerMrp,
     discount,
     description,
     category,
@@ -376,6 +379,8 @@ const SingleProduct = (props) => {
         quantity: quantity,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
+        dollerDiscount:dollerDiscount,
+        dollerMrp:dollerMrp,
         discountprice: discount,
         description: description,
         category: category,
@@ -782,17 +787,17 @@ const SingleProduct = (props) => {
               <div className="price pt-2">
                 <span className="price-detail">
                 {" "}
-                                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                   
-                                  {currancy == "Dollar" ? data.dollerDiscount : data.inrDiscount}
+                                  {state1.state1 == "1" ? data.dollerDiscount : data.inrDiscount}
                   <del>
-                  {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                   
-                                  {currancy == "Dollar" ? data.dollerMrp : data.inrMrp}
+                                  {state1.state1 == "1" ? data.dollerMrp : data.inrMrp}
                   </del>{" "}
                   <span>
                     {Math.ceil(
-                      currancy == "Dollar" ? ((data.dollerMrp - data.dollerDiscount) / data.dollerMrp) * 100:((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100
+                      state1.state1 == "1" ? ((data.dollerMrp - data.dollerDiscount) / data.dollerMrp) * 100:((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100
                     )}
                     % OFF
                   </span>
@@ -874,6 +879,8 @@ const SingleProduct = (props) => {
                               quantity,
                               data.inrMrp,
                               data.inrDiscount,
+                              data.dollerDiscount,
+                              data.dollerMrp,
                               data.discount,
                               data.description,
                               data.category,
@@ -1161,9 +1168,9 @@ const SingleProduct = (props) => {
                         <div className="col-lg-6 col-md-12 text-start">
                           <span className="price">
                             {" "}
-                            {currancy == "Dollar" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                            {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                   
-                                  {currancy == "Dollar" ? data.dollerDiscount : data.inrDiscount}
+                                  {state1.state1 == "1" ? data.dollerDiscount : data.inrDiscount}
                             {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0
@@ -1216,6 +1223,8 @@ const SingleProduct = (props) => {
                           quantity,
                           el.inrMrp,
                           el.inrDiscount,
+                          el.dollerDiscount,
+                          el.dollerMrp,
                           el.discount,
                           el.description,
                           el.category,
