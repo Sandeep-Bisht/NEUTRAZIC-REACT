@@ -66,16 +66,16 @@ const HomePage = () => {
   const [currancy,setCurrency] = useState("INR")
 
   const cookies = new Cookies();
-  const state1 = useContext(CurrencyContext);
+  const {state1,setState1} = useContext(CurrencyContext);
   console.log(state1,"State");
 
-  useEffect(() => {
-    let currentCurrencyType = cookies.get("Currency")
-    if (currentCurrencyType == "1") {
-      setCurrency("Dollar")
+  // useEffect(() => {
+  //   let currentCurrencyType = cookies.get("Currency")
+  //   if (currentCurrencyType == "1") {
+  //     setCurrency("Dollar")
 
-    }
-  }, [currancy])
+  //   }
+  // }, [currancy])
 
 
 
@@ -93,10 +93,12 @@ const HomePage = () => {
       });
   };
   useEffect(()=>{
-    if(state1 === "1"){
+    const currentCurrency = cookies.get('CurrencyType');
+    if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
+      setState1("1");
     }
-  },[currancy]);
+  }, [currancy]);
   useEffect(() => {
     // Userdata = localStorage.getItem("Userdata");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -653,9 +655,9 @@ const HomePage = () => {
                                 <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                   <span className="price">
                                     {" "}
-                                    {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                    {state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
 
-                                    {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                    {state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                   </span>
                                 </div>
                                 <div className="col-6 text-end">
@@ -880,9 +882,9 @@ const HomePage = () => {
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
                                   {" "}
-                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  {state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
 
-                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">
@@ -1039,9 +1041,9 @@ const HomePage = () => {
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
                                   {" "}
-                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                  {state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
 
-                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">
