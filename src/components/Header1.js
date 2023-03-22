@@ -204,7 +204,7 @@ const Header1 = (props) => {
           } else {
             setRegMsg("Username is already exits");
           }
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           console.log(`Error: ${error}`);
