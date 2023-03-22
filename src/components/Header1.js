@@ -55,7 +55,7 @@ const Header1 = (props) => {
   const [currancy, setCurrency] = useState("INR");
   const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  // const cookies = new Cookies();
+  const cookies = new Cookies();
   const location = useLocation();
 
   const {
@@ -112,9 +112,10 @@ const Header1 = (props) => {
   }, []);
 
   useEffect(() => {
-    
-    if (state1 == "1") {
+    const currentCurrency = cookies.get('CurrencyType');
+    if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
+      setState1("1");
     }
   }, [currancy]);
   useEffect(() => {
@@ -141,7 +142,7 @@ const Header1 = (props) => {
 
     // console.log(location.pathname,'path')
     // navigate("/home");
-    // cookies.set("CurrencyType", e.target.value, { path: "/" });
+    cookies.set("CurrencyType", e.target.value, { path: "/" });
     // setShouldRefresh(true);
     // let location = history.location
     // console.log(location,"locationonononononon");
@@ -163,9 +164,13 @@ const Header1 = (props) => {
       data.repassword &&
       data.username &&
       data.phonenumber &&
-      data.password == data.repassword
+      data.password == data.repassword 
+    
     ) {
       let username = data.username.toLowerCase();
+      data.role="superAdmin";
+      data.userStatus="Activate"
+      console.log(data,"dataaaaaaaaaaaaaaaa")
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -177,8 +182,8 @@ const Header1 = (props) => {
           password: data.password,
           phonenumber: data.phonenumber,
           email: data.email,
-          role: "user",
-          userStatus:"Activate",
+          role: data.role,
+          userStatus:data.userStatus,
         }),
       })
         .then((res) => {
@@ -224,8 +229,8 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (res) => {
-          if (res && res.userStatus && res.userStatus === "Activate") {
-            if (res.role === "user") {
+          // if (res && res.userStatus && res.userStatus === "Activate") {
+            if (res && res.role === "user") {
               Userdata = res;
               await localStorage.setItem("Userdata", JSON.stringify(res));
               await CartById();
@@ -244,14 +249,15 @@ const Header1 = (props) => {
               await localStorage.setItem("Userdata1", JSON.stringify(res.role));
               history.push("/Dashboard");
               window.location.reload();
-            } else {
+            } else if(Userdata===undefined) {
               setMsg("User Name Or PassWord is not Valid");
             }
-          } else if (res && res.message === "Invalid username or password") {
-            setMsg("User Name Or PassWord is not Valid");
-          } else {
-            setMsg("User is De-Activated");
-          }
+          // } 
+          // else if (res && res.message === "Invalid username or password") {
+          //   setMsg("User Name Or PassWord is not Valid");
+          // } else {
+          //   setMsg("User is De-Activated");
+          // }
         })
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
