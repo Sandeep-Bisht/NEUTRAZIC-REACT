@@ -1170,7 +1170,7 @@ const SingleProduct = (props) => {
                             {" "}
                             {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                   
-                                  {state1.state1 == "1" ? data.dollerDiscount : data.inrDiscount}
+                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                             {/* $
                       {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
                         ? 0

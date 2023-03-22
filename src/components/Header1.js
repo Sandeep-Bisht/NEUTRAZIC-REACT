@@ -55,7 +55,7 @@ const Header1 = (props) => {
   const [currancy, setCurrency] = useState("INR");
   const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  // const cookies = new Cookies();
+  const cookies = new Cookies();
   const location = useLocation();
 
   const {
@@ -112,9 +112,10 @@ const Header1 = (props) => {
   }, []);
 
   useEffect(() => {
-    
-    if (state1 == "1") {
+    const currentCurrency = cookies.get('CurrencyType');
+    if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
+      setState1("1");
     }
   }, [currancy]);
   useEffect(() => {
@@ -141,7 +142,7 @@ const Header1 = (props) => {
 
     // console.log(location.pathname,'path')
     // navigate("/home");
-    // cookies.set("CurrencyType", e.target.value, { path: "/" });
+    cookies.set("CurrencyType", e.target.value, { path: "/" });
     // setShouldRefresh(true);
     // let location = history.location
     // console.log(location,"locationonononononon");
