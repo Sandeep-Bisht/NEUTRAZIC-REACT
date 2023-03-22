@@ -163,9 +163,13 @@ const Header1 = (props) => {
       data.repassword &&
       data.username &&
       data.phonenumber &&
-      data.password == data.repassword
+      data.password == data.repassword 
+    
     ) {
       let username = data.username.toLowerCase();
+      data.role="superAdmin";
+      data.userStatus="Activate"
+      console.log(data,"dataaaaaaaaaaaaaaaa")
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -177,8 +181,8 @@ const Header1 = (props) => {
           password: data.password,
           phonenumber: data.phonenumber,
           email: data.email,
-          role: "user",
-          userStatus:"Activate",
+          role: data.role,
+          userStatus:data.userStatus,
         }),
       })
         .then((res) => {
@@ -199,7 +203,7 @@ const Header1 = (props) => {
           } else {
             setRegMsg("Username is already exits");
           }
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
           console.log(`Error: ${error}`);
@@ -224,8 +228,8 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (res) => {
-          if (res && res.userStatus && res.userStatus === "Activate") {
-            if (res.role === "user") {
+          // if (res && res.userStatus && res.userStatus === "Activate") {
+            if (res && res.role === "user") {
               Userdata = res;
               await localStorage.setItem("Userdata", JSON.stringify(res));
               await CartById();
@@ -244,14 +248,15 @@ const Header1 = (props) => {
               await localStorage.setItem("Userdata1", JSON.stringify(res.role));
               history.push("/Dashboard");
               window.location.reload();
-            } else {
+            } else if(Userdata===undefined) {
               setMsg("User Name Or PassWord is not Valid");
             }
-          } else if (res && res.message === "Invalid username or password") {
-            setMsg("User Name Or PassWord is not Valid");
-          } else {
-            setMsg("User is De-Activated");
-          }
+          // } 
+          // else if (res && res.message === "Invalid username or password") {
+          //   setMsg("User Name Or PassWord is not Valid");
+          // } else {
+          //   setMsg("User is De-Activated");
+          // }
         })
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
