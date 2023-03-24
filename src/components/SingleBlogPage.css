@@ -2,9 +2,8 @@
   height: 200px !important;
 }
 .blog-title-text {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.9);
   font-size: 1rem;
-  text-decoration: underline;
 }
 /* .Single-Blog-Heading h1{
     font-size: 2rem;

@@ -967,6 +967,8 @@ body {
 .heaader-wrapper{
     display: flex;
     justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .header-wrapper-left{

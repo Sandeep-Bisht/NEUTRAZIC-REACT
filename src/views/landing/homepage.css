@@ -17202,7 +17202,8 @@ textarea.form-control {
   background-color: var(--whiteColor);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   padding: 30px 20px;
-  height: 185px;
+  min-height: 230px;
+ 
 }
 
 .single-contact-info-box .icon {
@@ -19858,7 +19859,9 @@ svg {
 /* media query Deepak */
 @media only screen and (max-width: 1399px) {
   /*responsive homepage */
-
+  .single-contact-info-box{
+    height: 280px;
+  }
   .single-products-box .content .price-div span {
     font-size: 15x !important;
   }
@@ -20112,16 +20115,16 @@ svg {
   }
 
   .single-contact-info-box p a {
-    font-size: 17px;
+    font-size: 15px;
   }
   .single-contact-info-box p {
-    font-size: 17px;
+    font-size: 15px;
   }
   .single-contact-info-box {
-    height: 200px;
+    height: 260px;
   }
   .single-contact-info-box h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
   .contact-form .sub-title {
     font-size: 27px;
