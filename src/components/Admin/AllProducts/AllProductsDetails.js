@@ -12,10 +12,10 @@ import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 
 
-var currentCurrencyType="";
+// var currentCurrencyType="";
 
 export default function AllProductsDetails() {
 
@@ -24,13 +24,12 @@ export default function AllProductsDetails() {
   const [searchVal,setSearchVal]=useState("");
   const [filteredData]=useState([]);
   const [products, Setproducts] = useState("");
-  const cookies = new Cookies();
+  // const cookies = new Cookies();
 
   
   const { Search } = Input;
 
   useEffect(()=>{
-    currentCurrencyType = cookies.get("CurrencyType")
     fetchUsers();
     GetProducts();
    },[])
@@ -47,7 +46,6 @@ export default function AllProductsDetails() {
         console.log(err, "error");
       });
   };
-
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(`${baseUrl}/api/product/all_product`);
@@ -89,12 +87,12 @@ export default function AllProductsDetails() {
     },
     {
       title: "Price",
-      dataIndex: currentCurrencyType==="Dollar"  ? "dollerMrp" : "inrMrp",
+      dataIndex:"inrMrp",
       key: "inrMrp",
     },
     {
       title: "Discount",
-      dataIndex: currentCurrencyType==="Dollar"  ? "dollerDiscount" : "inrDiscount",
+      dataIndex: "inrDiscount",
       key: "inrDiscount",
     },
     {

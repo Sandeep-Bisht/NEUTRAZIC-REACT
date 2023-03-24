@@ -33,7 +33,6 @@ const CategoryCreation = (props) => {
     }
     return error;
   }
-
   const submitData = async (e) => {
     e.preventDefault();
     const errors = ValidationFrom(data);
@@ -62,6 +61,35 @@ const CategoryCreation = (props) => {
       .catch((err) => console.log(err));
     }
    };
+  // const submitData = async (e) => {
+  //   e.preventDefault();
+  //   const errors = ValidationFrom(data);
+  //   setFormerror(errors);
+  //   if(Object.keys(errors).length === 0){
+  //   const formData = new FormData();
+  //   await formData.append("description", data.description);
+  //   await formData.append("name", data.name);
+  //   await formData.append("featuredCategories", data.featuredCategories);
+  //   await formData.append("image", data.image);    
+  //   const url = `${baseUrl}/api/category/add_category`;
+   
+  //    await fetch(url, {
+  //   method: "POST",
+  //     body: formData,
+  //   })
+  //     .then((res) =>{
+  //       res.json()
+  //       history.push("/AllCategoriesDetails");
+  //     } )
+  //     .then((res) => {
+  //       GetCategory();
+
+  //       this.getAddOn();
+  //     })
+  //     .catch((err) => console.log(err));
+  //   }
+  //  };
+  
 
   const SelectImage = (e) => {
     Setdata({ ...data, image: [...e.target.files] });

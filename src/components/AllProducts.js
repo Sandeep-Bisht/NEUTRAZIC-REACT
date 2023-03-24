@@ -38,6 +38,13 @@ const AllProducts = (props) => {
   const history = useHistory();
   const [currancy,setCurrency]=useState("INR");
   // const cookies = new Cookies();
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [isLogin, setIsLogin] = useState(loginState)
+
+  useEffect(() => {
+    setLoginState(loginState)
+    setIsLogin(loginState)
+  },[loginState]);
 
   useEffect(()=>{
     if(state1 == "1"){
@@ -58,7 +65,7 @@ const AllProducts = (props) => {
     GetSubCategory();
     GetManufacturer();
     // GetCategory();
-  }, []);
+  }, [loginState]);
   // const setPreviousValue = () => {
   //   if (prev >= 7) {
   //     SetNext(next - 8);
