@@ -60,14 +60,20 @@ const HomePage = () => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [blogs, setBlogs] = useState();
-  
+
 
   const history = useHistory();
-  const [currancy,setCurrency] = useState("INR")
+  const [currancy, setCurrency] = useState("INR")
 
   const cookies = new Cookies();
-  const {state1,setState1} = useContext(CurrencyContext);
-  console.log(state1,"State");
+  const { state1, setState1 } = useContext(CurrencyContext);
+  const {loginState,setLoginState} = useContext(CurrencyContext);
+  const [isLogin,setIsLogin] = useState(loginState)
+  
+  useEffect(()=>{
+  setLoginState(loginState)
+  setIsLogin(loginState)
+  },[loginState])
 
   // useEffect(() => {
   //   let currentCurrencyType = cookies.get("Currency")
@@ -92,7 +98,7 @@ const HomePage = () => {
         console.log(err, "error");
       });
   };
-  useEffect(()=>{
+  useEffect(() => {
     const currentCurrency = cookies.get('CurrencyType');
     if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
@@ -121,7 +127,7 @@ const HomePage = () => {
         alert("in");
       });
     });
-  }, []);
+  }, [loginState]);
 
   let carouselRef = useRef(null);
 
@@ -554,9 +560,7 @@ const HomePage = () => {
                     Reliable on time home delivery
                   </p>
                   <p className="home-banner-content">
-                    We are excited to be part of the WordPress community and
-                    looking to make contribution by releasing free WordPress
-                    themes for everyone to use. Other themes can be found here.
+                  With the rise of e-commerce and online shopping, you can expect your purchases to be delivered to your doorstep in a timely and dependable manner. Reliable on-time home delivery is a crucial factor for businesses to succeed in the e-commerce industry.
                   </p>
 
                   <div className="login-div2 clearfix mb-5">
@@ -989,13 +993,13 @@ const HomePage = () => {
         </section>
         <section className="products-area">
           <h1 className="trendign-head">
-            <span className="products-color">Weight Management</span>
+            <span className="products-color">Fitness</span>
           </h1>
           <div className="container m-auto">
             <div className="row">
               <div id="column" className="columns_5">
                 {data
-                  .filter((item) => item.category.name == "Weight Management")
+                  .filter((item) => item.category.name == "Fitness")
                   .map((el, ind) => {
                     if (ind < 5) {
                       return (
@@ -1204,12 +1208,7 @@ const HomePage = () => {
                     </h3>
                     <div>
                       <p id="para" className="text-justify">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in
+                        Our nutraceutical app is designed to help you live a healthier life. Downloading our app is quick and easy. you'll have access to a wealth of information and tools that will help you take control of your health and wellness.
                       </p>
                     </div>
                   </div>
@@ -1219,7 +1218,9 @@ const HomePage = () => {
                         <div>
                           <AiFillApple />
                         </div>
+                        <Link to="/mobileapp">
                         <div>App Store</div>
+                        </Link>
                       </div>
                     </button>
                     <button type="button" className="btn ms-3" id="btn-2">
@@ -1227,7 +1228,9 @@ const HomePage = () => {
                         <div>
                           <IoLogoGooglePlaystore />
                         </div>
+                        <Link to="/mobileapp">
                         <div>Google Play</div>
+                        </Link>
                       </div>
                     </button>
                   </div>
@@ -1249,7 +1252,7 @@ const HomePage = () => {
                 <h1 className="trendign-head">
                   <span className="products-color">Our Blogs</span>
                 </h1>
-              
+
               </div>
               <div className="blog-page-section-2">
                 <div className="row">

@@ -18,11 +18,13 @@ import LineChart from "../../LineChart";
 import PieChart from "../PieChart";
 import Header1 from "../Header1";
 import HomePage from "../../views/landing/HomePage";
+import { useContext } from "react";
+import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
 
 
 // var ManufacturerCount1='';
 // var productCount1=''
-
+var Userdata;
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
   const [products, Setproducts] = useState("");
@@ -33,11 +35,19 @@ const Dashboard = () => {
   const [localuser, setLocaluser] = useState("");
   const [blogs, setBlogs] = useState("");
   const [warehouse, setWarehouse] = useState("")
-  var Userdata;
+  const {loginState,setLoginState} = useContext(CurrencyContext);
+  const [isLogin,setIsLogin] = useState(loginState)
+  
+  useEffect(()=>{
+  setLoginState(loginState)
+  setIsLogin(loginState)
+  },[loginState])
+  
 
    
 
   useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     setCount();
     GetUser();
     getAllBlogs();
@@ -49,7 +59,7 @@ const Dashboard = () => {
     GetProducts();
     GetLocalUserData();
     GetBlogs();
-  },[]);
+  },[loginState]);
 
   const GetLocalUserData = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));

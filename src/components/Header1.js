@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
 
+
 import "../components/Header1.css";
 import "../components/Carouselcomp";
 import $ from "jquery";
@@ -57,7 +58,20 @@ const Header1 = (props) => {
   const [shouldRefresh, setShouldRefresh] = useState(false);
   const cookies = new Cookies();
   const location = useLocation();
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [isLogin, setIsLogin] = useState(loginState)
 
+  useEffect(() => {
+    setLoginState(loginState)
+    setIsLogin(loginState)
+  },[loginState]);
+
+  // useEffect(() => {
+  //   Userdata = JSON.parse(localStorage.getItem("Userdata"));
+  //   if (Userdata === null) {
+  //     setCartItems("");
+  //   }
+  // }, [loginState]);
   const {
     register,
     handleSubmit,
@@ -73,10 +87,12 @@ const Header1 = (props) => {
     },
     mode: "onBlur",
   });
+
   const {
     register: register2,
     handleSubmit: handleLoginSubmit,
     formState: { errors: loginErrors },
+    reset,
   } = useForm({
     defaultValues: {
       username: "",
@@ -99,17 +115,18 @@ const Header1 = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     GetSubCategory();
-    $(document).ready(function() {
+    CartById();
+    $(document).ready(function () {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
-      window.onscroll = function() {
+      window.onscroll = function () {
         headerFunction();
       };
-      $(".arrow").click(function() {
+      $(".arrow").click(function () {
         $(".sublist").slideUp();
       });
     });
-  }, []);
+  }, [loginState]);
 
   useEffect(() => {
     const currentCurrency = cookies.get('CurrencyType');
@@ -118,15 +135,7 @@ const Header1 = (props) => {
       setState1("1");
     }
   }, [currancy]);
-  useEffect(() => {
-    if (shouldRefresh) {
-      console.log("helo refresh");
-      // history.push(location.pathname);
-      history.go(location.pathname);
-      // history.replace(location.pathname);
-      setShouldRefresh(false);
-    }
-  }, [shouldRefresh]);
+
 
   const currencyHandler = (e) => {
     // console.log(e.target.value,"Hello Value");
@@ -134,27 +143,31 @@ const Header1 = (props) => {
     if (currancy === "INR") {
       setState1("1");
     }
-    else{
+    else {
       setState1("0");
     }
 
-    
-
-    // console.log(location.pathname,'path')
-    // navigate("/home");
     cookies.set("CurrencyType", e.target.value, { path: "/" });
-    // setShouldRefresh(true);
-    // let location = history.location
-    // console.log(location,"locationonononononon");
+
   };
-  console.log(state1);
+useEffect(()=>{
+  if(Userdata===null)
+  {
+    setLoginState("0");
+    setCartItems("");
+  }
+    setLoginState("1");
+},[loginState]);
+
   const logout = () => {
     localStorage.setItem("Userdata", null);
     toast.success("Logout successfully", {
       position: "bottom-right",
       autoClose: 2000,
     });
-    window.location.replace("/");
+    reset();
+    setLoginState("0");
+    setCartItems("");
   };
 
   const RegisterUser = (data) => {
@@ -164,13 +177,12 @@ const Header1 = (props) => {
       data.repassword &&
       data.username &&
       data.phonenumber &&
-      data.password == data.repassword 
-    
+      data.password == data.repassword
+
     ) {
       let username = data.username.toLowerCase();
-      data.role="superAdmin";
-      data.userStatus="Activate"
-      console.log(data,"dataaaaaaaaaaaaaaaa")
+      data.userStatus = "Activate"
+      console.log(data, "dataaaaaaaaaaaaaaaa")
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -182,8 +194,8 @@ const Header1 = (props) => {
           password: data.password,
           phonenumber: data.phonenumber,
           email: data.email,
-          role: data.role,
-          userStatus:data.userStatus,
+          role: "user",
+          userStatus: data.userStatus,
         }),
       })
         .then((res) => {
@@ -201,10 +213,11 @@ const Header1 = (props) => {
               position: "bottom-right",
               autoClose: 2000,
             });
+            reset();
+            setRegisterModal(false);
           } else {
             setRegMsg("Username is already exits");
           }
-          window.location.reload();
         })
         .catch((error) => {
           console.log(`Error: ${error}`);
@@ -229,35 +242,40 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (res) => {
+            setLoginState("1")
           // if (res && res.userStatus && res.userStatus === "Activate") {
-            if (res && res.role === "user") {
-              Userdata = res;
-              await localStorage.setItem("Userdata", JSON.stringify(res));
-              await CartById();
-              //  history.push("/");
-              window.location.reload();
-              toast.success("Login successfully", {
-                position: "bottom-right",
-                autoClose: 2000,
-              });
-            } else if (
-              res.role == "superAdmin" ||
-              res.role == "Vendor" ||
-              res.role == "Manager"
-            ) {
-              await localStorage.setItem("Userdata", JSON.stringify(res));
-              await localStorage.setItem("Userdata1", JSON.stringify(res.role));
-              history.push("/Dashboard");
-              window.location.reload();
-            } else if(Userdata===undefined) {
-              setMsg("User Name Or PassWord is not Valid");
-            }
+          if (res && res.role === "user") {
+            Userdata = res;
+            await localStorage.setItem("Userdata", JSON.stringify(res));
+            await CartById();
+            $("#loginModalCloseBtn").click();
+        
+            reset();
+            toast.success("Login successfully", {
+              position: "bottom-right",
+              autoClose: 2000,
+            });
+          } else if (
+            res.role == "superAdmin" ||
+            res.role == "Vendor" ||
+            res.role == "Manager"
+          ) {
+            await localStorage.setItem("Userdata", JSON.stringify(res));
+            await localStorage.setItem("Userdata1", JSON.stringify(res.role)); 
+            await CartById();
+            $("#loginModalCloseBtn").click();
+            history.push("/Dashboard");
+          } else  if(res.message === "Invalid username or password") {
+            setMsg("User Name Or PassWord is not Valid");
+          }
           // } 
           // else if (res && res.message === "Invalid username or password") {
           //   setMsg("User Name Or PassWord is not Valid");
-          // } else {
+          // } 
+          //else {
           //   setMsg("User is De-Activated");
           // }
+          
         })
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
@@ -270,7 +288,8 @@ const Header1 = (props) => {
         });
     }
   };
-  
+
+
   const headerFunction = async () => {
     if (window.pageYOffset > sticky) {
       header.classList.add("sticky");
@@ -354,6 +373,7 @@ const Header1 = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data[0]);
+          setCartItems(data.data[0].order.length);
         })
 
         .catch((err) => {
@@ -435,6 +455,7 @@ const Header1 = (props) => {
               </button>
             </div>
             <div className="modal-body">
+              
               <div
                 className="accordion accordion-flush"
                 id="accordionFlushExample"
@@ -493,6 +514,7 @@ const Header1 = (props) => {
           <div className="modal-dialog">
             <div className="modal-content login-register-modal">
               <div className="modal-body">
+              <button type="button" id="loginModalCloseBtn" className="d-none" data-bs-dismiss="modal">Close</button>
                 <div className="row mt-0">
                   <div className="col-12">
                     <div className="nutra-logo-in-login-form">
@@ -692,7 +714,7 @@ const Header1 = (props) => {
                           onSubmit={handleLoginSubmit(LoginUser)}
                         >
                           <div className="row mt-0 start-login-form">
-                           
+
                             <div className="col-md-12 col-12">
                               <div className="form-group">
                                 <label>
