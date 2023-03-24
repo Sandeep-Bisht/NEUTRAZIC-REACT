@@ -1,3 +1,20 @@
 .Appstore-section{
     margin-top:170px;
 }
+.Appstore-section button{
+    margin-top: 30px;
+    padding: 8px 40px;
+    color: var(--optionalColor);
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0.25rem;
+    border: 2px solid rgb(27 151 255 / 33%);
+}
+.Appstore-section button:hover{
+    background: linear-gradient( 90deg, rgb(44 160 255 / 53%) 0%, rgba(23, 150, 255, 1) 100% );
+    border: none;
+    color: #fff;
+    padding: 10px 40px;
+}
