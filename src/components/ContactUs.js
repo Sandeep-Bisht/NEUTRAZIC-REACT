@@ -27,8 +27,7 @@ const ContactUs = () => {
                 <h3>Address</h3>
                 <p>
                   <a href="#" target="_blank">
-                    NutraZik Corp Devasenapathi Krishnan 539 W. Commerce Suite
-                    #6696 Dallas, TX 75208{" "}
+                  Sujok Building, 2nd floor, mansarovar colony, Ballupur Chowk, Ballupur, Dehradun, Uttarakhand 248001{" "}
                   </a>
                 </p>
               </div>
