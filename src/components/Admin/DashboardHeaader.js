@@ -7,18 +7,18 @@ import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
 var Userdata = " ";
 
 function DashboardHeaader() {
-  const {loginState,setLoginState} = useContext(CurrencyContext);
-  const [isLogin,setIsLogin] = useState(loginState)
+  // const {loginState,setLoginState} = useContext(CurrencyContext);
+  // const [isLogin,setIsLogin] = useState(loginState)
   
-  useEffect(()=>{
-  setLoginState(loginState)
-  setIsLogin(loginState)
-  },[loginState])
+  // useEffect(()=>{
+  // setLoginState(loginState)
+  // setIsLogin(loginState)
+  // },[loginState])
   
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-  },[loginState]);
+  },[]);
 
   return (
     <>
