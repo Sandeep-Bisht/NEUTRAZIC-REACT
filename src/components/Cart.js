@@ -205,7 +205,6 @@ const Cart = () => {
       .then(async (res) => {})
       .catch((err) => {});
   };
-  console.log(cart, "THis is cart");
   return (
     <>
       <Header1 CartItems={cart} />
@@ -222,7 +221,7 @@ const Cart = () => {
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
-                {cart.length > 0 ? (
+                {cart && cart.length > 0 ? (
                   <div className="cart-table">
                     <table
                       className="w-100"
@@ -245,7 +244,6 @@ const Cart = () => {
                       </thead>
                       <tbody>
                         {cart.map((el, ind1) => {
-                          console.log(state1.state1, "This is el");
                           if (state1.state1 == "1") {
                             total = el.dollerDiscount * el.quantity;
                             total1 = total1 + el.dollerDiscount * el.quantity;
