@@ -232,7 +232,7 @@ table .cart-data {
   border-bottom: 2px solid #c7c7c750;
 }
 table .cart-data td {
-  text-align: start;
+  text-align: center;
   padding: 2px;
 }
 table thead {

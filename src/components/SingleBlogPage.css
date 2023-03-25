@@ -8,6 +8,9 @@
 .blog-page-section-2 .single-blog-page-text{
   overflow: auto;
 }
+::-webkit-scrollbar-thumb {
+  background-color: #2a96ff;
+}
 /* .Single-Blog-Heading h1{
     font-size: 2rem;
 } */
@@ -39,7 +42,7 @@
 }
 
 .single-blog-page-text .card-text {
-  font-size: 12px;
+  font-size: 14px;
 }
 @media only screen and (max-width: 1399px) {
   .blog-container {
