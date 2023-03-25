@@ -788,7 +788,6 @@ const HomePage = () => {
                 {categories &&
                   categories.length > 0 &&
                   categories.map((item, index) => {
-                    console.log(item, "This is item");
                     if (item.featuredCategories == "Featured Categories") {
                       return (
                         <div className="col-md-12" key={index}>

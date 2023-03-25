@@ -109,7 +109,6 @@ const ShippedOrder = () => {
   };
 
   const showModal = (item) => {
-    console.log(item, "itemmmmmm")
     setPrticularUserOrder(item.order)
     setShippedOrder(item.address);
     setPrticularUserOrder(item.order);
@@ -220,7 +219,6 @@ const ShippedOrder = () => {
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item) => {
-                          console.log(item, "itemssss");
                           return (
                             <>
                               <tr>

@@ -14,7 +14,6 @@ const MyAccount = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     setData(Userdata);
   }, []);
-  console.log(data,"This is data");
   const {
     register,
     handleSubmit,

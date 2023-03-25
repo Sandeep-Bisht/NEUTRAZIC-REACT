@@ -72,7 +72,6 @@ const UpdateUserStatus = async (userId, userStatus) => {
       body: JSON.stringify({ ...userId, userStatus:userStatus }),
     });
     const data = await response.json();
-    console.log(data);
     // Call your GetUserData function here or do something with the data
   } catch (error) {
     console.log(error);

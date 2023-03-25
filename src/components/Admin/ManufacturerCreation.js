@@ -27,7 +27,6 @@ const ManufacturerCreation = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    console.log(Userdata, "usererr dasdaasdadad");
     GetManufacturer();
     if (editableData) {
       Setdata(editableData);

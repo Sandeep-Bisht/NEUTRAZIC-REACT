@@ -58,13 +58,11 @@ const InProgressOrder = () => {
 
   const UpdateOrderStatus = async (e,order, orderStatus) => {
     e.preventDefault()
-    // console.log(order, "inside updateeee",shipper,startDate,endDate ,orderStatus)
     order.shipperName = shipper;
     order.shippingDate = startDate;
     order.delivery_time = endDate;
     order.orderStatus = orderStatus;
     delete order.createdAt;
-    console.log("before api", order, "status",orderStatus)
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {
@@ -149,7 +147,6 @@ const InProgressOrder = () => {
   ];
 
   const showModal = (order) => {
-    console.log(order, "order");
     setPrticularUserOrder(order.order);
     setIsModalVisible(true);
   };
@@ -226,7 +223,6 @@ const InProgressOrder = () => {
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item) => {
-                          console.log(item, "itemssss");
                           return (
                             <>
                               <tr>                                

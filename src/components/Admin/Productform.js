@@ -67,7 +67,6 @@ const Productform = (props) => {
     }
     return error;
   }
-   console.log(formErrors,"erroroasssssss");
    
    const submitData =async(e) => {
     e.preventDefault();
@@ -126,7 +125,6 @@ const Productform = (props) => {
       {subcategory? restData.subcategory=subcategory._id:restData.subcategory=""}
       {manufacturer? restData.manufacturer=manufacturer._id:restData.manufacturer=""}
       {type? restData.type=type._id:restData.type=""}
-      console.log(restData,"rest data ");
       Setdata(restData);
     }
     $(document).ready(function () {
@@ -344,7 +342,6 @@ const Productform = (props) => {
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
 
-    console.log(data,"inside update")
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("description", data.description);
@@ -383,7 +380,6 @@ const Productform = (props) => {
     setShowTable(true);
   };
 
-  console.log(editableData,'editable data')
 
   return (
     <>

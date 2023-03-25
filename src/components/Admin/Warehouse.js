@@ -48,7 +48,6 @@ const Warehouse = (props) => {
       })
 
       .catch((err) => console.log(err));
-    //console.log(formData)
     e.preventDefault();
   }; 
 

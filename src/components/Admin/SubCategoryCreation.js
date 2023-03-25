@@ -35,7 +35,6 @@ const SubCategoryCreation = (props) => {
           ? (restData.category = category._id)
           : (restData.category = "");
       }
-      console.log(restData, "rest data");
       Setdata(restData);
     }
   }, []);

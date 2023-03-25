@@ -56,8 +56,6 @@ const PieChart = () => {
       // Handle the error in some way, e.g. by setting an error message state variable
     }
   };
-  
-  console.log(shipped,"pending length");
 
 
     const data = [

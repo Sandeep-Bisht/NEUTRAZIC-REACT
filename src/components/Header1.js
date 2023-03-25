@@ -139,7 +139,7 @@ const Header1 = (props) => {
 
 
   const currencyHandler = (e) => {
-    // console.log(e.target.value,"Hello Value");
+    
     setCurrency(e.target.value);
     if (currancy === "INR") {
       setState1("1");
@@ -206,7 +206,7 @@ useEffect(()=>{
           }
           // throw new Error(res.status);
           else if (res.status === 400) {
-            console.log("data is already exits");
+            
           }
         })
         .then((data) => {
