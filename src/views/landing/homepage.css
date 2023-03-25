@@ -11726,30 +11726,35 @@ textarea.form-control {
   transition: var(--transition);
   font-size: 22px;
 }
-.cart-table .bx-minus:before {
+.cart-table .bx-minus,.bx-plus{
+  color: black;
+}
+/* .cart-table .bx-minus:before {
   content: "\eaed";
   background: none;
   color: #000;
   opacity: 0.7;
+} */
+.cart-table .bx-plus:before:hover{
+  color:#2a96ff;
 }
-.cart-table .bx-plus:before {
+/* .cart-table .bx-plus:before {
   background: none;
   color: #000;
   opacity: 0.7;
-}
+} */
 
-.bx-minus:before {
+/* .bx-minus:before {
   content: "\eaed";
   background: #1e144f;
   color: white;
-}
-.bx-plus:before {
+} */
+/* .bx-plus:before {
   background: #1e144f;
   color: white;
-  /* padding: 4px; */
   padding-top: 0;
   padding-bottom: 0;
-}
+} */
 .products-details-desc .products-add-to-cart .input-counter span .minus-btn {
   left: 0;
 }
@@ -13444,6 +13449,7 @@ textarea.form-control {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   padding-left: 12px;
+  font-weight: 350;
 }
 
 .cart-table table tbody tr td.product-subtotal .remove {
@@ -13456,15 +13462,17 @@ textarea.form-control {
 
 .cart-table table tbody tr td.product-quantity .input-counter {
   text-align: center;
-  display: inline-block;
   position: relative;
   background-color: #f3f3f3;
   padding: 1px 20px;
-  border-radius: 20px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .product-quantity {
-  width: 80px;
-
+  width: 110px;
+  height: 80px;
   padding: 10px;
 }
 .product-quantity .amount {
@@ -13474,19 +13482,21 @@ textarea.form-control {
   justify-content: center;
   font-family: "Roboto", sans-serif;
   font-size: 30px;
+  
 }
 .product-quantity .amount .input-counter {
   position: relative;
   top: 5px;
+  border-radius: 5px;
 }
 .product-price .amount {
   /* height: 60px; */
   width: 100%;
-  color: #000;
   opacity: 0.7;
   justify-content: center;
   font-family: "Roboto", sans-serif;
-  font-size: 30px;
+  font-weight: 350;
+ 
 }
 .product-price .amount span {
   position: relative;
@@ -13494,24 +13504,29 @@ textarea.form-control {
   font-size: 21px;
   padding-left: 0px;
   padding-right: 10px;
+  font-weight: 350;
+}
+.product-price .amount span .currency-sign{
+  font-weight: 300 !important;
 }
 .product-subtotal .amount {
   /* height: 60px; */
   width: 100%;
   color: #000;
   opacity: 0.7;
-  justify-content: center;
-  font-family: "Roboto", sans-serif;
+   font-family: "Roboto", sans-serif;
   font-size: 30px;
+  text-align: center;
 }
+
 .product-subtotal .amount span {
   position: relative;
-  top: -4px;
+  top: 0;
   /* left: 25%; */
-  font-size: 21px;
+  font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  font-weight: 550;
+  font-weight: 350;
 }
 .cart-table table tbody tr td.product-quantity .input-counter span {
   position: absolute;
@@ -13528,20 +13543,31 @@ textarea.form-control {
 
 .cart-table table tbody tr td.product-quantity .input-counter span.minus-btn {
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
+.cart-table table tbody tr td.product-quantity .input-counter span.minus-btn .minus:hover {
+  color: #2a96ff !important;
+  font-weight: 800;
+}
+.cart-table table tbody tr td.product-quantity .input-counter span.plus-btn .plus:hover{
+  color: #2a96ff !important;
+  font-weight: 800;
+}
 .cart-table table tbody tr td.product-quantity .input-counter span.plus-btn {
   right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.cart-table table tbody tr td.product-quantity .input-counter span:hover {
+.cart-table .bx-minus:before:hover{
   color: var(--mainColor);
 }
 
 .cart-table table tbody tr td.product-quantity .input-counter input {
-  color: var(--blackColor);
+  color: black;
   outline: 0;
-  display: block;
   border: none;
   text-align: center;
   width: 100%;
@@ -18818,6 +18844,7 @@ textarea.form-control {
   text-transform: capitalize;
   font-size: 14px;
   font-weight: 400;
+  margin-top: 20px;
 }
 .nutracuetical-shop-now:hover,
 .cosmetic-shop-now:hover {
@@ -20781,4 +20808,20 @@ svg {
 /* All Product */
 .allproduct-price-div .text-start {
   color: rgba(0, 0, 0, 0.6);
+}
+
+
+
+.Image-Container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.category-Button{
+  margin: 20px 10px 0 0; 
+ 
+}
+.Category-container{
+  max-height: 280px;
+  
 }

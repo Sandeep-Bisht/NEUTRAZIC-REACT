@@ -245,7 +245,6 @@ const Cart = () => {
                       </thead>
                       <tbody>
                         {cart.map((el, ind1) => {
-                          console.log(state1.state1, "This is el");
                           if (state1.state1 == "1") {
                             total = el.dollerDiscount * el.quantity;
                             total1 = total1 + el.dollerDiscount * el.quantity;
@@ -281,9 +280,9 @@ const Cart = () => {
                                 <div className="amount">
                                   <span className="unit-amount">
                                     {state1.state1 == "1" ? (
-                                      <i class="fa fa-dollar-sign"></i>
+                                      <i class="fa fa-dollar-sign currency-sign"></i>
                                     ) : (
-                                      <i className="fa fa-inr"></i>
+                                      <i className="fa fa-inr currency-sign"></i>
                                     )}
                                     <del>
                                       {state1.state1 == "1"
@@ -315,8 +314,8 @@ const Cart = () => {
                                       <i className="bx bx-minus minus"></i>
                                     </span>
                                     <input
-                                      type="text"
-                                      min="1"
+                                      type="number"
+                                      
                                       value={el.quantity}
                                     />
                                     <span
@@ -325,7 +324,7 @@ const Cart = () => {
                                         Plusquantity(el.quantity, el.mrp, ind1);
                                       }}
                                     >
-                                      <i className="bx bx-plus  minus"></i>
+                                      <i className="bx bx-plus  plus"></i>
                                     </span>
                                   </div>
                                 </div>
