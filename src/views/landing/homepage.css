@@ -17303,7 +17303,9 @@ textarea.form-control {
 	margin-bottom: -7px;
 	border: none
 } */
-
+iframe{
+  display: none;
+}
 .footer-area {
   background-color: #fff;
   padding-top: 50px;
@@ -19974,7 +19976,7 @@ svg {
   /* end homepage */
   .footer-area {
     position: relative;
-    top: -22px;
+    top: 0px;
     left: -23px;
   }
   .contact-area {
@@ -20241,7 +20243,7 @@ svg {
   /* end All product page */
   .footer-area {
     position: relative;
-    top: -22px;
+    top: 0px;
     left: 0px;
   }
   .contact-area {
