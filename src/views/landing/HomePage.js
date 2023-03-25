@@ -83,8 +83,6 @@ const HomePage = () => {
   //   }
   // }, [currancy])
 
-
-
   // useEffect(() => {
 
   // },[])
@@ -114,16 +112,16 @@ const HomePage = () => {
     GetWishlist();
     GetCategory();
     GetManufacturer();
-    $(document).ready(function () {
+    $(document).ready(function() {
       //    $('.icon-wishlist').on('click', function(){
       //       $(this).toggleClass('in-wishlist');
 
       // })
 
-      $(".frontimage").mouseover(function () {
+      $(".frontimage").mouseover(function() {
         alert("in");
       });
-      $(".frontimage").mouseleave(function () {
+      $(".frontimage").mouseleave(function() {
         alert("in");
       });
     });
@@ -659,9 +657,14 @@ const HomePage = () => {
                                 <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                   <span className="price">
                                     {" "}
-                                    {state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-
-                                    {state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                    {state1 == "1" ? (
+                                      <i class="fa fa-dollar-sign"></i>
+                                    ) : (
+                                      <i className="fa fa-inr"></i>
+                                    )}
+                                    {state1 == "1"
+                                      ? el.dollerDiscount
+                                      : el.inrDiscount}
                                   </span>
                                 </div>
                                 <div className="col-6 text-end">
@@ -780,48 +783,47 @@ const HomePage = () => {
                 // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-              // itemPadding={[0, 4]}
+                // itemPadding={[0, 4]}
               >
                 {categories &&
                   categories.length > 0 &&
                   categories.map((item, index) => {
+                    console.log(item, "This is item");
                     if (item.featuredCategories == "Featured Categories") {
                       return (
                         <div className="col-md-12" key={index}>
-                          <div className="cat-left-side">
-                            <div className="row mt-0 align-items-center">
-                              <h1 className="cat-heading">{item.name}</h1>
-                              <div className="col-md-6">
-                                <p className="cat-para">{item.description}</p>
-                                <Link to={"/Subcategories/" + item._id}>
-                                  <button className="btn btn cosmetic-shop-now">
-                                    Shop Now
-                                  </button>
-                                </Link>
-                              </div>
-                              <div className="col-md-6">
-                                <Link to={"/Subcategories/" + item._id}>
-                                  <div className="category-div">
-                                    <figure>
-                                      {/* <img
-                              // src={require("../../Images/Nutraceutical-image 1.png")} cosmatic-healthcare.jpeg
-                              src={require("../../Images/cosmatic-healthcare.jpeg")}
-                              className="front-img img-fluid"
-                            /> */}
-                                      <img
-                                        src={
-                                          item.image &&
-                                          `${baseUrl}/` + item.image[0].path
-                                        }
-                                        alt=""
-                                        className="cat-left-side-image"
-                                      />
-                                    </figure>
-                                  </div>
+                          <div className="Category-container">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <div className="category-left-side">
+                                <div className="category-heading">
+                                  <h4>{item.name}</h4>
+                                </div>
+                                <div className="category-text">
+                                  <p>{item.description}</p>
+                                </div>
+                                <Link to={"/Subcategories/" + item._id}><button className="btn btn cosmetic-shop-now category-Button">
+                                  Shop Now
+                                </button>
                                 </Link>
                               </div>
                             </div>
+                            <div className="col-md-6">
+                            <Link to={"/Subcategories/" + item._id}>
+                              <div className="Image-Container">
+                                <img
+                                  src={
+                                    item.image &&
+                                    `${baseUrl}/` + item.image[0].path
+                                  }
+                                  alt=""
+                                  className="cat-left-side-image"
+                                />
+                              </div>
+                              </Link>
+                            </div>
                           </div>
+                        </div>
                         </div>
                       );
                     }
@@ -886,9 +888,14 @@ const HomePage = () => {
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
                                   {" "}
-                                  {state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-
-                                  {state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1 == "1" ? (
+                                    <i class="fa fa-dollar-sign"></i>
+                                  ) : (
+                                    <i className="fa fa-inr"></i>
+                                  )}
+                                  {state1 == "1"
+                                    ? el.dollerDiscount
+                                    : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">
@@ -1045,9 +1052,14 @@ const HomePage = () => {
                               <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
                                 <span className="price">
                                   {" "}
-                                  {state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-
-                                  {state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                  {state1 == "1" ? (
+                                    <i class="fa fa-dollar-sign"></i>
+                                  ) : (
+                                    <i className="fa fa-inr"></i>
+                                  )}
+                                  {state1 == "1"
+                                    ? el.dollerDiscount
+                                    : el.inrDiscount}
                                 </span>
                               </div>
                               <div className="col-6 text-end">
@@ -1173,7 +1185,7 @@ const HomePage = () => {
                 // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-              // itemPadding={[0, 4]}
+                // itemPadding={[0, 4]}
               >
                 {Manufactureres &&
                   Manufactureres.length > 0 &&
@@ -1206,6 +1218,7 @@ const HomePage = () => {
                       <span className="nutrazik-color">Nutrazik</span> <br />{" "}
                       mobile app
                     </h3>
+
                     <div>
                       <p id="para" className="text-justify">
                         Our nutraceutical app is designed to help you live a healthier life. Downloading our app is quick and easy. you'll have access to a wealth of information and tools that will help you take control of your health and wellness.
@@ -1252,7 +1265,6 @@ const HomePage = () => {
                 <h1 className="trendign-head">
                   <span className="products-color">Our Blogs</span>
                 </h1>
-
               </div>
               <div className="blog-page-section-2">
                 <div className="row">
@@ -1264,16 +1276,13 @@ const HomePage = () => {
                             if (ind < 4)
                               return (
                                 <div className="col-lg-3 col-md-6">
-                                  <Link
-
-                                    to={"/SingleBlogPage/" + item.slug}
-                                  >
+                                  <Link to={"/SingleBlogPage/" + item.slug}>
                                     <div className="card">
                                       <img
                                         src={
                                           item.featuredImage &&
                                           `${baseUrl}/` +
-                                          item.featuredImage[0].path
+                                            item.featuredImage[0].path
                                         }
                                         className="card-img-homepage"
                                         alt="blog-image"

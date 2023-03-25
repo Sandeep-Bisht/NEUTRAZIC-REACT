@@ -115,11 +115,14 @@
 }
 .blog-page-section-2 .cart-text-body {
   min-height: 182px;
+  font-size: 12px !important;
 }
 .blog-page {
   margin-top: 130px;
 }
-
+.cart-text-body .card-text{
+  font-size: 12px !important;
+}
 /* / Single-blog-css / */
 
 .single-blog-image {
