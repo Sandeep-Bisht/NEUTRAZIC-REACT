@@ -217,6 +217,7 @@ useEffect(()=>{
             });
             reset();
             setRegisterModal(false);
+            setRegMsg("");
           } else {
             setRegMsg("Username is already exits");
           }
@@ -266,7 +267,7 @@ useEffect(()=>{
             await CartById();
             $("#loginModalCloseBtn").click();
             history.push("/Dashboard");
-          } else  if(res.sucess === 400 || res.sucess===401) {
+          } else  if(res.message="Invalid username or password") {
             setMsg("User Name Or PassWord is not Valid");
           }
           // } 
