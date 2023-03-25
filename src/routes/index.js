@@ -71,6 +71,7 @@ import Blogs from "../components/Blog";
 import PageNotFound from "../components/PageNotFound";
 import NeedSupport from "../components/NeedSupport";
 import CurrencyState from "./ContextApi/CurrencyState";
+import AppStoreNutrazik from "../components/AppStoreNutrazik";
 
 var Userdata = "";
 const Root = (props) => {
@@ -112,7 +113,7 @@ const Root = (props) => {
             <Route exact path="/Warehouse" component={Warehouse} />
             <Route exact path="/SingleBlogPage/:slug" component={SingleBlogPage} />
             
-
+            <Route exact path="/mobileapp" component={AppStoreNutrazik}/>
             <Route exact path="/AllWarehouseDetails" component={AllWarehouseDetails} />
             <Route exact path="/userOrder" component={userOrder} />
 
@@ -121,10 +122,9 @@ const Root = (props) => {
             {/* <Route exact path="/Register" component={Register} /> */}
             {/* {Userdata!=undefined? Userdata.role=="superAdmin" ||Userdata.role=="Manager"||Userdata.role=="Vender"? */}
 
-            <Route exact path="/Dashboard" component={Dashboard} />
-            
-            <Route exact path="/Productform" component={Productform} />
-            <Route exact path="/Category" component={CategoryCreation} />
+            <Route exact path="/Dashboard" component={Dashboard}/>
+            <Route exact path="/Productform" component={Productform}/>
+            <Route exact path="/Category" component={CategoryCreation}/>
             <Route exact path="/CreateBlog" component={Create}/>
             <Route
               exact

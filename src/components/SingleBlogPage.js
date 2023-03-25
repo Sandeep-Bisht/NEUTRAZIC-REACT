@@ -24,7 +24,7 @@ const SingleBlog = (props) => {
     otherBlog();
   }, []);
 
-  const ChangeBlog = async (id) => {
+  const ChangeBlog = async (id,title,description) => {
     await fetch(`${baseUrl}/api/blogs/find_blog_by_slug`, {
       method: "POST",
       headers: {
@@ -38,7 +38,7 @@ const SingleBlog = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setSingleBlog(data.data);
-        history.push(id);
+        history.push(id,title,description);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -75,7 +75,6 @@ const SingleBlog = (props) => {
         console.log(err, "error");
       });
   };
-  console.log(blog, "This is Blog");
   return (
     <>
       <Header1 />
@@ -136,24 +135,19 @@ const SingleBlog = (props) => {
                         .map((item, ind) => {
                           return (
                             <div className="col-md-6 col-lg-3">
-                              <div class="card" onClick={() => ChangeBlog(item.slug)}>
+                              <div class="card">
                                 <img
                                   src={
                                     item.featuredImage &&
                                     `${baseUrl}/` + item.featuredImage[0].path
                                   }
+                                  onClick={() => ChangeBlog(item.slug)}
                                   class="card-img-top singleblog-card-image"
                                   alt="blog-image"
                                 />
                                 <div class="card-body single-blog-page-text" style = {{cursor:"pointer"}}>
                                   <h6 className="blog-title-text">{item.title}</h6>
-                                  <p class="card-text" ><ReadMoreReact
-                                text={item.description}
-                                min={80}
-                                ideal={80}
-                                max={80}
-                                readMoreText={"...Read More"}
-                              /></p>
+                                  <p class="card-text" >{item.description}</p>
                                 </div>
                               </div>
                             </div>

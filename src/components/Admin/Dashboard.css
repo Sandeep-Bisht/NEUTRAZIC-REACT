@@ -176,6 +176,10 @@ a{
 .Dashborad-search{
   height: auto !important;
 }
+iframe{
+  z-index: auto!important;
+  position: initial!important;
+}
 .search-in {
   position: relative;
   display: flex;
