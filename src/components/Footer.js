@@ -80,7 +80,7 @@ const WishlistHandler=()=>{
                 <h3>Information</h3>
                 <ul className="link-list">
                   <li>
-                    <a href="/aboutus">About Us</a>
+                    <Link to="/aboutus">About Us</Link>
                   </li>
                   <li>
                     <Link to="/ContactUs" onClick={ContactHandler}>Contact Us</Link>
