@@ -39,6 +39,7 @@
   }
   .cart-text {
     font-size: 1.3rem;
+    white-space: normal;
   }
   .cart-table table tbody tr td.product-thumbnail a img {
     height: 120px;
@@ -98,6 +99,15 @@
 @media only screen and (max-width: 567.99px) {
   .cart-table table thead tr th {
     font-size: 13px;
+  }
+  .cart-table table tbody tr td.product-quantity .input-counter span.minus-btn{
+    font-size: 16px;
+  }
+  .cart-table table tbody tr td.product-quantity .input-counter span{
+    font-size: 16px;
+  }
+  .cart-table table tbody tr td.product-quantity .input-counter input{
+    font-size: 15px;
   }
   .product-price .amount span {
     font-size: 18px;

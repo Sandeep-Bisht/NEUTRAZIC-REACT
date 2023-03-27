@@ -77,6 +77,7 @@ const Header1 = (props) => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm({
     defaultValues: {
       username: "",
@@ -92,7 +93,7 @@ const Header1 = (props) => {
     register: register2,
     handleSubmit: handleLoginSubmit,
     formState: { errors: loginErrors },
-    reset,
+    reset:reset1,
   } = useForm({
     defaultValues: {
       username: "",
@@ -182,7 +183,6 @@ useEffect(()=>{
     ) {
       let username = data.username.toLowerCase();
       data.userStatus = "Activate"
-      console.log(data, "dataaaaaaaaaaaaaaaa")
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -200,7 +200,9 @@ useEffect(()=>{
       })
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
+            reset1();
             return res.json();
+            
           }
           // throw new Error(res.status);
           else if (res.status === 400) {
@@ -215,6 +217,7 @@ useEffect(()=>{
             });
             reset();
             setRegisterModal(false);
+            setRegMsg("");
           } else {
             setRegMsg("Username is already exits");
           }
@@ -228,7 +231,6 @@ useEffect(()=>{
 
   const LoginUser = (data) => {
     if (data.username && data.password) {
-      console.log(data, "inside login user");
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -265,7 +267,7 @@ useEffect(()=>{
             await CartById();
             $("#loginModalCloseBtn").click();
             history.push("/Dashboard");
-          } else  if(res.message === "Invalid username or password") {
+          } else  if(res.message="Invalid username or password") {
             setMsg("User Name Or PassWord is not Valid");
           }
           // } 
@@ -528,6 +530,7 @@ useEffect(()=>{
                     <h3
                       onClick={() => {
                         setRegisterModal(false);
+                        reset1();
                       }}
                       className={!registerModal ? "text-success" : null}
                     >
@@ -538,6 +541,8 @@ useEffect(()=>{
                     <h3
                       onClick={() => {
                         setRegisterModal(true);
+                        reset();
+                        setMsg("");
                       }}
                       className={registerModal ? "text-success" : null}
                     >
@@ -757,9 +762,7 @@ useEffect(()=>{
                             <div className="form-group col-lg-12 justify-content-center">
                               <button
                                 className="btn btn-success btn-lg"
-                                onClick={(e) => {
-                                  LoginUser(e);
-                                }}
+                                type="submit"
                               >
                                 Login
                               </button>
