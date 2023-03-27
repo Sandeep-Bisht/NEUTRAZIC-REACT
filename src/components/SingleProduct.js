@@ -628,6 +628,7 @@ const SingleProduct = (props) => {
   const checkWishlistItem = (productId) => {
     for (let item of wishlist) {
       if (item.productId == productId) {
+        console.log(item.productId, "inside check wishlist istem", productId)
         return "wishlisted";
       }
     }
@@ -919,7 +920,10 @@ const SingleProduct = (props) => {
                 {Userdata ? (
                   <i
                     id={prodId}
-                    className="bx bxs-heart"
+                    // className="bx bxs-heart"
+                    className={`bx bxs-heart ${checkWishlistItem(
+                      prodId
+                    )}`}
                     onClick={() => {
                       AddtoWishlist(
                         data._id,
@@ -1143,7 +1147,7 @@ const SingleProduct = (props) => {
                           alt=""
                         />
                         <figcaption onClick={() => relatedImageHandler(el._id)}>
-                          {el.name}
+                          {el.name} 
                         </figcaption>
                       </div>
                     </Link>
