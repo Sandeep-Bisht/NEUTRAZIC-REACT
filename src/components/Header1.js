@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
-
+import { Modal } from "antd"
 
 import "../components/Header1.css";
 import "../components/Carouselcomp";
@@ -60,11 +60,15 @@ const Header1 = (props) => {
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState)
+  const [loginModal, setLoginModal] = useState(false);
+  const [forgetModal, setForgetModal] = useState(false);
+  const [forgetSecondModal, setForgetSecondModal] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     setLoginState(loginState)
     setIsLogin(loginState)
-  },[loginState]);
+  }, [loginState]);
 
   // useEffect(() => {
   //   Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -93,11 +97,33 @@ const Header1 = (props) => {
     register: register2,
     handleSubmit: handleLoginSubmit,
     formState: { errors: loginErrors },
-    reset:reset1,
+    reset: reset1,
   } = useForm({
     defaultValues: {
       username: "",
       password: "",
+    },
+    mode: "onBlur",
+  });
+  const {
+    register: register3,
+    handleSubmit: handleForgetSubmit,
+    formState: { errors: forgetErrors },
+    reset: reset3,
+  } = useForm({
+    defaultValues: {
+      email: "",
+    },
+    mode: "onBlur",
+  });
+  const {
+    register: register4,
+    handleSubmit: handleForgetSecondSubmit,
+    formState: { errors: forgetSecondErrors },
+    reset: reset4,
+  } = useForm({
+    defaultValues: {
+      email: "",
     },
     mode: "onBlur",
   });
@@ -151,14 +177,13 @@ const Header1 = (props) => {
     cookies.set("CurrencyType", e.target.value, { path: "/" });
 
   };
-useEffect(()=>{
-  if(Userdata===null)
-  {
-    setLoginState("0");
-    setCartItems("");
-  }
+  useEffect(() => {
+    if (Userdata === null) {
+      setLoginState("0");
+      setCartItems("");
+    }
     setLoginState("1");
-},[loginState]);
+  }, [loginState]);
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
@@ -202,7 +227,7 @@ useEffect(()=>{
           if (res.status === 200 || res.status === 201) {
             reset1();
             return res.json();
-            
+
           }
           // throw new Error(res.status);
           else if (res.status === 400) {
@@ -217,6 +242,7 @@ useEffect(()=>{
             });
             reset();
             setRegisterModal(false);
+            setLoginModal(true);
             setRegMsg("");
           } else {
             setRegMsg("Username is already exits");
@@ -244,14 +270,14 @@ useEffect(()=>{
       })
         .then((res) => res.json())
         .then(async (res) => {
-            setLoginState("1")
+          setLoginState("1")
           // if (res && res.userStatus && res.userStatus === "Activate") {
           if (res && res.role === "user") {
             Userdata = res;
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
             $("#loginModalCloseBtn").click();
-        
+
             reset();
             toast.success("Login successfully", {
               position: "bottom-right",
@@ -263,11 +289,11 @@ useEffect(()=>{
             res.role == "Manager"
           ) {
             await localStorage.setItem("Userdata", JSON.stringify(res));
-            await localStorage.setItem("Userdata1", JSON.stringify(res.role)); 
+            await localStorage.setItem("Userdata1", JSON.stringify(res.role));
             await CartById();
             $("#loginModalCloseBtn").click();
             history.push("/Dashboard");
-          } else  if(res.message="Invalid username or password") {
+          } else if (res.message = "Invalid username or password") {
             setMsg("User Name Or PassWord is not Valid");
           }
           // } 
@@ -277,7 +303,7 @@ useEffect(()=>{
           //else {
           //   setMsg("User is De-Activated");
           // }
-          
+
         })
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
@@ -430,6 +456,26 @@ useEffect(()=>{
       })
       .then((err) => console.log(err));
   };
+  const forgetHandler = () => {
+    setForgetModal(true);
+  }
+  const forgetPassword = (data) => {
+    setIsModalVisible(true);
+    $("#loginModalCloseBtn").click();
+    console.log(data, "Helo forget")
+  }
+  const forgetSecondPassword = (data) => {
+    setForgetModal(false);
+    setIsModalVisible(false);
+    console.log(data, "Helo second forget")
+  }
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <>
       {/* sidebar Modal */}
@@ -457,7 +503,7 @@ useEffect(()=>{
               </button>
             </div>
             <div className="modal-body">
-              
+
               <div
                 className="accordion accordion-flush"
                 id="accordionFlushExample"
@@ -506,281 +552,446 @@ useEffect(()=>{
       {/* end side bar Modal */}
       <div className="container-fluid top-nav">
         {/* login Register Modal  */}
-        <div
-          className="modal fade login-register-main"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content login-register-modal">
-              <div className="modal-body">
-              <button type="button" id="loginModalCloseBtn" className="d-none" data-bs-dismiss="modal">Close</button>
-                <div className="row mt-0">
-                  <div className="col-12">
-                    <div className="nutra-logo-in-login-form">
-                      <img
-                        src="/static/media/new-logo.8b4fa066.png"
-                        alt="nutrazik-logo"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-6 logiRegisterHeader1 pr-0">
-                    <h3
-                      onClick={() => {
-                        setRegisterModal(false);
-                        reset1();
-                      }}
-                      className={!registerModal ? "text-success" : null}
-                    >
-                      Login
-                    </h3>
-                  </div>
-                  <div className="col-6 logiRegisterHeader2 pl-0">
-                    <h3
-                      onClick={() => {
-                        setRegisterModal(true);
-                        reset();
-                        setMsg("");
-                      }}
-                      className={registerModal ? "text-success" : null}
-                    >
-                      Register
-                    </h3>
-                  </div>
-                  {registerModal ? (
-                    <div className="col-lg-12 logiRegisterContentDiv">
-                      <div className="form-row">
-                        <form
-                          className="form-group col-lg-12"
-                          onSubmit={handleSubmit(RegisterUser)}
-                        >
-                          <div className="row mt-0 start-register-form">
-                            <div className="col-md-6 col-12">
-                              <div className="form-group">
-                                <label>
-                                  Username<span>*</span>
-                                </label>
-                                <input
-                                  type="text"
-                                  className="form-control form-control-login"
-                                  {...register("username", {
-                                    required: true,
-                                    pattern: /^[^\s]+$/,
-                                  })}
-                                  onChange={(event) =>
-                                    (event.target.value = event.target.value.toLowerCase())
-                                  }
-                                />
-                                {errors?.username?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
-                                {errors?.username?.type === "pattern" && (
-                                  <p className="text-danger">
-                                    Username does not contain space
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                            <div className="col-md-6 col-12">
-                              <div className="form-group ">
-                                <label>
-                                  Email<span>*</span>
-                                </label>
-                                <input
-                                  type="email"
-                                  className="form-control form-control-login "
-                                  {...register("email", {
-                                    required: true,
-                                    pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                                  })}
-                                />
-                                {errors?.email?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
-                                {errors?.email?.type === "pattern" && (
-                                  <p className="text-danger">
-                                    Please enter the valid Email
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-
-                            <div className="col-md-6 col-12">
-                              <div className="form-group">
-                                <label>
-                                  Password<span>*</span>
-                                </label>
-                                <input
-                                  type="password"
-                                  className="form-control form-control-login "
-                                  {...register("password", {
-                                    required: true,
-                                    pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                                  })}
-                                />
-                                {errors?.password?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
-                                {errors?.password?.type === "pattern" && (
-                                  <p className="text-danger">
-                                    Must have more than 8 characters, Must have
-                                    atleast one number, Must have upper &
-                                    lowercase letters, Must have atleast one
-                                    special character.
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                            <div className="col-md-6 col-12">
-                              <div className="form-group ">
-                                <label>
-                                  Confirm Password<span>*</span>
-                                </label>
-                                <input
-                                  type="password"
-                                  className="form-control form-control-login "
-                                  {...register("repassword", {
-                                    required: true,
-                                    validate: (val) => {
-                                      if (watch("password") !== val) {
-                                        return "Your Password Does not Match";
-                                      }
-                                    },
-                                  })}
-                                />
-                                {errors?.repassword?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
-                                {errors?.repassword?.type === "validate" && (
-                                  <p className="text-danger">
-                                    Password does not match
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                            <div className="col-md-6 col-12">
-                              <div className="form-group ">
-                                <label>
-                                  Phone Number<span>*</span>
-                                </label>
-                                <input
-                                  type="number"
-                                  className="form-control form-control-login "
-                                  {...register("phonenumber", {
-                                    required: true,
-                                  })}
-                                  onInput={(e) => {
-                                    if (
-                                      e.target.value.length > e.target.maxLength
-                                    )
-                                      e.target.value = e.target.value.slice(
-                                        0,
-                                        e.target.maxLength
-                                      );
-                                  }}
-                                  maxlength={10}
-                                />
-                                {errors?.phonenumber?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
-                                {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
-                              </div>
-                            </div>
-                          </div>
-                          <h5 className="Login-fail-msg">{regmsg}</h5>
-                          <div className="form-group ">
-                            <button
-                              className="btn btn-success btn-lg"
-                              type="submit"
-                            >
-                              Register
-                            </button>
-                          </div>
-                        </form>
+        {forgetModal === false ?
+          <div
+            className="modal fade login-register-main"
+            id="exampleModal"
+            tabIndex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content login-register-modal">
+                <div className="modal-body">
+                  <button type="button" id="loginModalCloseBtn" className="d-none" data-bs-dismiss="modal">Close</button>
+                  <div className="row mt-0">
+                    <div className="col-12">
+                      <div className="nutra-logo-in-login-form">
+                        <img
+                          src="/static/media/new-logo.8b4fa066.png"
+                          alt="nutrazik-logo"
+                        />
                       </div>
                     </div>
-                  ) : (
-                    <div className="col-lg-12 logiRegisterContentDiv">
-                      <div className="form-row">
-                        <form
-                          className="form-group col-lg-12"
-                          onSubmit={handleLoginSubmit(LoginUser)}
-                        >
-                          <div className="row mt-0 start-login-form">
+                    <div className="col-6 logiRegisterHeader1 pr-0">
+                      <h3
+                        onClick={() => {
+                          setRegisterModal(false);
+                          setLoginModal(true);
+                          reset1();
+                        }}
+                        className={!registerModal ? "text-success" : null}
+                      >
+                        Login
+                      </h3>
+                    </div>
+                    <div className="col-6 logiRegisterHeader2 pl-0">
+                      <h3
+                        onClick={() => {
+                          setRegisterModal(true);
+                          setLoginModal(false)
+                          reset();
+                          setMsg("");
+                        }}
+                        className={registerModal ? "text-success" : null}
+                      >
+                        Register
+                      </h3>
+                    </div>
+                    {registerModal ? (
+                      <div className="col-lg-12 logiRegisterContentDiv">
+                        <div className="form-row">
+                          <form
+                            className="form-group col-lg-12"
+                            onSubmit={handleSubmit(RegisterUser)}
+                          >
+                            <div className="row mt-0 start-register-form">
+                              <div className="col-md-6 col-12">
+                                <div className="form-group">
+                                  <label>
+                                    Username<span>*</span>
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control form-control-login"
+                                    {...register("username", {
+                                      required: true,
+                                      pattern: /^[^\s]+$/,
+                                    })}
+                                    onChange={(event) =>
+                                      (event.target.value = event.target.value.toLowerCase())
+                                    }
+                                  />
+                                  {errors?.username?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                  {errors?.username?.type === "pattern" && (
+                                    <p className="text-danger">
+                                      Username does not contain space
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="col-md-6 col-12">
+                                <div className="form-group ">
+                                  <label>
+                                    Email<span>*</span>
+                                  </label>
+                                  <input
+                                    type="email"
+                                    className="form-control form-control-login "
+                                    {...register("email", {
+                                      required: true,
+                                      pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                                    })}
+                                  />
+                                  {errors?.email?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                  {errors?.email?.type === "pattern" && (
+                                    <p className="text-danger">
+                                      Please enter the valid Email
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
 
-                            <div className="col-md-12 col-12">
-                              <div className="form-group">
-                                <label>
-                                  Username<span>*</span>
-                                </label>
-                                <input
-                                  type="text"
-                                  className="form-control form-control-login"
-                                  {...register2("username", {
-                                    required: true,
-                                  })}
-                                />
-                                {loginErrors?.username?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
+                              <div className="col-md-6 col-12">
+                                <div className="form-group">
+                                  <label>
+                                    Password<span>*</span>
+                                  </label>
+                                  <input
+                                    type="password"
+                                    className="form-control form-control-login "
+                                    {...register("password", {
+                                      required: true,
+                                      pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                                    })}
+                                  />
+                                  {errors?.password?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                  {errors?.password?.type === "pattern" && (
+                                    <p className="text-danger">
+                                      Must have more than 8 characters, Must have
+                                      atleast one number, Must have upper &
+                                      lowercase letters, Must have atleast one
+                                      special character.
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="col-md-6 col-12">
+                                <div className="form-group ">
+                                  <label>
+                                    Confirm Password<span>*</span>
+                                  </label>
+                                  <input
+                                    type="password"
+                                    className="form-control form-control-login "
+                                    {...register("repassword", {
+                                      required: true,
+                                      validate: (val) => {
+                                        if (watch("password") !== val) {
+                                          return "Your Password Does not Match";
+                                        }
+                                      },
+                                    })}
+                                  />
+                                  {errors?.repassword?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                  {errors?.repassword?.type === "validate" && (
+                                    <p className="text-danger">
+                                      Password does not match
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="col-md-6 col-12">
+                                <div className="form-group ">
+                                  <label>
+                                    Phone Number<span>*</span>
+                                  </label>
+                                  <input
+                                    type="number"
+                                    className="form-control form-control-login "
+                                    {...register("phonenumber", {
+                                      required: true,
+                                    })}
+                                    onInput={(e) => {
+                                      if (
+                                        e.target.value.length > e.target.maxLength
+                                      )
+                                        e.target.value = e.target.value.slice(
+                                          0,
+                                          e.target.maxLength
+                                        );
+                                    }}
+                                    maxlength={10}
+                                  />
+                                  {errors?.phonenumber?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                  {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
+                                </div>
                               </div>
                             </div>
-                            <div className="col-md-12 col-12">
-                              <div className="form-group">
-                                <label>
-                                  Password<span>*</span>
-                                </label>
-                                <input
-                                  type="password"
-                                  className="form-control form-control-login "
-                                  {...register2("password", {
-                                    required: true,
-                                  })}
-                                />
-                                {loginErrors?.password?.type === "required" && (
-                                  <p className="text-danger">
-                                    This field is required
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                            <h5 className="Login-fail-msg">{msg}</h5>
-                            <div className="form-group col-lg-12 justify-content-center">
+                            <h5 className="Login-fail-msg">{regmsg}</h5>
+                            <div className="form-group ">
                               <button
                                 className="btn btn-success btn-lg"
                                 type="submit"
                               >
-                                Login
+                                Register
                               </button>
-                              <span>
-                                <p className="mt-3">Forgot Password?</p>
-                              </span>
                             </div>
-                          </div>
-                        </form>
+                          </form>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    ) : (
+                      <div className="col-lg-12 logiRegisterContentDiv">
+                        <div className="form-row">
+                          <form
+                            className="form-group col-lg-12"
+                            onSubmit={handleLoginSubmit(LoginUser)}
+                          >
+                            <div className="row mt-0 start-login-form">
+
+                              <div className="col-md-12 col-12">
+                                <div className="form-group">
+                                  <label>
+                                    Username<span>*</span>
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control form-control-login"
+                                    {...register2("username", {
+                                      required: true,
+                                    })}
+                                  />
+                                  {loginErrors?.username?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="col-md-12 col-12">
+                                <div className="form-group">
+                                  <label>
+                                    Password<span>*</span>
+                                  </label>
+                                  <input
+                                    type="password"
+                                    className="form-control form-control-login "
+                                    {...register2("password", {
+                                      required: true,
+                                    })}
+                                  />
+                                  {loginErrors?.password?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                              <h5 className="Login-fail-msg">{msg}</h5>
+                              <div className="form-group col-lg-12 justify-content-center">
+                                <button
+                                  className="btn btn-success btn-lg"
+                                  type="submit"
+                                >
+                                  Login
+                                </button>
+                                <span
+                                  style={{ cursor: "pointer" }} onClick={() => forgetHandler()}>
+                                  <p className="mt-3">Forgot Password?</p>
+                                </span>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <MdOutlineClose className="login-register-close-icon" />
                 </div>
-                <MdOutlineClose className="login-register-close-icon" />
               </div>
             </div>
           </div>
-        </div>
+          :
+          <div class="modal" tabindex="-1" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" id="loginModalCloseBtn" className="d-none" data-bs-dismiss="modal">Close</button>
+                  <div className="nutra-logo-in-login-form">
+                    <img
+                      src="/static/media/new-logo.8b4fa066.png"
+                      alt="nutrazik-logo"
+                    />
+                  </div>
+                  <div className="col-lg-12 forgetContentDiv">
+                    <div className="form-row">
+                      <form
+                        className="form-group col-lg-12"
+                        onSubmit={handleForgetSubmit(forgetPassword)}
+                      >
+                        <div className="row mt-0 start-login-form">
+
+                          <div className="col-md-12 col-12">
+                            <div className="form-group ">
+                              <label>
+                                Email<span>*</span>
+                              </label>
+                              <input
+                                type="email"
+                                className="form-control form-control-login "
+                                {...register3("email", {
+                                  required: true,
+                                  pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                                })}
+                              />
+                              {forgetErrors?.email?.type === "required" && (
+                                <p className="text-danger">
+                                  This field is required
+                                </p>
+                              )}
+                              {forgetErrors?.email?.type === "pattern" && (
+                                <p className="text-danger">
+                                  Please enter the valid Email
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                          <h5 className="Login-fail-msg">{msg}</h5>
+                          <div className="form-group col-lg-12 justify-content-center">
+                            <button
+                              className="btn btn-success btn-lg"
+                              type="submit"
+                            >
+                              Submit
+                            </button>
+
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        {
+          isModalVisible ?
+            <Modal
+              visible={isModalVisible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <div className="nutra-logo-in-login-form">
+            <img
+              src="/static/media/new-logo.8b4fa066.png"
+              alt="nutrazik-logo"
+            />
+          </div>
+              <div className="col-lg-12 forgetContentDiv">
+                <div className="form-row">
+                  <form
+                    className="form-group col-lg-12"
+                    onSubmit={handleForgetSecondSubmit(forgetSecondPassword)}
+                  >
+                    <div className="row mt-0 start-login-form">
+
+                      <div className="col-12">
+                        <div className="form-group">
+                          <label>
+                            Password<span>*</span>
+                          </label>
+                          <input
+                            type="password"
+                            className="form-control form-control-login "
+                            {...register("password", {
+                              required: true,
+                              pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                            })}
+                          />
+                          {errors?.password?.type === "required" && (
+                            <p className="text-danger">
+                              This field is required
+                            </p>
+                          )}
+                          {errors?.password?.type === "pattern" && (
+                            <p className="text-danger">
+                              Must have more than 8 characters, Must have
+                              atleast one number, Must have upper &
+                              lowercase letters, Must have atleast one
+                              special character.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="col-12">
+                        <div className="form-group ">
+                          <label>
+                            Confirm Password<span>*</span>
+                          </label>
+                          <input
+                            type="password"
+                            className="form-control form-control-login "
+                            {...register("repassword", {
+                              required: true,
+                              validate: (val) => {
+                                if (watch("password") !== val) {
+                                  return "Your Password Does not Match";
+                                }
+                              },
+                            })}
+                          />
+                          {errors?.repassword?.type === "required" && (
+                            <p className="text-danger">
+                              This field is required
+                            </p>
+                          )}
+                          {errors?.repassword?.type === "validate" && (
+                            <p className="text-danger">
+                              Password does not match
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <h5 className="Login-fail-msg">{msg}</h5>
+                      <div className="form-group col-lg-12 justify-content-center">
+                        <button
+                          className="btn btn-success btn-lg"
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </Modal> :
+            ""
+        }
+
+
         {/* End login register Modal  */}
         {/* Logo div */}
         <div className="newheader">
