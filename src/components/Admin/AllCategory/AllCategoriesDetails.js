@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Input, Space, Popconfirm, Typography } from "antd";
 import axios from "axios";
-// import { data } from "./columns";
 import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
@@ -75,14 +74,6 @@ export default function AllCategoriesDetails() {
     }
   };
 
-  // const editHandler=(_id)=>{
-  //    history.push({
-  //     pathname:"/Category",
-  //     state :{
-  //       _id:"_id",
-  //     }
-  //    })
-  // }
   const columns = [
     {
       title: "Name",

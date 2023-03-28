@@ -36,7 +36,7 @@ const AllProducts = (props) => {
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
   const history = useHistory();
-  const [currancy,setCurrency]=useState("INR");
+  const [currancy, setCurrency] = useState("INR");
   // const cookies = new Cookies();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState)
@@ -44,15 +44,15 @@ const AllProducts = (props) => {
   useEffect(() => {
     setLoginState(loginState)
     setIsLogin(loginState)
-  },[loginState]);
+  }, [loginState]);
 
-  useEffect(()=>{
-    if(state1 == "1"){
+  useEffect(() => {
+    if (state1 == "1") {
       setCurrency("Dollar")
     }
-  },[currancy])
+  }, [currancy])
 
-  
+
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -66,18 +66,7 @@ const AllProducts = (props) => {
     GetManufacturer();
     // GetCategory();
   }, [loginState]);
-  // const setPreviousValue = () => {
-  //   if (prev >= 7) {
-  //     SetNext(next - 8);
-  //     SetPrev(prev - 8);
-  //   }
-  // };
-  // const setNextValue = () => {
-  //   if (next < AllProduct.length) {
-  //     SetNext(next + 8);
-  //     SetPrev(prev + 8);
-  //   }
-  // };
+
   const cartfunction = async (
     productid,
     name,
@@ -101,8 +90,8 @@ const AllProducts = (props) => {
         quantity: quantity,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
-        dollerDiscount:dollerDiscount,
-        dollerMrp:dollerMrp,
+        dollerDiscount: dollerDiscount,
+        dollerMrp: dollerMrp,
         discountprice: discount,
         description: description,
         category: category,
@@ -116,8 +105,7 @@ const AllProducts = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
+
             merged = true;
             setQuantity(1);
           }
@@ -144,13 +132,8 @@ const AllProducts = (props) => {
         // CartById();
         UpdateCart();
 
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
-      // toast.success("Add to cart", {
-      //   position: "bottom-right",
-      //   autoClose: 5000,
-      // });
+
     }
   };
   const UpdateCart = () => {
@@ -231,7 +214,7 @@ const AllProducts = (props) => {
 
   const FilterItems = (item) => {
     setFilter(item);
-   
+
   };
 
 
@@ -244,7 +227,7 @@ const AllProducts = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         serProductLength(data.length);
-        setAllProduct([...AllProduct,...data.data]);
+        setAllProduct([...AllProduct, ...data.data]);
         page = page + 1;
       })
       .catch((err) => {
@@ -464,208 +447,6 @@ const AllProducts = (props) => {
   return (
     <>
       <Header1 />
-
-      {/* <!-- Right side Modal --> */}
-      {/* <div id="mySidenav" className="sidenav">
-        <Link
-          href="javascript:void(0)"
-          className="closebtn"
-          onClick={() => closeNav()}
-        >
-          &times;
-        </Link>
-
-        <div className="accordion accordion-flush" id="accordionFlushExample">
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="flush-headingTwo">
-              <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/categories-1.png")}
-                />
-                <button
-                  className="accordion-button collapsed button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseTwo"
-                >
-                  Categories
-                </button>
-              </div>
-            </h2>
-            <div
-              id="flush-collapseTwo"
-              className="accordion-collapse collapse"
-              aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div className="accordion-body">
-                <ul>
-                  {categories.map((el, ind) => (
-                    <li className="mt-2">
-                      <input type="checkbox" />
-
-                      <span className="ml-3">{el.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="flush-headingThree">
-              <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/category.ico")}
-                />
-                <button
-                  className="accordion-button collapsed button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  Subcategories
-                </button>
-              </div>
-            </h2>
-            <div
-              id="flush-collapseThree"
-              className="accordion-collapse collapse"
-              aria-labelledby="flush-headingThree"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div className="accordion-body list">
-                <ul>
-                  {subcategories.map((el, ind) => (
-                    <li className="mt-2">
-                      <input type="checkbox" />
-                      <span className="ml-3">{el.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="flush-headingFour">
-              <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/manufacturer.ico")}
-                />
-                <button
-                  className="accordion-button collapsed button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseFour"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseFour"
-                >
-                  Brand
-                </button>
-              </div>
-            </h2>
-            <div
-              id="flush-collapseFour"
-              className="accordion-collapse collapse"
-              aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div className="accordion-body">
-                <ul>
-                  {manufactureres.map((el, ind) => (
-                    <li className="mt-2">
-                      <input
-                        type="checkbox"
-                        value={el.name}
-                        onClick={(e) => setFilter(e.target.value)}
-                      />
-                      <span className="ml-3">{el.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="flush-headingFive">
-              <div className="d-flex align-items-center">
-                <img
-                  className="icons1"
-                  src={require("../Images/Icons/price.ico")}
-                />
-                <button
-                  className="accordion-button collapsed button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseFive"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseFive"
-                >
-                  Price{" "}
-                </button>
-              </div>
-            </h2>
-            <div
-              id="flush-collapseFive"
-              className="accordion-collapse collapse"
-              aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div className="accordion-body price">
-                <div className="price-div row">
-                  <div className="col-2"></div>
-                  <div className="col-4">
-                    <input type="number" placeholder="$Min" />
-                  </div>
-                  <div className="col-4">
-                    {" "}
-                    <input type="number" placeholder="$Max" />
-                  </div>
-                  <div className="col-2"></div>
-                  <ul className="mt-2">
-                    <li className="mt-2">
-                      <input type="checkbox" />
-                      <span className="ml-3">Under $500</span>
-                    </li>
-                    <li className="mt-2">
-                      <input type="checkbox" />
-                      <span className="ml-3">Under $1000</span>
-                    </li>
-                    <li className="mt-2">
-                      <input type="checkbox" />
-                      <span className="ml-3">Under $1500</span>
-                    </li>
-                    <li className="mt-2">
-                      <input type="checkbox" />
-                      <span className="ml-3">Under $2000</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="filter-button-div">
-        <i
-          className="bx bx-filter filter-button"
-          onClick={() => openNav()}
-          style={{}}
-        ></i>
-      </div>
-      <div id="main"></div> */}
-
-      {/* end side bar Modal */}
-
-      {/* <i className="fa fa-filter collapse-btn" data-bs-toggle="modal" data-bs-target="#filterModal"></i> */}
-
       <div id="__next">
         <div className="search-overlay null">
           <div className="d-table">
@@ -716,114 +497,96 @@ const AllProducts = (props) => {
                   }
                 >
                   {AllProduct.map((el, ind1) => {
-                      return (
-                        <figure className="figure allproduct-figure">
-                          <Link Link to={"/SingleProduct/" + el._id}>
-                            <div>
-                              {/* {Categorydetails.image!==undefined? */}
-                              <img src={`${baseUrl}/` + el.image[0].path} />
+                    return (
+                      <figure className="figure allproduct-figure" key={ind1}>
+                        <Link Link to={"/SingleProduct/" + el._id}>
+                          <div>
+                            {/* {Categorydetails.image!==undefined? */}
+                            <img src={`${baseUrl}/` + el.image[0].path} />
+                          </div>
+                          <figcaption>{el.name}</figcaption>
+                        </Link>
+                        {/* :null} */}
+
+                        <div className="contanier allproduct-price-div">
+                          <div className="row">
+                            <div className="col-6 text-start">
+                              <span className="price">
+                                {" "}
+                                {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+
+                                {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                              </span>
                             </div>
-                            <figcaption>{el.name}</figcaption>
-                          </Link>
-                          {/* :null} */}
+                            <div className="col-6 text-end">
+                              <p
+                                className={`text-nowrap wishlist`}
 
-                          <div className="contanier allproduct-price-div">
-                            {/* <div className="d-flex justify-content-center">
-                      <StarsRating
-                        count={5}
-                        // onChange={ratingChanged}
-                        size={20}
-                        color2={"#ffd700"}
-                        value={4}
-                      />
-                    </div> */}
-                            <div className="row">
-                              {/* <div className="col-4 ">
-                              <Link to={"/SingleProduct/" + el._id}>  
-                               <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
-                               </Link> 
-                              </div> */}
-                              <div className="col-6 text-start">
-                                <span className="price">
-                                  {" "}
-                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
-                                  {/* $
-                      {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                        ? 0
-                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
-                                </span>
-                              </div>
-                              <div className="col-6 text-end">
-                                <p
-                                  className={`text-nowrap wishlist`}
+                              >
+                                {Userdata ? (
+                                  <i
+                                    id={el._id}
+                                    onClick={() => {
+                                      AddtoWishlist(
+                                        el._id,
+                                        el.name,
+                                        quantity,
+                                        el.inrMrp,
+                                        el.inrDiscount,
+                                        el.description,
+                                        el.category,
+                                        el.manufacturer.name,
+                                        el.image
+                                      );
+                                    }}
+                                    className={`bx bxs-heart ${checkWishlistItem(
+                                      el._id
+                                    )}`}
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="bx bxs-heart "
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  ></i>
+                                )}
+                                Wishlist
+                              </p>
 
-                                >
-                                  {Userdata ? (
-                                    <i
-                                      id={el._id}
-                                      onClick={() => {
-                                        AddtoWishlist(
-                                          el._id,
-                                          el.name,
-                                          quantity,
-                                          el.inrMrp,
-                                          el.inrDiscount,
-                                          el.description,
-                                          el.category,
-                                          el.manufacturer.name,
-                                          el.image
-                                        );
-                                      }}
-                                      className={`bx bxs-heart ${checkWishlistItem(
-                                        el._id
-                                      )}`}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="bx bxs-heart "
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null ? "#exampleModal" : null
-                                      }
-                                    ></i>
-                                  )}
-                                  Wishlist
-                                </p>
-                                {/* <div className="icon-wishlist"></div> */}
-                              </div>
                             </div>
                           </div>
-                          <button
-                            className="button btn"
-                            onClick={() => {
-                              cartfunction
-                                (
-                                  el._id,
-                                  el.name,
-                                  quantity,
-                                  el.inrMrp,
-                                  el.inrDiscount,
-                                  el.dollerDiscount,
-                                  el.dollerMrp,
-                                  el.discount,
-                                  el.description,
-                                  el.category,
-                                  el.manufacturer.name,
-                                  el.image[0].path
-                                )
-                            }}
-                            data-bs-toggle={Userdata == null ? "modal" : null}
-                            data-bs-target={Userdata == null ? "#exampleModal" : null}
-                          >
-                            Add to Cart
-                          </button>
+                        </div>
+                        <button
+                          className="button btn"
+                          onClick={() => {
+                            cartfunction
+                              (
+                                el._id,
+                                el.name,
+                                quantity,
+                                el.inrMrp,
+                                el.inrDiscount,
+                                el.dollerDiscount,
+                                el.dollerMrp,
+                                el.discount,
+                                el.description,
+                                el.category,
+                                el.manufacturer.name,
+                                el.image[0].path
+                              )
+                          }}
+                          data-bs-toggle={Userdata == null ? "modal" : null}
+                          data-bs-target={Userdata == null ? "#exampleModal" : null}
+                        >
+                          Add to Cart
+                        </button>
 
-                        </figure>
+                      </figure>
 
-                      );
-                    
+                    );
+
                   })}
                 </InfiniteScroll>
               </div>
@@ -835,57 +598,11 @@ const AllProducts = (props) => {
 
 
       <div className="col-12 pagination text-center">
-        {/* <IoIosArrowBack
-          className="Prebutton"
-          onClick={() => {
-            setPreviousValue();
-          }}
-        /> */}
-        {/* <button
-          className="Nextbutton"
-          onClick={() => {
-            setNextValue();
-          }}
-        >
-          Load More...
-        </button> */}
+
 
       </div>
 
-      {/* <div className="brands-area bg-f7f8fa pt-70 pb-40">
-            <div className="container">
-                <div className="section-title">
-                    <h2>Selling Brands</h2>
-                </div>
-                <div className="row align-items-center">
-                    <div className="col-lg-2 col-sm-4 col-md-2 col-6">
-                        <div className="single-brands-item"><a className="d-block" href="#"><img
-                                    src="img/brands/brands-img1.png" alt="image" /></a></div>
-                    </div>
-                    <div className="col-lg-2 col-sm-4 col-md-2 col-6">
-                        <div className="single-brands-item"><a className="d-block" href="#"><img
-                                    src="img/brands/brands-img2.png" alt="image" /></a></div>
-                    </div>
-                    <div className="col-lg-2 col-sm-4 col-md-2 col-6">
-                        <div className="single-brands-item"><a className="d-block" href="#"><img
-                                    src="img/brands/brands-img3.png" alt="image" /></a></div>
-                    </div>
-                    <div className="col-lg-2 col-sm-4 col-md-2 col-6">
-                        <div className="single-brands-item"><a className="d-block" href="#"><img
-                                    src="img/brands/brands-img4.png" alt="image" /></a></div>
-                    </div>
-                    <div className="col-lg-2 col-sm-4 col-md-2 col-6">
-                        <div className="single-brands-item"><a className="d-block" href="#"><img
-                                    src="img/brands/brands-img5.png" alt="image" /></a></div>
-                    </div>
-        
-                    <div className="col-lg-2 col-sm-4 col-md-2 col-6">
-                        <div className="single-brands-item"><a className="d-block" href="#"><img
-                                    src="img/brands/brands-img6.png" alt="image" /></a></div>
-                    </div>
-                </div>
-            </div>
-        </div> */}
+
       <ToastContainer />
 
       <Footer />

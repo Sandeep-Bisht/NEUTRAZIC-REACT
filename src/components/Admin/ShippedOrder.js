@@ -109,7 +109,6 @@ const ShippedOrder = () => {
   };
 
   const showModal = (item) => {
-    console.log(item, "itemmmmmm")
     setPrticularUserOrder(item.order)
     setShippedOrder(item.address);
     setPrticularUserOrder(item.order);
@@ -219,11 +218,10 @@ const ShippedOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
-                          console.log(item, "itemssss");
+                        prticularUserOrder.map((item,ind) => {
                           return (
                             <>
-                              <tr>
+                              <tr key={ind}>
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                     <img

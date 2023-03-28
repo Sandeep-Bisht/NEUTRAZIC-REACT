@@ -76,7 +76,6 @@ const UserDetails = (props) => {
     await formData.append("addresstype", data.addresstype);
     await formData.append("deliverytype", data.deliverytype);
     await formData.append("username", Userdata.username);
-    // const url=`${baseUrl}/api/order/add_order`
     const url = `${baseUrl}/api/order/create-checkout-session`;
     await fetch(url, {
       method: "POST",
@@ -85,8 +84,6 @@ const UserDetails = (props) => {
       .then((res) => res.json())
       .then((res) => {
         window.location.href = res.url;
-        // alert("cart Deleted")
-        //DeleteCart()
       })
       .catch((err) => console.log(err));
   };
@@ -106,9 +103,6 @@ const UserDetails = (props) => {
         .then(async (data) => {
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
           setCart(data.data[0].order);
-          // setCartItems(data.data[0].order.length);
-          // let cartItems = data.data[0].order.length;
-          // dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })
         .catch((err) => {
@@ -261,18 +255,7 @@ const UserDetails = (props) => {
                         Debit Card
                         </label>
                         &nbsp;
-                        {/* <input className='mr-2' type="radio" id="html" name="fav_language" value="For Me" onChange={(e)=>{Setdata({...data,orderfor:e.target.value})}} />
-                                    <label for="html">For Other</label> */}
                       </div>
-                      {/* {
-                           cart.map((el,ind1)=>(
-                             total+=( el.mrp - (el.mrp * el.discountprice / 100) )* el.quantity,
-                            
-                                <>
-                                    <span onChange={(e)=>{Setdata({...data,totalamount:e.target.value})}}>{total}</span>
-                                </>
-                            
-                           ))} */}
 
                       <div className="col-12 p-1">
                         <button
@@ -299,8 +282,6 @@ const UserDetails = (props) => {
                     <li>
                       Discount <span>-₹{Subtotal - Discount}</span>
                     </li>
-
-                    {/* <li>Shipping <span>$30.00</span></li> */}
                     <li>
                       Payable Amount <span>₹{Discount}</span>
                     </li>

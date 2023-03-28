@@ -74,10 +74,6 @@ const SearchResult = (props) => {
     window.scroll(0, 0);
 
     $(document).ready(function() {
-      //    $('.icon-wishlist').on('click', function(){
-      //       $(this).toggleClass('in-wishlist');
-
-      // })
 
       $(".frontimage").mouseover(function() {
         alert("in");
@@ -94,11 +90,7 @@ const SearchResult = (props) => {
     Docsearch(searchresults);
   }, [searchresults]);
   const Docsearch = async (e) => {
-    // alert(e)
     setSearchResults(e);
-    // await setFilterData(
-    //   await data.filter((i) =>i.name.toLowerCase().includes(e.toLowerCase()))
-    //   );
     setCT(Date());
   };
   const GetWishlist = async () => {
@@ -156,7 +148,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data, "hrre");
         setCategories(data.data);
       })
       .catch((err) => {
@@ -211,8 +202,6 @@ const SearchResult = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -237,8 +226,6 @@ const SearchResult = (props) => {
         setQuantity(1);
         // CartById();
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
@@ -307,17 +294,11 @@ const SearchResult = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          // CartById();
-          // setCartItems(data.data[0].order.length);
-          // history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
   const AddtoWishlist = async (
     productid,
@@ -367,13 +348,10 @@ const SearchResult = (props) => {
                   position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 1000,
                 });
-
-                //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
                 GetWishlist();
-                // setWishlist(data.data[0]);
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -504,8 +482,6 @@ const SearchResult = (props) => {
       }
     }
   };
-  console.log(filterdata);
-  // End Filter Function //
 
   return (
     <>

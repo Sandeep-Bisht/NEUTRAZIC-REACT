@@ -11,7 +11,6 @@ import JoditEditor from "jodit-react";
 
 const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
-  console.log(editableData);
   const [data, setData] = useState({
     title: "",
     featuredImage: [],

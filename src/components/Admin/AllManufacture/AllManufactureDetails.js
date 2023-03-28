@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { Table, Input, Typography, Popconfirm, Space } from "antd";
 import axios from "axios";
-// import { data } from "./columns";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import {BiSearchAlt} from 'react-icons/bi';
@@ -26,15 +25,11 @@ export default function AllManufactureDetails() {
   
   useEffect(()=>{
     fetchUsers();
-    setCount();
     GetManufacturer();
    },[])
 
 
-   const setCount = async () => {
-    //  await setManufacturerCount1(localStorage.getItem("ManufacturerCount"));
-    // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
-  };
+
 
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
