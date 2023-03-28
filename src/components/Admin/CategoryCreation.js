@@ -4,7 +4,6 @@ import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router";
-// import DataTable from '@bit/adeoy.utils.data-table';
 var Userdata;
 const CategoryCreation = (props) => {
   var categoryCount = 0;
@@ -61,34 +60,6 @@ const CategoryCreation = (props) => {
       .catch((err) => console.log(err));
     }
    };
-  // const submitData = async (e) => {
-  //   e.preventDefault();
-  //   const errors = ValidationFrom(data);
-  //   setFormerror(errors);
-  //   if(Object.keys(errors).length === 0){
-  //   const formData = new FormData();
-  //   await formData.append("description", data.description);
-  //   await formData.append("name", data.name);
-  //   await formData.append("featuredCategories", data.featuredCategories);
-  //   await formData.append("image", data.image);    
-  //   const url = `${baseUrl}/api/category/add_category`;
-   
-  //    await fetch(url, {
-  //   method: "POST",
-  //     body: formData,
-  //   })
-  //     .then((res) =>{
-  //       res.json()
-  //       history.push("/AllCategoriesDetails");
-  //     } )
-  //     .then((res) => {
-  //       GetCategory();
-
-  //       this.getAddOn();
-  //     })
-  //     .catch((err) => console.log(err));
-  //   }
-  //  };
   
 
   const SelectImage = (e) => {
@@ -168,40 +139,6 @@ const CategoryCreation = (props) => {
       });
   };
 
-  // const data1 = [];
-  // {
-  //   categories.map((item, index) => {
-  //     data1.push({
-  //       sr_no: index + 1,
-  //       name: item.name,
-  //       Action: (
-  //         <>
-  //           <button
-  //             className="btnbtn-danger"
-  //             onClick={(e) => {
-  //               if (window.confirm("Are you sure ?")) {
-  //                 DeleteCategory(item._id, e);
-  //               } else {
-  //                 return false;
-  //               }
-  //             }}
-  //           >
-  //             <i className="bx bx-trash"></i>
-  //           </button>
-  //           <button
-  //             className="ml-2 btnbtn-danger"
-  //             onClick={() => {
-  //               EditCategory(item);
-  //               setUpdate(true);
-  //             }}
-  //           >
-  //             <i className="bx bx-edit"></i>
-  //           </button>
-  //         </>
-  //       ),
-  //     });
-  //   });
-  // }
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Category Name", data: "name" },
@@ -269,7 +206,6 @@ const CategoryCreation = (props) => {
                         <div className="col-6 p-1 form-floating">
                           <select
                             className="form-control Dashborad-search"
-                            // defaultValue={editableData  ? editableData.typ : ""}
                             onChange={(e) => {
                               Setdata({ ...data, featuredCategories: e.target.value });
                             }}

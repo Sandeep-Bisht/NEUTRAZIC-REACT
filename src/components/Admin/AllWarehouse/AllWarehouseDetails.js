@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Input, Space, Popconfirm, Typography } from "antd";
 import axios from "axios";
-// import { data } from "./columns";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";

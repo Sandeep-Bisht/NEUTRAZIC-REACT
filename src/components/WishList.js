@@ -1,6 +1,5 @@
 import { get, map } from "jquery";
 import "../components/WishList.css";
-// import "../views/landing/homepage.css";
 import React, { useState, useEffect } from "react";
 import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
@@ -84,7 +83,6 @@ const WishList = () => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //  this block is not working
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
@@ -99,19 +97,11 @@ const WishList = () => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          // history.push("/Cart");
-          // toast.success("Add to cart",{
-          //   position:"bottom-right",
-          //   autoClose:5000,
-          // });
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
 
   const CartById = async () => {
@@ -188,8 +178,6 @@ const WishList = () => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -214,8 +202,6 @@ const WishList = () => {
         setQuantity(1);
 
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
     }
   };
@@ -275,14 +261,12 @@ const WishList = () => {
                         <h6 className="wishlist-heading2">{item.name}</h6>
                         <p className="word-wrapping">{item.description}</p>
                         <div className="buynow-details-btn-wrap">
-                          {/* <Link to={"/UserDetails/" + item.productId}> */}
                           <button
                             onClick={() => handleBuyNow(item.productId)}
                             className="wishlist-btn"
                           >
                             Buy Now
                           </button>
-                          {/* </Link> */}
                           <Link to={"/SingleProduct/" + item.productId}>
                             <button className=" wishlist-btn">
                               See Details

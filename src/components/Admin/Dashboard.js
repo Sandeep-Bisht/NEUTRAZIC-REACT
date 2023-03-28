@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
-//import "@ant - design/flowchart/dist/index.css";
 import $ from "jquery";
 import DataTable from "datatables.net";
 import Sidemenu from "./Sidemenu";
@@ -20,10 +19,6 @@ import Header1 from "../Header1";
 import HomePage from "../../views/landing/HomePage";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
-
-
-// var ManufacturerCount1='';
-// var productCount1=''
 var Userdata;
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
@@ -48,7 +43,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    setCount();
     GetUser();
     getAllBlogs();
     GetWarehouse();
@@ -158,10 +152,6 @@ const Dashboard = () => {
       .catch((err) => {
         console.log(err, "errors");
       });
-  };
-  const setCount = async () => {
-    //  await setManufacturerCount1(localStorage.getItem("ManufacturerCount"));
-    // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
   };
 
   const logout = () => {

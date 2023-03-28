@@ -39,10 +39,7 @@ const Ordered = () => {
           console.log(err, "error");
         });
     }
-    //  else
-    //   {
-
-    //  }
+   
   };
 
   const UpdateOrderStatus = async (productId, status) => {
@@ -101,7 +98,7 @@ const Ordered = () => {
                 {orderes.map((el, ind1) =>
                   JSON.parse(el.order).map((item, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td className="product-thumbnail">
                           <a href="#">
                             <img
@@ -114,15 +111,6 @@ const Ordered = () => {
                           <span className="subtotal-amount">{item.name}</span>
                         </td>
                         <td className="product-price">
-                          {/* <span className="unit-amount">
-                            $
-                            {isNaN(
-                              item.mrp - (item.mrp * item.discountprice) / 100
-                            )
-                              ? 0
-                              : item.mrp -
-                                (item.mrp * item.discountprice) / 100}
-                          </span> */}
                           {item.mrp}
                         </td>
                         <td className="product-quantity">
@@ -130,9 +118,6 @@ const Ordered = () => {
                         </td>
                         <td className="product-subtotal">
                           <span className="subtotal-amount">
-                            {/* {(item.mrp -
-                              (item.mrp * item.discountprice) / 100) *
-                              item.quantity} */}
                             {item.quantity * item.singleprice}
                           </span>
                         </td>

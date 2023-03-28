@@ -165,7 +165,6 @@ const Header1 = (props) => {
 
 
   const currencyHandler = (e) => {
-    // console.log(e.target.value,"Hello Value");
     setCurrency(e.target.value);
     if (currancy === "INR") {
       setState1("1");
@@ -250,7 +249,6 @@ const Header1 = (props) => {
         })
         .catch((error) => {
           console.log(`Error: ${error}`);
-          // handle error here
         });
     }
   };
@@ -357,8 +355,7 @@ const Header1 = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
+            
             merged = true;
           }
         }
@@ -378,10 +375,9 @@ const Header1 = (props) => {
             userCart.order.push(newItemObj);
           }
         }
-        //  await CartById();
+        
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
+      
       }
     }
   };
@@ -432,9 +428,7 @@ const Header1 = (props) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
+    
   };
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
@@ -462,12 +456,10 @@ const Header1 = (props) => {
   const forgetPassword = (data) => {
     setIsModalVisible(true);
     $("#loginModalCloseBtn").click();
-    console.log(data, "Helo forget")
   }
   const forgetSecondPassword = (data) => {
     setForgetModal(false);
     setIsModalVisible(false);
-    console.log(data, "Helo second forget")
   }
   const handleOk = () => {
     setIsModalVisible(false);
@@ -919,7 +911,7 @@ const Header1 = (props) => {
                       <div className="col-12">
                         <div className="form-group">
                           <label>
-                            Password<span>*</span>
+                           New Password<span>*</span>
                           </label>
                           <input
                             type="password"

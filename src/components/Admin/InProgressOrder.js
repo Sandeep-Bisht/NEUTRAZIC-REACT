@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
@@ -163,7 +162,6 @@ const InProgressOrder = () => {
   ];
 
   const showModal = (order) => {
-    console.log(order, "order");
     setPrticularUserOrder(order.order);
     setIsModalVisible(true);
   };
@@ -221,11 +219,10 @@ const InProgressOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
-                          console.log(item, "itemssss");
+                        prticularUserOrder.map((item,ind) => {
                           return (
                             <>
-                              <tr>
+                              <tr key={ind}>
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                     <img
@@ -275,9 +272,6 @@ const InProgressOrder = () => {
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
-                  {/* <Link to="/Category" className="add-icon">
-                    <MdPlaylistAdd />Add
-                  </Link> */}
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}
