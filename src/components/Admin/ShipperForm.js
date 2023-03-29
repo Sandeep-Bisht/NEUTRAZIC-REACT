@@ -30,7 +30,7 @@ const ShipperForm = (props) => {
     })
       .then((res) =>{
         res.json()
-        history.push("/AllWarehouseDetails");
+        history.push("Configuration/"+"AllWarehouseDetails");
       } )
       .then((res) => {
         GetWarehouse();
@@ -71,7 +71,7 @@ const ShipperForm = (props) => {
     }
     await axios.put(`${baseUrl}/api/warehouse/update_warehouse_by_id`,formData,)
       .then((res) =>{
-        history.push("/AllWarehouseDetails");
+        history.push("Configuration/"+"AllWarehouseDetails");
         GetWarehouse();
       })
       .catch((err) => {

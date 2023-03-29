@@ -291,7 +291,7 @@ const Header1 = (props) => {
             await CartById();
             $("#loginModalCloseBtn").click();
             history.push("/Dashboard");
-          } else if (res.message === "Invalid username or password") {
+          } else if (res.success === 400 || res.success===401) {
             setMsg("User Name Or PassWord is not Valid");
           }
           // } 

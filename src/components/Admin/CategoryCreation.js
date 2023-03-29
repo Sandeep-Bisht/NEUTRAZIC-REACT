@@ -50,7 +50,7 @@ const CategoryCreation = (props) => {
     })
       .then((res) =>{
         res.json()
-        history.push("/AllCategoriesDetails");
+        history.push("/Configuration/"+"AllCategoriesDetails");
       } )
       .then((res) => {
         GetCategory();
@@ -129,7 +129,7 @@ const CategoryCreation = (props) => {
     })
       .then((res) =>{
         res.json()
-        history.push("/AllCategoriesDetails");
+        history.push("/Configuration/"+"AllCategoriesDetails");
       })
       .then(async (data) => {
         GetCategory();

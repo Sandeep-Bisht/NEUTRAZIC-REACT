@@ -174,7 +174,7 @@ const Dashboard = () => {
                 <main className="main graph-main-div">
                   <div className="row cardsec-row">
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllManufactureDetails">
+                      <Link to={"/Configuration/"+"AllManufactureDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -233,7 +233,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllProductsDetails">
+                      <Link to={"/Configuration/"+"AllProductsDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -252,7 +252,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllCategoriesDetails">
+                      <Link to={"/Configuration/"+"AllCategoriesDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -271,7 +271,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllSubCategoriesDetails">
+                      <Link to={"/Configuration/"+"AllSubCategoriesDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -290,7 +290,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllWarehouseDetails">
+                      <Link to={"/Configuration/"+"AllWarehouseDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
