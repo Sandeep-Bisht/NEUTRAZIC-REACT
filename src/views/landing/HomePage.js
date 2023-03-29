@@ -492,7 +492,7 @@ const HomePage = () => {
       items: 1,
     },
   };
-
+  console.log(data,"Checking data");
   const searchData = (e) => {
     // if (props.func) props.func(e);
   };
@@ -794,8 +794,9 @@ const HomePage = () => {
             <div className="row ">
               <div id="column" className="columns_5">
                 {data
-                  .filter((item) => item.type == "")
+                  .filter((item) => item.type == "" )
                   .map((el, ind) => {
+                    console.log(el,"Element");
                     if (ind < 5) {
                       return (
                         <figure

@@ -97,7 +97,7 @@ const Productform = (props) => {
     })
       .then((res) => {
         res.json();
-        history.push("/AllProductsDetails");
+        history.push("/Configuration/"+"AllProductsDetails");
       })
       .then((res) => {
         GetData();
@@ -263,7 +263,7 @@ const Productform = (props) => {
       if (response.status === 200) {
         await GetData();
         setTimeout(() => {
-          history.push("/AllProductsDetails");
+          history.push("/Configuration/"+"AllProductsDetails");
         }, 1500);
       }
     } catch (error) {
