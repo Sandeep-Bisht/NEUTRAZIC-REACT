@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Dashboard.css";
 import { RxDashboard } from "react-icons/rx";
 import { BsCartPlus } from "react-icons/bs";
@@ -26,9 +26,14 @@ import $ from "jquery";
 var Userdata = "";
 
 const Sidemenu = () => {
+
+  const location = useLocation();
+  const pathName = location.pathname;
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     // SidebarMenu();
+    // console.log(location.pathname.includes('NewOrder'),'location is this')
   });
 
   const logout = () => {
@@ -58,7 +63,7 @@ const Sidemenu = () => {
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapseTwo"
-          aria-expanded="false"
+          aria-expanded={`${pathName.includes('NewOrder')}`}
           aria-controls="collapseTwo"
         >
           <span className="pl-3 nav__name">Orders</span>
@@ -67,7 +72,7 @@ const Sidemenu = () => {
     </h2>
     <div
       id="collapseTwo"
-      className="accordion-collapse collapse"
+      className={`accordion-collapse collapse ${pathName.includes('NewOrder') && 'show'}`}
       aria-labelledby="headingThree"
       data-bs-parent="#accordionExample"
     >
@@ -80,35 +85,35 @@ const Sidemenu = () => {
               New Orders
             </li>
           </Link>
-          <Link to={"/InProgressOrderInProgress"}>
+          <Link to={"/NewOrder/" + "InProgress"}>
             <li>
               {" "}
               <GrInProgress className="configuration-icons-wrap" />
               In Progress
             </li>
           </Link>
-          <Link to={"/InProgressOrderPacked"}>
+          <Link to={"/NewOrder/" + "Packed"}>
             <li>
               {" "}
               <BsBox className="configuration-icons-wrap" />
               Packed
             </li>
           </Link>
-          <Link to={"/InProgressOrderShipped"}>
+          <Link to={"/NewOrder/" + "Shipped"}>
             <li>
               {" "}
               <FaShippingFast className="configuration-icons-wrap" />
               Shipped
             </li>
           </Link>
-          <Link to={"/DeliveredOrder"}>
+          <Link to={"/NewOrder/"+"Delivered"}>
             <li>
               {" "}
               <MdRealEstateAgent className="configuration-icons-wrap" />
               Delivered
             </li>
           </Link>
-          <Link to={"/CanceledOrder"}>
+          <Link to={"/NewOrder/"+"Canceled"}>
             <li>
               {" "}
               <BsCartXFill className="configuration-icons-wrap" />
@@ -135,7 +140,7 @@ const Sidemenu = () => {
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseThree"
-                          aria-expanded="false"
+                          aria-expanded={`${pathName.includes('Configuration')}`}
                           aria-controls="collapseThree"
                           
                         >
@@ -145,7 +150,7 @@ const Sidemenu = () => {
                     </h2>
                     <div
                       id="collapseThree"
-                      className="accordion-collapse collapse"
+                      className={`accordion-collapse collapse ${pathName.includes('Configuration') && 'show'}`}
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
@@ -154,25 +159,25 @@ const Sidemenu = () => {
                         {Userdata !== undefined ? (
                           Userdata.role === "superAdmin" ? (
                             <ul className="Configration-List">
-                              <Link to="/AllManufactureDetails">
+                              <Link to={"/Configuration/"+"AllManufactureDetails"}>
                                 <li className="nav-name">
                                   <GiFactory className="configuration-icons-wrap" />
                                   Manufacturer
                                 </li>
                               </Link>
-                              <Link to="/AllCategoriesDetails">
+                              <Link to={"/Configuration/"+"AllCategoriesDetails"}>
                                 <li>
                                   <BiCategory className="configuration-icons-wrap" />
                                   Category
                                 </li>
                               </Link>
-                              <Link to="/AllSubCategoriesDetails">
+                              <Link to={"/Configuration/"+"AllSubCategoriesDetails"}>
                                 <li>
                                   <BsListNested className="configuration-icons-wrap" />
                                   SubCategory
                                 </li>
                               </Link>
-                              <Link to="/AllProductsDetails">
+                              <Link to={"/Configuration/"+"AllProductsDetails"}>
                                 <li>
                                   <GiBoxUnpacking className="configuration-icons-wrap" />
                                   Products
@@ -185,7 +190,7 @@ const Sidemenu = () => {
                                   </li>
                                   </Link> */}
 
-                              <Link to="/AllWarehouseDetails">
+                              <Link to={"/Configuration/"+"AllWarehouseDetails"}>
                                 <li>
                                   <FaWarehouse className="configuration-icons-wrap" />
                                   Warehouse
@@ -194,19 +199,19 @@ const Sidemenu = () => {
                             </ul>
                           ) : (
                             <ul className="Configration-List">
-                              <Link to="/AllManufactureDetails">
+                              <Link to={"/Configuration/"+"AllManufactureDetails"}>
                                 <li className="nav-name">
                                   <GiFactory className="configuration-icons-wrap" />
                                   Manufacturer
                                 </li>
                               </Link>
-                              <Link to="/AllProductsDetails">
+                              <Link to={"/Configuration/"+"AllProductsDetails"}>
                                 <li>
                                   <GiBoxUnpacking className="configuration-icons-wrap" />
                                   Products
                                 </li>
                               </Link>
-                              <Link to="/AllWarehouseDetails">
+                              <Link to={"/Configuration/"+"AllWarehouseDetails"}>
                                 <li>
                                   <FaWarehouse className="configuration-icons-wrap" />
                                   Warehouse

@@ -114,7 +114,7 @@ const Root = (props) => {
             <Route exact path="/SingleBlogPage/:slug" component={SingleBlogPage} />
             
             <Route exact path="/mobileapp" component={AppStoreNutrazik}/>
-            <Route exact path="/AllWarehouseDetails" component={AllWarehouseDetails} />
+            <Route exact path={"/Configuration/"+"AllWarehouseDetails"} component={AllWarehouseDetails} />
             <Route exact path="/userOrder" component={userOrder} />
 
             {/* <Route exact path="/" component={HomePage} /> */}
@@ -143,7 +143,7 @@ const Root = (props) => {
             />
             <Route
               exact
-              path="/AllManufactureDetails"
+              path={"/Configuration/"+"AllManufactureDetails"}
               component={AllManufactureDetails}
             />
             <Route
@@ -153,17 +153,17 @@ const Root = (props) => {
             />
             <Route
               exact
-              path="/AllProductsDetails"
+              path={"/Configuration/"+"AllProductsDetails"}
               component={AllProductsDetails}
             />
             <Route
               exact
-              path="/AllCategoriesDetails"
+              path={"/Configuration/"+"AllCategoriesDetails"}
               component={AllCategoriesDetails}
             />
              <Route
               exact
-              path="/AllSubCategoriesDetails"
+              path={"/Configuration/"+"AllSubCategoriesDetails"}
               component={AllSubCategoriesDetails}
             />
             <Route exact path="/SingleProduct/:id" component={SingleProduct} />
@@ -184,14 +184,14 @@ const Root = (props) => {
             <Route exact path="/Header1" component={Header1} />
             <Route exact path="/WishList" component={WishList} />
             {/* <Route exact path="/AddressPage" component={AddressPage} /> */}
-            <Route exact path="/NewOrder/:status" component={NewOrder} />
+            <Route exact path={"/NewOrder/" + "Pending"} component={NewOrder} />
 
-            <Route exact path="/InProgressOrderInProgress" component={InProgressOrder} />
-            <Route exact path="/InProgressOrderPacked" component={PackedOrder} />
-            <Route exact path="/InProgressOrderShipped" component={ShippedOrder} />
-            <Route exact path="/CanceledOrder" component={CancelOrder} />
+            <Route exact path={"/NewOrder/" + "InProgress"} component={InProgressOrder} />
+            <Route exact path={"/NewOrder/" + "Packed"} component={PackedOrder} />
+            <Route exact path={"/NewOrder/" + "Shipped"} component={ShippedOrder} />
+            <Route exact path={"/NewOrder/" + "Canceled"} component={CancelOrder} />
 
-            <Route exact path="/DeliveredOrder" component={DeliveredOrder} />
+            <Route exact path={"/NewOrder/"+"Delivered"} component={DeliveredOrder} />
             <Route exact path="/Roles" component={Roles} />
             <Route
               exact

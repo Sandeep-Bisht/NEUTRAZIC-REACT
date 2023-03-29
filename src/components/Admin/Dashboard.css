@@ -507,7 +507,7 @@ iframe{
 {
   background-color: transparent;
   border:0px;
-  width:162px;
+  width:100%;
   
 }
 .nav__link .accordion-button:not(.collapsed)
