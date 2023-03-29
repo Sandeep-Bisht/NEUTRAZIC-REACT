@@ -133,13 +133,13 @@ const SingleBlog = (props) => {
                         .map((item, ind) => {
                           return (
                             <div className="col-md-6 col-lg-3" key={ind}>
-                              <div class="card">
+                              <div class="card" onClick={() => ChangeBlog(item.slug)}>
                                 <img
                                   src={
                                     item.featuredImage &&
                                     `${baseUrl}/` + item.featuredImage[0].path
                                   }
-                                  onClick={() => ChangeBlog(item.slug)}
+                                  
                                   class="card-img-top singleblog-card-image"
                                   alt="blog-image"
                                 />
