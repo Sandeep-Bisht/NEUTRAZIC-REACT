@@ -26,7 +26,6 @@ var CartDataWoLogin = [];
 var Userdata = "";
 let tranding = 0;
 const SearchResult = (props) => {
-  console.log(props);
   const SearchedText = props.match.params.Search;
   var count = 0;
   const params = useParams();

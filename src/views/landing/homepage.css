@@ -13507,7 +13507,10 @@ textarea.form-control {
   font-weight: 350;
 }
 .product-price .amount span .currency-sign{
-  font-weight: 300 !important;
+  font-weight: 350 !important;
+}
+.subtotal-amount .currency-subtotal-sign{
+ color: #696969;
 }
 .product-subtotal .amount {
   /* height: 60px; */

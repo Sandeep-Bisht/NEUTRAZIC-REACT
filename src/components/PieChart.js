@@ -57,7 +57,6 @@ const PieChart = () => {
   };
 
 
-
     const data = [
         { type: 'Pending', value: pending},
         { type: 'InProgress', value: inProgress},

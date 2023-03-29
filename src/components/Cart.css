@@ -1,7 +1,6 @@
 .cart-area {
   margin-top: 110px !important;
 }
-
 /* Cart Responsive Media Queries*/
 @media only screen and (max-width: 1399px) {
   .cart-totals {

@@ -61,7 +61,6 @@ const InProgressOrder = () => {
     order.delivery_time = endDate;
     order.orderStatus = orderStatus;
     delete order.createdAt;
-    console.log("before api", order, "status",orderStatus)
     await fetch(`${baseUrl}/api/order/update_order`, {
       method: "PATCH",
       headers: {

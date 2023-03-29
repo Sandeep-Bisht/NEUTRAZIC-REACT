@@ -65,7 +65,6 @@ const Productform = (props) => {
     }
     return error;
   }
-
    
    const submitData =async(e) => {
     e.preventDefault();
@@ -237,7 +236,6 @@ const Productform = (props) => {
 
   const UpdateProduct = async (e, _id) => {
     e.preventDefault();
-
 
     const formData = new FormData();
     await formData.append("_id", data._id);

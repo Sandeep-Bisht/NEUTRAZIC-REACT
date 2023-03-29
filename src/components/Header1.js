@@ -230,7 +230,7 @@ const Header1 = (props) => {
           }
           // throw new Error(res.status);
           else if (res.status === 400) {
-            console.log("data is already exits");
+            
           }
         })
         .then((data) => {

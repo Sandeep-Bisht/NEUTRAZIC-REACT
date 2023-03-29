@@ -83,6 +83,7 @@ const UpdateBlogs = async (e,_id) => {
                         <div className="row">
                           <div className="col-6 p-1 m-2 form-floating">
                         <input
+                        maxLength={40}
                           type="text"
                           id="floatingInputValue"
                           className="form-control Dashborad-search"
@@ -110,6 +111,7 @@ const UpdateBlogs = async (e,_id) => {
                       <div className="col-5 p-1 m-2 form-floating">
                           
                         <textarea
+                        maxLength={170}
                           className="form-control h-100"
                           id="floatingInputValue"
                           placeholder="Description"
