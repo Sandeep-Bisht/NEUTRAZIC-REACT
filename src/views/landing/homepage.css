@@ -5301,10 +5301,10 @@ a.close.disabled {
 }
 
 .modal-dialog {
-	position: relative;
-	width: auto;
-	/* margin: .5rem; */
-	pointer-events: none
+  position: relative;
+  width: auto;
+  /* margin: .5rem; */
+  pointer-events: none;
 }
 
 .modal.fade .modal-dialog {
@@ -11339,7 +11339,7 @@ textarea.form-control {
   padding-right: 5px;
   padding-top: 10px;
 }
-.blog-page-section-2 .card-img-homepage{
+.blog-page-section-2 .card-img-homepage {
   cursor: pointer;
   width: 100%;
   object-fit: cover;
@@ -11726,7 +11726,8 @@ textarea.form-control {
   transition: var(--transition);
   font-size: 22px;
 }
-.cart-table .bx-minus,.bx-plus{
+.cart-table .bx-minus,
+.bx-plus {
   color: black;
 }
 /* .cart-table .bx-minus:before {
@@ -11735,8 +11736,8 @@ textarea.form-control {
   color: #000;
   opacity: 0.7;
 } */
-.cart-table .bx-plus:before:hover{
-  color:#2a96ff;
+.cart-table .bx-plus:before:hover {
+  color: #2a96ff;
 }
 /* .cart-table .bx-plus:before {
   background: none;
@@ -13482,7 +13483,6 @@ textarea.form-control {
   justify-content: center;
   font-family: "Roboto", sans-serif;
   font-size: 30px;
-  
 }
 .product-quantity .amount .input-counter {
   position: relative;
@@ -13496,7 +13496,6 @@ textarea.form-control {
   justify-content: center;
   font-family: "Roboto", sans-serif;
   font-weight: 350;
- 
 }
 .product-price .amount span {
   position: relative;
@@ -13506,18 +13505,18 @@ textarea.form-control {
   padding-right: 10px;
   font-weight: 350;
 }
-.product-price .amount span .currency-sign{
+.product-price .amount span .currency-sign {
   font-weight: 350 !important;
 }
-.subtotal-amount .currency-subtotal-sign{
- color: #696969;
+.subtotal-amount .currency-subtotal-sign {
+  color: #696969;
 }
 .product-subtotal .amount {
   /* height: 60px; */
   width: 100%;
   color: #000;
   opacity: 0.7;
-   font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 30px;
   text-align: center;
 }
@@ -13550,11 +13549,25 @@ textarea.form-control {
   justify-content: center;
   align-items: center;
 }
-.cart-table table tbody tr td.product-quantity .input-counter span.minus-btn .minus:hover {
+.cart-table
+  table
+  tbody
+  tr
+  td.product-quantity
+  .input-counter
+  span.minus-btn
+  .minus:hover {
   color: #2a96ff !important;
   font-weight: 800;
 }
-.cart-table table tbody tr td.product-quantity .input-counter span.plus-btn .plus:hover{
+.cart-table
+  table
+  tbody
+  tr
+  td.product-quantity
+  .input-counter
+  span.plus-btn
+  .plus:hover {
   color: #2a96ff !important;
   font-weight: 800;
 }
@@ -13564,7 +13577,7 @@ textarea.form-control {
   justify-content: center;
   align-items: center;
 }
-.cart-table .bx-minus:before:hover{
+.cart-table .bx-minus:before:hover {
   color: var(--mainColor);
 }
 
@@ -17232,7 +17245,6 @@ textarea.form-control {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   padding: 30px 20px;
   min-height: 230px;
- 
 }
 
 .single-contact-info-box .icon {
@@ -17332,7 +17344,7 @@ textarea.form-control {
 	margin-bottom: -7px;
 	border: none
 } */
-iframe{
+iframe {
   display: none;
 }
 .footer-area {
@@ -19024,7 +19036,12 @@ div#column .hover-switch-homepage:hover .main-Image {
   -moz-transition: opacity 0.5s ease-in-out;
   -webkit-transition: opacity 0.5s ease-in-out;
 }
-
+.allproduct-figure:hover .allproduct-figure :not(:hover) {
+  opacity: 0.5;
+}
+.allproduct-figure:hover .allproduct-figure {
+  opacity: 1;
+}
 /* Homepage product css */
 
 .Product-name-home {
@@ -19047,9 +19064,9 @@ div#column .hover-switch-homepage:hover .main-Image {
 }
 /* end hover image */
 /* End Homepage Product css */
-#columns:hover .figure:not(:hover) {
+/* div#columns .figure:hover :not(:hover) {
   opacity: 0.4;
-}
+} */
 div#columns .figure {
   display: inline-block;
   background: #fefefe;
@@ -19891,7 +19908,7 @@ svg {
 /* media query Deepak */
 @media only screen and (max-width: 1399px) {
   /*responsive homepage */
-  .single-contact-info-box{
+  .single-contact-info-box {
     height: 280px;
   }
   .single-products-box .content .price-div span {
@@ -20636,7 +20653,7 @@ svg {
   .navbar-light .navbar-toggler {
     padding: 6px 10px !important;
   }
-  
+
   .section-title h2 {
     font-size: 20px;
   }
@@ -20815,18 +20832,14 @@ svg {
   color: rgba(0, 0, 0, 0.6);
 }
 
-
-
-.Image-Container img{
+.Image-Container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.category-Button{
-  margin: 20px 10px 0 0; 
- 
+.category-Button {
+  margin: 20px 10px 0 0;
 }
-.Category-container{
+.Category-container {
   max-height: 280px;
-  
 }

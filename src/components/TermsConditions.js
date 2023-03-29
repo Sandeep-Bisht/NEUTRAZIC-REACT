@@ -16,9 +16,9 @@ function TermsConditions() {
                 <div className='terms-condition-page'>
                 <h2><strong>Terms and Conditions</strong></h2>
 
-<p>Welcome to nutrazik.giksindia.com!</p>
+<p>Welcome to info@nutrazik.com!</p>
 
-<p>These terms and conditions outline the rules and regulations for the use of Nutrazik's Website, located at http://nutrazik.giksindia.com/.</p>
+<p>These terms and conditions outline the rules and regulations for the use of Nutrazik's Website, located at http://info@nutrazik.com/.</p>
 
 <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use nutrazik.giksindia.com if you do not agree to take all of the terms and conditions stated on this page.</p>
 
@@ -26,7 +26,7 @@ function TermsConditions() {
 
 <h3><strong>Cookies</strong></h3>
 
-<p>We employ the use of cookies. By accessing nutrazik.giksindia.com, you agreed to use cookies in agreement with the Nutrazik's Privacy Policy. </p>
+<p>We employ the use of cookies. By accessing info@nutrazik.com, you agreed to use cookies in agreement with the Nutrazik's Privacy Policy. </p>
 
 <p>Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
 
