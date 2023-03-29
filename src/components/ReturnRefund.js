@@ -19,7 +19,7 @@ function ReturnRefund() {
                     <h2>Refund</h2>
                     <p>All sales are final and no refund will be issued.</p>
                     <h2>Questions?</h2>
-                    <p>If you have any questions concerning our return policy, please contact us at : <br/> <b>nutrazik.giksindia.com</b></p>
+                    <p>If you have any questions concerning our return policy, please contact us at : <br/> <b>info@nutrazik.com</b></p>
                 </div>
             </div>
         </div>

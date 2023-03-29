@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useStateValue } from "../state";
 import { logout } from "../state/auth/actions";
-import { Modal } from "antd"
+import { Modal } from "antd";
 
 import "../components/Header1.css";
 import "../components/Carouselcomp";
@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import { IoClose } from "react-icons/io5";
 
 let changeNavValue = 0;
 var header;
@@ -59,15 +60,15 @@ const Header1 = (props) => {
   const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
-  const [isLogin, setIsLogin] = useState(loginState)
+  const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
   const [forgetSecondModal, setForgetSecondModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    setLoginState(loginState)
-    setIsLogin(loginState)
+    setLoginState(loginState);
+    setIsLogin(loginState);
   }, [loginState]);
 
   // useEffect(() => {
@@ -143,38 +144,35 @@ const Header1 = (props) => {
     GetCategory();
     GetSubCategory();
     CartById();
-    $(document).ready(function () {
+    $(document).ready(function() {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
-      window.onscroll = function () {
+      window.onscroll = function() {
         headerFunction();
       };
-      $(".arrow").click(function () {
+      $(".arrow").click(function() {
         $(".sublist").slideUp();
       });
     });
   }, [loginState]);
 
   useEffect(() => {
-    const currentCurrency = cookies.get('CurrencyType');
+    const currentCurrency = cookies.get("CurrencyType");
     if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
       setState1("1");
     }
   }, [currancy]);
 
-
   const currencyHandler = (e) => {
     setCurrency(e.target.value);
     if (currancy === "INR") {
       setState1("1");
-    }
-    else {
+    } else {
       setState1("0");
     }
 
     cookies.set("CurrencyType", e.target.value, { path: "/" });
-
   };
   useEffect(() => {
     if (Userdata === null) {
@@ -203,10 +201,9 @@ const Header1 = (props) => {
       data.username &&
       data.phonenumber &&
       data.password == data.repassword
-
     ) {
       let username = data.username.toLowerCase();
-      data.userStatus = "Activate"
+      data.userStatus = "Activate";
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -226,11 +223,9 @@ const Header1 = (props) => {
           if (res.status === 200 || res.status === 201) {
             reset1();
             return res.json();
-
           }
           // throw new Error(res.status);
           else if (res.status === 400) {
-            
           }
         })
         .then((data) => {
@@ -244,7 +239,7 @@ const Header1 = (props) => {
             setLoginModal(true);
             setRegMsg("");
           } else {
-            setRegMsg("Username is already exits");
+            setRegMsg("Username is already exist");
           }
         })
         .catch((error) => {
@@ -268,7 +263,7 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (res) => {
-          setLoginState("1")
+          setLoginState("1");
           // if (res && res.userStatus && res.userStatus === "Activate") {
           if (res && res.role === "user") {
             Userdata = res;
@@ -294,14 +289,13 @@ const Header1 = (props) => {
           } else if (res.message === "Invalid username or password") {
             setMsg("User Name Or PassWord is not Valid");
           }
-          // } 
+          // }
           // else if (res && res.message === "Invalid username or password") {
           //   setMsg("User Name Or PassWord is not Valid");
-          // } 
+          // }
           //else {
           //   setMsg("User is De-Activated");
           // }
-
         })
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
@@ -314,7 +308,6 @@ const Header1 = (props) => {
         });
     }
   };
-
 
   const headerFunction = async () => {
     if (window.pageYOffset > sticky) {
@@ -355,7 +348,7 @@ const Header1 = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            
+
             merged = true;
           }
         }
@@ -375,9 +368,8 @@ const Header1 = (props) => {
             userCart.order.push(newItemObj);
           }
         }
-        
+
         await UpdateCart();
-      
       }
     }
   };
@@ -428,7 +420,6 @@ const Header1 = (props) => {
           console.log(err, "error");
         });
     }
-    
   };
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
@@ -452,15 +443,15 @@ const Header1 = (props) => {
   };
   const forgetHandler = () => {
     setForgetModal(true);
-  }
+  };
   const forgetPassword = (data) => {
     setIsModalVisible(true);
     $("#loginModalCloseBtn").click();
-  }
+  };
   const forgetSecondPassword = (data) => {
     setForgetModal(false);
     setIsModalVisible(false);
-  }
+  };
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -495,7 +486,6 @@ const Header1 = (props) => {
               </button>
             </div>
             <div className="modal-body">
-
               <div
                 className="accordion accordion-flush"
                 id="accordionFlushExample"
@@ -544,7 +534,7 @@ const Header1 = (props) => {
       {/* end side bar Modal */}
       <div className="container-fluid top-nav">
         {/* login Register Modal  */}
-        {forgetModal === false ?
+        {forgetModal === false ? (
           <div
             className="modal fade login-register-main"
             id="exampleModal"
@@ -555,7 +545,22 @@ const Header1 = (props) => {
             <div className="modal-dialog">
               <div className="modal-content login-register-modal">
                 <div className="modal-body">
-                  <button type="button" id="loginModalCloseBtn" className="d-none" data-bs-dismiss="modal">Close</button>
+                  <button
+                    type="button"
+                    id="loginModalCloseBtn"
+                    className="d-none"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                   <div className="row mt-0">
                     <div className="col-12">
                       <div className="nutra-logo-in-login-form">
@@ -581,7 +586,7 @@ const Header1 = (props) => {
                       <h3
                         onClick={() => {
                           setRegisterModal(true);
-                          setLoginModal(false)
+                          setLoginModal(false);
                           reset();
                           setMsg("");
                         }}
@@ -672,8 +677,8 @@ const Header1 = (props) => {
                                   )}
                                   {errors?.password?.type === "pattern" && (
                                     <p className="text-danger">
-                                      Must have more than 8 characters, Must have
-                                      atleast one number, Must have upper &
+                                      Must have more than 8 characters, Must
+                                      have atleast one number, Must have upper &
                                       lowercase letters, Must have atleast one
                                       special character.
                                     </p>
@@ -722,7 +727,8 @@ const Header1 = (props) => {
                                     })}
                                     onInput={(e) => {
                                       if (
-                                        e.target.value.length > e.target.maxLength
+                                        e.target.value.length >
+                                        e.target.maxLength
                                       )
                                         e.target.value = e.target.value.slice(
                                           0,
@@ -760,7 +766,6 @@ const Header1 = (props) => {
                             onSubmit={handleLoginSubmit(LoginUser)}
                           >
                             <div className="row mt-0 start-login-form">
-
                               <div className="col-md-12 col-12">
                                 <div className="form-group">
                                   <label>
@@ -773,7 +778,8 @@ const Header1 = (props) => {
                                       required: true,
                                     })}
                                   />
-                                  {loginErrors?.username?.type === "required" && (
+                                  {loginErrors?.username?.type ===
+                                    "required" && (
                                     <p className="text-danger">
                                       This field is required
                                     </p>
@@ -792,7 +798,8 @@ const Header1 = (props) => {
                                       required: true,
                                     })}
                                   />
-                                  {loginErrors?.password?.type === "required" && (
+                                  {loginErrors?.password?.type ===
+                                    "required" && (
                                     <p className="text-danger">
                                       This field is required
                                     </p>
@@ -808,7 +815,9 @@ const Header1 = (props) => {
                                   Login
                                 </button>
                                 <span
-                                  style={{ cursor: "pointer" }} onClick={() => forgetHandler()}>
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => forgetHandler()}
+                                >
                                   <p className="mt-3">Forgot Password?</p>
                                 </span>
                               </div>
@@ -823,12 +832,25 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-          :
-          <div class="modal" tabindex="-1" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2">
+        ) : (
+          <div
+            class="modal"
+            tabindex="-1"
+            id="exampleModalToggle"
+            aria-hidden="true"
+            aria-labelledby="exampleModalToggleLabel2"
+          >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-body">
-                  <button type="button" id="loginModalCloseBtn" className="d-none" data-bs-dismiss="modal">Close</button>
+                  <button
+                    type="button"
+                    id="loginModalCloseBtn"
+                    className="d-none"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
                   <div className="nutra-logo-in-login-form">
                     <img
                       src="/static/media/new-logo.8b4fa066.png"
@@ -842,7 +864,6 @@ const Header1 = (props) => {
                         onSubmit={handleForgetSubmit(forgetPassword)}
                       >
                         <div className="row mt-0 start-login-form">
-
                           <div className="col-md-12 col-12">
                             <div className="form-group ">
                               <label>
@@ -876,7 +897,6 @@ const Header1 = (props) => {
                             >
                               Submit
                             </button>
-
                           </div>
                         </div>
                       </form>
@@ -886,103 +906,90 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-        }
-        {
-          isModalVisible ?
-            <Modal
-              visible={isModalVisible}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <div className="nutra-logo-in-login-form">
-            <img
-              src="/static/media/new-logo.8b4fa066.png"
-              alt="nutrazik-logo"
-            />
-          </div>
-              <div className="col-lg-12 forgetContentDiv">
-                <div className="form-row">
-                  <form
-                    className="form-group col-lg-12"
-                    onSubmit={handleForgetSecondSubmit(forgetSecondPassword)}
-                  >
-                    <div className="row mt-0 start-login-form">
-
-                      <div className="col-12">
-                        <div className="form-group">
-                          <label>
-                           New Password<span>*</span>
-                          </label>
-                          <input
-                            type="password"
-                            className="form-control form-control-login "
-                            {...register("password", {
-                              required: true,
-                              pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                            })}
-                          />
-                          {errors?.password?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )}
-                          {errors?.password?.type === "pattern" && (
-                            <p className="text-danger">
-                              Must have more than 8 characters, Must have
-                              atleast one number, Must have upper &
-                              lowercase letters, Must have atleast one
-                              special character.
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="col-12">
-                        <div className="form-group ">
-                          <label>
-                            Confirm Password<span>*</span>
-                          </label>
-                          <input
-                            type="password"
-                            className="form-control form-control-login "
-                            {...register("repassword", {
-                              required: true,
-                              validate: (val) => {
-                                if (watch("password") !== val) {
-                                  return "Your Password Does not Match";
-                                }
-                              },
-                            })}
-                          />
-                          {errors?.repassword?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )}
-                          {errors?.repassword?.type === "validate" && (
-                            <p className="text-danger">
-                              Password does not match
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <h5 className="Login-fail-msg">{msg}</h5>
-                      <div className="form-group col-lg-12 justify-content-center">
-                        <button
-                          className="btn btn-success btn-lg"
-                          type="submit"
-                        >
-                          Submit
-                        </button>
-
+        )}
+        {isModalVisible ? (
+          <Modal
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <div className="nutra-logo-in-login-form">
+              <img
+                src="/static/media/new-logo.8b4fa066.png"
+                alt="nutrazik-logo"
+              />
+            </div>
+            <div className="col-lg-12 forgetContentDiv">
+              <div className="form-row">
+                <form
+                  className="form-group col-lg-12"
+                  onSubmit={handleForgetSecondSubmit(forgetSecondPassword)}
+                >
+                  <div className="row mt-0 start-login-form">
+                    <div className="col-12">
+                      <div className="form-group">
+                        <label>
+                          New Password<span>*</span>
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control form-control-login "
+                          {...register("password", {
+                            required: true,
+                            pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                          })}
+                        />
+                        {errors?.password?.type === "required" && (
+                          <p className="text-danger">This field is required</p>
+                        )}
+                        {errors?.password?.type === "pattern" && (
+                          <p className="text-danger">
+                            Must have more than 8 characters, Must have atleast
+                            one number, Must have upper & lowercase letters,
+                            Must have atleast one special character.
+                          </p>
+                        )}
                       </div>
                     </div>
-                  </form>
-                </div>
+                    <div className="col-12">
+                      <div className="form-group ">
+                        <label>
+                          Confirm Password<span>*</span>
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control form-control-login "
+                          {...register("repassword", {
+                            required: true,
+                            validate: (val) => {
+                              if (watch("password") !== val) {
+                                return "Your Password Does not Match";
+                              }
+                            },
+                          })}
+                        />
+                        {errors?.repassword?.type === "required" && (
+                          <p className="text-danger">This field is required</p>
+                        )}
+                        {errors?.repassword?.type === "validate" && (
+                          <p className="text-danger">Password does not match</p>
+                        )}
+                      </div>
+                    </div>
+                    <h5 className="Login-fail-msg">{msg}</h5>
+                    <div className="form-group col-lg-12 justify-content-center">
+                      <button className="btn btn-success btn-lg" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </Modal> :
-            ""
-        }
-
+            </div>
+          </Modal>
+        ) : (
+          ""
+        )}
 
         {/* End login register Modal  */}
         {/* Logo div */}
@@ -1198,7 +1205,7 @@ const Header1 = (props) => {
                         onChange={(e) => currencyHandler(e)}
                         value={currancy}
                       >
-                        <option value="INR" >INR</option>
+                        <option value="INR">INR</option>
                         <option value="Dollar">Dollar</option>
                       </select>
                     </div>
