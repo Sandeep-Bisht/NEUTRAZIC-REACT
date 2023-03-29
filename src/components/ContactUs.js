@@ -139,7 +139,7 @@ const ContactUs = () => {
                             className="form-control"
                             id="email"
                             {...register("email", {
-                              require: true,
+                              required: true,
                               pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                             })}
                             // data-error="Please enter your email"
