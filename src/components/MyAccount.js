@@ -32,6 +32,7 @@ const MyAccount = () => {
   return (
     <>
       <Header1 />
+      <section className="cart-area">
       <div id="Myacount-Page">
         {Userdata ?(
         <form onSubmit={handleSubmit(onsubmit)}>
@@ -167,6 +168,7 @@ const MyAccount = () => {
             </div>
           }
       </div> 
+      </section>
       <Footer />
     </>
   );
