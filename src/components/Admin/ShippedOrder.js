@@ -218,10 +218,10 @@ const ShippedOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
+                        prticularUserOrder.map((item,ind) => {
                           return (
                             <>
-                              <tr>
+                              <tr key={ind}>
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                     <img

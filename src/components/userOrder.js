@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
-// import Sidemenu from './Sidemenu';
-// import './Dashboard.css';
 import Baseline from "../components/Baseline";
 import { baseUrl } from "../utils/services";
 import { useHistory } from "react-router-dom";
 import "../components/userOrder.css"
-// import DashboardHeaader from './DashboardHeaader';
 import {
   Table,
   Input,
@@ -128,10 +124,10 @@ const UserOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
+                        prticularUserOrder.map((item,ind) => {
                           return (
                             <>
-                              <tr>                                
+                              <tr key={ind}>                                
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                   <img

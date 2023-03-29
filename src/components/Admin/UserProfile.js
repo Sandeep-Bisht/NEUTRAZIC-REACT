@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import { useHistory } from "react-router-dom";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";

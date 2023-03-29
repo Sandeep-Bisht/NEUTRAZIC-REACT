@@ -330,7 +330,7 @@ const Allcategory = (props) => {
           {AllProduct.map((item, ind1) => {
             if (item.category._id == props.match.params.name) {
               return (
-                <div className="col-lg-3 col-md-12 col-sm-12 ">
+                <div className="col-lg-3 col-md-12 col-sm-12 " key={ind1}>
                   {/* <Link to={"/SingleProduct/" + el._id}> */}
                   <div className="single-products-box border">
                     <div className="row  align-items-center product-div">

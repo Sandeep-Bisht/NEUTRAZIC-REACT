@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { Table, Input, Space, Popconfirm, Typography  } from "antd";
 import axios from "axios";
-// import { data } from "./columns";
 import { useTableSearch } from "../useTableSearch";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
@@ -80,14 +79,6 @@ export default function AllSubCategoriesDetails() {
     
   }
 
-  // const editHandler=(_id)=>{
-  //   history.push({
-  //     pathname:"/SubCategoryCreation",
-  //     state:{
-  //       _id:"_id",
-  //     }
-  //   })
-  // }
   
   const columns = [
     {
@@ -136,16 +127,6 @@ export default function AllSubCategoriesDetails() {
 
   return (
     <>
-      {/* <div className="container-fluid">
-        {" "}
-        <a href="#" className="nav__logo">
-          <img
-            src={require("../../../Images/new-logo.png")}
-            className="dashboard-logo"
-            alt="image"
-          />
-        </a>
-      </div> */}
        <section id="body-pd">
   <div className="container-fluid">
     <DashboardHeaader/>

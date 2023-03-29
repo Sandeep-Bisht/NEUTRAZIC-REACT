@@ -102,9 +102,9 @@ function Blogs() {
                     <h2>Latest Blogs</h2>
                     <div className="row">
                       {data &&
-                        data.map((item) => {
+                        data.map((item,ind) => {
                           return (
-                            <div className="col-md-6 col-lg-3">
+                            <div className="col-md-6 col-lg-3" key={ind}>
                               <div class="card">
                                 <Link
                                   className="card-img-link"

@@ -75,17 +75,6 @@ const HomePage = () => {
   setIsLogin(loginState)
   },[loginState])
 
-  // useEffect(() => {
-  //   let currentCurrencyType = cookies.get("Currency")
-  //   if (currentCurrencyType == "1") {
-  //     setCurrency("Dollar")
-
-  //   }
-  // }, [currancy])
-
-  // useEffect(() => {
-
-  // },[])
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())
@@ -104,7 +93,6 @@ const HomePage = () => {
     }
   }, [currancy]);
   useEffect(() => {
-    // Userdata = localStorage.getItem("Userdata");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetData();
     getAllBlog();
@@ -113,10 +101,6 @@ const HomePage = () => {
     GetCategory();
     GetManufacturer();
     $(document).ready(function() {
-      //    $('.icon-wishlist').on('click', function(){
-      //       $(this).toggleClass('in-wishlist');
-
-      // })
 
       $(".frontimage").mouseover(function() {
         alert("in");
@@ -176,7 +160,6 @@ const HomePage = () => {
   };
 
   const GetData = async () => {
-    // Userdata = await (localStorage.getItem("Userdata"));
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
@@ -285,8 +268,6 @@ const HomePage = () => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -311,8 +292,6 @@ const HomePage = () => {
         setQuantity(1);
         // CartById();
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
@@ -338,8 +317,6 @@ const HomePage = () => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-        //history.push("/Cart");
-        //window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
@@ -386,17 +363,11 @@ const HomePage = () => {
         .then(async (data) => {
           setUserCart(data.data);
           CartById();
-
-          // setCartItems(data.data[0].order.length);
-          // history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
   const AddtoWishlist = async (
     productid,
@@ -447,12 +418,10 @@ const HomePage = () => {
                   autoClose: 1000,
                 });
 
-                //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
                 GetWishlist();
-                // setWishlist(data.data[0]);
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -488,7 +457,6 @@ const HomePage = () => {
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
                   GetWishlist();
-                  // setWishlist(data.data[0]);
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -503,13 +471,7 @@ const HomePage = () => {
         }
       });
   };
-  // const HeartColor = (el) => {
-  //   $(document).ready(function() {
-  //     $(".bxs-heart").click(function() {
-  //       $(".bxs-heart").addClass("active-color");
-  //     });
-  //   });
-  // };
+
 
   const responsive = {
     superLargeDesktop: {
@@ -583,12 +545,6 @@ const HomePage = () => {
                       </button>
                     </Link>
                   </div>
-
-                  {/* <div className="home-banner-buttons pt-4">
-                    <button className="btn common-gradient-btn">
-                      Read More
-                    </button>
-                  </div> */}
                 </div>
               </div>
               <div className="col-md-6">
@@ -617,7 +573,6 @@ const HomePage = () => {
                             className="figure homepage-trending-figure"
                             key={ind}
                           >
-                            {/* <Link to={"/SingleProduct/" + el._id}> */}
 
                             <Link to={"/SingleProduct/" + el._id}>
                               <div
@@ -631,7 +586,7 @@ const HomePage = () => {
                                     el.otherImage.length > 0 &&
                                     `${baseUrl}/` + el.otherImage[0].path
                                   }
-                                  // src={require("../../Images/products/Hintosulin (1).png")}
+
                                   alt=""
                                 />
                                 <img
@@ -759,7 +714,6 @@ const HomePage = () => {
                   <button type="button" className="btn10">
                     Show More
                   </button>
-                  {/* <div className="transition"></div> */}
                 </Link>
               </div>
               {/* Hover Button End */}
@@ -862,7 +816,6 @@ const HomePage = () => {
                                   el.otherImage.length > 0 &&
                                   `${baseUrl}/` + el.otherImage[0].path
                                 }
-                                // src={require("../../Images/products/Hintosulin (1).png")}
                                 alt=""
                               />
                               <img
@@ -990,7 +943,6 @@ const HomePage = () => {
                   <button type="button" className="btn10">
                     Show More
                   </button>
-                  {/* <div className="transition"></div> */}
                 </Link>
               </div>
               {/* Hover Button End */}
@@ -1013,7 +965,6 @@ const HomePage = () => {
                           className="figure homepage-trending-figure"
                           key={ind}
                         >
-                          {/* <Link to={"/SingleProduct/" + el._id}> */}
                           <Link to={"/SingleProduct/" + el._id}>
                             <div
                               className="image hover-switch-homepage"
@@ -1026,7 +977,6 @@ const HomePage = () => {
                                   el.otherImage.length > 0 &&
                                   `${baseUrl}/` + el.otherImage[0].path
                                 }
-                                // src={require("../../Images/products/Hintosulin (1).png")}
                                 alt=""
                               />
                               <img
@@ -1157,7 +1107,6 @@ const HomePage = () => {
                           <button type="button" className="btn10">
                             Show More
                           </button>
-                          {/* <div className="transition"></div> */}
                         </Link>
                       );
                     }
@@ -1175,16 +1124,13 @@ const HomePage = () => {
             </div>
             <div className="row image-group">
               <Carousel
-                // breakPoints={breakPoints}
                 disableAutoPlay
                 autoPlaySpeed={1500}
                 itemsToShow={5}
                 onPrevStart={onPrevStart}
                 onNextStart={onNextStart}
-                // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
               >
                 {Manufactureres &&
                   Manufactureres.length > 0 &&

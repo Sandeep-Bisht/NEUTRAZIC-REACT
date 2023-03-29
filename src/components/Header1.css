@@ -1034,8 +1034,28 @@ body {
 .right-part .currancy{
     margin-right: 5px;
 }
-
-
+.forgetContentDiv{
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+.forgetContentDiv .btn {
+    padding: 18px;
+    margin-top: 20px;
+    line-height: 0px;
+    width: 45%;
+    background: linear-gradient(90deg, rgb(44 160 255 / 53%) 0%, rgba(23,150,255,1) 100%);
+    border: #00D872;
+}
+.forgetContentDiv input {
+    border: 0.8px solid #ACACAC;
+}
+.ant-modal-footer .ant-btn{
+    display: none!important;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-modal .ant-modal-content {
+    border-radius: 0px!important;
+}
 @media only screen and (max-width : 1399px){
     .drop-category .category-head{
         font-size: 12px;

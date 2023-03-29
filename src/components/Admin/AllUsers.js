@@ -29,7 +29,6 @@ const GetUserData = async()=>{
 await fetch(`${baseUrl}/api/auth/allusers`)
 .then((res)=>res.json())
 .then(async(data)=>{
-  // const userfilter = data.data.filter((value)=>{ return value.role === "user"});
    setUserdata(data.data);
 })
 .catch((err) => {
@@ -72,7 +71,6 @@ const UpdateUserStatus = async (userId, userStatus) => {
       body: JSON.stringify({ ...userId, userStatus:userStatus }),
     });
     const data = await response.json();
-    // Call your GetUserData function here or do something with the data
   } catch (error) {
     console.log(error);
   }
@@ -96,11 +94,6 @@ const columns = [
     dataIndex: "phonenumber",
     key: "phonenumber",
   },
-  // {
-  //   title: "Password",
-  //   dataIndex: "password",
-  //   key: "password",
-  // },
   {
     title: "Action",
     dataIndex: "Action",
@@ -181,9 +174,6 @@ const columns = [
         <div className="all-manufacture-details-section">
               <h3 className="all-manufacturer-head">All Users</h3>
               <div className="all-manufacturer-search-wrap">
-              {/* <Link to="/UserProfile" className="add-icon">
-                  <MdPlaylistAdd/>Add
-                </Link> */}
               <input
               type='text'
                 onChange={e => onChangeHandler(e)}

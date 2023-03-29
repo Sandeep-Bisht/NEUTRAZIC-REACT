@@ -20,7 +20,7 @@ const MyAccount = () => {
     formState: { errors },   
   } = useForm(
     {
-      mode:"onBlur"
+      mode:"onBlur",
     },
    
   );

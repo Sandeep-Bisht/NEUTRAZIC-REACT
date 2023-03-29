@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from "./Sidemenu";
 import $ from "jquery";
 import "./Dashboard.css";
@@ -18,7 +17,6 @@ const Productform = (props) => {
   const [update, setUpdate] = useState(false);
   const [shwoTable, setShowTable] = useState(false);
   const [formErrors,setFormErrors]=useState({});
-  //const [validate,setValidate]=useState(true);
   const [editableData] = useState(props.history.location.state);
 
   let [data, Setdata] = useState({
@@ -205,107 +203,7 @@ const Productform = (props) => {
         console.log(err, "error");
       });
   };
-  // const data1 = [];
-
-  // if (Userdata != undefined && Userdata.role == "Vendor") {
-  //   {
-  //     products.map((item, index) => {
-  //       data1.push(
-  //         item.manufacturer.name == Userdata.organization
-  //           ? {
-  //             sr_no: index + 1,
-  //             name: item.name,
-  //             category: item.category,
-  //             manufacturer: item.manufacturer.name,
-  //             "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
-  //             "INRdiscount/Doolerdiscount":
-  //               item.inrDiscount + "/" + item.dollerDiscount,
-  //             action:
-  //               Userdata != undefined && Userdata.role == "superAdmin" ? (
-  //                 <>
-  //                   <button className="btnbtn-danger data-table-button">
-  //                     <i
-  //                       className="bx bx-trash"
-  //                       onClick={() => {
-  //                         if (window.confirm("Are you sure ?")) {
-  //                           DeleteProduct(item._id);
-  //                         } else {
-  //                           return false;
-  //                         }
-  //                       }}
-  //                     ></i>
-  //                   </button>{" "}
-  //                   <button
-  //                     onClick={() => Editproduct(item)}
-  //                     className=" btnbtn-danger"
-  //                   >
-  //                     <i className="bx bx-edit"></i>
-  //                   </button>
-  //                 </>
-  //               ) : (
-  //                 <button
-  //                   onClick={() => Editproduct(item)}
-  //                   className="update btnbtn-danger"
-  //                 >
-  //                   <i className="bx bx-show"></i>
-  //                 </button>
-  //               ),
-  //           }
-  //           : null
-  //       );
-  //     });
-  //   }
-  // } else if (
-  //   (Userdata != undefined && Userdata.role == "superAdmin") ||
-  //   (Userdata != undefined && Userdata.role == "Manager")
-  // ) {
-  //   {
-  //     products.map((item, index) => {
-  //       data1.push({
-  //         sr_no: index + 1,
-  //         name: item.name,
-  //         category: item.category,
-  //         manufacturer: item.manufacturer.name,
-  //         "INRprice/Dollerprice": item.inrMrp + "/" + item.dollerMrp,
-  //         "INRdiscount/Doolerdiscount":
-  //           item.inrDiscount + "/" + item.dollerDiscount,
-  //         action:
-  //           Userdata != undefined && Userdata.role == "superAdmin" ? (
-  //             <>
-  //               <button className="btnbtn-danger">
-  //                 <i
-  //                   className="bx bx-trash"
-  //                   onClick={() => {
-  //                     if (window.confirm("Are you sure ?")) {
-  //                       DeleteProduct(item._id);
-  //                     } else {
-  //                       return false;
-  //                     }
-  //                   }}
-  //                 ></i>
-  //               </button>{" "}
-  //               <button
-  //                 onClick={() => {
-  //                   Editproduct(item);
-  //                   setUpdate(true);
-  //                 }}
-  //                 className="btnbtn-danger"
-  //               >
-  //                 <i className="bx bx-edit"></i>
-  //               </button>
-  //             </>
-  //           ) : (
-  //             <button
-  //               onClick={() => Editproduct(item)}
-  //               className="btnbtn-danger"
-  //             >
-  //               <i className="bx bx-show "></i>
-  //             </button>
-  //           ),
-  //       });
-  //     });
-  //   }
-  // }
+  
   const columns = [
     { title: "SR NO", data: "sr_no" },
     { title: "Name", data: "name" },
@@ -317,9 +215,6 @@ const Productform = (props) => {
     },
     { title: "Action", data: "action" },
   ];
-  const click = (row) => {
-    console.log(row);
-  };
   const Editproduct = (item) => {
     let obj = {
       _id: item._id,
@@ -365,7 +260,7 @@ const Productform = (props) => {
         `${baseUrl}/api/product/update_product_by_id`,
         formData
       );
-      if (response.status == 200) {
+      if (response.status === 200) {
         await GetData();
         setTimeout(() => {
           history.push("/AllProductsDetails");
@@ -380,7 +275,6 @@ const Productform = (props) => {
     setShowTable(true);
   };
 
-
   return (
     <>
       <section id="body-pd">
@@ -391,8 +285,8 @@ const Productform = (props) => {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
-            {Userdata != undefined ? (
-                Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
+            {Userdata !== undefined ? (
+                Userdata.role === "superAdmin" || Userdata.role === "Vendor" ? (
                   <form>
                     <div className="col-12 px-0">
                       <div className="card p-4 m-2 mt-4 product-form">
@@ -405,9 +299,6 @@ const Productform = (props) => {
                                   className="form-control Dashborad-search"
                                   placeholder="Product Name"
                                   value={data.name}
-                                  // defaultValue={
-                                  //   editableData ? editableData.name : ""
-                                  // }
                                   onChange={(e) => {
                                     Setdata({ ...data, name: e.target.value });
                                   }}
@@ -436,7 +327,6 @@ const Productform = (props) => {
                                   className="form-control Dashborad-search"
                                   multiple
                                   name="otherImage[]"
-                                  // value={data.image}
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
@@ -452,7 +342,6 @@ const Productform = (props) => {
                                 <select
                                   className="form-control Dashborad-search custom-select"
                                   value={data.category}
-                                  // value={editableData ? editableData.category._id : ''}
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
@@ -489,7 +378,7 @@ const Productform = (props) => {
                                 <p className="formerror">{formErrors.subcategory}</p>
                               </div>
 
-                              { Userdata.role == "superAdmin" ? (
+                              { Userdata.role === "superAdmin" ? (
                                 <div className="col-6 p-1 required">
                                 <select
                                   className="form-control Dashborad-search custom-select"
@@ -536,10 +425,10 @@ const Productform = (props) => {
                                     Select Manufacturer
                                   </option>
                                   {manufactureres.map((el, ind) =>
-                                    Userdata.role == "superAdmin" ? (
+                                    Userdata.role === "superAdmin" ? (
                                       <option value={el._id}>{el.name}</option>
-                                    ) : Userdata._id == el.creatorId &&
-                                      Userdata.role == "Vendor" ? (
+                                    ) : Userdata._id === el.creatorId &&
+                                      Userdata.role === "Vendor" ? (
                                       <option value={el._id}>{el.name}</option>
                                     ) : null
                                   )}
@@ -562,10 +451,10 @@ const Productform = (props) => {
                                     Select warehouse
                                   </option>
                                   {warehouse.map((el, ind) =>
-                                    Userdata.role == "superAdmin" ? (
+                                    Userdata.role === "superAdmin" ? (
                                       <option value={el._id}>{el.name}</option>
-                                    ) : Userdata._id == el.creatorId &&
-                                      Userdata.role == "Vendor" ? (
+                                    ) : Userdata._id === el.creatorId &&
+                                      Userdata.role === "Vendor" ? (
                                       <option value={el._id}>{el.name}</option>
                                     ) : null
                                   )}                                 
@@ -577,9 +466,6 @@ const Productform = (props) => {
                                   type="number"
                                   id="floatingform"
                                   className="form-control Dashborad-search"
-                                  // defaultValue={
-                                  //   editableData ? editableData.quantity : ""
-                                  // }
                                   defaultValue={
                                     data.quantity
                                   }
@@ -604,9 +490,6 @@ const Productform = (props) => {
                                   defaultValue={
                                     data.inrMrp
                                   }
-                                  // defaultValue={
-                                  //   editableData ? editableData.inrMrp : ""
-                                  // }
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
@@ -621,9 +504,6 @@ const Productform = (props) => {
                                   type="text"
                                   id="floatingform"
                                   className="form-control Dashborad-search"
-                                  // defaultValue={
-                                  //   editableData ? editableData.inrDiscount : ""
-                                  // }
                                   defaultValue={
                                     data.inrDiscount
                                   }
@@ -648,9 +528,6 @@ const Productform = (props) => {
                                   defaultValue={
                                     data.dollerMrp
                                   }
-                                  // defaultValue={
-                                  //   editableData ? editableData.dollerMrp : ""
-                                  // }
                                   onChange={(e) => {
                                     Setdata({
                                       ...data,
@@ -669,11 +546,6 @@ const Productform = (props) => {
                                   defaultValue={
                                     data.dollerDiscount
                                   }
-                                  // defaultValue={
-                                  //   editableData
-                                  //     ? editableData.dollerDiscount
-                                  //     : ""
-                                  // }
                                   placeholder="Price after discount In Dollers"
                                   onChange={(e) => {
                                     Setdata({
@@ -692,9 +564,6 @@ const Productform = (props) => {
                                   value={
                                     data.type
                                   }
-                                  // defaultValue={
-                                  //   editableData ? editableData.type : ""
-                                  // }
                                   onChange={(e) => {
                                     Setdata({ ...data, type: e.target.value });
                                   }}
@@ -703,7 +572,6 @@ const Productform = (props) => {
                                   <option value="Trending Product">
                                     Trending Product
                                   </option>
-                                  {/* <option></option> */}
                                 </select>
                               </div>
                               <div className="col-6 p-1 form-floating">
@@ -711,9 +579,6 @@ const Productform = (props) => {
                                   className="form-control h-100"
                                   id="floatingform"
                                   placeholder="Product Description"
-                                  // defaultValue={
-                                  //   editableData ? editableData.description : ""
-                                  // }
                                   defaultValue={
                                     data.description
                                   }
@@ -756,7 +621,6 @@ const Productform = (props) => {
                               </div>
                             </div>
                           </div>
-                        {/* </div> */}
                       </div>
                   </form>
                 ) : null

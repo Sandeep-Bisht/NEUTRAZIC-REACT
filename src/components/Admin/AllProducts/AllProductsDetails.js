@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Table, Input, Popconfirm, Typography, Space } from "antd";
 
 import axios from "axios";
-// import { data } from "./columns";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
@@ -12,10 +11,7 @@ import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
 import {MdPlaylistAdd} from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
-// import Cookies from "universal-cookie";
 
-
-// var currentCurrencyType="";
 
 export default function AllProductsDetails() {
 
@@ -24,7 +20,7 @@ export default function AllProductsDetails() {
   const [searchVal,setSearchVal]=useState("");
   const [filteredData]=useState([]);
   const [products, Setproducts] = useState("");
-  // const cookies = new Cookies();
+
 
   
   const { Search } = Input;

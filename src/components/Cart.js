@@ -101,7 +101,6 @@ const Cart = () => {
         });
     }
   };
-  console.log(cart, "THis is cart");
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {

@@ -7,8 +7,6 @@ import Footer from "./Footer";
 import Baseline from "./Baseline";
 import { baseUrl } from "../utils/services";
 import "../components/SingleBlogPage.css";
-import { Link } from "react-router-dom";
-import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
 const SingleBlog = (props) => {
   const blogSlug = props.match.params.slug;
@@ -87,7 +85,7 @@ const SingleBlog = (props) => {
                 blog.map((item, ind) => {
                   return (
                     <>
-                      <h1 className="blog-heading1">{item.title}</h1>
+                      <h1 className="blog-heading1" key={ind}>{item.title}</h1>
                     </>
                   );
                 })}
@@ -97,10 +95,10 @@ const SingleBlog = (props) => {
         <div className="row">
           <div className="col-md-12">
             {blog &&
-              blog.map((item) => {
+              blog.map((item,ind) => {
                 return (
                   <>
-                    <div className="row">
+                    <div className="row" key={ind}>
                       <div className="col-md-12">
                         <img
                           className="single-blog-image1"
@@ -131,10 +129,10 @@ const SingleBlog = (props) => {
                   <div className="row">
                     {data &&
                       data
-                        .filter((data) => data.slug != props.match.params.slug)
+                        .filter((data) => data.slug !== props.match.params.slug)
                         .map((item, ind) => {
                           return (
-                            <div className="col-md-6 col-lg-3">
+                            <div className="col-md-6 col-lg-3" key={ind}>
                               <div class="card">
                                 <img
                                   src={

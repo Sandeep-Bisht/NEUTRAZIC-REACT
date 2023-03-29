@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
@@ -224,10 +223,10 @@ const NewOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
+                        prticularUserOrder.map((item,ind) => {
                           return (
                             <>
-                              <tr>                                
+                              <tr key={ind}>                                
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                   <img

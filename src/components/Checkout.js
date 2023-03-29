@@ -43,7 +43,6 @@ const Checkout=()=>{
         <div className="first-nav container-fluid"><span><Link to="/">Home</Link>/CheckOut</span></div>
         <section className="checkout-area ptb-70">
             <div className="container">
-               {/* <div className="user-actions"><i className="bx bx-log-in"></i><span>Returning customer? <a href="auth.html">Click here to login</a></span></div> */}
                <form>
                   <div className="row">
                      <div className="col-lg-12 col-md-12">
@@ -91,11 +90,6 @@ const Checkout=()=>{
                                        </td>
                                 
                                 </tr>
-                                   {/* <tr>
-                                       <td className="order-shipping"><span>Shipping</span></td>
-                                       <td className="shipping-price"><span>$10.00</span></td>
-                                    </tr>
-                                    */}
                                     <tr>
                                        <td className="total-price"><span>Order Total</span></td>
                                        <td className="product-subtotal">

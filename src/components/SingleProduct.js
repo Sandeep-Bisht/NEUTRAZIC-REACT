@@ -212,10 +212,6 @@ const SingleProduct = (props) => {
       });
   };
 
-  // useEffect(()=>{
-  //   Getsingledata();
-  // },[])
-
   const Getsingledata = async () => {
     await fetch(`${baseUrl}/api/product/product_by_id`, {
       method: "POST",
@@ -309,22 +305,14 @@ const SingleProduct = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          // history.push("/Cart");
-          // toast.success("Add to cart",{
-          //   position:"bottom-right",
-          //   autoClose:5000,
-          // });
+         
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
 
-  // ImageHandler
 
   const ImageHandler = (m, i) => {
     let Imagestore = m.path;
@@ -394,8 +382,6 @@ const SingleProduct = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -420,8 +406,6 @@ const SingleProduct = (props) => {
         setQuantity(1);
 
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
     }
   };
@@ -628,7 +612,6 @@ const SingleProduct = (props) => {
   const checkWishlistItem = (productId) => {
     for (let item of wishlist) {
       if (item.productId == productId) {
-        console.log(item.productId, "inside check wishlist istem", productId)
         return "wishlisted";
       }
     }
@@ -773,13 +756,6 @@ const SingleProduct = (props) => {
                 <span>{data.name}</span>
               </div>
               <div className="pt-2 pb-2">
-                {/* <StarsRating
-                  count={5}
-                  // onChange={ratingChanged}
-                  size={35}
-                  color2={"#ffd700"}
-                  value={4}
-                /> */}
               </div>
               <div className="MRP-Taxes-div">
                 <span>MRP (incl. of all taxes)</span>
@@ -812,12 +788,6 @@ const SingleProduct = (props) => {
               </div>
             </div>
             <div className="row pt-2 pb-3 add">
-              {/* wishlist animation */}
-              {/* <div className="stage">
-                 <div className="heart"></div>
-                  </div> */}
-
-              {/* end Wishlist animation */}
               <div className="wishlist">
                 <i className="search-btn"></i>
                 <span className="">
@@ -959,17 +929,9 @@ const SingleProduct = (props) => {
         <div className="row main-div p-4">
           <div>
             <div className="row heading mt-4 jutify-content-center">
-              {/* <div className="col-sm-1"></div> */}
               <div className="col-sm-2 title" id="Description">
                 <button className="button2">Description</button>
               </div>
-              {/* <div className="col-sm-2 text-center title " id="Review">
-                <button className="button1">Review</button>
-              </div>
-              <div className="col-sm-2 text-center title" id="Technical">
-                <button className="button1">Add a Review</button>
-              </div> */}
-              {/* <div className="col-sm-3"></div> */}
             </div>
             <div className="row content1">
               <div className="text" id="Descriptiondiv">
@@ -981,18 +943,12 @@ const SingleProduct = (props) => {
                     <div className="start-div">
                       <div className="row">
                         <div className="col-6">
-                          {/* <StarsRating
-                            count={5}
-                            // onChange={ratingChanged}
-                            size={25}
-                            color2={"#ffd700"}
-                            value={4}
-                          /> */}
+                        
                         </div>
                         <div className="col-6 text-right">
                           <span className="date">22/07/2021</span>
                         </div>
-                        {/* </div> */}
+                       
                         <div className="col-12 ">
                           <span className="content-text">
                             Loved this toner! I've been searching for
@@ -1024,18 +980,12 @@ const SingleProduct = (props) => {
                     <div className="start-div">
                       <div className="row">
                         <div className="col-6">
-                          {/* <StarsRating
-                            count={5}
-                            // onChange={ratingChanged}
-                            size={25}
-                            color2={"#ffd700"}
-                            value={4}
-                          /> */}
+                        
                         </div>
                         <div className="col-6 text-right">
                           <span className="date">22/07/2021</span>
                         </div>
-                        {/* </div> */}
+                      
                         <div className="col-12">
                           <span className="content-text">
                             Loved this toner! I've been searching for
@@ -1087,13 +1037,7 @@ const SingleProduct = (props) => {
                     </div>
                     <div className="row">
                       <div className="col-6">
-                        {/* <StarsRating
-                          count={5}
-                          // onChange={ratingChanged}
-                          size={30}
-                          color2={"#ffd700"}
-                          value={0}
-                        /> */}
+                      
                       </div>
 
                       <div className="col-6">
@@ -1154,31 +1098,16 @@ const SingleProduct = (props) => {
                     {/* :null} */}
 
                     <div className="allproduct-price-div">
-                      {/* <div className="d-flex justify-content-center">
-                      <StarsRating
-                        count={5}
-                        // onChange={ratingChanged}
-                        size={20}
-                        color2={"#ffd700"}
-                        value={4}
-                      />
-                    </div> */}
+                    
                       <div className="row">
-                        {/* <div className="col-4 ">
-                              <Link to={"/SingleProduct/" + el._id}>  
-                               <p className="bottom-icon text-nowrap"><i className='bx bx-show-alt'></i> Quick view</p>
-                               </Link> 
-                              </div> */}
+                       
                         <div className="col-lg-6 col-md-12 text-start">
                           <span className="price">
                             {" "}
                             {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                   
                                   {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
-                            {/* $
-                      {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                        ? 0
-                        : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100} */}
+                        
                           </span>
                         </div>
                         <div className="col-lg-6 col-md-12  text-end">
@@ -1214,7 +1143,7 @@ const SingleProduct = (props) => {
                             )}
                             Wishlist
                           </p>
-                          {/* <div className="icon-wishlist"></div> */}
+                         
                         </div>
                       </div>
                     </div>

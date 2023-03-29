@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import { useHistory } from "react-router-dom";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
@@ -85,17 +84,6 @@ const ManufacturerCreation = (props) => {
       });
   };
 
-  // const EditManufacturer = (item) => {
-  //   let obj;
-  //   obj = {
-  //     _id: item._id,
-  //     image: item.image,
-  //     name: item.name,
-  //     description: item.description,
-  //   };
-
-  //   Setdata(obj);
-  // };
 
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
