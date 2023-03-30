@@ -134,6 +134,10 @@
 .single-blog-page-header {
   padding-bottom: 30px;
 }
+.blog-page-section-2 .card .card-body {
+  height: 180px !important;
+  padding: 15px;
+}
 
 /* Media Query For Blog Page  */
 @media only screen and (max-width: 1399px) {

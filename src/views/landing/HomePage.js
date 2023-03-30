@@ -730,7 +730,7 @@ const HomePage = () => {
               <Carousel // breakPoints={breakPoints}
                 disableAutoPlay
                 autoPlaySpeed={3000}
-                itemsToShow={2}
+                itemsToShow={1}
                 onPrevStart={onPrevStart}
                 onNextStart={onNextStart}
                 infiniteLoop={true}
