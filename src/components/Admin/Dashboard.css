@@ -273,7 +273,7 @@ iframe{
   position: relative;
   color: var(--first-color-light);
   margin-bottom: 1rem;
-  transition: .3s;
+  /* transition: .3s; */
   width: 180px;
 }
 .nav__link .nav_name Link{
@@ -488,6 +488,8 @@ iframe{
 {
   font-size:15px;
   color:#1b97ff;
+  position: relative;
+  width: 145px;
 }
 .nav__link .accordion-item .accordion-header .d-flex button:hover
 {
@@ -525,6 +527,8 @@ iframe{
   height: 13px;
   width: 13px;
   background-image: url('../../Images/Icons/Rectangle 90.png') !important;
+  position: absolute;
+  right: 0;
   color: #595669 !important;
   background-size: 13px!important;
 }

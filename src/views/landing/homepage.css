@@ -17354,8 +17354,11 @@ iframe {
 
 .single-footer-widget {
   margin-bottom: 30px;
+  
 }
-
+.single-footer-widget .footer-contact-info{
+  width: 78%;
+}
 .single-footer-widget .logo {
   margin-bottom: 12px;
 }
@@ -17370,7 +17373,9 @@ iframe {
   margin-bottom: 0;
   list-style-type: none;
 }
-
+.single-footer-widget .footer-contact-info p{
+  font-size: 15px;
+}
 .single-footer-widget .footer-contact-info li {
   display: block;
   margin-bottom: 12px;

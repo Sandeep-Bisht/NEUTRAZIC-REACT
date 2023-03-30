@@ -31,19 +31,19 @@ const WishlistHandler=()=>{
                   
                   <li>
                     <span>Phone:</span>{" "}
-                    <a href="tel:+91-135-2976990">+91-7500872014</a>
+                    <a href="tel:+91-7500872014">+91-7500872014</a>
                   </li>
                   <li>
                     <span>Email:</span>{" "}
-                    <a href="cdn-cgi/l/email-protection.html#adc5c8c1c1c2edc0c8c9fc83cec2c0">
+                    <a href="mailto:info@nutrazik.com" target="_blank">
                     info@nutrazik.com
                     </a>
                   </li>
                   <li>
                     <span>Address:</span>{" "}
-                    <a href="#" target="_blank">
+                    <p>
                       NutraZik Corp 539 W. Commerce Suite #6696 Dallas, TX 75208{" "}
-                    </a>
+                    </p>
                   </li>
                 </ul>
                 <ul className="social">
@@ -142,7 +142,7 @@ const WishlistHandler=()=>{
                     className="input-newsletter"
                     placeholder="Enter your email address"
                     name="email"
-                    required=""
+                    required
                   />
                   <div className="align-items-center">
                     <button type="submit" className="default-btn">
