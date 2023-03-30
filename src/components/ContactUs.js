@@ -60,10 +60,7 @@ const ContactUs = () => {
                   </div>
                   <h3>Phone</h3>
                   <p>
-                    <a href="tel:16798">Hotline: 16798</a>
-                  </p>
-                  <p>
-                    <a href="tel:+1234567898">Tech support: 0135-3557207</a>
+                  <a href="tel:+91-7500872014">+91-7500872014</a>
                   </p>
                 </div>
               </div>
@@ -74,18 +71,10 @@ const ContactUs = () => {
                   </div>
                   <h3>Email</h3>
                   <p>
-                    <a href="cdn-cgi/l/email-protection.html#91f9f4fdfdfed1fcf4f5e0bff2fefc">
-                      <span
-                        className="__cf_email__"
-                        data-cfemail="244c4148484b64494140550a474b49"
-                      >
-                        {" "}
-                        info@nutrazik.com
-                      </span>
+                  <span>Email:</span>{" "}
+                    <a href="mailto:info@nutrazik.com" target="_blank">
+                    info@nutrazik.com
                     </a>
-                  </p>
-                  <p>
-                    <a href="#">Skype: hello.MedQ</a>
                   </p>
                 </div>
               </div>
@@ -95,8 +84,8 @@ const ContactUs = () => {
                     <i className="flaticon-clock"></i>
                   </div>
                   <h3>Working Hours</h3>
-                  <p>Sunday - Friday</p>
-                  <p>8:00AM - 8:00PM</p>
+                  <p>Monday - Saturday</p>
+                  <p>9:30AM - 6:30PM</p>
                 </div>
               </div>
             </div>

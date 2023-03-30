@@ -20839,12 +20839,12 @@ svg {
 
 .Image-Container img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 300px;
+  object-fit: fill;
 }
 .category-Button {
   margin: 20px 10px 0 0;
 }
 .Category-container {
-  max-height: 280px;
+  max-height: 350px;
 }
