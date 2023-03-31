@@ -41,9 +41,9 @@ const WishlistHandler=()=>{
                   </li>
                   <li>
                     <span>Address:</span>{" "}
-                    <a href="#" target="_blank">
+                    
                       NutraZik Corp 539 W. Commerce Suite #6696 Dallas, TX 75208{" "}
-                    </a>
+                    
                   </li>
                 </ul>
                 <ul className="social">

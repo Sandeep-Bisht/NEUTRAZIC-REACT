@@ -18,6 +18,7 @@ import { MdOutlineClose } from "react-icons/md";
 //import Button from './button';
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
@@ -37,6 +38,7 @@ const Header1 = (props) => {
   let { state1, setState1 } = useContext(CurrencyContext);
 
   const state = useSelector((state) => state.GetCartItemReducer);
+  const wishListstate = useSelector((state) => state.GetWishlistedReducer);
 
   // let history=useHistory();
   const history = useHistory();
@@ -53,6 +55,7 @@ const Header1 = (props) => {
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
+  const [wishlisted, setWishlisted] = useState("");
   const [usermodal, setUsermodal] = useState();
   const [currancy, setCurrency] = useState("INR");
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -70,7 +73,6 @@ const Header1 = (props) => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-
   // useEffect(() => {
   //   Userdata = JSON.parse(localStorage.getItem("Userdata"));
   //   if (Userdata === null) {
@@ -138,10 +140,16 @@ const Header1 = (props) => {
       setCartItems(state.noOfItemsInCart);
     }
   }, [state.noOfItemsInCart]);
+  useEffect(() => {
+    if (wishListstate.noOfItemsInwishlist >= 0) {
+      setWishlisted(wishListstate.noOfItemsInwishlist);
+    }
+  }, [wishListstate.noOfItemsInwishlist]);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
+    GetWishlist();
     GetSubCategory();
     CartById();
     $(document).ready(function() {
@@ -163,7 +171,33 @@ const Header1 = (props) => {
       setState1("1");
     }
   }, [currancy]);
-
+  const GetWishlist = async () => {
+    let id;
+    if (Userdata) {
+      id = Userdata._id;
+    }
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userid: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.data[0] !== undefined) {
+          setWishlisted(data.data.length);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
   const currencyHandler = (e) => {
     setCurrency(e.target.value);
     if (currancy === "INR") {
@@ -178,6 +212,7 @@ const Header1 = (props) => {
     if (Userdata === null) {
       setLoginState("0");
       setCartItems("");
+      setWishlisted("");
     }
     setLoginState("1");
   }, [loginState]);
@@ -191,6 +226,7 @@ const Header1 = (props) => {
     reset();
     setLoginState("0");
     setCartItems("");
+    setWishlisted("");
   };
 
   const RegisterUser = (data) => {
@@ -286,7 +322,7 @@ const Header1 = (props) => {
             await CartById();
             $("#loginModalCloseBtn").click();
             history.push("/Dashboard");
-          } else if (res.success === 400 || res.success===401) {
+          } else if (res.success === 400 || res.success === 401) {
             setMsg("User Name Or PassWord is not Valid");
           }
           // }
@@ -1186,6 +1222,7 @@ const Header1 = (props) => {
                           <div className="">
                             <div className="option-item">
                               <div className="cart-btn">
+                                {wishlisted ? <h6>{wishlisted}</h6> : ""}
                                 {/* <Link to="/Ordered"> */}
                                 <i className="bx bx-heart"></i>
                                 {/* </Link> */}

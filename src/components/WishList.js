@@ -12,6 +12,7 @@ import { IoClose } from "react-icons/io5";
 import SingleProduct from "./SingleProduct";
 import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 
 var Userdata = "";
@@ -27,7 +28,7 @@ const WishList = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetWishlist();
     CartById();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }, []);
 
   const GetWishlist = async () => {
@@ -47,15 +48,21 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        if (data.data[0] !== undefined) {
+        console.log(data,"Checking Number present");
+        if(data.error && data.message === "Data Not Found"){
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
+        if (data.data !== undefined) {
           Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
-
       .catch((err) => {
         console.log(err, "error");
       });
   };
+
   const DeleteWishlist = async (productId) => {
     await fetch(`${baseUrl}/api/wishlist/delete_wishlist_by_id`, {
       method: "delete",
@@ -164,8 +171,8 @@ const WishList = () => {
         quantity: quantity,
         mrp: parseInt(data.inrMrp),
         singleprice: parseInt(data.inrDiscount),
-        dollerDiscount:data.dollerDiscount,
-        dollerMrp:data.dollerMrp,
+        dollerDiscount: data.dollerDiscount,
+        dollerMrp: data.dollerMrp,
         discountprice: data.discount,
         description: data.description,
         category: data.category,
@@ -239,7 +246,7 @@ const WishList = () => {
         </span>
       </div>
 
-      <section className="wishlist-page m-auto" style={{overflow:"hidden"}}>
+      <section className="wishlist-page m-auto" style={{ overflow: "hidden" }}>
         <div className="container m-auto">
           <div className="row mt-0">
             <div className="col-md-12">

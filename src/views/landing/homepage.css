@@ -18901,14 +18901,14 @@ iframe {
   border-radius: 10px;
 }
 
-.cat-left-side-image {
+/* .cat-left-side-image {
   height: 200px;
   object-fit: contain;
   border: 1px solid #c7c7c769;
   background-color: #f2f2f2;
-  /* padding: 10px; */
+  padding: 10px;
   border-radius: 3px;
-}
+} */
 
 /* categories section css ends */
 
@@ -20832,14 +20832,10 @@ svg {
   color: rgba(0, 0, 0, 0.6);
 }
 
-.Image-Container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.category-Button {
-  margin: 20px 10px 0 0;
-}
-.Category-container {
-  max-height: 280px;
-}
+
+
+/* Blog section */
+/* .blog-page-section-2 .card .card-body {
+    height: 180px !important;
+    padding: 15px;
+} */
