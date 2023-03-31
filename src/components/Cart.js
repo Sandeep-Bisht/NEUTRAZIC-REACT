@@ -26,6 +26,7 @@ const Cart = () => {
   const history = useHistory();
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
+  const [loading,setLoading] = useState(true);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
   const [cartStatus, setCartStatus] = useState();
@@ -90,6 +91,7 @@ const Cart = () => {
 
           setCartStatus(data.data[0].cartStatus);
           setCart(data.data[0].order);
+          setLoading(false)
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
@@ -98,6 +100,7 @@ const Cart = () => {
           Set_id(data.data[0]._id);
         })
         .catch((err) => {
+          setLoading(false)
           console.log(err, "error");
         });
     }
@@ -223,6 +226,7 @@ const Cart = () => {
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
+                {loading ? '' : <>
                 {cart && cart.length > 0 ? (
                   <div className="cart-table">
                     <table
@@ -373,6 +377,7 @@ const Cart = () => {
                     autoplay
                   ></lottie-player>
                 )}
+                </>}
               </div>
 
               <div className="col-lg-4 col-md-12">

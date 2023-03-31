@@ -1111,6 +1111,9 @@ const Header1 = (props) => {
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModal"
                               style={{ cursor: "pointer" }}
+                              onClick={()=>
+                                {reset1()
+                                setMsg("")}}
                             >
                               Login/Register
                             </span>

@@ -473,11 +473,6 @@ const AllProducts = (props) => {
                   next={ProductByCategory}
                   hasMore={AllProduct.length < productLength}
                   loader={<h4>Loading...</h4>}
-                  endMessage={
-                    <p style={{ textAlign: "center" }}>
-                      <b>Yay! You have seen it all</b>
-                    </p>
-                  }
                 >
                   {AllProduct.map((el, ind1) => {
                     return (
