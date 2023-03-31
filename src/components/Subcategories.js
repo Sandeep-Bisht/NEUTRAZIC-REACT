@@ -9,6 +9,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
@@ -331,6 +332,8 @@ const Subcategories = (props) => {
       .then(async (data) => {
         if (data.data !== undefined) {
           Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
       .catch((err) => {

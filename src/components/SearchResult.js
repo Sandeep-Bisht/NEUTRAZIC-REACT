@@ -10,6 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
@@ -111,6 +112,8 @@ const SearchResult = (props) => {
       .then(async (data) => {
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
       .catch((err) => {

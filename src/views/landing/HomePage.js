@@ -15,6 +15,7 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as ACTIONS from "../../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../../CommonService/WishlistItem/action";
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 import Carousel from "react-elastic-carousel";
@@ -60,20 +61,18 @@ const HomePage = () => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [blogs, setBlogs] = useState();
-
-
   const history = useHistory();
-  const [currancy, setCurrency] = useState("INR")
+  const [currancy, setCurrency] = useState("INR");
 
   const cookies = new Cookies();
   const { state1, setState1 } = useContext(CurrencyContext);
-  const {loginState,setLoginState} = useContext(CurrencyContext);
-  const [isLogin,setIsLogin] = useState(loginState)
-  
-  useEffect(()=>{
-  setLoginState(loginState)
-  setIsLogin(loginState)
-  },[loginState])
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [isLogin, setIsLogin] = useState(loginState);
+
+  useEffect(() => {
+    setLoginState(loginState);
+    setIsLogin(loginState);
+  }, [loginState]);
 
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
@@ -86,7 +85,7 @@ const HomePage = () => {
       });
   };
   useEffect(() => {
-    const currentCurrency = cookies.get('CurrencyType');
+    const currentCurrency = cookies.get("CurrencyType");
     if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
       setState1("1");
@@ -101,7 +100,6 @@ const HomePage = () => {
     GetCategory();
     GetManufacturer();
     $(document).ready(function() {
-
       $(".frontimage").mouseover(function() {
         alert("in");
       });
@@ -152,6 +150,8 @@ const HomePage = () => {
       .then(async (data) => {
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
       .catch((err) => {
@@ -472,7 +472,6 @@ const HomePage = () => {
       });
   };
 
-
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -492,7 +491,7 @@ const HomePage = () => {
       items: 1,
     },
   };
-  console.log(data,"Checking data");
+  console.log(data, "Checking data");
   const searchData = (e) => {
     // if (props.func) props.func(e);
   };
@@ -520,7 +519,11 @@ const HomePage = () => {
                     Reliable on time home delivery
                   </p>
                   <p className="home-banner-content">
-                  With the rise of e-commerce and online shopping, you can expect your purchases to be delivered to your doorstep in a timely and dependable manner. Reliable on-time home delivery is a crucial factor for businesses to succeed in the e-commerce industry.
+                    With the rise of e-commerce and online shopping, you can
+                    expect your purchases to be delivered to your doorstep in a
+                    timely and dependable manner. Reliable on-time home delivery
+                    is a crucial factor for businesses to succeed in the
+                    e-commerce industry.
                   </p>
 
                   <div className="login-div2 clearfix mb-5">
@@ -573,7 +576,6 @@ const HomePage = () => {
                             className="figure homepage-trending-figure"
                             key={ind}
                           >
-
                             <Link to={"/SingleProduct/" + el._id}>
                               <div
                                 className="image hover-switch-homepage"
@@ -586,7 +588,6 @@ const HomePage = () => {
                                     el.otherImage.length > 0 &&
                                     `${baseUrl}/` + el.otherImage[0].path
                                   }
-
                                   alt=""
                                 />
                                 <img
@@ -729,7 +730,7 @@ const HomePage = () => {
             <div className="row mt-0 featured-products">
               <Carousel // breakPoints={breakPoints}
                 disableAutoPlay
-                autoPlaySpeed={3000}
+                autoPlaySpeed={2000}
                 itemsToShow={1}
                 onPrevStart={onPrevStart}
                 onNextStart={onNextStart}
@@ -744,39 +745,40 @@ const HomePage = () => {
                   categories.map((item, index) => {
                     if (item.featuredCategories == "Featured Categories") {
                       return (
-                        <div className="col-md-12" key={index}>
+                        <div className="col-12" key={index}>
                           <div className="Category-container">
-                          <div className="row">
-                            <div className="col-md-6">
-                              <div className="category-left-side">
-                                <div className="category-heading">
-                                  <h4>{item.name}</h4>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <div className="category-left-side">
+                                  <div className="category-heading">
+                                    <h4>{item.name}</h4>
+                                  </div>
+                                  <div className="category-text">
+                                    <p>{item.description}</p>
+                                  </div>
+                                  <Link to={"/Subcategories/" + item._id}>
+                                    <button className="btn btn cosmetic-shop-now category-Button">
+                                      Shop Now
+                                    </button>
+                                  </Link>
                                 </div>
-                                <div className="category-text">
-                                  <p>{item.description}</p>
-                                </div>
-                                <Link to={"/Subcategories/" + item._id}><button className="btn btn cosmetic-shop-now category-Button">
-                                  Shop Now
-                                </button>
+                              </div>
+                              <div className="col-md-6">
+                                <Link to={"/Subcategories/" + item._id}>
+                                  <div className="Image-Container">
+                                    <img
+                                      src={
+                                        item.image &&
+                                        `${baseUrl}/` + item.image[0].path
+                                      }
+                                      alt=""
+                                      className="cat-left-side-image img-fluid"
+                                    />
+                                  </div>
                                 </Link>
                               </div>
                             </div>
-                            <div className="col-md-6">
-                            <Link to={"/Subcategories/" + item._id}>
-                              <div className="Image-Container">
-                                <img
-                                  src={
-                                    item.image &&
-                                    `${baseUrl}/` + item.image[0].path
-                                  }
-                                  alt=""
-                                  className="cat-left-side-image"
-                                />
-                              </div>
-                              </Link>
-                            </div>
                           </div>
-                        </div>
                         </div>
                       );
                     }
@@ -794,9 +796,9 @@ const HomePage = () => {
             <div className="row ">
               <div id="column" className="columns_5">
                 {data
-                  .filter((item) => item.type == "" )
+                  .filter((item) => item.type == "")
                   .map((el, ind) => {
-                    console.log(el,"Element");
+                    console.log(el, "Element");
                     if (ind < 5) {
                       return (
                         <figure
@@ -1100,7 +1102,7 @@ const HomePage = () => {
               {/* hover Button */}
               <div className="wrapperbtn pt-3 pb-4">
                 {data
-                  .filter((item) => item.category.name == "Weight Management")
+                  .filter((item) => item.category.name == "Fitness")
                   .map((el, index) => {
                     if (index < 1) {
                       return (
@@ -1167,7 +1169,11 @@ const HomePage = () => {
 
                     <div>
                       <p id="para" className="text-justify">
-                        Our nutraceutical app is designed to help you live a healthier life. Downloading our app is quick and easy. you'll have access to a wealth of information and tools that will help you take control of your health and wellness.
+                        Our nutraceutical app is designed to help you live a
+                        healthier life. Downloading our app is quick and easy.
+                        you'll have access to a wealth of information and tools
+                        that will help you take control of your health and
+                        wellness.
                       </p>
                     </div>
                   </div>
@@ -1178,7 +1184,7 @@ const HomePage = () => {
                           <AiFillApple />
                         </div>
                         <Link to="/mobileapp">
-                        <div>App Store</div>
+                          <div>App Store</div>
                         </Link>
                       </div>
                     </button>
@@ -1188,7 +1194,7 @@ const HomePage = () => {
                           <IoLogoGooglePlaystore />
                         </div>
                         <Link to="/mobileapp">
-                        <div>Google Play</div>
+                          <div>Google Play</div>
                         </Link>
                       </div>
                     </button>

@@ -86,6 +86,7 @@ const Cart = () => {
       })
         .then((res) => res.json())
         .then(async (data) => {
+          console.log(data,"Cart data");
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
 
           setCartStatus(data.data[0].cartStatus);
@@ -104,6 +105,8 @@ const Cart = () => {
         });
     }
   };
+
+
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {

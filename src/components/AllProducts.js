@@ -5,11 +5,12 @@ import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../utils/services";
-import * as ACTIONS from "../CommonService/AddToCart/action"
+import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 // import Cookies from "universal-cookie";
@@ -29,7 +30,7 @@ const AllProducts = (props) => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
-  const [wishlistData, Setwishlist] = useState([])
+  const [wishlistData, Setwishlist] = useState([]);
   const [prev, SetPrev] = useState(0);
   //  const [next, SetNext] = useState(false);
   const [filter, setFilter] = useState("");
@@ -39,24 +40,22 @@ const AllProducts = (props) => {
   const [currancy, setCurrency] = useState("INR");
   // const cookies = new Cookies();
   const { loginState, setLoginState } = useContext(CurrencyContext);
-  const [isLogin, setIsLogin] = useState(loginState)
+  const [isLogin, setIsLogin] = useState(loginState);
 
   useEffect(() => {
-    setLoginState(loginState)
-    setIsLogin(loginState)
+    setLoginState(loginState);
+    setIsLogin(loginState);
   }, [loginState]);
 
   useEffect(() => {
     if (state1 == "1") {
-      setCurrency("Dollar")
+      setCurrency("Dollar");
     }
-  }, [currancy])
-
-
+  }, [currancy]);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     ProductByCategory();
     categoryDetails();
     GetWishlist();
@@ -115,7 +114,6 @@ const AllProducts = (props) => {
           setQuantity(1);
           await AddtoCart();
           await CartById();
-
         }
       } else {
         for (var i = 0; i < userCart.order.length; i++) {
@@ -131,9 +129,7 @@ const AllProducts = (props) => {
         setQuantity(1);
         // CartById();
         UpdateCart();
-
       }
-
     }
   };
   const UpdateCart = () => {
@@ -152,13 +148,12 @@ const AllProducts = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-
         CartById();
         //history.push("/Cart");
         toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 1000,
-        })
+        });
       })
       .then((err) => console.log(err));
   };
@@ -178,7 +173,7 @@ const AllProducts = (props) => {
         .then(async (data) => {
           setUserCart(data.data[0]);
           let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems))
+          dispatch(ACTIONS.getCartItem(cartItems));
         })
         .catch((err) => {
           console.log(err, "error");
@@ -214,12 +209,7 @@ const AllProducts = (props) => {
 
   const FilterItems = (item) => {
     setFilter(item);
-
   };
-
-
-
-
 
   var page = 1;
   const ProductByCategory = async () => {
@@ -247,19 +237,17 @@ const AllProducts = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        await setCategoryDetails(data.data[0]);
-
-
+        await setCategoryDetails(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-
+  
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
-      id = Userdata._id
+      id = Userdata._id;
     }
     await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
       method: "post",
@@ -268,30 +256,30 @@ const AllProducts = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-
         userid: id,
       }),
     })
       .then((res) => res.json())
       .then(async (data) => {
         if (data.data[0] !== undefined) {
-
-          Setwishlist(data.data)
+          Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
       .catch((err) => {
         console.log(err, "error");
       });
-
   };
+
 
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
       if (item.productId == productId) {
-        return "wishlisted"
+        return "wishlisted";
       }
     }
-  }
+  };
 
   const AddtoWishlist = async (
     productid,
@@ -318,9 +306,42 @@ const AllProducts = (props) => {
       .then(async (data) => {
         if (data.data == undefined) {
           if (!Userdata == []) {
-            await fetch(
-              `${baseUrl}/api/wishlist/add_to_wishlist`,
-              {
+            await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userid: Userdata._id,
+                image: image,
+                name: name,
+                productId: productid,
+                rating: "5",
+                category: category,
+                manufacturer: manufacturer,
+                description: description,
+              }),
+            })
+              .then((res) => res.json())
+              .then(async (data) => {
+                toast.success("Added to wishlist", {
+                  position: "bottom-right",
+                  autoClose: 1000,
+                });
+                let wishList = document.getElementById(productid);
+                wishList.classList.add("wishlisted");
+                GetWishlist();
+
+              })
+              .catch((err) => {
+                console.log(err, "error e");
+              });
+          }
+        } else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -336,66 +357,28 @@ const AllProducts = (props) => {
                   manufacturer: manufacturer,
                   description: description,
                 }),
-              }
-            )
-              .then((res) => res.json())
-              .then(async (data) => {
-                // setWishlist(data.data[0]);
-                toast.success("Added to wishlist", {
-                  position: "bottom-right",
-                  autoClose: 1000
-                })
-                let wishList = document.getElementById(productid);
-                wishList.classList.add("wishlisted");
               })
-              .catch((err) => {
-                console.log(err, "error e");
-              });
-          }
-        } else {
-          if (!JSON.stringify(data.data).includes(productid) && data.data) {
-            if (!Userdata == []) {
-              await fetch(
-                `${baseUrl}/api/wishlist/add_to_wishlist`,
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userid: Userdata._id,
-                    image: image,
-                    name: name,
-                    productId: productid,
-                    rating: "5",
-                    category: category,
-                    manufacturer: manufacturer,
-                    description: description,
-                  }),
-                }
-              )
                 .then((res) => res.json())
                 .then(async (data) => {
                   // setWishlist(data.data[0]);
                   //add product to wishlist response is comming here
                   toast.success("Added to wishlist", {
                     position: "bottom-right",
-                    autoClose: 1000
-                  })
+                    autoClose: 1000,
+                  });
                   let wishList = document.getElementById(productid);
                   wishList.classList.add("wishlisted");
+                  GetWishlist();
                 })
                 .catch((err) => {
                   console.log(err, "error e");
                 });
             }
           } else {
-            toast.error('Already in wishlist !', {
+            toast.error("Already in wishlist !", {
               position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 1000,
             });
-
           }
         }
       });
@@ -508,16 +491,18 @@ const AllProducts = (props) => {
                             <div className="col-6 text-start">
                               <span className="price">
                                 {" "}
-                                {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-
-                                {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                {state1.state1 == "1" ? (
+                                  <i class="fa fa-dollar-sign"></i>
+                                ) : (
+                                  <i className="fa fa-inr"></i>
+                                )}
+                                {state1.state1 == "1"
+                                  ? el.dollerDiscount
+                                  : el.inrDiscount}
                               </span>
                             </div>
                             <div className="col-6 text-end">
-                              <p
-                                className={`text-nowrap wishlist`}
-
-                              >
+                              <p className={`text-nowrap wishlist`}>
                                 {Userdata ? (
                                   <i
                                     id={el._id}
@@ -549,39 +534,36 @@ const AllProducts = (props) => {
                                 )}
                                 Wishlist
                               </p>
-
                             </div>
                           </div>
                         </div>
                         <button
                           className="button btn"
                           onClick={() => {
-                            cartfunction
-                              (
-                                el._id,
-                                el.name,
-                                quantity,
-                                el.inrMrp,
-                                el.inrDiscount,
-                                el.dollerDiscount,
-                                el.dollerMrp,
-                                el.discount,
-                                el.description,
-                                el.category,
-                                el.manufacturer.name,
-                                el.image[0].path
-                              )
+                            cartfunction(
+                              el._id,
+                              el.name,
+                              quantity,
+                              el.inrMrp,
+                              el.inrDiscount,
+                              el.dollerDiscount,
+                              el.dollerMrp,
+                              el.discount,
+                              el.description,
+                              el.category,
+                              el.manufacturer.name,
+                              el.image[0].path
+                            );
                           }}
                           data-bs-toggle={Userdata == null ? "modal" : null}
-                          data-bs-target={Userdata == null ? "#exampleModal" : null}
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
                         >
                           Add to Cart
                         </button>
-
                       </figure>
-
                     );
-
                   })}
                 </InfiniteScroll>
               </div>
@@ -590,13 +572,7 @@ const AllProducts = (props) => {
         </div>
       </div>
 
-
-
-      <div className="col-12 pagination text-center">
-
-
-      </div>
-
+      <div className="col-12 pagination text-center"></div>
 
       <ToastContainer />
 
