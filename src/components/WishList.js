@@ -22,6 +22,7 @@ const WishList = () => {
   const [order, Setorder] = useState([]);
   const [userCart, setUserCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [loading,setLoading]=useState(true);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -29,6 +30,7 @@ const WishList = () => {
     CartById();
     window.scroll(0,0);
   }, []);
+
 
   const GetWishlist = async () => {
     let id;
@@ -49,13 +51,23 @@ const WishList = () => {
       .then(async (data) => {
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
-        }
+          setLoading(false);         
+        } 
       })
-
       .catch((err) => {
         console.log(err, "error");
       });
   };
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(wishlistData.length===0)
+      {
+        setLoading(false);
+      }
+    },500);
+  },[]);
+  
   const DeleteWishlist = async (productId) => {
     await fetch(`${baseUrl}/api/wishlist/delete_wishlist_by_id`, {
       method: "delete",
@@ -69,13 +81,23 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        setLoading(true);
         Setwishlist("");
+        setLoading(true);
         toast.error("Product removed successfully", {
           position: "bottom-right",
           autoClose: 1000,
         });
-        GetWishlist();
-      })
+        setTimeout(()=>{
+          if(data)
+          {
+            setLoading(false);
+          }
+          
+        },500);
+        await GetWishlist();
+        })
+        
       .catch((err) => {
         console.log(err, "error");
       });
@@ -127,7 +149,7 @@ const WishList = () => {
         });
     }
   };
-
+console.log(loading,"in the wishlist");
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
@@ -247,6 +269,7 @@ const WishList = () => {
             </div>
           </div>
           <div className="row mt-0">
+          {loading ? '' : <>
             {wishlistData.length > 0 ? (
               wishlistData.map((item, ind) => (
                 <div className="col-lg-6 col-md-6 col-sm-12">
@@ -297,6 +320,7 @@ const WishList = () => {
                 ></lottie-player>
               </div>
             )}
+            </>}
           </div>
           <ToastContainer />
         </div>

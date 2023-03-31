@@ -13413,7 +13413,7 @@ textarea.form-control {
   opacity: 0.6;
   border-bottom: 2px solid #c7c7c769;
   font-family: "Roboto", sans-serif;
-  text-align: start;
+  /* text-align: start; */
   padding-left: 5px;
 }
 

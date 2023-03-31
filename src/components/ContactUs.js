@@ -109,14 +109,14 @@ const ContactUs = () => {
                             className="form-control"
                             id="name"
                             {...register("fullname", {
-                              required: true,
+                              // required: true,
                             })}
                           />
-                          {errors?.fullname?.type === "required" && (
+                          {/* {errors?.fullname?.type === "required" && (
                             <p className="text-danger">
                               This field is required
                             </p>
-                          )}
+                          )} */}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -128,12 +128,12 @@ const ContactUs = () => {
                             className="form-control"
                             id="email"
                             {...register("email", {
-                              required: true,
-                              pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                              // required: true,
+                              // pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                             })}
                             // data-error="Please enter your email"
                           />
-                          {errors?.email?.type === "required" && (
+                          {/* {errors?.email?.type === "required" && (
                             <p className="text-danger">
                               This field is required
                             </p>
@@ -142,28 +142,28 @@ const ContactUs = () => {
                             <p className="text-danger">
                               Please enter the valid Email
                             </p>
-                          )}
+                          )} */}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
                         <div className="form-group">
                           <label>Mobile No.</label>
                           <input
-                            type="text"
+                            type="number"
                             // name="phone_number"
                             className="form-control"
                             id="phone_number"
                             {...register("mobilenumber", {
-                              required: true,
+                              // required: true,
                             })}
                             // data-error="Please enter your phone number"
                             maxLength={10}
                           />
-                          {errors?.mobilenumber?.type === "required" && (
+                          {/* {errors?.mobilenumber?.type === "required" && (
                             <p className="text-danger">
                               This field is required
                             </p>
-                          )}
+                          )} */}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -175,14 +175,14 @@ const ContactUs = () => {
                             className="form-control"
                             id="subject"
                             {...register("subject", {
-                              required: true,
+                              // required: true,
                             })}
                           />
-                          {errors?.subject?.type === "required" && (
+                          {/* {errors?.subject?.type === "required" && (
                             <p className="text-danger">
                               This field is required
                             </p>
-                          )}
+                          )} */}
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12">
