@@ -1,6 +1,37 @@
 .wishlist-page{
     margin-top: 100px !important;
 }
+:where(.css-dev-only-do-not-override-diro6f).ant-popover .ant-popover-inner {
+    padding: 27px!important;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-popconfirm .ant-popconfirm-description {
+    margin-inline-start: 0px!important;
+    font-size: 17px!important;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-popconfirm .ant-popconfirm-message >.ant-popconfirm-message-icon .anticon {
+    padding-top: 0px!important;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-popconfirm .ant-popconfirm-inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-popconfirm .ant-popconfirm-message {
+    margin-bottom: 10px;
+}
+.anticon svg{
+    height: 21px!important;
+    color: red;
+    opacity: 0.7;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-popconfirm .ant-popconfirm-buttons {
+    position: relative;
+    top: 10px;
+    left: 161px;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-popconfirm .ant-popconfirm-message-title-only {
+    font-size: 15px;
+}
 /* .wishlist-page .container-fluid{
     padding: 0 80px !important;
 } */

@@ -23,6 +23,7 @@ const WishList = () => {
   const [order, Setorder] = useState([]);
   const [userCart, setUserCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [loading,setLoading]=useState(true);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -54,15 +55,25 @@ const WishList = () => {
         }
         if (data.data !== undefined) {
           Setwishlist(data.data);
+          setLoading(false);         
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
-        }
+        } 
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(wishlistData.length===0)
+      {
+        setLoading(false);
+      }
+    },500);
+  },[]);
+  
   const DeleteWishlist = async (productId) => {
     await fetch(`${baseUrl}/api/wishlist/delete_wishlist_by_id`, {
       method: "delete",
@@ -76,13 +87,23 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        setLoading(true);
         Setwishlist("");
+        setLoading(true);
         toast.error("Product removed successfully", {
           position: "bottom-right",
           autoClose: 1000,
         });
-        GetWishlist();
-      })
+        setTimeout(()=>{
+          if(data)
+          {
+            setLoading(false);
+          }
+          
+        },500);
+        await GetWishlist();
+        })
+        
       .catch((err) => {
         console.log(err, "error");
       });
@@ -171,8 +192,8 @@ const WishList = () => {
         quantity: quantity,
         mrp: parseInt(data.inrMrp),
         singleprice: parseInt(data.inrDiscount),
-        dollerDiscount: data.dollerDiscount,
-        dollerMrp: data.dollerMrp,
+        dollerDiscount:data.dollerDiscount,
+        dollerMrp:data.dollerMrp,
         discountprice: data.discount,
         description: data.description,
         category: data.category,
@@ -246,7 +267,7 @@ const WishList = () => {
         </span>
       </div>
 
-      <section className="wishlist-page m-auto" style={{ overflow: "hidden" }}>
+      <section className="wishlist-page m-auto" style={{overflow:"hidden"}}>
         <div className="container m-auto">
           <div className="row mt-0">
             <div className="col-md-12">
@@ -254,6 +275,7 @@ const WishList = () => {
             </div>
           </div>
           <div className="row mt-0">
+          {loading ? '' : <>
             {wishlistData.length > 0 ? (
               wishlistData.map((item, ind) => (
                 <div className="col-lg-6 col-md-6 col-sm-12">
@@ -304,6 +326,7 @@ const WishList = () => {
                 ></lottie-player>
               </div>
             )}
+            </>}
           </div>
           <ToastContainer />
         </div>
