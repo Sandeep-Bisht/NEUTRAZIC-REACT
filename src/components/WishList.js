@@ -12,6 +12,7 @@ import { IoClose } from "react-icons/io5";
 import SingleProduct from "./SingleProduct";
 import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 
 var Userdata = "";
@@ -28,9 +29,8 @@ const WishList = () => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetWishlist();
     CartById();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }, []);
-
 
   const GetWishlist = async () => {
     let id;
@@ -49,9 +49,15 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        if (data.data[0] !== undefined) {
+        console.log(data,"Checking Number present");
+        if(data.error && data.message === "Data Not Found"){
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
+        if (data.data !== undefined) {
           Setwishlist(data.data);
           setLoading(false);         
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         } 
       })
       .catch((err) => {
@@ -149,7 +155,7 @@ const WishList = () => {
         });
     }
   };
-console.log(loading,"in the wishlist");
+
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {

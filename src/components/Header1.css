@@ -62,7 +62,7 @@
     size:20px;
 }
 .option-item .cart-btn {
-	font-size: 28px;
+	font-size: 24px;
 	position: relative;
 	line-height: 0
 }
@@ -1226,6 +1226,12 @@ body {
         left: -12px;
         font-size: 14px;
     }
+    .heart-div .option-item .cart-btn h6{
+        position: absolute !important;
+        font-size: 14px !important;
+        bottom: 5px !important;
+        left: 5px !important;
+    }
     .drop-category{
         padding-right: 10px;
         height: 45px;
@@ -1292,6 +1298,12 @@ body {
     .currancy select{
         height: 25px;
         font-size: 14px;
+    }
+    .heart-div .option-item .cart-btn h6{
+        position: absolute !important;
+        font-size: 14px !important;
+        bottom: 6px !important;
+        left: 5px !important;
     }
 }
 
@@ -1454,6 +1466,12 @@ body {
         .table td{
             padding: 3px!important;
         }
+        .heart-div .option-item .cart-btn h6{
+            position: absolute !important;
+            font-size: 12px !important;
+            bottom: 3px !important;
+            left: 4px !important;
+        }
 }
 
 
@@ -1566,6 +1584,16 @@ height: 30px;
 
 .Browse-Category{
     cursor: pointer;
+}
+
+.heart-div .option-item{
+    position: relative;
+}
+.heart-div .option-item .cart-btn h6{
+    position: absolute;
+    font-size: 14px;
+    bottom:12px;
+    left: 8px;
 }
 
 

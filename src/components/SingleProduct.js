@@ -15,6 +15,7 @@ import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import defaultImage from "../Images/products/Hintosulin (1).png";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import Carousel from "react-elastic-carousel";
 import "../components/Header1.css";
@@ -491,6 +492,8 @@ const SingleProduct = (props) => {
         if (data.data[0] !== undefined) {
           let prodId = props.match.params.id;
           setWishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
           let response = data.data;
           for (let item of response) {
             if (props.match.params.id === item.productId) {
