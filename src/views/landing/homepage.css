@@ -15779,7 +15779,7 @@ textarea.form-control {
 .single-facility-box .icon {
   position: absolute;
   left: 0;
-  top: 0;
+  top: -8px;
   line-height: 1;
   color: var(--optionalColor);
   font-size: 45px;
@@ -20847,4 +20847,63 @@ svg {
 }
 .Category-container {
   max-height: 350px;
+}
+
+
+
+/* slick Carousel */
+/* .myCustomCarousel .slick-arrow {
+  color: #070606 !important;
+  border: none;
+  outline: none;
+  background: #242424 !important;
+}
+.slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: -3% !important;
+  z-index: 1;
+} */
+
+.controls button{
+  box-sizing: border-box;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: rgba(103,58,183,0.1);
+    color: #333;
+    box-shadow: 0 0 2px 0px #333;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    line-height: 50px;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    z-index: 10;
+}
+.controls button svg{
+  /* color: rgba(0, 0, 0, 0.7); */
+  height: 1.8rem !important;
+  width: 0.8rem !important;
+}
+
+.controls button:hover{
+  background:#6f42c1;
+  color: white !important;
+}
+
+
+
+/* BaseLine Css */
+.facility-area .single-facility-box .icon i svg{
+  height: 60px !important;
+  width: 60px !important;
 }

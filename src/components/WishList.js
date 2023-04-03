@@ -49,11 +49,10 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data,"Checking Number present");
         if(data.error && data.message === "Data Not Found"){
           dispatch(ACTIONS1.getwishlistitem(0));
         }
-        if (data.data !== undefined) {
+        if (data.data[0] !== undefined) {
           Setwishlist(data.data);
           setLoading(false);         
           const wishlisted = data.data.length;

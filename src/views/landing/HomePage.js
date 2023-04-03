@@ -22,6 +22,10 @@ import Carousel from "react-elastic-carousel";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import $ from "jquery";
 
@@ -47,6 +51,7 @@ const HomePage = () => {
   ];
 
   const [data, setData] = useState([]);
+  const [singlecategory,setSingleCategory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
@@ -68,7 +73,16 @@ const HomePage = () => {
   const { state1, setState1 } = useContext(CurrencyContext);
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
+  const [sliderRef, setSliderRef] = useState(null);
 
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
@@ -185,6 +199,7 @@ const HomePage = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
+        setSingleCategory(data.data[0]);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -491,7 +506,6 @@ const HomePage = () => {
       items: 1,
     },
   };
-  console.log(data, "Checking data");
   const searchData = (e) => {
     // if (props.func) props.func(e);
   };
@@ -711,7 +725,7 @@ const HomePage = () => {
               </div>
               {/* hover Button */}
               <div className="wrapperbtn pt-0">
-                <Link to="/AllProducts">
+                <Link to="/TrendingProducts">
                   <button type="button" className="btn10">
                     Show More
                   </button>
@@ -728,7 +742,7 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row mt-0 featured-products">
-              <Carousel // breakPoints={breakPoints}
+              {/* <Carousel // breakPoints={breakPoints}
                 disableAutoPlay
                 autoPlaySpeed={2000}
                 itemsToShow={1}
@@ -739,13 +753,14 @@ const HomePage = () => {
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
                 // itemPadding={[0, 4]}
-              >
+                > */} 
+              <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&
                   categories.map((item, index) => {
                     if (item.featuredCategories == "Featured Categories") {
                       return (
-                        <div className="col-12" key={index}>
+                        <div className="col-12 p-5" key={index}>
                           <div className="Category-container">
                             <div className="row">
                               <div className="col-md-6">
@@ -783,7 +798,18 @@ const HomePage = () => {
                       );
                     }
                   })}
-              </Carousel>
+                {/* </Carousel> */}
+                
+              </Slider>
+              <div className="controls d-flex justify-content-between">
+                <button onClick={sliderRef?.slickPrev}>
+                  <FaChevronLeft />
+                </button>
+                <button onClick={sliderRef?.slickNext}>
+                  <FaChevronRight />
+                </button>
+                </div>
+              
             </div>
           </div>
         </section>
@@ -798,7 +824,6 @@ const HomePage = () => {
                 {data
                   .filter((item) => item.type == "")
                   .map((el, ind) => {
-                    console.log(el, "Element");
                     if (ind < 5) {
                       return (
                         <figure
@@ -954,13 +979,13 @@ const HomePage = () => {
         </section>
         <section className="products-area">
           <h1 className="trendign-head">
-            <span className="products-color">Fitness</span>
+            <span className="products-color">{singlecategory.name}</span>
           </h1>
           <div className="container m-auto">
             <div className="row">
               <div id="column" className="columns_5">
                 {data
-                  .filter((item) => item.category.name == "Fitness")
+                  .filter((item) => item.category.name == singlecategory.name)
                   .map((el, ind) => {
                     if (ind < 5) {
                       return (
@@ -1227,7 +1252,7 @@ const HomePage = () => {
                           blogs.map((item, ind) => {
                             if (ind < 4)
                               return (
-                                <div className="col-lg-3 col-md-6">
+                                <div className="col-lg-3 col-md-6" key={ind}>
                                   <Link to={"/SingleBlogPage/" + item.slug}>
                                     <div className="card">
                                       <img
