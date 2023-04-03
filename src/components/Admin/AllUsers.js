@@ -61,6 +61,8 @@ const handleDelete=async (_id)=>{
   
 }
 const UpdateUserStatus = async (userId, userStatus) => {
+  console.log(userId,"id inside the userProfile updateuserProfiles");
+    console.log("function  chlra hai hmara");
   try {
     const response = await fetch(`${baseUrl}/api/auth/update_user_by_id`, {
       method: "PUT",
@@ -125,38 +127,43 @@ const columns = [
         </Space>
       ) : null,
   },
+  // {
+  //   title: "Status", 
+  //   render: (a, item) => (
+  //     <Space size="middle">
+  //       <Dropdown
+  //         menu={{
+  //           items: [
+  //             {
+  //               key: '1',
+  //               label: (
+  //                 <a onClick={() =>UpdateUserStatus(item,"Activate")}>
+  //                 Activate
+  //                 </a>
+  //               ),
+  //             },
+  //             {
+  //               key: '2',
+  //               label: (
+  //                 <a onClick={() =>UpdateUserStatus(item,"De-Activate")}>
+  //                   De-Activate
+  //                 </a>
+  //               ),
+  //             },
+  //           ],
+  //         }}
+  //       >
+  //         <a>
+  //           Status <DownOutlined />
+  //         </a>
+  //       </Dropdown>
+  //     </Space>
+  //   ),
+  // },
   {
-    title: "Status", 
-    render: (a, item) => (
-      <Space size="middle">
-        <Dropdown
-          menu={{
-            items: [
-              {
-                key: '1',
-                label: (
-                  <a onClick={() =>UpdateUserStatus(item,"Activate")}>
-                  Activate
-                  </a>
-                ),
-              },
-              {
-                key: '2',
-                label: (
-                  <a onClick={() =>UpdateUserStatus(item,"De-Activate")}>
-                    De-Activate
-                  </a>
-                ),
-              },
-            ],
-          }}
-        >
-          <a>
-            Status <DownOutlined />
-          </a>
-        </Dropdown>
-      </Space>
-    ),
+    title: "User Status",
+    dataIndex: "userStatus",
+    key: "userStatus",
   },
 ];
  

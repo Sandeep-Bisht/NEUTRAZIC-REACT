@@ -1201,7 +1201,7 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-12">
                 <div className="img-div d-flex justify-content-center">
                   <img id="img" src={Mobile} alt="image" />
                 </div>
