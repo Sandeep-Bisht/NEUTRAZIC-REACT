@@ -32,7 +32,7 @@ const MyAccount = () => {
   return (
     <>
       <Header1 />
-      <section className="cart-area">
+      <section className="myAccount-area">
       <div id="Myacount-Page">
         {Userdata ?(
         <form onSubmit={handleSubmit(onsubmit)}>
@@ -65,9 +65,9 @@ const MyAccount = () => {
                         className="form-control bg-light"
                         name="address"
                         rows="3"
-                        {...register("address", { required: true })}
+                        {...register("address", { required: false })}
                       />
-                      {errors?.address?.type === "required" && <p className="text-danger">This field is required</p>}
+                      {/* {errors?.address?.type === "required" && <p className="text-danger">This field is required</p>} */}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Pincode:</p>
@@ -82,9 +82,9 @@ const MyAccount = () => {
                           }
                         }}
                         maxLength={6}
-                        {...register("pincode", { required: true })}
+                        {...register("pincode", { required: false })}
                       />
-                      {errors?.pincode?.type === "required" && <p className="text-danger">This field is required</p>}
+                      {/* {errors?.pincode?.type === "required" && <p className="text-danger">This field is required</p>} */}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Mobile Number:</p>
@@ -141,11 +141,11 @@ const MyAccount = () => {
                           }
                         }}
                         maxLength={10}
-                        {...register("alternativeNumber", { required: true })}
+                        {...register("alternativeNumber", { required: false })}
                       />
-                      {errors?.alternativeNumber?.type === "required" && (
+                      {/* {errors?.alternativeNumber?.type === "required" && (
                         <p className="text-danger">This field is required</p>
-                      )}
+                      )} */}
                       </div>
 
                     <div className="col-12 d-flex justify-content-center mt-4 p-2">

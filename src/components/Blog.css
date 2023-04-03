@@ -168,6 +168,9 @@
     height: 150px;
     padding-top: 26px;
   }
+  .blog-page-section-2 .card .card-body {
+    padding: 39px;
+  }
   .blog-page {
     margin-top: 175px;
   }
