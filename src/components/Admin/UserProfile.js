@@ -18,6 +18,7 @@ const UserProfile = (props) => {
     email: "",
     phonenumber:"",
     password:"",
+    userStatus:"",
     role:""
   });
   const history = useHistory();
@@ -53,7 +54,8 @@ const UserProfile = (props) => {
             username:data.username,
             email:data.email,
             phonenumber:data.phonenumber,
-            password:data.password,
+            // password:data.password,
+            userStatus:data.userStatus,
             role:data.role
         })
         if(response.status==200)
@@ -143,7 +145,7 @@ const UserProfile = (props) => {
                               Phone Number
                             </label>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          {/* <div className="col-6 p-1 form-floating">
                             <input
                             type="password"
                               className="form-control h-100"
@@ -151,7 +153,7 @@ const UserProfile = (props) => {
                               placeholder="Password"
                               rows="6"
                               defaultValue={
-                                editableData ? editableData.phonenumber : ""
+                                editableData ? editableData.password : ""
                               }
                               onChange={(e) => {
                                 Setdata({
@@ -159,11 +161,13 @@ const UserProfile = (props) => {
                                   description: e.target.value,
                                 });
                               }}
-                            ></input>
+                            >
+
+                            </input>
                             <label for="floatingInputValue">
                               Password
                             </label>
-                          </div>
+                          </div> */}
                           <div className="col-6 p-1 form-floating">
                             <input
                             type="text"
@@ -190,6 +194,27 @@ const UserProfile = (props) => {
                             type="text"
                               className="form-control h-100"
                               id="floatingInputValue"
+                              placeholder="User Status"
+                              rows="6"
+                              defaultValue={
+                                editableData ? editableData.userStatus : ""
+                              }
+                              onChange={(e) => {
+                                Setdata({
+                                  ...data,
+                                  userStatus: e.target.value,
+                                });
+                              }}
+                            ></input>
+                            <label for="floatingInputValue">
+                              userStatus
+                            </label>
+                          </div>
+                          {/* <div className="col-6 p-1 form-floating">
+                            <input
+                            type="text"
+                              className="form-control h-100"
+                              id="floatingInputValue"
                               placeholder="New Password"
                               rows="6"
                               defaultValue=""
@@ -203,7 +228,7 @@ const UserProfile = (props) => {
                             <label for="floatingInputValue">
                               New Password
                             </label>
-                          </div>
+                          </div> */}
                           {editableData && (
                             <div className="col-12 p-1">
                               <button

@@ -347,7 +347,7 @@ const Cart = () => {
                                   </span>
                                 </div>
                               </td>
-                              <td>
+                              <td className="cartPop">
                                 <Popconfirm
                                   className="bx bx-trash cart-delete-icon"
                                   title="Delete the Product"

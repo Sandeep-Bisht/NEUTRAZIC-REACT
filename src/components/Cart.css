@@ -1,6 +1,42 @@
 .cart-area {
   margin-top: 110px !important;
 }
+/* .ant-popover .ant-popover-inner {
+    padding: 27px!important;
+}
+.ant-popconfirm .ant-popconfirm-description {
+    margin-inline-start: 0px!important;
+    font-size: 17px!important;
+}
+.ant-popconfirm .ant-popconfirm-message >.ant-popconfirm-message-icon .anticon {
+    padding-top: 0px!important;
+}
+.ant-popconfirm .ant-popconfirm-inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.ant-popconfirm .ant-popconfirm-message {
+    margin-bottom: 10px;
+}
+.anticon svg{
+    height: 21px!important;
+    color: red;
+    opacity: 0.7;
+}
+.ant-popconfirm .ant-popconfirm-buttons {
+    position: relative;
+    top: 10px;
+    left: 161px;
+}
+.ant-popconfirm .ant-popconfirm-message-title-only {
+    font-size: 15px;
+} */
+.anticon svg{
+  height: 21px!important;
+  color: red;
+  opacity: 0.7;
+}
 /* Cart Responsive Media Queries*/
 @media only screen and (max-width: 1399px) {
   .cart-totals {

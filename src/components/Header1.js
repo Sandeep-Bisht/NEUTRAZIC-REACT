@@ -241,6 +241,7 @@ const Header1 = (props) => {
       data.password == data.repassword
     ) {
       let username = data.username.toLowerCase();
+      data.role="superAdmin"
       data.userStatus = "Activate";
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
@@ -253,7 +254,7 @@ const Header1 = (props) => {
           password: data.password,
           phonenumber: data.phonenumber,
           email: data.email,
-          role: "user",
+          role: data.role,
           userStatus: data.userStatus,
         }),
       })
@@ -302,7 +303,7 @@ const Header1 = (props) => {
         .then((res) => res.json())
         .then(async (res) => {
           setLoginState("1");
-          // if (res && res.userStatus && res.userStatus === "Activate") {
+          if (res && res.userStatus && res.userStatus === "Activate") {
           if (res && res.role === "user") {
             Userdata = res;
             await localStorage.setItem("Userdata", JSON.stringify(res));
@@ -327,13 +328,13 @@ const Header1 = (props) => {
           } else if (res.success === 400 || res.success === 401) {
             setMsg("User Name Or PassWord is not Valid");
           }
-          // }
-          // else if (res && res.message === "Invalid username or password") {
-          //   setMsg("User Name Or PassWord is not Valid");
-          // }
-          //else {
-          //   setMsg("User is De-Activated");
-          // }
+          }
+          else if (res.success === 400 || res.success === 401) {
+            setMsg("User Name Or PassWord is not Valid");
+          }
+          else {
+            setMsg("User is De-Activated");
+          }
         })
         .then(async () => {
           if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
