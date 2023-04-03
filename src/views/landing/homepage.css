@@ -17244,7 +17244,7 @@ textarea.form-control {
   background-color: var(--whiteColor);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   padding: 30px 20px;
-  min-height: 230px;
+  height: 200px!important;
 }
 
 .single-contact-info-box .icon {
@@ -17269,6 +17269,9 @@ textarea.form-control {
 .single-contact-info-box p a {
   color: var(--optionalColor);
   display: inline-block;
+}
+.contact-address-box p a{
+  font-size: 13px;
 }
 
 .single-contact-info-box p a:hover {

@@ -39,9 +39,9 @@ const ContactUs = () => {
           <div className="container-fluid contact-container">
             <div className="row">
               <div className="col-lg-3 col-sm-6 col-md-6 contact-card">
-                <div className="single-contact-info-box">
+                <div className="single-contact-info-box contact-address-box">
                   <div className="icon">
-                    <i className="flaticon-placeholder"></i>
+                  <i class='bx bx-location-plus'></i>
                   </div>
                   <h3>Address</h3>
                   <p>
@@ -55,7 +55,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i className="flaticon-phone-ringing"></i>
+                  <i class='bx bx-phone-call'></i>
                   </div>
                   <h3>Phone</h3>
                   <p>
@@ -66,7 +66,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i className="flaticon-email"></i>
+                  <i class='bx bx-envelope'></i>
                   </div>
                   <h3>Email</h3>
                   <p>
@@ -80,9 +80,9 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i className="flaticon-clock"></i>
+                  <i class='bx bx-support' ></i>
                   </div>
-                  <h3>Working Hours</h3>
+                  <h3>Supporting Hours</h3>
                   <p>Monday - Saturday</p>
                   <p>9:30AM - 6:30PM</p>
                 </div>
