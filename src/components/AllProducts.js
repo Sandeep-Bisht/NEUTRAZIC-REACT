@@ -243,7 +243,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-  
+
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
@@ -271,7 +271,6 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-
 
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
@@ -304,7 +303,7 @@ const AllProducts = (props) => {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        if (data.data == undefined) {
+        if (data.data[0] == undefined) {
           if (!Userdata == []) {
             await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
@@ -332,7 +331,6 @@ const AllProducts = (props) => {
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("wishlisted");
                 GetWishlist();
-
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -430,7 +428,7 @@ const AllProducts = (props) => {
   return (
     <>
       <Header1 />
-      <div id="__next">
+      {/* <div id="__next">
         <div className="search-overlay null">
           <div className="d-table">
             <div className="d-table-cell">
@@ -458,7 +456,7 @@ const AllProducts = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="container m-auto Category-div">
         <div className="row align-items-center">
@@ -571,11 +569,7 @@ const AllProducts = (props) => {
           </div>
         </div>
       </div>
-
-      <div className="col-12 pagination text-center"></div>
-
       <ToastContainer />
-
       <Footer />
     </>
   );

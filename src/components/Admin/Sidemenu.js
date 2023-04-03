@@ -33,7 +33,6 @@ const Sidemenu = () => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     // SidebarMenu();
-    // console.log(location.pathname.includes('NewOrder'),'location is this')
   });
 
   const logout = () => {

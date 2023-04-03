@@ -171,6 +171,8 @@ const Header1 = (props) => {
       setState1("1");
     }
   }, [currancy]);
+
+  
   const GetWishlist = async () => {
     let id;
     if (Userdata) {

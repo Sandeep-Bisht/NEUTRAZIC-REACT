@@ -23,7 +23,6 @@ const ContactUs = () => {
     mode: "onBlur",
   });
   const RegisterUser = (data) => {
-    console.log(data);
     reset();
   };
   return (

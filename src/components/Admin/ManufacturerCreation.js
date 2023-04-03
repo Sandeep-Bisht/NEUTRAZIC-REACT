@@ -45,7 +45,6 @@ const ManufacturerCreation = (props) => {
   const submitData = async (e) => {
     e.preventDefault();
     const errors = ValidattionForm(data);
-    console.log(Object.keys(errors).length);
     setFormerror(errors);
     if (Object.keys(errors).length === 0) {
       data.creatorId = Userdata._id;

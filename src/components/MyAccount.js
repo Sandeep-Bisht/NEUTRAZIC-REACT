@@ -143,9 +143,9 @@ const MyAccount = () => {
                         maxLength={10}
                         {...register("alternativeNumber", { required: true })}
                       />
-                      {errors?.alternativeNumber?.type === "required" && (
+                      {/* {errors?.alternativeNumber?.type === "required" && (
                         <p className="text-danger">This field is required</p>
-                      )}
+                      )} */}
                       </div>
 
                     <div className="col-12 d-flex justify-content-center mt-4 p-2">
