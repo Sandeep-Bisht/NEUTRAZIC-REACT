@@ -9,10 +9,7 @@ import axios from "axios";
 
 var Userdata;
 const ManufacturerCreation = (props) => {
-  var count = 0;
   const [manufactureres, setManufactureres] = useState([]);
-  const [ManufacturerCount, setManufacturerCount] = useState(0);
-  const [update, setUpdate] = useState(true);
   const [formerror, setFormerror] = useState({});
   const [data, Setdata] = useState({
     name: "",
@@ -51,7 +48,6 @@ const ManufacturerCreation = (props) => {
       await formData.append("description", data.description);
       await formData.append("name", data.name);
       await formData.append("image", data.image);
-      // await formData.append("featuredImage", []);
       await formData.append("creatorId", data.creatorId);
       const url = `${baseUrl}/api/manufacture/add_manufacture`;
       await fetch(url, {
@@ -81,7 +77,6 @@ const ManufacturerCreation = (props) => {
         console.log(err, "errors");
       });
   };
-
 
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();

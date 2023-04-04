@@ -31,13 +31,13 @@ function OrderSuccess() {
             <Link to='/'>Continue Shopping</Link>
         </button>
             </div>
+          </div>
         </div>
-        </div>
-    </div>
-    </div>
-        <Footer/>
+      </div>
+      </div>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default OrderSuccess
+export default OrderSuccess;

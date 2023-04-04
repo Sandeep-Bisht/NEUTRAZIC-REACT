@@ -8,8 +8,8 @@ import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
 const DeliveredOrder = () => {
-  const [orders, setOrders] = useState([])
-  const [OrderDetails, setOrderDetails] = useState([])
+  const [orders, setOrders] = useState([]);
+  const [OrderDetails, setOrderDetails] = useState([]);
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
@@ -22,9 +22,8 @@ const DeliveredOrder = () => {
   }, []);
 
   const GetOrders = async () => {
-
     await fetch(`${baseUrl}/api/order/all_order`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
@@ -53,11 +52,14 @@ const DeliveredOrder = () => {
     setOrders(filteredData);
   };
 
-
   const columns = [
     { title: "Order No", dataIndex: "order_no", key: "order_no" },
     { title: "Status", dataIndex: "orderStatus", key: "stauts" },
-    { title: "Delivered Date", dataIndex: "delivery_date", key: "delivery_date" },
+    {
+      title: "Delivered Date",
+      dataIndex: "delivery_date",
+      key: "delivery_date",
+    },
     { title: "Paid Amount", dataIndex: "totalamount", key: "totalamount" },
 
     {
@@ -69,7 +71,6 @@ const DeliveredOrder = () => {
         </Button>
       ),
     },
-
   ];
 
   const showModal = (order) => {
@@ -88,7 +89,6 @@ const DeliveredOrder = () => {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
-
 
   return (
     <>
@@ -149,20 +149,26 @@ const DeliveredOrder = () => {
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
                   <input
-                    type='text'
-                    onChange={e => onChangeHandler(e)}
+                    type="text"
+                    onChange={(e) => onChangeHandler(e)}
                     onKeyUp={searchHandler}
                     placeholder="Search.."
                     enterButton
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
-                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                  <button type="button" className="dashboard-search-btn">
+                    <BiSearchAlt />
+                  </button>
                 </div>
               </div>
 
               <Table
                 rowKey="name"
-                dataSource={filteredData && filteredData.length ? filteredData : OrderDetails}
+                dataSource={
+                  filteredData && filteredData.length
+                    ? filteredData
+                    : OrderDetails
+                }
                 columns={columns}
                 loading={loading}
                 pagination={false}
@@ -173,6 +179,6 @@ const DeliveredOrder = () => {
       </section>
     </>
   );
-}
+};
 
 export default DeliveredOrder;

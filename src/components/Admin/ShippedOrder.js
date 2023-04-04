@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
-  Input,
   Button,
   Space,
-  Popconfirm,
-  Typography,
   Dropdown,
   Modal,
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { MdPlaylistAdd } from "react-icons/md";
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const ShippedOrder = () => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import $ from "jquery";
 import Sidemenu from "./Sidemenu";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 import { GiFactory } from "react-icons/gi";
 import { FiUserCheck } from "react-icons/fi";

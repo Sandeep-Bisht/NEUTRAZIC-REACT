@@ -8,13 +8,11 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 var Userdata;
 const Productform = (props) => {
-  var productCount = 0;
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
   const [products, Setproducts] = useState([]);
-  const [update, setUpdate] = useState(false);
   const [shwoTable, setShowTable] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [editableData] = useState(props.history.location.state);
@@ -67,8 +65,7 @@ const Productform = (props) => {
   const submitData = async (e) => {
     e.preventDefault();
 
-
-    const errors = validateForm(data)
+    const errors = validateForm(data);
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
       const formData = new FormData();
@@ -123,8 +120,8 @@ const Productform = (props) => {
       { type ? restData.type = type._id : restData.type = "" }
       Setdata(restData);
     }
-    $(document).ready(function () {
-      $(".update").click(function () {
+    $(document).ready(function() {
+      $(".update").click(function() {
         $(".update-btn").css("display", "block");
       });
     });
