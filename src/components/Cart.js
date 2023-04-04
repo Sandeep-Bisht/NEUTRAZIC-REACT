@@ -94,7 +94,6 @@ const Cart = () => {
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-
           dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })

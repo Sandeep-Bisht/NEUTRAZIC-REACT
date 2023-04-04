@@ -44,8 +44,6 @@ const Dashboard = () => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetUser();
-    getAllBlogs();
-    GetWarehouse();
     GetCategory();
     GetSubCategory();
     GetManufacturer();
@@ -83,28 +81,6 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const GetWarehouse = async () => {
-    await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setWarehouse(data.data.length); 
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const getAllBlogs = async () => {
-    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setBlogs(data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");

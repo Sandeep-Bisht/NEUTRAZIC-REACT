@@ -297,7 +297,7 @@ const TrengingProduct = (props) => {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        if (data.data[0] == undefined) {
+        if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
@@ -318,11 +318,13 @@ const TrengingProduct = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                toast.success("Added to wishlist", {
-                  position: "bottom-right",
+                toast.error("Added to wishlist", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 1000,
                 });
+
                 let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
                 GetWishlist();
               })
@@ -352,11 +354,12 @@ const TrengingProduct = (props) => {
               })
                 .then((res) => res.json())
                 .then(async (data) => {
-                  toast.success("Added to wishlist", {
-                    position: "bottom-right",
+                  toast.error("Added to wishlist", {
+                    position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 1000,
                   });
                   let wishList = document.getElementById(productid);
+                  wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
                   GetWishlist();
                 })

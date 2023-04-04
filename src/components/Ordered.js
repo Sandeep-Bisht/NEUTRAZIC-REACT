@@ -33,7 +33,6 @@ const Ordered = () => {
           if (data.data != undefined) {
             setOrderes(data.data);
           }
-
         })
         .catch((err) => {
           console.log(err, "error");
