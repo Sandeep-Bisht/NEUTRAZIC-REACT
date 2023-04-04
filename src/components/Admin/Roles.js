@@ -50,10 +50,6 @@ const Roles = (props) => {
       });
   };
 
-  const logout = () => {
-    localStorage.setItem("Userdata", null);
-    window.location.replace("/");
-  };
   const RegisterUser = () => {
     fetch(`${baseUrl}/api/auth/register`, {
       method: "POST",
@@ -75,42 +71,8 @@ const Roles = (props) => {
         window.location.reload();
       });
   };
-  const LoginUser = (e) => {
-    e.preventDefault();
-    if (username != "" && password != "") {
-      fetch(`${baseUrl}/api/auth/login`, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      })
-        .then((res) => res.json())
-        .then(async (res) => {
-          await localStorage.setItem("Userdata", JSON.stringify(res));
-          alert(res.role);
-          if (res.role == "user") {
-            history.push("/");
-          } else {
-            history.push("/dashboard");
-          }
-          window.location.reload();
-        });
-    } else {
-      alert("Please Enter a Valid Data");
-    }
-  };
-  const headerFunction = async () => {
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
-    } else {
-      header.classList.remove("sticky");
-    }
-  };
+
+
 
   const data1 = [];
   {
@@ -141,14 +103,6 @@ const Roles = (props) => {
       });
     });
   }
-  const columns = [
-    { title: "SR NO", data: "sr_no" },
-    { title: "User Name", data: "name" },
-    { title: "Email", data: "Email" },
-    { title: "Roles", data: "Role" },
-    { title: "Organization", data: "company" },
-    { title: "Action", data: "Action" },
-  ];
 
   return (
     <>
@@ -230,7 +184,7 @@ const Roles = (props) => {
                         <label htmlFor="formfloating">Confirm Password*</label>
                       </div>
                       {Userdata != undefined &&
-                      Userdata.role == "superAdmin" ? (
+                        Userdata.role == "superAdmin" ? (
                         <div className="form-group col-lg-12 p-1">
                           <select
                             className="form-control custom-select"

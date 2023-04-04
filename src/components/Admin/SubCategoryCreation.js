@@ -89,27 +89,6 @@ const SubCategoryCreation = (props) => {
         console.log(err, "error");
       });
   };
-
-  const DeleteSubCategory = async (_id) => {
-    await fetch(`${baseUrl}/api/subcategory/delete_subcategory_by_id`, {
-      method: "Delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: _id,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetSubCategory();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
   const GetSubCategory = async () => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
@@ -119,16 +98,6 @@ const SubCategoryCreation = (props) => {
       .catch((err) => {
         console.log(err, "error");
       });
-  };
-
-  const EditSubCategory = (item) => {
-    let obj;
-    obj = {
-      _id: item._id,
-      image: item.image,
-      name: item.name,
-      description: item.description,
-    };
   };
 
   const UpdateSubCategory = async (e, _id) => {
@@ -150,11 +119,7 @@ const SubCategoryCreation = (props) => {
       }, 1500);
     }
   };
-  const columns = [
-    { title: "SR NO", data: "sr_no" },
-    { title: "Sub Category Name", data: "name" },
-    { title: "Action", data: "Action" },
-  ];
+
 
   return (
     <>

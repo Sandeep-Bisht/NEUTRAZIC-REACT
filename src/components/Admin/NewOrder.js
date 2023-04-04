@@ -70,32 +70,9 @@ const NewOrder = () => {
         console.log(err, "error");
       });
   };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
 
-        GetOrders();
 
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
 
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders)
-
-  }
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
