@@ -1,19 +1,10 @@
 import React, { useEffect,useState } from "react";
 import UserImg from "../../Images/user3.jpg";
 import {Link} from "react-router-dom"
-import { useContext } from "react";
-import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
 
 var Userdata = " ";
 
 function DashboardHeaader() {
-  // const {loginState,setLoginState} = useContext(CurrencyContext);
-  // const [isLogin,setIsLogin] = useState(loginState)
-  
-  // useEffect(()=>{
-  // setLoginState(loginState)
-  // setIsLogin(loginState)
-  // },[loginState])
   
 
   useEffect(() => {

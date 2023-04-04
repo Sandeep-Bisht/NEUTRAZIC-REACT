@@ -5,17 +5,13 @@ import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
-  Input,
   Space,
-  Popconfirm,
   Modal,
   Button,
-  Typography,
   Dropdown,
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { MdPlaylistAdd } from "react-icons/md";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const InProgressOrder = () => {
@@ -68,29 +64,7 @@ const InProgressOrder = () => {
         console.log(err, "error");
       });
   };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetOrders();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
 
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders);
-  };
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -136,7 +110,7 @@ const InProgressOrder = () => {
                   key: "2",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item, "Packed")}>
-                     Move for Packing
+                      Move for Packing
                     </a>
                   ),
                 },
@@ -181,58 +155,56 @@ const InProgressOrder = () => {
   return (
     <>
       {/* table modal */}
-     
-              <div>
-                <Modal
-                  title="Order Details"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
+
+      <div>
+        <Modal
+          title="Order Details"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {prticularUserOrder &&
+                prticularUserOrder.length > 0 &&
+                prticularUserOrder.map((item, ind) => {
+                  return (
+                    <>
+                      <tr key={ind}>
+                        <td className="width-adjust-of-td">
+                          <div className="width-adjust-of-image">
+                            <img
+                              onClick={() => imageHandler(item.productid)}
+                              style={{ cursor: "pointer" }}
+                              src={`${baseUrl}/${item.image}`}
+                            ></img>
+                          </div>
+                        </td>
+                        <td>{item.name}</td>
+                        <td>{item.singleprice}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {prticularUserOrder &&
-                        prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item,ind) => {
-                          return (
-                            <>
-                              <tr key={ind}>
-                                <td className="width-adjust-of-td">
-                                  <div className="width-adjust-of-image">
-                                    <img
-                                      onClick={() =>
-                                        imageHandler(item.productid)
-                                      }
-                                      style={{ cursor: "pointer" }}
-                                      src={`${baseUrl}/${item.image}`}
-                                    ></img>
-                                  </div>
-                                </td>
-                                <td>{item.name}</td>
-                                <td>{item.singleprice}</td>
-                              </tr>
-                            </>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </Modal>
-              </div>
-            
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </Modal>
+      </div>
+
       {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
           <div className="row px-0 dashboard-container">
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
-              <Sidemenu/>
+              <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">

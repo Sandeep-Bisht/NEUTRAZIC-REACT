@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "./Footer";
-import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,7 +9,6 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 // import Cookies from "universal-cookie";

@@ -5,15 +5,11 @@ import Header1 from "./Header1";
 import "../components/singleproduct.css";
 
 import { useHistory } from "react-router-dom";
-import StarsRating from "stars-rating";
-import ReactImageZoom from "react-image-zoom";
 import Baseline from "./Baseline";
-import ReadMoreReact from "read-more-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
-import defaultImage from "../Images/products/Hintosulin (1).png";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
@@ -641,7 +637,6 @@ const SingleProduct = (props) => {
                }
             </div>
 
-            {/* <ReactImageZoom {...ImageData} /> */}
             <div className="row image-group pt-2">
               <Carousel
                 // breakPoints={breakPoints}

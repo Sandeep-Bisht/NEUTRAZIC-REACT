@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
-  Input,
   Button,
   Space,
-  Popconfirm,
-  Typography,
   Dropdown,
   Modal,
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { MdPlaylistAdd } from "react-icons/md";
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const ShippedOrder = () => {
@@ -72,29 +67,7 @@ const ShippedOrder = () => {
         console.log(err, "error");
       });
   };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetOrders();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
 
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders);
-  };
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {

@@ -14,9 +14,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
-import { BsWindowSidebar } from "react-icons/bs";
-import { set } from "dotenv-save";
-import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 var Userdata = "";
@@ -45,7 +42,6 @@ const Subcategories = (props) => {
   const state1 = useContext(CurrencyContext);
 
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
 
   useEffect(() => {
     

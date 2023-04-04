@@ -9,8 +9,6 @@ import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} 
 import {BiSearchAlt} from 'react-icons/bi';
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
-import {MdPlaylistAdd} from 'react-icons/md';
-import { DownOutlined } from '@ant-design/icons';
 
 const UserPage = () => {
 
@@ -23,7 +21,6 @@ useEffect(()=>{
   GetUserData();
 },[]);
 
-//Getting Userdata//
 
 const GetUserData = async()=>{
 await fetch(`${baseUrl}/api/auth/allusers`)
@@ -127,39 +124,7 @@ const columns = [
         </Space>
       ) : null,
   },
-  // {
-  //   title: "Status", 
-  //   render: (a, item) => (
-  //     <Space size="middle">
-  //       <Dropdown
-  //         menu={{
-  //           items: [
-  //             {
-  //               key: '1',
-  //               label: (
-  //                 <a onClick={() =>UpdateUserStatus(item,"Activate")}>
-  //                 Activate
-  //                 </a>
-  //               ),
-  //             },
-  //             {
-  //               key: '2',
-  //               label: (
-  //                 <a onClick={() =>UpdateUserStatus(item,"De-Activate")}>
-  //                   De-Activate
-  //                 </a>
-  //               ),
-  //             },
-  //           ],
-  //         }}
-  //       >
-  //         <a>
-  //           Status <DownOutlined />
-  //         </a>
-  //       </Dropdown>
-  //     </Space>
-  //   ),
-  // },
+ 
   {
     title: "User Status",
     dataIndex: "userStatus",

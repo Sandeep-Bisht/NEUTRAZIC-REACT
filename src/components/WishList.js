@@ -1,7 +1,6 @@
 import { get, map } from "jquery";
 import "../components/WishList.css";
 import React, { useState, useEffect } from "react";
-import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
 import Footer from "./Footer";
 import Header1 from "./Header1";

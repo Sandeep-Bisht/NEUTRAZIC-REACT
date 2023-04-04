@@ -3,11 +3,9 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Modal, Button, Typography,Dropdown } from "antd";
+import { Table, Modal, Button } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import {MdPlaylistAdd} from 'react-icons/md'
-import {Link, useHistory} from "react-router-dom";
-import { DownOutlined } from '@ant-design/icons';
+import { useHistory} from "react-router-dom";
 
 const ShippedOrder = () => {
   const [orders, setOrders] = useState([])
@@ -46,53 +44,8 @@ const ShippedOrder = () => {
       });
   }
 
-  const UpdateOrderStatus = async (orderId, orderStatus) => {
-    await fetch(`${baseUrl}/api/order/update_order`, {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: orderId,
-        orderStatus: orderStatus,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetOrders();
 
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
 
-        GetOrders();
-
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders)
-
-  }
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input, Space, Popconfirm, Typography } from "antd";
+import { Table, Space, Popconfirm, Typography } from "antd";
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
-import { useHistory, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import DashboardHeaader from "../DashboardHeaader";
-import {FaTrashAlt} from 'react-icons/fa';
-import {MdOutlineEditNote} from 'react-icons/md';
-import {MdPlaylistAdd} from 'react-icons/md'
-import { baseUrl } from "../../../utils//services"
-
-
+import { FaTrashAlt } from "react-icons/fa";
+import { MdOutlineEditNote } from "react-icons/md";
+import { MdPlaylistAdd } from "react-icons/md";
+import { baseUrl } from "../../../utils//services";
 
 export default function AllWarehouseDetails() {
   const [getuser, setGetuser] = useState([]);
@@ -20,15 +18,10 @@ export default function AllWarehouseDetails() {
   const [filteredData] = useState([]);
   const [warehouse, setWarehouse] = useState("");
 
-  const { Search } = Input;
-
-  const history = useHistory();
-
   useEffect(() => {
     fetchUsers();
-     GetWarehouse();
+    GetWarehouse();
   }, []);
-
 
   const GetWarehouse = async () => {
     await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
@@ -40,7 +33,6 @@ export default function AllWarehouseDetails() {
         console.log(err, "error");
       });
   };
-
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -65,16 +57,17 @@ export default function AllWarehouseDetails() {
     setGetuser(filteredData);
   };
 
-  const handleDelete= async (_id)=>{
-    try{
-      const DeletedData = await axios.delete(`${baseUrl}/api/warehouse/delete_warehouse_by_id`,{data: {_id:_id}});
+  const handleDelete = async (_id) => {
+    try {
+      const DeletedData = await axios.delete(
+        `${baseUrl}/api/warehouse/delete_warehouse_by_id`,
+        { data: { _id: _id } }
+      );
       fetchUsers();
-    }catch(error)
-    {
-      console.log(error, "error")
+    } catch (error) {
+      console.log(error, "error");
     }
-    
-  }
+  };
 
   const columns = [
     {
@@ -98,7 +91,13 @@ export default function AllWarehouseDetails() {
               title="Sure to delete?"
               onConfirm={() => handleDelete(record._id)}
             >
-              <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
+              <a
+                className="delete-icon-wrap"
+                title="Delete"
+                style={{ color: "blue" }}
+              >
+                <FaTrashAlt />
+              </a>
             </Popconfirm>
             <Typography.Link>
               <Link
@@ -109,10 +108,10 @@ export default function AllWarehouseDetails() {
                   },
                 }}
                 title="Edit"
-                className='edit-icon-wrap'
+                className="edit-icon-wrap"
                 style={{ color: "blue" }}
               >
-                <MdOutlineEditNote/>
+                <MdOutlineEditNote />
               </Link>
             </Typography.Link>
           </Space>
@@ -123,41 +122,48 @@ export default function AllWarehouseDetails() {
   return (
     <>
       <section id="body-pd">
-  <div className="container-fluid">
-    <DashboardHeaader/>
-      <div className="row px-0 dashboard-container">
-      <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
+        <div className="container-fluid">
+          <DashboardHeaader />
+          <div className="row px-0 dashboard-container">
+            <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-        <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-        <div className="category-details-section">
-              <h3 className="all-category-head">All Warehouses <span className="count">{warehouse}</span></h3>
-              <div className="all-category-search-wrap">
-                <Link to="/Warehouse" className="add-icon">
-                  <MdPlaylistAdd/>Add
-                </Link>
-              <input
-              type='text'
-                onChange={e => onChangeHandler(e)}
-                onKeyUp={searchHandler}
-                placeholder="Search.."
-                enterButton
-                style={{ position: "sticky", top: "0", left: "0" }}
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
+              <div className="category-details-section">
+                <h3 className="all-category-head">
+                  All Warehouses <span className="count">{warehouse}</span>
+                </h3>
+                <div className="all-category-search-wrap">
+                  <Link to="/Warehouse" className="add-icon">
+                    <MdPlaylistAdd />
+                    Add
+                  </Link>
+                  <input
+                    type="text"
+                    onChange={(e) => onChangeHandler(e)}
+                    onKeyUp={searchHandler}
+                    placeholder="Search.."
+                    enterButton
+                    style={{ position: "sticky", top: "0", left: "0" }}
+                  />
+                  <button type="button" className="dashboard-search-btn">
+                    <BiSearchAlt />
+                  </button>
+                </div>
+              </div>
+
+              <Table
+                rowKey="name"
+                dataSource={
+                  filteredData && filteredData.length ? filteredData : getuser
+                }
+                columns={columns}
+                loading={loading}
+                pagination={false}
               />
-              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
-              </div>
-              </div>
-        
-          <Table
-            rowKey="name"
-            dataSource={filteredData && filteredData.length ? filteredData : getuser}
-            columns={columns}
-            loading={loading}
-            pagination={false}
-          />
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
       </section>
     </>
   );
