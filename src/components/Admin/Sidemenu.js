@@ -8,7 +8,6 @@ import { BiCategory } from "react-icons/bi";
 import { BsListNested } from "react-icons/bs";
 import { GiBoxUnpacking } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
-import { FaBoxOpen } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
 import { GrInProgress } from "react-icons/gr";
 import { BsBox } from "react-icons/bs";
@@ -22,7 +21,6 @@ import { RiUserSettingsLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 
-import $ from "jquery";
 var Userdata = "";
 
 const Sidemenu = () => {

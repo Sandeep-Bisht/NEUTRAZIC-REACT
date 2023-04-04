@@ -3,11 +3,9 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Button, Popconfirm, Modal, Typography, Dropdown } from "antd";
+import { Table, Button, Modal} from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { MdPlaylistAdd } from 'react-icons/md'
-import { Link, useHistory } from "react-router-dom";
-import { DownOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 const InProgressOrder = () => {
   const [orders, setOrders] = useState([])
@@ -76,11 +74,6 @@ const InProgressOrder = () => {
       });
   };
 
-
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders)
-
-  }
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {

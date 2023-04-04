@@ -219,10 +219,6 @@ const Productform = (props) => {
     }
   };
 
-  const showAllProductHandler = () => {
-    setShowTable(true);
-  };
-
   return (
     <>
       <section id="body-pd">

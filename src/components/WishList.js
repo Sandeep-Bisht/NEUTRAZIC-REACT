@@ -1,15 +1,12 @@
 import { get, map } from "jquery";
 import "../components/WishList.css";
 import React, { useState, useEffect } from "react";
-import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
 import Footer from "./Footer";
 import Header1 from "./Header1";
-import ReadMoreReact from "read-more-react";
 import { Link, useHistory } from "react-router-dom";
 import { baseUrl } from "../utils/services";
 import { IoClose } from "react-icons/io5";
-import SingleProduct from "./SingleProduct";
 import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";

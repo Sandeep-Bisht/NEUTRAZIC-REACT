@@ -79,9 +79,6 @@ const ShipperForm = (props) => {
       });
   };
 
-
-  
-
   return (
     <>
     <section id="body-pd">

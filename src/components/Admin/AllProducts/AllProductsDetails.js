@@ -6,33 +6,32 @@ import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
 import DashboardHeaader from "../DashboardHeaader";
-import {Link} from "react-router-dom"
-import {FaTrashAlt} from 'react-icons/fa';
-import {MdOutlineEditNote} from 'react-icons/md';
-import {MdPlaylistAdd} from 'react-icons/md';
+import { Link } from "react-router-dom"
+import { FaTrashAlt } from 'react-icons/fa';
+import { MdOutlineEditNote } from 'react-icons/md';
+import { MdPlaylistAdd } from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
 
 
 export default function AllProductsDetails() {
 
-  const [getuser,setGetuser]=useState([])
-  const [loading,setLoading]=useState(false);
-  const [searchVal,setSearchVal]=useState("");
-  const [filteredData]=useState([]);
+  const [getuser, setGetuser] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [searchVal, setSearchVal] = useState("");
+  const [filteredData] = useState([]);
   const [products, Setproducts] = useState("");
 
 
-  
-  const { Search } = Input;
 
-  useEffect(()=>{
+
+  useEffect(() => {
     fetchUsers();
     GetProducts();
-   },[])
+  }, [])
 
- 
 
-   const GetProducts = async () => {
+
+  const GetProducts = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -48,28 +47,26 @@ export default function AllProductsDetails() {
     setGetuser(response.data.data);
     setLoading(false);
   };
-  
-  const handleDelete=async (_id)=>{
-    try{
-      const DeletedData=await axios.delete(`${baseUrl}/api/product/delete_product_by_id`,{data: {_id:_id}});
+
+  const handleDelete = async (_id) => {
+    try {
+      const DeletedData = await axios.delete(`${baseUrl}/api/product/delete_product_by_id`, { data: { _id: _id } });
       fetchUsers();
-    }catch(error)
-    {
+    } catch (error) {
 
     }
-    
+
   }
 
-  const onChangeHandler=(e)=>{
+  const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
-    if(e.target.value=="")
-    {
+    if (e.target.value == "") {
       fetchUsers();
     }
   }
 
-  const searchHandler=()=>{
-    const filteredData=getuser.filter((value)=>{
+  const searchHandler = () => {
+    const filteredData = getuser.filter((value) => {
       return value.name.toLowerCase().includes(searchVal.toLowerCase());
     })
     setGetuser(filteredData);
@@ -83,7 +80,7 @@ export default function AllProductsDetails() {
     },
     {
       title: "Price",
-      dataIndex:"inrMrp",
+      dataIndex: "inrMrp",
       key: "inrMrp",
     },
     {
@@ -114,7 +111,7 @@ export default function AllProductsDetails() {
               title="Sure to delete?"
               onConfirm={() => handleDelete(record._id)}
             >
-              <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt/></a>
+              <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt /></a>
             </Popconfirm>
             <Typography.Link>
               <Link
@@ -128,53 +125,53 @@ export default function AllProductsDetails() {
                 className='edit-icon-wrap'
                 style={{ color: "blue" }}
               >
-                <MdOutlineEditNote/>
+                <MdOutlineEditNote />
               </Link>
             </Typography.Link>
           </Space>
         ) : null,
     },
   ];
-  
+
 
   return (
     <>
-    <section id="body-pd">
-      <div className="container-fluid">
-    <DashboardHeaader/>
+      <section id="body-pd">
+        <div className="container-fluid">
+          <DashboardHeaader />
 
-    <div className="row px-0 dashboard-container">
-      <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
+          <div className="row px-0 dashboard-container">
+            <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-        <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-        <div className="all-products-details-section">
-              <h3 className="all-products-head">All Products <span className="count">{products}</span></h3>
-              <div className="all-products-search-wrap">
-                <Link to="/Productform" className="add-icon">
-                  <MdPlaylistAdd/>Add
-                </Link>
-              <input
-              type='text'
-                onChange={e => onChangeHandler(e)}
-                onKeyUp={searchHandler}
-                placeholder="Search.."
-                enterButton
-                style={{ position: "sticky", top: "0", left: "0" }}
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
+              <div className="all-products-details-section">
+                <h3 className="all-products-head">All Products <span className="count">{products}</span></h3>
+                <div className="all-products-search-wrap">
+                  <Link to="/Productform" className="add-icon">
+                    <MdPlaylistAdd />Add
+                  </Link>
+                  <input
+                    type='text'
+                    onChange={e => onChangeHandler(e)}
+                    onKeyUp={searchHandler}
+                    placeholder="Search.."
+                    enterButton
+                    style={{ position: "sticky", top: "0", left: "0" }}
+                  />
+                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                </div>
+              </div>
+              <Table
+                rowKey="name"
+                dataSource={filteredData && filteredData.length ? filteredData : getuser}
+                columns={columns}
+                loading={loading}
+                pagination={false}
               />
-              <button type="button" className="dashboard-search-btn"><BiSearchAlt/></button>
-              </div>
-              </div>
-        <Table
-          rowKey="name"
-          dataSource={filteredData && filteredData.length ? filteredData : getuser}
-          columns={columns}
-          loading={loading}
-          pagination={false}
-        />
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
       </section>
     </>
   );

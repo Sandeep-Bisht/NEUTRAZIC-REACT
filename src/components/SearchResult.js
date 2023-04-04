@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
-// import "../../sass/whislist.css";
-// import Carouselcomp from "../../components/Carouselcomp";
-import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
 import { useHistory, useParams } from "react-router-dom";
-import ReadMoreReact from "read-more-react";
 import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
@@ -15,11 +11,6 @@ import { useDispatch } from "react-redux";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import "../components/SearchResult.css";
-import { BiCategory } from "react-icons/bi";
-import { BsCardList } from "react-icons/bs";
-import { TbBrandNotion } from "react-icons/tb";
-import { GiPriceTag } from "react-icons/gi";
-import { IoClose } from "react-icons/io5";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 
@@ -403,78 +394,6 @@ const SearchResult = (props) => {
           }
         }
       });
-  };
-
-  const openNav = () => {
-    document.getElementById("mySidenav").style.width = "300px";
-  };
-  const closeNav = () => {
-    document.getElementById("mySidenav").style.width = "0";
-  };
-
-  // Filrer Funcation Start //
-  const FilterFunc = (item, e) => {
-    setSearchResults(undefined);
-    if (e.target.checked == true) {
-      dataForFilter.push(item);
-    }
-    if (!e.target.checked) {
-      for (var i = 0; i < dataForFilter.length; i++) {
-        if (dataForFilter[i] === item) {
-          dataForFilter.splice(i, 1);
-        }
-      }
-      if (dataForFilter != null) {
-        setSearchResults(params.Search);
-      }
-    }
-    let daata = dataForFilter;
-    setDataForFilter(daata);
-    setCT(Date());
-  };
-  const ChangeMinMax = async (price) => {
-    await setMinPrice("0");
-    await setMaxPrice(price);
-    await setCT(Date());
-  };
-
-  const addToCartWithoutRegistration = (
-    productid,
-    name,
-    quantity,
-    mrp,
-    discount,
-    description,
-    category,
-    manufacturer,
-    image
-  ) => {
-    var newItemObj = {
-      productid: productid,
-      name: name,
-      image: image,
-      quantity: quantity,
-      mrp: parseInt(mrp),
-      singleprice: parseInt(mrp),
-      discountprice: discount,
-      description: description,
-      category: category,
-      manufacturer: manufacturer,
-      description: description,
-      status: "Pending",
-      justification: "Enjoy",
-      delivery_time: "No Status",
-    };
-    if (
-      !JSON.stringify(CartDataWoLogin).includes(name) &&
-      !JSON.stringify(localStorage.getItem("CartDataWoLogin")).includes(name)
-    ) {
-      if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
-        CartDataWoLogin = JSON.parse(localStorage.getItem("CartDataWoLogin"));
-      }
-      CartDataWoLogin.push(newItemObj);
-      localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-    }
   };
 
   const checkWishlistItem = (productId) => {

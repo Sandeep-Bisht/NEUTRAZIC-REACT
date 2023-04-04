@@ -8,17 +8,17 @@ const Carouselcomp = () => {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
   };
 
@@ -29,7 +29,7 @@ const Carouselcomp = () => {
         draggable={false}
         showDots={false}
         responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
+        ssr={true}
         infinite={true}
         autoPlay={false}
         autoPlaySpeed={1000}
@@ -38,18 +38,15 @@ const Carouselcomp = () => {
         transitionDuration={1000}
         containerclassName="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
-        // deviceType={this.props.deviceType}
         dotListclassName="custom-dot-list-style"
         itemclassName="carousel-item-padding-40-px"
       >
-        {/* <div className="container-fluid"> */}
         <div className="container-fluid container-carousel  ">
           <div className="row align-ment carousel-row">
             <div className="col-0"></div>
             <div className="col-lg-8 col-sm-12 p-0">
               <div id="banner">
                 <a href="/">
-                  {/* <div id="target"></div> */}
                   <img src={require("../Images/headerposter-01.png")}></img>
                   <div id="badge">SAVE NOW!</div>
                   <div id="sale">
@@ -71,8 +68,6 @@ const Carouselcomp = () => {
                         alt="image"
                         className=".img-button"
                       ></img>
-                      {/* <div className="overlay"></div> */}
-                      {/* <div className="button-hover"><button> ShopNow </button></div> */}
                     </div>
 
                     <div className="justify-content-center align-items-center d-flex caresouel-shop-div">
@@ -86,8 +81,6 @@ const Carouselcomp = () => {
                         alt="image"
                         className=".img-button"
                       ></img>
-                      {/* <div className="overlay"></div> */}
-                      {/* <div className="button-hover"><button> ShopNow </button></div> */}
                     </div>
 
                     <div className="justify-content-center align-items-center d-flex caresouel-shop-div">
@@ -104,8 +97,6 @@ const Carouselcomp = () => {
                         alt="image"
                         className=".img-button"
                       ></img>
-                      {/* <div className="overlay"></div> */}
-                      {/* <div className="button-hover"><button> ShopNow </button></div> */}
                     </div>
 
                     <div className="justify-content-center align-items-center d-flex caresouel-shop-div">
@@ -119,30 +110,19 @@ const Carouselcomp = () => {
                         alt="image"
                         className=".img-button"
                       ></img>
-                      {/* <div className="overlay"></div> */}
-                      {/* <div className="button-hover"><button> ShopNow </button></div> */}
                     </div>
 
                     <div className="justify-content-center align-items-center d-flex caresouel-shop-div">
                       <button> Shop now</button>
                     </div>
                   </div>
-
-                  {/* <div className="row mt-4 shop-button ">
-      <div className="col-sm-12 justify-content-center d-flex">
-        <button>Shop Now</button>
-        </div>
-      </div> */}
                 </div>
               </div>
-              {/* <div className="col-2"><i className='bx bx-chevron-left carousel-LR'></i> <i className='bx bx-chevron-right carousel-LR ml-2'></i></div> */}
             </div>
-            {/* <div className="col-1"></div> */}
           </div>
         </div>
         <div className="container-fluid container-carousel pt-5 pb-5">
           <div className="row align-ment mt-5 carousel-row">
-            {/* <div className="col-1"></div> */}
             <div className="col-4">
               <p className="text-primary1">Premium Quality</p>
               <p className="heading">Surgical Mask With A Protective Layer</p>
@@ -225,19 +205,12 @@ const Carouselcomp = () => {
           </div>
         </div>
       </Carousel>
-
-      {/* Phone Carousel */}
-      {/* phone single page caresouel */}
       <div
         id="carouselExampleIndicators"
         className="carousel slide single-page-caresouel"
         data-bs-ride="carousel"
       >
-        {/* <div className="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div> */}
+      
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img src={require("../Images/header-image.png")} />
@@ -268,9 +241,6 @@ const Carouselcomp = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-
-      {/* end phone single page careousel */}
-      {/* End Phone Carousel */}
     </>
   );
 };

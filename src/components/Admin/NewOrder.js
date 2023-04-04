@@ -4,11 +4,9 @@ import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
 import { BiSearchAlt } from "react-icons/bi";
-import {MdPlaylistAdd} from 'react-icons/md'
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import { DownOutlined } from '@ant-design/icons';
-import { render } from 'react-dom';
-import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} from "antd";
+import { Table,  Space, Dropdown, Modal, Button,} from "antd";
 
 const NewOrder = () => {
   const [orders, setOrders] = useState([])
