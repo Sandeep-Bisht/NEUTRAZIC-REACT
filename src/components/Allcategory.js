@@ -103,7 +103,6 @@ const Allcategory = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        
         history.push("/Cart");
       })
       .then((err) => console.log(err));

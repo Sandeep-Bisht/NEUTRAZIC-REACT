@@ -36,14 +36,9 @@ const InProgressOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        let arr = [];
-        for (let item of data.data) {
-          if (item.orderStatus == "In-Progress") {
-            arr.push(item);
-          }
-        }
-        setOrderDetails(arr);
-      })
+        setOrders(data.data)
+      }
+      )
       .catch((err) => {
         console.log(err, "errors");
       });
@@ -103,6 +98,23 @@ const InProgressOrder = () => {
     });
     setOrders(filteredData);
   };
+  const data1 = [];
+  {
+    orders.map((item, index) => {
+      if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
+
+        data1.push({
+          "sr_no": index + 1, "name": item.username, "Mobile": item.mobile, "Addtionalnumber": item.othermobile, "Address": item.address, "actualamount": item.actualamount, "totalamount": item.totalamount, "status": <select value={item.status} onChange={(e) => UpdateOrderStatus(item._id, e.target.value)}>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In progress</option>
+            <option value="Delivered">Delivered</option>
+          </select>, "Action": <><button onClick={() => DeleteOrder(item._id)}><i className="bx bx-trash"></i></button>
+            <button className="ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => CaptureDetails(JSON.parse(item.order))}><i className='bx bx-show-alt'></i></button>
+          </>
+        })
+      }
+    })
+  }
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
