@@ -4,7 +4,6 @@ import "./Dashboard.css";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import axios from "axios";
 
 var Userdata;
@@ -35,7 +34,6 @@ const SubCategoryCreation = (props) => {
           ? (restData.category = category._id)
           : (restData.category = "");
       }
-      console.log(restData, "rest data");
       Setdata(restData);
     }
   }, []);
@@ -145,7 +143,7 @@ const SubCategoryCreation = (props) => {
       `${baseUrl}/api/subcategory/update_subcategory_by_id`,
       formData
     );
-    if (response.status == 200) {
+    if (response.status === 200) {
       await GetSubCategory();
       setTimeout(() => {
         history.push("/AllSubCategoriesDetails");
@@ -169,7 +167,7 @@ const SubCategoryCreation = (props) => {
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
               {Userdata !== undefined ? (
-                Userdata.role == "superAdmin" ? (
+                Userdata.role === "superAdmin" ? (
                   <form>
                     <div className="col-12 px-0">
                       <div className="card p-4 m-2 mt-4 product-form">

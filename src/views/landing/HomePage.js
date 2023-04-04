@@ -15,12 +15,17 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as ACTIONS from "../../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../../CommonService/WishlistItem/action";
 import { useSelector, useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 import Carousel from "react-elastic-carousel";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import $ from "jquery";
 
@@ -46,6 +51,7 @@ const HomePage = () => {
   ];
 
   const [data, setData] = useState([]);
+  const [singlecategory,setSingleCategory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
@@ -60,32 +66,28 @@ const HomePage = () => {
   const [categoryname, Setcategoryname] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [blogs, setBlogs] = useState();
-
-
   const history = useHistory();
-  const [currancy, setCurrency] = useState("INR")
+  const [currancy, setCurrency] = useState("INR");
 
   const cookies = new Cookies();
   const { state1, setState1 } = useContext(CurrencyContext);
-  const {loginState,setLoginState} = useContext(CurrencyContext);
-  const [isLogin,setIsLogin] = useState(loginState)
-  
-  useEffect(()=>{
-  setLoginState(loginState)
-  setIsLogin(loginState)
-  },[loginState])
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [isLogin, setIsLogin] = useState(loginState);
+  const [sliderRef, setSliderRef] = useState(null);
 
-  // useEffect(() => {
-  //   let currentCurrencyType = cookies.get("Currency")
-  //   if (currentCurrencyType == "1") {
-  //     setCurrency("Dollar")
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+  useEffect(() => {
+    setLoginState(loginState);
+    setIsLogin(loginState);
+  }, [loginState]);
 
-  //   }
-  // }, [currancy])
-
-  // useEffect(() => {
-
-  // },[])
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())
@@ -97,14 +99,13 @@ const HomePage = () => {
       });
   };
   useEffect(() => {
-    const currentCurrency = cookies.get('CurrencyType');
+    const currentCurrency = cookies.get("CurrencyType");
     if (currentCurrency === "Dollar") {
       setCurrency("Dollar");
       setState1("1");
     }
   }, [currancy]);
   useEffect(() => {
-    // Userdata = localStorage.getItem("Userdata");
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetData();
     getAllBlog();
@@ -113,11 +114,6 @@ const HomePage = () => {
     GetCategory();
     GetManufacturer();
     $(document).ready(function() {
-      //    $('.icon-wishlist').on('click', function(){
-      //       $(this).toggleClass('in-wishlist');
-
-      // })
-
       $(".frontimage").mouseover(function() {
         alert("in");
       });
@@ -168,6 +164,8 @@ const HomePage = () => {
       .then(async (data) => {
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
       .catch((err) => {
@@ -176,7 +174,6 @@ const HomePage = () => {
   };
 
   const GetData = async () => {
-    // Userdata = await (localStorage.getItem("Userdata"));
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
@@ -202,6 +199,7 @@ const HomePage = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
+        setSingleCategory(data.data[0]);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -285,8 +283,6 @@ const HomePage = () => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -311,8 +307,6 @@ const HomePage = () => {
         setQuantity(1);
         // CartById();
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
@@ -338,8 +332,6 @@ const HomePage = () => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-        //history.push("/Cart");
-        //window.scroll(0, 0);
       })
       .then((err) => console.log(err));
   };
@@ -386,17 +378,11 @@ const HomePage = () => {
         .then(async (data) => {
           setUserCart(data.data);
           CartById();
-
-          // setCartItems(data.data[0].order.length);
-          // history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
   const AddtoWishlist = async (
     productid,
@@ -447,12 +433,10 @@ const HomePage = () => {
                   autoClose: 1000,
                 });
 
-                //add product to wishlist response is comming here
                 let wishList = document.getElementById(productid);
                 wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
                 GetWishlist();
-                // setWishlist(data.data[0]);
               })
               .catch((err) => {
                 console.log(err, "error e");
@@ -488,7 +472,6 @@ const HomePage = () => {
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
                   GetWishlist();
-                  // setWishlist(data.data[0]);
                 })
                 .catch((err) => {
                   console.log(err, "error e");
@@ -503,13 +486,6 @@ const HomePage = () => {
         }
       });
   };
-  // const HeartColor = (el) => {
-  //   $(document).ready(function() {
-  //     $(".bxs-heart").click(function() {
-  //       $(".bxs-heart").addClass("active-color");
-  //     });
-  //   });
-  // };
 
   const responsive = {
     superLargeDesktop: {
@@ -530,7 +506,6 @@ const HomePage = () => {
       items: 1,
     },
   };
-
   const searchData = (e) => {
     // if (props.func) props.func(e);
   };
@@ -558,7 +533,11 @@ const HomePage = () => {
                     Reliable on time home delivery
                   </p>
                   <p className="home-banner-content">
-                  With the rise of e-commerce and online shopping, you can expect your purchases to be delivered to your doorstep in a timely and dependable manner. Reliable on-time home delivery is a crucial factor for businesses to succeed in the e-commerce industry.
+                    With the rise of e-commerce and online shopping, you can
+                    expect your purchases to be delivered to your doorstep in a
+                    timely and dependable manner. Reliable on-time home delivery
+                    is a crucial factor for businesses to succeed in the
+                    e-commerce industry.
                   </p>
 
                   <div className="login-div2 clearfix mb-5">
@@ -583,12 +562,6 @@ const HomePage = () => {
                       </button>
                     </Link>
                   </div>
-
-                  {/* <div className="home-banner-buttons pt-4">
-                    <button className="btn common-gradient-btn">
-                      Read More
-                    </button>
-                  </div> */}
                 </div>
               </div>
               <div className="col-md-6">
@@ -617,8 +590,6 @@ const HomePage = () => {
                             className="figure homepage-trending-figure"
                             key={ind}
                           >
-                            {/* <Link to={"/SingleProduct/" + el._id}> */}
-
                             <Link to={"/SingleProduct/" + el._id}>
                               <div
                                 className="image hover-switch-homepage"
@@ -631,7 +602,6 @@ const HomePage = () => {
                                     el.otherImage.length > 0 &&
                                     `${baseUrl}/` + el.otherImage[0].path
                                   }
-                                  // src={require("../../Images/products/Hintosulin (1).png")}
                                   alt=""
                                 />
                                 <img
@@ -755,11 +725,10 @@ const HomePage = () => {
               </div>
               {/* hover Button */}
               <div className="wrapperbtn pt-0">
-                <Link to="/AllProducts">
+                <Link to="/TrendingProducts">
                   <button type="button" className="btn10">
                     Show More
                   </button>
-                  {/* <div className="transition"></div> */}
                 </Link>
               </div>
               {/* Hover Button End */}
@@ -773,10 +742,10 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row mt-0 featured-products">
-              <Carousel // breakPoints={breakPoints}
+              {/* <Carousel // breakPoints={breakPoints}
                 disableAutoPlay
-                autoPlaySpeed={3000}
-                itemsToShow={2}
+                autoPlaySpeed={2000}
+                itemsToShow={1}
                 onPrevStart={onPrevStart}
                 onNextStart={onNextStart}
                 infiniteLoop={true}
@@ -784,51 +753,63 @@ const HomePage = () => {
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
                 // itemPadding={[0, 4]}
-              >
+                > */} 
+              <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&
                   categories.map((item, index) => {
-                    console.log(item, "This is item");
                     if (item.featuredCategories == "Featured Categories") {
                       return (
-                        <div className="col-md-12" key={index}>
+                        <div className="col-12 p-5" key={index}>
                           <div className="Category-container">
-                          <div className="row">
-                            <div className="col-md-6">
-                              <div className="category-left-side">
-                                <div className="category-heading">
-                                  <h4>{item.name}</h4>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <div className="category-left-side">
+                                  <div className="category-heading">
+                                    <h4>{item.name}</h4>
+                                  </div>
+                                  <div className="category-text">
+                                    <p>{item.description}</p>
+                                  </div>
+                                  <Link to={"/Subcategories/" + item._id}>
+                                    <button className="btn btn cosmetic-shop-now category-Button">
+                                      Shop Now
+                                    </button>
+                                  </Link>
                                 </div>
-                                <div className="category-text">
-                                  <p>{item.description}</p>
-                                </div>
-                                <Link to={"/Subcategories/" + item._id}><button className="btn btn cosmetic-shop-now category-Button">
-                                  Shop Now
-                                </button>
+                              </div>
+                              <div className="col-md-6">
+                                <Link to={"/Subcategories/" + item._id}>
+                                  <div className="Image-Container">
+                                    <img
+                                      src={
+                                        item.image &&
+                                        `${baseUrl}/` + item.image[0].path
+                                      }
+                                      alt=""
+                                      className="cat-left-side-image img-fluid"
+                                    />
+                                  </div>
                                 </Link>
                               </div>
                             </div>
-                            <div className="col-md-6">
-                            <Link to={"/Subcategories/" + item._id}>
-                              <div className="Image-Container">
-                                <img
-                                  src={
-                                    item.image &&
-                                    `${baseUrl}/` + item.image[0].path
-                                  }
-                                  alt=""
-                                  className="cat-left-side-image"
-                                />
-                              </div>
-                              </Link>
-                            </div>
                           </div>
-                        </div>
                         </div>
                       );
                     }
                   })}
-              </Carousel>
+                {/* </Carousel> */}
+                
+              </Slider>
+              <div className="controls d-flex justify-content-between">
+                <button onClick={sliderRef?.slickPrev}>
+                  <FaChevronLeft />
+                </button>
+                <button onClick={sliderRef?.slickNext}>
+                  <FaChevronRight />
+                </button>
+                </div>
+              
             </div>
           </div>
         </section>
@@ -863,7 +844,6 @@ const HomePage = () => {
                                   el.otherImage.length > 0 &&
                                   `${baseUrl}/` + el.otherImage[0].path
                                 }
-                                // src={require("../../Images/products/Hintosulin (1).png")}
                                 alt=""
                               />
                               <img
@@ -991,7 +971,6 @@ const HomePage = () => {
                   <button type="button" className="btn10">
                     Show More
                   </button>
-                  {/* <div className="transition"></div> */}
                 </Link>
               </div>
               {/* Hover Button End */}
@@ -1000,13 +979,13 @@ const HomePage = () => {
         </section>
         <section className="products-area">
           <h1 className="trendign-head">
-            <span className="products-color">Fitness</span>
+            <span className="products-color">{singlecategory.name}</span>
           </h1>
           <div className="container m-auto">
             <div className="row">
               <div id="column" className="columns_5">
                 {data
-                  .filter((item) => item.category.name == "Fitness")
+                  .filter((item) => item.category.name == singlecategory.name)
                   .map((el, ind) => {
                     if (ind < 5) {
                       return (
@@ -1014,7 +993,6 @@ const HomePage = () => {
                           className="figure homepage-trending-figure"
                           key={ind}
                         >
-                          {/* <Link to={"/SingleProduct/" + el._id}> */}
                           <Link to={"/SingleProduct/" + el._id}>
                             <div
                               className="image hover-switch-homepage"
@@ -1027,7 +1005,6 @@ const HomePage = () => {
                                   el.otherImage.length > 0 &&
                                   `${baseUrl}/` + el.otherImage[0].path
                                 }
-                                // src={require("../../Images/products/Hintosulin (1).png")}
                                 alt=""
                               />
                               <img
@@ -1150,7 +1127,7 @@ const HomePage = () => {
               {/* hover Button */}
               <div className="wrapperbtn pt-3 pb-4">
                 {data
-                  .filter((item) => item.category.name == "Weight Management")
+                  .filter((item) => item.category.name == "Fitness")
                   .map((el, index) => {
                     if (index < 1) {
                       return (
@@ -1158,7 +1135,6 @@ const HomePage = () => {
                           <button type="button" className="btn10">
                             Show More
                           </button>
-                          {/* <div className="transition"></div> */}
                         </Link>
                       );
                     }
@@ -1176,16 +1152,13 @@ const HomePage = () => {
             </div>
             <div className="row image-group">
               <Carousel
-                // breakPoints={breakPoints}
                 disableAutoPlay
                 autoPlaySpeed={1500}
                 itemsToShow={5}
                 onPrevStart={onPrevStart}
                 onNextStart={onNextStart}
-                // onChange={Loop}
                 ref={carouselRef}
                 disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
               >
                 {Manufactureres &&
                   Manufactureres.length > 0 &&
@@ -1221,7 +1194,11 @@ const HomePage = () => {
 
                     <div>
                       <p id="para" className="text-justify">
-                        Our nutraceutical app is designed to help you live a healthier life. Downloading our app is quick and easy. you'll have access to a wealth of information and tools that will help you take control of your health and wellness.
+                        Our nutraceutical app is designed to help you live a
+                        healthier life. Downloading our app is quick and easy.
+                        you'll have access to a wealth of information and tools
+                        that will help you take control of your health and
+                        wellness.
                       </p>
                     </div>
                   </div>
@@ -1232,7 +1209,7 @@ const HomePage = () => {
                           <AiFillApple />
                         </div>
                         <Link to="/mobileapp">
-                        <div>App Store</div>
+                          <div>App Store</div>
                         </Link>
                       </div>
                     </button>
@@ -1242,14 +1219,14 @@ const HomePage = () => {
                           <IoLogoGooglePlaystore />
                         </div>
                         <Link to="/mobileapp">
-                        <div>Google Play</div>
+                          <div>Google Play</div>
                         </Link>
                       </div>
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-12">
                 <div className="img-div d-flex justify-content-center">
                   <img id="img" src={Mobile} alt="image" />
                 </div>
@@ -1275,7 +1252,7 @@ const HomePage = () => {
                           blogs.map((item, ind) => {
                             if (ind < 4)
                               return (
-                                <div className="col-lg-3 col-md-6">
+                                <div className="col-lg-3 col-md-6" key={ind}>
                                   <Link to={"/SingleBlogPage/" + item.slug}>
                                     <div className="card">
                                       <img

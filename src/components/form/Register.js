@@ -20,10 +20,6 @@ const Register = (props) => {
   let [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
 
-  // useEffect(() => {
-  //     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
-  //   }, [])
 
   const RegisterUser = () => {
     if (
@@ -140,8 +136,6 @@ const Register = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
           }
         }
@@ -163,13 +157,10 @@ const Register = (props) => {
         }
         //  await CartById();
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
     }
   };
   const AddtoCart = async () => {
-    //  debugger
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
@@ -191,9 +182,6 @@ const Register = (props) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
   const UpdateCart = () => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;

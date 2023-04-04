@@ -1,6 +1,5 @@
 import { get, map } from "jquery";
 import "../components/WishList.css";
-// import "../views/landing/homepage.css";
 import React, { useState, useEffect } from "react";
 import StarsRating from "stars-rating";
 import Baseline from "./Baseline";
@@ -13,6 +12,7 @@ import { IoClose } from "react-icons/io5";
 import SingleProduct from "./SingleProduct";
 import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 
 var Userdata = "";
@@ -23,12 +23,13 @@ const WishList = () => {
   const [order, Setorder] = useState([]);
   const [userCart, setUserCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [loading,setLoading]=useState(true);
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetWishlist();
     CartById();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }, []);
 
   const GetWishlist = async () => {
@@ -48,15 +49,30 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        if(data.error && data.message === "Data Not Found"){
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
-        }
+          setLoading(false);         
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
+        } 
       })
-
       .catch((err) => {
         console.log(err, "error");
       });
   };
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(wishlistData.length===0)
+      {
+        setLoading(false);
+      }
+    },500);
+  },[]);
+  
   const DeleteWishlist = async (productId) => {
     await fetch(`${baseUrl}/api/wishlist/delete_wishlist_by_id`, {
       method: "delete",
@@ -70,13 +86,23 @@ const WishList = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        setLoading(true);
         Setwishlist("");
+        setLoading(true);
         toast.error("Product removed successfully", {
           position: "bottom-right",
           autoClose: 1000,
         });
-        GetWishlist();
-      })
+        setTimeout(()=>{
+          if(data)
+          {
+            setLoading(false);
+          }
+          
+        },500);
+        await GetWishlist();
+        })
+        
       .catch((err) => {
         console.log(err, "error");
       });
@@ -84,7 +110,6 @@ const WishList = () => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //  this block is not working
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
@@ -99,19 +124,11 @@ const WishList = () => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          // history.push("/Cart");
-          // toast.success("Add to cart",{
-          //   position:"bottom-right",
-          //   autoClose:5000,
-          // });
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //   history.push('/Register')
-    // }
   };
 
   const CartById = async () => {
@@ -188,8 +205,6 @@ const WishList = () => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -214,8 +229,6 @@ const WishList = () => {
         setQuantity(1);
 
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
     }
   };
@@ -261,6 +274,7 @@ const WishList = () => {
             </div>
           </div>
           <div className="row mt-0">
+          {loading ? '' : <>
             {wishlistData.length > 0 ? (
               wishlistData.map((item, ind) => (
                 <div className="col-lg-6 col-md-6 col-sm-12">
@@ -275,14 +289,12 @@ const WishList = () => {
                         <h6 className="wishlist-heading2">{item.name}</h6>
                         <p className="word-wrapping">{item.description}</p>
                         <div className="buynow-details-btn-wrap">
-                          {/* <Link to={"/UserDetails/" + item.productId}> */}
                           <button
                             onClick={() => handleBuyNow(item.productId)}
                             className="wishlist-btn"
                           >
                             Buy Now
                           </button>
-                          {/* </Link> */}
                           <Link to={"/SingleProduct/" + item.productId}>
                             <button className=" wishlist-btn">
                               See Details
@@ -313,6 +325,7 @@ const WishList = () => {
                 ></lottie-player>
               </div>
             )}
+            </>}
           </div>
           <ToastContainer />
         </div>

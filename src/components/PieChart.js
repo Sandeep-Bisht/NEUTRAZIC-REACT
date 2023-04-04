@@ -53,11 +53,8 @@ const PieChart = () => {
       setCanceled(CancelArr.length);
     } catch (err) {
       console.log(err);
-      // Handle the error in some way, e.g. by setting an error message state variable
     }
   };
-  
-  console.log(shipped,"pending length");
 
 
     const data = [

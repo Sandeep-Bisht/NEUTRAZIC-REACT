@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
@@ -163,7 +162,6 @@ const InProgressOrder = () => {
   ];
 
   const showModal = (order) => {
-    console.log(order, "order");
     setPrticularUserOrder(order.order);
     setIsModalVisible(true);
   };
@@ -183,26 +181,7 @@ const InProgressOrder = () => {
   return (
     <>
       {/* table modal */}
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header float-right">
-              <h5>User details</h5>
-              <div class="text-right">
-                <i
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  class="fa fa-close"
-                ></i>
-              </div>
-            </div>
-            <div class="modal-body">
+     
               <div>
                 <Modal
                   title="Order Details"
@@ -221,11 +200,10 @@ const InProgressOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item) => {
-                          console.log(item, "itemssss");
+                        prticularUserOrder.map((item,ind) => {
                           return (
                             <>
-                              <tr>
+                              <tr key={ind}>
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                     <img
@@ -247,22 +225,7 @@ const InProgressOrder = () => {
                   </table>
                 </Modal>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+            
       {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
@@ -275,9 +238,6 @@ const InProgressOrder = () => {
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
-                  {/* <Link to="/Category" className="add-icon">
-                    <MdPlaylistAdd />Add
-                  </Link> */}
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}

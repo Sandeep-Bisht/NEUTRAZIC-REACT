@@ -26,6 +26,7 @@ const Cart = () => {
   const history = useHistory();
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
+  const [loading,setLoading] = useState(true);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
   const [cartStatus, setCartStatus] = useState();
@@ -89,6 +90,7 @@ const Cart = () => {
 
           setCartStatus(data.data[0].cartStatus);
           setCart(data.data[0].order);
+          setLoading(false)
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
@@ -97,11 +99,13 @@ const Cart = () => {
           Set_id(data.data[0]._id);
         })
         .catch((err) => {
+          setLoading(false)
           console.log(err, "error");
         });
     }
   };
-  console.log(cart, "THis is cart");
+
+
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {
@@ -221,6 +225,7 @@ const Cart = () => {
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
+                {loading ? '' : <>
                 {cart && cart.length > 0 ? (
                   <div className="cart-table">
                     <table
@@ -332,9 +337,9 @@ const Cart = () => {
                                 <div className="amount">
                                   <span className="subtotal-amount mt-4">
                                     {state1.state1 == "1" ? (
-                                      <i class="fa fa-dollar-sign"></i>
+                                      <i class="fa fa-dollar-sign currency-subtotal-sign"></i>
                                     ) : (
-                                      <i className="fa fa-inr"></i>
+                                      <i className="fa fa-inr currency-subtotal-sign"></i>
                                     )}
                                     {(state1.state1 == "1"
                                       ? el.dollerDiscount
@@ -342,7 +347,7 @@ const Cart = () => {
                                   </span>
                                 </div>
                               </td>
-                              <td>
+                              <td className="cartPop">
                                 <Popconfirm
                                   className="bx bx-trash cart-delete-icon"
                                   title="Delete the Product"
@@ -371,6 +376,7 @@ const Cart = () => {
                     autoplay
                   ></lottie-player>
                 )}
+                </>}
               </div>
 
               <div className="col-lg-4 col-md-12">

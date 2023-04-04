@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
-//import "@ant - design/flowchart/dist/index.css";
 import $ from "jquery";
 import DataTable from "datatables.net";
 import Sidemenu from "./Sidemenu";
@@ -20,10 +19,6 @@ import Header1 from "../Header1";
 import HomePage from "../../views/landing/HomePage";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
-
-
-// var ManufacturerCount1='';
-// var productCount1=''
 var Userdata;
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
@@ -48,7 +43,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    setCount();
     GetUser();
     getAllBlogs();
     GetWarehouse();
@@ -159,10 +153,6 @@ const Dashboard = () => {
         console.log(err, "errors");
       });
   };
-  const setCount = async () => {
-    //  await setManufacturerCount1(localStorage.getItem("ManufacturerCount"));
-    // await  setproductCount1(JSON.parse(localStorage.getItem("TotalProduct")))
-  };
 
   const logout = () => {
     localStorage.setItem("Userdata", null);
@@ -184,7 +174,7 @@ const Dashboard = () => {
                 <main className="main graph-main-div">
                   <div className="row cardsec-row">
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllManufactureDetails">
+                      <Link to={"/Configuration/"+"AllManufactureDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -243,7 +233,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllProductsDetails">
+                      <Link to={"/Configuration/"+"AllProductsDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -262,7 +252,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllCategoriesDetails">
+                      <Link to={"/Configuration/"+"AllCategoriesDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -281,7 +271,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllSubCategoriesDetails">
+                      <Link to={"/Configuration/"+"AllSubCategoriesDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">
@@ -300,7 +290,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                      <Link to="/AllWarehouseDetails">
+                      <Link to={"/Configuration/"+"AllWarehouseDetails"}>
                         <div className="card cardsec">
                           <div className="row">
                             <div className="col-12">

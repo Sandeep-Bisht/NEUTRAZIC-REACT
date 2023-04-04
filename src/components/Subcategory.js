@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
-// import "../../sass/whislist.css";
-// import Carouselcomp from "../../components/Carouselcomp";
 import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
 import { useHistory } from "react-router-dom";
@@ -35,10 +33,6 @@ const Subcategory = () => {
     $(document).ready(function() {
       $(".frontimage").hide();
       $(".backimage").hide();
-      //    $('.icon-wishlist').on('click', function(){
-      //       $(this).toggleClass('in-wishlist');
-
-      // })
       $(".frontimage").mouseenter(function() {
         $(".backimage").hide();
       });
@@ -112,7 +106,6 @@ const Subcategory = () => {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
             order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -140,9 +133,6 @@ const Subcategory = () => {
         setQuantity(1);
         CartById();
         UpdateCart();
-
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
     }
   };
@@ -209,9 +199,6 @@ const Subcategory = () => {
           console.log(err, "error");
         });
     }
-    // else{
-    //    history.push('/Register')
-    // }
   };
   const AddtoWishlist = async (
     productid,
@@ -293,8 +280,7 @@ const Subcategory = () => {
               {data.map((el, ind) => {
                 if (el.subcategory == "6133469ff51d5a1242de049a") {
                   return (
-                    <div className="col-6 col-lg-3 col-md-3 col-sm-12 ">
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
+                    <div className="col-6 col-lg-3 col-md-3 col-sm-12 " key={ind}>
                       <div className="single-products-box border">
                         <div className="row p-4 align-items-center .product-div">
                           <div className="col-6">
@@ -402,14 +388,13 @@ const Subcategory = () => {
                                   >
                                     <i className="bx bx-heart"></i>Wishlist
                                   </p>
-                                  {/* <div className="icon-wishlist"></div> */}
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      {/* </Link> */}
+                      
                     </div>
                   );
                 }

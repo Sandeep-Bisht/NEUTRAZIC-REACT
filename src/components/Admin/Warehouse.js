@@ -8,8 +8,6 @@ import axios from "axios";
 
 var Userdata;
 const Warehouse = (props) => {
-  const [warehouse,setWarehouse] = useState([]);
-  const [update, setUpdate] = useState(false);
   const [data, Setdata] = useState({
     name: "",
     warehouseContactNo:"",
@@ -39,7 +37,7 @@ const Warehouse = (props) => {
     })
       .then((res) => {
         res.json();
-        history.push('/AllWarehouseDetails')        
+        history.push("Configuration/"+"AllWarehouseDetails")        
       })
       .then((res) => {
         
@@ -48,15 +46,13 @@ const Warehouse = (props) => {
       })
 
       .catch((err) => console.log(err));
-    //console.log(formData)
     e.preventDefault();
   }; 
 
   const GetWarehouse = async () => {
     await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
       .then((res) => res.json())
-      .then(async (data) => {
-        setWarehouse(data.data); 
+      .then(async (data) => { 
       })
       .catch((err) => {
         console.log(err, "error");
@@ -72,7 +68,7 @@ const Warehouse = (props) => {
     }
     await axios.put(`${baseUrl}/api/warehouse/update_warehouse_by_id`,formData,)
       .then((res) =>{
-        history.push("/AllWarehouseDetails");
+        history.push("Configuration/"+"AllWarehouseDetails");
         GetWarehouse();
       })
       .catch((err) => {
@@ -90,8 +86,8 @@ const Warehouse = (props) => {
         <Sidemenu />
         </div>
         <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
-        {Userdata != undefined ? (
-          Userdata.role == "superAdmin" || Userdata.role == "Vendor" ? (
+        {Userdata !== undefined ? (
+          Userdata.role === "superAdmin" || Userdata.role === "Vendor" ? (
             <form>
                   <div className="col-12 px-0">
                     <div className="card p-4 m-2 mt-4 product-form">

@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
-// import DataTable from '@bit/adeoy.utils.data-table';
-
-// import { useStateValue } from '../state';
-// import { logout } from '../state/auth/actions';
 import "../.././views/landing/homepage.css";
-// import '../components/Carouselcomp'
 import Sidemenu from "./Sidemenu";
 import $ from "jquery";
 
@@ -16,7 +11,6 @@ var header;
 var sticky;
 var Userdata = "";
 const Roles = (props) => {
-  // let history=useHistory();
   const history = useHistory();
   const [email, setemail] = useState("");
   const [username, setUsername] = useState("");
@@ -172,12 +166,10 @@ const Roles = (props) => {
                 <div className="container justify-content-center align-items-center d-flex pt-4 m-auto">
                   <div className="col-10 mx-auto dashboardroles-register-form-wrap">
                     <div className="form-group col-6">
-                      {/* <h1>Sale</h1> */}
                       <img src={require("../../Images/woman-laptop.jpg")} />
                     </div>
                     <div className="form-group col-6">
                       <div className="form-group col-lg-12 p-1  form-floating">
-                        {/* <label>Username<span>*</span></label> */}
                         <input
                           type="text"
                           id="floatingform"
@@ -191,7 +183,6 @@ const Roles = (props) => {
                         <label htmlFor="floatingform">Username*</label>
                       </div>
                       <div className="form-group col-lg-12 p-1  form-floating">
-                        {/* <label>Username<span>*</span></label> */}
                         <input
                           type="text"
                           id="floatingform"
@@ -205,7 +196,6 @@ const Roles = (props) => {
                         <label htmlFor="floatingform">Phone Number*</label>
                       </div>
                       <div className="form-group col-lg-12 p-1 form-floating">
-                        {/* <label>Email<span>*</span></label> */} 
                         <input
                           type="email"
                           id="floatingform"
@@ -219,7 +209,6 @@ const Roles = (props) => {
                         <label htmlFor="floatingform">Email*</label>
                       </div>
                       <div className="form-group col-lg-12 p-1 form-floating">
-                        {/* <label>Password<span>*</span></label> */}
                         <input
                           className="form-control input-text"
                           id="formfloating"
@@ -232,7 +221,6 @@ const Roles = (props) => {
                         <label htmlFor="formfloating">Password*</label>
                       </div>
                       <div className="form-group col-lg-12 p-1 form-floating">
-                        {/* <label>Confirm Password<span>*</span></label> */}
                         <input
                           className="form-control input-text"
                           id="formfloating"
@@ -244,7 +232,6 @@ const Roles = (props) => {
                       {Userdata != undefined &&
                       Userdata.role == "superAdmin" ? (
                         <div className="form-group col-lg-12 p-1">
-                          {/* <label>User Roles<span>*</span></label> */}
                           <select
                             className="form-control custom-select"
                             onChange={(e) => {
@@ -259,7 +246,6 @@ const Roles = (props) => {
                         </div>
                       ) : Userdata.role == "Manager" ? (
                         <div className="form-group col-lg-12 p-1">
-                          {/* <label>User Roles<span>*</span></label> */}
 
                           <select
                             className="form-control"
@@ -273,21 +259,6 @@ const Roles = (props) => {
                           </select>
                         </div>
                       ) : null}
-                      {/* <div className="form-group col-lg-12 p-1">
-                        <select
-                          className="form-control custom-select"
-                          onChange={(e) => {
-                            setOrganization(e.target.value);
-                          }}
-                        >
-                          <option selected>
-                            Select Vendor Organization Form Here
-                          </option>
-                          {manufactureres.map((el, ind) => (
-                            <option defaultValue={el.name}>{el.name}</option>
-                          ))}
-                        </select>
-                      </div> */}
                       <div className="form-group col-lg-12 p-1">
                         <button
                           className="btn btn-registration btn-lg"

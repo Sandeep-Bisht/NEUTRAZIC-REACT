@@ -1,98 +1,86 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Footer from ".././components/Footer";
-import ".././views/landing/homepage.css";
+import { Link, useHistory } from "react-router-dom";
+import Footer from "./Footer";
+import StarsRating from "stars-rating";
+import Header1 from "./Header1";
+import "../views/landing/homepage.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../utils/services";
-// import "../../sass/whislist.css";
-// import Carouselcomp from "../../components/Carouselcomp";
-import Baseline from ".././components/Baseline";
-import Header1 from ".././components/Header1";
-import { useHistory } from "react-router-dom";
-import ReadMoreReact from "read-more-react";
-import $ from "jquery";
-var Userdata = "";
-let tranding = 0;
-const TrendingProducts = (props) => {
-  const [data, setData] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [Manufactureres, setManufactureres] = useState([]);
-  const [AllProduct, setAllProduct] = useState([]);
+import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
+import { useDispatch } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useContext } from "react";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+// import Cookies from "universal-cookie";
 
-  const [ProductCategory, setProductCategory] = useState([]);
+var Userdata;
+const TrengingProduct = (props) => {
+  const state1 = useContext(CurrencyContext);
+
+  let dispatch = useDispatch();
+
+  const [AllProduct, setAllProduct] = useState([]);
+  const [productLength, serProductLength] = useState();
+  const [Categorydetails, setCategoryDetails] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
-  const [Categorydetails, setCategoryDetails] = useState({});
-  const [categoryname, Setcategoryname] = useState();
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubCategories] = useState([]);
+  const [manufactureres, setManufactureres] = useState([]);
+  const [wishlistData, Setwishlist] = useState([]);
+  const [prev, SetPrev] = useState(0);
+  //  const [next, SetNext] = useState(false);
+  const [filter, setFilter] = useState("");
+  const [mrp, setMrp] = useState();
+  const [data, setData] = useState([]);
   const history = useHistory();
+  const [currancy, setCurrency] = useState("INR");
+  // const cookies = new Cookies();
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [isLogin, setIsLogin] = useState(loginState);
+
+  useEffect(() => {
+    setLoginState(loginState);
+    setIsLogin(loginState);
+  }, [loginState]);
+
+  useEffect(() => {
+    if (state1 == "1") {
+      setCurrency("Dollar");
+    }
+  }, [currancy]);
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    GetData();
+    window.scrollTo(0, 0);
+    ProductByCategory();
+    categoryDetails();
+    GetWishlist();
     CartById();
     GetCategory();
+    GetSubCategory();
     GetManufacturer();
+    // GetCategory();
+  }, [loginState]);
 
-    $(document).ready(function() {
-      $(".frontimage").hide();
-      $(".backimage").hide();
-      //    $('.icon-wishlist').on('click', function(){
-      //       $(this).toggleClass('in-wishlist');
-
-      // })
-      $(".frontimage").mouseenter(function() {
-        $(".backimage").hide();
-      });
-      const WishlistHeart = () => {
-        $(".icon-wishlist").on("click", function() {
-          $(this).toggleClass("in-wishlist");
-        });
-      };
-    });
-  }, []);
-
-  const GetData = async () => {
-    Userdata = await JSON.parse(localStorage.getItem("Userdata"));
-    await fetch(`${baseUrl}/api/product/all_product`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setData(data.data);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-  const GetManufacturer = async () => {
-    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setManufactureres(data.data);
-      })
-      .catch((err) => {
-        console.log(err, "errors");
-      });
-  };
-  const GetCategory = async () => {
-    await fetch(`${baseUrl}/api/category/all_category`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setCategories(data.data._id);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
   const cartfunction = async (
     productid,
     name,
     quantity,
     mrp,
+    singleprice,
+    dollerDiscount,
+    dollerMrp,
     discount,
     description,
     category,
     manufacturer,
     image
   ) => {
-    if (quantity !== 0) {
+    if (quantity > 0) {
       var merged = false;
       var newItemObj = {
         productid: productid,
@@ -100,19 +88,23 @@ const TrendingProducts = (props) => {
         image: image,
         quantity: quantity,
         mrp: parseInt(mrp),
-        singleprice: parseInt(mrp),
+        singleprice: parseInt(singleprice),
+        dollerDiscount: dollerDiscount,
+        dollerMrp: dollerMrp,
         discountprice: discount,
-
+        description: description,
         category: category,
         manufacturer: manufacturer,
         description: description,
+        status: "Pending",
+        justification: "Enjoy",
+        delivery_time: "No Status",
       };
       if (userCart.order == null || userCart.order == []) {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
+
             merged = true;
             setQuantity(1);
           }
@@ -127,10 +119,7 @@ const TrendingProducts = (props) => {
         for (var i = 0; i < userCart.order.length; i++) {
           if (userCart.order[i].productid == newItemObj.productid) {
             userCart.order[i].quantity += newItemObj.quantity;
-            userCart.order[i].mrp += newItemObj.mrp;
             merged = true;
-          } else {
-            merged = false;
           }
           setQuantity(1);
         }
@@ -138,11 +127,7 @@ const TrendingProducts = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        CartById();
         UpdateCart();
-
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
     }
   };
@@ -162,7 +147,11 @@ const TrendingProducts = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        history.push("/Cart");
+        CartById();
+        toast.success("Added to cart", {
+          position: "bottom-right",
+          autoClose: 1000,
+        });
       })
       .then((err) => console.log(err));
   };
@@ -181,6 +170,8 @@ const TrendingProducts = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data[0]);
+          let cartItems = data.data[0].order.length;
+          dispatch(ACTIONS.getCartItem(cartItems));
         })
         .catch((err) => {
           console.log(err, "error");
@@ -203,16 +194,86 @@ const TrendingProducts = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //    history.push('/Register')
-    // }
+    
   };
+
+  const FilterItems = (item) => {
+    setFilter(item);
+  };
+
+  // var page = 1
+  const ProductByCategory = async () => {
+    await fetch(`${baseUrl}/api/product/all_product?_page=&_limit=10`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        serProductLength(data.length);
+        setAllProduct(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+  const categoryDetails = async () => {
+    await fetch(`${baseUrl}/api/category/category_by_id`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: props.match.params.name,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        await setCategoryDetails(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
+  const GetWishlist = async () => {
+    let id;
+    if (Userdata) {
+      id = Userdata._id;
+    }
+    await fetch(`${baseUrl}/api/wishlist/wishlist_by_id`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userid: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.data[0] !== undefined) {
+          Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+
+  const checkWishlistItem = (productId) => {
+    for (let item of wishlistData) {
+      if (item.productId == productId) {
+        return "wishlisted";
+      }
+    }
+  };
+
   const AddtoWishlist = async (
     productid,
     name,
@@ -236,7 +297,7 @@ const TrendingProducts = (props) => {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        if (data.data == undefined) {
+        if (data.data[0] == undefined) {
           if (!Userdata == []) {
             await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
@@ -257,190 +318,256 @@ const TrendingProducts = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                
+                toast.success("Added to wishlist", {
+                  position: "bottom-right",
+                  autoClose: 1000,
+                });
                 let wishList = document.getElementById(productid);
-                wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
+                GetWishlist();
               })
               .catch((err) => {
-                console.log(err, "error");
+                console.log(err, "error e");
               });
           }
-        } 
-        else {
+        } else {
+          if (!JSON.stringify(data.data).includes(productid) && data.data) {
+            if (!Userdata == []) {
+              await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  userid: Userdata._id,
+                  image: image,
+                  name: name,
+                  productId: productid,
+                  rating: "5",
+                  category: category,
+                  manufacturer: manufacturer,
+                  description: description,
+                }),
+              })
+                .then((res) => res.json())
+                .then(async (data) => {
+                  toast.success("Added to wishlist", {
+                    position: "bottom-right",
+                    autoClose: 1000,
+                  });
+                  let wishList = document.getElementById(productid);
+                  wishList.classList.add("wishlisted");
+                  GetWishlist();
+                })
+                .catch((err) => {
+                  console.log(err, "error e");
+                });
+            }
+          } else {
+            toast.error("Already in wishlist !", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 1000,
+            });
+          }
         }
       });
   };
+  // allcategory api //
+  const GetCategory = async () => {
+    await fetch(`${baseUrl}/api/category/all_category`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setCategories(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+  // End All Category API//
+
+  // SubCategory API //
+  const GetSubCategory = async () => {
+    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setSubCategories(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
+  // End Subcategory //
+  // Manufacturer API //
+  const GetManufacturer = async () => {
+    await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setManufactureres(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "errors");
+      });
+  };
+  // const openNav = () => {
+  //   document.getElementById("mySidenav").style.width = "300px";
+  // };
+  // const closeNav = () => {
+  //   document.getElementById("mySidenav").style.width = "0";
+  // };
+  // End Manufacturer API //
 
   return (
     <>
       <Header1 />
-
-      <div id="__next">
-        {/* trending section  */}
-
-        <section className="trending-section mt-5 mb-5">
-          <div className="container m-auto h-100">
-            <div className="row h-100">
-              <div className="col-12 p-0">
-                <div className="align-items-center position-relative h-100 d-flex w-100 ">
-                  <h1 className="trendign-head">Trending</h1>
-                  <h2 className="pl-4 product-head">Products</h2>
-                </div>
+      {/* <div id="__next">
+        <div className="search-overlay null">
+          <div className="d-table">
+            <div className="d-table-cell">
+              <div className="search-overlay-layer"></div>
+              <div className="search-overlay-layer"></div>
+              <div className="search-overlay-layer"></div>
+              <div className="search-overlay-close">
+                <span className="search-overlay-close-line"></span>
+                <span className="search-overlay-close-line"></span>
+              </div>
+              <div className="search-overlay-form">
+                <form>
+                  <input
+                    type="text"
+                    className="input-search"
+                    placeholder="Search here..."
+                    name="search"
+                    value=""
+                  />
+                  <button type="submit">
+                    <i className="bx bx-search-alt"></i>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
-        </section>
-        <section className="products-area pb-40">
-          <div className="container-fluid">
-            <div className="row">
-              {data.map((el, ind) => {
-                if (el.type == "Tranding Product") {
-                  return (
-                    <div className="col-lg-3 col-md-12 col-sm-12 ">
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
-                      <div className="single-products-box border">
-                        <div className="row  align-items-center product-div">
-                          <div className="col-6 product-image-div">
-                            <Link
-                              to={"/SingleProduct/" + el._id}
-                              className="product-image-link"
-                            >
-                              <div className="image hover-switch">
-                                {/* <img
-                           src={
-                           require('../../')
-                           }
-                           alt="" 
-                            /> */}
-                                <img
-                                  src={
-                                    `${baseUrl}/` + el.image[0].path
-                                  }
-                                  alt=""
-                                  //  style={{position:"absolute"}}
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                          <div className="col-6 pd-0 tranding product-image-content">
-                            <div className="content product-content">
-                              <Link to={"/SingleProduct/" + el._id}>
-                                <h3 className="pb-1 pl-4 pt-5">
-                                  <ReadMoreReact
-                                    text={el.name}
-                                    min={10}
-                                    ideal={10}
-                                    max={10}
-                                    readMoreText={"..."}
-                                  />
-                                </h3>
-                              </Link>
-                              <div className="d-flex pb-2 pl-4">
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                                <i className="bx bxs-star"></i>
-                              </div>
-                              <div className=" justify-content-center align-items-center d-flex pt-3 mr-5">
-                                <div className="discount-price-div">
-                                  <span>{el.inrDiscount}%</span>
-                                </div>
-                                <div className="discount-price-div2">
-                                  <span>off</span>
-                                </div>
-                              </div>
+        </div>
+      </div> */}
 
-                              <div className="hr-div">
-                                <hr />
-                              </div>
-                              <div className="price-div justify-content-center align-items-center d-flex">
-                                <span className="new-price ml-3">
-                                  {/* $
-                                  {isNaN(
-                                    el.inrMrp -
-                                      (el.inrMrp * el.inrDiscount) / 100
-                                  )
-                                    ? 0
-                                    : el.inrMrp -
-                                      (el.inrMrp * el.inrDiscount) / 100} */}
-                                      {el.inrDiscount}
-                                </span>
-                                <del className="new-price ml-1">
-                                <i className="fa fa-inr"></i> {el.inrMrp}
-                                </del>
-                                {Userdata ? (
-                                  <i
-                                    className="bx bxs-heart ml-3"
-                                    onClick={() => {
-                                      AddtoWishlist(
-                                        el._id,
-                                        el.name,
-                                        quantity,
-                                        el.inrMrp,
-                                        el.inrDiscount,
-                                        el.description,
-                                        el.category,
-                                        el.manufacturer.name,
-                                        el.image
-                                      );
-                                    }}
-                                  ></i>
-                                ) : (
-                                  <>
-                                    <i
-                                      className="bx bxs-heart ml-3 pc-heart"
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null
-                                          ? "#exampleModal"
-                                          : null
-                                      }
-                                    ></i>
-                                    <Link to="/Register">
-                                      <i className="bx bxs-heart ml-3 mobile-heart"></i>
-                                    </Link>
-                                  </>
-                                )}
-                                <i className="bx bx-cart ml-1"></i>
-                              </div>
-                              {/* <div className="price mt-1">
-                              <div>
-                                 <span className="new-price">
-                                 $
-                                 {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                                 ? 0
-                                 : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
-                                 </span>
-                              </div>
-                           </div> */}
-                              {/* <div className="mt-2 mb-2">
-                              <button className="add-to-cart-button1 text-nowrap"  onClick={()=>{cartfunction(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image[0].path)}} data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}>Add to Cart</button>
-                           </div> */}
-                              {/* <div className="row">
-                              
-                              <div className="col-12">
-                                 <p className="bottom-icon text-nowrap" onClick={()=>{AddtoWishlist(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image)}}  data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}><i className='bx bx-heart' ></i>Wishlist</p>
-                              <div className="icon-wishlist"></div>
-                              </div>
-                           </div> */}
-                            </div>
+      <div className="container m-auto Category-div">
+        <div className="row align-items-center">
+          <div className="col-12">
+            <div className="section-title my-4">
+              <h2>Trending Products</h2>
+            </div>
+            <div>
+              <div id="columns" className="columns_5">
+                {AllProduct.filter(
+                  (item) => item.type == "Trending Product"
+                ).map((el, ind1) => {
+                  return (
+                    <figure className="figure allproduct-figure" key={ind1}>
+                      <Link Link to={"/SingleProduct/" + el._id}>
+                        <div>
+                          {/* {Categorydetails.image!==undefined? */}
+                          <img src={`${baseUrl}/` + el.image[0].path} />
+                        </div>
+                        <figcaption>{el.name}</figcaption>
+                      </Link>
+                      {/* :null} */}
+
+                      <div className="contanier allproduct-price-div">
+                        <div className="row">
+                          <div className="col-6 text-start">
+                            <span className="price">
+                              {" "}
+                              {state1.state1 == "1" ? (
+                                <i class="fa fa-dollar-sign"></i>
+                              ) : (
+                                <i className="fa fa-inr"></i>
+                              )}
+                              {state1.state1 == "1"
+                                ? el.dollerDiscount
+                                : el.inrDiscount}
+                            </span>
+                          </div>
+                          <div className="col-6 text-end">
+                            <p className={`text-nowrap wishlist`}>
+                              {Userdata ? (
+                                <i
+                                  id={el._id}
+                                  onClick={() => {
+                                    AddtoWishlist(
+                                      el._id,
+                                      el.name,
+                                      quantity,
+                                      el.inrMrp,
+                                      el.inrDiscount,
+                                      el.description,
+                                      el.category,
+                                      el.manufacturer.name,
+                                      el.image
+                                    );
+                                  }}
+                                  className={`bx bxs-heart ${checkWishlistItem(
+                                    el._id
+                                  )}`}
+                                ></i>
+                              ) : (
+                                <i
+                                  className="bx bxs-heart "
+                                  data-bs-toggle="modal"
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                ></i>
+                              )}
+                              Wishlist
+                            </p>
                           </div>
                         </div>
                       </div>
-                      {/* </Link> */}
-                    </div>
+                      <button
+                        className="button btn"
+                        onClick={() => {
+                          cartfunction(
+                            el._id,
+                            el.name,
+                            quantity,
+                            el.inrMrp,
+                            el.inrDiscount,
+                            el.dollerDiscount,
+                            el.dollerMrp,
+                            el.discount,
+                            el.description,
+                            el.category,
+                            el.manufacturer.name,
+                            el.image[0].path
+                          );
+                        }}
+                        data-bs-toggle={Userdata == null ? "modal" : null}
+                        data-bs-target={
+                          Userdata == null ? "#exampleModal" : null
+                        }
+                      >
+                        Add to Cart
+                      </button>
+                    </figure>
                   );
-                }
-              })}
+                })}
+              </div>
+              <div className="wrapperbtn pt-3 pb-4">
+                <Link to="/AllProducts">
+                  <button type="button" className="btn10">
+                    Show More
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-      <Baseline />
+
+      <ToastContainer />
+
       <Footer />
     </>
   );
 };
-export default TrendingProducts;
+export default TrengingProduct;

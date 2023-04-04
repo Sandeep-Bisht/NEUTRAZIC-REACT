@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
 import "../components/Subcategories.css";
-// import "../../sass/whislist.css";
-// import Carouselcomp from "../../components/Carouselcomp";
 import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
 import { useHistory, NavLink } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../CommonService/AddToCart/action";
+import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
@@ -71,10 +70,6 @@ const Subcategories = (props) => {
     $(document).ready(function() {
       $(".frontimage").hide();
       $(".backimage").hide();
-      //    $('.icon-wishlist').on('click', function(){
-      //       $(this).toggleClass('in-wishlist');
-
-      // })
       $(".frontimage").mouseenter(function() {
         $(".backimage").hide();
       });
@@ -219,8 +214,6 @@ const Subcategories = (props) => {
         for (var i = 0; i < order.length; i++) {
           if (order[i].productid == newItemObj.productid) {
             order[i].quantity += newItemObj.quantity;
-            // order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
             merged = true;
             setQuantity(1);
           }
@@ -245,8 +238,6 @@ const Subcategories = (props) => {
         setQuantity(1);
         // CartById();
         await UpdateCart();
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
       }
       toast.success("Added to Cart", {
         position: "bottom-right",
@@ -339,8 +330,10 @@ const Subcategories = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        if (data.data[0] !== undefined) {
+        if (data.data !== undefined) {
           Setwishlist(data.data);
+          const wishlisted = data.data.length;
+          dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
       })
       .catch((err) => {
@@ -463,7 +456,7 @@ const Subcategories = (props) => {
     let filteredData = [];
     for (let item of data) {
       if (item.subcategory._id === id) filteredData.push(item);
-      activeItem.classList.add("newActive");
+      // activeItem.classList.add("newActive");
     }
     setfilterData(filteredData);
     setsubcategoryId(name);
@@ -483,12 +476,6 @@ const Subcategories = (props) => {
     setData(Products);
     setsubcategoryId("All Products");
   };
-  // const Addclassactive = ()=>{
-  //   let item = document.getElementById("List-item");
-  //   for(let i = 0 ; i<=item.length; i++){
-  //     item[i].
-  //   }
-  // }
 
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
@@ -525,9 +512,8 @@ const Subcategories = (props) => {
                         <li>
                           {categories.map((item, ind) => {
                             if (item._id === props.match.params._id) {
-                              // if(item.category._id === props.match.params._id){
                               return (
-                                <h1 className="browse-categories-header">
+                                <h1 className="browse-categories-header" key={ind}>
                                   {item.name}
                                 </h1>
                               );
@@ -591,7 +577,6 @@ const Subcategories = (props) => {
                       >
                         {filterData && filterData.length > 0 ? (
                           filterData.map((item, ind) => {
-                            console.log(item.dollerDiscount, "Hello filter");
                             return (
                               <figure
                                 className="figure subcategory-figure"
