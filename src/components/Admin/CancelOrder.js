@@ -3,9 +3,9 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Modal, Button } from "antd";
+import { Table, Input, Space, Popconfirm, Modal, Button, Typography, Dropdown } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ShippedOrder = () => {
   const [orders, setOrders] = useState([])
@@ -15,7 +15,7 @@ const ShippedOrder = () => {
   const [searchVal, setSearchVal] = useState("");
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const history =  useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     GetOrders();
@@ -26,26 +26,20 @@ const ShippedOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then(res => res.json())
       .then(async (data) => {
-        let arr=[];
-         for(let item of data.data)
-         {
-            if(item.orderStatus=="Cancel")
+        let arr = [];
+        for (let item of data.data) {
+          if (item.orderStatus == "Cancel") {
+            arr.push(item);
+          }
+        }
+        setOrderDetails(arr)
 
-            {
-               arr.push(item);
-            }
-         }
-         setOrderDetails(arr)
-        
       }
       )
       .catch((err) => {
         console.log(err, "errors");
       });
   }
-
-
-
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -58,12 +52,12 @@ const ShippedOrder = () => {
     });
     setOrders(filteredData);
   };
-  
+
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
     { title: "Actual Amount.", dataIndex: "actualamount", key: "actualamount" },
-    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },   
+    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     {
       title: "View Order",
       key: "action",
@@ -96,52 +90,48 @@ const ShippedOrder = () => {
 
   return (
     <>
-     {/* table modal */}
-    
-              <div>
-                <Modal
-                  title="Order Details"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <table class="table">
-                    <thead>
-                      <tr>                        
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
+      <div>
+        <Modal
+          title="Order Details"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {prticularUserOrder &&
+                prticularUserOrder.length > 0 &&
+                prticularUserOrder.map((item, ind) => {
+                  return (
+                    <>
+                      <tr key={ind}>
+                        <td className="width-adjust-of-td">
+                          <div className="width-adjust-of-image">
+                            <img
+                              onClick={() => imageHandler(item.productid)}
+                              style={{ cursor: "pointer" }}
+                              src={`${baseUrl}/${item.image}`}
+                            ></img>
+                          </div>
+                        </td>
+                        <td >{item.name}</td>
+                        <td>{item.singleprice}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {prticularUserOrder &&
-                        prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item,ind) => {
-                          return (
-                            <>
-                              <tr key={ind}>                                
-                                <td className="width-adjust-of-td">
-                                  <div className="width-adjust-of-image">
-                                  <img
-                                    onClick={() => imageHandler(item.productid)}
-                                    style={{ cursor: "pointer" }}
-                                    src={`${baseUrl}/${item.image}`}
-                                  ></img>
-                                  </div>
-                                </td>
-                                <td >{item.name}</td>
-                                <td>{item.singleprice}</td>                                
-                              </tr>
-                            </>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </Modal>
-              </div>
-          
-      {/* end modal */}
-    
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </Modal>
+      </div>
+
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />

@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
-// import Cookies from "universal-cookie";
 
 var Userdata;
 const AllProducts = (props) => {
@@ -31,13 +30,11 @@ const AllProducts = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [wishlistData, Setwishlist] = useState([]);
   const [prev, SetPrev] = useState(0);
-  //  const [next, SetNext] = useState(false);
   const [filter, setFilter] = useState("");
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
   const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
 
@@ -206,10 +203,6 @@ const AllProducts = (props) => {
     // }
   };
 
-  const FilterItems = (item) => {
-    setFilter(item);
-  };
-
   var page = 1;
   const ProductByCategory = async () => {
     await fetch(`${baseUrl}/api/product/all_product?_page=${page}&_limit=10`)
@@ -302,7 +295,7 @@ const AllProducts = (props) => {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        if (data.data[0] == undefined) {
+        if (data.data == undefined) {
           if (!Userdata == []) {
             await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
@@ -323,11 +316,13 @@ const AllProducts = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                toast.success("Added to wishlist", {
-                  position: "bottom-right",
+                toast.error("Added to wishlist", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
                   autoClose: 1000,
                 });
+
                 let wishList = document.getElementById(productid);
+                wishList.classList.add("in-wishlist");
                 wishList.classList.add("wishlisted");
                 GetWishlist();
               })
@@ -357,13 +352,12 @@ const AllProducts = (props) => {
               })
                 .then((res) => res.json())
                 .then(async (data) => {
-                  // setWishlist(data.data[0]);
-                  //add product to wishlist response is comming here
-                  toast.success("Added to wishlist", {
-                    position: "bottom-right",
+                  toast.error("Added to wishlist", {
+                    position: toast.POSITION.BOTTOM_RIGHT,
                     autoClose: 1000,
                   });
                   let wishList = document.getElementById(productid);
+                  wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
                   GetWishlist();
                 })
@@ -380,7 +374,6 @@ const AllProducts = (props) => {
         }
       });
   };
-  // allcategory api //
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -391,9 +384,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-  // End All Category API//
-
-  // SubCategory API //
+  
   const GetSubCategory = async () => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
@@ -404,8 +395,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-  // End Subcategory //
-  // Manufacturer API //
+ 
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -416,48 +406,11 @@ const AllProducts = (props) => {
         console.log(err, "errors");
       });
   };
-  const openNav = () => {
-    document.getElementById("mySidenav").style.width = "300px";
-  };
-  const closeNav = () => {
-    document.getElementById("mySidenav").style.width = "0";
-  };
-  // End Manufacturer API //
 
   return (
     <>
       <Header1 />
-      {/* <div id="__next">
-        <div className="search-overlay null">
-          <div className="d-table">
-            <div className="d-table-cell">
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-close">
-                <span className="search-overlay-close-line"></span>
-                <span className="search-overlay-close-line"></span>
-              </div>
-              <div className="search-overlay-form">
-                <form>
-                  <input
-                    type="text"
-                    className="input-search"
-                    placeholder="Search here..."
-                    name="search"
-                    value=""
-                  />
-                  <button type="submit">
-                    <i className="bx bx-search-alt"></i>
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      <div className="container m-auto Category-div">
+    <div className="container m-auto Category-div">
         <div className="row align-items-center">
           <div className="col-12">
             <div className="section-title my-4">
@@ -476,12 +429,11 @@ const AllProducts = (props) => {
                       <figure className="figure allproduct-figure" key={ind1}>
                         <Link Link to={"/SingleProduct/" + el._id}>
                           <div>
-                            {/* {Categorydetails.image!==undefined? */}
+                            
                             <img src={`${baseUrl}/` + el.image[0].path} />
                           </div>
                           <figcaption>{el.name}</figcaption>
                         </Link>
-                        {/* :null} */}
 
                         <div className="contanier allproduct-price-div">
                           <div className="row">

@@ -63,7 +63,9 @@ const Roles = (props) => {
         window.location.reload();
       });
   };
- 
+
+
+
   const data1 = [];
   {
     users.map((item, index) => {
@@ -93,14 +95,6 @@ const Roles = (props) => {
       });
     });
   }
-  const columns = [
-    { title: "SR NO", data: "sr_no" },
-    { title: "User Name", data: "name" },
-    { title: "Email", data: "Email" },
-    { title: "Roles", data: "Role" },
-    { title: "Organization", data: "company" },
-    { title: "Action", data: "Action" },
-  ];
 
   return (
     <>
@@ -182,7 +176,7 @@ const Roles = (props) => {
                         <label htmlFor="formfloating">Confirm Password*</label>
                       </div>
                       {Userdata != undefined &&
-                      Userdata.role == "superAdmin" ? (
+                        Userdata.role == "superAdmin" ? (
                         <div className="form-group col-lg-12 p-1">
                           <select
                             className="form-control custom-select"

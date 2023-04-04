@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
+import $ from "jquery";
 import Sidemenu from "./Sidemenu";
 import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
@@ -25,20 +26,21 @@ const Dashboard = () => {
   const [subCategories, setSubCategories] = useState("");
   const [localuser, setLocaluser] = useState("");
   const [blogs, setBlogs] = useState("");
-  const [warehouse, setWarehouse] = useState("");
+  const [warehouse, setWarehouse] = useState("")
   const { loginState, setLoginState } = useContext(CurrencyContext);
-  const [isLogin, setIsLogin] = useState(loginState);
+  const [isLogin, setIsLogin] = useState(loginState)
 
   useEffect(() => {
-    setLoginState(loginState);
-    setIsLogin(loginState);
-  }, [loginState]);
+    setLoginState(loginState)
+    setIsLogin(loginState)
+  }, [loginState])
+
+
+
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetUser();
-    getAllBlogs();
-    GetWarehouse();
     GetCategory();
     GetSubCategory();
     GetManufacturer();
@@ -69,35 +71,13 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setBlogs(data.data.length);
-      });
-  };
+      })
+  }
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data.length);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const GetWarehouse = async () => {
-    await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setWarehouse(data.data.length);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const getAllBlogs = async () => {
-    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setBlogs(data.data.length);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -147,7 +127,6 @@ const Dashboard = () => {
       });
   };
 
-
   return (
     <>
       {localuser !== null ? (
@@ -173,9 +152,7 @@ const Dashboard = () => {
                                     <h6 className="cardheads">Manufacturer </h6>
                                   </div>
                                   <div>
-                                    <span className="count1">
-                                      {Manufacturer}
-                                    </span>
+                                    <span className="count1">{Manufacturer}</span>
                                   </div>
                                 </div>
                               </div>
@@ -262,9 +239,7 @@ const Dashboard = () => {
                         </Link>
                       </div>
                       <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                        <Link
-                          to={"/Configuration/" + "AllSubCategoriesDetails"}
-                        >
+                        <Link to={"/Configuration/" + "AllSubCategoriesDetails"}>
                           <div className="card cardsec">
                             <div className="row">
                               <div className="col-12">
@@ -274,9 +249,7 @@ const Dashboard = () => {
                                     <h6 className="cardheads">Sub category</h6>
                                   </div>
                                   <div>
-                                    <span className="count1">
-                                      {subCategories}
-                                    </span>
+                                    <span className="count1">{subCategories}</span>
                                   </div>
                                 </div>
                               </div>
@@ -306,11 +279,11 @@ const Dashboard = () => {
                     </div>
                   </main>
                   <div className="container">
-                    <div className="row my-5">
-                      <div className="col-md-6">
+                    <div className='row my-5'>
+                      <div className='col-md-6'>
                         <PieChart />
                       </div>
-                      <div className="col-md-6">
+                      <div className='col-md-6'>
                         <LineChart />
                       </div>
                     </div>
@@ -319,12 +292,13 @@ const Dashboard = () => {
               </div>
             </div>
           </section>
-        ) : (
-          <PageNotFound />
-        )
+        ) :
+          (<PageNotFound />)
       ) : (
-        <PageNotFound />
-      )}
+        (<PageNotFound />)
+      )
+      }
+
     </>
   );
 };

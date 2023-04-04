@@ -49,9 +49,7 @@ const SingleProduct = (props) => {
       setCurrency("Dollar")
     }
   },[currancy])
-  // let Wishlist = [];
-  //let ImageData ;
-
+ 
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2 },
@@ -59,9 +57,6 @@ const SingleProduct = (props) => {
     { width: 1200, itemToShow: 4 },
   ];
 
-  //     const carouselRef = React.useRef(null);
-  //
-  // };
 
   let carouselRef = useRef(null);
 
@@ -186,18 +181,7 @@ const SingleProduct = (props) => {
         $("#SubmitComments-button-div").css("visibility", "hidden");
       });
     });
-
-    //  $(function() {
-    //   $(".heart").on("click", function() {
-    //     $(this).toggleClass("is-active");
-    //   });
-    // });
   }, []);
-  // const AddtoWishlist=async (_id,name,quantity,mrp,discount,description,category,image)=>{
-  //    Wishlist.push({_id,name,quantity,mrp,discount,description,category,image});
-  //     localStorage.setItem("Wishlist", JSON.stringify(Wishlist));
-  //   }
-
   const ProductByCategory = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
@@ -224,8 +208,6 @@ const SingleProduct = (props) => {
       .then(async (data) => {
         setData(data.data[0]);
         SetMainImage(data.data[0].image[0].path);
-
-        //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         setProductCategory(data.data[0].category.name);
         categoryDetails(data.data[0].category);
       })
@@ -250,8 +232,6 @@ const SingleProduct = (props) => {
         await getWishlist();
         setData(data.data[0]);
         SetMainImage(data.data[0].image[0].path);
-
-        //  ImageData= {width: 400, height: 250, zoomWidth: 500, img:data.data[0].image}
         setProductCategory(data.data[0].category.name);
         categoryDetails(data.data[0].category);
       })
@@ -287,7 +267,6 @@ const SingleProduct = (props) => {
 
   const AddtoCart = async () => {
     if (!Userdata == []) {
-      //  this block is not working
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
         headers: {
@@ -333,7 +312,6 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-        //history.push("/Cart");
         toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 1000,
@@ -550,7 +528,6 @@ const SingleProduct = (props) => {
             })
               .then((res) => res.json())
               .then(async (data) => {
-                // setWishlist(data.data[0]);
                 let wishlist = document.getElementById(productid);
                 wishlist.classList.add("wishlisted");
                 getWishlist();
@@ -585,7 +562,6 @@ const SingleProduct = (props) => {
               })
                 .then((res) => res.json())
                 .then(async (data) => {
-                  // setWishlist(data.data[0]);
                   let wishlist = document.getElementById(productid);
                   wishlist.classList.add("wishlisted");
                   getWishlist();
@@ -1065,7 +1041,6 @@ const SingleProduct = (props) => {
             <hr className="hr"></hr>
           </div>
         </div>
-        {/* Related product heading for phone view */}
         <div className="row relate-product1">
           <div className="col-12">
             <div className="row related">
@@ -1073,7 +1048,6 @@ const SingleProduct = (props) => {
             </div>
           </div>
         </div>
-        {/* End Related product heading for phone view */}
         <div id="columns" className="columns_5 d-flex justify-content-between related-Prod-single-product">
           {AllProduct.map((el, ind1) => {
             if (ind1 < 5) {
@@ -1082,7 +1056,6 @@ const SingleProduct = (props) => {
                   <figure className="figure1 single-product-figure">
                     <Link Link to={"/SingleProduct/" + el._id}>
                       <div>
-                        {/* {Categorydetails.image!==undefined? */}
                         <img
                           src={`${baseUrl}/` + el.image[0].path}
                           onClick={() => relatedImageHandler(el._id)}
@@ -1093,7 +1066,6 @@ const SingleProduct = (props) => {
                         </figcaption>
                       </div>
                     </Link>
-                    {/* :null} */}
 
                     <div className="allproduct-price-div">
                     

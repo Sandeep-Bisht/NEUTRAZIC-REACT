@@ -8,6 +8,7 @@ var Userdata;
 const CategoryCreation = (props) => {
   var categoryCount = 0;
   const [categories, setCategories] = useState([]);
+  const [update, setUpdate] = useState(false);
   const [formerror, setFormerror] = useState({});
   const [data, Setdata] = useState({
     name: "",
@@ -42,13 +43,12 @@ const CategoryCreation = (props) => {
       await formData.append("featuredCategories", data.featuredCategories);
       await formData.append("image", data.image);
       const url = `${baseUrl}/api/category/add_category`;
-
       await fetch(url, {
         method: "POST",
         body: formData,
       })
         .then((res) => {
-          res.json();
+          res.json()
           history.push("/Configuration/" + "AllCategoriesDetails");
         })
         .then((res) => {
@@ -59,6 +59,7 @@ const CategoryCreation = (props) => {
         .catch((err) => console.log(err));
     }
   };
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
@@ -72,6 +73,7 @@ const CategoryCreation = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
+        Setdata({ ...data, image: data.image });
       })
       .catch((err) => {
         console.log(err, "error");
@@ -92,7 +94,7 @@ const CategoryCreation = (props) => {
       body: formData,
     })
       .then((res) => {
-        res.json();
+        res.json()
         history.push("/Configuration/" + "AllCategoriesDetails");
       })
       .then(async (data) => {
@@ -103,11 +105,6 @@ const CategoryCreation = (props) => {
       });
   };
 
-  const columns = [
-    { title: "SR NO", data: "sr_no" },
-    { title: "Category Name", data: "name" },
-    { title: "Action", data: "Action" },
-  ];
 
   return (
     <>
@@ -130,6 +127,7 @@ const CategoryCreation = (props) => {
                             <input
                               type="file"
                               className="form-control Dashborad-search"
+                              // onChange={SelectImage}
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
@@ -142,17 +140,13 @@ const CategoryCreation = (props) => {
                               id="floatingInputValue"
                               className="form-control Dashborad-search"
                               placeholder="Category Name"
-                              defaultValue={
-                                editableData ? editableData.name : ""
-                              }
+                              defaultValue={editableData ? editableData.name : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
                             <p className="formerror">{formerror.name}</p>
-                            <label for="floatingInputValue">
-                              Category Name
-                            </label>
+                            <label for="floatingInputValue">Category Name</label>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <textarea
@@ -164,37 +158,29 @@ const CategoryCreation = (props) => {
                                 editableData ? editableData.description : ""
                               }
                               onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  description: e.target.value,
-                                });
+                                Setdata({ ...data, description: e.target.value });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">
-                              Category Description
-                            </label>
+                            <label for="floatingInputValue">Category Description</label>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <select
                               className="form-control Dashborad-search"
                               onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  featuredCategories: e.target.value,
-                                });
+                                Setdata({ ...data, featuredCategories: e.target.value });
                               }}
                             >
                               <option>Select Category Type</option>
                               <option value="Featured Categories">
                                 Featured Categories
                               </option>
+                              {/* <option></option> */}
                             </select>
-                            <p className="formerror">
-                              {formerror.featuredCategories}
-                            </p>
+                            <p className="formerror">{formerror.featuredCategories}</p>
                           </div>
                           {editableData ? (
                             <div className="col-12 p-1">
+
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => UpdateCategory(e, data._id)}

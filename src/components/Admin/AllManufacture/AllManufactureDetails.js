@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Table, Typography, Popconfirm, Space } from "antd";
+import { Table, Input, Typography, Popconfirm, Space } from "antd";
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
-import { BiSearchAlt } from "react-icons/bi";
+import { BiSearchAlt } from 'react-icons/bi';
 import DashboardHeaader from "../DashboardHeaader";
-import { Link } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
-import { MdOutlineEditNote } from "react-icons/md";
-import { MdPlaylistAdd } from "react-icons/md";
+import { Link } from 'react-router-dom'
+import { FaTrashAlt } from 'react-icons/fa';
+import { MdOutlineEditNote } from 'react-icons/md';
+import { MdPlaylistAdd } from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
 
+
+
 export default function AllManufactureDetails() {
-  const [getuser, setGetuser] = useState([]);
+  const [getuser, setGetuser] = useState([])
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [filteredData] = useState([]);
@@ -22,7 +24,10 @@ export default function AllManufactureDetails() {
   useEffect(() => {
     fetchUsers();
     GetManufacturer();
-  }, []);
+  }, [])
+
+
+
 
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
@@ -49,24 +54,24 @@ export default function AllManufactureDetails() {
     if (e.target.value == "") {
       fetchUsers();
     }
-  };
+  }
 
   const searchHandler = () => {
     const filteredData = getuser.filter((value) => {
       return value.name.toLowerCase().includes(searchVal.toLowerCase());
-    });
+    })
     setGetuser(filteredData);
-  };
+  }
 
   const handleDelete = async (_id) => {
     try {
-      const DeletedData = await axios.delete(
-        `${baseUrl}/api/manufacture/delete_manufacturer_by_id`,
-        { data: { _id: _id } }
-      );
+      const DeletedData = await axios.delete(`${baseUrl}/api/manufacture/delete_manufacturer_by_id`, { data: { _id: _id } });
       fetchUsers();
-    } catch (error) {}
-  };
+    } catch (error) {
+    }
+
+  }
+
 
   const columns = [
     {
@@ -97,13 +102,7 @@ export default function AllManufactureDetails() {
               title="Sure to delete?"
               onConfirm={() => handleDelete(record._id)}
             >
-              <a
-                className="delete-icon-wrap"
-                title="Delete"
-                style={{ color: "blue" }}
-              >
-                <FaTrashAlt />
-              </a>
+              <a className="delete-icon-wrap" title="Delete" style={{ color: "blue" }}><FaTrashAlt /></a>
             </Popconfirm>
             <Typography.Link>
               <Link
@@ -113,7 +112,7 @@ export default function AllManufactureDetails() {
                     ...record,
                   },
                 }}
-                className="edit-icon-wrap"
+                className='edit-icon-wrap'
                 title="Edit"
                 style={{ color: "blue" }}
               >
@@ -123,10 +122,15 @@ export default function AllManufactureDetails() {
           </Space>
         ) : null,
     },
+
   ];
+
+
+
 
   return (
     <>
+
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
@@ -136,33 +140,26 @@ export default function AllManufactureDetails() {
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="all-manufacture-details-section">
-                <h3 className="all-manufacturer-head">
-                  All Manufacturer <span className="count">{Manufacturer}</span>
-                </h3>
+                <h3 className="all-manufacturer-head">All Manufacturer <span className="count">{Manufacturer}</span></h3>
                 <div className="all-manufacturer-search-wrap">
                   <Link to="/Manufacturer" className="add-icon">
-                    <MdPlaylistAdd />
-                    Add
+                    <MdPlaylistAdd />Add
                   </Link>
                   <input
-                    type="text"
-                    onChange={(e) => onChangeHandler(e)}
+                    type='text'
+                    onChange={e => onChangeHandler(e)}
                     onKeyUp={searchHandler}
                     placeholder="Search.."
                     enterButton
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
-                  <button type="button" className="dashboard-search-btn">
-                    <BiSearchAlt />
-                  </button>
+                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
                 </div>
               </div>
 
               <Table
                 rowKey="name"
-                dataSource={
-                  filteredData && filteredData.length ? filteredData : getuser
-                }
+                dataSource={filteredData && filteredData.length ? filteredData : getuser}
                 columns={columns}
                 loading={loading}
                 pagination={false}

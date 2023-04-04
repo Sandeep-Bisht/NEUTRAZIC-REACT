@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
+import $ from "jquery";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import axios from "axios";

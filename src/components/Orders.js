@@ -1,7 +1,4 @@
 import React from "react";
-import Baseline from "./Baseline";
-import Footer from "./Footer";
-import { Link } from "react-router-dom";
 import "../components/singleproduct.css";
 const Orders = () => {
   return (

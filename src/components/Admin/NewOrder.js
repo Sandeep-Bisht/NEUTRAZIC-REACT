@@ -4,15 +4,9 @@ import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import { BiSearchAlt } from "react-icons/bi";
-import {  useHistory } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
-import {
-  Table,
-  Space,
-  Dropdown,
-  Modal,
-  Button,
-} from "antd";
+import {useHistory} from "react-router-dom";
+import { DownOutlined } from '@ant-design/icons';
+import { Table,  Space, Dropdown, Modal, Button,} from "antd";
 
 const NewOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -64,6 +58,7 @@ const NewOrder = () => {
         console.log(err, "error");
       });
   };
+
 
 
   const onChangeHandler = (e) => {

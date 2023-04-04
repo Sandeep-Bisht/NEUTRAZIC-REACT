@@ -104,18 +104,11 @@ const ContactUs = () => {
                           <label>Full Name</label>
                           <input
                             type="text"
-                            // name="name"
                             className="form-control"
                             id="name"
                             {...register("fullname", {
-                              // required: true,
                             })}
                           />
-                          {/* {errors?.fullname?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )} */}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -127,21 +120,9 @@ const ContactUs = () => {
                             className="form-control"
                             id="email"
                             {...register("email", {
-                              // required: true,
-                              // pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                             })}
-                            // data-error="Please enter your email"
                           />
-                          {/* {errors?.email?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )}
-                          {errors?.email?.type === "pattern" && (
-                            <p className="text-danger">
-                              Please enter the valid Email
-                            </p>
-                          )} */}
+                          
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -149,20 +130,13 @@ const ContactUs = () => {
                           <label>Mobile No.</label>
                           <input
                             type="number"
-                            // name="phone_number"
                             className="form-control"
                             id="phone_number"
                             {...register("mobilenumber", {
-                              // required: true,
                             })}
-                            // data-error="Please enter your phone number"
                             maxLength={10}
                           />
-                          {/* {errors?.mobilenumber?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )} */}
+                          
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -170,18 +144,12 @@ const ContactUs = () => {
                           <label>Subject</label>
                           <input
                             type="text"
-                            // name="subject"
                             className="form-control"
                             id="subject"
                             {...register("subject", {
-                              // required: true,
                             })}
                           />
-                          {/* {errors?.subject?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )} */}
+                          
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12">

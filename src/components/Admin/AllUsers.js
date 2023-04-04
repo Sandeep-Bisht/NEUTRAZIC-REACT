@@ -57,24 +57,6 @@ const handleDelete=async (_id)=>{
   }
   
 }
-const UpdateUserStatus = async (userId, userStatus) => {
-  console.log(userId,"id inside the userProfile updateuserProfiles");
-    console.log("function  chlra hai hmara");
-  try {
-    const response = await fetch(`${baseUrl}/api/auth/update_user_by_id`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...userId, userStatus:userStatus }),
-    });
-    const data = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 
 
 const columns = [

@@ -5,9 +5,7 @@ import {Link} from "react-router-dom"
 var Userdata = " ";
 
 function DashboardHeaader() {
-  
-
-  useEffect(() => {
+useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   },[]);
 

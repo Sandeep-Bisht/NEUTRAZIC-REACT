@@ -73,29 +73,6 @@ const InProgressOrder = () => {
         console.log(err, "error");
       });
   };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetOrders();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders);
-  };
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -286,7 +263,6 @@ const InProgressOrder = () => {
                   type="text"
                   className="form-control"
                   value={shippedOrder.postal_code}
-                  //aria-describedby="emailHelp"
                 />
               </div>
               <div class="col-md-4 mb-3">

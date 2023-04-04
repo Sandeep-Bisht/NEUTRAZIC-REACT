@@ -740,19 +740,7 @@ const HomePage = () => {
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
-            <div className="row mt-0 featured-products">
-              {/* <Carousel // breakPoints={breakPoints}
-                disableAutoPlay
-                autoPlaySpeed={2000}
-                itemsToShow={1}
-                onPrevStart={onPrevStart}
-                onNextStart={onNextStart}
-                infiniteLoop={true}
-                // onChange={Loop}
-                ref={carouselRef}
-                disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
-                > */} 
+            <div className="row mt-0 featured-products"> 
               <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&

@@ -18,7 +18,6 @@ export default function AllCategoriesDetails() {
   const [filteredData] = useState([]);
   const [categories, setCategories] = useState("");
 
-  const { Search } = Input;
 
   const history = useHistory();
 

@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Sidemenu from "./Sidemenu";
-import "./Dashboard.css";
-import { baseUrl } from "../../utils/services";
-import DashboardHeaader from "./DashboardHeaader";
-import {
-  Table,
-  Modal,
-  Button,
-} from "antd";
+import React, { useEffect, useState } from 'react';
+import Sidemenu from './Sidemenu';
+import './Dashboard.css';
+import { baseUrl } from '../../utils/services';
+import DashboardHeaader from './DashboardHeaader';
+import { Table, Modal, Button } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
@@ -35,12 +31,14 @@ const DeliveredOrder = () => {
             arr.push(item);
           }
         }
-        setOrderDetails(arr);
-      })
+        setOrderDetails(arr)
+
+      }
+      )
       .catch((err) => {
         console.log(err, "errors");
       });
-  };
+  }
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -127,7 +125,7 @@ const DeliveredOrder = () => {
                             ></img>
                           </div>
                         </td>
-                        <td>{item.name}</td>
+                        <td >{item.name}</td>
                         <td>{item.singleprice}</td>
                       </tr>
                     </>

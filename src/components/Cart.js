@@ -13,7 +13,6 @@ import { message, Popconfirm } from "antd";
 import "../views/landing/homepage.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
-// import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 
@@ -33,7 +32,6 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState(undefined);
 
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
   const state1 = useContext(CurrencyContext);
   
   useEffect(() => {
@@ -94,7 +92,6 @@ const Cart = () => {
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
-
           dispatch(ACTIONS.getCartItem(cartItems));
           Set_id(data.data[0]._id);
         })

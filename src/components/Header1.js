@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useStateValue } from "../state";
-import { logout } from "../state/auth/actions";
 import { Modal } from "antd";
-
 import "../components/Header1.css";
 import "../components/Carouselcomp";
 import $ from "jquery";
-import b from "./Admin/CategoryCreation";
-import Carouselcomp from "../components/Carouselcomp";
-import Cart from "./Cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { MdOutlineClose } from "react-icons/md";
-//import Button from './button';
 import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
@@ -23,7 +16,6 @@ import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
-import { IoClose } from "react-icons/io5";
 
 let changeNavValue = 0;
 var header;
@@ -40,14 +32,11 @@ const Header1 = (props) => {
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
 
-  // let history=useHistory();
   const history = useHistory();
   const [search, setSearch] = useState("");
-  // const [email, setemail] = useState("");
   const [subcategories, setSubCategories] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [repassword, setRePassword] = useState("");
   let [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
   const [msg, setMsg] = useState("");
@@ -437,7 +426,6 @@ const Header1 = (props) => {
     }
   };
   const AddtoCart = async () => {
-    //  debugger
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
@@ -500,8 +488,6 @@ const Header1 = (props) => {
   };
   return (
     <>
-      {/* sidebar Modal */}
-      {/* <!-- Modal --> */}
       <div
         className="modal left fade"
         id="myModal"
@@ -781,7 +767,6 @@ const Header1 = (props) => {
                                       This field is required
                                     </p>
                                   )}
-                                  {/* <h5 className="Login-fail-msg">{regmsg}</h5> */}
                                 </div>
                               </div>
                             </div>
@@ -1029,9 +1014,6 @@ const Header1 = (props) => {
         ) : (
           ""
         )}
-
-        {/* End login register Modal  */}
-        {/* Logo div */}
         <div className="newheader">
           <div className="row mt-0 top-header-padding">
             <div className="col-md-12">
@@ -1123,10 +1105,6 @@ const Header1 = (props) => {
                           </>
                         ) : (
                           <>
-                            {/* <span className="sp" style={{ cursor: "pointer" }}>
-                      Account
-                    </span> */}
-                            {/* <br /> */}
                             <div className="dropdown">
                               <button
                                 className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn"
@@ -1216,7 +1194,6 @@ const Header1 = (props) => {
                             )}
                             <span className="sp">Cart</span>
                             <br />
-                            {/* <span className="Sp1">₹ 0.0</span> */}
                           </div>
                         </div>
                       </Link>
@@ -1229,9 +1206,7 @@ const Header1 = (props) => {
                             <div className="option-item">
                               <div className="cart-btn">
                                 {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                {/* <Link to="/Ordered"> */}
                                 <i className="bx bx-heart"></i>
-                                {/* </Link> */}
                               </div>
                             </div>
                           </div>

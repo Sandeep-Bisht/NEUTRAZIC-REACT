@@ -32,14 +32,9 @@ const InProgressOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        let arr = [];
-        for (let item of data.data) {
-          if (item.orderStatus == "In-Progress") {
-            arr.push(item);
-          }
-        }
-        setOrderDetails(arr);
-      })
+        setOrders(data.data)
+      }
+      )
       .catch((err) => {
         console.log(err, "errors");
       });
@@ -64,7 +59,29 @@ const InProgressOrder = () => {
         console.log(err, "error");
       });
   };
+  const DeleteOrder = async (productId) => {
+    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
+      method: "delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: productId,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        GetOrders();
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  };
 
+  const CaptureDetails = (orders) => {
+    setOrderDetails(orders);
+  };
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -77,6 +94,23 @@ const InProgressOrder = () => {
     });
     setOrders(filteredData);
   };
+  const data1 = [];
+  {
+    orders.map((item, index) => {
+      if (item.status.includes('InProgressOrder') || item.status.includes('In Progress')) {
+
+        data1.push({
+          "sr_no": index + 1, "name": item.username, "Mobile": item.mobile, "Addtionalnumber": item.othermobile, "Address": item.address, "actualamount": item.actualamount, "totalamount": item.totalamount, "status": <select value={item.status} onChange={(e) => UpdateOrderStatus(item._id, e.target.value)}>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In progress</option>
+            <option value="Delivered">Delivered</option>
+          </select>, "Action": <><button onClick={() => DeleteOrder(item._id)}><i className="bx bx-trash"></i></button>
+            <button className="ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => CaptureDetails(JSON.parse(item.order))}><i className='bx bx-show-alt'></i></button>
+          </>
+        })
+      }
+    })
+  }
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
@@ -110,7 +144,7 @@ const InProgressOrder = () => {
                   key: "2",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item, "Packed")}>
-                      Move for Packing
+                     Move for Packing
                     </a>
                   ),
                 },
@@ -155,56 +189,58 @@ const InProgressOrder = () => {
   return (
     <>
       {/* table modal */}
-
-      <div>
-        <Modal
-          title="Order Details"
-          visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {prticularUserOrder &&
-                prticularUserOrder.length > 0 &&
-                prticularUserOrder.map((item, ind) => {
-                  return (
-                    <>
-                      <tr key={ind}>
-                        <td className="width-adjust-of-td">
-                          <div className="width-adjust-of-image">
-                            <img
-                              onClick={() => imageHandler(item.productid)}
-                              style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image}`}
-                            ></img>
-                          </div>
-                        </td>
-                        <td>{item.name}</td>
-                        <td>{item.singleprice}</td>
+     
+              <div>
+                <Modal
+                  title="Order Details"
+                  visible={isModalVisible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
                       </tr>
-                    </>
-                  );
-                })}
-            </tbody>
-          </table>
-        </Modal>
-      </div>
-
+                    </thead>
+                    <tbody>
+                      {prticularUserOrder &&
+                        prticularUserOrder.length > 0 &&
+                        prticularUserOrder.map((item,ind) => {
+                          return (
+                            <>
+                              <tr key={ind}>
+                                <td className="width-adjust-of-td">
+                                  <div className="width-adjust-of-image">
+                                    <img
+                                      onClick={() =>
+                                        imageHandler(item.productid)
+                                      }
+                                      style={{ cursor: "pointer" }}
+                                      src={`${baseUrl}/${item.image}`}
+                                    ></img>
+                                  </div>
+                                </td>
+                                <td>{item.name}</td>
+                                <td>{item.singleprice}</td>
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </Modal>
+              </div>
+            
       {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
           <div className="row px-0 dashboard-container">
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
-              <Sidemenu />
+              <Sidemenu/>
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">
