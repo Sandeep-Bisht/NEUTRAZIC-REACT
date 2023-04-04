@@ -2,10 +2,6 @@ import React, { useState,useEffect } from "react";
 import { Pie } from '@ant-design/plots';
 import { baseUrl } from "../utils/services";
 
-
-
-
-
 const PieChart = () => {
 
   const [pending,setPending]=useState();

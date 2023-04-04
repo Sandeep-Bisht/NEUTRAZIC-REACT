@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import "./homepage.css";
 import "../../sass/whislist.css";
-import Carouselcomp from "../../components/Carouselcomp";
 import Baseline from "../../components/Baseline";
 import Header1 from "../../components/Header1";
 import { useHistory } from "react-router-dom";
@@ -741,19 +740,7 @@ const HomePage = () => {
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
-            <div className="row mt-0 featured-products">
-              {/* <Carousel // breakPoints={breakPoints}
-                disableAutoPlay
-                autoPlaySpeed={2000}
-                itemsToShow={1}
-                onPrevStart={onPrevStart}
-                onNextStart={onNextStart}
-                infiniteLoop={true}
-                // onChange={Loop}
-                ref={carouselRef}
-                disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
-                > */} 
+            <div className="row mt-0 featured-products"> 
               <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&

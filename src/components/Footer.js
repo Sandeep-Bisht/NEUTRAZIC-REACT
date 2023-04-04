@@ -2,12 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../views/landing/homepage.css";
 const Footer = () => {
-// Contact Page scroll
 const ContactHandler=()=>{
   window.scroll(0,0);
 }
 
-// WishlistHandler page scroll
 const WishlistHandler=()=>{
   window.scroll(0,0);
 }
@@ -120,12 +118,6 @@ const WishlistHandler=()=>{
                   <li>
                     <Link to="/support">Need Support?</Link>
                   </li>
-                  {/* <li>
-                    <a href="contact.html">Newsletter</a>
-                  </li> */}
-                  {/* <li>
-                    <Link to="/returnRefund">Purchasing Policy</Link>
-                  </li> */}
                 </ul>
               </div>
             </div>

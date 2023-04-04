@@ -75,89 +75,7 @@ const ProductByManufacturer = (props) => {
         console.log(err, "error");
       });
   };
-  const cartfunction = async (
-    productid,
-    name,
-    quantity,
-    mrp,
-    discount,
-    description,
-    category,
-    manufacturer,
-    image
-  ) => {
-    if (quantity !== 0) {
-      var merged = false;
-      var newItemObj = {
-        productid: productid,
-        name: name,
-        image: image,
-        quantity: quantity,
-        mrp: parseInt(mrp),
-        singleprice: parseInt(mrp),
-        discountprice: discount,
 
-        category: category,
-        manufacturer: manufacturer,
-        description: description,
-      };
-      if (userCart.order == null || userCart.order == []) {
-        for (var i = 0; i < order.length; i++) {
-          if (order[i].productid == newItemObj.productid) {
-            order[i].quantity += newItemObj.quantity;
-            order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
-            merged = true;
-            setQuantity(1);
-          }
-        }
-        if (!merged) {
-          order.push(newItemObj);
-          setQuantity(1);
-          await AddtoCart();
-          await CartById();
-        }
-      } else {
-        for (var i = 0; i < userCart.order.length; i++) {
-          if (userCart.order[i].productid == newItemObj.productid) {
-            userCart.order[i].quantity += newItemObj.quantity;
-            userCart.order[i].mrp += newItemObj.mrp;
-            merged = true;
-          } else {
-            merged = false;
-          }
-          setQuantity(1);
-        }
-        if (!merged) {
-          userCart.order.push(newItemObj);
-        }
-        setQuantity(1);
-        CartById();
-        UpdateCart();
-
-      }
-    }
-  };
-  const UpdateCart = () => {
-    const url = `${baseUrl}/api/cart/update_cart_by_id`;
-    fetch(url, {
-      method: "put",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: userCart._id,
-        userid: Userdata._id,
-        order: userCart.order,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        history.push("/Cart");
-      })
-      .then((err) => console.log(err));
-  };
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
@@ -179,30 +97,7 @@ const ProductByManufacturer = (props) => {
         });
     }
   };
-  const AddtoCart = async () => {
-    if (!Userdata == []) {
-      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: Userdata._id,
-          order: order,
-        }),
-      })
-        .then((res) => res.json())
-        .then(async (data) => {
-          setUserCart(data.data);
-          history.push("/Cart");
-        })
-        .catch((err) => {
-          console.log(err, "error");
-        });
-    }
-    
-  };
+  
   const AddtoWishlist = async (
     productid,
     name,

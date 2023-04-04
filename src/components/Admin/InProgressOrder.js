@@ -5,17 +5,13 @@ import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
-  Input,
   Space,
-  Popconfirm,
   Modal,
   Button,
-  Typography,
   Dropdown,
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { MdPlaylistAdd } from "react-icons/md";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const InProgressOrder = () => {
