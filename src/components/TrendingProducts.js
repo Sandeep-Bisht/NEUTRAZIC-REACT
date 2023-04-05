@@ -61,7 +61,6 @@ const TrengingProduct = (props) => {
     GetCategory();
     GetSubCategory();
     GetManufacturer();
-    // GetCategory();
   }, [loginState]);
 
   const cartfunction = async (
@@ -503,10 +502,10 @@ const TrengingProduct = (props) => {
                   );
                 })}
               </div>
-              <div className="wrapperbtn pt-3 pb-4">
+              <div className="wrapperbtn pt-0">
                 <Link to="/AllProducts">
                   <button type="button" className="btn10">
-                    Show More
+                    Show All
                   </button>
                 </Link>
               </div>

@@ -80,7 +80,7 @@ const Blog = (props) => {
                     <div className="row">
                       <div className="col-6 p-1 m-2 form-floating">
                         <input
-                          maxLength={40}
+                        maxLength={80}
                           type="text"
                           id="floatingInputValue"
                           className="form-control Dashborad-search"
