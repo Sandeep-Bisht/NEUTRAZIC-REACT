@@ -82,10 +82,6 @@ const Root = (props) => {
   useEffect(()=>{
 
   },[])
-  // const initialState = {
-  //   auth: AUTH_INITIAL_STATE,
-  //   product: PRODUCT_INITIAL_STATE,
-  // };
   const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
       {...rest}
@@ -100,8 +96,6 @@ const Root = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
   return (
-    // <StateProvider initialState={initialState} reducer={reducers}>
-      /* <BaseStyles /> */
       <CurrencyState>
       <Provider store={store}>
       <Router>
@@ -116,12 +110,6 @@ const Root = (props) => {
             <Route exact path="/mobileapp" component={AppStoreNutrazik}/>
             <Route exact path={"/Configuration/"+"AllWarehouseDetails"} component={AllWarehouseDetails} />
             <Route exact path="/userOrder" component={userOrder} />
-
-            {/* <Route exact path="/" component={HomePage} /> */}
-            {/* <PrivateRoute path="/home" component={Home} /> */}
-            {/* <Route exact path="/Register" component={Register} /> */}
-            {/* {Userdata!=undefined? Userdata.role=="superAdmin" ||Userdata.role=="Manager"||Userdata.role=="Vender"? */}
-
             <Route exact path="/Dashboard" component={Dashboard}/>
             <Route exact path="/Productform" component={Productform}/>
             <Route exact path="/Category" component={CategoryCreation}/>

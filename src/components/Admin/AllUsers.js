@@ -9,8 +9,6 @@ import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} 
 import {BiSearchAlt} from 'react-icons/bi';
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdOutlineEditNote} from 'react-icons/md';
-import {MdPlaylistAdd} from 'react-icons/md';
-import { DownOutlined } from '@ant-design/icons';
 
 const UserPage = () => {
 
@@ -23,7 +21,6 @@ useEffect(()=>{
   GetUserData();
 },[]);
 
-//Getting Userdata//
 
 const GetUserData = async()=>{
 await fetch(`${baseUrl}/api/auth/allusers`)
@@ -60,24 +57,6 @@ const handleDelete=async (_id)=>{
   }
   
 }
-const UpdateUserStatus = async (userId, userStatus) => {
-  console.log(userId,"id inside the userProfile updateuserProfiles");
-    console.log("function  chlra hai hmara");
-  try {
-    const response = await fetch(`${baseUrl}/api/auth/update_user_by_id`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...userId, userStatus:userStatus }),
-    });
-    const data = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 
 
 const columns = [
@@ -127,39 +106,7 @@ const columns = [
         </Space>
       ) : null,
   },
-  // {
-  //   title: "Status", 
-  //   render: (a, item) => (
-  //     <Space size="middle">
-  //       <Dropdown
-  //         menu={{
-  //           items: [
-  //             {
-  //               key: '1',
-  //               label: (
-  //                 <a onClick={() =>UpdateUserStatus(item,"Activate")}>
-  //                 Activate
-  //                 </a>
-  //               ),
-  //             },
-  //             {
-  //               key: '2',
-  //               label: (
-  //                 <a onClick={() =>UpdateUserStatus(item,"De-Activate")}>
-  //                   De-Activate
-  //                 </a>
-  //               ),
-  //             },
-  //           ],
-  //         }}
-  //       >
-  //         <a>
-  //           Status <DownOutlined />
-  //         </a>
-  //       </Dropdown>
-  //     </Space>
-  //   ),
-  // },
+ 
   {
     title: "User Status",
     dataIndex: "userStatus",

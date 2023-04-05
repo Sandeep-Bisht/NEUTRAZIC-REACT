@@ -67,7 +67,6 @@ const MyAccount = () => {
                         rows="3"
                         {...register("address", { required: false })}
                       />
-                      {/* {errors?.address?.type === "required" && <p className="text-danger">This field is required</p>} */}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Pincode:</p>
@@ -84,7 +83,6 @@ const MyAccount = () => {
                         maxLength={6}
                         {...register("pincode", { required: false })}
                       />
-                      {/* {errors?.pincode?.type === "required" && <p className="text-danger">This field is required</p>} */}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Mobile Number:</p>
@@ -93,18 +91,8 @@ const MyAccount = () => {
                         value={data.phonenumber}
                         className="form-control bg-light"
                         rows="3"
-                        name="mobileNumber"
-                      //   maxLength={10}
-                      //   onInput={(e)=>{
-                      //   if(e.target.value.length>e.target.maxLength)
-                      // {
-                      //     e.target.value=e.target.value.slice(0,e.target.maxLength)
-                      // }}}
-                      //   {...register("mobileNumber", { required: true })}
-                      />
-                      {/* {errors?.mobileNumber?.type === "required" && <p className="text-danger">This field is required</p>} */}
-                      
-                    </div>
+                        name="mobileNumber"/>
+                      </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps1">Email:</p>
                       <input
@@ -113,19 +101,7 @@ const MyAccount = () => {
                         value={data.email}
                         rows="3"
                         name="email"
-                        // {...register("email", {
-                        //   required: true,
-                        //   pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                        // })}
                       />
-                      {/* {errors?.email?.type === "required" && (
-                        <p className="text-danger">This field is required</p>
-                      )}
-                      {errors?.email?.type === "pattern" && (
-                        <p className="text-danger">
-                          Please enter the valid Email
-                        </p>
-                      )} */}
                     </div>
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Alternative Number</p>
@@ -143,9 +119,6 @@ const MyAccount = () => {
                         maxLength={10}
                         {...register("alternativeNumber", { required: false })}
                       />
-                      {/* {errors?.alternativeNumber?.type === "required" && (
-                        <p className="text-danger">This field is required</p>
-                      )} */}
                       </div>
 
                     <div className="col-12 d-flex justify-content-center mt-4 p-2">

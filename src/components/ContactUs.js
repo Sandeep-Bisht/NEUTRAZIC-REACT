@@ -39,9 +39,9 @@ const ContactUs = () => {
           <div className="container-fluid contact-container">
             <div className="row">
               <div className="col-lg-3 col-sm-6 col-md-6 contact-card">
-                <div className="single-contact-info-box">
+                <div className="single-contact-info-box contact-address-box">
                   <div className="icon">
-                    <i className="flaticon-placeholder"></i>
+                  <i class='bx bx-location-plus'></i>
                   </div>
                   <h3>Address</h3>
                   <p>
@@ -55,7 +55,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i className="flaticon-phone-ringing"></i>
+                  <i class='bx bx-phone-call'></i>
                   </div>
                   <h3>Phone</h3>
                   <p>
@@ -66,7 +66,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i className="flaticon-email"></i>
+                  <i class='bx bx-envelope'></i>
                   </div>
                   <h3>Email</h3>
                   <p>
@@ -80,9 +80,9 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i className="flaticon-clock"></i>
+                  <i class='bx bx-support' ></i>
                   </div>
-                  <h3>Working Hours</h3>
+                  <h3>Supporting Hours</h3>
                   <p>Monday - Saturday</p>
                   <p>9:30AM - 6:30PM</p>
                 </div>
@@ -104,18 +104,11 @@ const ContactUs = () => {
                           <label>Full Name</label>
                           <input
                             type="text"
-                            // name="name"
                             className="form-control"
                             id="name"
                             {...register("fullname", {
-                              // required: true,
                             })}
                           />
-                          {/* {errors?.fullname?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )} */}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -127,21 +120,9 @@ const ContactUs = () => {
                             className="form-control"
                             id="email"
                             {...register("email", {
-                              // required: true,
-                              // pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                             })}
-                            // data-error="Please enter your email"
                           />
-                          {/* {errors?.email?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )}
-                          {errors?.email?.type === "pattern" && (
-                            <p className="text-danger">
-                              Please enter the valid Email
-                            </p>
-                          )} */}
+                          
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -149,20 +130,13 @@ const ContactUs = () => {
                           <label>Mobile No.</label>
                           <input
                             type="number"
-                            // name="phone_number"
                             className="form-control"
                             id="phone_number"
                             {...register("mobilenumber", {
-                              // required: true,
                             })}
-                            // data-error="Please enter your phone number"
                             maxLength={10}
                           />
-                          {/* {errors?.mobilenumber?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )} */}
+                          
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -170,18 +144,12 @@ const ContactUs = () => {
                           <label>Subject</label>
                           <input
                             type="text"
-                            // name="subject"
                             className="form-control"
                             id="subject"
                             {...register("subject", {
-                              // required: true,
                             })}
                           />
-                          {/* {errors?.subject?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )} */}
+                          
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12">

@@ -3,7 +3,7 @@
   width: 100%;
   object-fit: cover;
 }
-.blog-box-wrapper{
+.blog-box-wrapper {
   margin-top: 10px;
 }
 
@@ -12,20 +12,12 @@
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 {
   position: absolute;
-  bottom: 10%;
+  bottom: 20%;
   left: 5%;
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
   width: auto;
-  padding: 6px 40px;
-  color: var(--optionalColor);
-  border: 2px solid rgb(27 151 255 / 33%);
-  border-radius: 0.25rem;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-}
-.blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button:hover {
+  padding: 10px 25px;
   background: linear-gradient(
     90deg,
     rgb(44 160 255 / 53%) 0%,
@@ -33,13 +25,31 @@
   );
   border: none;
   color: #fff;
+  border-radius: 0.3rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  position: absolute;
+  top: 100%;
+}
+.blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 53%) 0%,
+    rgba(255, 255, 255, 1) 50%
+  );
+  border: 2px solid rgba(23, 150, 255);
+  color: rgba(0, 0, 0, 0.6);
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
   color: #fff;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 10px;
   font-weight: 600;
   letter-spacing: 0.25px;
+  line-height: 2;
+  width:80%;
+  
 }
 
 .right-blog-image-wrapper img {
@@ -54,19 +64,31 @@
 .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2,
 .top-heading-box-3 {
   position: absolute;
-  bottom: 10%;
+  bottom: 20%;
   left: 5%;
 }
 .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button,
 .top-heading-box-3 button {
   width: auto;
-  padding: 6px 40px;
-  color: var(--optionalColor);
-  border: 2px solid rgb(27 151 255 / 33%);
-  border-radius: 0.25rem;
+  padding: 10px 25px;
+  background: linear-gradient(
+    90deg,
+    rgb(44 160 255 / 53%) 0%,
+    rgba(23, 150, 255, 1) 100%
+  );
+  border: none;
+  color: white;
+  border-radius: 0.3rem;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
+  position: absolute;
+  top: 100%;
+}
+.blog-text-div {
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
 }
 .right-blog-image-wrapper
   .right-blog-image-wrap
@@ -75,11 +97,11 @@
 .top-heading-box-3 button:hover {
   background: linear-gradient(
     90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
+    rgb(255 255 255 / 53%) 0%,
+    rgba(255, 255, 255, 1) 50%
   );
-  border: none;
-  color: #fff;
+  border: 2px solid rgba(23, 150, 255);
+  color: rgba(0, 0, 0, 0.6);
 }
 .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
 .top-heading-box-3 p {
@@ -121,7 +143,7 @@
 .blog-page {
   margin-top: 130px;
 }
-.cart-text-body .card-text{
+.cart-text-body .card-text {
   font-size: 12px !important;
 }
 /* / Single-blog-css / */
@@ -174,6 +196,22 @@
   .blog-page {
     margin-top: 175px;
   }
+  .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
+  .top-heading-box-3 p {
+    font-size: 13px !important;
+  }
+  .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
+    font-size: 14px;
+  }
+  .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button,
+  .top-heading-box-3 button {
+    padding: 4px 12px;
+    font-size: 10px;
+  }
+  .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
+    padding: 4px 20px;
+    font-size: 12px;
+  }
 }
 @media only screen and (max-width: 767.5px) {
   .blog-box-wrapper .left-blog-image-wrap img {
@@ -182,7 +220,14 @@
     margin-left: 1%;
     width: 100%;
   }
-
+  .blog-text-div {
+    top: 8%;
+    height: 92%;
+  }
+  .left-blog-image-wrap .blog-text-div {
+    left: 1%;
+    height: 89%;
+  }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
     padding: 6px 14px;
     font-size: 12px;
@@ -205,7 +250,7 @@
   }
   .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
   .top-heading-box-3 p {
-    font-size:13px!important;
+    font-size: 13px !important;
   }
   .blog-page {
     margin-top: 129px;
@@ -251,6 +296,12 @@
     .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p{
         font-size: 0.8rem;
     } */
+    .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button{
+      padding: 4px 15px !important;
+    }
+    .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button, .top-heading-box-3 button{
+      padding: 4px 15px !important;
+    }
   .blog-box-wrapper .col-md-5 {
     display: block;
   }

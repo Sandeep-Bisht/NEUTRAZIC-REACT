@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "./Footer";
-import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,7 +9,6 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 // import Cookies from "universal-cookie";
@@ -201,10 +199,6 @@ const TrengingProduct = (props) => {
     
   };
 
-  const FilterItems = (item) => {
-    setFilter(item);
-  };
-
   const ProductByCategory = async () => {
     await fetch(`${baseUrl}/api/product/all_product?_page=&_limit=10`)
       .then((res) => res.json())
@@ -374,7 +368,6 @@ const TrengingProduct = (props) => {
         }
       });
   };
-  // allcategory api //
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -385,9 +378,6 @@ const TrengingProduct = (props) => {
         console.log(err, "error");
       });
   };
-  // End All Category API//
-
-  // SubCategory API //
   const GetSubCategory = async () => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
@@ -398,8 +388,7 @@ const TrengingProduct = (props) => {
         console.log(err, "error");
       });
   };
-  // End Subcategory //
-  // Manufacturer API //
+  
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -410,47 +399,9 @@ const TrengingProduct = (props) => {
         console.log(err, "errors");
       });
   };
-  // const openNav = () => {
-  //   document.getElementById("mySidenav").style.width = "300px";
-  // };
-  // const closeNav = () => {
-  //   document.getElementById("mySidenav").style.width = "0";
-  // };
-  // End Manufacturer API //
-
   return (
     <>
       <Header1 />
-      {/* <div id="__next">
-        <div className="search-overlay null">
-          <div className="d-table">
-            <div className="d-table-cell">
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-close">
-                <span className="search-overlay-close-line"></span>
-                <span className="search-overlay-close-line"></span>
-              </div>
-              <div className="search-overlay-form">
-                <form>
-                  <input
-                    type="text"
-                    className="input-search"
-                    placeholder="Search here..."
-                    name="search"
-                    value=""
-                  />
-                  <button type="submit">
-                    <i className="bx bx-search-alt"></i>
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       <div className="container m-auto Category-div">
         <div className="row align-items-center">
           <div className="col-12">
@@ -466,12 +417,10 @@ const TrengingProduct = (props) => {
                     <figure className="figure allproduct-figure" key={ind1}>
                       <Link Link to={"/SingleProduct/" + el._id}>
                         <div>
-                          {/* {Categorydetails.image!==undefined? */}
                           <img src={`${baseUrl}/` + el.image[0].path} />
                         </div>
                         <figcaption>{el.name}</figcaption>
                       </Link>
-                      {/* :null} */}
 
                       <div className="contanier allproduct-price-div">
                         <div className="row">

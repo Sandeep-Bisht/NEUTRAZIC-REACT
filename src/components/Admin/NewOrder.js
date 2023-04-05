@@ -1,54 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import Sidemenu from './Sidemenu';
-import './Dashboard.css';
-import { baseUrl } from '../../utils/services';
-import DashboardHeaader from './DashboardHeaader';
+import React, { useEffect, useState } from "react";
+import Sidemenu from "./Sidemenu";
+import "./Dashboard.css";
+import { baseUrl } from "../../utils/services";
+import DashboardHeaader from "./DashboardHeaader";
 import { BiSearchAlt } from "react-icons/bi";
-import {MdPlaylistAdd} from 'react-icons/md'
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import { DownOutlined } from '@ant-design/icons';
-import { render } from 'react-dom';
-import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button,} from "antd";
+import { Table,  Space, Dropdown, Modal, Button,} from "antd";
 
 const NewOrder = () => {
-  const [orders, setOrders] = useState([])
-  const [OrderDetails, setOrderDetails] = useState([])
+  const [orders, setOrders] = useState([]);
+  const [OrderDetails, setOrderDetails] = useState([]);
   const [filteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  const [PendingOrders,setPendingOrders]=useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
   const history = useHistory();
-
 
   useEffect(() => {
     GetOrders();
   }, []);
 
   const GetOrders = async () => {
-
     await fetch(`${baseUrl}/api/order/all_order`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(async (data) => {
-         let arr=[];
-         for(let item of data.data)
-         {
-            if(item.orderStatus=="Pending")
-
-            {
-               arr.push(item);
-            }
-         }
-         setOrderDetails(arr)
-        
-     
-      }
-      )
+        let arr = [];
+        for (let item of data.data) {
+          if (item.orderStatus == "Pending") {
+            arr.push(item);
+          }
+        }
+        setOrderDetails(arr);
+      })
       .catch((err) => {
         console.log(err, "errors");
       });
-  }
+  };
 
   const UpdateOrderStatus = async (order, orderStatus) => {
     delete order.createdAt;
@@ -64,38 +53,14 @@ const NewOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
-
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-
-        GetOrders();
-
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
 
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders)
 
-  }
+
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -122,32 +87,38 @@ const NewOrder = () => {
     setIsModalVisible(false);
   };
 
-
   const columns = [
-
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
-    { title: "Transaction Id", dataIndex: "transaction_id", key: "transaction_id" },
-    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
-    { title: "Payment Status", dataIndex: "payment_status", key: "payment_status" },
     {
-      title: "Status", 
+      title: "Transaction Id",
+      dataIndex: "transaction_id",
+      key: "transaction_id",
+    },
+    { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
+    {
+      title: "Payment Status",
+      dataIndex: "payment_status",
+      key: "payment_status",
+    },
+    {
+      title: "Status",
       render: (a, item) => (
         <Space size="middle">
           <Dropdown
             menu={{
               items: [
                 {
-                  key: '1',
+                  key: "1",
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item,"Cancel")}>
+                    <a onClick={() => UpdateOrderStatus(item, "Cancel")}>
                       Cancel Order
                     </a>
                   ),
                 },
                 {
-                  key: '2',
+                  key: "2",
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item,"In-Progress")}>
+                    <a onClick={() => UpdateOrderStatus(item, "In-Progress")}>
                       Move to In-progress
                     </a>
                   ),
@@ -171,63 +142,58 @@ const NewOrder = () => {
         </Button>
       ),
     },
-
   ];
-  
+
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
 
-
-
-
-
   return (
     <>
-     {/* table modal */}
-    
-              <div>
-                <Modal
-                  title="Order Details"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <table class="table">
-                    <thead>
-                      <tr>                        
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
+      {/* table modal */}
+
+      <div>
+        <Modal
+          title="Order Details"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {prticularUserOrder &&
+                prticularUserOrder.length > 0 &&
+                prticularUserOrder.map((item, ind) => {
+                  return (
+                    <>
+                      <tr key={ind}>
+                        <td className="width-adjust-of-td">
+                          <div className="width-adjust-of-image">
+                            <img
+                              onClick={() => imageHandler(item.productid)}
+                              style={{ cursor: "pointer" }}
+                              src={`${baseUrl}/${item.image}`}
+                            ></img>
+                          </div>
+                        </td>
+                        <td>{item.name}</td>
+                        <td>{item.singleprice}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {prticularUserOrder &&
-                        prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item,ind) => {
-                          return (
-                            <>
-                              <tr key={ind}>                                
-                                <td className="width-adjust-of-td">
-                                  <div className="width-adjust-of-image">
-                                  <img
-                                    onClick={() => imageHandler(item.productid)}
-                                    style={{ cursor: "pointer" }}
-                                    src={`${baseUrl}/${item.image}`}
-                                  ></img>
-                                  </div>
-                                </td>
-                                <td >{item.name}</td>
-                                <td>{item.singleprice}</td>                                
-                              </tr>
-                            </>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </Modal>
-              </div>
-          
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </Modal>
+      </div>
+
       {/* end modal */}
       <section id="body-pd">
         <div className="container-fluid">
@@ -240,24 +206,27 @@ const NewOrder = () => {
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
                 <div className="all-category-search-wrap">
-                  {/* <Link to="/Category" className="add-icon">
-                    <MdPlaylistAdd />Add
-                  </Link> */}
                   <input
-                    type='text'
-                    onChange={e => onChangeHandler(e)}
+                    type="text"
+                    onChange={(e) => onChangeHandler(e)}
                     onKeyUp={searchHandler}
                     placeholder="Search.."
                     enterButton
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
-                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                  <button type="button" className="dashboard-search-btn">
+                    <BiSearchAlt />
+                  </button>
                 </div>
               </div>
 
               <Table
                 rowKey="name"
-                dataSource={filteredData && filteredData.length ? filteredData : OrderDetails}
+                dataSource={
+                  filteredData && filteredData.length
+                    ? filteredData
+                    : OrderDetails
+                }
                 columns={columns}
                 loading={loading}
                 pagination={false}
@@ -268,6 +237,6 @@ const NewOrder = () => {
       </section>
     </>
   );
-}
+};
 
 export default NewOrder;

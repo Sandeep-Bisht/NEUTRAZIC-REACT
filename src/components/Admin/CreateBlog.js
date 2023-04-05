@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DashboardHeaader from "./DashboardHeaader";
 import Sidemenu from "./Sidemenu";
-import $ from "jquery";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import axios from "axios";
@@ -17,55 +16,53 @@ const Blog = (props) => {
     description: "",
     content: "",
   });
-  useEffect(()=>{
+  useEffect(() => {
     if (editableData) {
       setData(editableData);
     }
-  },[])
+  }, []);
   const history = useHistory();
-const addBlogs = async(e)=>{
-  e.preventDefault();
-  const formData = new FormData();
-  await formData.append("title",data.title);
-  await formData.append("description",data.description);
-  await formData.append("featuredImage",data.featuredImage);
-  await formData.append("content",data.content);
-  await formData.append("slug",slugify(data.title));
-  const url = `${baseUrl}/api/blogs/add_blog`;
+  const addBlogs = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    await formData.append("title", data.title);
+    await formData.append("description", data.description);
+    await formData.append("featuredImage", data.featuredImage);
+    await formData.append("content", data.content);
+    await formData.append("slug", slugify(data.title));
+    const url = `${baseUrl}/api/blogs/add_blog`;
     await fetch(url, {
       method: "POST",
       body: formData,
     })
       .then((res) => {
-        
         res.json();
       })
-      .then((res) => {
-        
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
-      history.push("/AllBlogs");
-}
-const UpdateBlogs = async (e,_id) => {
-  e.preventDefault();
-  const formData = new FormData();
-  await formData.append("_id", data._id);
-  await formData.append("description", data.description);
-  await formData.append("title", data.title);
-  await formData.append("featuredImage", data.featuredImage);
-  await formData.append("content", data.content);
-  await formData.append("slug",slugify(data.title));
-    try{
-      const response = await axios.put(`${baseUrl}/api/blogs/update_slug_by_id`, formData)
-      
+    history.push("/AllBlogs");
+  };
+  const UpdateBlogs = async (e, _id) => {
+    e.preventDefault();
+    const formData = new FormData();
+    await formData.append("_id", data._id);
+    await formData.append("description", data.description);
+    await formData.append("title", data.title);
+    await formData.append("featuredImage", data.featuredImage);
+    await formData.append("content", data.content);
+    await formData.append("slug", slugify(data.title));
+    try {
+      const response = await axios.put(
+        `${baseUrl}/api/blogs/update_slug_by_id`,
+        formData
+      );
+
       await addBlogs();
-      
-    }catch(error)
-    {
+    } catch (error) {
       console.log(error);
     }
     history.push("/AllBlogs");
-};
+  };
   return (
     <>
       <section id="body-pd">
@@ -77,11 +74,11 @@ const UpdateBlogs = async (e,_id) => {
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
               <form>
-              <div className="col-12 px-0">
-                      <div className="card p-4 m-2 mt-4 product-form">
-                        <h5>Create Blog</h5>
-                        <div className="row">
-                          <div className="col-6 p-1 m-2 form-floating">
+                <div className="col-12 px-0">
+                  <div className="card p-4 m-2 mt-4 product-form">
+                    <h5>Create Blog</h5>
+                    <div className="row">
+                      <div className="col-6 p-1 m-2 form-floating">
                         <input
                         maxLength={80}
                           type="text"
@@ -96,10 +93,12 @@ const UpdateBlogs = async (e,_id) => {
                         <label for="floatingInputValue">Title</label>
                       </div>
                       <div className="col-5">
-                        <label className="featured-Image"><p>Featured Image:</p></label>
+                        <label className="featured-Image">
+                          <p>Featured Image:</p>
+                        </label>
                         <input
                           type="file"
-                          className="form-control Dashborad-search featured"  
+                          className="form-control Dashborad-search featured"
                           onChange={(e) =>
                             setData({
                               ...data,
@@ -109,13 +108,14 @@ const UpdateBlogs = async (e,_id) => {
                         />
                       </div>
                       <div className="col-5 p-1 m-2 form-floating">
-                          
                         <textarea
-                        maxLength={170}
+                          maxLength={170}
                           className="form-control h-100"
                           id="floatingInputValue"
                           placeholder="Description"
-                          defaultValue={editableData ? editableData.description : ""}
+                          defaultValue={
+                            editableData ? editableData.description : ""
+                          }
                           rows="4"
                           onChange={(e) =>
                             setData({ ...data, description: e.target.value })
@@ -125,31 +125,33 @@ const UpdateBlogs = async (e,_id) => {
                       </div>
                       <div className="col-12">
                         <JoditEditor
-                        value={editableData ? editableData.content : ""}
-                        onChange={(newText)=> setData({...data, content: newText})}
+                          value={editableData ? editableData.content : ""}
+                          onChange={(newText) =>
+                            setData({ ...data, content: newText })
+                          }
                         />
                       </div>
-                      { editableData ? (
+                      {editableData ? (
                         <div className="col-12 p-1">
-                        <button className="m-2 ps-2 btn btn-primary"
-                        onClick={(e)=>UpdateBlogs(e)}
-                        >
-                          Update
-                        </button>
-                      </div>
-                        ):
-                        (
-                      <div className="col-12 p-1">
-                        <button className="m-2 ps-2 btn btn-primary"
-                        onClick={(e)=>addBlogs(e)}
-                        >
-                        Submit
-                        </button>
-                      </div>
-                      )
-                      }
+                          <button
+                            className="m-2 ps-2 btn btn-primary"
+                            onClick={(e) => UpdateBlogs(e)}
+                          >
+                            Update
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="col-12 p-1">
+                          <button
+                            className="m-2 ps-2 btn btn-primary"
+                            onClick={(e) => addBlogs(e)}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  </div>                
+                  </div>
                 </div>
               </form>
             </div>

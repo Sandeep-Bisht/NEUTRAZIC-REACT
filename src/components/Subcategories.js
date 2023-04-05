@@ -14,9 +14,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
-import { BsWindowSidebar } from "react-icons/bs";
-import { set } from "dotenv-save";
-import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 var Userdata = "";
@@ -45,7 +42,6 @@ const Subcategories = (props) => {
   const state1 = useContext(CurrencyContext);
 
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
 
   useEffect(() => {
     
@@ -136,47 +132,7 @@ const Subcategories = (props) => {
         console.log(err, "error");
       });
   };
-
-  const addToCartWithoutRegistration = (
-    productid,
-    name,
-    quantity,
-    mrp,
-    discount,
-    description,
-    category,
-    manufacturer,
-    image
-  ) => {
-    var newItemObj = {
-      productid: productid,
-      name: name,
-      image: image,
-      quantity: quantity,
-      mrp: parseInt(mrp),
-      singleprice: parseInt(mrp),
-      discountprice: discount,
-      description: description,
-      category: category,
-      manufacturer: manufacturer,
-      description: description,
-      status: "Pending",
-      justification: "Enjoy",
-      delivery_time: "No Status",
-    };
-    if (
-      !JSON.stringify(CartDataWoLogin).includes(name) &&
-      !JSON.stringify(localStorage.getItem("CartDataWoLogin")).includes(name)
-    ) {
-      if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
-        CartDataWoLogin = JSON.parse(localStorage.getItem("CartDataWoLogin"));
-      }
-      CartDataWoLogin.push(newItemObj);
-      localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-    }
-  };
-
-  const cartfunction = async (
+   const cartfunction = async (
     productid,
     name,
     quantity,
@@ -460,13 +416,6 @@ const Subcategories = (props) => {
     }
     setfilterData(filteredData);
     setsubcategoryId(name);
-  };
-
-  const checkidSubcategory = (id) => {};
-
-  const GetOtherCategories = () => {
-    setData(categories);
-    setfilterData("");
   };
 
   const allSubCateory = document.getElementById("allsub");

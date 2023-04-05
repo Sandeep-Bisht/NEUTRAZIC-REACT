@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
 import DashboardHeaader from "./DashboardHeaader";
 import { baseUrl } from "../../utils/services";
 import "../.././views/landing/homepage.css";
 import Sidemenu from "./Sidemenu";
-import $ from "jquery";
 
-let changeNavValue = 0;
-var header;
-var sticky;
 var Userdata = "";
 const Roles = (props) => {
-  const history = useHistory();
   const [email, setemail] = useState("");
   const [username, setUsername] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
   const [password, setPassword] = useState("");
   const [manufactureres, setManufactureres] = useState([]);
   const [role, setRole] = useState("");
-  const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
   const [organization, setOrganization] = useState("");
-  const [registerModal, setRegisterModal] = useState(false);
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
 
@@ -50,10 +42,6 @@ const Roles = (props) => {
       });
   };
 
-  const logout = () => {
-    localStorage.setItem("Userdata", null);
-    window.location.replace("/");
-  };
   const RegisterUser = () => {
     fetch(`${baseUrl}/api/auth/register`, {
       method: "POST",
@@ -75,42 +63,8 @@ const Roles = (props) => {
         window.location.reload();
       });
   };
-  const LoginUser = (e) => {
-    e.preventDefault();
-    if (username != "" && password != "") {
-      fetch(`${baseUrl}/api/auth/login`, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      })
-        .then((res) => res.json())
-        .then(async (res) => {
-          await localStorage.setItem("Userdata", JSON.stringify(res));
-          alert(res.role);
-          if (res.role == "user") {
-            history.push("/");
-          } else {
-            history.push("/dashboard");
-          }
-          window.location.reload();
-        });
-    } else {
-      alert("Please Enter a Valid Data");
-    }
-  };
-  const headerFunction = async () => {
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
-    } else {
-      header.classList.remove("sticky");
-    }
-  };
+
+
 
   const data1 = [];
   {
@@ -141,14 +95,6 @@ const Roles = (props) => {
       });
     });
   }
-  const columns = [
-    { title: "SR NO", data: "sr_no" },
-    { title: "User Name", data: "name" },
-    { title: "Email", data: "Email" },
-    { title: "Roles", data: "Role" },
-    { title: "Organization", data: "company" },
-    { title: "Action", data: "Action" },
-  ];
 
   return (
     <>
@@ -230,7 +176,7 @@ const Roles = (props) => {
                         <label htmlFor="formfloating">Confirm Password*</label>
                       </div>
                       {Userdata != undefined &&
-                      Userdata.role == "superAdmin" ? (
+                        Userdata.role == "superAdmin" ? (
                         <div className="form-group col-lg-12 p-1">
                           <select
                             className="form-control custom-select"
@@ -246,7 +192,6 @@ const Roles = (props) => {
                         </div>
                       ) : Userdata.role == "Manager" ? (
                         <div className="form-group col-lg-12 p-1">
-
                           <select
                             className="form-control"
                             onChange={(e) => {

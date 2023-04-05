@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "./Footer";
-import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import ReadMoreReact from "read-more-react";
 import "../views/landing/homepage.css";
@@ -103,7 +102,6 @@ const Allcategory = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        
         history.push("/Cart");
       })
       .then((err) => console.log(err));
@@ -246,15 +244,7 @@ const Allcategory = (props) => {
 
   return (
     <>
-      {/* sidebar Modal */}
-      {/* <!-- Modal --> */}
-
       <Header1 />
-      {/* <i className="fa fa-filter collapse-btn" data-bs-toggle="modal" data-bs-target="#filterModal"></i> */}
-
-      {/* Side nav bar */}
-
-      {/* End Side navbar */}
       <div id="__next">
         <div className="search-overlay null">
           <div className="d-table">
@@ -435,32 +425,11 @@ const Allcategory = (props) => {
 
                             <i className="bx bx-cart ml-1"></i>
                           </div>
-                          {/* <div className="price mt-1">
-                              <div>
-                                 <span className="new-price">
-                                 $
-                                 {isNaN(el.inrMrp - (el.inrMrp * el.inrDiscount) / 100)
-                                 ? 0
-                                 : el.inrMrp - (el.inrMrp * el.inrDiscount) / 100}
-                                 </span>
-                              </div>
-                           </div> */}
-                          {/* <div className="mt-2 mb-2">
-                              <button className="add-to-cart-button1 text-nowrap"  onClick={()=>{cartfunction(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image[0].path)}} data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}>Add to Cart</button>
-                           </div> */}
-                          {/* <div className="row">
-                              
-                              <div className="col-12">
-                                 <p className="bottom-icon text-nowrap" onClick={()=>{AddtoWishlist(el._id,el.name,quantity,el.inrMrp,el.inrDiscount,el.description,el.category,el.manufacturer.name,el.image)}}  data-bs-toggle={Userdata==null?"modal":null} data-bs-target= {Userdata==null?"#exampleModal":null}><i className='bx bx-heart' ></i>Wishlist</p>
-                              <div className="icon-wishlist"></div>
-                              </div>
-                           </div> */}
-                        </div>
+                          </div>
                       </div>
                     </div>
                   </div>
-                  {/* </Link> */}
-                </div>
+                  </div>
               );
             }
           })}

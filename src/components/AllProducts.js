@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "./Footer";
-import StarsRating from "stars-rating";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,7 +12,6 @@ import { useDispatch } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
-// import Cookies from "universal-cookie";
 
 var Userdata;
 const AllProducts = (props) => {
@@ -32,13 +30,11 @@ const AllProducts = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [wishlistData, Setwishlist] = useState([]);
   const [prev, SetPrev] = useState(0);
-  //  const [next, SetNext] = useState(false);
   const [filter, setFilter] = useState("");
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
   const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
 
@@ -205,10 +201,6 @@ const AllProducts = (props) => {
     // else{
     //    history.push('/Register')
     // }
-  };
-
-  const FilterItems = (item) => {
-    setFilter(item);
   };
 
   var page = 1;
@@ -382,7 +374,6 @@ const AllProducts = (props) => {
         }
       });
   };
-  // allcategory api //
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -393,9 +384,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-  // End All Category API//
-
-  // SubCategory API //
+  
   const GetSubCategory = async () => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
@@ -406,8 +395,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-  // End Subcategory //
-  // Manufacturer API //
+ 
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -418,48 +406,11 @@ const AllProducts = (props) => {
         console.log(err, "errors");
       });
   };
-  const openNav = () => {
-    document.getElementById("mySidenav").style.width = "300px";
-  };
-  const closeNav = () => {
-    document.getElementById("mySidenav").style.width = "0";
-  };
-  // End Manufacturer API //
 
   return (
     <>
       <Header1 />
-      {/* <div id="__next">
-        <div className="search-overlay null">
-          <div className="d-table">
-            <div className="d-table-cell">
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-layer"></div>
-              <div className="search-overlay-close">
-                <span className="search-overlay-close-line"></span>
-                <span className="search-overlay-close-line"></span>
-              </div>
-              <div className="search-overlay-form">
-                <form>
-                  <input
-                    type="text"
-                    className="input-search"
-                    placeholder="Search here..."
-                    name="search"
-                    value=""
-                  />
-                  <button type="submit">
-                    <i className="bx bx-search-alt"></i>
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      <div className="container m-auto Category-div">
+    <div className="container m-auto Category-div">
         <div className="row align-items-center">
           <div className="col-12">
             <div className="section-title my-4">
@@ -478,12 +429,11 @@ const AllProducts = (props) => {
                       <figure className="figure allproduct-figure" key={ind1}>
                         <Link Link to={"/SingleProduct/" + el._id}>
                           <div>
-                            {/* {Categorydetails.image!==undefined? */}
+                            
                             <img src={`${baseUrl}/` + el.image[0].path} />
                           </div>
                           <figcaption>{el.name}</figcaption>
                         </Link>
-                        {/* :null} */}
 
                         <div className="contanier allproduct-price-div">
                           <div className="row">

@@ -10,13 +10,7 @@ const OrderDetails = (props) => {
 
   useEffect(() => {
     Getsingledata();
-    
-     
-     
-    },[]);
-
-
-
+ },[]);
 
   const Getsingledata = async () => {
       await fetch(`${baseUrl}/api/product/product_by_id`, {
@@ -44,7 +38,6 @@ const OrderDetails = (props) => {
       <div className="page-title-area">
         <div className="container">
           <div className="page-title-content p-2">
-            {/* <h1>Hearing Aid Device</h1> */}
             <ul>
               <li>
             <Link to="/">Home</Link>

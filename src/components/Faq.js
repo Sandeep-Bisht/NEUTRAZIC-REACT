@@ -55,11 +55,9 @@ function Faq () {
                     <button className="accordion-button collapsed" 
                     type="button" data-bs-toggle="collapse" id="accordionTwo" data-bs-target="#collapseTwo" 
                     aria-expanded="false" aria-controls="collapseTwo" 
-                    // onClick={(e)=>Toogle(e)}
                     >
                    <span className="one">What products can I sell on Nutrazik?</span>
                       <span className="two">
-                    {/* {showInfo.accordionTwo == true ? <AiOutlineMinus /> : <AiOutlinePlus />} */}
                     <AiOutlineMinus className="icon1"/>
                       <AiOutlinePlus className="icon2" />
                     </span>
@@ -137,11 +135,9 @@ function Faq () {
                     <button className="accordion-button collapsed" type="button"  id="accordionFive"
                     data-bs-toggle="collapse" data-bs-target="#collapseFive" 
                     aria-expanded="false" aria-controls="collapseFive" 
-                    // onClick={(e)=>Toogle(e)}
                     >
                       <span className="one">Can customers leave feedback and why is customer feedback important?</span>
                       <span className="two">
-                    {/* {showInfo.accordionThree == true ? <AiOutlineMinus /> : <AiOutlinePlus />} */}
                     <AiOutlineMinus className="icon1"/>
                       <AiOutlinePlus className="icon2" />
                     </span>

@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useSelector } from "react-redux";
-//import url from backend
 
 import React from 'react'
 

@@ -17244,7 +17244,7 @@ textarea.form-control {
   background-color: var(--whiteColor);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   padding: 30px 20px;
-  min-height: 230px;
+  height: 200px!important;
 }
 
 .single-contact-info-box .icon {
@@ -17269,6 +17269,9 @@ textarea.form-control {
 .single-contact-info-box p a {
   color: var(--optionalColor);
   display: inline-block;
+}
+.contact-address-box p a{
+  font-size: 13px;
 }
 
 .single-contact-info-box p a:hover {
@@ -20867,42 +20870,46 @@ svg {
   right: -3% !important;
   z-index: 1;
 } */
+.controls{
+  position: relative;
+  bottom: 200px;
+}
 
 .controls button{
-  box-sizing: border-box;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    background-color: rgba(103,58,183,0.1);
-    color: #333;
-    box-shadow: 0 0 2px 0px #333;
-    border-radius: 50%;
-    border: none;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    line-height: 50px;
-    -webkit-align-self: center;
-    -ms-flex-item-align: center;
-    align-self: center;
-    cursor: pointer;
-    outline: none;
-    border: none;
     z-index: 10;
+    border: none;
+    background: none;
+    color: rgba(0, 0, 0, 0.8);
 }
 .controls button svg{
-  /* color: rgba(0, 0, 0, 0.7); */
-  height: 1.8rem !important;
-  width: 0.8rem !important;
+  
+  height: 2rem !important;
+  width: 1rem !important;
 }
 
 .controls button:hover{
-  background:#6f42c1;
-  color: white !important;
+  color: #2a96ff;
+}
+.controls button:focus:enabled{
+  color: #2a96ff;
 }
 
+/* Manufacturer css carousel */
+.brands-area .image-group .cvyJEp{
+  font-size: 1.6rem !important;
+  border: none !important;
+  background: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 
 
+}
+.brands-area .image-group .cvyJEp:hover{
+  color: #2a96ff !important;
+}
+.brands-area .image-group .cvyJEp:focus:enabled{
+  color:#2a96ff !important;
+}
 /* BaseLine Css */
 .facility-area .single-facility-box .icon i svg{
   height: 60px !important;

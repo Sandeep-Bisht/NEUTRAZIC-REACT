@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-// import DataTable from '@bit/adeoy.utils.data-table';
 import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import {
   Table,
-  Input,
   Button,
   Space,
-  Popconfirm,
-  Typography,
   Dropdown,
   Modal,
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import { MdPlaylistAdd } from "react-icons/md";
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const ShippedOrder = () => {
@@ -29,7 +24,7 @@ const ShippedOrder = () => {
   const [shippedOrder, setShippedOrder] = useState([]);
   const [orderItem, setOrderItem] = useState([]);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
-  const history =  useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     GetOrders();
@@ -72,29 +67,6 @@ const ShippedOrder = () => {
         console.log(err, "error");
       });
   };
-  const DeleteOrder = async (productId) => {
-    await fetch(`${baseUrl}/api/order/delete_order_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: productId,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        GetOrders();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
-  const CaptureDetails = (orders) => {
-    setOrderDetails(orders);
-  };
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
     if (e.target.value === "") {
@@ -125,7 +97,7 @@ const ShippedOrder = () => {
       key: "payment_status",
     },
     {
-      title: "Status", 
+      title: "Status",
       render: (a, item) => (
         <Space size="middle">
           <Dropdown
@@ -134,7 +106,7 @@ const ShippedOrder = () => {
                 {
                   key: '1',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item,"Cancel")}>
+                    <a onClick={() => UpdateOrderStatus(item, "Cancel")}>
                       Cancel Order
                     </a>
                   ),
@@ -142,8 +114,8 @@ const ShippedOrder = () => {
                 {
                   key: '2',
                   label: (
-                    <a onClick={() =>UpdateOrderStatus(item,"Delivered")}>
-                     Mark as Delivered
+                    <a onClick={() => UpdateOrderStatus(item, "Delivered")}>
+                      Mark as Delivered
                     </a>
                   ),
                 },
@@ -179,50 +151,50 @@ const ShippedOrder = () => {
   };
   return (
     <>
-    {/* table modal */}
-              <div>
-              <Modal
-                  title="Order Details"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
+      {/* table modal */}
+      <div>
+        <Modal
+          title="Order Details"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {prticularUserOrder &&
+                prticularUserOrder.length > 0 &&
+                prticularUserOrder.map((item, ind) => {
+                  return (
+                    <>
+                      <tr key={ind}>
+                        <td className="width-adjust-of-td">
+                          <div className="width-adjust-of-image">
+                            <img
+                              onClick={() =>
+                                imageHandler(item.productid)
+                              }
+                              style={{ cursor: "pointer" }}
+                              src={`${baseUrl}/${item.image}`}
+                            ></img>
+                          </div>
+                        </td>
+                        <td>{item.name}</td>
+                        <td>{item.singleprice}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {prticularUserOrder &&
-                        prticularUserOrder.length > 0 &&
-                        prticularUserOrder.map((item,ind) => {
-                          return (
-                            <>
-                              <tr key={ind}>
-                                <td className="width-adjust-of-td">
-                                  <div className="width-adjust-of-image">
-                                    <img
-                                      onClick={() =>
-                                        imageHandler(item.productid)
-                                      }
-                                      style={{ cursor: "pointer" }}
-                                      src={`${baseUrl}/${item.image}`}
-                                    ></img>
-                                  </div>
-                                </td>
-                                <td>{item.name}</td>
-                                <td>{item.singleprice}</td>
-                              </tr>
-                            </>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </Modal>
-              </div>
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </Modal>
+      </div>
       {/* end modal */}
 
       <section id="body-pd">
@@ -235,7 +207,7 @@ const ShippedOrder = () => {
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="category-details-section">
                 <h3 className="all-category-head">Orders </h3>
-                <div className="all-category-search-wrap">                  
+                <div className="all-category-search-wrap">
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}
