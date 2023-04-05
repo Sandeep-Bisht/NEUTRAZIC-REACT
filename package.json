@@ -33,6 +33,7 @@
     "read-more-react": "^1.0.10",
     "redux": "^4.2.0",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.9",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {

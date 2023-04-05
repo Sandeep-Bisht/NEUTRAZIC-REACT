@@ -47,7 +47,7 @@ const ContactUs = () => {
                   <p>
                     <a href="#" target="_blank">
                       Sujok Building, 2nd floor, mansarovar colony, Ballupur
-                      Chowk, Ballupur, Dehradun, Uttarakhand 248001{" "}
+                      Chowk, Dehradun, Uttarakhand{" "}
                     </a>
                   </p>
                 </div>
