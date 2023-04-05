@@ -20915,3 +20915,9 @@ svg {
   height: 60px !important;
   width: 60px !important;
 }
+
+
+/* mobile-app Homepage section */
+.mobile-app .btn-div .btn .mobile-app-link:hover{
+  color: black;
+}
