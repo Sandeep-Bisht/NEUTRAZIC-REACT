@@ -1195,7 +1195,7 @@ const HomePage = () => {
                         <div>
                           <AiFillApple />
                         </div>
-                        <Link to="/mobileapp">
+                        <Link className="mobile-app-link" to="/mobileapp">
                           <div>App Store</div>
                         </Link>
                       </div>
@@ -1205,7 +1205,7 @@ const HomePage = () => {
                         <div>
                           <IoLogoGooglePlaystore />
                         </div>
-                        <Link to="/mobileapp">
+                        <Link className="mobile-app-link" to="/mobileapp">
                           <div>Google Play</div>
                         </Link>
                       </div>
