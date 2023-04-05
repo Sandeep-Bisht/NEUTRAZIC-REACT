@@ -175,6 +175,7 @@ const Cart = () => {
     await formData.append("instruction", data.instruction);
     await formData.append("addresstype", data.addresstype);
     await formData.append("username", Userdata.username);
+    
     const url = `${baseUrl}/api/order/create-checkout-session`;
     await fetch(url, {
       method: "POST",
