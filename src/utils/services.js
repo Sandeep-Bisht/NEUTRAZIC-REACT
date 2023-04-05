@@ -3,7 +3,8 @@ const api = {
   token: '',
 };
 //export const baseUrl = "http://localhost:3033";
-export const baseUrl = "http://144.91.110.221:4802";
+export const baseUrl = "https://144.91.110.221:4802";
+
 
 
 export default api;

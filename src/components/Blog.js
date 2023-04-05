@@ -48,6 +48,7 @@ function Blogs() {
                         if (ind < 1)
                           return (
                             <div className="left-blog-image-wrap" key={ind}>
+                              <div className="position-absolute blog-text-div "></div>
                               <img
                                 src={
                                   item.featuredImage &&
@@ -73,6 +74,8 @@ function Blogs() {
                           return (
                             <div className="right-blog-image-wrapper" key={ind}>
                               <div className="right-blog-image-wrap">
+                                <div className="position-absolute blog-text-div "></div>
+
                                 <img
                                   src={
                                     item.featuredImage &&
@@ -102,7 +105,7 @@ function Blogs() {
                     <h2>Latest Blogs</h2>
                     <div className="row">
                       {data &&
-                        data.map((item,ind) => {
+                        data.map((item, ind) => {
                           return (
                             <div className="col-md-6 col-lg-3" key={ind}>
                               <div class="card">
