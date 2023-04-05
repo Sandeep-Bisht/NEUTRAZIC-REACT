@@ -42,7 +42,6 @@ const Subcategories = (props) => {
   const state1 = useContext(CurrencyContext);
 
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
 
   useEffect(() => {
     

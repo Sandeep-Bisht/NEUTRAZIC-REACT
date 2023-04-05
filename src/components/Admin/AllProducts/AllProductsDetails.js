@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Input, Popconfirm, Typography, Space } from "antd";
+import { Table, Popconfirm, Typography, Space } from "antd";
 
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
@@ -11,7 +11,6 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { MdOutlineEditNote } from 'react-icons/md';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
-
 
 export default function AllProductsDetails() {
 
@@ -63,14 +62,14 @@ export default function AllProductsDetails() {
     if (e.target.value == "") {
       fetchUsers();
     }
-  }
+  };
 
   const searchHandler = () => {
     const filteredData = getuser.filter((value) => {
       return value.name.toLowerCase().includes(searchVal.toLowerCase());
-    })
+    });
     setGetuser(filteredData);
-  }
+  };
 
   const columns = [
     {
@@ -122,7 +121,7 @@ export default function AllProductsDetails() {
                   },
                 }}
                 title="Edit"
-                className='edit-icon-wrap'
+                className="edit-icon-wrap"
                 style={{ color: "blue" }}
               >
                 <MdOutlineEditNote />
@@ -132,7 +131,6 @@ export default function AllProductsDetails() {
         ) : null,
     },
   ];
-
 
   return (
     <>

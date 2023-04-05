@@ -314,15 +314,15 @@ const Header1 = (props) => {
             await CartById();
             $("#loginModalCloseBtn").click();
             history.push("/Dashboard");
-          } else if (res.success === 400 || res.success === 401) {
-            setMsg("User Name Or PassWord is not Valid");
+          } else if (res.success === 403) {
+            setMsg(res.error);
           }
           }
-          else if (res.success === 400 || res.success === 401) {
-            setMsg("User Name Or PassWord is not Valid");
+          else if (res.success === 403) {
+            setMsg(res.error);
           }
           else {
-            setMsg("User is De-Activated");
+            setMsg(res.error);
           }
         })
         .then(async () => {

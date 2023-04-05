@@ -15,7 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as ACTIONS from "../../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../../CommonService/WishlistItem/action";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
 import Carousel from "react-elastic-carousel";
 import Cookies from "universal-cookie";

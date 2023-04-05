@@ -31,7 +31,7 @@ const CategoryCreation = (props) => {
       error.featuredCategories = "This field is required";
     }
     return error;
-  }
+  };
   const submitData = async (e) => {
     e.preventDefault();
     const errors = ValidationFrom(data);

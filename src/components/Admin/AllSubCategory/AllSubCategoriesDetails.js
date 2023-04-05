@@ -57,14 +57,14 @@ export default function AllSubCategoriesDetails() {
     if (e.target.value == "") {
       fetchUsers();
     }
-  }
+  };
 
   const searchHandler = () => {
     const filteredData = getuser.filter((value) => {
       return value.name.toLowerCase().includes(searchVal.toLowerCase());
-    })
+    });
     setGetuser(filteredData);
-  }
+  };
 
   const handleDelete = async (_id) => {
     try {
@@ -81,19 +81,19 @@ export default function AllSubCategoriesDetails() {
     {
       title: "Name",
       dataIndex: "name",
-      key: "name"
+      key: "name",
     },
     {
       title: "Description",
       dataIndex: "description",
-      key: "description"
+      key: "description",
     },
     {
-      title: 'Image',
-      dataIndex: 'image[0].path',
+      title: "Image",
+      dataIndex: "image[0].path",
       width: 80,
       maxWidth: 90,
-      render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />
+      render: (t, r) => <img src={`${baseUrl}/${r.image[0].path}`} />,
     },
     {
 
@@ -121,7 +121,6 @@ export default function AllSubCategoriesDetails() {
           </Space>
         ) : null,
     },
-
   ];
 
   return (
