@@ -788,7 +788,7 @@ const HomePage = () => {
                 {/* </Carousel> */}
                 
               </Slider>
-              <div className="controls d-flex justify-content-between">
+              <div className="controls d-flex  justify-content-between">
                 <button onClick={sliderRef?.slickPrev}>
                   <FaChevronLeft />
                 </button>
@@ -1141,7 +1141,7 @@ const HomePage = () => {
               <Carousel
                 disableAutoPlay
                 autoPlaySpeed={1500}
-                itemsToShow={5}
+                itemsToShow={3}
                 onPrevStart={onPrevStart}
                 onNextStart={onNextStart}
                 ref={carouselRef}
@@ -1195,7 +1195,7 @@ const HomePage = () => {
                         <div>
                           <AiFillApple />
                         </div>
-                        <Link to="/mobileapp">
+                        <Link className="mobile-app-link" to="/mobileapp">
                           <div>App Store</div>
                         </Link>
                       </div>
@@ -1205,7 +1205,7 @@ const HomePage = () => {
                         <div>
                           <IoLogoGooglePlaystore />
                         </div>
-                        <Link to="/mobileapp">
+                        <Link className="mobile-app-link" to="/mobileapp">
                           <div>Google Play</div>
                         </Link>
                       </div>
