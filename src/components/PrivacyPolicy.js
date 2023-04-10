@@ -16,7 +16,7 @@ useEffect(()=>{
             <div className='col-12'>
                 <div className='privacy-policy-page'>
             <h1>Privacy Policy for Nutrazik</h1>
-<p>At nutrazik.giksindia.com, accessible from http://nutrazik.giksindia.com/, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by nutrazik.giksindia.com and how we use it.</p>
+<p>At nutrazik.giksindia.com, accessible from https://nutrazik.giksindia.com/, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by nutrazik.giksindia.com and how we use it.</p>
 
 <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
 
