@@ -136,7 +136,7 @@ const MyAccount = () => {
           </div>
         </form>
         ):
-        <div className="col-12 mt-4 text-center EMPTYWISHLIST-DIV myAccount-empty-div">
+        <div className="col-12 pt-4 text-center EMPTYWISHLIST-DIV myAccount-empty-div">
             <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json" className="lottie-myAccount" background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
             </div>
           }

@@ -90,14 +90,14 @@ const WishList = () => {
           position: "bottom-right",
           autoClose: 1000,
         });
-        setTimeout(()=>{
+        await setTimeout(()=>{
           if(data)
           {
             setLoading(false);
           }
           
         },500);
-        await GetWishlist();
+        GetWishlist();
         })
         
       .catch((err) => {

@@ -16,7 +16,7 @@ const AppStoreNutrazik = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <h1>App will be available soon.....</h1>
+                            <h2>App will be available soon.....</h2>
                             <Link to="/AllProducts"><button className="Appstore-Button wrapperbtn btn10">Continue Shopping With Us.....</button></Link>
                         </div>
                     </div>

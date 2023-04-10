@@ -44,11 +44,9 @@ const ContactUs = () => {
                   <i class='bx bx-location-plus'></i>
                   </div>
                   <h3>Address</h3>
-                  <p>
-                    <a href="#" target="_blank">
+                  <p> 
                       Sujok Building, 2nd floor, mansarovar colony, Ballupur
                       Chowk, Dehradun, Uttarakhand{" "}
-                    </a>
                   </p>
                 </div>
               </div>

@@ -11,7 +11,7 @@ import { BiLogOut } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import { GrInProgress } from "react-icons/gr";
 import { BsBox } from "react-icons/bs";
-
+import { useHistory } from "react-router-dom";
 import { FaBlogger } from "react-icons/fa";
 import { FaShippingFast, FaWarehouse } from "react-icons/fa";
 import { BsCartXFill } from "react-icons/bs";
@@ -27,7 +27,7 @@ const Sidemenu = () => {
 
   const location = useLocation();
   const pathName = location.pathname;
-
+  const history=useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     // SidebarMenu();
@@ -39,7 +39,7 @@ const Sidemenu = () => {
       position: "bottom-right",
       autoClose: 1000,
     });
-    window.location.replace("/");
+    history.push("/");
   };
 
   return (
