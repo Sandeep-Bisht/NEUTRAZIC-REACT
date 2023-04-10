@@ -672,7 +672,19 @@ h3 .read-more-button
 }
 /* end Logout UL css */
 
-
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close {
+    width: 40px!important;
+    height: 24px!important;
+}
+:where(.css-dev-only-do-not-override-1vtf12y).ant-popconfirm .ant-popconfirm-message-title-only {
+    padding-top: 3px!important;
+}
+:where(.css-dev-only-do-not-override-1vtf12y).ant-popconfirm .ant-popconfirm-message{
+    align-items: center!important;
+}
+:where(.css-dev-only-do-not-override-1vtf12y).ant-popconfirm .ant-popconfirm-message >.ant-popconfirm-message-icon .anticon {
+    padding-top: 0px!important;
+}
 
 /* left side menu */
 

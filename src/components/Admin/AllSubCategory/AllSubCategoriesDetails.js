@@ -28,6 +28,7 @@ export default function AllSubCategoriesDetails() {
     fetchUsers();
     GetSubCategory();
   }, [])
+  // console
 
 
   const GetSubCategory = async () => {
