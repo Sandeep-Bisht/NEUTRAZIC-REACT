@@ -8,14 +8,14 @@
   height: 370px;
 }
 .left-side-supportpage .left-Heading {
-  width: 80%;
+  width: 100%;
 }
-.left-side-supportpage .left-Heading h1{
-    color: #1e144f;
-    font-size: 3rem;
-    font-family: "Roboto", sans-serif;
+.left-side-supportpage .left-Heading h1 {
+  color: #1e144f;
+  font-size: 3rem;
+  font-family: "Roboto", sans-serif;
 }
-.left-side-supportpage .left-Heading .support-left-text p{
+.left-side-supportpage .left-Heading .support-left-text p {
   font-family: "Roboto", sans-serif;
 }
 .right-side-supportpage .support-page-image {
@@ -28,4 +28,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.Support-page-section .left-side-supportpage button {
+  margin-top: 20px;
+  color: var(--optionalColor);
+  background: white;
+  border: 1px solid rgb(27 151 255 / 33%);
+  font-size: 14px;
+}
+.Support-page-section .left-side-supportpage button:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(44 160 255 / 53%) 0%,
+    rgba(23, 150, 255, 1) 100%
+  );
+  border: 1px solid rgb(27 151 255 / 33%);
+  color: #fff;
 }

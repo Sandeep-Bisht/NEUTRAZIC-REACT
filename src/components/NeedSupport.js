@@ -20,7 +20,7 @@ function NeedSupport() {
                 <div className="left-side-supportpage">
                   <div className="left-Heading">
                     <div>
-                      <h1>Support and Help</h1>
+                      <h1> Help and Support</h1>
                     </div>
                     <div className="support-left-text">
                       <p>
