@@ -57,6 +57,8 @@ const Header1 = (props) => {
   const [forgetModal, setForgetModal] = useState(false);
   const [forgetSecondModal, setForgetSecondModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [userdata,setUserdata]=useState();
+  const [forgetMsg,setForgetMsg]=useState("");
 
   useEffect(() => {
     setLoginState(loginState);
@@ -145,7 +147,7 @@ const Header1 = (props) => {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
       window.onscroll = function() {
-        headerFunction();
+        // headerFunction();
       };
       $(".arrow").click(function() {
         $(".sublist").slideUp();
@@ -275,7 +277,10 @@ const Header1 = (props) => {
         });
     }
   };
-
+  $('body').click(function(){
+    // setLoginModal(true);
+    // setForgetModal(false);
+  });
   const LoginUser = (data) => {
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
@@ -337,13 +342,13 @@ const Header1 = (props) => {
     }
   };
 
-  const headerFunction = async () => {
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
-    } else {
-      header.classList.remove("sticky");
-    }
-  };
+  // const headerFunction = async () => {
+  //   if (window.pageYOffset > sticky) {
+  //     header.classList.add("sticky");
+  //   } else {
+  //     header.classList.remove("sticky");
+  //   }
+  // };
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -469,11 +474,11 @@ const Header1 = (props) => {
       .then((err) => console.log(err));
   };
   const forgetHandler = () => {
+    reset3();
     setForgetModal(true);
   };
-  const forgetPassword = (data) => {
-    setIsModalVisible(true);
-    $("#loginModalCloseBtn").click();
+  const forgetPassword = async(data) => {
+    await GetUserData(data);
   };
   const forgetSecondPassword = (data) => {
     setForgetModal(false);
@@ -485,7 +490,66 @@ const Header1 = (props) => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setLoginModal(false);
+    setForgetModal(false);
   };
+
+
+  // const GetUserData = async(userEmail)=>{
+  //   await fetch(`${baseUrl}/api/auth/allusers`)
+  //   .then((res)=>res.json())
+  //   .then(async(data)=>{
+  //     //  await setUserdata(data.data);
+  //      const filteredEmail=[];
+  //     for(var item of data.data){
+  //       filteredEmail.push(item.email);
+  //     }
+  //      const filteredNewEmail=await filteredEmail.filter((item)=>{
+  //       console.log(item,"filted item")
+  //       return item===userEmail;
+  //     })
+  //     setUserdata(filteredNewEmail);
+  //      console.log(userdata,"inside");
+  //      if(filteredNewEmail)
+  //      {
+  //       console.log(filteredEmail,"inside of scop");
+  //       setIsModalVisible(true);
+  //       $("#loginModalCloseBtn").click();
+  //      }
+  //      else{
+  //       console.log("out of scop");
+  //      }
+
+  //   })
+  //   .catch((err) => {
+  //     console.log(err, "error");
+  //   });
+  //   }
+  const GetUserData = async (userEmail) => {
+    const currentEmail=userEmail.email;
+    try {
+      const res = await fetch(`${baseUrl}/api/auth/allusers`);
+      const data = await res.json();
+      console.log(data.data,"data of all user");
+      const filteredEmail = data.data.map((item) => item.email);
+      const filteredNewEmail = filteredEmail.filter((item) => {
+        console.log(item, "filtered item");
+        return item===currentEmail;
+      });
+      console.log(filteredNewEmail, "filtered new email");
+      if (filteredNewEmail.length > 0) {
+        console.log(filteredEmail, "inside of scope");
+        setIsModalVisible(true);
+        $("#loginModalCloseBtn").click();
+      } else {
+        setForgetMsg("This Email is not registered yet")
+      }
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+  
+    
   return (
     <>
       <div
@@ -912,6 +976,7 @@ const Header1 = (props) => {
                                 </p>
                               )}
                             </div>
+                            <p className="text-danger">{forgetMsg}</p>
                           </div>
                           <h5 className="Login-fail-msg">{msg}</h5>
                           <div className="form-group col-lg-12 justify-content-center">
