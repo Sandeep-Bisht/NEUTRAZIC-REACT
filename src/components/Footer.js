@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect,useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import "../views/landing/homepage.css";
+import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import $ from "jquery";
+var Userdata="";
 const Footer = () => {
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [isLogin, setIsLogin] = useState(loginState);
 const ContactHandler=()=>{
   window.scroll(0,0);
 }
@@ -9,6 +14,14 @@ const ContactHandler=()=>{
 const WishlistHandler=()=>{
   window.scroll(0,0);
 }
+
+useEffect(()=>{
+  Userdata = JSON.parse(localStorage.getItem("Userdata"));
+  // setLoginState(loginState);
+  setIsLogin(loginState);
+  window.scroll(0,0);
+  console.log(Userdata,"helo userData");
+},[loginState])
 
   return (
     <>
@@ -84,7 +97,7 @@ const WishlistHandler=()=>{
                     <Link to="/ContactUs" onClick={ContactHandler}>Contact Us</Link>
                   </li>
                   <li>
-                    <Link to='/privacypolicy'>Privacy Policy</Link>
+                    <Link to='/privacy&policy'>Privacy Policy</Link>
                   </li>
                   <li>
                     <Link to="/termsofservices">Terms &amp; Conditions</Link>
@@ -106,7 +119,23 @@ const WishlistHandler=()=>{
                     <Link to="/Faq">FAQs</Link>
                   </li>
                   <li>
-                  <Link to="/MyAccount">My Account</Link>
+                    {
+                      Userdata===null ? 
+                      <Link
+                                
+                      data-bs-toggle="modal"
+                      data-bs-target={
+                        Userdata == null ? "#exampleModal" : null
+                      }
+                    >
+                      My Account
+                    </Link> : 
+                      <Link to="/MyAccount">My Account</Link>
+                      
+                      
+                      
+                    }
+                 
                   </li>
                   <li>
                     <Link to="/UserOrder">Order History</Link>
