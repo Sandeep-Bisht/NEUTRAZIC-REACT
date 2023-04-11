@@ -206,7 +206,7 @@ const Root = (props) => {
             />
             <Route exact path = "/MyAccount" component={MyAccount}/>
             <Route path='/PageNotFound' component={PageNotFound} />
-            <Route path='/privacypolicy' component={PrivacyPolicy} />
+            <Route path='/privacy&policy' component={PrivacyPolicy} />
             <Route path='/termsofservices' component={TermsConditions} />
             <Route path='/crpolicy' component={ReturnRefund} />
             <Route path='/shippingPolicy' component={ShippingPolicy} />
