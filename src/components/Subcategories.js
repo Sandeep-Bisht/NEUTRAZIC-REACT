@@ -511,9 +511,13 @@ const Subcategories = (props) => {
               </div>
               <div className="col-lg-10 col-md-9 col-sm-9 col-8 subcategory-container">
                 <div className="browse-categories-sub-heading">
-                  {getSubCategories.map((item, ind) => {
-                    if (ind < 1) {
-                      return <h2 key={ind}>{SubcategoryId}</h2>;
+                  {categories.map((item, ind) => {
+                    if (item._id === props.match.params._id) {
+                      return (
+                        <>
+                      <h2 key={ind}>{item.name} Products</h2>
+                      </>
+                      )
                     }
                   })}
                 </div>

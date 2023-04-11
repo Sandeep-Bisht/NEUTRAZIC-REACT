@@ -20527,6 +20527,8 @@ svg {
   }
   .footer-bottom-area p {
     font-size: 14px;
+    display: flex;
+    align-items: center;
   }
   .footer-bottom-area .payment-types ul li {
     font-size: 14px;
