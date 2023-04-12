@@ -59,6 +59,9 @@ const Footer = () => {
             reset();
           } else {
             setMessage("Please Register this Email First");
+            setTimeout(()=>{
+              setMessage("");
+            },2000)
             reset();
           }
         })
@@ -69,7 +72,7 @@ const Footer = () => {
       setMessage("Please Login or Register First to Subscribe us");
       setTimeout(() => {
         setMessage("");
-      }, 3000);
+      }, 2000);
       reset();
     }
   };
