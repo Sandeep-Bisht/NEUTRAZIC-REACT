@@ -577,6 +577,11 @@ padding-top: 60px;
 padding-bottom: 110px;
 }
 
+.category svg{
+    color: #fff;
+    height: 25px!important;
+}
+
 .btn-demo {
 margin: 15px;
 padding: 10px 15px;
@@ -995,7 +1000,7 @@ body {
 {
     display: flex;
     align-items: center;
-    margin-right: 100px;
+    /* margin-right: 100px; */
 }
 .header-wrapper-right .right-part{
     display: flex;
@@ -1044,7 +1049,7 @@ body {
 }
 
 .right-part .currancy{
-    margin-right: 5px;
+    margin-right: 60px;
 }
 .forgetContentDiv{
     padding-left: 50px;
@@ -1171,8 +1176,8 @@ body {
     /* .login-div{
         padding-right: 70px;
     } */
-    .drop-category .category-head{
-        font-size: 10px;
+    .drop-category .category-head {
+        display: none;
     }
     .drop-category i {
         font-size: 13px;
@@ -1253,9 +1258,6 @@ body {
     } */
     .category i{
         display: none!important;
-    }
-    .drop-category .category-head {
-        font-size: 12px;
     }
     .user-icon,.option-item .cart-btn{
         font-size: 18px;
@@ -1343,9 +1345,6 @@ body {
         padding-left: 0px;
         margin-left: -5px;
     }
-    .drop-category .category-head {
-        font-size: 11px;
-    }
     /* ------pras css----------- */
     .login-div2 input[type="text"]{
         width: 100%;
@@ -1375,7 +1374,12 @@ body {
 }
 
 @media only screen and (max-width : 450px) {
-
+    .right-part .currancy{
+        margin-right: 0px;
+    }
+    .category svg{
+        width: 19px!important;
+    }
     .blog-page-section-2 .card-body{
         height: 170px!important;
     }
@@ -1516,15 +1520,9 @@ body {
         margin-top: 17px!important;
     }
     /* end */
-    .drop-category .category-head {
-        font-size: 10px;
-    }
     .drop-category{
 		height: 34px!important;
 	}
-    .category{
-        width: 100px;
-    }
     .currancy {
         margin-left: 5px!important;
     }

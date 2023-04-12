@@ -68,6 +68,7 @@ const InProgressOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
+        setShowShippingModal(false);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -324,13 +325,13 @@ const InProgressOrder = () => {
             </div>
             <button
               className="btn btn-primary m-2"
-              onClick={(e) => UpdateOrderStatus(e, orderItem, "Shipping")}
+              onClick={(e) => UpdateOrderStatus(e, orderItem, "Shipped")}
             >
               Proceed for Shipping
             </button>
             <button
               className="btn btn-primary m-2"
-              onClick={(e) => UpdateOrderStatus(e, orderItem._id, "Cancel")}
+              onClick={(e) => UpdateOrderStatus(e, orderItem, "Cancel")}
             >
               Cancel Order
             </button>
