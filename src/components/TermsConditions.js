@@ -16,7 +16,7 @@ function TermsConditions() {
                 <div className='terms-condition-page'>
                 <h2><strong>Terms and Conditions</strong></h2>
 
-<p>Welcome to nutrazik.com!</p>
+<p>Welcome to nutrazik.com</p>
 
 <p>These terms and conditions outline the rules and regulations for the use of Nutrazik's Website, located at https://nutrazik.com/.</p>
 

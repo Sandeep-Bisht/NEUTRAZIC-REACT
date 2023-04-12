@@ -50,7 +50,7 @@ const HomePage = () => {
   ];
 
   const [data, setData] = useState([]);
-  const [singlecategory,setSingleCategory] = useState([]);
+  const [singlecategory, setSingleCategory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
@@ -740,7 +740,7 @@ const HomePage = () => {
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
-            <div className="row mt-0 featured-products"> 
+            <div className="row mt-0 featured-products">
               <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&
@@ -786,7 +786,6 @@ const HomePage = () => {
                     }
                   })}
                 {/* </Carousel> */}
-                
               </Slider>
               <div className="controls d-flex  justify-content-between">
                 <button onClick={sliderRef?.slickPrev}>
@@ -795,8 +794,7 @@ const HomePage = () => {
                 <button onClick={sliderRef?.slickNext}>
                   <FaChevronRight />
                 </button>
-                </div>
-              
+              </div>
             </div>
           </div>
         </section>
@@ -1190,26 +1188,28 @@ const HomePage = () => {
                     </div>
                   </div>
                   <div className="btn-div">
-                    <button type="button" className="btn" id="btn-1">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <AiFillApple />
-                        </div>
-                        <Link className="mobile-app-link" to="/mobileapp">
+                    <Link className="mobile-app-link" to="/mobileapp">
+                      <button type="button" className="btn" id="btn-1">
+                        <div className="d-flex align-items-center">
+                          <div>
+                            <AiFillApple />
+                          </div>
+
                           <div>App Store</div>
-                        </Link>
-                      </div>
-                    </button>
-                    <button type="button" className="btn ms-3" id="btn-2">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <IoLogoGooglePlaystore />
                         </div>
-                        <Link className="mobile-app-link" to="/mobileapp">
+                      </button>
+                    </Link>
+                    <Link className="mobile-app-link" to="/mobileapp">
+                      <button type="button" className="btn ms-3" id="btn-2">
+                        <div className="d-flex align-items-center">
+                          <div>
+                            <IoLogoGooglePlaystore />
+                          </div>
+
                           <div>Google Play</div>
-                        </Link>
-                      </div>
-                    </button>
+                        </div>
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
