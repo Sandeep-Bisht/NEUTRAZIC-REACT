@@ -531,15 +531,11 @@ const Header1 = (props) => {
     try {
       const res = await fetch(`${baseUrl}/api/auth/allusers`);
       const data = await res.json();
-      console.log(data.data,"data of all user");
       const filteredEmail = data.data.map((item) => item.email);
       const filteredNewEmail = filteredEmail.filter((item) => {
-        console.log(item, "filtered item");
         return item===currentEmail;
       });
-      console.log(filteredNewEmail, "filtered new email");
       if (filteredNewEmail.length > 0) {
-        console.log(filteredEmail, "inside of scope");
         setIsModalVisible(true);
         $("#loginModalCloseBtn").click();
       } else {

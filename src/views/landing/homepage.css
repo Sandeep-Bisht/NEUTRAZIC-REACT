@@ -20906,10 +20906,7 @@ svg {
   right: -3% !important;
   z-index: 1;
 } */
-.controls{
-  position: relative;
-  bottom: 200px;
-}
+/* */
 
 .controls button{
     z-index: 10;
