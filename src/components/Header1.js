@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import {BiCategoryAlt } from "react-icons/bi";
 
 let changeNavValue = 0;
 var header;
@@ -1122,7 +1123,57 @@ const Header1 = (props) => {
                   </div>
                 </div>
                 <div className="header-wrapper-right">
+                <div className="right-part">
+                    <div className="d-flex align-items-center currancy">
+                      <select
+                        onChange={(e) => currencyHandler(e)}
+                        value={currancy}
+                      >
+                        <option value="INR">INR</option>
+                        <option value="Dollar">Dollar</option>
+                      </select>
+                    </div>
+                  </div>
                   <div className="left-part">
+                  <div className="cart-div">
+                      <Link to="/cart">
+                        <div className=" login-div1">
+                          <div className="">
+                            <div className="option-item">
+                              <div className="cart-btn">
+                                <i className="bx bx-cart"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div className=" user-login">
+                            {cartItems ? (
+                              <h6 className="Total-Item">{cartItems}</h6>
+                            ) : (
+                              ""
+                            )}
+                            <span className="sp">Cart</span>
+                            <br />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className=" heart-div ">
+                      <Link to="/WishList">
+                        <div className="  heart-div-inner">
+                          <div className="">
+                            <div className="option-item">
+                              <div className="cart-btn">
+                                {wishlisted ? <h6>{wishlisted}</h6> : ""}
+                                <i className="bx bx-heart"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div className=" user-login">
+                            <span className="sp">Wishlist</span>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                     <div className="  account-div ">
                       <div className=" login-div ">
                         <div className="option-item">
@@ -1239,59 +1290,6 @@ const Header1 = (props) => {
                         )}
                       </div>
                     </div>
-
-                    <div className="cart-div">
-                      <Link to="/cart">
-                        <div className=" login-div1">
-                          <div className="">
-                            <div className="option-item">
-                              <div className="cart-btn">
-                                <i className="bx bx-cart"></i>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className=" user-login">
-                            {cartItems ? (
-                              <h6 className="Total-Item">{cartItems}</h6>
-                            ) : (
-                              ""
-                            )}
-                            <span className="sp">Cart</span>
-                            <br />
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-
-                    <div className=" heart-div ">
-                      <Link to="/WishList">
-                        <div className="  heart-div-inner">
-                          <div className="">
-                            <div className="option-item">
-                              <div className="cart-btn">
-                                {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                <i className="bx bx-heart"></i>
-                              </div>
-                            </div>
-                          </div>
-                          <div className=" user-login">
-                            <span className="sp">Wishlist</span>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="right-part">
-                    <div className="d-flex align-items-center currancy">
-                      <select
-                        onChange={(e) => currencyHandler(e)}
-                        value={currancy}
-                      >
-                        <option value="INR">INR</option>
-                        <option value="Dollar">Dollar</option>
-                      </select>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -1301,24 +1299,20 @@ const Header1 = (props) => {
           <div className="container-fluid main-nav px-0">
             <div className="row mt-0" id="myHeader">
               <div
-                className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category"
+                className="col-lg-2  col-1 drop-category Browse-Category"
                 data-bs-toggle="modal"
                 data-bs-target="#myModal"
               >
                 <div>
                   <div className="category ">
-                    <i
-                      className="fa fa-bars collapse-btn pt-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#myModal"
-                    ></i>
+                  <BiCategoryAlt></BiCategoryAlt>
                   </div>
                   <div className="category">
                     <span className="category-head">Browse Categories</span>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-10 col-md-10 col-sm-9 col-8 p-0">
+              <div className="col-lg-10 col-11 p-0">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                   <div className="container-fluid mb-1">
                     <button

@@ -539,7 +539,7 @@ const HomePage = () => {
                     e-commerce industry.
                   </p>
 
-                  <div className="login-div2 clearfix mb-5">
+                  <div className="login-div2 search-btn clearfix mb-5">
                     <input
                       type="text"
                       className="my-input-field"

@@ -86,7 +86,7 @@ useEffect(()=>{
                 </ul>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6 col-md-6">
+            <div className="col-lg-3 col-sm-6 col-md-6 col-6">
               <div className="single-footer-widget">
                 <h3>Information</h3>
                 <ul className="link-list">
@@ -111,7 +111,7 @@ useEffect(()=>{
                 </ul>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6 col-md-6">
+            <div className="col-lg-3 col-sm-6 col-md-6 col-6">
               <div className="single-footer-widget">
                 <h3>Customer Care</h3>
                 <ul className="link-list">
