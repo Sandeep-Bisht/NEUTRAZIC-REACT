@@ -145,7 +145,6 @@ const AllProducts = (props) => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-        //history.push("/Cart");
         toast.success("Added to cart", {
           position: "bottom-right",
           autoClose: 1000,
@@ -192,15 +191,11 @@ const AllProducts = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          //history.push("/Cart");
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
-    // else{
-    //    history.push('/Register')
-    // }
   };
 
   var page = 1;

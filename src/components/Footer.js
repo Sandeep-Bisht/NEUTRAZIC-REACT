@@ -37,7 +37,6 @@ const Footer = () => {
     // setLoginState(loginState);
     setIsLogin(loginState);
     window.scroll(0, 0);
-    console.log(Userdata, "helo userData");
   }, [loginState]);
 
   const GetUserData = async (data) => {

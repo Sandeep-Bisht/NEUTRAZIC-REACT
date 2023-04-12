@@ -55,7 +55,6 @@ const HomePage = () => {
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
   const [search, setSearch] = useState("");
-
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
@@ -67,7 +66,6 @@ const HomePage = () => {
   const [blogs, setBlogs] = useState();
   const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
-
   const cookies = new Cookies();
   const { state1, setState1 } = useContext(CurrencyContext);
   const { loginState, setLoginState } = useContext(CurrencyContext);
@@ -1129,7 +1127,6 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-
         <div className="brands-area">
           <div className="container m-auto">
             <div className="trendign-head">
@@ -1176,7 +1173,6 @@ const HomePage = () => {
                       <span className="nutrazik-color">Nutrazik</span> <br />{" "}
                       mobile app
                     </h3>
-
                     <div>
                       <p id="para" className="text-justify">
                         Our nutraceutical app is designed to help you live a
@@ -1205,7 +1201,6 @@ const HomePage = () => {
                           <div>
                             <IoLogoGooglePlaystore />
                           </div>
-
                           <div>Google Play</div>
                         </div>
                       </button>
@@ -1251,7 +1246,6 @@ const HomePage = () => {
                                         className="card-img-homepage"
                                         alt="blog-image"
                                       />
-
                                       <div className="card-body">
                                         <h6 className="blog-title-text">
                                           {item.title}
