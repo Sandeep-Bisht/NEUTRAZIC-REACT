@@ -142,29 +142,6 @@ const UserProfile = (props) => {
                               Phone Number
                             </label>
                           </div>
-                          {/* <div className="col-6 p-1 form-floating">
-                            <input
-                            type="password"
-                              className="form-control h-100"
-                              id="floatingInputValue"
-                              placeholder="Password"
-                              rows="6"
-                              defaultValue={
-                                editableData ? editableData.password : ""
-                              }
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  description: e.target.value,
-                                });
-                              }}
-                            >
-
-                            </input>
-                            <label for="floatingInputValue">
-                              Password
-                            </label>
-                          </div> */}
                           <div className="col-6 p-1 form-floating">
                             <input
                             type="text"
@@ -207,25 +184,6 @@ const UserProfile = (props) => {
                               userStatus
                             </label>
                           </div>
-                          {/* <div className="col-6 p-1 form-floating">
-                            <input
-                            type="text"
-                              className="form-control h-100"
-                              id="floatingInputValue"
-                              placeholder="New Password"
-                              rows="6"
-                              defaultValue=""
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  password: e.target.value,
-                                });
-                              }}
-                            ></input>
-                            <label for="floatingInputValue">
-                              New Password
-                            </label>
-                          </div> */}
                           {editableData && (
                             <div className="col-12 p-1">
                               <button

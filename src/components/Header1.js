@@ -494,38 +494,6 @@ const Header1 = (props) => {
     setLoginModal(false);
     setForgetModal(false);
   };
-
-
-  // const GetUserData = async(userEmail)=>{
-  //   await fetch(`${baseUrl}/api/auth/allusers`)
-  //   .then((res)=>res.json())
-  //   .then(async(data)=>{
-  //     //  await setUserdata(data.data);
-  //      const filteredEmail=[];
-  //     for(var item of data.data){
-  //       filteredEmail.push(item.email);
-  //     }
-  //      const filteredNewEmail=await filteredEmail.filter((item)=>{
-  //       console.log(item,"filted item")
-  //       return item===userEmail;
-  //     })
-  //     setUserdata(filteredNewEmail);
-  //      console.log(userdata,"inside");
-  //      if(filteredNewEmail)
-  //      {
-  //       console.log(filteredEmail,"inside of scop");
-  //       setIsModalVisible(true);
-  //       $("#loginModalCloseBtn").click();
-  //      }
-  //      else{
-  //       console.log("out of scop");
-  //      }
-
-  //   })
-  //   .catch((err) => {
-  //     console.log(err, "error");
-  //   });
-  //   }
   const GetUserData = async (userEmail) => {
     const currentEmail=userEmail.email;
     try {
