@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "../views/landing/homepage.css";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import $ from "jquery";
-import { useForm } from "react-hook-form";
 import { baseUrl } from "../utils/services";
 import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 var Userdata = "";
 const Footer = () => {
   const { loginState, setLoginState } = useContext(CurrencyContext);
@@ -31,11 +31,13 @@ const Footer = () => {
   const WishlistHandler = () => {
     window.scroll(0, 0);
   };
+
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     // setLoginState(loginState);
     setIsLogin(loginState);
     window.scroll(0, 0);
+    console.log(Userdata, "helo userData");
   }, [loginState]);
 
   const GetUserData = async (data) => {
@@ -55,27 +57,23 @@ const Footer = () => {
               autoClose: 1000,
             });
             reset();
-          } else{
+          } else {
             setMessage("Please Register this Email First");
-            setTimeout(()=>{
-              setMessage("");
-            },3000)
-            
             reset();
           }
         })
         .catch((err) => {
           console.log(err, "error");
         });
-    }
-    else{
+    } else {
       setMessage("Please Login or Register First to Subscribe us");
       setTimeout(() => {
-          setMessage("");
+        setMessage("");
       }, 3000);
       reset();
     }
   };
+
   return (
     <>
       <div className="container">
@@ -99,7 +97,7 @@ const Footer = () => {
                     <li>
                       <span>Email:</span>{" "}
                       <a href="mailto:info@nutrazik.com" target="_blank">
-                        info@nutrazik.com
+                        mailto:info@nutrazik.com
                       </a>
                     </li>
                     <li>
@@ -148,7 +146,7 @@ const Footer = () => {
                   </ul>
                 </div>
               </div>
-              <div className="col-lg-3 col-sm-6 col-md-6">
+              <div className="col-lg-3 col-sm-6 col-md-6 col-6">
                 <div className="single-footer-widget">
                   <h3>Information</h3>
                   <ul className="link-list">
@@ -164,7 +162,7 @@ const Footer = () => {
                       <Link to="/privacy&policy">Privacy Policy</Link>
                     </li>
                     <li>
-                      <Link to="/terms&conditions">Terms &amp; Conditions</Link>
+                      <Link to="/termsofservices">Terms &amp; Conditions</Link>
                     </li>
                     <li>
                       <Link to="/shippingPolicy">Shipping Policy</Link>
@@ -175,7 +173,7 @@ const Footer = () => {
                   </ul>
                 </div>
               </div>
-              <div className="col-lg-3 col-sm-6 col-md-6">
+              <div className="col-lg-3 col-sm-6 col-md-6 col-6">
                 <div className="single-footer-widget">
                   <h3>Customer Care</h3>
                   <ul className="link-list">
@@ -226,7 +224,7 @@ const Footer = () => {
                       type="text"
                       className="input-newsletter"
                       placeholder="Enter your email address"
-                      onInput={()=>setMessage("")}
+                      onInput={() => setMessage("")}
                       {...register("email", {
                         required: true,
                         pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
@@ -324,7 +322,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <ToastContainer />
         </footer>
       </div>
     </>

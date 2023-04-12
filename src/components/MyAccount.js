@@ -58,7 +58,7 @@ const MyAccount = () => {
                       {/* {errors?.name?.type === "required" && <p className="text-danger">This field is required</p>} */}
                     </div>
 
-                    <div className="col-md-6 col-12 p-1">
+                    {/* <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Address:</p>
                       <input
                         type="text"
@@ -67,8 +67,8 @@ const MyAccount = () => {
                         rows="3"
                         {...register("address", { required: false })}
                       />
-                    </div>
-                    <div className="col-md-6 col-12 p-1">
+                    </div> */}
+                    {/* <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Pincode:</p>
                       <input
                         type="number"
@@ -83,7 +83,7 @@ const MyAccount = () => {
                         maxLength={6}
                         {...register("pincode", { required: false })}
                       />
-                    </div>
+                    </div> */}
                     <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Mobile Number:</p>
                       <input
@@ -103,7 +103,7 @@ const MyAccount = () => {
                         name="email"
                       />
                     </div>
-                    <div className="col-md-6 col-12 p-1">
+                    {/* <div className="col-md-6 col-12 p-1">
                       <p className="ps-1">Alternative Number</p>
                       <input
                         type="number"
@@ -119,7 +119,7 @@ const MyAccount = () => {
                         maxLength={10}
                         {...register("alternativeNumber", { required: false })}
                       />
-                      </div>
+                      </div> */}
 
                     <div className="col-12 d-flex justify-content-center mt-4 p-2">
                       <button

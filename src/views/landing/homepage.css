@@ -20264,12 +20264,21 @@ svg {
   .contact-container {
     margin-top: 98px !important;
   }
+  .home-banner {
+    margin-top: 60px;
+  }
 }
 
 @media only screen and (max-width: 575.98px) {
+  .search-btn{
+    width: 40%;
+  }
+  .home-banner .home-banner-left .home-banner-heading {
+    margin-bottom: 18px;
+  }
   /* reponsive homepage */
   .home-banner {
-    padding-top: 100px;
+    margin-top: 65px;
   }
   .single-products-box .image img {
     width: 100% !important;
@@ -20432,10 +20441,13 @@ svg {
   .home-banner .home-banner-left .home-banner-heading {
     font-size: 20px !important;
   }
+  .home-banner{
+    margin-top: 97px;
+  }
   .home-banner .home-banner-content {
-    line-height: 25px;
+    line-height: 27px;
     font-size: 14px;
-    margin-top: -9px;
+    margin-top: 0px;
   }
   .home-banner .home-banner-right img {
     height: 365px;
@@ -20591,6 +20603,12 @@ svg {
     width: 100%;
     text-align: center;
   }
+  .search-btn{
+    display: none!important;
+  }
+  .home-banner .home-banner-right img{
+    bottom: 0px;
+  }
 }
 @media only screen and (max-width: 430px) {
   .allproduct-price-div .text-start,
@@ -20625,12 +20643,20 @@ svg {
   .content figcaption {
     font-size: 12px !important;
   }
+  .home-banner .home-banner-content {
+    line-height: 27px!important;
+    font-size: 14px!important;
+    margin-top: -11px!important;
+  }
   /* end homepage */
   .contact-container-div {
     overflow: hidden !important;
   }
   div#columns .figure figcaption {
     font-size: 0.8rem !important;
+  }
+  .single-footer-widget .link-list li {
+    margin-bottom: 8px!important;
   }
 }
 
