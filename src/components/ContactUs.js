@@ -5,8 +5,11 @@ import Header1 from "./Header1";
 import Baseline from "./Baseline";
 import "../views/landing/homepage.css";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
 
 const ContactUs = () => {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -14,16 +17,31 @@ const ContactUs = () => {
     watch,
     reset,
   } = useForm({
-    defaultValues: {
-      fullname: "",
-      email: "",
-      mobilenumber: "",
-      subject: "",
-    },
+    // defaultValues: {
+    //   fullname: "",
+    //   email: "",
+    //   mobilenumber: "",
+    //   subject: "",
+    // },
     mode: "onBlur",
   });
-  const RegisterUser = (data) => {
+  const userContact = (data,e) => {
+    e.preventDefault();
+    console.log(data,"Data Sending");
+    if(data.email !== "" && data.name !== "" && data.mobilenumber !== "" && data.subject !== ""){
+    toast.success("Message has been sent",{
+      position:"bottom-right",
+      autoClose:3000,
+    })
     reset();
+  }
+  else{
+    toast.error("Please Fill data",{
+      position:"bottom-left",
+      autoClose:4000,
+    })
+  }
+    
   };
   return (
     <>
@@ -95,7 +113,7 @@ const ContactUs = () => {
                 <div className="contact-form">
                   <span className="sub-title">Get In Touch</span>
                   <h2>We want to provide you with a great experience</h2>
-                  <form id="contactForm" onSubmit={handleSubmit(RegisterUser)}>
+                  <form id="contactForm" onSubmit={handleSubmit(userContact)}>
                     <div className="row">
                       <div className="col-lg-6 col-md-6 col-sm-6">
                         <div className="form-group">
@@ -132,6 +150,11 @@ const ContactUs = () => {
                             id="phone_number"
                             {...register("mobilenumber", {
                             })}
+                            onInput={(e)=>{
+                              if(e.target.value > e.target.maxLength){
+                                e.target.value = e.target.value.slice(0,e.target.maxLength)
+                              }
+                            }}
                             maxLength={10}
                           />
                           
@@ -159,8 +182,9 @@ const ContactUs = () => {
                             className="form-control"
                             cols="30"
                             rows="6"
-                            required=""
                             data-error="Please enter your message"
+                            {...register("message", {
+                            })}
                           ></textarea>
                         </div>
                       </div>
@@ -197,6 +221,7 @@ const ContactUs = () => {
         <i className="bx bx-up-arrow-alt"></i>
       </div>
       <Footer />
+      <ToastContainer className="red-toast-container"/>
     </>
   );
 };

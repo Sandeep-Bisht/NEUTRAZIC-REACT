@@ -19952,6 +19952,18 @@ svg {
   .single-contact-info-box {
     height: 260px!important;
   }
+  .blog-section .blog-page-section-2 .card .card-body{
+    height: 140px !important;
+  }
+  .blog-section .displayed-text{
+    font-size: 12px !important;
+  }
+  .blog-section .display-text-group{
+    line-height: 1;
+  }
+  .blog-section .blog-title-text{
+    font-size: 14px !important;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .first-nav {
