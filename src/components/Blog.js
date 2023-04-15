@@ -136,7 +136,7 @@ function Blogs() {
                                         min={80}
                                         ideal={80}
                                         max={80}
-                                        readMoreText={"...Read More"}
+                                        readMoreText={"Read More"}
                                       />
                                     </p>
                                   </div>

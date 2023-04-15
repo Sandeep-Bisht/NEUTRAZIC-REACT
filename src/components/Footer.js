@@ -57,7 +57,7 @@ const Footer = () => {
             });
             reset();
           } else {
-            setMessage("Please Register this Email First");
+            setMessage("Invalid email address");
             setTimeout(() => {
               setMessage("");
             }, 2000);
