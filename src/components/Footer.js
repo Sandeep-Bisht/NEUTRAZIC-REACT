@@ -58,9 +58,9 @@ const Footer = () => {
             reset();
           } else {
             setMessage("Please Register this Email First");
-            setTimeout(()=>{
+            setTimeout(() => {
               setMessage("");
-            },2000)
+            }, 2000);
             reset();
           }
         })
@@ -239,13 +239,29 @@ const Footer = () => {
                     )}
                     <p className="text-danger">{message}</p>
                     <div className="align-items-center">
-                      <button type="submit" className="default-btn">
-                        Subscribe Now
-                        <img
-                          src={require("../Images/Icons/cib_telegram-plane.png")}
-                          className="pl-2 pb-1"
-                        />
-                      </button>
+                      {Userdata ? (
+                        <button type="submit" className="default-btn">
+                          Subscribe Now
+                          <img
+                            src={require("../Images/Icons/cib_telegram-plane.png")}
+                            className="pl-2 pb-1"
+                          />
+                        </button>
+                      ) : (
+                        <button
+                          data-bs-toggle="modal"
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                          className="default-btn"
+                        >
+                          Subscribe Now
+                          <img
+                            src={require("../Images/Icons/cib_telegram-plane.png")}
+                            className="pl-2 pb-1"
+                          />
+                        </button>
+                      )}
                     </div>
 
                     <div

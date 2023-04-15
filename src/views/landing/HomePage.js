@@ -1110,7 +1110,7 @@ const HomePage = () => {
               {/* hover Button */}
               <div className="wrapperbtn pt-3 pb-4">
                 {data
-                  .filter((item) => item.category.name == "Fitness")
+                  .filter((item) => item.category.name == singlecategory.name)
                   .map((el, index) => {
                     if (index < 1) {
                       return (
@@ -1256,7 +1256,7 @@ const HomePage = () => {
                                             min={60}
                                             ideal={60}
                                             max={60}
-                                            readMoreText={"...Read More"}
+                                            readMoreText={"Read More"}
                                           />
                                         </p>
                                       </div>
