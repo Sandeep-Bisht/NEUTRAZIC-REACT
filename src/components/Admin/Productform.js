@@ -60,7 +60,7 @@ const Productform = (props) => {
       error.otherImage = "This field is required";
     }
     return error;
-  }
+  };
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -100,9 +100,8 @@ const Productform = (props) => {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log('Form has errors. Please correct them.');
+      console.log("Form has errors. Please correct them.");
     }
-
   };
 
   useEffect(() => {
@@ -113,11 +112,31 @@ const Productform = (props) => {
     GetData();
     GetSubCategory();
     if (editableData) {
-      let { category, subcategory, manufacturer, type, ...restData } = editableData
-      { category ? restData.category = category._id : restData.category = "" }
-      { subcategory ? restData.subcategory = subcategory._id : restData.subcategory = "" }
-      { manufacturer ? restData.manufacturer = manufacturer._id : restData.manufacturer = "" }
-      { type ? restData.type = type._id : restData.type = "" }
+      let {
+        category,
+        subcategory,
+        manufacturer,
+        type,
+        ...restData
+      } = editableData;
+      {
+        category
+          ? (restData.category = category._id)
+          : (restData.category = "");
+      }
+      {
+        subcategory
+          ? (restData.subcategory = subcategory._id)
+          : (restData.subcategory = "");
+      }
+      {
+        manufacturer
+          ? (restData.manufacturer = manufacturer._id)
+          : (restData.manufacturer = "");
+      }
+      {
+        type ? (restData.type = type._id) : (restData.type = "");
+      }
       Setdata(restData);
     }
     $(document).ready(function() {
@@ -245,7 +264,7 @@ const Productform = (props) => {
                               }}
                             />
                             <p className="formerror">{formErrors.name}</p>
-                            <label for="floatingform" >Product Name</label>
+                            <label for="floatingform">Product Name</label>
                           </div>
                           <div className="col-6 p-1">
                             <input
@@ -278,7 +297,6 @@ const Productform = (props) => {
                             <p className="formerror">{formErrors.otherImage}</p>
                           </div>
 
-
                           <div className="col-6 p-1 required">
                             <select
                               className="form-control Dashborad-search custom-select"
@@ -290,10 +308,11 @@ const Productform = (props) => {
                                 });
                               }}
                             >
-
-                              <option value='' hidden defaultChecked>Select Category</option>
+                              <option value="" hidden defaultChecked>
+                                Select Category
+                              </option>
                               {categories.map((el, ind) => (
-                                <option value={el._id} >{el.name}</option>
+                                <option value={el._id}>{el.name}</option>
                               ))}
                             </select>
                             <p className="formerror">{formErrors.category}</p>
@@ -309,14 +328,16 @@ const Productform = (props) => {
                                 });
                               }}
                             >
-                              <option value='' disabled hidden>
+                              <option value="" disabled hidden>
                                 Select Sub Category
                               </option>
                               {subcategories.map((el, ind) => (
                                 <option value={el._id}>{el.name}</option>
                               ))}
                             </select>
-                            <p className="formerror">{formErrors.subcategory}</p>
+                            <p className="formerror">
+                              {formErrors.subcategory}
+                            </p>
                           </div>
 
                           {Userdata.role === "superAdmin" ? (
@@ -331,7 +352,7 @@ const Productform = (props) => {
                                   });
                                 }}
                               >
-                                <option value='' disabled hidden>
+                                <option value="" disabled hidden>
                                   Select Vendor
                                 </option>
                                 {subcategories.map((el, ind) => (
@@ -339,17 +360,17 @@ const Productform = (props) => {
                                 ))}
                               </select>
                             </div>
-                          ) : <div className="col-6 p-1 form-floating required">
-                            <input
-                              type="text"
-                              id="floatingform"
-                              className="form-control Dashborad-search"
-                              placeholder="Product Name"
-                              value={Userdata && Userdata.username}
-                            />
-                          </div>}
-
-
+                          ) : (
+                            <div className="col-6 p-1 form-floating required">
+                              <input
+                                type="text"
+                                id="floatingform"
+                                className="form-control Dashborad-search"
+                                placeholder="Product Name"
+                                value={Userdata && Userdata.username}
+                              />
+                            </div>
+                          )}
 
                           <div className="col-6 p-1 required">
                             <select
@@ -362,7 +383,7 @@ const Productform = (props) => {
                                 });
                               }}
                             >
-                              <option value='' disabled hidden>
+                              <option value="" disabled hidden>
                                 Select Manufacturer
                               </option>
                               {manufactureres.map((el, ind) =>
@@ -374,7 +395,9 @@ const Productform = (props) => {
                                 ) : null
                               )}
                             </select>
-                            <p className="formerror">{formErrors.manufacturer}</p>
+                            <p className="formerror">
+                              {formErrors.manufacturer}
+                            </p>
                           </div>
 
                           <div className="col-6 p-1 required">
@@ -388,7 +411,7 @@ const Productform = (props) => {
                                 });
                               }}
                             >
-                              <option value='' disabled hidden>
+                              <option value="" disabled hidden>
                                 Select warehouse
                               </option>
                               {warehouse.map((el, ind) =>
@@ -407,9 +430,7 @@ const Productform = (props) => {
                               type="number"
                               id="floatingform"
                               className="form-control Dashborad-search"
-                              defaultValue={
-                                data.quantity
-                              }
+                              defaultValue={data.quantity}
                               placeholder="Quantity of Product"
                               onChange={(e) => {
                                 Setdata({
@@ -428,9 +449,7 @@ const Productform = (props) => {
                               id="floatingform"
                               className="form-control Dashborad-search"
                               placeholder="MRP In Rupees"
-                              defaultValue={
-                                data.inrMrp
-                              }
+                              defaultValue={data.inrMrp}
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
@@ -445,9 +464,7 @@ const Productform = (props) => {
                               type="text"
                               id="floatingform"
                               className="form-control Dashborad-search"
-                              defaultValue={
-                                data.inrDiscount
-                              }
+                              defaultValue={data.inrDiscount}
                               placeholder="Price after discount In Rupees"
                               onChange={(e) => {
                                 Setdata({
@@ -466,9 +483,7 @@ const Productform = (props) => {
                               id="floatingform"
                               className="form-control Dashborad-search"
                               placeholder="MRP In Doller"
-                              defaultValue={
-                                data.dollerMrp
-                              }
+                              defaultValue={data.dollerMrp}
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
@@ -484,9 +499,7 @@ const Productform = (props) => {
                               type="text"
                               id="floatingform"
                               className="form-control Dashborad-search"
-                              defaultValue={
-                                data.dollerDiscount
-                              }
+                              defaultValue={data.dollerDiscount}
                               placeholder="Price after discount In Dollers"
                               onChange={(e) => {
                                 Setdata({
@@ -495,21 +508,19 @@ const Productform = (props) => {
                                 });
                               }}
                             />
-                            <label for="floatingform">
-                              Discount In Dollar
-                            </label>
+                            <label for="floatingform">Discount In Dollar</label>
                           </div>
                           <div className="col-6 p-1">
                             <select
                               className="form-control Dashborad-search custom-select"
-                              value={
-                                data.type
-                              }
+                              value={data.type}
                               onChange={(e) => {
                                 Setdata({ ...data, type: e.target.value });
                               }}
                             >
-                              <option value='' hidden defaultChecked>Select Product Type</option>
+                              <option value="" hidden defaultChecked>
+                                Select Product Type
+                              </option>
                               <option value="Trending Product">
                                 Trending Product
                               </option>
@@ -520,9 +531,7 @@ const Productform = (props) => {
                               className="form-control h-100"
                               id="floatingform"
                               placeholder="Product Description"
-                              defaultValue={
-                                data.description
-                              }
+                              defaultValue={data.description}
                               rows="3"
                               onChange={(e) => {
                                 Setdata({
@@ -541,9 +550,7 @@ const Productform = (props) => {
                               <div className="col-6 p-1">
                                 <button
                                   className="btn btn-registration"
-                                  onClick={(e) =>
-                                    UpdateProduct(e, data._id)
-                                  }
+                                  onClick={(e) => UpdateProduct(e, data._id)}
                                 >
                                   Update
                                 </button>
