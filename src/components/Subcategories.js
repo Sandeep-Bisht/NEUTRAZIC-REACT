@@ -218,7 +218,6 @@ const Subcategories = (props) => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-        // history.push("/Cart");
       })
       .then((err) => console.log(err));
   };

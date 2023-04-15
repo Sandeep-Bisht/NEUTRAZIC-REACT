@@ -149,7 +149,6 @@ const ShippedOrder = () => {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
-  console.log(OrderDetails,"order of orderDetails")
   return (
     <>
       {/* table modal */}

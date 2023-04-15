@@ -30,13 +30,11 @@ const TrengingProduct = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [wishlistData, Setwishlist] = useState([]);
   const [prev, SetPrev] = useState(0);
-  //  const [next, SetNext] = useState(false);
   const [filter, setFilter] = useState("");
   const [mrp, setMrp] = useState();
   const [data, setData] = useState([]);
   const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
-  // const cookies = new Cookies();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
 
@@ -321,7 +319,7 @@ const TrengingProduct = (props) => {
                 GetWishlist();
               })
               .catch((err) => {
-                console.log(err, "error e");
+                console.log(err, "error");
               });
           }
         } else {
@@ -356,7 +354,7 @@ const TrengingProduct = (props) => {
                   GetWishlist();
                 })
                 .catch((err) => {
-                  console.log(err, "error e");
+                  console.log(err, "error");
                 });
             }
           } else {

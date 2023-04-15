@@ -48,9 +48,7 @@ const ShipperForm = (props) => {
       Setdata(editableData);
     }
   }, []);
-
-// 
-
+  
   const GetWarehouse = async () => {
     await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
       .then((res) => res.json())
