@@ -8,6 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 var Userdata = "";
 const Footer = () => {
+  const {modalreset,setModalreset} = useContext(CurrencyContext);
+  console.log(modalreset,"THis is initial state");
+
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [users, setUsers] = useState([]);
@@ -164,7 +167,7 @@ const Footer = () => {
                       <Link to="/privacy&policy">Privacy Policy</Link>
                     </li>
                     <li>
-                      <Link to="/termsofservices">Terms &amp; Conditions</Link>
+                      <Link to="/terms&condition">Terms &amp; Conditions</Link>
                     </li>
                     <li>
                       <Link to="/shippingPolicy">Shipping Policy</Link>
@@ -253,6 +256,7 @@ const Footer = () => {
                           data-bs-target={
                             Userdata == null ? "#exampleModal" : null
                           }
+                          onClick={()=>{setModalreset("1")}}
                           className="default-btn"
                         >
                           Subscribe Now

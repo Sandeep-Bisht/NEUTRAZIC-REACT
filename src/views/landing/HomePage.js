@@ -544,20 +544,25 @@ const HomePage = () => {
                       placeholder="Search..."
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter") {
+                        if (e.key === "Enter" && search.length) {
                           searchData(search);
                           history.push("/SearchResult/" + search);
                         }
                       }}
                     />
-                    <Link to={"/SearchResult/" + search}>
+                    {/* <Link to={"/SearchResult/" + search}> */}
                       <button
                         className="search mr-1"
-                        onClick={() => searchData(search)}
+                        onClick={() => {
+                          if (search.length) {
+                            searchData(search);
+                            history.push("/SearchResult/" + search);
+                          }
+                        }}
                       >
                         <i className="bx bx-search-alt"></i>
                       </button>
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
