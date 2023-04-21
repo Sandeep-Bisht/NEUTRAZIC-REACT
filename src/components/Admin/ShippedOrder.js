@@ -11,7 +11,7 @@ import {
   Modal,
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
 const ShippedOrder = () => {

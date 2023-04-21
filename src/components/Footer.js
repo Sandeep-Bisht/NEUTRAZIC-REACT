@@ -6,12 +6,15 @@ import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
 var Userdata = "";
 const Footer = () => {
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState();
+  const [msg, setMsg] = useState();
   const ContactHandler = () => {
     window.scroll(0, 0);
   };
@@ -28,6 +31,17 @@ const Footer = () => {
     mode: "onBlur",
   });
 
+  let { resetForm,setResetForm } = useContext(CurrencyContext);
+  const clickModalResetHandler=()=>{
+    if(resetForm===0)
+    {
+      setResetForm(1);
+    }
+    else{
+      setResetForm(0);
+    }
+  }
+
   const WishlistHandler = () => {
     window.scroll(0, 0);
   };
@@ -39,41 +53,35 @@ const Footer = () => {
     window.scroll(0, 0);
   }, [loginState]);
 
-  const GetUserData = async (data) => {
-    if (Userdata !== null) {
-      const currentUseremail = data.email;
-      await fetch(`${baseUrl}/api/auth/allusers`)
-        .then((res) => res.json())
-        .then(async (data) => {
-          setUsers(data.data);
-
-          const FilteredUserbyEmail = data.data.filter(
-            (value) => value.email === currentUseremail
-          );
-          if (FilteredUserbyEmail && FilteredUserbyEmail.length > 0) {
-            toast.success("Subscribed Successfully", {
-              position: "bottom-right",
-              autoClose: 1000,
-            });
-            reset();
-          } else {
-            setMessage("Invalid email address");
-            setTimeout(() => {
-              setMessage("");
-            }, 2000);
-            reset();
-          }
-        })
-        .catch((err) => {
-          console.log(err, "error");
-        });
-    } else {
-      setMessage("Please Login or Register First to Subscribe us");
-      setTimeout(() => {
-        setMessage("");
-      }, 2000);
-      reset();
+  const Subscribed = async (data) => {
+    try{
+      const response= await axios.post(`${baseUrl}/api/subscribed/subscribed`,
+      {
+       email:data.email,
+      }
+      )
+      if(response && response.success===200)
+      {
+        setMessage(response.data.message);
+        setInterval(function(){
+          setMessage("");
+          },5000);
+      }
+      else{
+        setMsg(response.data.message);
+        setInterval(function(){
+          setMsg("");
+          },5000);
+      }
     }
+    catch(error)
+    {
+      setMessage("User already subscribed")
+      setInterval(function(){
+        setMessage("");
+        },5000);  
+    }
+    reset();  
   };
 
   return (
@@ -189,6 +197,7 @@ const Footer = () => {
                           data-bs-target={
                             Userdata == null ? "#exampleModal" : null
                           }
+                          onClick={()=>clickModalResetHandler()}
                         >
                           My Account
                         </Link>
@@ -220,7 +229,7 @@ const Footer = () => {
                   </p>
                   <form
                     className="newsletter-form"
-                    onSubmit={handleSubmit(GetUserData)}
+                    onSubmit={handleSubmit(Subscribed)}
                   >
                     <input
                       type="text"
@@ -237,9 +246,9 @@ const Footer = () => {
                         Please enter Valid email Address
                       </p>
                     )}
-                    <p className="text-danger">{message}</p>
+                    <p style={{color:"red"}}>{message}</p>
+                    <p style={{color:"red"}}>{msg}</p>
                     <div className="align-items-center">
-                      {Userdata ? (
                         <button type="submit" className="default-btn">
                           Subscribe Now
                           <img
@@ -247,21 +256,6 @@ const Footer = () => {
                             className="pl-2 pb-1"
                           />
                         </button>
-                      ) : (
-                        <button
-                          data-bs-toggle="modal"
-                          data-bs-target={
-                            Userdata == null ? "#exampleModal" : null
-                          }
-                          className="default-btn"
-                        >
-                          Subscribe Now
-                          <img
-                            src={require("../Images/Icons/cib_telegram-plane.png")}
-                            className="pl-2 pb-1"
-                          />
-                        </button>
-                      )}
                     </div>
 
                     <div

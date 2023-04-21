@@ -186,7 +186,6 @@ const Productform = (props) => {
       });
   };
 
-  // Api for Get Products uploded by Admin //
   const GetData = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())

@@ -72,6 +72,7 @@ import PageNotFound from "../components/PageNotFound";
 import NeedSupport from "../components/NeedSupport";
 import CurrencyState from "./ContextApi/CurrencyState";
 import AppStoreNutrazik from "../components/AppStoreNutrazik";
+import verifyToken from "../components/verifyToken";
 
 var Userdata = "";
 const Root = (props) => {
@@ -97,6 +98,7 @@ const Root = (props) => {
         <Router>
           <>
             <Switch>
+              <Route exact path="/subscribed/:token" component={verifyToken}/>
               <Route exact path="/AllProducts" component={AllProducts} />
               <Route exact path="/" component={HomePage} />
               <Route exact path="/Register" component={Register} />

@@ -53,6 +53,7 @@ const Header1 = (props) => {
   const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
+  let { resetForm,setResetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
@@ -65,12 +66,7 @@ const Header1 = (props) => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-  // useEffect(() => {
-  //   Userdata = JSON.parse(localStorage.getItem("Userdata"));
-  //   if (Userdata === null) {
-  //     setCartItems("");
-  //   }
-  // }, [loginState]);
+  
   const {
     register,
     handleSubmit,
@@ -127,6 +123,14 @@ const Header1 = (props) => {
     dispatch(ACTIONS.getCategories([]));
   };
 
+  console.log(resetForm,"reset number using context api")
+  useEffect(()=>{
+    if(resetForm===0 || resetForm===1)
+    {
+      reset1();
+    }
+  },[resetForm])
+
   useEffect(() => {
     if (state.noOfItemsInCart >= 0) {
       setCartItems(state.noOfItemsInCart);
@@ -162,9 +166,8 @@ const Header1 = (props) => {
       setCurrency("Dollar");
       setState1("1");
     }
-  }, [currancy]);
+  }, [currancy]); 
 
-  
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
@@ -278,10 +281,6 @@ const Header1 = (props) => {
         });
     }
   };
-  $('body').click(function(){
-    // setLoginModal(true);
-    // setForgetModal(false);
-  });
   const LoginUser = (data) => {
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
@@ -342,14 +341,6 @@ const Header1 = (props) => {
         });
     }
   };
-
-  // const headerFunction = async () => {
-  //   if (window.pageYOffset > sticky) {
-  //     header.classList.add("sticky");
-  //   } else {
-  //     header.classList.remove("sticky");
-  //   }
-  // };
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
