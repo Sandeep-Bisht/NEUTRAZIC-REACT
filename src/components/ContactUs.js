@@ -6,7 +6,7 @@ import Baseline from "./Baseline";
 import "../views/landing/homepage.css";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const ContactUs = () => {
   const history = useHistory();
@@ -14,34 +14,25 @@ const ContactUs = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     reset,
   } = useForm({
-    // defaultValues: {
-    //   fullname: "",
-    //   email: "",
-    //   mobilenumber: "",
-    //   subject: "",
-    // },
     mode: "onBlur",
   });
-  const userContact = (data,e) => {
+  const userContact = (data, e) => {
     e.preventDefault();
-    console.log(data,"Data Sending");
-    if(data.email !== "" && data.name !== "" && data.mobilenumber !== "" && data.subject !== ""){
-    toast.success("Message has been sent",{
-      position:"bottom-right",
-      autoClose:3000,
-    })
-    reset();
-  }
-  else{
-    toast.error("Please Fill data",{
-      position:"bottom-left",
-      autoClose:4000,
-    })
-  }
-    
+    if (
+      data.email !== "" &&
+      data.name !== "" &&
+      data.mobilenumber !== "" &&
+      data.subject !== ""
+    ) {
+      toast.success("Thanks for contacting us", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      reset();
+    } else {
+    }
   };
   return (
     <>
@@ -59,36 +50,36 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6 contact-card">
                 <div className="single-contact-info-box contact-address-box">
                   <div className="icon">
-                  <i class='bx bx-location-plus'></i>
+                    <i class="bx bx-location-plus"></i>
                   </div>
                   <h3>Address</h3>
-                  <p> 
-                      Sujok Building, 2nd floor, mansarovar colony, Ballupur
-                      Chowk, Dehradun, Uttarakhand{" "}
+                  <p>
+                    Sujok Building, 2nd floor, mansarovar colony, Ballupur
+                    Chowk, Dehradun, Uttarakhand{" "}
                   </p>
                 </div>
               </div>
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                  <i class='bx bx-phone-call'></i>
+                    <i class="bx bx-phone-call"></i>
                   </div>
                   <h3>Phone</h3>
                   <p>
-                  <a href="tel:+91-7500872014">+91-7500872014</a>
+                    <a href="tel:+91-7500872014">+91-7500872014</a>
                   </p>
                 </div>
               </div>
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                  <i class='bx bx-envelope'></i>
+                    <i class="bx bx-envelope"></i>
                   </div>
                   <h3>Email</h3>
                   <p>
-                  <span>Email:</span>{" "}
+                    <span>Email:</span>{" "}
                     <a href="mailto:info@nutrazik.com" target="_blank">
-                    info@nutrazik.com
+                      info@nutrazik.com
                     </a>
                   </p>
                 </div>
@@ -96,7 +87,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                  <i class='bx bx-support' ></i>
+                    <i class="bx bx-support"></i>
                   </div>
                   <h3>Supporting Hours</h3>
                   <p>Monday - Saturday</p>
@@ -122,8 +113,7 @@ const ContactUs = () => {
                             type="text"
                             className="form-control"
                             id="name"
-                            {...register("fullname", {
-                            })}
+                            {...register("fullname", {})}
                           />
                         </div>
                       </div>
@@ -135,10 +125,8 @@ const ContactUs = () => {
                             name="email"
                             className="form-control"
                             id="email"
-                            {...register("email", {
-                            })}
+                            {...register("email", {})}
                           />
-                          
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -148,16 +136,17 @@ const ContactUs = () => {
                             type="number"
                             className="form-control"
                             id="phone_number"
-                            {...register("mobilenumber", {
-                            })}
-                            onInput={(e)=>{
-                              if(e.target.value > e.target.maxLength){
-                                e.target.value = e.target.value.slice(0,e.target.maxLength)
+                            {...register("mobilenumber", {})}
+                            onInput={(e) => {
+                              if (e.target.value > e.target.maxLength) {
+                                e.target.value = e.target.value.slice(
+                                  0,
+                                  e.target.maxLength
+                                );
                               }
                             }}
                             maxLength={10}
                           />
-                          
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
@@ -167,10 +156,8 @@ const ContactUs = () => {
                             type="text"
                             className="form-control"
                             id="subject"
-                            {...register("subject", {
-                            })}
+                            {...register("subject", {})}
                           />
-                          
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12">
@@ -183,8 +170,7 @@ const ContactUs = () => {
                             cols="30"
                             rows="6"
                             data-error="Please enter your message"
-                            {...register("message", {
-                            })}
+                            {...register("message", {})}
                           ></textarea>
                         </div>
                       </div>
@@ -221,7 +207,7 @@ const ContactUs = () => {
         <i className="bx bx-up-arrow-alt"></i>
       </div>
       <Footer />
-      <ToastContainer className="red-toast-container"/>
+      <ToastContainer className="red-toast-container" />
     </>
   );
 };

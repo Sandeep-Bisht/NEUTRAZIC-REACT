@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
-import {BiCategoryAlt } from "react-icons/bi";
+import { BiCategoryAlt } from "react-icons/bi";
 
 let changeNavValue = 0;
 var header;
@@ -53,24 +53,32 @@ const Header1 = (props) => {
   const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
+  const { modalreset, setModalreset } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
   const [forgetSecondModal, setForgetSecondModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [userdata,setUserdata]=useState();
-  const [forgetMsg,setForgetMsg]=useState("");
+  const [userdata, setUserdata] = useState();
+  const [forgetMsg, setForgetMsg] = useState("");
 
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
+
+  useEffect(() => {
+    if(modalreset &&  modalreset=== "1"){
+      reset1();
+    }
+  }, [modalreset]);
   // useEffect(() => {
   //   Userdata = JSON.parse(localStorage.getItem("Userdata"));
   //   if (Userdata === null) {
   //     setCartItems("");
   //   }
   // }, [loginState]);
+  console.log(modalreset, "This is header checking state");
   const {
     register,
     handleSubmit,
@@ -164,7 +172,6 @@ const Header1 = (props) => {
     }
   }, [currancy]);
 
-  
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
@@ -233,7 +240,7 @@ const Header1 = (props) => {
       data.password == data.repassword
     ) {
       let username = data.username.toLowerCase();
-      data.role="superAdmin"
+      data.role = "superAdmin";
       data.userStatus = "Activate";
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
@@ -278,7 +285,7 @@ const Header1 = (props) => {
         });
     }
   };
-  $('body').click(function(){
+  $("body").click(function() {
     // setLoginModal(true);
     // setForgetModal(false);
   });
@@ -299,35 +306,34 @@ const Header1 = (props) => {
         .then(async (res) => {
           setLoginState("1");
           if (res && res.userStatus && res.userStatus === "Activate") {
-          if (res && res.role === "user") {
-            Userdata = res;
-            await localStorage.setItem("Userdata", JSON.stringify(res));
-            await CartById();
-            $("#loginModalCloseBtn").click();
+            if (res && res.role === "user") {
+              Userdata = res;
+              await localStorage.setItem("Userdata", JSON.stringify(res));
+              await CartById();
+              $("#loginModalCloseBtn").click();
 
-            reset();
-            toast.success("Login successfully", {
-              position: "bottom-right",
-              autoClose: 2000,
-            });
-          } else if (
-            res.role == "superAdmin" ||
-            res.role == "Vendor" ||
-            res.role == "Manager"
-          ) {
-            await localStorage.setItem("Userdata", JSON.stringify(res));
-            await localStorage.setItem("Userdata1", JSON.stringify(res.role));
-            await CartById();
-            $("#loginModalCloseBtn").click();
-            history.push("/Dashboard");
+              reset();
+              setModalreset("0");
+              toast.success("Login successfully", {
+                position: "bottom-right",
+                autoClose: 2000,
+              });
+            } else if (
+              res.role == "superAdmin" ||
+              res.role == "Vendor" ||
+              res.role == "Manager"
+            ) {
+              await localStorage.setItem("Userdata", JSON.stringify(res));
+              await localStorage.setItem("Userdata1", JSON.stringify(res.role));
+              await CartById();
+              $("#loginModalCloseBtn").click();
+              history.push("/Dashboard");
+            } else if (res.success === 403) {
+              setMsg(res.error);
+            }
           } else if (res.success === 403) {
             setMsg(res.error);
-          }
-          }
-          else if (res.success === 403) {
-            setMsg(res.error);
-          }
-          else {
+          } else {
             setMsg(res.error);
           }
         })
@@ -371,6 +377,7 @@ const Header1 = (props) => {
       });
   };
   const searchData = (e) => {
+
     if (props.func) {
       props.func(e);
     }
@@ -478,7 +485,7 @@ const Header1 = (props) => {
     reset3();
     setForgetModal(true);
   };
-  const forgetPassword = async(data) => {
+  const forgetPassword = async (data) => {
     await GetUserData(data);
   };
   const forgetSecondPassword = (data) => {
@@ -495,26 +502,25 @@ const Header1 = (props) => {
     setForgetModal(false);
   };
   const GetUserData = async (userEmail) => {
-    const currentEmail=userEmail.email;
+    const currentEmail = userEmail.email;
     try {
       const res = await fetch(`${baseUrl}/api/auth/allusers`);
       const data = await res.json();
       const filteredEmail = data.data.map((item) => item.email);
       const filteredNewEmail = filteredEmail.filter((item) => {
-        return item===currentEmail;
+        return item === currentEmail;
       });
       if (filteredNewEmail.length > 0) {
         setIsModalVisible(true);
         $("#loginModalCloseBtn").click();
       } else {
-        setForgetMsg("This Email is not registered yet")
+        setForgetMsg("This Email is not registered yet");
       }
     } catch (err) {
       console.log(err, "error");
     }
   };
-  
-    
+ 
   return (
     <>
       <div
@@ -705,7 +711,7 @@ const Header1 = (props) => {
                                   )}
                                   {errors?.email?.type === "pattern" && (
                                     <p className="text-danger">
-                                      Please enter the valid Email
+                                      Please enter a valid Email
                                     </p>
                                   )}
                                 </div>
@@ -1069,25 +1075,30 @@ const Header1 = (props) => {
                           setSearch(e.target.value.toLowerCase())
                         }
                         onKeyDown={(e) => {
-                          if (e.key === "Enter") {
+                          if (e.key === "Enter" && search.length) {
                             searchData(search);
                             history.push("/SearchResult/" + search);
                           }
                         }}
                       />
-                      <Link to={"/SearchResult/" + search}>
+                      {/* <Link to={"/SearchResult/" + search}> */}
                         <button
                           className="search mr-1"
-                          onClick={() => searchData(search)}
+                          onClick={() => {
+                            if (search.length) {
+                              searchData(search);
+                              history.push("/SearchResult/" + search);
+                            }
+                          }}
                         >
                           <i className="bx bx-search-alt"></i>
                         </button>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>
                 <div className="header-wrapper-right">
-                <div className="right-part">
+                  <div className="right-part">
                     <div className="d-flex align-items-center currancy">
                       <select
                         onChange={(e) => currencyHandler(e)}
@@ -1099,7 +1110,7 @@ const Header1 = (props) => {
                     </div>
                   </div>
                   <div className="left-part">
-                  <div className="cart-div">
+                    <div className="cart-div">
                       <Link to="/cart">
                         <div className=" login-div1">
                           <div className="">
@@ -1176,9 +1187,14 @@ const Header1 = (props) => {
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModal"
                               style={{ cursor: "pointer" }}
-                              onClick={()=>
-                                {reset1()
-                                setMsg("")}}
+                              onClick={() => {
+                                reset1();
+                                setMsg("");
+                                if(modalreset && modalreset === 1){
+                                  reset1();
+                                setMsg("");
+                                }
+                              }}
                             >
                               Login/Register
                             </span>
@@ -1269,7 +1285,7 @@ const Header1 = (props) => {
               >
                 <div>
                   <div className="category ">
-                  <BiCategoryAlt></BiCategoryAlt>
+                    <BiCategoryAlt></BiCategoryAlt>
                   </div>
                   <div className="category">
                     <span className="category-head">Browse Categories</span>
