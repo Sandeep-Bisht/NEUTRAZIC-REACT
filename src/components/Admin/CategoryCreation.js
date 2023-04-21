@@ -8,7 +8,6 @@ var Userdata;
 const CategoryCreation = (props) => {
   var categoryCount = 0;
   const [categories, setCategories] = useState([]);
-  const [update, setUpdate] = useState(false);
   const [formerror, setFormerror] = useState({});
   const [data, Setdata] = useState({
     name: "",
@@ -127,7 +126,6 @@ const CategoryCreation = (props) => {
                             <input
                               type="file"
                               className="form-control Dashborad-search"
-                              // onChange={SelectImage}
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
@@ -174,7 +172,6 @@ const CategoryCreation = (props) => {
                               <option value="Featured Categories">
                                 Featured Categories
                               </option>
-                              {/* <option></option> */}
                             </select>
                             <p className="formerror">{formerror.featuredCategories}</p>
                           </div>

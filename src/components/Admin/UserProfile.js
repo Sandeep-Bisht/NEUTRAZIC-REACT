@@ -10,7 +10,6 @@ var Userdata;
 const UserProfile = (props) => {
   var count = 0;
   const [userProfile, setUserProfile] = useState([]);
-  const [update, setUpdate] = useState(true);
   const [data, Setdata] = useState({
     username: "",
     email: "",
@@ -51,7 +50,6 @@ const UserProfile = (props) => {
             username:data.username,
             email:data.email,
             phonenumber:data.phonenumber,
-            // password:data.password,
             userStatus:data.userStatus,
             role:data.role
         })
