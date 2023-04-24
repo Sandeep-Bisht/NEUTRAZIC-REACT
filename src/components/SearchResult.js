@@ -243,7 +243,6 @@ const SearchResult = (props) => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
-        //history.push("/Cart");
       })
       .then((err) => console.log(err));
   };
@@ -380,7 +379,6 @@ const SearchResult = (props) => {
                   wishList.classList.add("in-wishlist");
                   wishList.classList.add("wishlisted");
                   GetWishlist();
-                  // setWishlist(data.data[0]);
                 })
                 .catch((err) => {
                   console.log(err, "error e");

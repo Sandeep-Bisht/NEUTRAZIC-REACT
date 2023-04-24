@@ -14,7 +14,7 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRePassword] = useState("");
- 
+
   const [regmsg, setRegMsg] = useState("");
   const [msg, setMsg] = useState("");
   let [userCart, setUserCart] = useState([]);
@@ -77,7 +77,7 @@ const Register = (props) => {
             await localStorage.setItem("Userdata", JSON.stringify(res));
             await CartById();
             window.location.reload();
-             history.push("/");
+            history.push("/");
           } else if (
             res.role == "superAdmin" ||
             res.role == "Vendor" ||
@@ -87,7 +87,7 @@ const Register = (props) => {
             await localStorage.setItem("Userdata1", JSON.stringify(res.role));
             window.location.reload();
             history.push("/Dashboard");
-          } 
+          }
           else if (Userdata == undefined) {
             setMsg("User Name Or PassWord is not Valid");
           }
@@ -102,7 +102,7 @@ const Register = (props) => {
           }
         });
     } else {
-     
+
     }
   };
 
@@ -205,7 +205,6 @@ const Register = (props) => {
   };
 
   useEffect(() => {
-    //loadSignup();
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
   return (

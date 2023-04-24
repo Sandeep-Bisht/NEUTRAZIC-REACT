@@ -45,7 +45,7 @@ function Faq () {
                   <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
                        <p className="common-para-3">
-                       Sell on Nutrazik is a program that enables you to list and sell your unique product on http://Nutrazik.giksindia.com/.
+                       Sell on Nutrazik is a program that enables you to list and sell your unique product on https://Nutrazik.giksindia.com/.
                        </p>
                     </div>
                   </div>

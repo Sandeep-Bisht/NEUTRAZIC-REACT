@@ -1,20 +1,85 @@
-.Appstore-section{
-    margin-top:170px;
+.Appstore-section {
+  margin-top: 170px;
 }
-.Appstore-section button{
-    margin-top: 30px;
-    padding: 8px 40px;
-    color: var(--optionalColor);
-    letter-spacing: 0.5px;
-    text-transform: capitalize;
-    font-size: 14px;
-    font-weight: 400;
-    border-radius: 0.25rem;
-    border: 2px solid rgb(27 151 255 / 33%);
+.Appstore-section .Right-Content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.Appstore-section button:hover{
+.Appstore-section .Right-Content img{
+    border-radius: 10px;
+}
+.Appstore-section .Left-Content{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.Appstore-section .Left-Content .heading-left {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.Appstore-section .Left-Content h2 {
+  font-size: 3rem;
+  color: #1e144f;
+}
+
+.Appstore-section .Left-Content .heading-left{
+    text-align: center;
+}
+.Buttons-store {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Buttons-store button {
+  padding: 8px 40px;
+  color: var(--optionalColor);
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  border: 2px solid rgb(27 151 255 / 33%);
+  margin-top: 30px;
+}
+.Buttons-store button:hover{
     background: linear-gradient( 90deg, rgb(44 160 255 / 53%) 0%, rgba(23, 150, 255, 1) 100% );
     border: none;
     color: #fff;
     padding: 10px 40px;
+}
+.coming-soon-img{
+    object-fit: contain;
+}
+
+
+@media only screen and (max-width: 1399px){
+    .Appstore-section .Left-Content h2{
+        font-size: 2.5rem;
+    }
+    .Buttons-store button{
+        padding: 8px 35px;
+    }
+}
+
+
+@media only screen and (max-width: 991px){
+    .Appstore-section .Left-Content h2{
+        font-size: 2rem;
+    }
+    .Buttons-store button{
+        padding: 8px 20px;
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .Appstore-section .Left-Content h2{
+        font-size: 2rem;
+    }
+    .Buttons-store button{
+        padding: 8px 20px;
+        margin-bottom: 10px;
+    }
 }

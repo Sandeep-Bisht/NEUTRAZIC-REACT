@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import { BiCategoryAlt } from "react-icons/bi";
 
 let changeNavValue = 0;
 var header;
@@ -52,22 +53,20 @@ const Header1 = (props) => {
   const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
+  let { resetForm,setResetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
   const [forgetSecondModal, setForgetSecondModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [userdata, setUserdata] = useState();
+  const [forgetMsg, setForgetMsg] = useState("");
 
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-  // useEffect(() => {
-  //   Userdata = JSON.parse(localStorage.getItem("Userdata"));
-  //   if (Userdata === null) {
-  //     setCartItems("");
-  //   }
-  // }, [loginState]);
+  
   const {
     register,
     handleSubmit,
@@ -124,6 +123,13 @@ const Header1 = (props) => {
     dispatch(ACTIONS.getCategories([]));
   };
 
+  useEffect(()=>{
+    if(resetForm===0 || resetForm===1)
+    {
+      reset1();
+    }
+  },[resetForm])
+
   useEffect(() => {
     if (state.noOfItemsInCart >= 0) {
       setCartItems(state.noOfItemsInCart);
@@ -145,7 +151,7 @@ const Header1 = (props) => {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
       window.onscroll = function() {
-        headerFunction();
+        // headerFunction();
       };
       $(".arrow").click(function() {
         $(".sublist").slideUp();
@@ -159,9 +165,8 @@ const Header1 = (props) => {
       setCurrency("Dollar");
       setState1("1");
     }
-  }, [currancy]);
+  }, [currancy]); 
 
-  
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
@@ -230,7 +235,7 @@ const Header1 = (props) => {
       data.password == data.repassword
     ) {
       let username = data.username.toLowerCase();
-      data.role="superAdmin"
+      data.role = "superAdmin";
       data.userStatus = "Activate";
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
@@ -275,7 +280,6 @@ const Header1 = (props) => {
         });
     }
   };
-
   const LoginUser = (data) => {
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
@@ -293,35 +297,33 @@ const Header1 = (props) => {
         .then(async (res) => {
           setLoginState("1");
           if (res && res.userStatus && res.userStatus === "Activate") {
-          if (res && res.role === "user") {
-            Userdata = res;
-            await localStorage.setItem("Userdata", JSON.stringify(res));
-            await CartById();
-            $("#loginModalCloseBtn").click();
+            if (res && res.role === "user") {
+              Userdata = res;
+              await localStorage.setItem("Userdata", JSON.stringify(res));
+              await CartById();
+              $("#loginModalCloseBtn").click();
 
-            reset();
-            toast.success("Login successfully", {
-              position: "bottom-right",
-              autoClose: 2000,
-            });
-          } else if (
-            res.role == "superAdmin" ||
-            res.role == "Vendor" ||
-            res.role == "Manager"
-          ) {
-            await localStorage.setItem("Userdata", JSON.stringify(res));
-            await localStorage.setItem("Userdata1", JSON.stringify(res.role));
-            await CartById();
-            $("#loginModalCloseBtn").click();
-            history.push("/Dashboard");
+              reset();
+              toast.success("Login successfully", {
+                position: "bottom-right",
+                autoClose: 2000,
+              });
+            } else if (
+              res.role == "superAdmin" ||
+              res.role == "Vendor" ||
+              res.role == "Manager"
+            ) {
+              await localStorage.setItem("Userdata", JSON.stringify(res));
+              await localStorage.setItem("Userdata1", JSON.stringify(res.role));
+              await CartById();
+              $("#loginModalCloseBtn").click();
+              history.push("/Dashboard");
+            } else if (res.success === 403) {
+              setMsg(res.error);
+            }
           } else if (res.success === 403) {
             setMsg(res.error);
-          }
-          }
-          else if (res.success === 403) {
-            setMsg(res.error);
-          }
-          else {
+          } else {
             setMsg(res.error);
           }
         })
@@ -334,14 +336,6 @@ const Header1 = (props) => {
             );
           }
         });
-    }
-  };
-
-  const headerFunction = async () => {
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
-    } else {
-      header.classList.remove("sticky");
     }
   };
   const GetCategory = async () => {
@@ -365,6 +359,7 @@ const Header1 = (props) => {
       });
   };
   const searchData = (e) => {
+
     if (props.func) {
       props.func(e);
     }
@@ -469,11 +464,11 @@ const Header1 = (props) => {
       .then((err) => console.log(err));
   };
   const forgetHandler = () => {
+    reset3();
     setForgetModal(true);
   };
-  const forgetPassword = (data) => {
-    setIsModalVisible(true);
-    $("#loginModalCloseBtn").click();
+  const forgetPassword = async (data) => {
+    await GetUserData(data);
   };
   const forgetSecondPassword = (data) => {
     setForgetModal(false);
@@ -485,7 +480,29 @@ const Header1 = (props) => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setLoginModal(false);
+    setForgetModal(false);
   };
+  const GetUserData = async (userEmail) => {
+    const currentEmail = userEmail.email;
+    try {
+      const res = await fetch(`${baseUrl}/api/auth/allusers`);
+      const data = await res.json();
+      const filteredEmail = data.data.map((item) => item.email);
+      const filteredNewEmail = filteredEmail.filter((item) => {
+        return item === currentEmail;
+      });
+      if (filteredNewEmail.length > 0) {
+        setIsModalVisible(true);
+        $("#loginModalCloseBtn").click();
+      } else {
+        setForgetMsg("This Email is not registered yet");
+      }
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+ 
   return (
     <>
       <div
@@ -676,7 +693,7 @@ const Header1 = (props) => {
                                   )}
                                   {errors?.email?.type === "pattern" && (
                                     <p className="text-danger">
-                                      Please enter the valid Email
+                                      Please enter a valid Email
                                     </p>
                                   )}
                                 </div>
@@ -912,6 +929,7 @@ const Header1 = (props) => {
                                 </p>
                               )}
                             </div>
+                            <p className="text-danger">{forgetMsg}</p>
                           </div>
                           <h5 className="Login-fail-msg">{msg}</h5>
                           <div className="form-group col-lg-12 justify-content-center">
@@ -1039,25 +1057,80 @@ const Header1 = (props) => {
                           setSearch(e.target.value.toLowerCase())
                         }
                         onKeyDown={(e) => {
-                          if (e.key === "Enter") {
+                          if (e.key === "Enter" && search.length) {
                             searchData(search);
                             history.push("/SearchResult/" + search);
                           }
                         }}
                       />
-                      <Link to={"/SearchResult/" + search}>
+                      {/* <Link to={"/SearchResult/" + search}> */}
                         <button
                           className="search mr-1"
-                          onClick={() => searchData(search)}
+                          onClick={() => {
+                            if (search.length) {
+                              searchData(search);
+                              history.push("/SearchResult/" + search);
+                            }
+                          }}
                         >
                           <i className="bx bx-search-alt"></i>
                         </button>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>
                 <div className="header-wrapper-right">
+                  <div className="right-part">
+                    <div className="d-flex align-items-center currancy">
+                      <select
+                        onChange={(e) => currencyHandler(e)}
+                        value={currancy}
+                      >
+                        <option value="INR">INR</option>
+                        <option value="Dollar">Dollar</option>
+                      </select>
+                    </div>
+                  </div>
                   <div className="left-part">
+                    <div className="cart-div">
+                      <Link to="/cart">
+                        <div className=" login-div1">
+                          <div className="">
+                            <div className="option-item">
+                              <div className="cart-btn">
+                                <i className="bx bx-cart"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div className=" user-login">
+                            {cartItems ? (
+                              <h6 className="Total-Item">{cartItems}</h6>
+                            ) : (
+                              ""
+                            )}
+                            <span className="sp">Cart</span>
+                            <br />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className=" heart-div ">
+                      <Link to="/WishList">
+                        <div className="  heart-div-inner">
+                          <div className="">
+                            <div className="option-item">
+                              <div className="cart-btn">
+                                {wishlisted ? <h6>{wishlisted}</h6> : ""}
+                                <i className="bx bx-heart"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div className=" user-login">
+                            <span className="sp">Wishlist</span>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                     <div className="  account-div ">
                       <div className=" login-div ">
                         <div className="option-item">
@@ -1096,9 +1169,10 @@ const Header1 = (props) => {
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModal"
                               style={{ cursor: "pointer" }}
-                              onClick={()=>
-                                {reset1()
-                                setMsg("")}}
+                              onClick={() => {
+                                reset1();
+                                setMsg("");
+                              }}
                             >
                               Login/Register
                             </span>
@@ -1174,59 +1248,6 @@ const Header1 = (props) => {
                         )}
                       </div>
                     </div>
-
-                    <div className="cart-div">
-                      <Link to="/cart">
-                        <div className=" login-div1">
-                          <div className="">
-                            <div className="option-item">
-                              <div className="cart-btn">
-                                <i className="bx bx-cart"></i>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className=" user-login">
-                            {cartItems ? (
-                              <h6 className="Total-Item">{cartItems}</h6>
-                            ) : (
-                              ""
-                            )}
-                            <span className="sp">Cart</span>
-                            <br />
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-
-                    <div className=" heart-div ">
-                      <Link to="/WishList">
-                        <div className="  heart-div-inner">
-                          <div className="">
-                            <div className="option-item">
-                              <div className="cart-btn">
-                                {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                <i className="bx bx-heart"></i>
-                              </div>
-                            </div>
-                          </div>
-                          <div className=" user-login">
-                            <span className="sp">Wishlist</span>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="right-part">
-                    <div className="d-flex align-items-center currancy">
-                      <select
-                        onChange={(e) => currencyHandler(e)}
-                        value={currancy}
-                      >
-                        <option value="INR">INR</option>
-                        <option value="Dollar">Dollar</option>
-                      </select>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -1236,24 +1257,20 @@ const Header1 = (props) => {
           <div className="container-fluid main-nav px-0">
             <div className="row mt-0" id="myHeader">
               <div
-                className="col-lg-2 col-md-2 col-sm-3 col-4 drop-category Browse-Category"
+                className="col-lg-2  col-1 drop-category Browse-Category"
                 data-bs-toggle="modal"
                 data-bs-target="#myModal"
               >
                 <div>
                   <div className="category ">
-                    <i
-                      className="fa fa-bars collapse-btn pt-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#myModal"
-                    ></i>
+                    <BiCategoryAlt></BiCategoryAlt>
                   </div>
                   <div className="category">
                     <span className="category-head">Browse Categories</span>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-10 col-md-10 col-sm-9 col-8 p-0">
+              <div className="col-lg-10 col-11 p-0">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                   <div className="container-fluid mb-1">
                     <button

@@ -50,12 +50,11 @@ const HomePage = () => {
   ];
 
   const [data, setData] = useState([]);
-  const [singlecategory,setSingleCategory] = useState([]);
+  const [singlecategory, setSingleCategory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
   const [search, setSearch] = useState("");
-
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
@@ -67,7 +66,6 @@ const HomePage = () => {
   const [blogs, setBlogs] = useState();
   const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
-
   const cookies = new Cookies();
   const { state1, setState1 } = useContext(CurrencyContext);
   const { loginState, setLoginState } = useContext(CurrencyContext);
@@ -539,27 +537,32 @@ const HomePage = () => {
                     e-commerce industry.
                   </p>
 
-                  <div className="login-div2 clearfix mb-5">
+                  <div className="login-div2 search-btn clearfix mb-5">
                     <input
                       type="text"
                       className="my-input-field"
                       placeholder="Search..."
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter") {
+                        if (e.key === "Enter" && search.length) {
                           searchData(search);
                           history.push("/SearchResult/" + search);
                         }
                       }}
                     />
-                    <Link to={"/SearchResult/" + search}>
+                    {/* <Link to={"/SearchResult/" + search}> */}
                       <button
                         className="search mr-1"
-                        onClick={() => searchData(search)}
+                        onClick={() => {
+                          if (search.length) {
+                            searchData(search);
+                            history.push("/SearchResult/" + search);
+                          }
+                        }}
                       >
                         <i className="bx bx-search-alt"></i>
                       </button>
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
@@ -740,7 +743,7 @@ const HomePage = () => {
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
-            <div className="row mt-0 featured-products"> 
+            <div className="row mt-0 featured-products">
               <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&
@@ -786,7 +789,6 @@ const HomePage = () => {
                     }
                   })}
                 {/* </Carousel> */}
-                
               </Slider>
               <div className="controls d-flex  justify-content-between">
                 <button onClick={sliderRef?.slickPrev}>
@@ -795,8 +797,7 @@ const HomePage = () => {
                 <button onClick={sliderRef?.slickNext}>
                   <FaChevronRight />
                 </button>
-                </div>
-              
+              </div>
             </div>
           </div>
         </section>
@@ -1114,7 +1115,7 @@ const HomePage = () => {
               {/* hover Button */}
               <div className="wrapperbtn pt-3 pb-4">
                 {data
-                  .filter((item) => item.category.name == "Fitness")
+                  .filter((item) => item.category.name == singlecategory.name)
                   .map((el, index) => {
                     if (index < 1) {
                       return (
@@ -1131,7 +1132,6 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-
         <div className="brands-area">
           <div className="container m-auto">
             <div className="trendign-head">
@@ -1178,7 +1178,6 @@ const HomePage = () => {
                       <span className="nutrazik-color">Nutrazik</span> <br />{" "}
                       mobile app
                     </h3>
-
                     <div>
                       <p id="para" className="text-justify">
                         Our nutraceutical app is designed to help you live a
@@ -1190,26 +1189,27 @@ const HomePage = () => {
                     </div>
                   </div>
                   <div className="btn-div">
-                    <button type="button" className="btn" id="btn-1">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <AiFillApple />
-                        </div>
-                        <Link className="mobile-app-link" to="/mobileapp">
+                    <Link className="mobile-app-link" to="/mobileapp">
+                      <button type="button" className="btn" id="btn-1">
+                        <div className="d-flex align-items-center">
+                          <div>
+                            <AiFillApple />
+                          </div>
+
                           <div>App Store</div>
-                        </Link>
-                      </div>
-                    </button>
-                    <button type="button" className="btn ms-3" id="btn-2">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <IoLogoGooglePlaystore />
                         </div>
-                        <Link className="mobile-app-link" to="/mobileapp">
+                      </button>
+                    </Link>
+                    <Link className="mobile-app-link" to="/mobileapp">
+                      <button type="button" className="btn ms-3" id="btn-2">
+                        <div className="d-flex align-items-center">
+                          <div>
+                            <IoLogoGooglePlaystore />
+                          </div>
                           <div>Google Play</div>
-                        </Link>
-                      </div>
-                    </button>
+                        </div>
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -1251,7 +1251,6 @@ const HomePage = () => {
                                         className="card-img-homepage"
                                         alt="blog-image"
                                       />
-
                                       <div className="card-body">
                                         <h6 className="blog-title-text">
                                           {item.title}
@@ -1262,7 +1261,7 @@ const HomePage = () => {
                                             min={60}
                                             ideal={60}
                                             max={60}
-                                            readMoreText={"...Read More"}
+                                            readMoreText={"Read More"}
                                           />
                                         </p>
                                       </div>

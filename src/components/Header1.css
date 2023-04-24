@@ -577,6 +577,11 @@ padding-top: 60px;
 padding-bottom: 110px;
 }
 
+.category svg{
+    color: #fff;
+    height: 25px!important;
+}
+
 .btn-demo {
 margin: 15px;
 padding: 10px 15px;
@@ -995,7 +1000,7 @@ body {
 {
     display: flex;
     align-items: center;
-    margin-right: 100px;
+    /* margin-right: 100px; */
 }
 .header-wrapper-right .right-part{
     display: flex;
@@ -1044,7 +1049,7 @@ body {
 }
 
 .right-part .currancy{
-    margin-right: 5px;
+    margin-right: 60px;
 }
 .forgetContentDiv{
     padding-left: 50px;
@@ -1171,8 +1176,8 @@ body {
     /* .login-div{
         padding-right: 70px;
     } */
-    .drop-category .category-head{
-        font-size: 10px;
+    .drop-category .category-head {
+        display: none;
     }
     .drop-category i {
         font-size: 13px;
@@ -1223,15 +1228,6 @@ body {
     .currancy{
         margin-left: 30px!important;
     }
-    /* .logo-main-div{
-         padding-top: 8px;
-    } */
-    /* .sp{
-        display: none;
-    } */
-    /* .login-div2 {
-        margin-top: 32px;
-    } */
     .user-login .Total-Item {
         position: absolute;
         bottom: 7px;
@@ -1254,9 +1250,6 @@ body {
     .category i{
         display: none!important;
     }
-    .drop-category .category-head {
-        font-size: 12px;
-    }
     .user-icon,.option-item .cart-btn{
         font-size: 18px;
     }
@@ -1264,7 +1257,7 @@ body {
         font-size: 14px;
     }
     .login-div2 input[type="text"]{
-        width: auto;
+        width: 100%;
     }
     .newheader{
         height: 108px;
@@ -1318,12 +1311,6 @@ body {
         left: 5px !important;
     }
 }
-
-
-
-
-
-
 @media only screen and (max-width : 575.98px) {
     /* responsive homepage */
     
@@ -1335,16 +1322,10 @@ body {
         object-fit: cover;
     }
     /* end homepage */
-    /* .navbar-brand img{
-        margin-left: 22px!important;
-    } */
     .newheader{
         height: 141px;
         padding-left: 0px;
         margin-left: -5px;
-    }
-    .drop-category .category-head {
-        font-size: 11px;
     }
     /* ------pras css----------- */
     .login-div2 input[type="text"]{
@@ -1356,15 +1337,9 @@ body {
     .login-div2{
         margin-left: 8px!important;
     }
-    /* .currancy{
-        padding-left: 50px!important;
-    } */
     .col-sm-2 .login-div{
         padding-left: 14px;
     }
-    /* .bx-heart{
-        padding-left: 14px;
-    } */
     .main-navbar-head{
         margin-top: -9px;
         width: 40%;
@@ -1375,7 +1350,12 @@ body {
 }
 
 @media only screen and (max-width : 450px) {
-
+    .right-part .currancy{
+        margin-right: 0px;
+    }
+    .category svg{
+        width: 19px!important;
+    }
     .blog-page-section-2 .card-body{
         height: 170px!important;
     }
@@ -1420,30 +1400,18 @@ body {
     .col-sm-2 .login-div{
         padding-left: 10px;
     }
-    /* .bx-heart{
-        padding-left: 27px;
-    }
-    */
     .main-navbar-head{
         margin-top: -9px;
         margin-left: -14px!important;
         margin-right: -1px!important;
         width: 41%;
     }
-    
-    /* .login-div{
-        width: 141px;
-    margin-left: 15px;
-    } */
-
 }
 
 @media only screen and (max-width : 390px){
     .heaader-wrapper .account-div, .heaader-wrapper .cart-div, .heaader-wrapper .heart-div{
      padding: 0 4px;
     }
-    
-    
     .navbar-brand img{
         height: 25px;
     }
@@ -1516,15 +1484,9 @@ body {
         margin-top: 17px!important;
     }
     /* end */
-    .drop-category .category-head {
-        font-size: 10px;
-    }
     .drop-category{
 		height: 34px!important;
 	}
-    .category{
-        width: 100px;
-    }
     .currancy {
         margin-left: 5px!important;
     }
@@ -1542,7 +1504,7 @@ body {
         padding-left: 10px;
     }
     .navbar-toggler{
-height: 30px;
+     height: 30px;
     }
     .drop-category {
         height: 33px;
@@ -1550,8 +1512,6 @@ height: 30px;
     .navbar-toggler-icon{
         font-size: 14px;
     }
-    
-    
     .login-div{
         width: 93px;
     margin-left: -22px;

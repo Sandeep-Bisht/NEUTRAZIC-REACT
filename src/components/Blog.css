@@ -137,7 +137,7 @@
   margin-bottom: 20px;
 }
 .blog-page-section-2 .cart-text-body {
-  min-height: 182px;
+  height: 182px;
   font-size: 12px !important;
 }
 .blog-page {
@@ -175,23 +175,32 @@
     object-fit: fill;
   } */
 }
-@media only screen and (max-width: 1199px) {
-  .blog-page-section-2 .card-body {
-    height: 210px;
+@media only screen and (max-width: 1199.98px) {
+  .blog-page .blog-page-section-2 .cart-text-body {
+    height: 140px !important;
+  }
+  .blog-page .displayed-text {
+    font-size: 12px !important;
+  }
+  .blog-page .display-text-group {
+    line-height: 1;
+  }
+  .blog-page .blog-title-text {
+    font-size: 14px !important;
   }
 }
 @media only screen and (max-width: 1024px) {
-  .blog-page-section-2 .card-body {
+  .blog-page .blog-page-section-2 .card-body {
     height: 202px;
   }
 }
-@media only screen and (max-width: 991px) {
-  .blog-page-section-2 .card-body {
+@media only screen and (max-width: 991.98px) {
+  .blog-page .blog-page-section-2 .card-body {
+    padding: 30px;
+  }
+  .blog-page .blog-page-section-2 .card-body {
     height: 150px;
     padding-top: 26px;
-  }
-  .blog-page-section-2 .card .card-body {
-    padding: 39px;
   }
   .blog-page {
     margin-top: 175px;

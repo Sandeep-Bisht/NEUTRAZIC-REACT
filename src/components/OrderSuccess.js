@@ -18,10 +18,6 @@ function OrderSuccess() {
   let [userCart, setUserCart] = useState([]);
   let dispatch = useDispatch()
 
-
-  // ActualSubtotal
-  // Usercartdata
-  // Subtotal
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ActualSubtotal = JSON.parse(localStorage.getItem("ActualSubtotal"));

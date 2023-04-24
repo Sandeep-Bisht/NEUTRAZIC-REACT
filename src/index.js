@@ -4,5 +4,5 @@ import Root from './routes';
 
 import registerServiceWorker from './registerServiceWorker';
 
-render(<Root />, document.getElementById('root'));
+render(<Root />, document.getElementById('root')); 
 registerServiceWorker();

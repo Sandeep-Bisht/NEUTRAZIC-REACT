@@ -339,9 +339,8 @@ width:100%;
     border-top:1px solid red;
     border-left:1px solid red;
 } */
-
-.Myacount-Page{
-    margin-top: 80px;
+.myAccount-area{
+    margin-top: 120px;
 }
 .caresouel-4-p-div
 {
@@ -416,20 +415,17 @@ width:100%;
 
 @media only screen and (max-width:991px)
 {
-    .Myacount-Page{
-        margin-top: 120px!important;
+    .myAccount-area{
+        margin-top: 146px;
     }
 }
 }
 @media only screen and (max-width:730px){
-    .Myacount-Page{
-        margin-top: 120px!important;
+    .myAccount-area {
+        margin-top: 142px;
     }
 }
 @media only screen and (max-width:575.98px){
-    .Myacount-Page{
-        margin-top: 120px!important;
-    }
     .Myacount-heading{
         font-size: 30px!important;
     }
@@ -438,17 +434,15 @@ width:100%;
         padding: 5px!important;
     }
 }
-@media only screen and (max-width:480px){
-    .Myacount-Page{
-        margin-top:110px!important;
-    }
-}
+
 @media only screen and (max-width:379.98px){
+    .myAccount-area {
+        margin-top: 126px;
+    }
     .animation-container{
         height:70%!important;
     }
     .myAccount-empty-div{
-         margin-top: 227px!important;
          margin-bottom: 5px!important;
          padding: 10px 10px!important;
     }
