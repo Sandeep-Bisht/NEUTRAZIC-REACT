@@ -123,7 +123,6 @@ const Header1 = (props) => {
     dispatch(ACTIONS.getCategories([]));
   };
 
-  console.log(resetForm,"reset number using context api")
   useEffect(()=>{
     if(resetForm===0 || resetForm===1)
     {
@@ -305,7 +304,6 @@ const Header1 = (props) => {
               $("#loginModalCloseBtn").click();
 
               reset();
-              setModalreset("0");
               toast.success("Login successfully", {
                 position: "bottom-right",
                 autoClose: 2000,
@@ -1174,10 +1172,6 @@ const Header1 = (props) => {
                               onClick={() => {
                                 reset1();
                                 setMsg("");
-                                if(modalreset && modalreset === 1){
-                                  reset1();
-                                setMsg("");
-                                }
                               }}
                             >
                               Login/Register
