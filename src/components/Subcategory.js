@@ -9,7 +9,7 @@ import ReadMoreReact from "read-more-react";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
 var Userdata = "";
-let tranding = 0;
+// let tranding = 0;
 const Subcategory = () => {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
