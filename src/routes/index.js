@@ -38,7 +38,6 @@ import DeliveredOrder from "../components/Admin/DeliveredOrder";
 import Roles from "../components/Admin/Roles";
 import SubCategoryCreation from "../components/Admin/SubCategoryCreation";
 import AllProducts from "../components/AllProducts";
-import Subcategory from "../components/Subcategory";
 import Subcategories from "../components/Subcategories";
 import TrendingProducts from "../components/TrendingProducts";
 import ProductByManufacturer from "../components/ProductByManufacturer";
@@ -205,11 +204,10 @@ const Root = (props) => {
               <Route exact path="/Roles" component={Roles} />
               <Route
                 exact
-                path="/SubCategoryCreation"
+                path="/SubCategory"
                 component={SubCategoryCreation}
               />
               <Route path="/AllUsers" component={AllUsers} />
-              <Route exact path="/Subcategory" component={Subcategory} />
               <Route
                 exact
                 path="/Subcategories/:_id"
