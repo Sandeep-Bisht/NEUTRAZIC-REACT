@@ -305,7 +305,7 @@ const Header1 = (props) => {
               $("#loginModalCloseBtn").click();
 
               reset();
-              setModalreset("0");
+              
               toast.success("Login successfully", {
                 position: "bottom-right",
                 autoClose: 2000,
@@ -1174,10 +1174,7 @@ const Header1 = (props) => {
                               onClick={() => {
                                 reset1();
                                 setMsg("");
-                                if(modalreset && modalreset === 1){
-                                  reset1();
-                                setMsg("");
-                                }
+                                
                               }}
                             >
                               Login/Register
