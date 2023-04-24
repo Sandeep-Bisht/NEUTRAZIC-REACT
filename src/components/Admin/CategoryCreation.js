@@ -48,7 +48,7 @@ const CategoryCreation = (props) => {
       })
         .then((res) => {
           res.json()
-          history.push("/Configuration/" + "AllCategoriesDetails");
+          history.push("Configuration/"+"AllCategoriesDetails");
         })
         .then((res) => {
           GetCategory();
@@ -63,9 +63,16 @@ const CategoryCreation = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     if (editableData) {
-      Setdata(editableData);
+      let {featuredCategories, ...restData}=editableData;
+      {
+        featuredCategories
+          ? (restData.featuredCategories = featuredCategories)
+          : (restData.featuredCategories = "");
+      }
+      Setdata(restData);
     }
   }, []);
+  console.log(editableData,"editabledata of category cration")
 
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
@@ -94,7 +101,7 @@ const CategoryCreation = (props) => {
     })
       .then((res) => {
         res.json()
-        history.push("/Configuration/" + "AllCategoriesDetails");
+        history.push("Configuration/"+"AllCategoriesDetails");
       })
       .then(async (data) => {
         GetCategory();
@@ -162,13 +169,15 @@ const CategoryCreation = (props) => {
                             <label for="floatingInputValue">Category Description</label>
                           </div>
                           <div className="col-6 p-1 form-floating">
-                            <select
-                              className="form-control Dashborad-search"
+                          <select
+                              className="form-control Dashborad-search custom-select"
+                              value={data.featuredCategories}
                               onChange={(e) => {
                                 Setdata({ ...data, featuredCategories: e.target.value });
                               }}
                             >
-                              <option>Select Category Type</option>
+                              <option value="" hidden defaultChecked>
+                                Select Category Type</option>
                               <option value="Featured Categories">
                                 Featured Categories
                               </option>
