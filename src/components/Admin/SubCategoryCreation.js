@@ -30,7 +30,7 @@ const SubCategoryCreation = (props) => {
       let { category, ...restData } = editableData;
       {
         category
-          ? (restData.category = category._id)
+          ? (restData.category = category)
           : (restData.category = "");
       }
       Setdata(restData);
@@ -114,7 +114,7 @@ const SubCategoryCreation = (props) => {
     if (response.status === 200) {
       await GetSubCategory();
       setTimeout(() => {
-        history.push("/AllSubCategoriesDetails");
+        history.push("Configuration/"+"AllSubCategoriesDetails");
       }, 1500);
     }
   };
@@ -151,17 +151,16 @@ const SubCategoryCreation = (props) => {
                           <div className="col-6 p-1">
                             <select
                               className="form-control Dashborad-search custom-select"
-                              defaultValue={
-                                editableData ? editableData.name : ""
-                              }
+                              value={data.category}
                               onChange={(e) => {
-                                Setdata({ ...data, category: e.target.value });
+                                Setdata({
+                                  ...data,
+                                  category: e.target.value,
+                                });
                               }}
                             >
-                              <option selected>
-                                {editableData
-                                  ? editableData.name
-                                  : "Select Category"}
+                              <option value="" hidden defaultChecked>
+                                Select Category
                               </option>
                               {categories.map((el, ind) => (
                                 <option value={el._id}>{el.name}</option>
