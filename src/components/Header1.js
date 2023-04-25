@@ -81,7 +81,7 @@ const Header1 = (props) => {
       password: "",
       repassword: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
 
   const {
@@ -94,7 +94,7 @@ const Header1 = (props) => {
       username: "",
       password: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
   const {
     register: register3,
@@ -105,7 +105,7 @@ const Header1 = (props) => {
     defaultValues: {
       email: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
   const {
     register: register4,
@@ -116,14 +116,13 @@ const Header1 = (props) => {
     defaultValues: {
       email: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
 
   const CategoryDataHandler = () => {
     dispatch(ACTIONS.getCategories([]));
   };
 
-  console.log(resetForm,"reset number using context api")
   useEffect(()=>{
     if(resetForm===0 || resetForm===1)
     {
@@ -305,7 +304,6 @@ const Header1 = (props) => {
               $("#loginModalCloseBtn").click();
 
               reset();
-              
               toast.success("Login successfully", {
                 position: "bottom-right",
                 autoClose: 2000,
@@ -658,6 +656,7 @@ const Header1 = (props) => {
                                     {...register("username", {
                                       required: true,
                                       pattern: /^[^\s]+$/,
+                                      mode:"all",
                                     })}
                                     onChange={(event) =>
                                       (event.target.value = event.target.value.toLowerCase())
@@ -1174,7 +1173,6 @@ const Header1 = (props) => {
                               onClick={() => {
                                 reset1();
                                 setMsg("");
-                                
                               }}
                             >
                               Login/Register

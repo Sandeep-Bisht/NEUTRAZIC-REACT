@@ -11,8 +11,6 @@ import axios from "axios";
 var Userdata = "";
 const Footer = () => {
   const {modalreset,setModalreset} = useContext(CurrencyContext);
-  console.log(modalreset,"THis is initial state");
-
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [users, setUsers] = useState([]);
@@ -104,13 +102,13 @@ const Footer = () => {
                   </a>
                   <ul className="footer-contact-info">
                     <li>
-                      <span>Phone:</span>{" "}
+                      <span>Phone:</span >{" "}
                       <a href="tel:+91-7500872014">+91-7500872014</a>
                     </li>
                     <li>
                       <span>Email:</span>{" "}
                       <a href="mailto:info@nutrazik.com" target="_blank">
-                        mailto:info@nutrazik.com
+                        info@nutrazik.com
                       </a>
                     </li>
                     <li>
