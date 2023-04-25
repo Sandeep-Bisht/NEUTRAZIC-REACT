@@ -24,7 +24,6 @@ import { ToastContainer, toast } from "react-toastify";
 var Userdata = "";
 
 const Sidemenu = () => {
-
   const location = useLocation();
   const pathName = location.pathname;
   const history = useHistory();
@@ -43,7 +42,6 @@ const Sidemenu = () => {
 
   return (
     <>
-
       <div className="nav__list">
         <Link to="/Dashboard" className="nav__link active">
           <RxDashboard className="nav__icon" />
@@ -59,7 +57,7 @@ const Sidemenu = () => {
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseTwo"
-                  aria-expanded={`${pathName.includes('NewOrder')}`}
+                  aria-expanded={`${pathName.includes("NewOrder")}`}
                   aria-controls="collapseTwo"
                 >
                   <span className="pl-3 nav__name">Orders</span>
@@ -68,7 +66,9 @@ const Sidemenu = () => {
             </h2>
             <div
               id="collapseTwo"
-              className={`accordion-collapse collapse ${pathName.includes('NewOrder') && 'show'}`}
+              className={`accordion-collapse collapse ${pathName.includes(
+                "NewOrder"
+              ) && "show"}`}
               aria-labelledby="headingThree"
               data-bs-parent="#accordionExample"
             >
@@ -134,9 +134,8 @@ const Sidemenu = () => {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseThree"
-                        aria-expanded={`${pathName.includes('Configuration')}`}
+                        aria-expanded={`${pathName.includes("Configuration")}`}
                         aria-controls="collapseThree"
-
                       >
                         <span className="pl-3 nav__name">Configuration</span>
                       </button>
@@ -144,28 +143,35 @@ const Sidemenu = () => {
                   </h2>
                   <div
                     id="collapseThree"
-                    className={`accordion-collapse collapse ${pathName.includes('Configuration') && 'show'}`}
+                    className={`accordion-collapse collapse ${pathName.includes(
+                      "Configuration"
+                    ) && "show"}`}
                     aria-labelledby="headingThree"
                     data-bs-parent="#accordionExample"
                   >
                     <div className="dashboard-accordion-body">
-
                       {Userdata !== undefined ? (
                         Userdata.role === "superAdmin" ? (
                           <ul className="Configration-List">
-                            <Link to={"/Configuration/" + "AllManufactureDetails"}>
+                            <Link
+                              to={"/Configuration/" + "AllManufactureDetails"}
+                            >
                               <li className="nav-name">
                                 <GiFactory className="configuration-icons-wrap" />
                                 Manufacturer
                               </li>
                             </Link>
-                            <Link to={"/Configuration/" + "AllCategoriesDetails"}>
+                            <Link
+                              to={"/Configuration/" + "AllCategoriesDetails"}
+                            >
                               <li>
                                 <BiCategory className="configuration-icons-wrap" />
                                 Category
                               </li>
                             </Link>
-                            <Link to={"/Configuration/" + "AllSubCategoriesDetails"}>
+                            <Link
+                              to={"/Configuration/" + "AllSubCategoriesDetails"}
+                            >
                               <li>
                                 <BsListNested className="configuration-icons-wrap" />
                                 SubCategory
@@ -177,7 +183,9 @@ const Sidemenu = () => {
                                 Products
                               </li>
                             </Link>
-                            <Link to={"/Configuration/" + "AllWarehouseDetails"}>
+                            <Link
+                              to={"/Configuration/" + "AllWarehouseDetails"}
+                            >
                               <li>
                                 <FaWarehouse className="configuration-icons-wrap" />
                                 Warehouse
@@ -186,7 +194,9 @@ const Sidemenu = () => {
                           </ul>
                         ) : (
                           <ul className="Configration-List">
-                            <Link to={"/Configuration/" + "AllManufactureDetails"}>
+                            <Link
+                              to={"/Configuration/" + "AllManufactureDetails"}
+                            >
                               <li className="nav-name">
                                 <GiFactory className="configuration-icons-wrap" />
                                 Manufacturer
@@ -198,7 +208,9 @@ const Sidemenu = () => {
                                 Products
                               </li>
                             </Link>
-                            <Link to={"/Configuration/" + "AllWarehouseDetails"}>
+                            <Link
+                              to={"/Configuration/" + "AllWarehouseDetails"}
+                            >
                               <li>
                                 <FaWarehouse className="configuration-icons-wrap" />
                                 Warehouse
@@ -229,9 +241,8 @@ const Sidemenu = () => {
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapsefour"
-                  aria-expanded="false"
+                  aria-expanded={`${pathName.includes("IAM")}`}
                   aria-controls="collapsefour"
-
                 >
                   <span className="pl-3 nav__name">IAM</span>
                 </button>
@@ -239,7 +250,9 @@ const Sidemenu = () => {
             </h2>
             <div
               id="collapsefour"
-              className="accordion-collapse collapse"
+              className={`accordion-collapse collapse ${pathName.includes(
+                "Configuration"
+              ) && "show"}`}
               aria-labelledby="headingThree"
               data-bs-parent="#accordionExample"
             >
