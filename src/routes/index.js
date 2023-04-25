@@ -232,7 +232,7 @@ const Root = (props) => {
               <Route path="/PageNotFound" component={PageNotFound} />
               <Route path="/privacy&policy" component={PrivacyPolicy} />
               <Route path="/terms&condition" component={TermsConditions} />
-              <Route path="/crpolicy" component={ReturnRefund} />
+              <Route path="/return&refund" component={ReturnRefund} />
               <Route path="/shippingPolicy" component={ShippingPolicy} />
               <Route path="/Faq" component={Faq} />
               <Route path="/orderSuccess" component={OrderSuccess} />

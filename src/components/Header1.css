@@ -82,7 +82,7 @@
 .user-login .Total-Item
 {
   position: absolute;
-  bottom: 10px;
+  bottom: 16px;
   left: -15px;
   font-size: 14px;
 }
@@ -1073,6 +1073,27 @@ body {
 :where(.css-dev-only-do-not-override-diro6f).ant-modal .ant-modal-content {
     border-radius: 0px!important;
 }
+.ant-modal-content {
+    border-radius: 0px!important;
+}
+.anticon svg{
+    color: black;
+}
+.after-user-Logout .sp {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    position: relative;
+    color: #1e144f;
+    padding-left: 5px;
+    bottom: 4px;
+}
+
+/* forget modal */
+.Forgot-Password{
+    display: none;
+}
+/* end forget modal */
+
 @media only screen and (max-width : 1399px){
     .drop-category .category-head{
         font-size: 12px;
