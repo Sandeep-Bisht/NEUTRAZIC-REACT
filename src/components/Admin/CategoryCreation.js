@@ -72,14 +72,12 @@ const CategoryCreation = (props) => {
       Setdata(restData);
     }
   }, []);
-  console.log(editableData,"editabledata of category cration")
 
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
         setCategories(data.data);
-        Setdata({ ...data, image: data.image });
       })
       .catch((err) => {
         console.log(err, "error");

@@ -22,6 +22,10 @@ let changeNavValue = 0;
 var header;
 var sticky;
 var Userdata = "";
+var Subtotal="";
+var Usercartdata="";
+var Userdata1="";
+var ActualSubtotal="";
 
 const errorEmail = "Please Enter a valid Email Address";
 
@@ -29,6 +33,7 @@ const errorEmail = "Please Enter a valid Email Address";
 const Header1 = (props) => {
   let dispatch = useDispatch();
   let { state1, setState1 } = useContext(CurrencyContext);
+  
 
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
@@ -66,7 +71,7 @@ const Header1 = (props) => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-  
+
   const {
     register,
     handleSubmit,
@@ -81,7 +86,7 @@ const Header1 = (props) => {
       password: "",
       repassword: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
 
   const {
@@ -94,7 +99,7 @@ const Header1 = (props) => {
       username: "",
       password: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
   const {
     register: register3,
@@ -105,7 +110,7 @@ const Header1 = (props) => {
     defaultValues: {
       email: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
   const {
     register: register4,
@@ -116,7 +121,7 @@ const Header1 = (props) => {
     defaultValues: {
       email: "",
     },
-    mode: "onBlur",
+    mode: "all",
   });
 
   const CategoryDataHandler = () => {
@@ -143,6 +148,10 @@ const Header1 = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    ActualSubtotal=JSON.parse(localStorage.getItem("ActualSubtotal"));
+    Subtotal=JSON.parse(localStorage.getItem("Subtotal"));
+    Userdata1=JSON.parse(localStorage.getItem("Userdata1"));
+    Usercartdata=JSON.parse(localStorage.getItem("Usercartdata"));
     GetCategory();
     GetWishlist();
     GetSubCategory();
@@ -214,7 +223,12 @@ const Header1 = (props) => {
   }, [loginState]);
 
   const logout = () => {
-    localStorage.setItem("Userdata", null);
+    localStorage.removeItem("Userdata");
+    localStorage.removeItem("Subtotal");
+    localStorage.removeItem("Usercartdata");
+    localStorage.removeItem("Userdata1")
+    localStorage.removeItem("ActualSubtotal")
+    Userdata="";
     toast.success("Logout successfully", {
       position: "bottom-right",
       autoClose: 2000,
@@ -235,7 +249,7 @@ const Header1 = (props) => {
       data.password == data.repassword
     ) {
       let username = data.username.toLowerCase();
-      data.role = "superAdmin";
+      data.role = "user";
       data.userStatus = "Activate";
       fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
@@ -273,6 +287,9 @@ const Header1 = (props) => {
             setRegMsg("");
           } else {
             setRegMsg("Username is already exist");
+            setTimeout(()=>{
+              setRegMsg("");
+            },2000);
           }
         })
         .catch((error) => {
@@ -320,11 +337,20 @@ const Header1 = (props) => {
               history.push("/Dashboard");
             } else if (res.success === 403) {
               setMsg(res.error);
+              setTimeout(()=>{
+                setMsg("");
+              },2000)
             }
           } else if (res.success === 403) {
             setMsg(res.error);
+            setTimeout(()=>{
+              setMsg("");
+            },2000)
           } else {
             setMsg(res.error);
+            setTimeout(()=>{
+              setMsg("");
+            },2000)
           }
         })
         .then(async () => {
@@ -466,6 +492,10 @@ const Header1 = (props) => {
   const forgetHandler = () => {
     reset3();
     setForgetModal(true);
+    setRegisterModal(false);
+    setLoginModal(false);
+    $("#loginModalCloseBtn").click()
+    
   };
   const forgetPassword = async (data) => {
     await GetUserData(data);
@@ -479,6 +509,7 @@ const Header1 = (props) => {
   };
 
   const handleCancel = () => {
+    setForgetModal(false);
     setIsModalVisible(false);
     setLoginModal(false);
     setForgetModal(false);
@@ -576,7 +607,6 @@ const Header1 = (props) => {
       {/* end side bar Modal */}
       <div className="container-fluid top-nav">
         {/* login Register Modal  */}
-        {forgetModal === false ? (
           <div
             className="modal fade login-register-main"
             id="exampleModal"
@@ -655,9 +685,9 @@ const Header1 = (props) => {
                                     className="form-control form-control-login"
                                     {...register("username", {
                                       required: true,
-                                      pattern: /^[^\s]+$/,
+                                      pattern: /^[A-Za-z0-9]*$/,
                                     })}
-                                    onChange={(event) =>
+                                    onInput={(event) =>
                                       (event.target.value = event.target.value.toLowerCase())
                                     }
                                   />
@@ -668,7 +698,7 @@ const Header1 = (props) => {
                                   )}
                                   {errors?.username?.type === "pattern" && (
                                     <p className="text-danger">
-                                      Username does not contain space
+                                      Username does not contain space and special key
                                     </p>
                                   )}
                                 </div>
@@ -719,10 +749,7 @@ const Header1 = (props) => {
                                   )}
                                   {errors?.password?.type === "pattern" && (
                                     <p className="text-danger">
-                                      Must have more than 8 characters, Must
-                                      have atleast one number, Must have upper &
-                                      lowercase letters, Must have atleast one
-                                      special character.
+                                      Must have more than 8 characters, one number, upper & lowercase letters & special character
                                     </p>
                                   )}
                                 </div>
@@ -766,6 +793,7 @@ const Header1 = (props) => {
                                     className="form-control form-control-login "
                                     {...register("phonenumber", {
                                       required: true,
+                                      minLength:10,
                                     })}
                                     onInput={(e) => {
                                       if (
@@ -782,6 +810,11 @@ const Header1 = (props) => {
                                   {errors?.phonenumber?.type === "required" && (
                                     <p className="text-danger">
                                       This field is required
+                                    </p>
+                                  )}
+                                   {errors?.phonenumber?.type === "minLength" && (
+                                    <p className="text-danger">
+                                      Please enter a valid phone number.
                                     </p>
                                   )}
                                 </div>
@@ -859,7 +892,7 @@ const Header1 = (props) => {
                                   style={{ cursor: "pointer" }}
                                   onClick={() => forgetHandler()}
                                 >
-                                  <p className="mt-3">Forgot Password?</p>
+                                  <p className="mt-3 Forgot-Password">Forgot Password?</p>
                                 </span>
                               </div>
                             </div>
@@ -873,90 +906,65 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-        ) : (
-          <div
-            class="modal"
-            tabindex="-1"
-            id="exampleModalToggle"
-            aria-hidden="true"
-            aria-labelledby="exampleModalToggleLabel2"
+          {
+            forgetModal ? (
+              <Modal
+            visible={forgetModal}
+            onOk={handleOk}
+            onCancel={handleCancel}
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <button
-                    type="button"
-                    id="loginModalCloseBtn"
-                    className="d-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    className="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <div className="nutra-logo-in-login-form">
-                    <img
-                      src="/static/media/new-logo.8b4fa066.png"
-                      alt="nutrazik-logo"
-                    />
-                  </div>
-                  <div className="col-lg-12 forgetContentDiv">
-                    <div className="form-row">
-                      <form
-                        className="form-group col-lg-12"
-                        onSubmit={handleForgetSubmit(forgetPassword)}
-                      >
-                        <div className="row mt-0 start-login-form">
-                          <div className="col-md-12 col-12">
-                            <div className="form-group ">
-                              <label>
-                                Email<span>*</span>
-                              </label>
-                              <input
-                                type="email"
-                                className="form-control form-control-login "
-                                {...register3("email", {
-                                  required: true,
-                                  pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                                })}
-                              />
-                              {forgetErrors?.email?.type === "required" && (
-                                <p className="text-danger">
-                                  This field is required
-                                </p>
-                              )}
-                              {forgetErrors?.email?.type === "pattern" && (
-                                <p className="text-danger">
-                                  Please enter the valid Email
-                                </p>
-                              )}
-                            </div>
-                            <p className="text-danger">{forgetMsg}</p>
-                          </div>
-                          <h5 className="Login-fail-msg">{msg}</h5>
-                          <div className="form-group col-lg-12 justify-content-center">
-                            <button
-                              className="btn btn-success btn-lg"
-                              type="submit"
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        </div>
-                      </form>
+            <div className="nutra-logo-in-login-form">
+              <img
+                src="/static/media/new-logo.8b4fa066.png"
+                alt="nutrazik-logo"
+              />
+            </div>
+            <div className="col-lg-12 forgetContentDiv">
+              <div className="form-row">
+                <form
+                  className="form-group col-lg-12"
+                  onSubmit={handleForgetSubmit(forgetPassword)}
+                >
+                  <div className="row mt-0 start-login-form">
+                  <div className="col-12">
+                                <div className="form-group ">
+                                  <label>
+                                    Email<span>*</span>
+                                  </label>
+                                  <input
+                                    type="email"
+                                    className="form-control form-control-login "
+                                    {...register3("email", {
+                                      required: true,
+                                      pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                                    })}
+                                  />
+                                  {forgetErrors?.email?.type === "required" && (
+                                    <p className="text-danger">
+                                      This field is required
+                                    </p>
+                                  )}
+                                  {forgetErrors?.email?.type === "pattern" && (
+                                    <p className="text-danger">
+                                      Please enter a valid Email
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                    <div className="form-group col-lg-12 justify-content-center">
+                      <button className="btn btn-success btn-lg" type="submit">
+                        Submit
+                      </button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
-          </div>
-        )}
+          </Modal>
+            ) : (
+              ""
+            )
+          }
         {isModalVisible ? (
           <Modal
             visible={isModalVisible}
@@ -994,9 +1002,7 @@ const Header1 = (props) => {
                         )}
                         {errors?.password?.type === "pattern" && (
                           <p className="text-danger">
-                            Must have more than 8 characters, Must have atleast
-                            one number, Must have upper & lowercase letters,
-                            Must have atleast one special character.
+                            Must have more than 8 characters, one number, upper & lowercase letters & special character.
                           </p>
                         )}
                       </div>
@@ -1026,7 +1032,6 @@ const Header1 = (props) => {
                         )}
                       </div>
                     </div>
-                    <h5 className="Login-fail-msg">{msg}</h5>
                     <div className="form-group col-lg-12 justify-content-center">
                       <button className="btn btn-success btn-lg" type="submit">
                         Submit
@@ -1099,8 +1104,33 @@ const Header1 = (props) => {
                       </select>
                     </div>
                   </div>
-                  <div className="left-part">
-                    <div className="cart-div">
+                  <div className="left-part after-user-Logout">
+                    {
+                      Userdata===null || Userdata==="" ?
+                      
+                      <div className="option-item" 
+                      onClick={()=>{
+                        reset1();
+                                reset();
+                                setRegMsg("");
+                                setMsg("");
+                        }}>
+                      <div className="cart-btn">
+                      <i
+                    className="bx bx-cart"
+                    data-bs-toggle="modal"
+                    data-bs-target={
+                      "#exampleModal"   
+                    }
+                    
+                  >
+                    <span className="sp">Cart</span>
+                  </i>
+                  
+                  </div>
+                  </div>
+                      :
+                      <div className="cart-div">
                       <Link to="/cart">
                         <div className=" login-div1">
                           <div className="">
@@ -1110,7 +1140,7 @@ const Header1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <div className=" user-login">
+                          <div className=" user-login pt-1">
                             {cartItems ? (
                               <h6 className="Total-Item">{cartItems}</h6>
                             ) : (
@@ -1121,8 +1151,34 @@ const Header1 = (props) => {
                           </div>
                         </div>
                       </Link>
-                    </div>
-                    <div className=" heart-div ">
+                    </div> 
+                    }
+                    
+                    <div className=" heart-div">
+                    {
+                      Userdata===null || Userdata==="" ?
+                      
+                      <div className="option-item"
+                      onClick={()=>{
+                        reset1();
+                                reset();
+                                setRegMsg("");
+                                setMsg("");
+                      }}>
+                      <div className="cart-btn">
+                      <i
+                    className="bx bx-heart"
+                    data-bs-toggle="modal"
+                    data-bs-target={
+                      "#exampleModal"   
+                    }
+                    
+                  >
+                    <span className="sp">Wishlist</span>
+                  </i>
+                  </div>
+                  </div>
+                  :
                       <Link to="/WishList">
                         <div className="  heart-div-inner">
                           <div className="">
@@ -1133,11 +1189,12 @@ const Header1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <div className=" user-login">
+                          <div className=" user-login pt-1">
                             <span className="sp">Wishlist</span>
                           </div>
                         </div>
                       </Link>
+}
                     </div>
                     <div className="  account-div ">
                       <div className=" login-div ">
@@ -1169,8 +1226,9 @@ const Header1 = (props) => {
                           </div>
                         </div>
                       </div>
-                      <div className=" user-login">
-                        {Userdata == null ? (
+                      <div className=" user-login" 
+                      >
+                        {Userdata == null || Userdata=="" ? (
                           <>
                             <span
                               className="Sp1"
@@ -1182,6 +1240,7 @@ const Header1 = (props) => {
                                 reset();
                                 setRegMsg("");
                                 setMsg("");
+                                
                               }}
                             >
                               Login/Register

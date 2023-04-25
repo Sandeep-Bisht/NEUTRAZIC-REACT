@@ -100,6 +100,7 @@ const UserOrder = () => {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
+  console.log(prticularUserOrder,"helo user order checked");
 
   return (
     <>
@@ -125,20 +126,21 @@ const UserOrder = () => {
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item,ind) => {
+                          console.log(item,"helo item")
                           return (
                             <>
-                              <tr key={ind}>                                
+                            <tr key={ind}>                                
                                 <td className="width-adjust-of-td">
                                   <div className="width-adjust-of-image">
                                   <img
                                     onClick={() => imageHandler(item.productid)}
                                     style={{ cursor: "pointer" }}
-                                    src={`${baseUrl}/${item.image}`}
+                                    src={`${baseUrl}/${item.order[0].image}`}
                                   ></img>
                                   </div>
                                 </td>
-                                <td >{item.name}</td>
-                                <td>{item.singleprice}</td>
+                                <td >{item.order[0].name}</td>
+                                <td>{item.order[0].singleprice}</td>
                                 <td className="text-center">
                                   <button onClick={()=>imageHandler(item.productid)} type="button" className="btn btn-primary">Re-Order</button>
                                 </td>
