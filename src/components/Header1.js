@@ -893,6 +893,14 @@ const Header1 = (props) => {
                   >
                     Close
                   </button>
+                  <button
+                    type="button"
+                    className="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                   <div className="nutra-logo-in-login-form">
                     <img
                       src="/static/media/new-logo.8b4fa066.png"
@@ -1172,6 +1180,8 @@ const Header1 = (props) => {
                               style={{ cursor: "pointer" }}
                               onClick={() => {
                                 reset1();
+                                reset();
+                                setRegMsg("");
                                 setMsg("");
                               }}
                             >

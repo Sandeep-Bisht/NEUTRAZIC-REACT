@@ -93,7 +93,7 @@ const ManufacturerCreation = (props) => {
       if (response.status == 200) {
         await GetManufacturer();
         setTimeout(() => {
-          history.push("/AllManufactureDetails");
+          history.push("Configuration/"+"AllManufactureDetails");
         }, 1500);
       }
     } catch (error) {
