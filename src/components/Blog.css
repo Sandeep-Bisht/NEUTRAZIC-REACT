@@ -48,8 +48,7 @@
   font-weight: 600;
   letter-spacing: 0.25px;
   line-height: 2;
-  width:80%;
-  
+  width: 80%;
 }
 
 .right-blog-image-wrapper img {
@@ -128,7 +127,7 @@
 }
 .blog-page-section-2 .cart-text-body .card-text {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 0.8rem !important;
+  /* font-size: 0.8rem !important; */
 }
 .blog-page-section-2 .card-img-link {
   height: 230px;
@@ -137,14 +136,18 @@
   margin-bottom: 20px;
 }
 .blog-page-section-2 .cart-text-body {
-  height: 182px;
-  font-size: 12px !important;
+  /* height: 182px; */
+  /* font-size: 12px !important; */
 }
 .blog-page {
   margin-top: 130px;
 }
-.cart-text-body .card-text {
-  font-size: 12px !important;
+.blog-page-section-2 .card .cart-text-body .card-text,
+.blog-page-section-2 .card .cart-text-body .displayed-text {
+  font-size: 15px !important;
+  text-align: justify !important;
+  hyphens: auto !important;
+  word-spacing: -1px !important;
 }
 /* / Single-blog-css / */
 
@@ -157,50 +160,68 @@
 .single-blog-page-header {
   padding-bottom: 30px;
 }
-.blog-page-section-2 .card .card-body {
-  height: 180px !important;
-  padding: 15px;
+.blog-page-section-2 .card .cart-text-body {
+  height: 200px !important;
+  /* padding: 15px; */
 }
 
 /* Media Query For Blog Page  */
 @media only screen and (max-width: 1399px) {
-  .blog-page-section-2 .card-body {
-    height: 190px;
-    padding: 15px;
+  .blog-page-section-2 .card .cart-text-body {
+    height: 210px !important;
+    /* padding: 15px; */
   }
-  /* .blog-box-wrapper .left-blog-image-wrap img {
-    object-fit: fill;
-  } */
-  /* .blog-page-section-2 .card-img-top {
-    object-fit: fill;
-  } */
-}
-@media only screen and (max-width: 1199.98px) {
-  .blog-page .blog-page-section-2 .cart-text-body {
-    height: 140px !important;
-  }
-  .blog-page .displayed-text {
-    font-size: 12px !important;
-  }
-  .blog-page .display-text-group {
-    line-height: 1;
+  .blog-page-section-2 .card .cart-text-body .card-text,
+  .blog-page-section-2 .card .cart-text-body .displayed-text {
+    font-size: 15px !important;
+    text-align: left !important;
+    hyphens: auto !important;
+    word-spacing: 3px !important; 
   }
   .blog-page .blog-title-text {
-    font-size: 14px !important;
+    font-size: 16px !important;
+    height: 30px;
+  }
+}
+@media only screen and (max-width: 1199.98px) {
+  .blog-page-section-2 .card .cart-text-body {
+    height: 210px !important;
+    /* padding: 15px; */
+  }
+  .blog-page-section-2 .card .cart-text-body .card-text,
+  .blog-page-section-2 .card .cart-text-body .displayed-text {
+    font-size: 15px !important;
+    text-align: left !important;
+    hyphens: auto !important;
+    word-spacing: normal;
+    
+  }
+  .blog-page .display-text-group {
+    line-height: 1.5;
+  }
+  .blog-page .blog-title-text {
+    font-size: 16px !important;
+    height: 32px;
   }
 }
 @media only screen and (max-width: 1024px) {
-  .blog-page .blog-page-section-2 .card-body {
-    height: 202px;
+  .blog-page-section-2 .card .cart-text-body {
+    height: 200px !important;
+    /* padding: 15px; */
   }
 }
 @media only screen and (max-width: 991.98px) {
-  .blog-page .blog-page-section-2 .card-body {
-    padding: 30px;
+  .blog-page-section-2 .card .cart-text-body {
+    height: 175px !important;
+    /* padding: 15px; */
+  }
+  .blog-page .blog-title-text {
+    font-size: 16px !important;
+    height: auto;
   }
   .blog-page .blog-page-section-2 .card-body {
-    height: 150px;
-    padding-top: 26px;
+    /* height: 150px; */
+    padding-top: 30px;
   }
   .blog-page {
     margin-top: 175px;
@@ -208,6 +229,7 @@
   .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
   .top-heading-box-3 p {
     font-size: 13px !important;
+    padding: 6px !important;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
     font-size: 14px;
@@ -305,12 +327,13 @@
     .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p{
         font-size: 0.8rem;
     } */
-    .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button{
-      padding: 4px 15px !important;
-    }
-    .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button, .top-heading-box-3 button{
-      padding: 4px 15px !important;
-    }
+  .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
+    padding: 4px 15px !important;
+  }
+  .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button,
+  .top-heading-box-3 button {
+    padding: 4px 15px !important;
+  }
   .blog-box-wrapper .col-md-5 {
     display: block;
   }
