@@ -36,6 +36,8 @@ const Subcategories = (props) => {
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
   const [SubcategoryId, setsubcategoryId] = useState("All Products");
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
+  const { loginState, setLoginState } = useContext(CurrencyContext);
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -49,6 +51,14 @@ const Subcategories = (props) => {
       setCurrency("Dollar");
     }
   }, [currancy]);
+
+  const handleResetForm = () => {
+    if (resetForm === 0) {
+      setResetForm(1);
+    } else {
+      setResetForm(0);
+    }
+  };
 
   var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
@@ -75,7 +85,7 @@ const Subcategories = (props) => {
         });
       };
     });
-  }, []);
+  }, [loginState]);
 
   useEffect(() => {
     const allSubCateory = document.getElementById("allsub");
@@ -595,6 +605,7 @@ const Subcategories = (props) => {
                                                 ? "#exampleModal"
                                                 : null
                                             }
+                                            onClick={()=>handleResetForm()}
                                           ></i>
                                         )}
                                         Wishlist
@@ -638,6 +649,7 @@ const Subcategories = (props) => {
                                     data-bs-target={
                                       Userdata == null ? "#exampleModal" : null
                                     }
+                                    onClick={()=>handleResetForm()}
                                   >
                                     Add to Cart
                                   </button>
@@ -716,6 +728,7 @@ const Subcategories = (props) => {
                                                     ? "#exampleModal"
                                                     : null
                                                 }
+                                                onClick={()=>handleResetForm()}
                                               ></i>
                                             )}
                                             Wishlist
@@ -763,6 +776,7 @@ const Subcategories = (props) => {
                                             ? "#exampleModal"
                                             : null
                                         }
+                                        onClick={()=>handleResetForm()}
                                       >
                                         Add to Cart
                                       </button>

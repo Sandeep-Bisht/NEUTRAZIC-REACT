@@ -147,7 +147,7 @@
   font-size: 15px !important;
   text-align: justify !important;
   hyphens: auto !important;
-  word-spacing: -1px !important;
+  word-spacing: 0px !important;
 }
 /* / Single-blog-css / */
 

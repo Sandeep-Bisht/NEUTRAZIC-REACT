@@ -9275,6 +9275,8 @@ a.text-warning:hover {
 
 .text-danger {
   color: #dc3545 !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
 }
 
 a.text-danger:focus,

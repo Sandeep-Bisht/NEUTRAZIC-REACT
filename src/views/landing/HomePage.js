@@ -69,6 +69,7 @@ const HomePage = () => {
   const cookies = new Cookies();
   const { state1, setState1 } = useContext(CurrencyContext);
   const { loginState, setLoginState } = useContext(CurrencyContext);
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [sliderRef, setSliderRef] = useState(null);
 
@@ -94,6 +95,14 @@ const HomePage = () => {
       .catch((err) => {
         console.log(err, "error");
       });
+  };
+
+  const handleResetForm = () => {
+    if (resetForm === 0) {
+      setResetForm(1);
+    } else {
+      setResetForm(0);
+    }
   };
   useEffect(() => {
     const currentCurrency = cookies.get("CurrencyType");
@@ -551,17 +560,17 @@ const HomePage = () => {
                       }}
                     />
                     {/* <Link to={"/SearchResult/" + search}> */}
-                      <button
-                        className="search mr-1"
-                        onClick={() => {
-                          if (search.length) {
-                            searchData(search);
-                            history.push("/SearchResult/" + search);
-                          }
-                        }}
-                      >
-                        <i className="bx bx-search-alt"></i>
-                      </button>
+                    <button
+                      className="search mr-1"
+                      onClick={() => {
+                        if (search.length) {
+                          searchData(search);
+                          history.push("/SearchResult/" + search);
+                        }
+                      }}
+                    >
+                      <i className="bx bx-search-alt"></i>
+                    </button>
                     {/* </Link> */}
                   </div>
                 </div>
@@ -670,6 +679,7 @@ const HomePage = () => {
                                             ? "#exampleModal"
                                             : null
                                         }
+                                        onClick={() => handleResetForm()}
                                       ></i>
                                     )}
                                     Wishlist
@@ -713,6 +723,7 @@ const HomePage = () => {
                                 data-bs-target={
                                   Userdata == null ? "#exampleModal" : null
                                 }
+                                onClick={() => handleResetForm()}
                               >
                                 Add to Cart
                               </button>
@@ -897,6 +908,7 @@ const HomePage = () => {
                                           ? "#exampleModal"
                                           : null
                                       }
+                                      onClick={() => handleResetForm()}
                                     ></i>
                                   )}
                                   Wishlist
@@ -938,6 +950,7 @@ const HomePage = () => {
                                     data-bs-target={
                                       Userdata == null ? "#exampleModal" : null
                                     }
+                                    onClick={() => handleResetForm()}
                                   >
                                     Add to Cart
                                   </button>
@@ -1058,6 +1071,7 @@ const HomePage = () => {
                                           ? "#exampleModal"
                                           : null
                                       }
+                                      onClick={() => handleResetForm()}
                                     ></i>
                                   )}
                                   Wishlist
@@ -1100,6 +1114,7 @@ const HomePage = () => {
                                     data-bs-target={
                                       Userdata == null ? "#exampleModal" : null
                                     }
+                                    onClick={() => handleResetForm()}
                                   >
                                     Add to Cart
                                   </button>

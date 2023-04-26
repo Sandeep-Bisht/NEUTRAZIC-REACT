@@ -1591,3 +1591,12 @@ body {
 
 
 
+.password-err{
+    text-align: justify !important;
+    /* word-break: break-all; */
+    hyphens: auto;
+    font-size: 10px !important;
+}
+
+
+
