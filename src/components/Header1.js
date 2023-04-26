@@ -246,7 +246,7 @@ console.log(currentLocation,"This is checking current location");
     setLoginState("0");
     setCartItems("");
     setWishlisted("");
-    if(currentLocation === "/cart" || currentLocation === "/WishList" || currentLocation === "/UserOrder"){
+    if(currentLocation === "/cart" || currentLocation === "/WishList" || currentLocation === "/UserOrder" || currentLocation === "/MyAccount"){
       history.push("/");
     }
   };
