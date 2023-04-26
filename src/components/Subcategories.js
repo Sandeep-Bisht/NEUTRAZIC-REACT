@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
 import { useContext } from "react";
+import Loader from "react-spinner-loader";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 var Userdata = "";
 let tranding = 0;
@@ -36,6 +37,8 @@ const Subcategories = (props) => {
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
   const [SubcategoryId, setsubcategoryId] = useState("All Products");
+  const [loading,setLoading] = useState(true);
+
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -127,6 +130,7 @@ const Subcategories = (props) => {
           }
         });
         setGetSubCategories(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -414,6 +418,7 @@ const Subcategories = (props) => {
       // activeItem.classList.add("newActive");
     }
     setfilterData(filteredData);
+    setLoading(false);
     setsubcategoryId(name);
   };
 
@@ -481,28 +486,36 @@ const Subcategories = (props) => {
                             All SubCategories
                           </p>
                         </li>
-                        {getSubCategories.map((item, ind) => {
-                          if (item.category == props.match.params._id) {
-                            return (
-                              <>
-                                <li className="box" key={ind}>
-                                  <p
-                                    className={`List-item ${activeLinkSubCategory(
-                                      item.name
-                                    )}`}
-                                    id="List"
-                                    onClick={() => {
-                                      GetSingleSubCategory(item._id, item.name);
-                                    }}
-                                    style={{ cursor: "pointer" }}
-                                  >
-                                    {item.name}
-                                  </p>
-                                </li>
-                              </>
-                            );
-                          }
-                        })}
+                        {
+                          loading ?
+                          <Loader
+                show={loading}
+                stack="vertical"
+              /> :
+              getSubCategories.map((item, ind) => {
+                if (item.category == props.match.params._id) {
+                  return (
+                    <>
+                      <li className="box" key={ind}>
+                        <p
+                          className={`List-item ${activeLinkSubCategory(
+                            item.name
+                          )}`}
+                          id="List"
+                          onClick={() => {
+                            GetSingleSubCategory(item._id, item.name);
+                          }}
+                          style={{ cursor: "pointer" }}
+                        >
+                          {item.name}
+                        </p>
+                      </li>
+                    </>
+                  );
+                }
+              })
+                        }
+                        
                       </ul>
                     </div>
                   </div>
@@ -527,252 +540,259 @@ const Subcategories = (props) => {
                         id="columns"
                         className="columns_5 subcategory-columns"
                       >
-                        {filterData && filterData.length > 0 ? (
-                          filterData.map((item, ind) => {
-                            return (
-                              <figure
-                                className="figure subcategory-figure"
-                                key={ind}
-                              >
-                                <Link
-                                  to={"/SingleProduct/" + item._id}
-                                  className="product-image-link"
-                                >
-                                  <div>
-                                    <img
-                                      src={`${baseUrl}/` + item.image[0].path}
-                                      alt=""
-                                    />
-                                  </div>
+                        {
+                          loading ?
+                          <Loader
+                show={loading}
+                stack="vertical"
+              /> : filterData && filterData.length > 0 ? (
+                filterData.map((item, ind) => {
+                  return (
+                    <figure
+                      className="figure subcategory-figure"
+                      key={ind}
+                    >
+                      <Link
+                        to={"/SingleProduct/" + item._id}
+                        className="product-image-link"
+                      >
+                        <div>
+                          <img
+                            src={`${baseUrl}/` + item.image[0].path}
+                            alt=""
+                          />
+                        </div>
 
-                                  <figcaption>{item.name}</figcaption>
-                                </Link>
+                        <figcaption>{item.name}</figcaption>
+                      </Link>
 
-                                <div className="contanier subcategory-price-div">
-                                  <div className="row">
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
-                                      <span className="price">
-                                        {" "}
-                                        {state1.state1 == "1" ? (
-                                          <i class="fa fa-dollar-sign"></i>
-                                        ) : (
-                                          <i className="fa fa-inr"></i>
-                                        )}
-                                        {state1.state1 == "1" 
-                                          ? item.dollerDiscount
-                                          : item.inrDiscount}
-                                      </span>
-                                    </div>
-                                    <div className="col-6 text-end ">
-                                      <p className={`text-nowrap wishlist`}>
-                                        {Userdata ? (
-                                          <i
-                                            id={item._id}
-                                            onClick={() => {
-                                              AddtoWishlist(
-                                                item._id,
-                                                item.name,
-                                                quantity,
+                      <div className="contanier subcategory-price-div">
+                        <div className="row">
+                          <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
+                            <span className="price">
+                              {" "}
+                              {state1.state1 == "1" ? (
+                                <i class="fa fa-dollar-sign"></i>
+                              ) : (
+                                <i className="fa fa-inr"></i>
+                              )}
+                              {state1.state1 == "1" 
+                                ? item.dollerDiscount
+                                : item.inrDiscount}
+                            </span>
+                          </div>
+                          <div className="col-6 text-end ">
+                            <p className={`text-nowrap wishlist`}>
+                              {Userdata ? (
+                                <i
+                                  id={item._id}
+                                  onClick={() => {
+                                    AddtoWishlist(
+                                      item._id,
+                                      item.name,
+                                      quantity,
 
-                                                item.inrMrp,
-                                                item.inrDiscount,
-                                                item.description,
-                                                item.category,
-                                                item.manufacturer.name,
-                                                item.image
-                                              );
-                                            }}
-                                            className={`bx bxs-heart ${checkWishlistItem(
-                                              item._id
-                                            )}`}
-                                          ></i>
-                                        ) : (
-                                          <i
-                                            className="bx bxs-heart "
-                                            data-bs-toggle="modal"
-                                            data-bs-target={
-                                              Userdata == null
-                                                ? "#exampleModal"
-                                                : null
-                                            }
-                                          ></i>
-                                        )}
-                                        Wishlist
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
+                                      item.inrMrp,
+                                      item.inrDiscount,
+                                      item.description,
+                                      item.category,
+                                      item.manufacturer.name,
+                                      item.image
+                                    );
+                                  }}
+                                  className={`bx bxs-heart ${checkWishlistItem(
+                                    item._id
+                                  )}`}
+                                ></i>
+                              ) : (
+                                <i
+                                  className="bx bxs-heart "
+                                  data-bs-toggle="modal"
+                                  data-bs-target={
+                                    Userdata == null
+                                      ? "#exampleModal"
+                                      : null
+                                  }
+                                ></i>
+                              )}
+                              Wishlist
+                            </p>
+                          </div>
+                        </div>
+                      </div>
 
-                                {Userdata ? (
-                                  <button
-                                    className="button btn"
-                                    onClick={() => {
-                                      cartfunction(
-                                        item._id,
-                                        item.name,
-                                        quantity,
-                                        item.inrMrp,
-                                        item.inrDiscount,
-                                        item.dollerDiscount,
-                                        item.dollerMrp,
-                                        item.discount,
-                                        item.description,
-                                        item.category,
-                                        item.manufacturer.name,
-                                        item.image[0].path
-                                      );
-                                    }}
-                                    data-bs-toggle={
-                                      Userdata == null ? "modal" : null
-                                    }
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                  >
-                                    Add to Cart
-                                  </button>
-                                ) : (
-                                  <button
-                                    className="button btn"
-                                    data-bs-toggle="modal"
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                  >
-                                    Add to Cart
-                                  </button>
-                                )}
-                              </figure>
+                      {Userdata ? (
+                        <button
+                          className="button btn"
+                          onClick={() => {
+                            cartfunction(
+                              item._id,
+                              item.name,
+                              quantity,
+                              item.inrMrp,
+                              item.inrDiscount,
+                              item.dollerDiscount,
+                              item.dollerMrp,
+                              item.discount,
+                              item.description,
+                              item.category,
+                              item.manufacturer.name,
+                              item.image[0].path
                             );
-                          })
-                        ) : (
-                          <>
-                            {data.map((item, ind) => {
-                              if (item.category._id == props.match.params._id) {
-                                return (
-                                  <figure
-                                    className="figure subcategory-figure"
-                                    key={ind}
-                                  >
-                                    <Link
-                                      to={"/SingleProduct/" + item._id}
-                                      className="product-image-link"
-                                    >
-                                      <div>
-                                        <img
-                                          src={
-                                            `${baseUrl}/` + item.image[0].path
-                                          }
-                                          alt=""
-                                        />
-                                      </div>
+                          }}
+                          data-bs-toggle={
+                            Userdata == null ? "modal" : null
+                          }
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      ) : (
+                        <button
+                          className="button btn"
+                          data-bs-toggle="modal"
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      )}
+                    </figure>
+                  );
+                })
+              ) : (
+                <>
+                  {data.map((item, ind) => {
+                    if (item.category._id == props.match.params._id) {
+                      return (
+                        <figure
+                          className="figure subcategory-figure"
+                          key={ind}
+                        >
+                          <Link
+                            to={"/SingleProduct/" + item._id}
+                            className="product-image-link"
+                          >
+                            <div>
+                              <img
+                                src={
+                                  `${baseUrl}/` + item.image[0].path
+                                }
+                                alt=""
+                              />
+                            </div>
 
-                                      <figcaption>{item.name}</figcaption>
-                                    </Link>
+                            <figcaption>{item.name}</figcaption>
+                          </Link>
 
-                                    <div className="contanier subcategory-price-div">
-                                      <div className="row">
-                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
-                                          <span className="price">
-                                            {" "}
-                                            {state1.state1 == "1"  ? (
-                                              <i class="fa fa-dollar-sign"></i>
-                                            ) : (
-                                              <i className="fa fa-inr"></i>
-                                            )}
-                                            {state1.state1 == "1" 
-                                              ? item.dollerDiscount
-                                              : item.inrDiscount}
-                                          </span>
-                                        </div>
-                                        <div className="col-6 text-end ">
-                                          <p className={`text-nowrap wishlist`}>
-                                            {Userdata ? (
-                                              <i
-                                                id={item._id}
-                                                onClick={() => {
-                                                  AddtoWishlist(
-                                                    item._id,
-                                                    item.name,
-                                                    quantity,
-                                                    item.inrMrp,
-                                                    item.inrDiscount,
-                                                    item.description,
-                                                    item.category,
-                                                    item.manufacturer.name,
-                                                    item.image
-                                                  );
-                                                }}
-                                                className={`bx bxs-heart ${checkWishlistItem(
-                                                  item._id
-                                                )}`}
-                                              ></i>
-                                            ) : (
-                                              <i
-                                                className="bx bxs-heart "
-                                                data-bs-toggle="modal"
-                                                data-bs-target={
-                                                  Userdata == null
-                                                    ? "#exampleModal"
-                                                    : null
-                                                }
-                                              ></i>
-                                            )}
-                                            Wishlist
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </div>
+                          <div className="contanier subcategory-price-div">
+                            <div className="row">
+                              <div className="col-lg-6 col-md-6 col-sm-6 col-12 text-start subcategory-text-start">
+                                <span className="price">
+                                  {" "}
+                                  {state1.state1 == "1"  ? (
+                                    <i class="fa fa-dollar-sign"></i>
+                                  ) : (
+                                    <i className="fa fa-inr"></i>
+                                  )}
+                                  {state1.state1 == "1" 
+                                    ? item.dollerDiscount
+                                    : item.inrDiscount}
+                                </span>
+                              </div>
+                              <div className="col-6 text-end ">
+                                <p className={`text-nowrap wishlist`}>
+                                  {Userdata ? (
+                                    <i
+                                      id={item._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          item._id,
+                                          item.name,
+                                          quantity,
+                                          item.inrMrp,
+                                          item.inrDiscount,
+                                          item.description,
+                                          item.category,
+                                          item.manufacturer.name,
+                                          item.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        item._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null
+                                          ? "#exampleModal"
+                                          : null
+                                      }
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
 
-                                    {Userdata ? (
-                                      <button
-                                        className="button btn"
-                                        onClick={() => {
-                                          cartfunction(
-                                            item._id,
-                                            item.name,
-                                            quantity,
-                                            item.inrMrp,
-                                            item.inrDiscount,
-                                            item.dollerDiscount,
-                                            item.dollerMrp,
-                                            item.discount,
-                                            item.description,
-                                            item.category,
-                                            item.manufacturer.name,
-                                            item.image[0].path
-                                          );
-                                        }}
-                                        data-bs-toggle={
-                                          Userdata == null ? "modal" : null
-                                        }
-                                        data-bs-target={
-                                          Userdata == null
-                                            ? "#exampleModal"
-                                            : null
-                                        }
-                                      >
-                                        Add to Cart
-                                      </button>
-                                    ) : (
-                                      <button
-                                        className="button btn"
-                                        data-bs-toggle="modal"
-                                        data-bs-target={
-                                          Userdata == null
-                                            ? "#exampleModal"
-                                            : null
-                                        }
-                                      >
-                                        Add to Cart
-                                      </button>
-                                    )}
-                                  </figure>
+                          {Userdata ? (
+                            <button
+                              className="button btn"
+                              onClick={() => {
+                                cartfunction(
+                                  item._id,
+                                  item.name,
+                                  quantity,
+                                  item.inrMrp,
+                                  item.inrDiscount,
+                                  item.dollerDiscount,
+                                  item.dollerMrp,
+                                  item.discount,
+                                  item.description,
+                                  item.category,
+                                  item.manufacturer.name,
+                                  item.image[0].path
                                 );
+                              }}
+                              data-bs-toggle={
+                                Userdata == null ? "modal" : null
                               }
-                            })}
-                          </>
-                        )}
+                              data-bs-target={
+                                Userdata == null
+                                  ? "#exampleModal"
+                                  : null
+                              }
+                            >
+                              Add to Cart
+                            </button>
+                          ) : (
+                            <button
+                              className="button btn"
+                              data-bs-toggle="modal"
+                              data-bs-target={
+                                Userdata == null
+                                  ? "#exampleModal"
+                                  : null
+                              }
+                            >
+                              Add to Cart
+                            </button>
+                          )}
+                        </figure>
+                      );
+                    }
+                  })}
+                </>
+              )}
+                        
+                        
                       </div>
                     </div>
                   </div>
