@@ -298,6 +298,7 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
+    console.log(data,"data of login users")
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
@@ -314,7 +315,9 @@ const Header1 = (props) => {
         .then(async (res) => {
           setLoginState("1");
           if (res && res.userStatus && res.userStatus === "Activate") {
+            console.log("helo inside the activete if ")
             if (res && res.role === "user") {
+              console.log("inside the 2nd if condition");
               Userdata = res;
               await localStorage.setItem("Userdata", JSON.stringify(res));
               await CartById();
@@ -364,6 +367,7 @@ const Header1 = (props) => {
         });
     }
   };
+  console.log(Userdata,"user data of after the login")
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())

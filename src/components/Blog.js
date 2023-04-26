@@ -7,9 +7,11 @@ import { baseUrl } from "../utils/services";
 import { Link } from "react-router-dom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
+import Loader from "react-spinner-loader";
 
 function Blogs() {
   const [data, setData] = useState([]);
+  const [loading,setLoading] = useState(true);
   useEffect(() => {
     window.scroll(0, 0);
     getAllBlog();
@@ -20,6 +22,7 @@ function Blogs() {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -38,6 +41,12 @@ function Blogs() {
               </div>
             </div>
           </div>
+          {
+                loading ?
+                <Loader
+                show={loading}
+                stack="vertical"
+              /> :
           <div className="row">
             <div className="col-md-12">
               <div className="blog-box-wrapper">
@@ -96,7 +105,7 @@ function Blogs() {
                       })}
                   </div>
                 </div>
-              </div>
+              </div> 
             </div>
             <div className="blog-page-section-2">
               <div className="row">
@@ -151,6 +160,7 @@ function Blogs() {
               </div>
             </div>
           </div>
+}
         </div>
       </section>
       <Baseline />

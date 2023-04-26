@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import Loader from "react-spinner-loader";
 
 var Userdata;
 const AllProducts = (props) => {
@@ -37,6 +38,8 @@ const AllProducts = (props) => {
   const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
+  const [loading,setLoading] = useState(true);
+
 
   useEffect(() => {
     setLoginState(loginState);
@@ -205,6 +208,7 @@ const AllProducts = (props) => {
       .then(async (data) => {
         serProductLength(data.length);
         setAllProduct([...AllProduct, ...data.data]);
+        setLoading(false);        
         page = page + 1;
       })
       .catch((err) => {
@@ -411,6 +415,11 @@ const AllProducts = (props) => {
             <div className="section-title my-4">
               <h2>All Products</h2>
             </div>
+            {loading ? 
+            <Loader
+            show={loading}
+            stack="vertical"
+          /> :
             <div>
               <div id="columns" className="columns_5">
                 <InfiniteScroll
@@ -512,6 +521,7 @@ const AllProducts = (props) => {
                 </InfiniteScroll>
               </div>
             </div>
+          }
           </div>
         </div>
       </div>
