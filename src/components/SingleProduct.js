@@ -763,7 +763,7 @@ const SingleProduct = (props) => {
             </div>
             <div className="row pt-2 pb-3 add">
               <div className="wishlist">
-                <i className="search-btn"></i>
+                <i className="social-links"></i>
                 <span className="">
                   Category:{" "}
                   <Link to={"/Subcategories/" + categoryid}>
@@ -772,19 +772,19 @@ const SingleProduct = (props) => {
                 </span>
                 &nbsp; <span className="pl-2">Share:</span>
                 <a href="https://www.facebook.com/Nutrazik" target="_blank">
-                  <i className="search-btn bx bxl-facebook "></i>
+                  <i className="social-links bx bxl-facebook "></i>
                 </a>
                 <a href="https://www.instagram.com/nutrazik/" target="_blank">
-                  <i className="search-btn bx bxl-instagram "></i>
+                  <i className="social-links bx bxl-instagram "></i>
                 </a>
                 <a href="https://twitter.com/nutrazik" target="_blank">
-                  <i className="search-btn bx bxl-twitter "></i>
+                  <i className="social-links bx bxl-twitter "></i>
                 </a>
                 <a
                   href="https://www.linkedin.com/company/70941207/admin/"
                   target="_blank"
                 >
-                  <i className="search-btn bx bxl-linkedin "></i>
+                  <i className="social-links bx bxl-linkedin "></i>
                 </a>
               </div>
             </div>

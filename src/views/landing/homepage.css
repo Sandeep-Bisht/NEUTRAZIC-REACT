@@ -4125,7 +4125,7 @@ input[type="submit"].btn-block {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  /* padding: 1.25rem; */
 }
 
 .card-title {
@@ -17244,7 +17244,7 @@ textarea.form-control {
   background-color: var(--whiteColor);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   padding: 18px 12px;
-  height: 200px!important;
+  height: 200px !important;
 }
 
 .single-contact-info-box .icon {
@@ -17270,7 +17270,7 @@ textarea.form-control {
   color: var(--optionalColor);
   display: inline-block;
 }
-.contact-address-box p a{
+.contact-address-box p a {
   font-size: 16px;
 }
 
@@ -17357,9 +17357,8 @@ iframe {
 
 .single-footer-widget {
   margin-bottom: 30px;
-  
 }
-.single-footer-widget .footer-contact-info{
+.single-footer-widget .footer-contact-info {
   width: 78%;
 }
 .single-footer-widget .logo {
@@ -17376,7 +17375,7 @@ iframe {
   margin-bottom: 0;
   list-style-type: none;
 }
-.single-footer-widget .footer-contact-info p{
+.single-footer-widget .footer-contact-info p {
   font-size: 15px;
 }
 .single-footer-widget .footer-contact-info li {
@@ -19948,21 +19947,22 @@ svg {
     font-size: 0.8rem;
   }
 }
-@media only screen and (max-width: 1199px){
+@media only screen and (max-width: 1199px) {
   .single-contact-info-box {
-    height: 260px!important;
+    height: 260px !important;
   }
-  .blog-section .blog-page-section-2 .card .card-body{
-    height: 140px !important;
+  .blog-section .blog-page-section-2 .card .card-body {
+    height: 180px !important;
   }
-  .blog-section .displayed-text{
-    font-size: 12px !important;
-  }
-  .blog-section .display-text-group{
-    line-height: 1;
-  }
-  .blog-section .blog-title-text{
+  .blog-section .displayed-text {
     font-size: 14px !important;
+  }
+  .blog-section .display-text-group {
+    line-height: 1.4;
+  }
+  .blog-section .blog-title-text {
+    font-size: 16px !important;
+    height: 32px;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -20060,8 +20060,8 @@ svg {
     left: -25px;
   }
   .single-contact-info-box {
-    height: 208px!important;
-}
+    height: 208px !important;
+  }
 
   .first-nav {
     display: none;
@@ -20072,6 +20072,22 @@ svg {
   .home-banner {
     margin-top: 110px;
   }
+
+  /* Blog css */
+  .blog-section .blog-title-text {
+    font-size: 16px !important;
+    height: auto;
+  }
+  .blog-section .displayed-text {
+    font-size: 15px !important;
+  }
+  .blog-section .display-text-group {
+    line-height: 1.7;
+  }
+  .blog-section .blog-page-section-2 .card .card-body {
+    height: 150px !important;
+  }
+  /* End blog css */
 
   /* responsive All product page */
   div#columns .figure {
@@ -20285,7 +20301,7 @@ svg {
 }
 
 @media only screen and (max-width: 575.98px) {
-  .search-btn{
+  .search-btn {
     width: 40%;
   }
   .home-banner .home-banner-left .home-banner-heading {
@@ -20456,7 +20472,7 @@ svg {
   .home-banner .home-banner-left .home-banner-heading {
     font-size: 20px !important;
   }
-  .home-banner{
+  .home-banner {
     margin-top: 97px;
   }
   .home-banner .home-banner-content {
@@ -20618,10 +20634,10 @@ svg {
     width: 100%;
     text-align: center;
   }
-  .search-btn{
-    display: none!important;
+  .search-btn {
+    display: none !important;
   }
-  .home-banner .home-banner-right img{
+  .home-banner .home-banner-right img {
     bottom: 0px;
   }
 }
@@ -20659,9 +20675,9 @@ svg {
     font-size: 12px !important;
   }
   .home-banner .home-banner-content {
-    line-height: 27px!important;
-    font-size: 14px!important;
-    margin-top: -11px!important;
+    line-height: 27px !important;
+    font-size: 14px !important;
+    margin-top: -11px !important;
   }
   /* end homepage */
   .contact-container-div {
@@ -20671,7 +20687,7 @@ svg {
     font-size: 0.8rem !important;
   }
   .single-footer-widget .link-list li {
-    margin-bottom: 8px!important;
+    margin-bottom: 8px !important;
   }
 }
 
@@ -20904,8 +20920,6 @@ svg {
   max-height: 350px;
 }
 
-
-
 /* slick Carousel */
 /* .myCustomCarousel .slick-arrow {
   color: #070606 !important;
@@ -20923,55 +20937,49 @@ svg {
 } */
 /* */
 
-.controls button{
-    z-index: 10;
-    border: none;
-    background: none;
-    color: rgba(0, 0, 0, 0.8);
+.controls button {
+  z-index: 10;
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.8);
 }
-.controls button svg{
-  
+.controls button svg {
   height: 2rem !important;
   width: 1rem !important;
 }
 
-.controls button:hover{
+.controls button:hover {
   color: #2a96ff;
 }
-.controls button:focus:enabled{
+.controls button:focus:enabled {
   color: #2a96ff;
 }
 
 /* Manufacturer css carousel */
-.brands-area .image-group .cvyJEp{
+.brands-area .image-group .cvyJEp {
   font-size: 1.6rem !important;
   border: none !important;
   background: none !important;
   outline: none !important;
   box-shadow: none !important;
-
-
 }
-.brands-area .image-group .cvyJEp:hover{
+.brands-area .image-group .cvyJEp:hover {
   color: #2a96ff !important;
 }
-.brands-area .image-group .cvyJEp:focus:enabled{
-  color:#2a96ff !important;
+.brands-area .image-group .cvyJEp:focus:enabled {
+  color: #2a96ff !important;
 }
 /* BaseLine Css */
-.facility-area .single-facility-box .icon i svg{
+.facility-area .single-facility-box .icon i svg {
   height: 60px !important;
   width: 60px !important;
 }
 
-
 /* mobile-app Homepage section */
-.mobile-app .btn-div .btn .mobile-app-link:hover{
+.mobile-app .btn-div .btn .mobile-app-link:hover {
   color: black;
 }
 
-
-
-.read-more-button{
+.read-more-button {
   margin-top: 10px !important;
 }
