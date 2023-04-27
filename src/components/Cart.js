@@ -15,6 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../utils/services";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import Loader from "react-spinner-loader";
 
 const stripePromise = loadStripe(
   "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
@@ -223,7 +224,11 @@ const Cart = () => {
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
-                {loading ? '' : <>
+                {loading ? 
+                <Loader
+                show={loading}
+                stack="vertical"
+              /> : <>
                 {cart && cart.length > 0 ? (
                   <div className="cart-table">
                     <table

@@ -19996,6 +19996,9 @@ svg {
   .home-banner .home-banner-left .home-banner-heading {
     font-size: 34px !important;
   }
+  .home-banner .home-banner-right img {
+    height: 361px;
+  }
   .cosmetic-shop-now {
     margin-bottom: 15px;
   }

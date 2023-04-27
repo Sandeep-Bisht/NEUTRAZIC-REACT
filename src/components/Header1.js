@@ -310,6 +310,7 @@ console.log(currentLocation,"This is checking current location");
     }
   };
   const LoginUser = (data) => {
+    console.log(data,"data of login users")
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
@@ -326,7 +327,9 @@ console.log(currentLocation,"This is checking current location");
         .then(async (res) => {
           setLoginState("1");
           if (res && res.userStatus && res.userStatus === "Activate") {
+            console.log("helo inside the activete if ")
             if (res && res.role === "user") {
+              console.log("inside the 2nd if condition");
               Userdata = res;
               await localStorage.setItem("Userdata", JSON.stringify(res));
               await CartById();
@@ -376,6 +379,7 @@ console.log(currentLocation,"This is checking current location");
         });
     }
   };
+  console.log(Userdata,"user data of after the login")
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())

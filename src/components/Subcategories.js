@@ -92,7 +92,7 @@ const Subcategories = (props) => {
     setfilterData(state.array);
     setsubcategoryId(state.allProduct);
     allSubCateory.classList.add("newActive");
-  }, [state]);
+  }, [state,loginState]);
 
   const GetData = async () => {
     Userdata = await JSON.parse(localStorage.getItem("Userdata"));

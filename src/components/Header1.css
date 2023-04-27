@@ -1155,6 +1155,9 @@ body {
     width: 100%;
     height: 45px;
     }
+    .top-header-padding{
+        padding-top: 15px !important;
+    }
     .contact{
         display: none;
     }
@@ -1238,7 +1241,7 @@ body {
         padding: 0 10px;
     }
     .newheader{
-        height: 135px;
+        height: 123px;
     }
     .navbar-toggler {
 		border-radius: 0px!important;
@@ -1249,17 +1252,15 @@ body {
     .currancy{
         margin-left: 30px!important;
     }
-    .user-login .Total-Item {
-        position: absolute;
-        bottom: 7px;
-        left: -12px;
-        font-size: 14px;
-    }
+    
     .heart-div .option-item .cart-btn h6{
         position: absolute !important;
         font-size: 14px !important;
         bottom: 5px !important;
         left: 5px !important;
+    }
+    .user-login .Total-Item{
+        left: -12px;
     }
     .drop-category{
         padding-right: 10px;

@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
+import Loader from "react-spinner-loader";
 
 var Userdata = "";
 const WishList = () => {
@@ -67,7 +68,7 @@ const WishList = () => {
       {
         setLoading(false);
       }
-    },500);
+    },3000);
   },[]);
   
   const DeleteWishlist = async (productId) => {
@@ -96,7 +97,7 @@ const WishList = () => {
             setLoading(false);
           }
           
-        },500);
+        },2000);
         GetWishlist();
         })
         
@@ -271,7 +272,11 @@ const WishList = () => {
             </div>
           </div>
           <div className="row mt-0">
-          {loading ? '' : <>
+          {loading ? 
+          <Loader
+          show={loading}
+          stack="vertical"
+        /> : <>
             {wishlistData.length > 0 ? (
               wishlistData.map((item, ind) => (
                 <div className="col-lg-6 col-md-6 col-sm-12">
