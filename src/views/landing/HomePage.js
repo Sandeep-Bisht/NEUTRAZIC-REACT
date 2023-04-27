@@ -73,7 +73,7 @@ const HomePage = () => {
   let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [sliderRef, setSliderRef] = useState(null);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
 
   var settings = {
@@ -122,11 +122,11 @@ const HomePage = () => {
     GetWishlist();
     GetCategory();
     GetManufacturer();
-    $(document).ready(function() {
-      $(".frontimage").mouseover(function() {
+    $(document).ready(function () {
+      $(".frontimage").mouseover(function () {
         alert("in");
       });
-      $(".frontimage").mouseleave(function() {
+      $(".frontimage").mouseleave(function () {
         alert("in");
       });
     });
@@ -596,160 +596,160 @@ const HomePage = () => {
           <div className="container m-auto">
             <div className="row">
               {
-                loading ? 
-                <Loader
-                show={loading}
-                stack="vertical"
-              />
-              :
-              <div id="column" className="columns_5">
-                {data
-                  .filter((item) => item.type == "Trending Product")
-                  .map((el, ind) => {
-                    if (ind < 5) {
-                      return (
-                        <>
-                          <figure
-                            className="figure homepage-trending-figure"
-                            key={ind}
-                          >
-                            <Link to={"/SingleProduct/" + el._id}>
-                              <div
-                                className="image hover-switch-homepage"
-                                style={{ position: "relative" }}
+                loading ?
+                  <Loader
+                    show={loading}
+                    stack="vertical"
+                  />
+                  :
+                  <div id="column" className="columns_5">
+                    {data
+                      .filter((item) => item.type == "Trending Product")
+                      .map((el, ind) => {
+                        if (ind < 5) {
+                          return (
+                            <>
+                              <figure
+                                className="figure homepage-trending-figure"
+                                key={ind}
                               >
-                                <img
-                                  className="hoverimage"
-                                  src={
-                                    el.otherImage &&
-                                    el.otherImage.length > 0 &&
-                                    `${baseUrl}/` + el.otherImage[0].path
-                                  }
-                                  alt=""
-                                />
-                                <img
-                                  className="main-Image"
-                                  src={`${baseUrl}/` + el.image[0].path}
-                                  alt=""
-                                  style={{
-                                    position: "absolute",
-                                    top: "0",
-                                    left: "0",
-                                  }}
-                                />
-                              </div>
-                              <Link to={"/SingleProduct/" + el._id}>
-                                <figcaption className="Product-name-home">
-                                  {el.name}
-                                </figcaption>
-                              </Link>
-                            </Link>
+                                <Link to={"/SingleProduct/" + el._id}>
+                                  <div
+                                    className="image hover-switch-homepage"
+                                    style={{ position: "relative" }}
+                                  >
+                                    <img
+                                      className="hoverimage"
+                                      src={
+                                        el.otherImage &&
+                                        el.otherImage.length > 0 &&
+                                        `${baseUrl}/` + el.otherImage[0].path
+                                      }
+                                      alt=""
+                                    />
+                                    <img
+                                      className="main-Image"
+                                      src={`${baseUrl}/` + el.image[0].path}
+                                      alt=""
+                                      style={{
+                                        position: "absolute",
+                                        top: "0",
+                                        left: "0",
+                                      }}
+                                    />
+                                  </div>
+                                  <Link to={"/SingleProduct/" + el._id}>
+                                    <figcaption className="Product-name-home">
+                                      {el.name}
+                                    </figcaption>
+                                  </Link>
+                                </Link>
 
-                            <div className="contanier homepage-product-price-div">
-                              <div className="row mt-2">
-                                <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
-                                  <span className="price">
-                                    {" "}
-                                    {state1 == "1" ? (
-                                      <i class="fa fa-dollar-sign"></i>
-                                    ) : (
-                                      <i className="fa fa-inr"></i>
-                                    )}
-                                    {state1 == "1"
-                                      ? el.dollerDiscount
-                                      : el.inrDiscount}
-                                  </span>
+                                <div className="contanier homepage-product-price-div">
+                                  <div className="row mt-2">
+                                    <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                                      <span className="price">
+                                        {" "}
+                                        {state1 == "1" ? (
+                                          <i class="fa fa-dollar-sign"></i>
+                                        ) : (
+                                          <i className="fa fa-inr"></i>
+                                        )}
+                                        {state1 == "1"
+                                          ? el.dollerDiscount
+                                          : el.inrDiscount}
+                                      </span>
+                                    </div>
+                                    <div className="col-6 text-end">
+                                      <p className={`text-nowrap wishlist`}>
+                                        {Userdata ? (
+                                          <i
+                                            id={el._id}
+                                            onClick={() => {
+                                              AddtoWishlist(
+                                                el._id,
+                                                el.name,
+                                                quantity,
+                                                el.inrMrp,
+                                                el.inrDiscount,
+                                                el.description,
+                                                el.category,
+                                                el.manufacturer.name,
+                                                el.image
+                                              );
+                                            }}
+                                            className={`bx bxs-heart ${checkWishlistItem(
+                                              el._id
+                                            )}`}
+                                          ></i>
+                                        ) : (
+                                          <i
+                                            className="bx bxs-heart "
+                                            data-bs-toggle="modal"
+                                            data-bs-target={
+                                              Userdata == null
+                                                ? "#exampleModal"
+                                                : null
+                                            }
+                                            onClick={() => handleResetForm()}
+                                          ></i>
+                                        )}
+                                        Wishlist
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div className="col-6 text-end">
-                                  <p className={`text-nowrap wishlist`}>
-                                    {Userdata ? (
-                                      <i
-                                        id={el._id}
-                                        onClick={() => {
-                                          AddtoWishlist(
-                                            el._id,
-                                            el.name,
-                                            quantity,
-                                            el.inrMrp,
-                                            el.inrDiscount,
-                                            el.description,
-                                            el.category,
-                                            el.manufacturer.name,
-                                            el.image
-                                          );
-                                        }}
-                                        className={`bx bxs-heart ${checkWishlistItem(
-                                          el._id
-                                        )}`}
-                                      ></i>
-                                    ) : (
-                                      <i
-                                        className="bx bxs-heart "
-                                        data-bs-toggle="modal"
-                                        data-bs-target={
-                                          Userdata == null
-                                            ? "#exampleModal"
-                                            : null
-                                        }
-                                        onClick={() => handleResetForm()}
-                                      ></i>
-                                    )}
-                                    Wishlist
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
 
-                            {Userdata ? (
-                              <button
-                                className="button btn"
-                                onClick={() => {
-                                  cartfunction(
-                                    el._id,
-                                    el.name,
-                                    quantity,
-                                    el.inrMrp,
-                                    el.inrDiscount,
-                                    el.dollerMrp,
-                                    el.dollerDiscount,
-                                    el.discount,
-                                    el.description,
-                                    el.category,
-                                    el.manufacturer.name,
-                                    el.image[0].path
-                                  );
-                                }}
-                                data-bs-toggle={
-                                  Userdata == null ? "modal" : null
-                                }
-                                data-bs-target={
-                                  Userdata == null ? "#exampleModal" : null
-                                }
-                              >
-                                Add to Cart
-                              </button>
-                            ) : (
-                              <button
-                                className="button btn"
-                                data-bs-toggle="modal"
-                                data-bs-target={
-                                  Userdata == null ? "#exampleModal" : null
-                                }
-                                onClick={() => handleResetForm()}
-                              >
-                                Add to Cart
-                              </button>
-                            )}
+                                {Userdata ? (
+                                  <button
+                                    className="button btn"
+                                    onClick={() => {
+                                      cartfunction(
+                                        el._id,
+                                        el.name,
+                                        quantity,
+                                        el.inrMrp,
+                                        el.inrDiscount,
+                                        el.dollerMrp,
+                                        el.dollerDiscount,
+                                        el.discount,
+                                        el.description,
+                                        el.category,
+                                        el.manufacturer.name,
+                                        el.image[0].path
+                                      );
+                                    }}
+                                    data-bs-toggle={
+                                      Userdata == null ? "modal" : null
+                                    }
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                  >
+                                    Add to Cart
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="button btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                    onClick={() => handleResetForm()}
+                                  >
+                                    Add to Cart
+                                  </button>
+                                )}
 
-                            {/* </Link> */}
-                          </figure>
-                        </>
-                      );
-                    }
-                  })}
-              </div>
+                                {/* </Link> */}
+                              </figure>
+                            </>
+                          );
+                        }
+                      })}
+                  </div>
               }
-              
+
               {/* hover Button */}
               <div className="wrapperbtn pt-0">
                 <Link to="/TrendingProducts">
@@ -769,70 +769,70 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             {
-            loading ?
-            <Loader
-                show={loading}
-                stack="vertical"
-              />
-              :
-<div className="row mt-0 featured-products">
-              <Slider ref={setSliderRef} {...settings}>
-                {categories &&
-                  categories.length > 0 &&
-                  categories.map((item, index) => {
-                    if (item.featuredCategories == "Featured Categories") {
-                      return (
-                        <div className="col-12 p-5" key={index}>
-                          <div className="Category-container">
-                            <div className="row">
-                              <div className="col-md-6">
-                                <div className="category-left-side">
-                                  <div className="category-heading">
-                                    <h4>{item.name}</h4>
+              loading ?
+                <Loader
+                  show={loading}
+                  stack="vertical"
+                />
+                :
+                <div className="row mt-0 featured-products">
+                  <Slider ref={setSliderRef} {...settings}>
+                    {categories &&
+                      categories.length > 0 &&
+                      categories.map((item, index) => {
+                        if (item.featuredCategories == "Featured Categories") {
+                          return (
+                            <div className="col-12 p-5" key={index}>
+                              <div className="Category-container">
+                                <div className="row">
+                                  <div className="col-md-6">
+                                    <div className="category-left-side">
+                                      <div className="category-heading">
+                                        <h4>{item.name}</h4>
+                                      </div>
+                                      <div className="category-text">
+                                        <p>{item.description}</p>
+                                      </div>
+                                      <Link to={"/Subcategories/" + item._id}>
+                                        <button className="btn btn cosmetic-shop-now category-Button">
+                                          Shop Now
+                                        </button>
+                                      </Link>
+                                    </div>
                                   </div>
-                                  <div className="category-text">
-                                    <p>{item.description}</p>
+                                  <div className="col-md-6">
+                                    <Link to={"/Subcategories/" + item._id}>
+                                      <div className="Image-Container">
+                                        <img
+                                          src={
+                                            item.image &&
+                                            `${baseUrl}/` + item.image[0].path
+                                          }
+                                          alt=""
+                                          className="cat-left-side-image img-fluid"
+                                        />
+                                      </div>
+                                    </Link>
                                   </div>
-                                  <Link to={"/Subcategories/" + item._id}>
-                                    <button className="btn btn cosmetic-shop-now category-Button">
-                                      Shop Now
-                                    </button>
-                                  </Link>
                                 </div>
                               </div>
-                              <div className="col-md-6">
-                                <Link to={"/Subcategories/" + item._id}>
-                                  <div className="Image-Container">
-                                    <img
-                                      src={
-                                        item.image &&
-                                        `${baseUrl}/` + item.image[0].path
-                                      }
-                                      alt=""
-                                      className="cat-left-side-image img-fluid"
-                                    />
-                                  </div>
-                                </Link>
-                              </div>
                             </div>
-                          </div>
-                        </div>
-                      );
-                    }
-                  })}
-                {/* </Carousel> */}
-              </Slider>
-              <div className="controls d-flex  justify-content-between">
-                <button onClick={sliderRef?.slickPrev}>
-                  <FaChevronLeft />
-                </button>
-                <button onClick={sliderRef?.slickNext}>
-                  <FaChevronRight />
-                </button>
-              </div>
-            </div>
+                          );
+                        }
+                      })}
+                    {/* </Carousel> */}
+                  </Slider>
+                  <div className="controls d-flex  justify-content-between">
+                    <button onClick={sliderRef?.slickPrev}>
+                      <FaChevronLeft />
+                    </button>
+                    <button onClick={sliderRef?.slickNext}>
+                      <FaChevronRight />
+                    </button>
+                  </div>
+                </div>
             }
-            
+
           </div>
         </section>
 
@@ -842,171 +842,171 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto py-4">
             {
-            loading ?
-            <Loader
-                show={loading}
-                stack="vertical"
-              />
-              :
-              <div className="row ">
-              <div id="column" className="columns_5">
-                {data
-                  .filter((item) => item.type == "")
-                  .map((el, ind) => {
-                    if (ind < 5) {
-                      return (
-                        <figure
-                          className="figure homepage-trending-figure"
-                          key={ind}
-                        >
-                          {/* <Link to={"/SingleProduct/" + el._id}> */}
-
-                          <Link to={"/SingleProduct/" + el._id}>
-                            <div
-                              className="image hover-switch-homepage"
-                              style={{ position: "relative" }}
+              loading ?
+                <Loader
+                  show={loading}
+                  stack="vertical"
+                />
+                :
+                <div className="row ">
+                  <div id="column" className="columns_5">
+                    {data
+                      .filter((item) => item.type == "")
+                      .map((el, ind) => {
+                        if (ind < 5) {
+                          return (
+                            <figure
+                              className="figure homepage-trending-figure"
+                              key={ind}
                             >
-                              <img
-                                className="hoverimage"
-                                src={
-                                  el.otherImage &&
-                                  el.otherImage.length > 0 &&
-                                  `${baseUrl}/` + el.otherImage[0].path
-                                }
-                                alt=""
-                              />
-                              <img
-                                className="main-Image"
-                                src={`${baseUrl}/` + el.image[0].path}
-                                alt=""
-                                style={{
-                                  position: "absolute",
-                                  top: "0",
-                                  left: "0",
-                                }}
-                              />
-                            </div>
-                            <Link to={"/SingleProduct/" + el._id}>
-                              <figcaption className="Product-name-home">
-                                {el.name}
-                              </figcaption>
-                            </Link>
-                          </Link>
-                          <div className="contanier homepage-product-price-div">
-                            <div className="row mt-2">
-                              <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
-                                <span className="price">
-                                  {" "}
-                                  {state1 == "1" ? (
-                                    <i class="fa fa-dollar-sign"></i>
-                                  ) : (
-                                    <i className="fa fa-inr"></i>
-                                  )}
-                                  {state1 == "1"
-                                    ? el.dollerDiscount
-                                    : el.inrDiscount}
-                                </span>
-                              </div>
-                              <div className="col-6 text-end">
-                                <p className={`text-nowrap wishlist`}>
-                                  {Userdata ? (
-                                    <i
-                                      id={el._id}
-                                      onClick={() => {
-                                        AddtoWishlist(
-                                          el._id,
-                                          el.name,
-                                          quantity,
-                                          el.inrMrp,
-                                          el.inrDiscount,
-                                          el.description,
-                                          el.category,
-                                          el.manufacturer.name,
-                                          el.image
-                                        );
-                                      }}
-                                      className={`bx bxs-heart ${checkWishlistItem(
-                                        el._id
-                                      )}`}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="bx bxs-heart "
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null
-                                          ? "#exampleModal"
-                                          : null
-                                      }
-                                      onClick={() => handleResetForm()}
-                                    ></i>
-                                  )}
-                                  Wishlist
-                                </p>
-                              </div>
-                              <div>
-                                {Userdata ? (
-                                  <button
-                                    className="button btn"
-                                    onClick={() => {
-                                      cartfunction(
-                                        el._id,
-                                        el.name,
-                                        quantity,
-                                        el.inrMrp,
-                                        el.inrDiscount,
-                                        el.dollerMrp,
-                                        el.dollerDiscount,
-                                        el.discount,
-                                        el.description,
-                                        el.category,
-                                        el.manufacturer.name,
-                                        el.image[0].path
-                                      );
+                              {/* <Link to={"/SingleProduct/" + el._id}> */}
+
+                              <Link to={"/SingleProduct/" + el._id}>
+                                <div
+                                  className="image hover-switch-homepage"
+                                  style={{ position: "relative" }}
+                                >
+                                  <img
+                                    className="hoverimage"
+                                    src={
+                                      el.otherImage &&
+                                      el.otherImage.length > 0 &&
+                                      `${baseUrl}/` + el.otherImage[0].path
+                                    }
+                                    alt=""
+                                  />
+                                  <img
+                                    className="main-Image"
+                                    src={`${baseUrl}/` + el.image[0].path}
+                                    alt=""
+                                    style={{
+                                      position: "absolute",
+                                      top: "0",
+                                      left: "0",
                                     }}
-                                    data-bs-toggle={
-                                      Userdata == null ? "modal" : null
-                                    }
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                  >
-                                    Add to Cart
-                                  </button>
-                                ) : (
-                                  <button
-                                    className="button btn"
-                                    data-bs-toggle="modal"
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                    onClick={() => handleResetForm()}
-                                  >
-                                    Add to Cart
-                                  </button>
-                                )}
+                                  />
+                                </div>
+                                <Link to={"/SingleProduct/" + el._id}>
+                                  <figcaption className="Product-name-home">
+                                    {el.name}
+                                  </figcaption>
+                                </Link>
+                              </Link>
+                              <div className="contanier homepage-product-price-div">
+                                <div className="row mt-2">
+                                  <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                                    <span className="price">
+                                      {" "}
+                                      {state1 == "1" ? (
+                                        <i class="fa fa-dollar-sign"></i>
+                                      ) : (
+                                        <i className="fa fa-inr"></i>
+                                      )}
+                                      {state1 == "1"
+                                        ? el.dollerDiscount
+                                        : el.inrDiscount}
+                                    </span>
+                                  </div>
+                                  <div className="col-6 text-end">
+                                    <p className={`text-nowrap wishlist`}>
+                                      {Userdata ? (
+                                        <i
+                                          id={el._id}
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          className={`bx bxs-heart ${checkWishlistItem(
+                                            el._id
+                                          )}`}
+                                        ></i>
+                                      ) : (
+                                        <i
+                                          className="bx bxs-heart "
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
+                                          onClick={() => handleResetForm()}
+                                        ></i>
+                                      )}
+                                      Wishlist
+                                    </p>
+                                  </div>
+                                  <div>
+                                    {Userdata ? (
+                                      <button
+                                        className="button btn"
+                                        onClick={() => {
+                                          cartfunction(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.dollerMrp,
+                                            el.dollerDiscount,
+                                            el.discount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image[0].path
+                                          );
+                                        }}
+                                        data-bs-toggle={
+                                          Userdata == null ? "modal" : null
+                                        }
+                                        data-bs-target={
+                                          Userdata == null ? "#exampleModal" : null
+                                        }
+                                      >
+                                        Add to Cart
+                                      </button>
+                                    ) : (
+                                      <button
+                                        className="button btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target={
+                                          Userdata == null ? "#exampleModal" : null
+                                        }
+                                        onClick={() => handleResetForm()}
+                                      >
+                                        Add to Cart
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
 
-                          {/* </Link> */}
-                        </figure>
-                      );
-                    }
-                  })}
-              </div>
-              {/* hover Button */}
+                              {/* </Link> */}
+                            </figure>
+                          );
+                        }
+                      })}
+                  </div>
+                  {/* hover Button */}
 
-              <div className="wrapperbtn pt-3 pb-4">
-                <Link to="/AllProducts">
-                  <button type="button" className="btn10">
-                    Show More
-                  </button>
-                </Link>
-              </div>
-              {/* Hover Button End */}
-            </div>
-            }           
+                  <div className="wrapperbtn pt-3 pb-4">
+                    <Link to="/AllProducts">
+                      <button type="button" className="btn10">
+                        Show More
+                      </button>
+                    </Link>
+                  </div>
+                  {/* Hover Button End */}
+                </div>
+            }
           </div>
         </section>
         <section className="products-area">
@@ -1016,173 +1016,173 @@ const HomePage = () => {
           <div className="container m-auto">
             {
               loading ?
-              <Loader
-                show={loading}
-                stack="vertical"
-              />:
-<div className="row">
-              <div id="column" className="columns_5">
-                {data
-                  .filter((item) => item.category.name == singlecategory.name)
-                  .map((el, ind) => {
-                    if (ind < 5) {
-                      return (
-                        <figure
-                          className="figure homepage-trending-figure"
-                          key={ind}
-                        >
-                          <Link to={"/SingleProduct/" + el._id}>
-                            <div
-                              className="image hover-switch-homepage"
-                              style={{ position: "relative" }}
+                <Loader
+                  show={loading}
+                  stack="vertical"
+                /> :
+                <div className="row">
+                  <div id="column" className="columns_5">
+                    {data
+                      .filter((item) => item.category.name == singlecategory.name)
+                      .map((el, ind) => {
+                        if (ind < 5) {
+                          return (
+                            <figure
+                              className="figure homepage-trending-figure"
+                              key={ind}
                             >
-                              <img
-                                className="hoverimage"
-                                src={
-                                  el.otherImage &&
-                                  el.otherImage.length > 0 &&
-                                  `${baseUrl}/` + el.otherImage[0].path
-                                }
-                                alt=""
-                              />
-                              <img
-                                className="main-Image"
-                                src={`${baseUrl}/` + el.image[0].path}
-                                alt=""
-                                style={{
-                                  position: "absolute",
-                                  top: "0",
-                                  left: "0",
-                                }}
-                              />
-                            </div>
-                            <Link to={"/SingleProduct/" + el._id}>
-                              <figcaption className="Product-name-home">
-                                {el.name}
-                              </figcaption>
-                            </Link>
-                          </Link>
-                          <div className="contanier homepage-product-price-div">
-                            <div className="row mt-2">
-                              <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
-                                <span className="price">
-                                  {" "}
-                                  {state1 == "1" ? (
-                                    <i class="fa fa-dollar-sign"></i>
-                                  ) : (
-                                    <i className="fa fa-inr"></i>
-                                  )}
-                                  {state1 == "1"
-                                    ? el.dollerDiscount
-                                    : el.inrDiscount}
-                                </span>
-                              </div>
-                              <div className="col-6 text-end">
-                                <p className={`text-nowrap wishlist`}>
-                                  {Userdata ? (
-                                    <i
-                                      id={el._id}
-                                      onClick={() => {
-                                        AddtoWishlist(
-                                          el._id,
-                                          el.name,
-                                          quantity,
-                                          el.inrMrp,
-                                          el.inrDiscount,
-                                          el.description,
-                                          el.category,
-                                          el.manufacturer.name,
-                                          el.image
-                                        );
-                                      }}
-                                      className={`bx bxs-heart ${checkWishlistItem(
-                                        el._id
-                                      )}`}
-                                    ></i>
-                                  ) : (
-                                    <i
-                                      className="bx bxs-heart "
-                                      data-bs-toggle="modal"
-                                      data-bs-target={
-                                        Userdata == null
-                                          ? "#exampleModal"
-                                          : null
-                                      }
-                                      onClick={() => handleResetForm()}
-                                    ></i>
-                                  )}
-                                  Wishlist
-                                </p>
-                              </div>
-
-                              <div>
-                                {Userdata ? (
-                                  <button
-                                    className="button btn"
-                                    onClick={() => {
-                                      cartfunction(
-                                        el._id,
-                                        el.name,
-                                        quantity,
-                                        el.inrMrp,
-                                        el.inrDiscount,
-                                        el.dollerMrp,
-                                        el.dollerDiscount,
-                                        el.discount,
-                                        el.description,
-                                        el.category,
-                                        el.manufacturer.name,
-                                        el.image[0].path
-                                      );
+                              <Link to={"/SingleProduct/" + el._id}>
+                                <div
+                                  className="image hover-switch-homepage"
+                                  style={{ position: "relative" }}
+                                >
+                                  <img
+                                    className="hoverimage"
+                                    src={
+                                      el.otherImage &&
+                                      el.otherImage.length > 0 &&
+                                      `${baseUrl}/` + el.otherImage[0].path
+                                    }
+                                    alt=""
+                                  />
+                                  <img
+                                    className="main-Image"
+                                    src={`${baseUrl}/` + el.image[0].path}
+                                    alt=""
+                                    style={{
+                                      position: "absolute",
+                                      top: "0",
+                                      left: "0",
                                     }}
-                                    data-bs-toggle={
-                                      Userdata == null ? "modal" : null
-                                    }
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                  >
-                                    Add to Cart
-                                  </button>
-                                ) : (
-                                  <button
-                                    className="button btn"
-                                    data-bs-toggle="modal"
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                    onClick={() => handleResetForm()}
-                                  >
-                                    Add to Cart
-                                  </button>
-                                )}
+                                  />
+                                </div>
+                                <Link to={"/SingleProduct/" + el._id}>
+                                  <figcaption className="Product-name-home">
+                                    {el.name}
+                                  </figcaption>
+                                </Link>
+                              </Link>
+                              <div className="contanier homepage-product-price-div">
+                                <div className="row mt-2">
+                                  <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                                    <span className="price">
+                                      {" "}
+                                      {state1 == "1" ? (
+                                        <i class="fa fa-dollar-sign"></i>
+                                      ) : (
+                                        <i className="fa fa-inr"></i>
+                                      )}
+                                      {state1 == "1"
+                                        ? el.dollerDiscount
+                                        : el.inrDiscount}
+                                    </span>
+                                  </div>
+                                  <div className="col-6 text-end">
+                                    <p className={`text-nowrap wishlist`}>
+                                      {Userdata ? (
+                                        <i
+                                          id={el._id}
+                                          onClick={() => {
+                                            AddtoWishlist(
+                                              el._id,
+                                              el.name,
+                                              quantity,
+                                              el.inrMrp,
+                                              el.inrDiscount,
+                                              el.description,
+                                              el.category,
+                                              el.manufacturer.name,
+                                              el.image
+                                            );
+                                          }}
+                                          className={`bx bxs-heart ${checkWishlistItem(
+                                            el._id
+                                          )}`}
+                                        ></i>
+                                      ) : (
+                                        <i
+                                          className="bx bxs-heart "
+                                          data-bs-toggle="modal"
+                                          data-bs-target={
+                                            Userdata == null
+                                              ? "#exampleModal"
+                                              : null
+                                          }
+                                          onClick={() => handleResetForm()}
+                                        ></i>
+                                      )}
+                                      Wishlist
+                                    </p>
+                                  </div>
+
+                                  <div>
+                                    {Userdata ? (
+                                      <button
+                                        className="button btn"
+                                        onClick={() => {
+                                          cartfunction(
+                                            el._id,
+                                            el.name,
+                                            quantity,
+                                            el.inrMrp,
+                                            el.inrDiscount,
+                                            el.dollerMrp,
+                                            el.dollerDiscount,
+                                            el.discount,
+                                            el.description,
+                                            el.category,
+                                            el.manufacturer.name,
+                                            el.image[0].path
+                                          );
+                                        }}
+                                        data-bs-toggle={
+                                          Userdata == null ? "modal" : null
+                                        }
+                                        data-bs-target={
+                                          Userdata == null ? "#exampleModal" : null
+                                        }
+                                      >
+                                        Add to Cart
+                                      </button>
+                                    ) : (
+                                      <button
+                                        className="button btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target={
+                                          Userdata == null ? "#exampleModal" : null
+                                        }
+                                        onClick={() => handleResetForm()}
+                                      >
+                                        Add to Cart
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </figure>
-                      );
-                    }
-                  })}
-              </div>
-              {/* hover Button */}
-              <div className="wrapperbtn pt-3 pb-4">
-                {data
-                  .filter((item) => item.category.name == singlecategory.name)
-                  .map((el, index) => {
-                    if (index < 1) {
-                      return (
-                        <Link to={"/SubCategories/" + el.category._id}>
-                          <button type="button" className="btn10">
-                            Show More
-                          </button>
-                        </Link>
-                      );
-                    }
-                  })}
-              </div>
-              {/* Hover Button End */}
-            </div>
-            }            
+                            </figure>
+                          );
+                        }
+                      })}
+                  </div>
+                  {/* hover Button */}
+                  <div className="wrapperbtn pt-3 pb-4">
+                    {data
+                      .filter((item) => item.category.name == singlecategory.name)
+                      .map((el, index) => {
+                        if (index < 1) {
+                          return (
+                            <Link to={"/SubCategories/" + el.category._id}>
+                              <button type="button" className="btn10">
+                                Show More
+                              </button>
+                            </Link>
+                          );
+                        }
+                      })}
+                  </div>
+                  {/* Hover Button End */}
+                </div>
+            }
           </div>
         </section>
         <div className="brands-area">
@@ -1299,7 +1299,7 @@ const HomePage = () => {
                                         src={
                                           item.featuredImage &&
                                           `${baseUrl}/` +
-                                            item.featuredImage[0].path
+                                          item.featuredImage[0].path
                                         }
                                         className="card-img-homepage"
                                         alt="blog-image"

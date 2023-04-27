@@ -26,7 +26,7 @@ const Cart = () => {
   const history = useHistory();
   const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [_id, Set_id] = useState();
   const [subtotal, setSubtotal] = useState(0);
   const [cartStatus, setCartStatus] = useState();
@@ -34,9 +34,9 @@ const Cart = () => {
 
   const [currancy, setCurrency] = useState("INR");
   const state1 = useContext(CurrencyContext);
-  
+
   useEffect(() => {
-    
+
     if (state1 == "1") {
       setCurrency("Dollar");
     }
@@ -120,7 +120,7 @@ const Cart = () => {
       }),
     })
       .then((res) => res.json())
-      .then((res) => {})
+      .then((res) => { })
       .then((err) => console.log(err));
   };
 
@@ -156,7 +156,7 @@ const Cart = () => {
     const stripe = await stripePromise;
     let { order } = data;
     let neworder = JSON.parse(order);
-    neworder.forEach(function(item) {
+    neworder.forEach(function (item) {
       delete item.category;
       delete item.description;
       delete item.delivery_time;
@@ -176,7 +176,7 @@ const Cart = () => {
     await formData.append("instruction", data.instruction);
     await formData.append("addresstype", data.addresstype);
     await formData.append("username", Userdata.username);
-    
+
     const url = `${baseUrl}/api/order/create-checkout-session`;
     await fetch(url, {
       method: "POST",
@@ -205,8 +205,8 @@ const Cart = () => {
         localStorage.removeItem("Usercartdata");
         window.location.href = url;
       })
-      .then(async (res) => {})
-      .catch((err) => {});
+      .then(async (res) => { })
+      .catch((err) => { });
   };
   return (
     <>
@@ -224,162 +224,162 @@ const Cart = () => {
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
-                {loading ? 
-                <Loader
-                show={loading}
-                stack="vertical"
-              /> : <>
-                {cart && cart.length > 0 ? (
-                  <div className="cart-table">
-                    <table
-                      className="w-100"
-                      cellsacing="10px"
-                      cellPadding="10px"
-                    >
-                      <thead className="text-center">
-                        <tr>
-                          <th scope="col">Product</th>
-                          <th scope="col"></th>
-                          <th scope="col">PRICE</th>
-                          <th scope="col" className="text-center">
-                            QUANTITY
-                          </th>
-                          <th scope="col" className="text-center">
-                            Total
-                          </th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {cart.map((el, ind1) => {
-                          if (state1.state1 == "1") {
-                            total = el.dollerDiscount * el.quantity;
-                            total1 = total1 + el.dollerDiscount * el.quantity;
-                            localStorage.setItem("ActualSubtotal", total1);
-                            actualtotal += el.dollerMrp * el.quantity;
-                            localStorage.setItem("Subtotal", actualtotal);
-                          } else {
-                            total = el.singleprice * el.quantity;
-                            total1 = total1 + el.singleprice * el.quantity;
-                            localStorage.setItem("ActualSubtotal", total1);
-                            actualtotal += el.mrp * el.quantity;
-                            localStorage.setItem("Subtotal", actualtotal);
-                          }
-                          return (
-                            <tr key={ind1} className="cart-data">
-                              <td className="product-thumbnail">
-                                <Link to={"/SingleProduct/" + el.productid}>
-                                  <img
-                                    src={
-                                      `${baseUrl}/` + el.image ||
-                                      el.manufacturer.image[0].path
-                                    }
-                                    alt="item"
-                                  />
-                                </Link>
-                              </td>
-                              <td className="product-name">
-                                <Link to={"/SingleProduct/" + el.productid}>
-                                  <div className="cart-text">{el.name}</div>
-                                </Link>
-                              </td>
-                              <td className="product-price">
-                                <div className="amount">
-                                  <span className="unit-amount">
-                                    {state1.state1 == "1" ? (
-                                      <i class="fa fa-dollar-sign currency-sign"></i>
-                                    ) : (
-                                      <i className="fa fa-inr currency-sign"></i>
-                                    )}
-                                    <del>
-                                      {state1.state1 == "1"
-                                        ? el.dollerMrp
-                                        : el.mrp}
-                                    </del>
-                                  </span>
-                                  <span>
-                                    {state1.state1 == "1"
-                                      ? el.dollerDiscount
-                                      : el.singleprice}
-                                  </span>
-                                </div>
-                              </td>
-                              <td className="product-quantity">
-                                <div className="amount">
-                                  {" "}
-                                  <div className="input-counter">
-                                    <span
-                                      className="minus-btn"
-                                      onClick={() => {
-                                        Minusquantity(
-                                          el.quantity,
-                                          el.mrp,
-                                          ind1
-                                        );
-                                      }}
-                                    >
-                                      <i className="bx bx-minus minus"></i>
-                                    </span>
-                                    <input
-                                      type="number"
-                                      
-                                      value={el.quantity}
-                                    />
-                                    <span
-                                      className="plus-btn"
-                                      onClick={() => {
-                                        Plusquantity(el.quantity, el.mrp, ind1);
-                                      }}
-                                    >
-                                      <i className="bx bx-plus  plus"></i>
-                                    </span>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="product-subtotal">
-                                <div className="amount">
-                                  <span className="subtotal-amount mt-4">
-                                    {state1.state1 == "1" ? (
-                                      <i class="fa fa-dollar-sign currency-subtotal-sign"></i>
-                                    ) : (
-                                      <i className="fa fa-inr currency-subtotal-sign"></i>
-                                    )}
-                                    {(state1.state1 == "1"
-                                      ? el.dollerDiscount
-                                      : el.singleprice) * el.quantity}
-                                  </span>
-                                </div>
-                              </td>
-                              <td className="cartPop">
-                                <Popconfirm
-                                  className="bx bx-trash cart-delete-icon"
-                                  title="Delete the Product"
-                                  description="Are you sure to delete this Product?"
-                                  style={{ margin: "0" }}
-                                  onConfirm={(e) => Sliceorder(ind1, e)}
-                                ></Popconfirm>
-                              </td>
+                {loading ?
+                  <Loader
+                    show={loading}
+                    stack="vertical"
+                  /> : <>
+                    {cart && cart.length > 0 ? (
+                      <div className="cart-table">
+                        <table
+                          className="w-100"
+                          cellsacing="10px"
+                          cellPadding="10px"
+                        >
+                          <thead className="text-center">
+                            <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col"></th>
+                              <th scope="col">PRICE</th>
+                              <th scope="col" className="text-center">
+                                QUANTITY
+                              </th>
+                              <th scope="col" className="text-center">
+                                Total
+                              </th>
+                              <th scope="col"></th>
                             </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                ) : (
-                  <lottie-player
-                    src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
-                    background="transparent"
-                    speed="1"
-                    style={{
-                      width: "300px",
-                      height: "300px",
-                      margin: "auto",
-                    }}
-                    loop
-                    autoplay
-                  ></lottie-player>
-                )}
-                </>}
+                          </thead>
+                          <tbody>
+                            {cart.map((el, ind1) => {
+                              if (state1.state1 == "1") {
+                                total = el.dollerDiscount * el.quantity;
+                                total1 = total1 + el.dollerDiscount * el.quantity;
+                                localStorage.setItem("ActualSubtotal", total1);
+                                actualtotal += el.dollerMrp * el.quantity;
+                                localStorage.setItem("Subtotal", actualtotal);
+                              } else {
+                                total = el.singleprice * el.quantity;
+                                total1 = total1 + el.singleprice * el.quantity;
+                                localStorage.setItem("ActualSubtotal", total1);
+                                actualtotal += el.mrp * el.quantity;
+                                localStorage.setItem("Subtotal", actualtotal);
+                              }
+                              return (
+                                <tr key={ind1} className="cart-data">
+                                  <td className="product-thumbnail">
+                                    <Link to={"/SingleProduct/" + el.productid}>
+                                      <img
+                                        src={
+                                          `${baseUrl}/` + el.image ||
+                                          el.manufacturer.image[0].path
+                                        }
+                                        alt="item"
+                                      />
+                                    </Link>
+                                  </td>
+                                  <td className="product-name">
+                                    <Link to={"/SingleProduct/" + el.productid}>
+                                      <div className="cart-text">{el.name}</div>
+                                    </Link>
+                                  </td>
+                                  <td className="product-price">
+                                    <div className="amount">
+                                      <span className="unit-amount">
+                                        {state1.state1 == "1" ? (
+                                          <i class="fa fa-dollar-sign currency-sign"></i>
+                                        ) : (
+                                          <i className="fa fa-inr currency-sign"></i>
+                                        )}
+                                        <del>
+                                          {state1.state1 == "1"
+                                            ? el.dollerMrp
+                                            : el.mrp}
+                                        </del>
+                                      </span>
+                                      <span>
+                                        {state1.state1 == "1"
+                                          ? el.dollerDiscount
+                                          : el.singleprice}
+                                      </span>
+                                    </div>
+                                  </td>
+                                  <td className="product-quantity">
+                                    <div className="amount">
+                                      {" "}
+                                      <div className="input-counter">
+                                        <span
+                                          className="minus-btn"
+                                          onClick={() => {
+                                            Minusquantity(
+                                              el.quantity,
+                                              el.mrp,
+                                              ind1
+                                            );
+                                          }}
+                                        >
+                                          <i className="bx bx-minus minus"></i>
+                                        </span>
+                                        <input
+                                          type="number"
+
+                                          value={el.quantity}
+                                        />
+                                        <span
+                                          className="plus-btn"
+                                          onClick={() => {
+                                            Plusquantity(el.quantity, el.mrp, ind1);
+                                          }}
+                                        >
+                                          <i className="bx bx-plus  plus"></i>
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="product-subtotal">
+                                    <div className="amount">
+                                      <span className="subtotal-amount mt-4">
+                                        {state1.state1 == "1" ? (
+                                          <i class="fa fa-dollar-sign currency-subtotal-sign"></i>
+                                        ) : (
+                                          <i className="fa fa-inr currency-subtotal-sign"></i>
+                                        )}
+                                        {(state1.state1 == "1"
+                                          ? el.dollerDiscount
+                                          : el.singleprice) * el.quantity}
+                                      </span>
+                                    </div>
+                                  </td>
+                                  <td className="cartPop">
+                                    <Popconfirm
+                                      className="bx bx-trash cart-delete-icon"
+                                      title="Delete the Product"
+                                      description="Are you sure to delete this Product?"
+                                      style={{ margin: "0" }}
+                                      onConfirm={(e) => Sliceorder(ind1, e)}
+                                    ></Popconfirm>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <lottie-player
+                        src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                        background="transparent"
+                        speed="1"
+                        style={{
+                          width: "300px",
+                          height: "300px",
+                          margin: "auto",
+                        }}
+                        loop
+                        autoplay
+                      ></lottie-player>
+                    )}
+                  </>}
               </div>
 
               <div className="col-lg-4 col-md-12">

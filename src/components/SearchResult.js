@@ -28,7 +28,7 @@ const SearchResult = (props) => {
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
@@ -43,7 +43,7 @@ const SearchResult = (props) => {
   let [maxprice, setMaxPrice] = useState();
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
-  const [currancy,setCurrency] = useState("INR");
+  const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
 
@@ -53,11 +53,11 @@ const SearchResult = (props) => {
   const state1 = useContext(CurrencyContext);
 
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(state1 == "1"){
+  useEffect(() => {
+    if (state1 == "1") {
       setCurrency("Dollar");
     }
-  },[currancy])
+  }, [currancy])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -70,12 +70,12 @@ const SearchResult = (props) => {
     GetSubCategory();
     window.scroll(0, 0);
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-      $(".frontimage").mouseover(function() {
+      $(".frontimage").mouseover(function () {
         alert("in");
       });
-      $(".frontimage").mouseleave(function() {
+      $(".frontimage").mouseleave(function () {
         alert("in");
       });
     });
@@ -92,14 +92,14 @@ const SearchResult = (props) => {
   };
 
 
-const handleResetForm = ()=>{
-  if(resetForm === 0){
-    setResetForm(1);
+  const handleResetForm = () => {
+    if (resetForm === 0) {
+      setResetForm(1);
+    }
+    else {
+      setResetForm(0);
+    }
   }
-  else{
-    setResetForm(0);
-  }
-}
 
   const GetWishlist = async () => {
     let id;
@@ -445,154 +445,154 @@ const handleResetForm = ()=>{
           <section className="pb-4">
             <div className="container-fluid">
               {
-                loading ? 
-                <Loader
-                show={loading}
-                stack="vertical"
-              />:
-<div className="row mt-0">
-                <div id="columns" className="columns_5">
-                  {filterdata &&
-                    filterdata.length > 0 &&
-                    filterdata.map((el, ind) => {
-                      if (
-                        el.name.toLowerCase().startsWith(searchresults) ||
-                        (minprice != "" &&
-                          maxprice != "" &&
-                          parseInt(el.inrMrp) >= minprice &&
-                          parseInt(el.inrMrp) <= maxprice)
-                      ) {
-                        count = count + 1;
-                        return (
-                          <>
-                            <figure className="figure search-figure" key={ind}>
-                              <Link
-                                to={"/SingleProduct/" + el._id}
-                                className="product-image-link"
-                              >
-                                <div>
-                                  <img
-                                    src={`${baseUrl}/` + el.image[0].path}
-                                    alt=""
-                                  />
-                                </div>
+                loading ?
+                  <Loader
+                    show={loading}
+                    stack="vertical"
+                  /> :
+                  <div className="row mt-0">
+                    <div id="columns" className="columns_5">
+                      {filterdata &&
+                        filterdata.length > 0 &&
+                        filterdata.map((el, ind) => {
+                          if (
+                            el.name.toLowerCase().startsWith(searchresults) ||
+                            (minprice != "" &&
+                              maxprice != "" &&
+                              parseInt(el.inrMrp) >= minprice &&
+                              parseInt(el.inrMrp) <= maxprice)
+                          ) {
+                            count = count + 1;
+                            return (
+                              <>
+                                <figure className="figure search-figure" key={ind}>
+                                  <Link
+                                    to={"/SingleProduct/" + el._id}
+                                    className="product-image-link"
+                                  >
+                                    <div>
+                                      <img
+                                        src={`${baseUrl}/` + el.image[0].path}
+                                        alt=""
+                                      />
+                                    </div>
 
-                                <figcaption>{el.name}</figcaption>
-                              </Link>
-                              <div className="contanier Search-price-div">
-                                <div className="row">
-                                  <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start search-text-start">
-                                    <span className="price">
-                                      {" "}
-                                      {state1.state1 =="1" ?<i class="fa fa-dollar-sign"></i>:<i className="fa fa-inr"></i>}
-                                      {state1.state1 =="1" ? el.dollerDiscount : el.inrDiscount }
-                                    </span>
+                                    <figcaption>{el.name}</figcaption>
+                                  </Link>
+                                  <div className="contanier Search-price-div">
+                                    <div className="row">
+                                      <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start search-text-start">
+                                        <span className="price">
+                                          {" "}
+                                          {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                          {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
+                                        </span>
+                                      </div>
+
+                                      <div className="col-6 text-end">
+                                        <p
+                                          className={`text-nowrap wishlist search-result-wishlist`}
+                                        >
+                                          {Userdata ? (
+                                            <i
+                                              id={el._id}
+                                              onClick={() => {
+                                                AddtoWishlist(
+                                                  el._id,
+                                                  el.name,
+                                                  quantity,
+                                                  el.inrMrp,
+                                                  el.inrDiscount,
+                                                  el.description,
+                                                  el.category,
+                                                  el.manufacturer.name,
+                                                  el.image
+                                                );
+                                              }}
+                                              className={`bx bxs-heart ${checkWishlistItem(
+                                                el._id
+                                              )}`}
+                                            ></i>
+                                          ) : (
+                                            <i
+                                              className="bx bxs-heart "
+                                              data-bs-toggle="modal"
+                                              data-bs-target={
+                                                Userdata == null
+                                                  ? "#exampleModal"
+                                                  : null
+                                              }
+                                              onClick={() => handleResetForm()}
+                                            ></i>
+                                          )}
+                                          Wishlist
+                                        </p>
+                                      </div>
+                                    </div>
                                   </div>
-
-                                  <div className="col-6 text-end">
-                                    <p
-                                      className={`text-nowrap wishlist search-result-wishlist`}
+                                  {Userdata ? (
+                                    <button
+                                      className="button btn"
+                                      onClick={() => {
+                                        cartfunction(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.dollerDiscount,
+                                          el.dollerMrp,
+                                          el.discount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image[0].path
+                                        );
+                                      }}
+                                      data-bs-toggle={
+                                        Userdata == null ? "modal" : null
+                                      }
+                                      data-bs-target={
+                                        Userdata == null ? "#exampleModal" : null
+                                      }
                                     >
-                                      {Userdata ? (
-                                        <i
-                                          id={el._id}
-                                          onClick={() => {
-                                            AddtoWishlist(
-                                              el._id,
-                                              el.name,
-                                              quantity,
-                                              el.inrMrp,
-                                              el.inrDiscount,
-                                              el.description,
-                                              el.category,
-                                              el.manufacturer.name,
-                                              el.image
-                                            );
-                                          }}
-                                          className={`bx bxs-heart ${checkWishlistItem(
-                                            el._id
-                                          )}`}
-                                        ></i>
-                                      ) : (
-                                        <i
-                                          className="bx bxs-heart "
-                                          data-bs-toggle="modal"
-                                          data-bs-target={
-                                            Userdata == null
-                                              ? "#exampleModal"
-                                              : null
-                                          }
-                                          onClick={()=>handleResetForm()}
-                                        ></i>
-                                      )}
-                                      Wishlist
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              {Userdata ? (
-                                <button
-                                  className="button btn"
-                                  onClick={() => {
-                                    cartfunction(
-                                      el._id,
-                                      el.name,
-                                      quantity,
-                                      el.inrMrp,
-                                      el.inrDiscount,
-                                      el.dollerDiscount,
-                                      el.dollerMrp,
-                                      el.discount,
-                                      el.description,
-                                      el.category,
-                                      el.manufacturer.name,
-                                      el.image[0].path
-                                    );
-                                  }}
-                                  data-bs-toggle={
-                                    Userdata == null ? "modal" : null
-                                  }
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                >
-                                  Add to Cart
-                                </button>
-                              ) : (
-                                <button
-                                  className="button btn"
-                                  data-bs-toggle="modal"
-                                  data-bs-target={
-                                    Userdata == null ? "#exampleModal" : null
-                                  }
-                                  onClick={()=>handleResetForm()}
-                                >
-                                  Add to Cart
-                                </button>
-                              )}
-                            </figure>
-                          </>
-                        );
-                      }
-                    })}
-                  {count == 0 && (
-                    <lottie-player
-                      src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
-                      background="transparent"
-                      speed="1"
-                      style={{
-                        width: "300px",
-                        height: "300px",
-                        margin: "auto",
-                      }}
-                      loop
-                      autoplay
-                    ></lottie-player>
-                  )}
-                </div>
-              </div>
+                                      Add to Cart
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className="button btn"
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null ? "#exampleModal" : null
+                                      }
+                                      onClick={() => handleResetForm()}
+                                    >
+                                      Add to Cart
+                                    </button>
+                                  )}
+                                </figure>
+                              </>
+                            );
+                          }
+                        })}
+                      {count == 0 && (
+                        <lottie-player
+                          src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                          background="transparent"
+                          speed="1"
+                          style={{
+                            width: "300px",
+                            height: "300px",
+                            margin: "auto",
+                          }}
+                          loop
+                          autoplay
+                        ></lottie-player>
+                      )}
+                    </div>
+                  </div>
               }
-              
+
             </div>
           </section>
           <ToastContainer />
