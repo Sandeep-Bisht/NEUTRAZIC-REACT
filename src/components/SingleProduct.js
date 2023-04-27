@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import "../components/singleproduct.css";
-
 import { useHistory } from "react-router-dom";
 import Baseline from "./Baseline";
 import { ToastContainer, toast } from "react-toastify";
@@ -39,17 +38,21 @@ const SingleProduct = (props) => {
   const [wishlist, setWishlist] = useState([]);
   const [MainImage, SetMainImage] = useState();
   const [categoryid, setcategoryId] = useState();
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+
   const history = useHistory();
 
-  const [currancy,setCurrency]=useState("INR");
+  const [currancy, setCurrency] = useState("INR");
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
+
   const cookies = new Cookies();
 
-  useEffect(()=>{
-    if(state1 == "1"){
-      setCurrency("Dollar")
+  useEffect(() => {
+    if (state1 == "1") {
+      setCurrency("Dollar");
     }
-  },[currancy])
- 
+  }, [currancy]);
+
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2 },
@@ -57,7 +60,13 @@ const SingleProduct = (props) => {
     { width: 1200, itemToShow: 4 },
   ];
 
-
+  const handleResetForm = () => {
+    if (resetForm === 0) {
+      setResetForm(1);
+    } else {
+      setResetForm(0);
+    }
+  };
   let carouselRef = useRef(null);
 
   const onNextStart = (currentItem, nextItem) => {
@@ -181,7 +190,7 @@ const SingleProduct = (props) => {
         $("#SubmitComments-button-div").css("visibility", "hidden");
       });
     });
-  }, []);
+  }, [loginState]);
   const ProductByCategory = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
@@ -281,14 +290,12 @@ const SingleProduct = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-         
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
   };
-
 
   const ImageHandler = (m, i) => {
     let Imagestore = m.path;
@@ -342,8 +349,8 @@ const SingleProduct = (props) => {
         quantity: quantity,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
-        dollerDiscount:dollerDiscount,
-        dollerMrp:dollerMrp,
+        dollerDiscount: dollerDiscount,
+        dollerMrp: dollerMrp,
         discountprice: discount,
         description: description,
         category: category,
@@ -603,301 +610,315 @@ const SingleProduct = (props) => {
         </span>
       </div>
       <div className="container">
-      <div className=" product-div single-page mt-5">
-        <div className="row ">
-          <div className="col-sm-12 col-md-12 col-lg-6 pd-0 picture-div justify-content-center align-items-center ">
-            <div className="single-img-div justify-content-center align-items-center d-flex">
-              {" "}
-              {data.image && data.image.length > 0 &&
-                <img src={`${baseUrl}/` + MainImage} />
-               }
-            </div>
-
-            <div className="row image-group pt-2">
-              <Carousel
-                // breakPoints={breakPoints}
-                enableAutoPlay
-                autoPlaySpeed={1500}
-                itemsToShow={4}
-                onPrevStart={onPrevStart}
-                onNextStart={onNextStart}
-                // onChange={Loop}
-                ref={carouselRef}
-                disableArrowsOnEnd={false}
-                // itemPadding={[0, 4]}
-              >
-                {data.otherImage && data.otherImage.length > 0 &&
-                  data.otherImage.map((item, ind) => (
-                    <div className="col" key={ind}>
-                      <img
-                        className="img-slide"
-                        src={`${baseUrl}/` + item.path}
-                        onMouseOver={() => ImageHandler(item, ind)}
-                      />
-                    </div>
-                  ))
-                
-                }
-              </Carousel>
-            </div>
-
-            {/* phone single page caresouel */}
-            <div
-              id="carouselExampleIndicators"
-              className="carousel slide single-page-caresouel"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    src={
-                      data && data.image && `${baseUrl}/` + data.image[0].path
-                    }
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src={
-                      data &&
-                      data.otherImage &&
-                      `${baseUrl}/` + data.otherImage[0].path
-                    }
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src={
-                      data &&
-                      data.otherImage &&
-                      `${baseUrl}/` + data.otherImage[1].path
-                    }
-                  />
-                </div>
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
-
-            {/* end phone single page careousel */}
-          </div>
-          <div className="col-12 col-sm-12 col-lg-6 col-md-12 content-div">
-            <div className="row ml-2">
-              <div className="details pt-2">
-                <span>{data.name}</span>
-              </div>
-              <div className="pt-2 pb-2">
-              </div>
-              <div className="MRP-Taxes-div">
-                <span>MRP (incl. of all taxes)</span>
-              </div>
-
-              <div className="price pt-2">
-                <span className="price-detail">
+        <div className=" product-div single-page mt-5">
+          <div className="row ">
+            <div className="col-sm-12 col-md-12 col-lg-6 pd-0 picture-div justify-content-center align-items-center ">
+              <div className="single-img-div justify-content-center align-items-center d-flex">
                 {" "}
-                                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {state1.state1 == "1" ? data.dollerDiscount : data.inrDiscount}
-                  <del>
-                  {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {state1.state1 == "1" ? data.dollerMrp : data.inrMrp}
-                  </del>{" "}
-                  <span>
-                    {Math.ceil(
-                      state1.state1 == "1" ? ((data.dollerMrp - data.dollerDiscount) / data.dollerMrp) * 100:((data.inrMrp - data.inrDiscount) / data.inrMrp) * 100
-                    )}
-                    % OFF
-                  </span>
-                </span>
+                {data.image && data.image.length > 0 && (
+                  <img src={`${baseUrl}/` + MainImage} />
+                )}
               </div>
 
-              <div className="List pt-1">
-                <div>
-                  <p>{data.description}</p>
+              <div className="row image-group pt-2">
+                <Carousel
+                  // breakPoints={breakPoints}
+                  enableAutoPlay
+                  autoPlaySpeed={1500}
+                  itemsToShow={4}
+                  onPrevStart={onPrevStart}
+                  onNextStart={onNextStart}
+                  // onChange={Loop}
+                  ref={carouselRef}
+                  disableArrowsOnEnd={false}
+                  // itemPadding={[0, 4]}
+                >
+                  {data.otherImage &&
+                    data.otherImage.length > 0 &&
+                    data.otherImage.map((item, ind) => (
+                      <div className="col" key={ind}>
+                        <img
+                          className="img-slide"
+                          src={`${baseUrl}/` + item.path}
+                          onMouseOver={() => ImageHandler(item, ind)}
+                        />
+                      </div>
+                    ))}
+                </Carousel>
+              </div>
+
+              {/* phone single page caresouel */}
+              <div
+                id="carouselExampleIndicators"
+                className="carousel slide single-page-caresouel"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to="0"
+                    className="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                  ></button>
+                </div>
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img
+                      src={
+                        data && data.image && `${baseUrl}/` + data.image[0].path
+                      }
+                    />
+                  </div>
+                  <div className="carousel-item">
+                    <img
+                      src={
+                        data &&
+                        data.otherImage &&
+                        `${baseUrl}/` + data.otherImage[0].path
+                      }
+                    />
+                  </div>
+                  <div className="carousel-item">
+                    <img
+                      src={
+                        data &&
+                        data.otherImage &&
+                        `${baseUrl}/` + data.otherImage[1].path
+                      }
+                    />
+                  </div>
+                </div>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide="next"
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
+              </div>
+
+              {/* end phone single page careousel */}
+            </div>
+            <div className="col-12 col-sm-12 col-lg-6 col-md-12 content-div">
+              <div className="row ml-2">
+                <div className="details pt-2">
+                  <span>{data.name}</span>
+                </div>
+                <div className="pt-2 pb-2"></div>
+                <div className="MRP-Taxes-div">
+                  <span>MRP (incl. of all taxes)</span>
+                </div>
+
+                <div className="price pt-2">
+                  <span className="price-detail">
+                    {" "}
+                    {state1.state1 == "1" ? (
+                      <i class="fa fa-dollar-sign"></i>
+                    ) : (
+                      <i className="fa fa-inr"></i>
+                    )}
+                    {state1.state1 == "1"
+                      ? data.dollerDiscount
+                      : data.inrDiscount}
+                    <del>
+                      {state1.state1 == "1" ? (
+                        <i class="fa fa-dollar-sign"></i>
+                      ) : (
+                        <i className="fa fa-inr"></i>
+                      )}
+
+                      {state1.state1 == "1" ? data.dollerMrp : data.inrMrp}
+                    </del>{" "}
+                    <span>
+                      {Math.ceil(
+                        state1.state1 == "1"
+                          ? ((data.dollerMrp - data.dollerDiscount) /
+                              data.dollerMrp) *
+                              100
+                          : ((data.inrMrp - data.inrDiscount) / data.inrMrp) *
+                              100
+                      )}
+                      % OFF
+                    </span>
+                  </span>
+                </div>
+
+                <div className="List pt-1">
+                  <div>
+                    <p>{data.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row pt-2 pb-3 add">
-              <div className="wishlist">
-                <i className="social-links"></i>
-                <span className="">
-                  Category:{" "}
-                  <Link to={"/Subcategories/" + categoryid}>
-                    <span> {categoryname}</span>
-                  </Link>
-                </span>
-                &nbsp; <span className="pl-2">Share:</span>
-                <a href="https://www.facebook.com/Nutrazik" target="_blank">
-                  <i className="social-links bx bxl-facebook "></i>
-                </a>
-                <a href="https://www.instagram.com/nutrazik/" target="_blank">
-                  <i className="social-links bx bxl-instagram "></i>
-                </a>
-                <a href="https://twitter.com/nutrazik" target="_blank">
-                  <i className="social-links bx bxl-twitter "></i>
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/70941207/admin/"
-                  target="_blank"
-                >
-                  <i className="social-links bx bxl-linkedin "></i>
-                </a>
+              <div className="row pt-2 pb-3 add">
+                <div className="wishlist">
+                  <i className="social-links"></i>
+                  <span className="">
+                    Category:{" "}
+                    <Link to={"/Subcategories/" + categoryid}>
+                      <span> {categoryname}</span>
+                    </Link>
+                  </span>
+                  &nbsp; <span className="pl-2">Share:</span>
+                  <a href="https://www.facebook.com/Nutrazik" target="_blank">
+                    <i className="social-links bx bxl-facebook "></i>
+                  </a>
+                  <a href="https://www.instagram.com/nutrazik/" target="_blank">
+                    <i className="social-links bx bxl-instagram "></i>
+                  </a>
+                  <a href="https://twitter.com/nutrazik" target="_blank">
+                    <i className="social-links bx bxl-twitter "></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/70941207/admin/"
+                    target="_blank"
+                  >
+                    <i className="social-links bx bxl-linkedin "></i>
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="mt-3 add-cart-buttons ml-3">
-              <div className="quantity1 mt-1 ">
-                <i
-                  className="bx bx-minus minus-single mr-2"
-                  onClick={() => {
-                    if (quantity > 1) {
-                      setQuantity(quantity - 1);
-                    }
-                  }}
-                ></i>
-                <input
-                  type="number"
-                  //value="1"
-                  min="1"
-                  max="9"
-                  step="1"
-                  value={quantity}
-                  onChange={(e) => cartfunction(e.target.value)}
-                />
-                <i
-                  className="bx bx-plus minus-single ml-2"
-                  onClick={() => setQuantity(quantity + 1)}
-                ></i>
-              </div>
-              <div className="add-to-cart mt-1">
-                {Userdata ? (
-                  <button
+              <div className="mt-3 add-cart-buttons ml-3">
+                <div className="quantity1 mt-1 ">
+                  <i
+                    className="bx bx-minus minus-single mr-2"
                     onClick={() => {
-                      {
-                        Userdata != null
-                          ? cartfunction(
-                              data._id,
-                              data.name,
-                              quantity,
-                              data.inrMrp,
-                              data.inrDiscount,
-                              data.dollerDiscount,
-                              data.dollerMrp,
-                              data.discount,
-                              data.description,
-                              data.category,
-                              data.manufacturer.name,
-                              data.image[0].path
-                            )
-                          : addToCartWithoutRegistration(
-                              data._id,
-                              data.name,
-                              quantity,
-                              data.inrMrp,
-                              data.inrDiscount,
-                              data.discount,
-                              data.description,
-                              data.category,
-                              data.manufacturer.name,
-                              data.image[0].path
-                            );
+                      if (quantity > 1) {
+                        setQuantity(quantity - 1);
                       }
                     }}
-                  >
-                    Add to Cart
-                  </button>
-                ) : (
-                  <button
-                    data-bs-toggle="modal"
-                    data-bs-target={Userdata == null ? "#exampleModal" : null}
-                  >
-                    <Link to="/Register"></Link>
-                    Add to Cart
-                  </button>
-                )}
-              </div>
-
-              <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
-                {Userdata ? (
-                  <i
-                    id={prodId}
-                    // className="bx bxs-heart"
-                    className={`bx bxs-heart ${checkWishlistItem(
-                      prodId
-                    )}`}
-                    onClick={() => {
-                      AddtoWishlist(
-                        data._id,
-                        data.name,
-                        quantity,
-                        data.mrp,
-                        data.discount,
-                        data.description,
-                        data.category,
-                        data.manufacturer.name,
-                        data.image
-                      );
-                    }}
                   ></i>
-                ) : (
-                  <>
-                    <i
-                      className="bx bxs-heart"
+                  <input
+                    type="number"
+                    //value="1"
+                    min="1"
+                    max="9"
+                    step="1"
+                    value={quantity}
+                    onChange={(e) => cartfunction(e.target.value)}
+                  />
+                  <i
+                    className="bx bx-plus minus-single ml-2"
+                    onClick={() => setQuantity(quantity + 1)}
+                  ></i>
+                </div>
+                <div className="add-to-cart mt-1">
+                  {Userdata ? (
+                    <button
+                      onClick={() => {
+                        {
+                          Userdata != null
+                            ? cartfunction(
+                                data._id,
+                                data.name,
+                                quantity,
+                                data.inrMrp,
+                                data.inrDiscount,
+                                data.dollerDiscount,
+                                data.dollerMrp,
+                                data.discount,
+                                data.description,
+                                data.category,
+                                data.manufacturer.name,
+                                data.image[0].path
+                              )
+                            : addToCartWithoutRegistration(
+                                data._id,
+                                data.name,
+                                quantity,
+                                data.inrMrp,
+                                data.inrDiscount,
+                                data.discount,
+                                data.description,
+                                data.category,
+                                data.manufacturer.name,
+                                data.image[0].path
+                              );
+                        }
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <button
                       data-bs-toggle="modal"
                       data-bs-target={Userdata == null ? "#exampleModal" : null}
-                    ></i>
-                  </>
-                )}
+                    onClick={()=>handleResetForm()}
+                    >
+                      {/* <Link to="/Register"></Link> */}
+                      Add to Cart
+                    </button>
+                  )}
+                </div>
 
-                <ToastContainer />
+                <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
+                  {Userdata ? (
+                    <i
+                      id={prodId}
+                      // className="bx bxs-heart"
+                      className={`bx bxs-heart ${checkWishlistItem(prodId)}`}
+                      onClick={() => {
+                        AddtoWishlist(
+                          data._id,
+                          data.name,
+                          quantity,
+                          data.mrp,
+                          data.discount,
+                          data.description,
+                          data.category,
+                          data.manufacturer.name,
+                          data.image
+                        );
+                      }}
+                    ></i>
+                  ) : (
+                    <>
+                      <i
+                        className="bx bxs-heart"
+                        data-bs-toggle="modal"
+                        data-bs-target={
+                          Userdata == null ? "#exampleModal" : null
+                        }
+                        onClick={()=>handleResetForm()}
+                      ></i>
+                    </>
+                  )}
+
+                  <ToastContainer />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
       <div className="container-fluid description">
         <div className="row main-div p-4">
@@ -916,13 +937,11 @@ const SingleProduct = (props) => {
                   <div className="col-4">
                     <div className="start-div">
                       <div className="row">
-                        <div className="col-6">
-                        
-                        </div>
+                        <div className="col-6"></div>
                         <div className="col-6 text-right">
                           <span className="date">22/07/2021</span>
                         </div>
-                       
+
                         <div className="col-12 ">
                           <span className="content-text">
                             Loved this toner! I've been searching for
@@ -953,13 +972,11 @@ const SingleProduct = (props) => {
                   <div className="col-4 ">
                     <div className="start-div">
                       <div className="row">
-                        <div className="col-6">
-                        
-                        </div>
+                        <div className="col-6"></div>
                         <div className="col-6 text-right">
                           <span className="date">22/07/2021</span>
                         </div>
-                      
+
                         <div className="col-12">
                           <span className="content-text">
                             Loved this toner! I've been searching for
@@ -1010,9 +1027,7 @@ const SingleProduct = (props) => {
                       ></textarea>
                     </div>
                     <div className="row">
-                      <div className="col-6">
-                      
-                      </div>
+                      <div className="col-6"></div>
 
                       <div className="col-6">
                         <button>Submit</button>
@@ -1048,75 +1063,80 @@ const SingleProduct = (props) => {
             </div>
           </div>
         </div>
-        <div id="columns" className="columns_5 d-flex justify-content-between related-Prod-single-product">
+        <div
+          id="columns"
+          className="columns_5 d-flex justify-content-between related-Prod-single-product"
+        >
           {AllProduct.map((el, ind1) => {
             if (ind1 < 5) {
               return (
-                
-                  <figure className="figure1 single-product-figure">
-                    <Link Link to={"/SingleProduct/" + el._id}>
-                      <div>
-                        <img
-                          src={`${baseUrl}/` + el.image[0].path}
-                          onClick={() => relatedImageHandler(el._id)}
-                          alt=""
-                        />
-                        <figcaption onClick={() => relatedImageHandler(el._id)}>
-                          {el.name} 
-                        </figcaption>
-                      </div>
-                    </Link>
+                <figure className="figure1 single-product-figure">
+                  <Link Link to={"/SingleProduct/" + el._id}>
+                    <div>
+                      <img
+                        src={`${baseUrl}/` + el.image[0].path}
+                        onClick={() => relatedImageHandler(el._id)}
+                        alt=""
+                      />
+                      <figcaption onClick={() => relatedImageHandler(el._id)}>
+                        {el.name}
+                      </figcaption>
+                    </div>
+                  </Link>
 
-                    <div className="allproduct-price-div">
-                    
-                      <div className="row">
-                       
-                        <div className="col-lg-6 col-md-12 text-start">
-                          <span className="price">
-                            {" "}
-                            {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
-                                  
-                                  {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
-                        
-                          </span>
-                        </div>
-                        <div className="col-lg-6 col-md-12  text-end">
-                          <p className={`text-nowrap wishlist`}>
-                            {Userdata ? (
-                              <i
-                                id={el._id}
-                                onClick={() => {
-                                  AddtoWishlist(
-                                    el._id,
-                                    el.name,
-                                    quantity,
-                                    el.inrMrp,
-                                    el.inrDiscount,
-                                    el.description,
-                                    el.category,
-                                    el.manufacturer.name,
-                                    el.image
-                                  );
-                                }}
-                                className={`bx bxs-heart ${checkWishlistItem(
-                                  el._id
-                                )}`}
-                              ></i>
-                            ) : (
-                              <i
-                                className="bx bxs-heart "
-                                data-bs-toggle="modal"
-                                data-bs-target={
-                                  Userdata == null ? "#exampleModal" : null
-                                }
-                              ></i>
-                            )}
-                            Wishlist
-                          </p>
-                         
-                        </div>
+                  <div className="allproduct-price-div">
+                    <div className="row">
+                      <div className="col-lg-6 col-md-12 text-start">
+                        <span className="price">
+                          {" "}
+                          {state1.state1 == "1" ? (
+                            <i class="fa fa-dollar-sign"></i>
+                          ) : (
+                            <i className="fa fa-inr"></i>
+                          )}
+                          {state1.state1 == "1"
+                            ? el.dollerDiscount
+                            : el.inrDiscount}
+                        </span>
+                      </div>
+                      <div className="col-lg-6 col-md-12  text-end">
+                        <p className={`text-nowrap wishlist`}>
+                          {Userdata ? (
+                            <i
+                              id={el._id}
+                              onClick={() => {
+                                AddtoWishlist(
+                                  el._id,
+                                  el.name,
+                                  quantity,
+                                  el.inrMrp,
+                                  el.inrDiscount,
+                                  el.description,
+                                  el.category,
+                                  el.manufacturer.name,
+                                  el.image
+                                );
+                              }}
+                              className={`bx bxs-heart ${checkWishlistItem(
+                                el._id
+                              )}`}
+                            ></i>
+                          ) : (
+                            <i
+                              className="bx bxs-heart "
+                              data-bs-toggle="modal"
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                              onClick={() => handleResetForm()}
+                            ></i>
+                          )}
+                          Wishlist
+                        </p>
                       </div>
                     </div>
+                  </div>
+                  {Userdata ? (
                     <button
                       className="button btn"
                       onClick={() => {
@@ -1140,8 +1160,17 @@ const SingleProduct = (props) => {
                     >
                       Add to Cart
                     </button>
-                  </figure>
-               
+                  ) : (
+                    <button
+                      className="button btn"
+                      data-bs-toggle="modal"
+                      data-bs-target={Userdata == null ? "#exampleModal" : null}
+                      onClick={() => handleResetForm()}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                </figure>
               );
             }
           })}

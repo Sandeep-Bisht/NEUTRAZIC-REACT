@@ -38,6 +38,7 @@ const AllProducts = (props) => {
   const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [loading,setLoading] = useState(true);
 
 
@@ -63,7 +64,24 @@ const AllProducts = (props) => {
     GetSubCategory();
     GetManufacturer();
     // GetCategory();
+  }, []);
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    window.scrollTo(0, 0);
+    GetWishlist();
+    CartById();
+    
+    // GetCategory();
   }, [loginState]);
+
+
+  const handleResetForm = () => {
+    if (resetForm === 0) {
+      setResetForm(1);
+    } else {
+      setResetForm(0);
+    }
+  };
 
   const cartfunction = async (
     productid,
@@ -383,7 +401,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
-  
+
   const GetSubCategory = async () => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
@@ -394,7 +412,7 @@ const AllProducts = (props) => {
         console.log(err, "error");
       });
   };
- 
+
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -409,7 +427,7 @@ const AllProducts = (props) => {
   return (
     <>
       <Header1 />
-    <div className="container m-auto Category-div">
+      <div className="container m-auto Category-div">
         <div className="row align-items-center">
           <div className="col-12">
             <div className="section-title my-4">
@@ -422,18 +440,17 @@ const AllProducts = (props) => {
           /> :
             <div>
               <div id="columns" className="columns_5">
-                <InfiniteScroll
+                {/* <InfiniteScroll
                   dataLength={AllProduct.length}
                   next={ProductByCategory}
                   hasMore={AllProduct.length < productLength}
                   loader={<h4>Loading...</h4>}
-                >
+                > */}
                   {AllProduct.map((el, ind1) => {
                     return (
                       <figure className="figure allproduct-figure" key={ind1}>
                         <Link Link to={"/SingleProduct/" + el._id}>
                           <div>
-                            
                             <img src={`${baseUrl}/` + el.image[0].path} />
                           </div>
                           <figcaption>{el.name}</figcaption>
@@ -483,6 +500,7 @@ const AllProducts = (props) => {
                                     data-bs-target={
                                       Userdata == null ? "#exampleModal" : null
                                     }
+                                    onClick={() => handleResetForm()}
                                   ></i>
                                 )}
                                 Wishlist
@@ -490,35 +508,48 @@ const AllProducts = (props) => {
                             </div>
                           </div>
                         </div>
-                        <button
-                          className="button btn"
-                          onClick={() => {
-                            cartfunction(
-                              el._id,
-                              el.name,
-                              quantity,
-                              el.inrMrp,
-                              el.inrDiscount,
-                              el.dollerDiscount,
-                              el.dollerMrp,
-                              el.discount,
-                              el.description,
-                              el.category,
-                              el.manufacturer.name,
-                              el.image[0].path
-                            );
-                          }}
-                          data-bs-toggle={Userdata == null ? "modal" : null}
-                          data-bs-target={
-                            Userdata == null ? "#exampleModal" : null
-                          }
-                        >
-                          Add to Cart
-                        </button>
+                        {Userdata ? (
+                          <button
+                            className="button btn"
+                            onClick={() => {
+                              cartfunction(
+                                el._id,
+                                el.name,
+                                quantity,
+                                el.inrMrp,
+                                el.inrDiscount,
+                                el.dollerDiscount,
+                                el.dollerMrp,
+                                el.discount,
+                                el.description,
+                                el.category,
+                                el.manufacturer.name,
+                                el.image[0].path
+                              );
+                            }}
+                            data-bs-toggle={Userdata == null ? "modal" : null}
+                            data-bs-target={
+                              Userdata == null ? "#exampleModal" : null
+                            }
+                          >
+                            Add to Cart
+                          </button>
+                        ) : (
+                          <button
+                            className="button btn"
+                            data-bs-toggle="modal"
+                            data-bs-target={
+                              Userdata == null ? "#exampleModal" : null
+                            }
+                            onClick={() => handleResetForm()}
+                          >
+                            Add to Cart
+                          </button>
+                        )}
                       </figure>
                     );
                   })}
-                </InfiniteScroll>
+                {/* </InfiniteScroll> */}
               </div>
             </div>
           }
