@@ -13,6 +13,8 @@ import { baseUrl } from "../utils/services";
 import "../components/SearchResult.css";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
+import Loader from "react-spinner-loader";
+
 
 var CartDataWoLogin = [];
 var Userdata = "";
@@ -26,7 +28,7 @@ const SearchResult = (props) => {
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
   const [AllProduct, setAllProduct] = useState([]);
-
+  const [loading,setLoading] = useState(true);
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
@@ -117,6 +119,7 @@ const SearchResult = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data);
+        setLoading(false);
       })
       .then(() => {
         setSearchResults(params.Search);
@@ -426,7 +429,13 @@ const SearchResult = (props) => {
           </section>
           <section className="pb-4">
             <div className="container-fluid">
-              <div className="row mt-0">
+              {
+                loading ? 
+                <Loader
+                show={loading}
+                stack="vertical"
+              />:
+<div className="row mt-0">
                 <div id="columns" className="columns_5">
                   {filterdata &&
                     filterdata.length > 0 &&
@@ -565,6 +574,8 @@ const SearchResult = (props) => {
                   )}
                 </div>
               </div>
+              }
+              
             </div>
           </section>
           <ToastContainer />

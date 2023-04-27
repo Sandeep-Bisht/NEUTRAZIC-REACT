@@ -25,6 +25,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Loader from "react-spinner-loader";
 
 import $ from "jquery";
 
@@ -71,6 +72,8 @@ const HomePage = () => {
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [sliderRef, setSliderRef] = useState(null);
+  const [loading,setLoading] = useState(true);
+
 
   var settings = {
     dots: true,
@@ -176,6 +179,7 @@ const HomePage = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setData(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -197,6 +201,7 @@ const HomePage = () => {
       .then(async (data) => {
         setCategories(data.data);
         setSingleCategory(data.data[0]);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -581,6 +586,13 @@ const HomePage = () => {
           </h1>
           <div className="container m-auto">
             <div className="row">
+              {
+                loading ? 
+                <Loader
+                show={loading}
+                stack="vertical"
+              />
+              :
               <div id="column" className="columns_5">
                 {data
                   .filter((item) => item.type == "Trending Product")
@@ -725,6 +737,8 @@ const HomePage = () => {
                     }
                   })}
               </div>
+              }
+              
               {/* hover Button */}
               <div className="wrapperbtn pt-0">
                 <Link to="/TrendingProducts">
@@ -743,7 +757,14 @@ const HomePage = () => {
             <span className="products-color">Featured Categories</span>
           </h1>
           <div className="container m-auto">
-            <div className="row mt-0 featured-products">
+            {
+            loading ?
+            <Loader
+                show={loading}
+                stack="vertical"
+              />
+              :
+<div className="row mt-0 featured-products">
               <Slider ref={setSliderRef} {...settings}>
                 {categories &&
                   categories.length > 0 &&
@@ -799,6 +820,8 @@ const HomePage = () => {
                 </button>
               </div>
             </div>
+            }
+            
           </div>
         </section>
 
@@ -807,7 +830,14 @@ const HomePage = () => {
             <span className="products-color">Products</span>
           </h1>
           <div className="container m-auto py-4">
-            <div className="row ">
+            {
+            loading ?
+            <Loader
+                show={loading}
+                stack="vertical"
+              />
+              :
+              <div className="row ">
               <div id="column" className="columns_5">
                 {data
                   .filter((item) => item.type == "")
@@ -963,6 +993,7 @@ const HomePage = () => {
               </div>
               {/* Hover Button End */}
             </div>
+            }           
           </div>
         </section>
         <section className="products-area">
@@ -970,7 +1001,13 @@ const HomePage = () => {
             <span className="products-color">{singlecategory.name}</span>
           </h1>
           <div className="container m-auto">
-            <div className="row">
+            {
+              loading ?
+              <Loader
+                show={loading}
+                stack="vertical"
+              />:
+<div className="row">
               <div id="column" className="columns_5">
                 {data
                   .filter((item) => item.category.name == singlecategory.name)
@@ -1130,6 +1167,7 @@ const HomePage = () => {
               </div>
               {/* Hover Button End */}
             </div>
+            }            
           </div>
         </section>
         <div className="brands-area">
