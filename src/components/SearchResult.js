@@ -44,6 +44,10 @@ const SearchResult = (props) => {
   const [wishlistData, Setwishlist] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
   const [currancy,setCurrency] = useState("INR");
+  const { loginState, setLoginState } = useContext(CurrencyContext);
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
+
+
 
   const history = useHistory();
   const state1 = useContext(CurrencyContext);
@@ -75,7 +79,7 @@ const SearchResult = (props) => {
         alert("in");
       });
     });
-  }, []);
+  }, [loginState]);
   useEffect(() => {
     setFilterData(data);
   }, [data]);
@@ -86,6 +90,17 @@ const SearchResult = (props) => {
     setSearchResults(e);
     setCT(Date());
   };
+
+
+const handleResetForm = ()=>{
+  if(resetForm === 0){
+    setResetForm(1);
+  }
+  else{
+    setResetForm(0);
+  }
+}
+
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
@@ -507,6 +522,7 @@ const SearchResult = (props) => {
                                               ? "#exampleModal"
                                               : null
                                           }
+                                          onClick={()=>handleResetForm()}
                                         ></i>
                                       )}
                                       Wishlist
@@ -549,6 +565,7 @@ const SearchResult = (props) => {
                                   data-bs-target={
                                     Userdata == null ? "#exampleModal" : null
                                   }
+                                  onClick={()=>handleResetForm()}
                                 >
                                   Add to Cart
                                 </button>

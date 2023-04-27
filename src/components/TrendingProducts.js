@@ -37,6 +37,7 @@ const TrengingProduct = (props) => {
   const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
 
   useEffect(() => {
     setLoginState(loginState);
@@ -48,6 +49,15 @@ const TrengingProduct = (props) => {
       setCurrency("Dollar");
     }
   }, [currancy]);
+
+  const handleResetForm = ()=>{
+    if(resetForm === 0){
+      setResetForm(1);
+    }
+    else{
+      setResetForm(0);
+    }
+  }
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -464,6 +474,7 @@ const TrengingProduct = (props) => {
                                   data-bs-target={
                                     Userdata == null ? "#exampleModal" : null
                                   }
+                                  onClick={()=>handleResetForm()}
                                 ></i>
                               )}
                               Wishlist
@@ -471,6 +482,7 @@ const TrengingProduct = (props) => {
                           </div>
                         </div>
                       </div>
+                      {Userdata ? (
                       <button
                         className="button btn"
                         onClick={() => {
@@ -496,6 +508,18 @@ const TrengingProduct = (props) => {
                       >
                         Add to Cart
                       </button>
+                      ):(
+                        <button
+                            className="button btn"
+                            data-bs-toggle="modal"
+                            data-bs-target={
+                              Userdata == null ? "#exampleModal" : null
+                            }
+                            onClick={() => handleResetForm()}
+                          >
+                            Add to Cart
+                          </button>
+                      )}
                     </figure>
                   );
                 })}

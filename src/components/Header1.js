@@ -53,7 +53,7 @@ const Header1 = (props) => {
   const [wishlisted, setWishlisted] = useState("");
   const [usermodal, setUsermodal] = useState();
   const [currancy, setCurrency] = useState("INR");
-  const [currentLocation, setCurrentLocation] = useState(null);
+  // const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
   const cookies = new Cookies();
   const location = useLocation();
@@ -67,10 +67,16 @@ const Header1 = (props) => {
   const [userdata, setUserdata] = useState();
   const [forgetMsg, setForgetMsg] = useState("");
 
+const currentLocation = location.pathname;
+console.log(currentLocation,"This is checking current location");
+
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
+
+
+
 
   const {
     register,
@@ -132,6 +138,7 @@ const Header1 = (props) => {
     if(resetForm===0 || resetForm===1)
     {
       reset1();
+      reset();
     }
   },[resetForm])
 
@@ -219,7 +226,9 @@ const Header1 = (props) => {
       setCartItems("");
       setWishlisted("");
     }
+    else{
     setLoginState("1");
+  }
   }, [loginState]);
 
   const logout = () => {
@@ -237,6 +246,9 @@ const Header1 = (props) => {
     setLoginState("0");
     setCartItems("");
     setWishlisted("");
+    if(currentLocation === "/cart" || currentLocation === "/WishList" || currentLocation === "/UserOrder" || currentLocation === "/MyAccount"){
+      history.push("/");
+    }
   };
 
   const RegisterUser = (data) => {
@@ -752,7 +764,7 @@ const Header1 = (props) => {
                                     </p>
                                   )}
                                   {errors?.password?.type === "pattern" && (
-                                    <p className="text-danger">
+                                    <p className="text-danger password-err">
                                       Must have more than 8 characters, one number, upper & lowercase letters & special character
                                     </p>
                                   )}
