@@ -17,15 +17,16 @@ import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
+import axios from "axios";
 
 let changeNavValue = 0;
 var header;
 var sticky;
 var Userdata = "";
-var Subtotal="";
-var Usercartdata="";
-var Userdata1="";
-var ActualSubtotal="";
+var Subtotal = "";
+var Usercartdata = "";
+var Userdata1 = "";
+var ActualSubtotal = "";
 
 const errorEmail = "Please Enter a valid Email Address";
 
@@ -33,7 +34,6 @@ const errorEmail = "Please Enter a valid Email Address";
 const Header1 = (props) => {
   let dispatch = useDispatch();
   let { state1, setState1 } = useContext(CurrencyContext);
-  
 
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
@@ -58,7 +58,7 @@ const Header1 = (props) => {
   const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
-  let { resetForm,setResetForm } = useContext(CurrencyContext);
+  let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
@@ -67,16 +67,12 @@ const Header1 = (props) => {
   const [userdata, setUserdata] = useState();
   const [forgetMsg, setForgetMsg] = useState("");
 
-const currentLocation = location.pathname;
-console.log(currentLocation,"This is checking current location");
+  const currentLocation = location.pathname;
 
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-
-
-
 
   const {
     register,
@@ -134,13 +130,12 @@ console.log(currentLocation,"This is checking current location");
     dispatch(ACTIONS.getCategories([]));
   };
 
-  useEffect(()=>{
-    if(resetForm===0 || resetForm===1)
-    {
+  useEffect(() => {
+    if (resetForm === 0 || resetForm === 1) {
       reset1();
       reset();
     }
-  },[resetForm])
+  }, [resetForm]);
 
   useEffect(() => {
     if (state.noOfItemsInCart >= 0) {
@@ -155,10 +150,10 @@ console.log(currentLocation,"This is checking current location");
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    ActualSubtotal=JSON.parse(localStorage.getItem("ActualSubtotal"));
-    Subtotal=JSON.parse(localStorage.getItem("Subtotal"));
-    Userdata1=JSON.parse(localStorage.getItem("Userdata1"));
-    Usercartdata=JSON.parse(localStorage.getItem("Usercartdata"));
+    ActualSubtotal = JSON.parse(localStorage.getItem("ActualSubtotal"));
+    Subtotal = JSON.parse(localStorage.getItem("Subtotal"));
+    Userdata1 = JSON.parse(localStorage.getItem("Userdata1"));
+    Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"));
     GetCategory();
     GetWishlist();
     GetSubCategory();
@@ -181,7 +176,7 @@ console.log(currentLocation,"This is checking current location");
       setCurrency("Dollar");
       setState1("1");
     }
-  }, [currancy]); 
+  }, [currancy]);
 
   const GetWishlist = async () => {
     let id;
@@ -225,19 +220,18 @@ console.log(currentLocation,"This is checking current location");
       setLoginState("0");
       setCartItems("");
       setWishlisted("");
+    } else {
+      setLoginState("1");
     }
-    else{
-    setLoginState("1");
-  }
   }, [loginState]);
 
   const logout = () => {
     localStorage.removeItem("Userdata");
     localStorage.removeItem("Subtotal");
     localStorage.removeItem("Usercartdata");
-    localStorage.removeItem("Userdata1")
-    localStorage.removeItem("ActualSubtotal")
-    Userdata="";
+    localStorage.removeItem("Userdata1");
+    localStorage.removeItem("ActualSubtotal");
+    Userdata = "";
     toast.success("Logout successfully", {
       position: "bottom-right",
       autoClose: 2000,
@@ -246,7 +240,12 @@ console.log(currentLocation,"This is checking current location");
     setLoginState("0");
     setCartItems("");
     setWishlisted("");
-    if(currentLocation === "/cart" || currentLocation === "/WishList" || currentLocation === "/UserOrder" || currentLocation === "/MyAccount"){
+    if (
+      currentLocation === "/cart" ||
+      currentLocation === "/WishList" ||
+      currentLocation === "/UserOrder" ||
+      currentLocation === "/MyAccount"
+    ) {
       history.push("/");
     }
   };
@@ -299,9 +298,9 @@ console.log(currentLocation,"This is checking current location");
             setRegMsg("");
           } else {
             setRegMsg("Username is already exist");
-            setTimeout(()=>{
+            setTimeout(() => {
               setRegMsg("");
-            },2000);
+            }, 2000);
           }
         })
         .catch((error) => {
@@ -310,7 +309,6 @@ console.log(currentLocation,"This is checking current location");
     }
   };
   const LoginUser = (data) => {
-    console.log(data,"data of login users")
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
@@ -327,9 +325,7 @@ console.log(currentLocation,"This is checking current location");
         .then(async (res) => {
           setLoginState("1");
           if (res && res.userStatus && res.userStatus === "Activate") {
-            console.log("helo inside the activete if ")
             if (res && res.role === "user") {
-              console.log("inside the 2nd if condition");
               Userdata = res;
               await localStorage.setItem("Userdata", JSON.stringify(res));
               await CartById();
@@ -352,20 +348,20 @@ console.log(currentLocation,"This is checking current location");
               history.push("/Dashboard");
             } else if (res.success === 403) {
               setMsg(res.error);
-              setTimeout(()=>{
+              setTimeout(() => {
                 setMsg("");
-              },2000)
+              }, 2000);
             }
           } else if (res.success === 403) {
             setMsg(res.error);
-            setTimeout(()=>{
+            setTimeout(() => {
               setMsg("");
-            },2000)
+            }, 2000);
           } else {
             setMsg(res.error);
-            setTimeout(()=>{
+            setTimeout(() => {
               setMsg("");
-            },2000)
+            }, 2000);
           }
         })
         .then(async () => {
@@ -379,7 +375,6 @@ console.log(currentLocation,"This is checking current location");
         });
     }
   };
-  console.log(Userdata,"user data of after the login")
   const GetCategory = async () => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
@@ -401,7 +396,6 @@ console.log(currentLocation,"This is checking current location");
       });
   };
   const searchData = (e) => {
-
     if (props.func) {
       props.func(e);
     }
@@ -510,8 +504,7 @@ console.log(currentLocation,"This is checking current location");
     setForgetModal(true);
     setRegisterModal(false);
     setLoginModal(false);
-    $("#loginModalCloseBtn").click()
-    
+    $("#loginModalCloseBtn").click();
   };
   const forgetPassword = async (data) => {
     await GetUserData(data);
@@ -549,7 +542,7 @@ console.log(currentLocation,"This is checking current location");
       console.log(err, "error");
     }
   };
- 
+
   return (
     <>
       <div
@@ -623,312 +616,309 @@ console.log(currentLocation,"This is checking current location");
       {/* end side bar Modal */}
       <div className="container-fluid top-nav">
         {/* login Register Modal  */}
-          <div
-            className="modal fade login-register-main"
-            id="exampleModal"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content login-register-modal">
-                <div className="modal-body">
-                  <button
-                    type="button"
-                    id="loginModalCloseBtn"
-                    className="d-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    className="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <div className="row mt-0">
-                    <div className="col-12">
-                      <div className="nutra-logo-in-login-form">
-                        <img
-                          src="/static/media/new-logo.8b4fa066.png"
-                          alt="nutrazik-logo"
-                        />
-                      </div>
+        <div
+          className="modal fade login-register-main"
+          id="exampleModal"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content login-register-modal">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  id="loginModalCloseBtn"
+                  className="d-none"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <div className="row mt-0">
+                  <div className="col-12">
+                    <div className="nutra-logo-in-login-form">
+                      <img
+                        src="/static/media/new-logo.8b4fa066.png"
+                        alt="nutrazik-logo"
+                      />
                     </div>
-                    <div className="col-6 logiRegisterHeader1 pr-0">
-                      <h3
-                        onClick={() => {
-                          setRegisterModal(false);
-                          setLoginModal(true);
-                          reset1();
-                        }}
-                        className={!registerModal ? "text-success" : null}
-                      >
-                        Login
-                      </h3>
-                    </div>
-                    <div className="col-6 logiRegisterHeader2 pl-0">
-                      <h3
-                        onClick={() => {
-                          setRegisterModal(true);
-                          setLoginModal(false);
-                          reset();
-                          setMsg("");
-                        }}
-                        className={registerModal ? "text-success" : null}
-                      >
-                        Register
-                      </h3>
-                    </div>
-                    {registerModal ? (
-                      <div className="col-lg-12 logiRegisterContentDiv">
-                        <div className="form-row">
-                          <form
-                            className="form-group col-lg-12"
-                            onSubmit={handleSubmit(RegisterUser)}
-                          >
-                            <div className="row mt-0 start-register-form">
-                              <div className="col-md-6 col-12">
-                                <div className="form-group">
-                                  <label>
-                                    Username<span>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-login"
-                                    {...register("username", {
-                                      required: true,
-                                      pattern: /^[A-Za-z0-9]*$/,
-                                    })}
-                                    onInput={(event) =>
-                                      (event.target.value = event.target.value.toLowerCase())
-                                    }
-                                  />
-                                  {errors?.username?.type === "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                  {errors?.username?.type === "pattern" && (
-                                    <p className="text-danger">
-                                      Username does not contain space and special key
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="col-md-6 col-12">
-                                <div className="form-group ">
-                                  <label>
-                                    Email<span>*</span>
-                                  </label>
-                                  <input
-                                    type="email"
-                                    className="form-control form-control-login "
-                                    {...register("email", {
-                                      required: true,
-                                      pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                                    })}
-                                  />
-                                  {errors?.email?.type === "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                  {errors?.email?.type === "pattern" && (
-                                    <p className="text-danger">
-                                      Please enter a valid Email
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-
-                              <div className="col-md-6 col-12">
-                                <div className="form-group">
-                                  <label>
-                                    Password<span>*</span>
-                                  </label>
-                                  <input
-                                    type="password"
-                                    className="form-control form-control-login "
-                                    {...register("password", {
-                                      required: true,
-                                      pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                                    })}
-                                  />
-                                  {errors?.password?.type === "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                  {errors?.password?.type === "pattern" && (
-                                    <p className="text-danger password-err">
-                                      Must have more than 8 characters, one number, upper & lowercase letters & special character
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="col-md-6 col-12">
-                                <div className="form-group ">
-                                  <label>
-                                    Confirm Password<span>*</span>
-                                  </label>
-                                  <input
-                                    type="password"
-                                    className="form-control form-control-login "
-                                    {...register("repassword", {
-                                      required: true,
-                                      validate: (val) => {
-                                        if (watch("password") !== val) {
-                                          return "Your Password Does not Match";
-                                        }
-                                      },
-                                    })}
-                                  />
-                                  {errors?.repassword?.type === "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                  {errors?.repassword?.type === "validate" && (
-                                    <p className="text-danger">
-                                      Password does not match
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="col-md-6 col-12">
-                                <div className="form-group ">
-                                  <label>
-                                    Phone Number<span>*</span>
-                                  </label>
-                                  <input
-                                    type="number"
-                                    className="form-control form-control-login "
-                                    {...register("phonenumber", {
-                                      required: true,
-                                      minLength:10,
-                                    })}
-                                    onInput={(e) => {
-                                      if (
-                                        e.target.value.length >
-                                        e.target.maxLength
-                                      )
-                                        e.target.value = e.target.value.slice(
-                                          0,
-                                          e.target.maxLength
-                                        );
-                                    }}
-                                    maxlength={10}
-                                  />
-                                  {errors?.phonenumber?.type === "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                   {errors?.phonenumber?.type === "minLength" && (
-                                    <p className="text-danger">
-                                      Please enter a valid phone number.
-                                    </p>
-                                  )}
-                                </div>
+                  </div>
+                  <div className="col-6 logiRegisterHeader1 pr-0">
+                    <h3
+                      onClick={() => {
+                        setRegisterModal(false);
+                        setLoginModal(true);
+                        reset1();
+                      }}
+                      className={!registerModal ? "text-success" : null}
+                    >
+                      Login
+                    </h3>
+                  </div>
+                  <div className="col-6 logiRegisterHeader2 pl-0">
+                    <h3
+                      onClick={() => {
+                        setRegisterModal(true);
+                        setLoginModal(false);
+                        reset();
+                        setMsg("");
+                      }}
+                      className={registerModal ? "text-success" : null}
+                    >
+                      Register
+                    </h3>
+                  </div>
+                  {registerModal ? (
+                    <div className="col-lg-12 logiRegisterContentDiv">
+                      <div className="form-row">
+                        <form
+                          className="form-group col-lg-12"
+                          onSubmit={handleSubmit(RegisterUser)}
+                        >
+                          <div className="row mt-0 start-register-form">
+                            <div className="col-md-6 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Username<span>*</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control form-control-login"
+                                  {...register("username", {
+                                    required: true,
+                                    pattern: /^[A-Za-z0-9]*$/,
+                                  })}
+                                  onInput={(event) =>
+                                    (event.target.value = event.target.value.toLowerCase())
+                                  }
+                                />
+                                {errors?.username?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.username?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Username does not contain space and special
+                                    key
+                                  </p>
+                                )}
                               </div>
                             </div>
-                            <h5 className="Login-fail-msg">{regmsg}</h5>
-                            <div className="form-group ">
+                            <div className="col-md-6 col-12">
+                              <div className="form-group ">
+                                <label>
+                                  Email<span>*</span>
+                                </label>
+                                <input
+                                  type="email"
+                                  className="form-control form-control-login "
+                                  {...register("email", {
+                                    required: true,
+                                    pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                                  })}
+                                />
+                                {errors?.email?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.email?.type === "pattern" && (
+                                  <p className="text-danger">
+                                    Please enter a valid Email
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-md-6 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control form-control-login "
+                                  {...register("password", {
+                                    required: true,
+                                    pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                                  })}
+                                />
+                                {errors?.password?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.password?.type === "pattern" && (
+                                  <p className="text-danger password-err">
+                                    Must have more than 8 characters, one
+                                    number, upper & lowercase letters & special
+                                    character
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-6 col-12">
+                              <div className="form-group ">
+                                <label>
+                                  Confirm Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control form-control-login "
+                                  {...register("repassword", {
+                                    required: true,
+                                    validate: (val) => {
+                                      if (watch("password") !== val) {
+                                        return "Your Password Does not Match";
+                                      }
+                                    },
+                                  })}
+                                />
+                                {errors?.repassword?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.repassword?.type === "validate" && (
+                                  <p className="text-danger">
+                                    Password does not match
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-6 col-12">
+                              <div className="form-group ">
+                                <label>
+                                  Phone Number<span>*</span>
+                                </label>
+                                <input
+                                  type="number"
+                                  className="form-control form-control-login "
+                                  {...register("phonenumber", {
+                                    required: true,
+                                    minLength: 10,
+                                  })}
+                                  onInput={(e) => {
+                                    if (
+                                      e.target.value.length > e.target.maxLength
+                                    )
+                                      e.target.value = e.target.value.slice(
+                                        0,
+                                        e.target.maxLength
+                                      );
+                                  }}
+                                  maxlength={10}
+                                />
+                                {errors?.phonenumber?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                                {errors?.phonenumber?.type === "minLength" && (
+                                  <p className="text-danger">
+                                    Please enter a valid phone number.
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <h5 className="Login-fail-msg">{regmsg}</h5>
+                          <div className="form-group ">
+                            <button
+                              className="btn btn-success btn-lg"
+                              type="submit"
+                            >
+                              Register
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="col-lg-12 logiRegisterContentDiv">
+                      <div className="form-row">
+                        <form
+                          className="form-group col-lg-12"
+                          onSubmit={handleLoginSubmit(LoginUser)}
+                        >
+                          <div className="row mt-0 start-login-form">
+                            <div className="col-md-12 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Username<span>*</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control form-control-login"
+                                  {...register2("username", {
+                                    required: true,
+                                  })}
+                                />
+                                {loginErrors?.username?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-12 col-12">
+                              <div className="form-group">
+                                <label>
+                                  Password<span>*</span>
+                                </label>
+                                <input
+                                  type="password"
+                                  className="form-control form-control-login "
+                                  {...register2("password", {
+                                    required: true,
+                                  })}
+                                />
+                                {loginErrors?.password?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <h5 className="Login-fail-msg">{msg}</h5>
+                            <div className="form-group col-lg-12 justify-content-center">
                               <button
                                 className="btn btn-success btn-lg"
                                 type="submit"
                               >
-                                Register
+                                Login
                               </button>
+                              <span
+                                style={{ cursor: "pointer" }}
+                                onClick={() => forgetHandler()}
+                              >
+                                <p className="mt-3 Forgot-Password">
+                                  Forgot Password?
+                                </p>
+                              </span>
                             </div>
-                          </form>
-                        </div>
+                          </div>
+                        </form>
                       </div>
-                    ) : (
-                      <div className="col-lg-12 logiRegisterContentDiv">
-                        <div className="form-row">
-                          <form
-                            className="form-group col-lg-12"
-                            onSubmit={handleLoginSubmit(LoginUser)}
-                          >
-                            <div className="row mt-0 start-login-form">
-                              <div className="col-md-12 col-12">
-                                <div className="form-group">
-                                  <label>
-                                    Username<span>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-login"
-                                    {...register2("username", {
-                                      required: true,
-                                    })}
-                                  />
-                                  {loginErrors?.username?.type ===
-                                    "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="col-md-12 col-12">
-                                <div className="form-group">
-                                  <label>
-                                    Password<span>*</span>
-                                  </label>
-                                  <input
-                                    type="password"
-                                    className="form-control form-control-login "
-                                    {...register2("password", {
-                                      required: true,
-                                    })}
-                                  />
-                                  {loginErrors?.password?.type ===
-                                    "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                              <h5 className="Login-fail-msg">{msg}</h5>
-                              <div className="form-group col-lg-12 justify-content-center">
-                                <button
-                                  className="btn btn-success btn-lg"
-                                  type="submit"
-                                >
-                                  Login
-                                </button>
-                                <span
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() => forgetHandler()}
-                                >
-                                  <p className="mt-3 Forgot-Password">Forgot Password?</p>
-                                </span>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <MdOutlineClose className="login-register-close-icon" />
+                    </div>
+                  )}
                 </div>
+                <MdOutlineClose className="login-register-close-icon" />
               </div>
             </div>
           </div>
-          {
-            forgetModal ? (
-              <Modal
-            visible={forgetModal}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
+        </div>
+        {forgetModal ? (
+          <Modal visible={forgetModal} onOk={handleOk} onCancel={handleCancel}>
             <div className="nutra-logo-in-login-form">
               <img
                 src="/static/media/new-logo.8b4fa066.png"
@@ -942,31 +932,29 @@ console.log(currentLocation,"This is checking current location");
                   onSubmit={handleForgetSubmit(forgetPassword)}
                 >
                   <div className="row mt-0 start-login-form">
-                  <div className="col-12">
-                                <div className="form-group ">
-                                  <label>
-                                    Email<span>*</span>
-                                  </label>
-                                  <input
-                                    type="email"
-                                    className="form-control form-control-login "
-                                    {...register3("email", {
-                                      required: true,
-                                      pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
-                                    })}
-                                  />
-                                  {forgetErrors?.email?.type === "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
-                                  {forgetErrors?.email?.type === "pattern" && (
-                                    <p className="text-danger">
-                                      Please enter a valid Email
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
+                    <div className="col-12">
+                      <div className="form-group ">
+                        <label>
+                          Email<span>*</span>
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control form-control-login "
+                          {...register3("email", {
+                            required: true,
+                            pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                          })}
+                        />
+                        {forgetErrors?.email?.type === "required" && (
+                          <p className="text-danger">This field is required</p>
+                        )}
+                        {forgetErrors?.email?.type === "pattern" && (
+                          <p className="text-danger">
+                            Please enter a valid Email
+                          </p>
+                        )}
+                      </div>
+                    </div>
                     <div className="form-group col-lg-12 justify-content-center">
                       <button className="btn btn-success btn-lg" type="submit">
                         Submit
@@ -977,10 +965,9 @@ console.log(currentLocation,"This is checking current location");
               </div>
             </div>
           </Modal>
-            ) : (
-              ""
-            )
-          }
+        ) : (
+          ""
+        )}
         {isModalVisible ? (
           <Modal
             visible={isModalVisible}
@@ -1018,7 +1005,8 @@ console.log(currentLocation,"This is checking current location");
                         )}
                         {errors?.password?.type === "pattern" && (
                           <p className="text-danger">
-                            Must have more than 8 characters, one number, upper & lowercase letters & special character.
+                            Must have more than 8 characters, one number, upper
+                            & lowercase letters & special character.
                           </p>
                         )}
                       </div>
@@ -1093,17 +1081,17 @@ console.log(currentLocation,"This is checking current location");
                         }}
                       />
                       {/* <Link to={"/SearchResult/" + search}> */}
-                        <button
-                          className="search mr-1"
-                          onClick={() => {
-                            if (search.length) {
-                              searchData(search);
-                              history.push("/SearchResult/" + search);
-                            }
-                          }}
-                        >
-                          <i className="bx bx-search-alt"></i>
-                        </button>
+                      <button
+                        className="search mr-1"
+                        onClick={() => {
+                          if (search.length) {
+                            searchData(search);
+                            history.push("/SearchResult/" + search);
+                          }
+                        }}
+                      >
+                        <i className="bx bx-search-alt"></i>
+                      </button>
                       {/* </Link> */}
                     </div>
                   </div>
@@ -1121,96 +1109,89 @@ console.log(currentLocation,"This is checking current location");
                     </div>
                   </div>
                   <div className="left-part after-user-Logout">
-                    {
-                      Userdata===null || Userdata==="" ?
-                      
-                      <div className="option-item" 
-                      onClick={()=>{
-                        reset1();
-                                reset();
-                                setRegMsg("");
-                                setMsg("");
-                        }}>
-                      <div className="cart-btn">
-                      <i
-                    className="bx bx-cart"
-                    data-bs-toggle="modal"
-                    data-bs-target={
-                      "#exampleModal"   
-                    }
-                    
-                  >
-                    <span className="sp">Cart</span>
-                  </i>
-                  
-                  </div>
-                  </div>
-                      :
-                      <div className="cart-div">
-                      <Link to="/cart">
-                        <div className=" login-div1">
-                          <div className="">
-                            <div className="option-item">
-                              <div className="cart-btn">
-                                <i className="bx bx-cart"></i>
-                              </div>
-                            </div>
-                          </div>
-                          <div className=" user-login pt-1">
-                            {cartItems ? (
-                              <h6 className="Total-Item">{cartItems}</h6>
-                            ) : (
-                              ""
-                            )}
+                    {Userdata === null || Userdata === "" ? (
+                      <div
+                        className="option-item"
+                        onClick={() => {
+                          reset1();
+                          reset();
+                          setRegMsg("");
+                          setMsg("");
+                        }}
+                      >
+                        <div className="cart-btn">
+                          <i
+                            className="bx bx-cart"
+                            data-bs-toggle="modal"
+                            data-bs-target={"#exampleModal"}
+                          >
                             <span className="sp">Cart</span>
-                            <br />
-                          </div>
+                          </i>
                         </div>
-                      </Link>
-                    </div> 
-                    }
-                    
-                    <div className=" heart-div">
-                    {
-                      Userdata===null || Userdata==="" ?
-                      
-                      <div className="option-item"
-                      onClick={()=>{
-                        reset1();
-                                reset();
-                                setRegMsg("");
-                                setMsg("");
-                      }}>
-                      <div className="cart-btn">
-                      <i
-                    className="bx bx-heart"
-                    data-bs-toggle="modal"
-                    data-bs-target={
-                      "#exampleModal"   
-                    }
-                    
-                  >
-                    <span className="sp">Wishlist</span>
-                  </i>
-                  </div>
-                  </div>
-                  :
-                      <Link to="/WishList">
-                        <div className="  heart-div-inner">
-                          <div className="">
-                            <div className="option-item">
-                              <div className="cart-btn">
-                                {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                <i className="bx bx-heart"></i>
+                      </div>
+                    ) : (
+                      <div className="cart-div">
+                        <Link to="/cart">
+                          <div className=" login-div1">
+                            <div className="">
+                              <div className="option-item">
+                                <div className="cart-btn">
+                                  <i className="bx bx-cart"></i>
+                                </div>
                               </div>
                             </div>
+                            <div className=" user-login pt-1">
+                              {cartItems ? (
+                                <h6 className="Total-Item">{cartItems}</h6>
+                              ) : (
+                                ""
+                              )}
+                              <span className="sp">Cart</span>
+                              <br />
+                            </div>
                           </div>
-                          <div className=" user-login pt-1">
-                            <span className="sp">Wishlist</span>
+                        </Link>
+                      </div>
+                    )}
+
+                    <div className=" heart-div">
+                      {Userdata === null || Userdata === "" ? (
+                        <div
+                          className="option-item"
+                          onClick={() => {
+                            reset1();
+                            reset();
+                            setRegMsg("");
+                            setMsg("");
+                          }}
+                        >
+                          <div className="cart-btn">
+                            <i
+                              className="bx bx-heart"
+                              data-bs-toggle="modal"
+                              data-bs-target={"#exampleModal"}
+                            >
+                              <span className="sp">Wishlist</span>
+                            </i>
                           </div>
                         </div>
-                      </Link>
-}
+                      ) : (
+                        <Link to="/WishList">
+                          <div className="  heart-div-inner">
+                            <div className="">
+                              <div className="option-item">
+                                <div className="cart-btn">
+                                  {wishlisted ? <h6>{wishlisted}</h6> : ""}
+                                  <i className="bx bx-heart"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div className=" user-login pt-1">
+                              <span className="sp">Wishlist</span>
+                            </div>
+                          </div>
+                        </Link>
+                      )}
                     </div>
                     <div className="  account-div ">
                       <div className=" login-div ">
@@ -1242,9 +1223,8 @@ console.log(currentLocation,"This is checking current location");
                           </div>
                         </div>
                       </div>
-                      <div className=" user-login" 
-                      >
-                        {Userdata == null || Userdata=="" ? (
+                      <div className=" user-login">
+                        {Userdata == null || Userdata == "" ? (
                           <>
                             <span
                               className="Sp1"
@@ -1256,7 +1236,6 @@ console.log(currentLocation,"This is checking current location");
                                 reset();
                                 setRegMsg("");
                                 setMsg("");
-                                
                               }}
                             >
                               Login/Register

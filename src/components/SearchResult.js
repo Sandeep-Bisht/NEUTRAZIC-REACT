@@ -484,7 +484,7 @@ const SearchResult = (props) => {
                                       <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start search-text-start">
                                         <span className="price">
                                           {" "}
-                                          {state1.state1 == "1" ? <i class="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
+                                          {state1.state1 == "1" ? <i className="fa fa-dollar-sign"></i> : <i className="fa fa-inr"></i>}
                                           {state1.state1 == "1" ? el.dollerDiscount : el.inrDiscount}
                                         </span>
                                       </div>

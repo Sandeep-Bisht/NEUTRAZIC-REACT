@@ -390,7 +390,7 @@ const Cart = () => {
                       Sub Total{" "}
                       <span>
                         {state1.state1 == "1" ? (
-                          <i class="fa fa-dollar-sign"></i>
+                          <i className="fa fa-dollar-sign"></i>
                         ) : (
                           <i className="fa fa-inr"></i>
                         )}
@@ -402,7 +402,7 @@ const Cart = () => {
                       <span>
                         -
                         {state1.state1 == "1" ? (
-                          <i class="fa fa-dollar-sign"></i>
+                          <i className="fa fa-dollar-sign"></i>
                         ) : (
                           <i className="fa fa-inr"></i>
                         )}
@@ -414,7 +414,7 @@ const Cart = () => {
                       Payable Amount{" "}
                       <span>
                         {state1.state1 == "1" ? (
-                          <i class="fa fa-dollar-sign"></i>
+                          <i className="fa fa-dollar-sign"></i>
                         ) : (
                           <i className="fa fa-inr"></i>
                         )}

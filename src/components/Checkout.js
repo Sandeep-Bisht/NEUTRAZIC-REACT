@@ -63,7 +63,7 @@ const Checkout=()=>{
                                  {
                            cart.map((el,ind1)=>(
                              
-                                    <tr>
+                                    <tr key={ind1}>
                                        <th scope="col">{el.name}</th>
                                        <th scope="col">{el.quantity}</th>
                                        {/* <th scope="col">{(el.mrp - el.mrp * el.discountprice / 100) * el.quantity}</th> */}

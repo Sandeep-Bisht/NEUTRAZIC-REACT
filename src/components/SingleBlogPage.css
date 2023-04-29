@@ -5,6 +5,10 @@
   color: rgba(0, 0, 0, 0.9);
   font-size: 16px;
 }
+.Read-more-singleblog{
+  color: #1b97ff;
+    font-weight: 700;
+}
 /* .blog-page-section-2 .single-blog-page-text{
   overflow: auto;
 } */

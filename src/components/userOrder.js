@@ -100,7 +100,6 @@ const UserOrder = () => {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
-  console.log(prticularUserOrder,"helo user order checked");
 
   return (
     <>
@@ -126,7 +125,6 @@ const UserOrder = () => {
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item,ind) => {
-                          console.log(item,"helo item")
                           return (
                             <>
                             <tr key={ind}>                                

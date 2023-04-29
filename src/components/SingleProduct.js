@@ -744,7 +744,7 @@ const SingleProduct = (props) => {
                   <span className="price-detail">
                     {" "}
                     {state1.state1 == "1" ? (
-                      <i class="fa fa-dollar-sign"></i>
+                      <i className="fa fa-dollar-sign"></i>
                     ) : (
                       <i className="fa fa-inr"></i>
                     )}
@@ -753,7 +753,7 @@ const SingleProduct = (props) => {
                       : data.inrDiscount}
                     <del>
                       {state1.state1 == "1" ? (
-                        <i class="fa fa-dollar-sign"></i>
+                        <i className="fa fa-dollar-sign"></i>
                       ) : (
                         <i className="fa fa-inr"></i>
                       )}
@@ -1070,7 +1070,7 @@ const SingleProduct = (props) => {
           {AllProduct.map((el, ind1) => {
             if (ind1 < 5) {
               return (
-                <figure className="figure1 single-product-figure">
+                <figure className="figure1 single-product-figure" key={ind1}>
                   <Link Link to={"/SingleProduct/" + el._id}>
                     <div>
                       <img
@@ -1090,7 +1090,7 @@ const SingleProduct = (props) => {
                         <span className="price">
                           {" "}
                           {state1.state1 == "1" ? (
-                            <i class="fa fa-dollar-sign"></i>
+                            <i className="fa fa-dollar-sign"></i>
                           ) : (
                             <i className="fa fa-inr"></i>
                           )}

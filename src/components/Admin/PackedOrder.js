@@ -212,48 +212,48 @@ const InProgressOrder = () => {
         >
           <form>
             <div className="row">
-              <div class="col-md-4 mb-3">
-                <label for="line1" class="form-label">
+              <div className="col-md-4 mb-3">
+                <label for="line1" className="form-label">
                   Line 1
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="line1"
                   value={shippedOrder.line1}
                 />
               </div>
               {shippedOrder && shippedOrder.line2 && (
-                <div class="col-md-4 mb-3">
-                  <label for="line2" class="form-label">
+                <div className="col-md-4 mb-3">
+                  <label for="line2" className="form-label">
                     Line 2
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="line2"
                     value={shippedOrder.line2}
                   />
                 </div>
               )}
-              <div class="col-md-4 mb-3">
-                <label for="city" class="form-label">
+              <div className="col-md-4 mb-3">
+                <label for="city" className="form-label">
                   City
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="city"
                   value={shippedOrder.city}
                 />
               </div>
-              <div class="col-md-4 mb-3">
-                <label for="state" class="form-label">
+              <div className="col-md-4 mb-3">
+                <label for="state" className="form-label">
                   State
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="state"
                   value={shippedOrder.state}
                 />
@@ -266,20 +266,20 @@ const InProgressOrder = () => {
                   value={shippedOrder.postal_code}
                 />
               </div>
-              <div class="col-md-4 mb-3">
-                <label for="country" class="form-label">
+              <div className="col-md-4 mb-3">
+                <label for="country" className="form-label">
                   Country
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="country"
                   value={shippedOrder.country == "IN" && "India"}
                   aria-describedby="emailHelp"
                 />
               </div>
-              <div class="col-md-4 mb-3">
-                <label for="Blue Dart" class="form-label">
+              <div className="col-md-4 mb-3">
+                <label for="Blue Dart" className="form-label">
                   Choose a Shipper
                 </label>
                 <select
@@ -294,7 +294,7 @@ const InProgressOrder = () => {
                   <option value="DTDC Courier">DTDC Courier</option>
                 </select>
               </div>
-              <div class="col-md-4 mb-3">
+              <div className="col-md-4 mb-3">
                 <label htmlFor="start-date-input" className="form-labe">
                   Shipping date
                 </label>
@@ -308,7 +308,7 @@ const InProgressOrder = () => {
                   onChange={(e) => setStartDate(e.target.value)}
                 />
               </div>
-              <div class="col-md-4 mb-3">
+              <div className="col-md-4 mb-3">
                 <label htmlFor="end-date-input" className="form-labe">
                   Delivery date
                 </label>

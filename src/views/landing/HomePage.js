@@ -651,7 +651,7 @@ const HomePage = () => {
                                       <span className="price">
                                         {" "}
                                         {state1 == "1" ? (
-                                          <i class="fa fa-dollar-sign"></i>
+                                          <i className="fa fa-dollar-sign"></i>
                                         ) : (
                                           <i className="fa fa-inr"></i>
                                         )}
@@ -898,7 +898,7 @@ const HomePage = () => {
                                     <span className="price">
                                       {" "}
                                       {state1 == "1" ? (
-                                        <i class="fa fa-dollar-sign"></i>
+                                        <i className="fa fa-dollar-sign"></i>
                                       ) : (
                                         <i className="fa fa-inr"></i>
                                       )}
@@ -1068,7 +1068,7 @@ const HomePage = () => {
                                     <span className="price">
                                       {" "}
                                       {state1 == "1" ? (
-                                        <i class="fa fa-dollar-sign"></i>
+                                        <i className="fa fa-dollar-sign"></i>
                                       ) : (
                                         <i className="fa fa-inr"></i>
                                       )}
@@ -1171,8 +1171,8 @@ const HomePage = () => {
                       .map((el, index) => {
                         if (index < 1) {
                           return (
-                            <Link to={"/SubCategories/" + el.category._id}>
-                              <button type="button" className="btn10">
+                            <Link to={"/SubCategories/" + el.category._id} key={index}>
+                              <button key={index} type="button" className="btn10">
                                 Show More
                               </button>
                             </Link>
