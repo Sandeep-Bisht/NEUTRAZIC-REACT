@@ -1089,9 +1089,9 @@ body {
 }
 
 /* forget modal */
-.Forgot-Password{
+/* .Forgot-Password{
     display: none;
-}
+} */
 /* end forget modal */
 
 @media only screen and (max-width : 1399px){
@@ -1596,7 +1596,7 @@ body {
     text-align: justify !important;
     /* word-break: break-all; */
     hyphens: auto;
-    font-size: 10px !important;
+    font-size: 12px !important;
 }
 
 
