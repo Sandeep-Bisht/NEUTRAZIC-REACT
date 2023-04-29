@@ -101,7 +101,7 @@ const DeliveredOrder = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">Image</th>

@@ -117,7 +117,7 @@ function Blogs() {
                         data.map((item, ind) => {
                           return (
                             <div className="col-md-6 col-lg-3" key={ind}>
-                              <div class="card">
+                              <div className="card">
                                 <Link
                                   className="card-img-link"
                                   to={"/SingleBlogPage/" + item.slug}
@@ -127,19 +127,19 @@ function Blogs() {
                                       item.featuredImage &&
                                       `${baseUrl}/` + item.featuredImage[0].path
                                     }
-                                    class="card-img-top"
+                                    className="card-img-top"
                                     alt="blog-image"
                                   />
                                 </Link>
                                 <Link to={"/SingleBlogPage/" + item.slug}>
                                   <div
-                                    class="card-body cart-text-body"
+                                    className="card-body cart-text-body"
                                     style={{ cursor: "pointer" }}
                                   >
                                     <h6 className="blog-title-text">
                                       {item.title}
                                     </h6>
-                                    <p class="card-text">
+                                    <p className="card-text">
                                       <ReadMoreReact
                                         text={item.description}
                                         min={80}

@@ -311,7 +311,7 @@ const Productform = (props) => {
                                 Select Category
                               </option>
                               {categories.map((el, ind) => (
-                                <option value={el._id}>{el.name}</option>
+                                <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
                             <p className="formerror">{formErrors.category}</p>
@@ -331,7 +331,7 @@ const Productform = (props) => {
                                 Select Sub Category
                               </option>
                               {subcategories.map((el, ind) => (
-                                <option value={el._id}>{el.name}</option>
+                                <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
                             <p className="formerror">
@@ -355,7 +355,7 @@ const Productform = (props) => {
                                   Select Vendor
                                 </option>
                                 {subcategories.map((el, ind) => (
-                                  <option value={el._id}>{el.name}</option>
+                                  <option value={el._id} key={ind}>{el.name}</option>
                                 ))}
                               </select>
                             </div>
@@ -387,7 +387,7 @@ const Productform = (props) => {
                               </option>
                               {manufactureres.map((el, ind) =>
                                 Userdata.role === "superAdmin" ? (
-                                  <option value={el._id}>{el.name}</option>
+                                  <option value={el._id} key={ind}>{el.name}</option>
                                 ) : Userdata._id === el.creatorId &&
                                   Userdata.role === "Vendor" ? (
                                   <option value={el._id}>{el.name}</option>
@@ -415,7 +415,7 @@ const Productform = (props) => {
                               </option>
                               {warehouse.map((el, ind) =>
                                 Userdata.role === "superAdmin" ? (
-                                  <option value={el._id}>{el.name}</option>
+                                  <option value={el._id} key={ind}>{el.name}</option>
                                 ) : Userdata._id === el.creatorId &&
                                   Userdata.role === "Vendor" ? (
                                   <option value={el._id}>{el.name}</option>

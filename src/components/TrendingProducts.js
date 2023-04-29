@@ -436,7 +436,7 @@ const TrengingProduct = (props) => {
                             <span className="price">
                               {" "}
                               {state1.state1 == "1" ? (
-                                <i class="fa fa-dollar-sign"></i>
+                                <i className="fa fa-dollar-sign"></i>
                               ) : (
                                 <i className="fa fa-inr"></i>
                               )}

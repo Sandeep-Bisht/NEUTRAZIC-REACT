@@ -50,7 +50,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6 contact-card">
                 <div className="single-contact-info-box contact-address-box">
                   <div className="icon">
-                    <i class="bx bx-location-plus"></i>
+                    <i className="bx bx-location-plus"></i>
                   </div>
                   <h3>Address</h3>
                   <p>
@@ -62,7 +62,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i class="bx bx-phone-call"></i>
+                    <i className="bx bx-phone-call"></i>
                   </div>
                   <h3>Phone</h3>
                   <p>
@@ -73,7 +73,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i class="bx bx-envelope"></i>
+                    <i className="bx bx-envelope"></i>
                   </div>
                   <h3>Email</h3>
                   <p>
@@ -87,7 +87,7 @@ const ContactUs = () => {
               <div className="col-lg-3 col-sm-6 col-md-6">
                 <div className="single-contact-info-box">
                   <div className="icon">
-                    <i class="bx bx-support"></i>
+                    <i className="bx bx-support"></i>
                   </div>
                   <h3>Supporting Hours</h3>
                   <p>Monday - Saturday</p>

@@ -163,7 +163,7 @@ const SubCategoryCreation = (props) => {
                                 Select Category
                               </option>
                               {categories.map((el, ind) => (
-                                <option value={el._id}>{el.name}</option>
+                                <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
                             <p className="formerror">{formerror.category}</p>

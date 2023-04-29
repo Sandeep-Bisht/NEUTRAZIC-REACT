@@ -279,7 +279,7 @@ const WishList = () => {
         /> : <>
             {wishlistData.length > 0 ? (
               wishlistData.map((item, ind) => (
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-lg-6 col-md-6 col-sm-12" key={ind}>
                   <div className="wishlistDiv">
                     <div className="row">
                       <div className="col-4">
