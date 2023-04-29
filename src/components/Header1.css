@@ -1000,9 +1000,9 @@ body {
 }
 
 /* forget modal */
-.Forgot-Password {
-  
-}
+/* .Forgot-Password{
+    display: none;
+} */
 /* end forget modal */
 
 @media only screen and (max-width: 1399px) {
@@ -1283,6 +1283,13 @@ body {
   }
   .top-header-padding {
     text-align: center;
+  }
+
+  .password-err {
+    text-align: justify !important;
+    /* word-break: break-all; */
+    hyphens: auto;
+    font-size: 12px !important;
   }
 }
 

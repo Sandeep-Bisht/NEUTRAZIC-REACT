@@ -66,6 +66,10 @@ const Header1 = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userdata, setUserdata] = useState();
   const [forgetMsg, setForgetMsg] = useState("");
+  const [otpInput, setOtpInput] = useState(false);
+  const [verifyUserOtp, setVerifyUserOtp] = useState("");
+  const [userItem, setUserItem] = useState({});
+  const [otpMsg, setOtpMsg] = useState("");
 
   const currentLocation = location.pathname;
 
@@ -108,9 +112,11 @@ const Header1 = (props) => {
     handleSubmit: handleForgetSubmit,
     formState: { errors: forgetErrors },
     reset: reset3,
+    watch: watch3,
   } = useForm({
     defaultValues: {
       email: "",
+      otp: "",
     },
     mode: "all",
   });
@@ -119,9 +125,11 @@ const Header1 = (props) => {
     handleSubmit: handleForgetSecondSubmit,
     formState: { errors: forgetSecondErrors },
     reset: reset4,
+    watch: watch4,
   } = useForm({
     defaultValues: {
-      email: "",
+      password: "",
+      repassword: "",
     },
     mode: "all",
   });
@@ -507,12 +515,43 @@ const Header1 = (props) => {
     $("#loginModalCloseBtn").click();
   };
   const forgetPassword = async (data) => {
-    await GetUserData(data);
+    console.log(data, "data of forget password");
+    if (!otpInput) {
+      await GetUserData(data);
+    } else {
+      verifyOtp(data.otp);
+    }
   };
-  const forgetSecondPassword = (data) => {
-    setForgetModal(false);
-    setIsModalVisible(false);
+
+  const forgetSecondPassword = async (data) => {
+    try {
+      const response = await axios.put(
+        `${baseUrl}/api/auth/find_by_id_update`,
+        {
+          _id: userItem._id,
+          email: userItem.email,
+          password: data.password,
+          phonenumber: userItem.phonenumber,
+          role: userItem.role,
+          userStatus: userItem.userStatus,
+          username: userItem.username,
+        }
+      );
+      if (response.status == 200) {
+        setForgetModal(false);
+        setIsModalVisible(false);
+        setLoginModal(false);
+        setForgetModal(false);
+        toast.success("Password Updated successfully", {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -528,18 +567,45 @@ const Header1 = (props) => {
     try {
       const res = await fetch(`${baseUrl}/api/auth/allusers`);
       const data = await res.json();
-      const filteredEmail = data.data.map((item) => item.email);
+      const filteredEmail = data.data.map((item) => item);
       const filteredNewEmail = filteredEmail.filter((item) => {
-        return item === currentEmail;
+        if (item.email === currentEmail) {
+          setUserItem(item);
+          return item.email === currentEmail;
+        }
       });
       if (filteredNewEmail.length > 0) {
-        setIsModalVisible(true);
-        $("#loginModalCloseBtn").click();
+        const createOtp = await axios.post(`${baseUrl}/api/otp/createotp`, {
+          email: currentEmail,
+        });
+        if (createOtp.data.success === 200) {
+          setOtpInput(true);
+          setVerifyUserOtp(createOtp.data.otp.otp);
+        }
       } else {
         setForgetMsg("This Email is not registered yet");
       }
     } catch (err) {
       console.log(err, "error");
+    }
+  };
+
+  const verifyOtp = async (otp1) => {
+    const response = await axios.post(`${baseUrl}/api/otp/verifyotp`, {
+      otp: otp1,
+    });
+    {
+      if (response.data.success === 200) {
+        setIsModalVisible(true);
+        setForgetModal(false);
+        setOtpInput(false);
+        $("#loginModalCloseBtn").click();
+      } else if (response.data.success === 400) {
+        setOtpMsg("Please fill Correct otp");
+        setTimeout(() => {
+          setOtpMsg("");
+        }, 3000);
+      }
     }
   };
 
@@ -955,10 +1021,44 @@ const Header1 = (props) => {
                         )}
                       </div>
                     </div>
+                    {otpInput ? (
+                      <div className="col-12">
+                        <div className="form-group ">
+                          <label>
+                            Otp<span>*</span>
+                          </label>
+                          <input
+                            type="number"
+                            className="form-control form-control-login"
+                            {...register3("otp", {
+                              required: true,
+                            })}
+                          />
+                          {forgetErrors?.otp?.type === "required" && (
+                            <p className="text-danger">Please fill the otp</p>
+                          )}
+                        </div>
+                        <p className="text-danger">{otpMsg}</p>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                     <div className="form-group col-lg-12 justify-content-center">
-                      <button className="btn btn-success btn-lg" type="submit">
-                        Submit
-                      </button>
+                      {otpInput ? (
+                        <button
+                          className="btn btn-success btn-lg"
+                          type="submit"
+                        >
+                          Verify
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-success btn-lg"
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
                   </div>
                 </form>
@@ -995,15 +1095,15 @@ const Header1 = (props) => {
                         <input
                           type="password"
                           className="form-control form-control-login "
-                          {...register("password", {
+                          {...register4("password", {
                             required: true,
                             pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                           })}
                         />
-                        {errors?.password?.type === "required" && (
+                        {forgetSecondErrors?.password?.type === "required" && (
                           <p className="text-danger">This field is required</p>
                         )}
-                        {errors?.password?.type === "pattern" && (
+                        {forgetSecondErrors?.password?.type === "pattern" && (
                           <p className="text-danger">
                             Must have more than 8 characters, one number, upper
                             & lowercase letters & special character.
@@ -1019,19 +1119,21 @@ const Header1 = (props) => {
                         <input
                           type="password"
                           className="form-control form-control-login "
-                          {...register("repassword", {
+                          {...register4("repassword", {
                             required: true,
                             validate: (val) => {
-                              if (watch("password") !== val) {
+                              if (watch4("password") !== val) {
                                 return "Your Password Does not Match";
                               }
                             },
                           })}
                         />
-                        {errors?.repassword?.type === "required" && (
+                        {forgetSecondErrors?.repassword?.type ===
+                          "required" && (
                           <p className="text-danger">This field is required</p>
                         )}
-                        {errors?.repassword?.type === "validate" && (
+                        {forgetSecondErrors?.repassword?.type ===
+                          "validate" && (
                           <p className="text-danger">Password does not match</p>
                         )}
                       </div>
@@ -1161,6 +1263,8 @@ const Header1 = (props) => {
                           onClick={() => {
                             reset1();
                             reset();
+                            reset3();
+                            reset4();
                             setRegMsg("");
                             setMsg("");
                           }}
@@ -1173,6 +1277,15 @@ const Header1 = (props) => {
                             >
                               <span className="sp">Wishlist</span>
                             </i>
+                          </div>
+                          <div className=" user-login pt-1">
+                            {cartItems ? (
+                              <h6 className="Total-Item">{cartItems}</h6>
+                            ) : (
+                              ""
+                            )}
+                            <span className="sp">Cart</span>
+                            <br />
                           </div>
                         </div>
                       ) : (
@@ -1235,7 +1348,10 @@ const Header1 = (props) => {
                                 reset1();
                                 reset();
                                 setRegMsg("");
+                                reset3();
+                                reset4();
                                 setMsg("");
+                                setOtpInput(false);
                               }}
                             >
                               Login/Register

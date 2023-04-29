@@ -1274,7 +1274,7 @@ const HomePage = () => {
             </div>
           </div>
           <ToastContainer />
-        </section>
+        </section> 
         <div className="blog-section">
           <div className="container m-auto">
             <div className="row">
