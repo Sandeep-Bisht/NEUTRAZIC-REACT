@@ -101,7 +101,7 @@ function TermsConditions() {
 
 <p>No use of Nutrazik's logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
 
-<h3><strong>Iframes</strong></h3>
+<h3><strong>I-Frames</strong></h3>
 
 <p>Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.</p>
 
