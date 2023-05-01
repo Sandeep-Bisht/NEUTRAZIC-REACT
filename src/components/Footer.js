@@ -61,18 +61,18 @@ const Footer = () => {
        email:data.email,
       }
       )
-      if(response && response.success===200)
+      if(response && response.data.success===200)
       {
         setMessage(response.data.message);
         setInterval(function(){
           setMessage("");
-          },5000);
+          },500000);
       }
       else{
         setMsg(response.data.message);
         setInterval(function(){
           setMsg("");
-          },5000);
+          },500000);
       }
     }
     catch(error)
@@ -247,8 +247,8 @@ const Footer = () => {
                         Please enter Valid email Address
                       </p>
                     )}
-                    <p style={{color:"red"}}>{message}</p>
-                    <p style={{color:"red"}}>{msg}</p>
+                    <p className="sendSubscribeLink">{message}</p>
+                    <p className="sendSubscribeError">{msg}</p>
                     <div className="align-items-center">
                         <button type="submit" className="default-btn">
                           Subscribe Now

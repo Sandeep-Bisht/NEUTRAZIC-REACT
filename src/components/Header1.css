@@ -999,6 +999,10 @@ body {
   bottom: 4px;
 }
 
+.heart-div .option-item .cart-btn h6 {
+  display: none;
+}
+
 /* forget modal */
 /* .Forgot-Password{
     display: none;
