@@ -66,13 +66,13 @@ const Footer = () => {
         setMessage(response.data.message);
         setInterval(function(){
           setMessage("");
-          },500000);
+          },5000);
       }
       else{
         setMsg(response.data.message);
         setInterval(function(){
           setMsg("");
-          },500000);
+          },5000);
       }
     }
     catch(error)
