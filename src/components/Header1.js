@@ -35,7 +35,6 @@ const Header1 = (props) => {
   let dispatch = useDispatch();
   let { state1, setState1 } = useContext(CurrencyContext);
 
-
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
 
@@ -71,8 +70,6 @@ const Header1 = (props) => {
   const [verifyUserOtp, setVerifyUserOtp] = useState("");
   const [userItem, setUserItem] = useState({});
   const [otpMsg, setOtpMsg] = useState("");
-  
-
 
   const currentLocation = location.pathname;
 
@@ -80,9 +77,6 @@ const Header1 = (props) => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-
-
-
 
   const {
     register,
@@ -135,7 +129,7 @@ const Header1 = (props) => {
   } = useForm({
     defaultValues: {
       password: "",
-      repassword: ""
+      repassword: "",
     },
     mode: "all",
   });
@@ -149,7 +143,7 @@ const Header1 = (props) => {
       reset1();
       reset();
     }
-  }, [resetForm])
+  }, [resetForm]);
 
   useEffect(() => {
     if (state.noOfItemsInCart >= 0) {
@@ -172,13 +166,13 @@ const Header1 = (props) => {
     GetWishlist();
     GetSubCategory();
     CartById();
-    $(document).ready(function () {
+    $(document).ready(function() {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
-      window.onscroll = function () {
+      window.onscroll = function() {
         // headerFunction();
       };
-      $(".arrow").click(function () {
+      $(".arrow").click(function() {
         $(".sublist").slideUp();
       });
     });
@@ -234,8 +228,7 @@ const Header1 = (props) => {
       setLoginState("0");
       setCartItems("");
       setWishlisted("");
-    }
-    else {
+    } else {
       setLoginState("1");
     }
   }, [loginState]);
@@ -244,8 +237,8 @@ const Header1 = (props) => {
     localStorage.removeItem("Userdata");
     localStorage.removeItem("Subtotal");
     localStorage.removeItem("Usercartdata");
-    localStorage.removeItem("Userdata1")
-    localStorage.removeItem("ActualSubtotal")
+    localStorage.removeItem("Userdata1");
+    localStorage.removeItem("ActualSubtotal");
     Userdata = "";
     toast.success("Logout successfully", {
       position: "bottom-right",
@@ -255,7 +248,12 @@ const Header1 = (props) => {
     setLoginState("0");
     setCartItems("");
     setWishlisted("");
-    if (currentLocation === "/cart" || currentLocation === "/WishList" || currentLocation === "/UserOrder" || currentLocation === "/MyAccount") {
+    if (
+      currentLocation === "/cart" ||
+      currentLocation === "/WishList" ||
+      currentLocation === "/UserOrder" ||
+      currentLocation === "/MyAccount"
+    ) {
       history.push("/");
     }
   };
@@ -319,7 +317,7 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
-    console.log(data, "data of login users")
+    console.log(data, "data of login users");
     if (data.username && data.password) {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
@@ -361,18 +359,18 @@ const Header1 = (props) => {
               setMsg(res.error);
               setTimeout(() => {
                 setMsg("");
-              }, 2000)
+              }, 2000);
             }
           } else if (res.success === 403) {
             setMsg(res.error);
             setTimeout(() => {
               setMsg("");
-            }, 2000)
+            }, 2000);
           } else {
             setMsg(res.error);
             setTimeout(() => {
               setMsg("");
-            }, 2000)
+            }, 2000);
           }
         })
         .then(async () => {
@@ -407,7 +405,6 @@ const Header1 = (props) => {
       });
   };
   const searchData = (e) => {
-
     if (props.func) {
       props.func(e);
     }
@@ -516,33 +513,32 @@ const Header1 = (props) => {
     setForgetModal(true);
     setRegisterModal(false);
     setLoginModal(false);
-    $("#loginModalCloseBtn").click()
-
+    $("#loginModalCloseBtn").click();
   };
   const forgetPassword = async (data) => {
-    console.log(data,"data of forget password")
-    if(!otpInput){
+    console.log(data, "data of forget password");
+    if (!otpInput) {
       await GetUserData(data);
-    } 
-    else{
+    } else {
       verifyOtp(data.otp);
     }
-    
   };
 
   const forgetSecondPassword = async (data) => {
     try {
-      const response = await axios.put(`${baseUrl}/api/auth/find_by_id_update`, {
-        _id: userItem._id,
-        email: userItem.email,
-        password: data.password,
-        phonenumber: userItem.phonenumber,
-        role: userItem.role,
-        userStatus: userItem.userStatus,
-        username: userItem.username,
-      })
+      const response = await axios.put(
+        `${baseUrl}/api/auth/find_by_id_update`,
+        {
+          _id: userItem._id,
+          email: userItem.email,
+          password: data.password,
+          phonenumber: userItem.phonenumber,
+          role: userItem.role,
+          userStatus: userItem.userStatus,
+          username: userItem.username,
+        }
+      );
       if (response.status == 200) {
-
         setForgetModal(false);
         setIsModalVisible(false);
         setLoginModal(false);
@@ -552,7 +548,6 @@ const Header1 = (props) => {
           autoClose: 2000,
         });
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -561,6 +556,18 @@ const Header1 = (props) => {
   const handleOk = () => {
     setIsModalVisible(false);
   };
+
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
 
   const handleCancel = () => {
     setForgetModal(false);
@@ -579,16 +586,14 @@ const Header1 = (props) => {
           setUserItem(item);
           return item.email === currentEmail;
         }
-
       });
       if (filteredNewEmail.length > 0) {
         const createOtp = await axios.post(`${baseUrl}/api/otp/createotp`, {
           email: currentEmail,
-        })
+        });
         if (createOtp.data.success === 200) {
           setOtpInput(true);
           setVerifyUserOtp(createOtp.data.otp.otp);
-
         }
       } else {
         setForgetMsg("This Email is not registered yet");
@@ -601,23 +606,21 @@ const Header1 = (props) => {
   const verifyOtp = async (otp1) => {
     const response = await axios.post(`${baseUrl}/api/otp/verifyotp`, {
       otp: otp1,
-    })
+    });
     {
       if (response.data.success === 200) {
         setIsModalVisible(true);
         setForgetModal(false);
         setOtpInput(false);
         $("#loginModalCloseBtn").click();
-      }
-      else if(response.data.success === 400) {
+      } else if (response.data.success === 400) {
         setOtpMsg("Please fill Correct otp");
-        setTimeout(()=>{
+        setTimeout(() => {
           setOtpMsg("");
-        },3000)
+        }, 3000);
       }
     }
-  }
-
+  };
 
   return (
     <>
@@ -783,7 +786,8 @@ const Header1 = (props) => {
                                 )}
                                 {errors?.username?.type === "pattern" && (
                                   <p className="text-danger">
-                                    Username does not contain space and special key
+                                    Username does not contain space and special
+                                    key
                                   </p>
                                 )}
                               </div>
@@ -834,7 +838,9 @@ const Header1 = (props) => {
                                 )}
                                 {errors?.password?.type === "pattern" && (
                                   <p className="text-danger password-err">
-                                    Must have more than 8 characters, one number, upper & lowercase letters & special character
+                                    Must have more than 8 characters, one
+                                    number, upper & lowercase letters & special
+                                    character
                                   </p>
                                 )}
                               </div>
@@ -882,8 +888,7 @@ const Header1 = (props) => {
                                   })}
                                   onInput={(e) => {
                                     if (
-                                      e.target.value.length >
-                                      e.target.maxLength
+                                      e.target.value.length > e.target.maxLength
                                     )
                                       e.target.value = e.target.value.slice(
                                         0,
@@ -937,12 +942,11 @@ const Header1 = (props) => {
                                     required: true,
                                   })}
                                 />
-                                {loginErrors?.username?.type ===
-                                  "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
+                                {loginErrors?.username?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
                               </div>
                             </div>
                             <div className="col-md-12 col-12">
@@ -957,12 +961,11 @@ const Header1 = (props) => {
                                     required: true,
                                   })}
                                 />
-                                {loginErrors?.password?.type ===
-                                  "required" && (
-                                    <p className="text-danger">
-                                      This field is required
-                                    </p>
-                                  )}
+                                {loginErrors?.password?.type === "required" && (
+                                  <p className="text-danger">
+                                    This field is required
+                                  </p>
+                                )}
                               </div>
                             </div>
                             <h5 className="Login-fail-msg">{msg}</h5>
@@ -977,7 +980,9 @@ const Header1 = (props) => {
                                 style={{ cursor: "pointer" }}
                                 onClick={() => forgetHandler()}
                               >
-                                <p className="mt-3 Forgot-Password">Forgot Password?</p>
+                                <p className="mt-3 Forgot-Password">
+                                  Forgot Password?
+                                </p>
                               </span>
                             </div>
                           </div>
@@ -991,101 +996,106 @@ const Header1 = (props) => {
             </div>
           </div>
         </div>
-        {
-          forgetModal ? (
-            <Modal
-              visible={forgetModal}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <div className="nutra-logo-in-login-form">
-                <img
-                  src="/static/media/new-logo.8b4fa066.png"
-                  alt="nutrazik-logo"
-                />
-              </div>
-              <div className="col-lg-12 forgetContentDiv">
-                <div className="form-row">
-                  <form
-                    className="form-group col-lg-12"
-                    onSubmit={handleForgetSubmit(forgetPassword)}
-                  >
-                    <div className="row mt-0 start-login-form">
+        {forgetModal ? (
+          // <div className="forget-modal-body">
+          <Modal
+            visible={forgetModal}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            closeIcon={<CustomCloseIcon />}
+            className="forget-modal-body"
+          >
+            <div className="nutra-logo-in-login-form">
+              <img
+                src="/static/media/new-logo.8b4fa066.png"
+                alt="nutrazik-logo"
+              />
+            </div>
+            <div className="col-lg-12 forgetContentDiv">
+              <div className="form-row">
+                <form
+                  className="form-group col-lg-12"
+                  onSubmit={handleForgetSubmit(forgetPassword)}
+                >
+                  <div className="row mt-0 start-login-form">
+                    <div className="col-12">
+                      <div className="form-group ">
+                        <label>
+                          Email<span>*</span>
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control form-control-login "
+                          {...register3("email", {
+                            required: true,
+                            pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
+                          })}
+                        />
+                        {forgetErrors?.email?.type === "required" && (
+                          <p className="text-danger">This field is required</p>
+                        )}
+                        {forgetErrors?.email?.type === "pattern" && (
+                          <p className="text-danger">
+                            Please enter a valid Email
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    {otpInput ? (
                       <div className="col-12">
                         <div className="form-group ">
                           <label>
-                            Email<span>*</span>
+                            Otp<span>*</span>
                           </label>
                           <input
-                            type="email"
-                            className="form-control form-control-login "
-                            {...register3("email", {
+                            type="number"
+                            className="form-control form-control-login"
+                            {...register3("otp", {
                               required: true,
-                              pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/,
                             })}
                           />
-                          {forgetErrors?.email?.type === "required" && (
-                            <p className="text-danger">
-                              This field is required
-                            </p>
-                          )}
-                          {forgetErrors?.email?.type === "pattern" && (
-                            <p className="text-danger">
-                              Please enter a valid Email
-                            </p>
+                          {forgetErrors?.otp?.type === "required" && (
+                            <p className="text-danger">Please fill the otp</p>
                           )}
                         </div>
+                        <p className="text-danger">{otpMsg}</p>
                       </div>
-                      {otpInput ?
-                        <div className="col-12">
-                          <div className="form-group ">
-                            <label>
-                              Otp<span>*</span>
-                            </label>
-                            <input
-                              type="number"
-                              className="form-control form-control-login"
-                              {...register3("otp", {
-                                required: true,
-                              })}
-                            />
-                            {forgetErrors?.otp?.type === "required" && (
-                              <p className="text-danger">
-                                Please fill the otp
-                              </p>
-                            )}
-                          </div>
-                          <p className="text-danger">{otpMsg}</p>
-                        </div> :
-                        ""
-                      }
-                      <div className="form-group col-lg-12 justify-content-center">
-                        {otpInput ?
-                          <button className="btn btn-success btn-lg"
-                            type="submit">
-                            Verify
-                          </button>
-                          :
-                          <button className="btn btn-success btn-lg" type="submit">
-                            Submit
-                          </button>
-                        }
-                      </div>
+                    ) : (
+                      ""
+                    )}
+                    <div className="form-group col-lg-12 justify-content-center">
+                      {otpInput ? (
+                        <button
+                          className="btn btn-success btn-lg"
+                          type="submit"
+                        >
+                          Verify
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-success btn-lg"
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
-                  </form>
-
-                </div>
+                  </div>
+                </form>
               </div>
-            </Modal>
-          ) : (
-            ""
-          )
-        }
+            </div>
+          </Modal>
+        ) : (
+          // </div>
+          ""
+        )}
         {isModalVisible ? (
           <Modal
             visible={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
+            closeIcon={<CustomCloseIcon />}
+            className="forget-modal-body"
           >
             <div className="nutra-logo-in-login-form">
               <img
@@ -1118,7 +1128,8 @@ const Header1 = (props) => {
                         )}
                         {forgetSecondErrors?.password?.type === "pattern" && (
                           <p className="text-danger">
-                            Must have more than 8 characters, one number, upper & lowercase letters & special character.
+                            Must have more than 8 characters, one number, upper
+                            & lowercase letters & special character.
                           </p>
                         )}
                       </div>
@@ -1140,10 +1151,12 @@ const Header1 = (props) => {
                             },
                           })}
                         />
-                        {forgetSecondErrors?.repassword?.type === "required" && (
+                        {forgetSecondErrors?.repassword?.type ===
+                          "required" && (
                           <p className="text-danger">This field is required</p>
                         )}
-                        {forgetSecondErrors?.repassword?.type === "validate" && (
+                        {forgetSecondErrors?.repassword?.type ===
+                          "validate" && (
                           <p className="text-danger">Password does not match</p>
                         )}
                       </div>
@@ -1221,98 +1234,91 @@ const Header1 = (props) => {
                     </div>
                   </div>
                   <div className="left-part after-user-Logout">
-                    {
-                      Userdata === null || Userdata === "" ?
+                    {Userdata === null || Userdata === "" ? (
+                      <div
+                        className="option-item"
+                        onClick={() => {
+                          reset1();
+                          reset();
+                          setRegMsg("");
+                          setMsg("");
+                        }}
+                      >
+                        <div className="cart-btn">
+                          <i
+                            className="bx bx-cart"
+                            data-bs-toggle="modal"
+                            data-bs-target={"#exampleModal"}
+                          >
+                            <span className="sp">Cart</span>
+                          </i>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="cart-div">
+                        <Link to="/cart">
+                          <div className=" login-div1">
+                            <div className="">
+                              <div className="option-item">
+                                <div className="cart-btn">
+                                  <i className="bx bx-cart"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div className=" user-login pt-1">
+                              {cartItems ? (
+                                <h6 className="Total-Item">{cartItems}</h6>
+                              ) : (
+                                ""
+                              )}
+                              <span className="sp">Cart</span>
+                              <br />
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                    )}
 
-                        <div className="option-item"
+                    <div className=" heart-div">
+                      {Userdata === null || Userdata === "" ? (
+                        <div
+                          className="option-item"
                           onClick={() => {
                             reset1();
                             reset();
+                            reset3();
+                            reset4();
                             setRegMsg("");
                             setMsg("");
-                          }}>
+                          }}
+                        >
                           <div className="cart-btn">
                             <i
-                              className="bx bx-cart"
+                              className="bx bx-heart"
                               data-bs-toggle="modal"
-                              data-bs-target={
-                                "#exampleModal"
-                              }
-
+                              data-bs-target={"#exampleModal"}
                             >
-                              <span className="sp">Cart</span>
+                              <span className="sp">Wishlist</span>
                             </i>
-
                           </div>
                         </div>
-                        :
-                        <div className="cart-div">
-                          <Link to="/cart">
-                            <div className=" login-div1">
-                              <div className="">
-                                <div className="option-item">
-                                  <div className="cart-btn">
-                                    <i className="bx bx-cart"></i>
-                                  </div>
+                      ) : (
+                        <Link to="/WishList">
+                          <div className="  heart-div-inner">
+                            <div className="">
+                              <div className="option-item">
+                                <div className="cart-btn">
+                                  {wishlisted ? <h6>{wishlisted}</h6> : ""}
+                                  <i className="bx bx-heart"></i>
                                 </div>
                               </div>
-                              <div className=" user-login pt-1">
-                                {cartItems ? (
-                                  <h6 className="Total-Item">{cartItems}</h6>
-                                ) : (
-                                  ""
-                                )}
-                                <span className="sp">Cart</span>
-                                <br />
-                              </div>
                             </div>
-                          </Link>
-                        </div>
-                    }
-
-                    <div className=" heart-div">
-                      {
-                        Userdata === null || Userdata === "" ?
-
-                          <div className="option-item"
-                            onClick={() => {
-                              reset1();
-                              reset();
-                              reset3();
-                              reset4();
-                              setRegMsg("");
-                              setMsg("");
-                            }}>
-                            <div className="cart-btn">
-                              <i
-                                className="bx bx-heart"
-                                data-bs-toggle="modal"
-                                data-bs-target={
-                                  "#exampleModal"
-                                }
-
-                              >
-                                <span className="sp">Wishlist</span>
-                              </i>
+                            <div className=" user-login pt-1">
+                              <span className="sp">Wishlist</span>
                             </div>
                           </div>
-                          :
-                          <Link to="/WishList">
-                            <div className="  heart-div-inner">
-                              <div className="">
-                                <div className="option-item">
-                                  <div className="cart-btn">
-                                    {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                    <i className="bx bx-heart"></i>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className=" user-login pt-1">
-                                <span className="sp">Wishlist</span>
-                              </div>
-                            </div>
-                          </Link>
-                      }
+                        </Link>
+                      )}
                     </div>
                     <div className="  account-div ">
                       <div className=" login-div ">
@@ -1344,8 +1350,7 @@ const Header1 = (props) => {
                           </div>
                         </div>
                       </div>
-                      <div className=" user-login"
-                      >
+                      <div className=" user-login">
                         {Userdata == null || Userdata == "" ? (
                           <>
                             <span
@@ -1361,7 +1366,6 @@ const Header1 = (props) => {
                                 reset4();
                                 setMsg("");
                                 setOtpInput(false);
-
                               }}
                             >
                               Login/Register
