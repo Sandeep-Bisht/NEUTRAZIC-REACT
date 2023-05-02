@@ -67,6 +67,7 @@ const Productform = (props) => {
 
     const errors = validateForm(data);
     setFormErrors(errors);
+   
     if (Object.keys(errors).length === 0) {
       const formData = new FormData();
       await formData.append("description", data.description);
@@ -103,6 +104,52 @@ const Productform = (props) => {
       console.log("Form has errors. Please correct them.");
     }
   };
+
+  const UpdateProduct = async (e, _id) => {
+    e.preventDefault();
+    const Errors = await validateForm(data);
+    setFormErrors(Errors);
+    if (Object.keys(Errors).length === 0) {
+    const formData = new FormData();
+    await formData.append("_id", data._id);
+    await formData.append("description", data.description);
+    await formData.append("name", data.name);
+    await formData.append("warehouse", data.warehouse);
+    await formData.append("category", data.category);
+    await formData.append("subcategory", data.subcategory);
+    await formData.append("quantity", data.quantity);
+    await formData.append("inrMrp", data.inrMrp);
+    await formData.append("dollerMrp", data.dollerMrp);
+    await formData.append("inrDiscount", data.inrDiscount);
+    await formData.append("dollerDiscount", data.dollerDiscount);
+    await formData.append("manufacturer", data.manufacturer);
+    await formData.append("type", data.type);
+    await formData.append("image", data.image);
+    for (let item of data.otherImage) {
+      await formData.append("otherImage", item);
+    }
+    try {
+      const response = await axios.put(
+        `${baseUrl}/api/product/update_product_by_id`,
+        formData
+      );
+      if (response.status === 200) {
+        await GetData();
+        setTimeout(() => {
+          history.push("/Configuration/" + "AllProductsDetails");
+        }, 1500);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  else {
+    console.log("Form has errors. Please correct them.");
+  }
+  };
+  console.log(formErrors,"error of form");
+  console.log(data,"editable data of produncts");
+
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -197,42 +244,7 @@ const Productform = (props) => {
       });
   };
 
-  const UpdateProduct = async (e, _id) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    await formData.append("_id", data._id);
-    await formData.append("description", data.description);
-    await formData.append("name", data.name);
-    await formData.append("warehouse", data.warehouse);
-    await formData.append("category", data.category);
-    await formData.append("subcategory", data.subcategory);
-    await formData.append("quantity", data.quantity);
-    await formData.append("inrMrp", data.inrMrp);
-    await formData.append("dollerMrp", data.dollerMrp);
-    await formData.append("inrDiscount", data.inrDiscount);
-    await formData.append("dollerDiscount", data.dollerDiscount);
-    await formData.append("manufacturer", data.manufacturer);
-    await formData.append("type", data.type);
-    await formData.append("image", data.image);
-    for (let item of data.otherImage) {
-      await formData.append("otherImage", item);
-    }
-    try {
-      const response = await axios.put(
-        `${baseUrl}/api/product/update_product_by_id`,
-        formData
-      );
-      if (response.status === 200) {
-        await GetData();
-        setTimeout(() => {
-          history.push("/Configuration/" + "AllProductsDetails");
-        }, 1500);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
 
   return (
     <>
@@ -252,6 +264,7 @@ const Productform = (props) => {
                         <h5>Product Creation</h5>
                         <div className="row">
                           <div className="col-6 p-1 form-floating">
+                          {/* <div className="input-div"> */}
                             <input
                               type="text"
                               id="floatingform"
@@ -262,10 +275,12 @@ const Productform = (props) => {
                                 Setdata({ ...data, name: e.target.value });
                               }}
                             />
+                            {/* </div> */}
                             <p className="formerror">{formErrors.name}</p>
                             <label for="floatingform">Product Name</label>
                           </div>
                           <div className="col-6 p-1">
+                          <div className="input-div">
                             <input
                               type="file"
                               className="form-control Dashborad-search"
@@ -277,10 +292,12 @@ const Productform = (props) => {
                                 });
                               }}
                             />
+                            </div>
                             <p className="formerror">{formErrors.image}</p>
                           </div>
 
                           <div className="col-6 p-1">
+                          <div className="input-div">
                             <input
                               type="file"
                               className="form-control Dashborad-search"
@@ -293,10 +310,13 @@ const Productform = (props) => {
                                 });
                               }}
                             />
+                            </div>
                             <p className="formerror">{formErrors.otherImage}</p>
                           </div>
 
                           <div className="col-6 p-1 required">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">Category</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.category}
@@ -314,9 +334,12 @@ const Productform = (props) => {
                                 <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
+                            </div>
                             <p className="formerror">{formErrors.category}</p>
                           </div>
                           <div className="col-6 p-1 required">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">SubCategory</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.subcategory}
@@ -334,6 +357,7 @@ const Productform = (props) => {
                                 <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
+                            </div>
                             <p className="formerror">
                               {formErrors.subcategory}
                             </p>
@@ -341,6 +365,8 @@ const Productform = (props) => {
 
                           {Userdata.role === "superAdmin" ? (
                             <div className="col-6 p-1 required">
+                              <div className="input-div">
+                            {editableData?<p className="category-select-div">Vendor</p>:""}
                               <select
                                 className="form-control Dashborad-search custom-select"
                                 value={data.subcategory}
@@ -358,6 +384,7 @@ const Productform = (props) => {
                                   <option value={el._id} key={ind}>{el.name}</option>
                                 ))}
                               </select>
+                              </div>
                             </div>
                           ) : (
                             <div className="col-6 p-1 form-floating required">
@@ -372,6 +399,8 @@ const Productform = (props) => {
                           )}
 
                           <div className="col-6 p-1 required">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">Manufacturer</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.manufacturer}
@@ -394,12 +423,15 @@ const Productform = (props) => {
                                 ) : null
                               )}
                             </select>
+                            </div>
                             <p className="formerror">
                               {formErrors.manufacturer}
                             </p>
                           </div>
 
                           <div className="col-6 p-1 required">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">warehouse</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.warehouse}
@@ -422,6 +454,7 @@ const Productform = (props) => {
                                 ) : null
                               )}
                             </select>
+                            </div>
                             <p className="formerror">{formErrors.warehouse}</p>
                           </div>
                           <div className="col-6 p-1 form-floating">
@@ -510,6 +543,8 @@ const Productform = (props) => {
                             <label for="floatingform">Discount In Dollar</label>
                           </div>
                           <div className="col-6 p-1">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">Product Type</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.type}
@@ -524,6 +559,7 @@ const Productform = (props) => {
                                 Trending Product
                               </option>
                             </select>
+                            </div>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <textarea

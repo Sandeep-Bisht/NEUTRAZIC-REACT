@@ -80,6 +80,9 @@ const ManufacturerCreation = (props) => {
 
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
+    const errors = ValidattionForm(data);
+    setFormerror(errors);
+    if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("description", data.description);
@@ -99,7 +102,29 @@ const ManufacturerCreation = (props) => {
     } catch (error) {
       console.log(error);
     }
+  }
   };
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   Setdata({
+  //     ...data,
+  //     [name]: value
+  //   });
+  //   setFormerror({
+  //     ...formerror,
+  //     [name]: '' // clear error message for the current input field
+  //   });
+  // };
+  // const handleBlur = (event) => {
+  //   const { name, value } = event.target;
+  //   const errors = { ...formerror };
+
+  //   // Validate the input field on blur
+  //   if (!value) {
+  //     errors[name] = `${name} is required`;
+  //   }
+  //   setFormerror(errors);
+  // };
 
   return (
     <>
@@ -121,10 +146,12 @@ const ManufacturerCreation = (props) => {
                           <div className="col-6 p-1">
                             <input
                               type="file"
+                              name="image"
                               multiple
                               className="form-control Dashborad-search"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
                               }}
                             />
                             <p className="formerror">{formerror.image}</p>
@@ -132,6 +159,7 @@ const ManufacturerCreation = (props) => {
                           <div className="col-6 p-1 form-floating">
                             <input
                               type="text"
+                              name="name"
                               id="floatingInputValue"
                               className="form-control Dashborad-search"
                               placeholder="Manufacturer Name "
@@ -140,7 +168,10 @@ const ManufacturerCreation = (props) => {
                               }
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
+                                // handleInputChange(e);
                               }}
+                              // onBlur={handleBlur}
+
                             />
                             <p className="formerror">{formerror.name}</p>
                             <label for="floatingInputValue">

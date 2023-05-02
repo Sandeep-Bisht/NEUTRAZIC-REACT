@@ -86,6 +86,9 @@ const CategoryCreation = (props) => {
 
   const UpdateCategory = async (e, _id) => {
     e.preventDefault();
+    const errors = ValidationFrom(data);
+    setFormerror(errors);
+    if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("description", data.description);
@@ -107,6 +110,7 @@ const CategoryCreation = (props) => {
       .catch((err) => {
         console.log(err, "error");
       });
+    }
   };
 
 
