@@ -20804,8 +20804,8 @@ svg {
   .first-nav {
     display: none !important;
   }
-  .home-banner-heading {
-    margin-top: -110px;
+  .home-banner-heading{
+    margin-top: -90px;
   }
   /* .contact-container{
 	position: relative;

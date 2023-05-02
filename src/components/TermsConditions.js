@@ -247,7 +247,7 @@ function TermsConditions() {
               </p>
 
               <h3>
-                <strong>I-frames</strong>
+                <strong>I-Frames</strong>
               </h3>
 
               <p>
