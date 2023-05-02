@@ -995,3 +995,11 @@ font-family: 'Roboto', sans-serif;
   position: relative;
   bottom: 7%;
 }
+.input-div{
+  background-color:#f5f5f5!important;
+  height: 67px!important;
+}
+.category-select-div{
+  margin-bottom: 0!important;
+  padding-left: 12px!important;
+}

@@ -101,6 +101,9 @@ const SubCategoryCreation = (props) => {
 
   const UpdateSubCategory = async (e, _id) => {
     e.preventDefault();
+    const errors = ValidationFrom(data);
+    Setformerror(errors);
+    if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("name", data.name);
@@ -117,6 +120,7 @@ const SubCategoryCreation = (props) => {
         history.push("Configuration/"+"AllSubCategoriesDetails");
       }, 1500);
     }
+  }
   };
 
 
@@ -137,7 +141,8 @@ const SubCategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>SubCategory Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-1 ">
+                            <div className="input-div">
                             <input
                               type="file"
                               className="form-control Dashborad-search"
@@ -146,11 +151,15 @@ const SubCategoryCreation = (props) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
                             />
+                            </div>
+                           
                             <p className="formerror">{formerror.image}</p>
                           </div>
                           <div className="col-6 p-1">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">Category</p>:""}
                             <select
-                              className="form-control Dashborad-search custom-select"
+                              className="form-control Dashborad-search custom-select "
                               value={data.category}
                               onChange={(e) => {
                                 Setdata({
@@ -166,6 +175,7 @@ const SubCategoryCreation = (props) => {
                                 <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
+                            </div>
                             <p className="formerror">{formerror.category}</p>
                           </div>
                           <div className="col-6 p-1 form-floating">
