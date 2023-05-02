@@ -987,9 +987,9 @@ body {
 .ant-modal-content {
   border-radius: 0px !important;
 }
-.anticon svg {
+/* .anticon svg {
   color: black;
-}
+} */
 .after-user-Logout .sp {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -1516,3 +1516,26 @@ body {
   hyphens: auto;
   font-size: 10px !important;
 }
+
+.forget-modal-body .custom-close-icon-forget {
+  width: max(10px, 3vw);
+  height: max(14px, 1vw);
+  overflow: visible !important;
+  
+}
+.forget-modal-body .custom-close-icon-forget{
+  stroke:rgba(0,0,0,0.6) !important;
+  stroke-width: 4px !important; 
+}
+
+/* .forget-modal-body .ant-modal-close-x {
+  font-weight: bold;
+} */
+
+/* .forget-modal-body .ant-modal-close:hover{
+  background: transparent !important;
+  color: black;
+}
+.forget-modal-body .anticon svg:hover{
+  color: rgba(0,0,0,1) !important;
+} */
