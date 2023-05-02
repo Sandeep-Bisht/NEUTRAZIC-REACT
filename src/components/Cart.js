@@ -220,7 +220,7 @@ const Cart = () => {
         <div className="container m-auto">
           <form>
             <div className="cart-buttons">
-              <h1 className="cart-header">Your Cart</h1>
+              <h1 className="cart-header">{cart && cart.length>0 ? "Your Cart":""}</h1>
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
@@ -238,14 +238,14 @@ const Cart = () => {
                         >
                           <thead className="text-center">
                             <tr>
-                              <th scope="col">Product</th>
-                              <th scope="col"></th>
-                              <th scope="col">PRICE</th>
+                              <th scope="col">Product Image</th>
+                              <th scope="col">Product Name</th>
+                              <th scope="col">Product Price</th>
                               <th scope="col" className="text-center">
-                                QUANTITY
+                                Quantity
                               </th>
                               <th scope="col" className="text-center">
-                                Total
+                                Total Price
                               </th>
                               <th scope="col"></th>
                             </tr>
@@ -366,6 +366,10 @@ const Cart = () => {
                         </table>
                       </div>
                     ) : (
+                      <div className="col-12 text-center EMPTYWISHLIST-DIV">
+                    <div>
+                      <h1>No Product Found</h1>
+                    </div>
                       <lottie-player
                         src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
                         background="transparent"
@@ -378,6 +382,7 @@ const Cart = () => {
                         loop
                         autoplay
                       ></lottie-player>
+                      </div>
                     )}
                   </>}
               </div>

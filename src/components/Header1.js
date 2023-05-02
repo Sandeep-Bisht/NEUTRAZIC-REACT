@@ -597,6 +597,9 @@ const Header1 = (props) => {
         }
       } else {
         setForgetMsg("This Email is not registered yet");
+        setTimeout(() => {
+          setForgetMsg("");
+        }, 2000);
       }
     } catch (err) {
       console.log(err, "error");
@@ -911,9 +914,9 @@ const Header1 = (props) => {
                             </div>
                           </div>
                           <h5 className="Login-fail-msg">{regmsg}</h5>
-                          <div className="form-group ">
+                          <div className="form-group register-form-header">
                             <button
-                              className="btn btn-success btn-lg"
+                              className="btn btn-success btn-lg register-form-button"
                               type="submit"
                             >
                               Register
@@ -1039,6 +1042,7 @@ const Header1 = (props) => {
                             Please enter a valid Email
                           </p>
                         )}
+                        <p className="text-danger">{forgetMsg}</p>
                       </div>
                     </div>
                     {otpInput ? (
@@ -1127,9 +1131,9 @@ const Header1 = (props) => {
                           <p className="text-danger">This field is required</p>
                         )}
                         {forgetSecondErrors?.password?.type === "pattern" && (
-                          <p className="text-danger">
+                          <p className="text-danger password-err">
                             Must have more than 8 characters, one number, upper
-                            & lowercase letters & special character.
+                            & lowercase letters & special character
                           </p>
                         )}
                       </div>
