@@ -121,12 +121,12 @@ function TermsConditions() {
               <ul>
                 <li>
                   You are entitled to post the Comments on our website and have
-                  all necessary licenses and consents to do so;
+                  all necessary licenses and consents to do so.
                 </li>
                 <li>
                   The Comments do not invade any intellectual property right,
                   including without limitation copyright, patent or trademark of
-                  any third party;
+                  any third party.
                 </li>
                 <li>
                   The Comments do not contain any defamatory, libelous,
@@ -156,13 +156,13 @@ function TermsConditions() {
               </p>
 
               <ul>
-                <li>Government agencies;</li>
-                <li>Search engines;</li>
-                <li>News organizations;</li>
+                <li>Government agencies.</li>
+                <li>Search engines.</li>
+                <li>News organizations.</li>
                 <li>
                   Online directory distributors may link to our Website in the
                   same manner as they hyperlink to the Websites of other listed
-                  businesses; and
+                  businesses.
                 </li>
                 <li>
                   System wide Accredited Businesses except soliciting non-profit
@@ -187,13 +187,13 @@ function TermsConditions() {
 
               <ul>
                 <li>
-                  commonly-known consumer and/or business information sources;
+                  commonly-known consumer and/or business information sources.
                 </li>
-                <li>dot.com community sites;</li>
-                <li>associations or other groups representing charities;</li>
-                <li>online directory distributors;</li>
-                <li>internet portals;</li>
-                <li>accounting, law and consulting firms; and</li>
+                <li>dot.com community sites.</li>
+                <li>associations or other groups representing charities.</li>
+                <li>online directory distributors.</li>
+                <li>internet portals.</li>
+                <li>accounting, law and consulting firms.</li>
                 <li>educational institutions and trade associations.</li>
               </ul>
 
@@ -230,9 +230,9 @@ function TermsConditions() {
               </p>
 
               <ul>
-                <li>By use of our corporate name; or</li>
+                <li>By use of our corporate name.</li>
                 <li>
-                  By use of the uniform resource locator being linked to; or
+                  By use of the uniform resource locator being linked to.
                 </li>
                 <li>
                   By use of any other description of our Website being linked to
@@ -321,15 +321,15 @@ function TermsConditions() {
               <ul>
                 <li>
                   limit or exclude our or your liability for death or personal
-                  injury;
+                  injury.
                 </li>
                 <li>
                   limit or exclude our or your liability for fraud or fraudulent
-                  misrepresentation;
+                  misrepresentation.
                 </li>
                 <li>
                   limit any of our or your liabilities in any way that is not
-                  permitted under applicable law; or
+                  permitted under applicable law.
                 </li>
                 <li>
                   exclude any of our or your liabilities that may not be

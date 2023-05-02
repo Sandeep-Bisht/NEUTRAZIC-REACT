@@ -47,6 +47,11 @@ const ContactUs = () => {
         <div className="contact-info-area pt-70 pb-40">
           <div className="container-fluid contact-container">
             <div className="row">
+              <div className="col-12">
+                <div className="section-title-contact my-4">
+                  <h2>Contact Us</h2>
+                </div>
+              </div>
               <div className="col-lg-3 col-sm-6 col-md-6 contact-card">
                 <div className="single-contact-info-box contact-address-box">
                   <div className="icon">
