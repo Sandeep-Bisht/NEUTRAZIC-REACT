@@ -96,6 +96,28 @@ const Warehouse = (props) => {
     }
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    Setdata({
+      ...data,
+      [name]: value
+    });
+    Setformerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
+
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This is required`;
+    }
+    Setformerror(errors);
+  };
+
   return (
     <>
       <section id="body-pd">
@@ -117,12 +139,15 @@ const Warehouse = (props) => {
                             <input
                               type="text"
                               id="floatingInputValue"
+                              name="name"
                               className="form-control Dashborad-search"
                               placeholder="Warehouse Name"
                               defaultValue={editableData ? editableData.name : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <label for="floatingInputValue">Warehouse Name</label>
                             <p className="formerror">{formerror.name}</p>
@@ -132,6 +157,7 @@ const Warehouse = (props) => {
                             <input
                               type="number"
                               id="floatingInputValue"
+                              name="warehouseContactNo"
                               className="form-control Dashborad-search"
                               placeholder="Warehouse Contact No"
                               defaultValue={editableData ? editableData.warehouseContactNo : data.warehouseContactNo}
@@ -141,9 +167,10 @@ const Warehouse = (props) => {
                                   Setdata({ ...data, warehouseContactNo: e.target.value });
 
                                 }
+                                handleInputChange(e);
                               }}
                               maxLength={10}
-
+                              onBlur={handleBlur}
                             />
                             <label for="floatingInputValue">Warehouse Contact No</label>
                             <p className="formerror">{formerror.warehouseContactNo}</p>
@@ -153,12 +180,15 @@ const Warehouse = (props) => {
                             <input
                               type="text"
                               id="floatingInputValue"
+                              name="warehouseAddress"
                               className="form-control Dashborad-search"
                               placeholder="Warehouse Address"
                               defaultValue={editableData ? editableData.warehouseAddress : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, warehouseAddress: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <label for="floatingInputValue">Warehouse Address</label>
                             <p className="formerror">{formerror.warehouseAddress}</p>

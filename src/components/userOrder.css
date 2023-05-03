@@ -6,6 +6,9 @@
 {
     vertical-align: middle;
 }
+.search-user-order{
+    display: none!important;
+}
 .table td img
 {
     height: 100px;

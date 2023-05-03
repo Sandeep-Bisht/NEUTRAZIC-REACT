@@ -19,11 +19,12 @@ const ManufacturerCreation = (props) => {
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
-
+console.log(editableData,"inside the manufacturerCreaction");
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetManufacturer();
     if (editableData) {
+
       Setdata(editableData);
     }
   }, []);
@@ -104,27 +105,27 @@ const ManufacturerCreation = (props) => {
     }
   }
   };
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   Setdata({
-  //     ...data,
-  //     [name]: value
-  //   });
-  //   setFormerror({
-  //     ...formerror,
-  //     [name]: '' // clear error message for the current input field
-  //   });
-  // };
-  // const handleBlur = (event) => {
-  //   const { name, value } = event.target;
-  //   const errors = { ...formerror };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    Setdata({
+      ...data,
+      [name]: value
+    });
+    setFormerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
 
-  //   // Validate the input field on blur
-  //   if (!value) {
-  //     errors[name] = `${name} is required`;
-  //   }
-  //   setFormerror(errors);
-  // };
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This is required`;
+    }
+    setFormerror(errors);
+  };
 
   return (
     <>
@@ -148,10 +149,9 @@ const ManufacturerCreation = (props) => {
                               type="file"
                               name="image"
                               multiple
-                              className="form-control Dashborad-search"
+                              className="form-control Dashborad-search input-div"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
-                                // handleInputChange(e);
                               }}
                             />
                             <p className="formerror">{formerror.image}</p>
@@ -161,16 +161,16 @@ const ManufacturerCreation = (props) => {
                               type="text"
                               name="name"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search"
+                              className="form-control Dashborad-search input-div"
                               placeholder="Manufacturer Name "
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
-                                // handleInputChange(e);
+                                handleInputChange(e);
                               }}
-                              // onBlur={handleBlur}
+                              onBlur={handleBlur}
 
                             />
                             <p className="formerror">{formerror.name}</p>

@@ -201,13 +201,13 @@ const Root = (props) => {
                 path={"/NewOrder/" + "Delivered"}
                 component={DeliveredOrder}
               />
-              <Route exact path="/Roles" component={Roles} />
+              <Route exact path={"/IAM/"+"Roles"} component={Roles} />
               <Route
                 exact
                 path="/SubCategory"
                 component={SubCategoryCreation}
               />
-              <Route path="/AllUsers" component={AllUsers} />
+              <Route path={"/IAM/"+"AllUsers"} component={AllUsers} />
               <Route
                 exact
                 path="/Subcategories/:_id"
