@@ -123,6 +123,27 @@ const SubCategoryCreation = (props) => {
   }
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    Setdata({
+      ...data,
+      [name]: value
+    });
+    Setformerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
+
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This is required`;
+    }
+    Setformerror(errors);
+  };
 
   return (
     <>
@@ -145,7 +166,8 @@ const SubCategoryCreation = (props) => {
                             <div className="input-div">
                             <input
                               type="file"
-                              className="form-control Dashborad-search"
+                              name="image"
+                              className="form-control Dashborad-search input-div"
                               placeholder="SubCategory Name "
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
@@ -159,14 +181,17 @@ const SubCategoryCreation = (props) => {
                           <div className="input-div">
                             {editableData?<p className="category-select-div">Category</p>:""}
                             <select
-                              className="form-control Dashborad-search custom-select "
+                              className="form-control Dashborad-search custom-select input-div"
                               value={data.category}
+                              name="category"
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
                                   category: e.target.value,
                                 });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             >
                               <option value="" hidden defaultChecked>
                                 Select Category
@@ -181,15 +206,18 @@ const SubCategoryCreation = (props) => {
                           <div className="col-6 p-1 form-floating">
                             <input
                               type="text"
+                              name="name"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search"
+                              className="form-control Dashborad-search input-div"
                               placeholder="SubCategory Name "
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <p className="formerror">{formerror.name}</p>
 

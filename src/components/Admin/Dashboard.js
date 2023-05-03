@@ -162,7 +162,7 @@ const Dashboard = () => {
                       </div>
 
                       <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
-                        <Link to="/AllUsers">
+                        <Link to={"/IAM/"+"AllUsers"}>
                           <div className="card cardsec">
                             <div className="row">
                               <div className="col-12">

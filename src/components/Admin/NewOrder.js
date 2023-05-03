@@ -179,12 +179,12 @@ const NewOrder = () => {
                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image}`}
+                              src={`${baseUrl}/${item.order[0].image}`}
                             ></img>
                           </div>
                         </td>
-                        <td>{item.name}</td>
-                        <td>{item.singleprice}</td>
+                        <td>{item.order[0].name}</td>
+                        <td>{item.order[0].singleprice}</td>
                       </tr>
                     </>
                   );
