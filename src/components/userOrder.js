@@ -70,7 +70,8 @@ const UserOrder = () => {
   };
 
   const showModal = (order) => {
-    setPrticularUserOrder(order.order);
+    console.log(order,"order of showModal");
+    setPrticularUserOrder(order.order[0].order);
     setIsModalVisible(true);
   };
 
@@ -111,7 +112,7 @@ const UserOrder = () => {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
-
+console.log(prticularUserOrder,"user orderof pericula user")
   return (
     <>
       {/* table modal */}
@@ -148,12 +149,12 @@ const UserOrder = () => {
                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.order[0].image}`}
+                              src={`${baseUrl}/${item.image}`}
                             ></img>
                           </div>
                         </td>
-                        <td>{item.order[0].name}</td>
-                        <td>{item.order[0].singleprice}</td>
+                        <td>{item.name}</td>
+                        <td>{item.singleprice}</td>
                         <td className="text-center">
                           <button
                             onClick={() => imageHandler(item.productid)}
