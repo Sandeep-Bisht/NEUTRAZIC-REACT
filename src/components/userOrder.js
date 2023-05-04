@@ -148,7 +148,7 @@ console.log(prticularUserOrder,"user orderof pericula user")
                           <div className="width-adjust-of-image">
                             <img
                               onClick={() =>
-                                imageHandler(item.order[0].productid)
+                                imageHandler(item.productid)
                               }
                               style={{ cursor: "pointer" }}
                               src={`${baseUrl}/${item.image}`}
@@ -159,7 +159,7 @@ console.log(prticularUserOrder,"user orderof pericula user")
                         <td>{item.singleprice}</td>
                         <td className="text-center">
                           <button
-                            onClick={() => imageHandler(item.order[0].productid)}
+                            onClick={() => imageHandler(item.productid)}
                             type="button"
                             className="btn btn-primary button-order"
                           >
