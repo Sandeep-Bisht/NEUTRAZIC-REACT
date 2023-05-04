@@ -46,6 +46,8 @@ const SearchResult = (props) => {
   const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
+  const  {searchedtextstate,setSearchedTextState} = useContext(CurrencyContext);
+  const {searchedtext,setSearchedText} = useContext(CurrencyContext);
 
 
 
@@ -61,7 +63,7 @@ const SearchResult = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-
+    // setSearchedTextState("1");
     GetData();
     CartById();
     GetWishlist();
@@ -435,7 +437,7 @@ const SearchResult = (props) => {
                 <div className="col-12">
                   <div className="">
                     <h1 className="Search-Result p-3">
-                      Showing Results for "{SearchedText}"
+                      Showing Results for "{searchedtext}"
                     </h1>
                   </div>
                 </div>
