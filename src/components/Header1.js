@@ -71,6 +71,9 @@ const Header1 = (props) => {
   const [userItem, setUserItem] = useState({});
   const [otpMsg, setOtpMsg] = useState("");
 
+  const{searchedtext,setSearchedText} = useContext(CurrencyContext);
+  const [searcheditem,setSearchedItem] = useState("");
+
   const currentLocation = location.pathname;
 
   useEffect(() => {
@@ -166,6 +169,13 @@ const Header1 = (props) => {
     GetWishlist();
     GetSubCategory();
     CartById();
+    if(!currentLocation.includes("SearchResult")){
+      setSearchedItem("");
+      setSearchedText("");
+    }
+    else{
+      setSearchedItem(searchedtext);
+    }
     $(document).ready(function() {
       header = document.getElementById("myHeader");
       sticky = header.offsetTop;
@@ -1199,12 +1209,19 @@ const Header1 = (props) => {
                         type="text"
                         className="my-input-field"
                         placeholder="Search..."
-                        onChange={(e) =>
-                          setSearch(e.target.value.toLowerCase())
-                        }
+                        Value={searcheditem}
+                        onChange={(e) => {
+                          setSearch(e.target.value.toLowerCase());
+                          
+                          setSearchedText(e.target.value);
+                        
+                        }}
                         onKeyDown={(e) => {
                           if (e.key === "Enter" && search.length) {
                             searchData(search);
+                            
+                              setSearchedText(e.target.value);
+                            
                             history.push("/SearchResult/" + search);
                           }
                         }}

@@ -146,7 +146,9 @@ const UserOrder = () => {
                         <td className="width-adjust-of-td">
                           <div className="width-adjust-of-image">
                             <img
-                              onClick={() => imageHandler(item.productid)}
+                              onClick={() =>
+                                imageHandler(item.order[0].productid)
+                              }
                               style={{ cursor: "pointer" }}
                               src={`${baseUrl}/${item.order[0].image}`}
                             ></img>
@@ -156,9 +158,9 @@ const UserOrder = () => {
                         <td>{item.order[0].singleprice}</td>
                         <td className="text-center">
                           <button
-                            onClick={() => imageHandler(item.productid)}
+                            onClick={() => imageHandler(item.order[0].productid)}
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary button-order"
                           >
                             Re-Order
                           </button>

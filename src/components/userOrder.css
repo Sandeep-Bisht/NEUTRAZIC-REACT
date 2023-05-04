@@ -19,6 +19,7 @@
 .user-order-div{
     margin-top: 80px!important;
 }
+
 @media only screen and (max-width:575.98px){
     .user-order-div{
         margin-top: 94px!important;
@@ -38,5 +39,8 @@
     }
     :where(.css-dev-only-do-not-override-diro6f).ant-table-wrapper .ant-table-tbody>tr>td{
         padding: 12px 9px!important;
+    }
+    .button-order{
+    font-size: 11px !important;
     }
 }

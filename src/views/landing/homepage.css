@@ -259,8 +259,9 @@ label {
   height: 41px;
   position: relative !important;
   left: -3px;
-  top: 116px;
+  top: 116px !important;
   background-color: #c4c4c4;
+  display: none !important;
 }
 
 .contact-container {
@@ -19936,7 +19937,7 @@ svg {
   /* contact page start */
 
   .first-nav {
-    top: 109px !important;
+    top: 136px !important;
   }
   /* contact page end */
   .cosmetic-shop-now {
@@ -19965,6 +19966,9 @@ svg {
   .blog-section .blog-title-text {
     font-size: 16px !important;
     height: 32px;
+  }
+  .first-nav {
+    top: 136px !important;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -20804,7 +20808,7 @@ svg {
   .first-nav {
     display: none !important;
   }
-  .home-banner-heading{
+  .home-banner-heading {
     margin-top: -90px;
   }
   /* .contact-container{
@@ -20984,4 +20988,90 @@ svg {
 
 .read-more-button {
   margin-top: 10px !important;
+}
+
+/* featured Category css  */
+.featured-products .controls-left {
+  width: 1% !important;
+  position: absolute !important;
+  margin-top: 12%;
+  left: -1;
+}
+.featured-products .controls-right {
+  width: 1% !important;
+  position: absolute !important;
+  right: 6%;
+  /* top: 19%; */
+  margin-top: 12%;
+}
+
+@media only screen and (max-width: 1399.98px) {
+  .featured-products .controls-left {
+    margin-top: 13%;
+   
+  }
+  .featured-products .controls-right {
+    
+    margin-top: 13%;
+    right: 8%;
+  }
+}
+@media only screen and (max-width: 1299.98px) {
+  .featured-products .controls-left {
+    margin-top: 13%;
+  }
+  .featured-products .controls-right {
+    margin-top: 13%;
+    right: 5%;
+  }
+}
+@media only screen and (max-width: 1199.98px) {
+  .featured-products .controls-left {
+    margin-top: 13%;
+  }
+  .featured-products .controls-right {
+    margin-top: 13%;
+    right: 0;
+    margin-right: 120px;
+  }
+}
+@media only screen and (max-width: 1140.98px) {
+  .featured-products .controls-left {
+    margin-top: 14%;
+  }
+  .featured-products .controls-right {
+    margin-top: 14%;
+    right: 0;
+    margin-right: 80px;
+  }
+}
+@media only screen and (max-width: 1060.98px) {
+  .featured-products .controls-left {
+    margin-top: 14%;
+  }
+  .featured-products .controls-right {
+    margin-top: 14%;
+    right: 0;
+    margin-right: 45px;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .featured-products .controls-left {
+    margin-top: 18%;
+  }
+  .featured-products .controls-right {
+    margin-top: 18%;
+    right: 0;
+    margin-right: 13%;
+  }
+}
+@media only screen and (max-width: 900.98px) {
+  .featured-products .controls-left {
+    margin-top: 19%;
+  }
+  .featured-products .controls-right {
+    margin-top: 19%;
+    right: 0;
+    margin-right: 11%;
+  }
 }
