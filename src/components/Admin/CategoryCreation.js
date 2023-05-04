@@ -63,7 +63,7 @@ const CategoryCreation = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     if (editableData) {
-      let {featuredCategories, ...restData}=editableData;
+      let {featuredCategories,image, ...restData}=editableData;
       {
         featuredCategories
           ? (restData.featuredCategories = featuredCategories)
@@ -113,6 +113,28 @@ const CategoryCreation = (props) => {
     }
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    Setdata({
+      ...data,
+      [name]: value
+    });
+    setFormerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
+
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This is required`;
+    }
+    setFormerror(errors);
+  };
+
 
   return (
     <>
@@ -134,7 +156,8 @@ const CategoryCreation = (props) => {
                           <div className="col-6 p-1">
                             <input
                               type="file"
-                              className="form-control Dashborad-search"
+                              name="image"
+                              className="form-control Dashborad-search  input-div"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
@@ -145,12 +168,15 @@ const CategoryCreation = (props) => {
                             <input
                               type="text"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search"
+                              name="name"
+                              className="form-control Dashborad-search input-div"
                               placeholder="Category Name"
                               defaultValue={editableData ? editableData.name : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <p className="formerror">{formerror.name}</p>
                             <label for="floatingInputValue">Category Name</label>
@@ -172,11 +198,14 @@ const CategoryCreation = (props) => {
                           </div>
                           <div className="col-6 p-1 form-floating">
                           <select
-                              className="form-control Dashborad-search custom-select"
+                              className="form-control Dashborad-search custom-select input-div"
                               value={data.featuredCategories}
+                              name="featuredCategories"
                               onChange={(e) => {
                                 Setdata({ ...data, featuredCategories: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             >
                               <option value="" hidden defaultChecked>
                                 Select Category Type</option>

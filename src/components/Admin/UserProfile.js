@@ -57,7 +57,7 @@ const UserProfile = (props) => {
         {
           await GetUserData();
           setTimeout(()=>{
-            history.push("/AllUsers");
+            history.push("/IAM/"+"AllUsers");
           },1500)
           
         }

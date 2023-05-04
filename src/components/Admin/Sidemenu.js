@@ -251,20 +251,20 @@ const Sidemenu = () => {
             <div
               id="collapsefour"
               className={`accordion-collapse collapse ${pathName.includes(
-                "Configuration"
+                "IAM"
               ) && "show"}`}
               aria-labelledby="headingThree"
               data-bs-parent="#accordionExample"
             >
               <div className="dashboard-accordion-body">
                 <ul className="Configration-List">
-                  <Link to="/AllUsers">
+                  <Link to={"/IAM/"+"AllUsers"}>
                     <li>
                       <AiOutlineUser className="configuration-icons-wrap" />
                       Users
                     </li>
                   </Link>
-                  <Link to="/Roles">
+                  <Link to={"/IAM/"+"Roles"}>
                     {" "}
                     <li>
                       <RiUserSettingsLine className="configuration-icons-wrap" />

@@ -315,7 +315,7 @@ const Header1 = (props) => {
             setLoginModal(true);
             setRegMsg("");
           } else {
-            setRegMsg("Username is already exist");
+            setRegMsg("Username or Email is already exist");
             setTimeout(() => {
               setRegMsg("");
             }, 2000);
@@ -1345,7 +1345,7 @@ const Header1 = (props) => {
                       <div className=" login-div ">
                         <div className="option-item">
                           <div className="cart-btn">
-                            {Userdata == null ? (
+                            {Userdata == null || Userdata==""? (
                               <>
                                 <span
                                   className="sp"
@@ -1356,16 +1356,81 @@ const Header1 = (props) => {
                                   <i className="user-icon bx bx-log-in"></i>
                                 </span>
 
-                                <span
+                                {/* <span
                                   className="Sp1 "
                                   data-bs-toggle="modal"
                                   data-bs-target="#exampleModal"
                                   style={{ cursor: "pointer" }}
-                                ></span>
+                                ></span> */}
                               </>
                             ) : (
                               <>
+                                
+                                <div className="dropdown">
+                              <button
+                                className="btn btn-white btn-sm login-btn user-dropdown-btn"
+                                type="button"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
                                 <i className="user-icon bx bx-user-pin"></i>
+                              </button>
+
+                              <ul
+                                className="dropdown-menu Logout-ul"
+                                aria-labelledby="dropdownMenuButton1"
+                              >
+                                <div>
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-file pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <Link to="/UserOrder">
+                                        <span className="pr-4">Orders</span>
+                                      </Link>
+                                    </li>
+                                  </div>
+                                </div>
+                                <Link to="/Cart">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-cart pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Cart</span>
+                                      {/* <span className="text-danger">item</span> */}
+                                    </li>
+                                  </div>
+                                </Link>
+                                <Link to="/Wishlist">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-heart pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Wishlist</span>
+                                    </li>
+                                  </div>
+                                </Link>
+                                <div className="Logout-div d-flex align-items-center">
+                                  <i className="bx bx-log-out pl-2"></i>{" "}
+                                  <li
+                                    className="dropdown-item Logout-li"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                      logout();
+                                    }}
+                                  >
+                                    <span className="pr-4">Logout</span>
+                                  </li>
+                                </div>
+                              </ul>
+                            </div>
                               </>
                             )}
                           </div>

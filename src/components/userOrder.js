@@ -185,7 +185,7 @@ const UserOrder = () => {
                 <>
                   <div className="category-details-section">
                     <h3 className="all-category-head">Orders </h3>
-                    <div className="all-category-search-wrap">
+                    <div className="all-category-search-wrap search-user-order">
                       <input
                         type="text"
                         onChange={(e) => onChangeHandler(e)}
