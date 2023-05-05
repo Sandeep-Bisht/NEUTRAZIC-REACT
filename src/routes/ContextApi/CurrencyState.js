@@ -7,9 +7,9 @@ const CurrencyState = (props) => {
     const [loginState , setLoginState] = useState("0");
     const [resetForm,setResetForm]=useState("0");
     const [searchedtext,setSearchedText] = useState("");
-    const [searchedtextstate,setSearchedTextState] = useState("0");
+    const [searchlength,setSearchLength] = useState("");
   return (
-    <CurrencyContext.Provider value={{state1,setState1,loginState,setLoginState, resetForm,setResetForm,searchedtext,setSearchedText}}>
+    <CurrencyContext.Provider value={{state1,setState1,loginState,setLoginState, resetForm,setResetForm,searchedtext,setSearchedText,searchlength,setSearchLength}}>
       {props.children}
     </CurrencyContext.Provider>
   );

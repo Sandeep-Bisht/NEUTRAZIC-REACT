@@ -78,7 +78,7 @@ const SingleBlog = (props) => {
       <Header1 />
 
       <div className="container product-div blog-container">
-        <div className="row">
+        {/* <div className="row">
           <div className="col-md-12">
             <div className="Single-Blog-Heading">
               {blog &&
@@ -91,7 +91,7 @@ const SingleBlog = (props) => {
                 })}
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="row">
           <div className="col-md-12">
             {blog &&
