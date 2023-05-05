@@ -616,7 +616,7 @@ const HomePage = () => {
                                   className="image hover-switch-homepage"
                                   style={{ position: "relative" }}
                                 >
-                                  <img
+                                  {/* <img
                                     className="hoverimage"
                                     src={
                                       el.otherImage &&
@@ -624,16 +624,16 @@ const HomePage = () => {
                                       `${baseUrl}/` + el.otherImage[0].path
                                     }
                                     alt=""
-                                  />
+                                  /> */}
                                   <img
                                     className="main-Image"
                                     src={`${baseUrl}/` + el.image[0].path}
                                     alt=""
-                                    style={{
-                                      position: "absolute",
-                                      top: "0",
-                                      left: "0",
-                                    }}
+                                    // style={{
+                                    //   position: "absolute",
+                                    //   top: "0",
+                                    //   left: "0",
+                                    // }}
                                   />
                                 </div>
                                 <Link to={"/SingleProduct/" + el._id}>
@@ -857,7 +857,7 @@ const HomePage = () => {
                                 className="image hover-switch-homepage"
                                 style={{ position: "relative" }}
                               >
-                                <img
+                                {/* <img
                                   className="hoverimage"
                                   src={
                                     el.otherImage &&
@@ -865,16 +865,16 @@ const HomePage = () => {
                                     `${baseUrl}/` + el.otherImage[0].path
                                   }
                                   alt=""
-                                />
+                                /> */}
                                 <img
                                   className="main-Image"
                                   src={`${baseUrl}/` + el.image[0].path}
                                   alt=""
-                                  style={{
-                                    position: "absolute",
-                                    top: "0",
-                                    left: "0",
-                                  }}
+                                  // style={{
+                                  //   position: "absolute",
+                                  //   top: "0",
+                                  //   left: "0",
+                                  // }}
                                 />
                               </div>
                               <Link to={"/SingleProduct/" + el._id}>
@@ -1028,7 +1028,7 @@ const HomePage = () => {
                                 className="image hover-switch-homepage"
                                 style={{ position: "relative" }}
                               >
-                                <img
+                                {/* <img
                                   className="hoverimage"
                                   src={
                                     el.otherImage &&
@@ -1036,16 +1036,16 @@ const HomePage = () => {
                                     `${baseUrl}/` + el.otherImage[0].path
                                   }
                                   alt=""
-                                />
+                                /> */}
                                 <img
                                   className="main-Image"
                                   src={`${baseUrl}/` + el.image[0].path}
                                   alt=""
-                                  style={{
-                                    position: "absolute",
-                                    top: "0",
-                                    left: "0",
-                                  }}
+                                  // style={{
+                                  //   position: "absolute",
+                                  //   top: "0",
+                                  //   left: "0",
+                                  // }}
                                 />
                               </div>
                               <Link to={"/SingleProduct/" + el._id}>

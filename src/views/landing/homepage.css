@@ -19031,21 +19031,21 @@ div#column .figure img {
   height: 170px;
   object-fit: contain;
 }
-div#column .hoverimage {
+/* div#column .hoverimage {
   opacity: 0;
-}
+} */
 div#column .hover-switch-homepage:hover .hoverimage {
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   -webkit-transition: opacity 0.5s ease-in-out;
 }
-div#column .hover-switch-homepage:hover .main-Image {
+/* div#column .hover-switch-homepage:hover .main-Image {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   -webkit-transition: opacity 0.5s ease-in-out;
-}
+} */
 .allproduct-figure:hover .allproduct-figure :not(:hover) {
   opacity: 0.5;
 }
@@ -19144,22 +19144,23 @@ div#columns .figure .price-div .price {
 figure .button {
   font-size: 15px;
   padding: 5px 10px;
-  border: 2px solid rgb(27 151 255 / 33%);
   display: block;
   text-align: center;
-  color: var(--optionalColor);
-  text-decoration: none;
-  border-radius: 0.25rem;
-}
-figure .button:hover {
-  padding: 7px;
   background: linear-gradient(
     90deg,
     rgb(44 160 255 / 53%) 0%,
     rgba(23, 150, 255, 1) 100%
   );
-  border: none;
+  border: 1px solid rgb(27 151 255 / 33%);
   color: #fff;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+figure .button:hover {
+  padding: 5px 10px;
+  border: 1px solid rgb(27 151 255 / 33%);
+  background: none;
+  color: black;
 }
 a.button:hover {
   color: #f1f2f3;
@@ -19232,7 +19233,7 @@ svg {
 .wrapperbtn .btn10 {
   padding: 15px 100px;
   margin: 10px 4px;
-  color: #fff;
+  color:black;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   text-align: center;
@@ -19275,21 +19276,19 @@ svg {
   color: var(--optionalColor);
   letter-spacing: 0.5px;
   text-transform: capitalize;
+  background: linear-gradient( 90deg, rgb(44 160 255 / 53%) 0%, rgba(23, 150, 255, 1) 100% );
+    border: 1px solid rgb(27 151 255 / 33%);
+    color: #fff;
   font-size: 14px;
   font-weight: 400;
   border-radius: 0.25rem;
-  border: 2px solid rgb(27 151 255 / 33%);
 }
 
 .wrapperbtn .btn10:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: none;
-  color: #fff;
-  padding: 10px 40px;
+  background:none;
+  padding: 8px 40px;
+  border: 1px solid rgb(27 151 255 / 33%);
+  color: black;
 }
 
 :where(.css-dev-only-do-not-override-k83k30).ant-btn.ant-btn-sm {
@@ -19758,8 +19757,10 @@ svg {
 }
 
 .btn-div .btn {
-  color: var(--optionalColor);
-  border: 2px solid rgb(27 151 255 / 33%);
+  color: white;
+  background:linear-gradient( 90deg, rgb(44 160 255 / 53%) 0%, rgba(23, 150, 255, 1) 100% );
+  border: 1px solid rgb(27 151 255 / 33%);
+  border: 1px solid rgb(27 151 255 / 33%);
   padding: 8px 30px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
@@ -19768,14 +19769,10 @@ svg {
   border-radius: 2rem;
 }
 .btn-div .btn:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: none;
-  padding: 10px 32px;
-  color: #fff;
+  border: 1px solid rgb(27 151 255 / 33%);
+  background: none;
+  padding: 8px 30px;
+  color: black;
 }
 .btn-div .btn svg {
   height: auto;
@@ -19948,6 +19945,7 @@ svg {
   }
   .Product-name-home {
     font-size: 0.8rem;
+    text-align: center;
   }
 }
 @media only screen and (max-width: 1199px) {
@@ -21008,10 +21006,8 @@ svg {
 @media only screen and (max-width: 1399.98px) {
   .featured-products .controls-left {
     margin-top: 13%;
-   
   }
   .featured-products .controls-right {
-    
     margin-top: 13%;
     right: 8%;
   }

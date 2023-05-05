@@ -240,7 +240,7 @@ const Cart = () => {
                             <tr>
                               <th scope="col">Product Image</th>
                               <th scope="col">Product Name</th>
-                              <th scope="col">Product Price</th>
+                              <th scope="col">Price</th>
                               <th scope="col" className="text-center">
                                 Quantity
                               </th>
