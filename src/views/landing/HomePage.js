@@ -87,7 +87,7 @@ const HomePage = () => {
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
-  }, [loginState]);
+  }, [loginState,isLogin]);
 
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
@@ -171,8 +171,12 @@ const HomePage = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        if (data.data[0] !== undefined) {
+        if (data.error && data.message === "Data Not Found") {
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
+        if (data.data !== undefined) {
           Setwishlist(data.data);
+          console.log(data.data.length,"length of wishlisted after call the wishtlisted");
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }

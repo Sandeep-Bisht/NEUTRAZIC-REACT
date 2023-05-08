@@ -13,6 +13,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import Loader from "react-spinner-loader";
+import AllproductsFilter from "./AllproductsFilter";
 
 var Userdata;
 const AllProducts = (props) => {
@@ -432,6 +433,7 @@ const AllProducts = (props) => {
           <div className="col-12">
             <div className="section-title my-4">
               <h2>All Products</h2>
+              {/* <AllproductsFilter/> */}
             </div>
             {loading ? 
             <Loader

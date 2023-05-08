@@ -46,6 +46,21 @@
   max-width: 26px !important;
   height: 30px;
 }
+.navbar-expand-lg .navbar-nav .nav-header{
+  padding-left: 20px!important;
+  padding-right: 20px;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: #fff;
+  color: #1e144f!important;
+  margin-top: 8px;
+  padding-top: 4px;
+  padding-bottom: 1px;
+}
+
+
+
 
 .icons2 {
   max-width: 19px !important;
@@ -155,7 +170,7 @@
 }
 
 #navbarTogglerDemo03 ul {
-  margin-left: 30px;
+  margin-left: 72px!important;
 }
 .nav-item .nav-heading {
   font-family: "Roboto", sans-serif;
@@ -171,6 +186,10 @@
 }
 .drop-category .category {
   float: left;
+}
+.drop-category .category svg{
+  position: absolute;
+  left: 14px;
 }
 .drop-category .category-head {
   font-size: 16px;
@@ -674,6 +693,7 @@ h3 .read-more-button {
 /* Sidebar Styles */
 
 .sidebar-nav {
+  padding-left: 10px!important;
   position: absolute;
   top: 30px;
   width: 100%;
@@ -937,12 +957,13 @@ body {
   top: 0;
 }
 .login-div2 input[type="text"] {
-  width: auto;
+  width: 200px;
 }
 
 .header-wrapper-left .main-navbar-head {
   display: flex;
   align-items: center;
+  margin-left: 9px;
 }
 
 /* responsive */

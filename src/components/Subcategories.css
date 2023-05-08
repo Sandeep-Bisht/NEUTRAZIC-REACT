@@ -7,6 +7,9 @@
   color: rgba(0,0,0,0.6);
 }
 
+.navbar-expand-lg .navbar-nav .nav-link {
+padding-left: 1.5rem;
+}
 @media only screen and (max-width : 1399px){
   .subcategory-columns  .figure figcaption{
     font-size: 0.7rem !important;
@@ -17,6 +20,9 @@
   }
   .subcategory-price-div  .text-end p{
     font-size: 0.8rem ; 
+  }
+  .back-ground-subcategory-sidebar {
+    width: 225px;
   }
 }
 @media only screen and (max-width : 1024px){

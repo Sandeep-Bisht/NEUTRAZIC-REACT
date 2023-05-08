@@ -197,6 +197,7 @@ const Header1 = (props) => {
   }, [currancy]);
 
   const GetWishlist = async () => {
+    console.log("inside the wishlist")
     let id;
     if (Userdata) {
       id = Userdata._id;
@@ -213,8 +214,11 @@ const Header1 = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        if (data.data[0] !== undefined) {
-          setWishlisted(data.data.length);
+        if (data.error && data.message === "Data Not Found") {
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
+        if (data.data !== undefined) {
+          console.log(data.data.length)
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
@@ -223,6 +227,7 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
+  console.log(wishlisted,"number of wishlisted");
   const currencyHandler = (e) => {
     setCurrency(e.target.value);
     if (currancy === "INR") {
@@ -234,7 +239,7 @@ const Header1 = (props) => {
     cookies.set("CurrencyType", e.target.value, { path: "/" });
   };
   useEffect(() => {
-    if (Userdata === null) {
+    if (Userdata === null || Userdata=="") {
       setLoginState("0");
       setCartItems("");
       setWishlisted("");
@@ -347,10 +352,10 @@ const Header1 = (props) => {
             if (res && res.role === "user") {
               Userdata = res;
               await localStorage.setItem("Userdata", JSON.stringify(res));
-              await CartById();
               $("#loginModalCloseBtn").click();
-
               reset();
+              await GetWishlist();
+              await CartById();
               toast.success("Login successfully", {
                 position: "bottom-right",
                 autoClose: 2000,
@@ -634,6 +639,26 @@ const Header1 = (props) => {
       }
     }
   };
+  
+  $(document).ready(function() {
+    // Get the current URL
+    var currentUrl = window.location.href;
+  
+    // Remove the domain name and trailing slash
+    var currentPath = currentUrl.replace(/^(?:\/\/|[^/]+)*\//, '').replace(/\/$/, '');
+  
+    // Find the link with the same href as the current URL
+    $('.navbar-nav .nav-link').each(function() {
+      var linkHref = $(this).attr('href').replace(/^(?:\/\/|[^/]+)*\//, '').replace(/\/$/, '');
+      if (linkHref === currentPath) {
+        // Remove "active" class from previously active link
+        $('.navbar-nav .nav-link.active').removeClass('active');
+        // Add "active" class to newly active link
+        $(this).addClass('active');
+      }
+    });
+  });
+  
 
   return (
     <>
@@ -1571,7 +1596,7 @@ const Header1 = (props) => {
                       <ul className="navbar-nav me-auto mb-2 mb-lg-0  ml-5">
                         <li className="nav-item">
                           <Link
-                            className="nav-link nav-heading"
+                            className="nav-link nav-heading nav-header"
                             aria-current="page"
                             to="/"
                           >
@@ -1580,7 +1605,7 @@ const Header1 = (props) => {
                         </li>
                         <li className="nav-item">
                           <Link
-                            className="nav-link nav-heading"
+                            className="nav-link nav-heading nav-header"
                             to="/AllProducts"
                           >
                             Shop
@@ -1588,7 +1613,7 @@ const Header1 = (props) => {
                         </li>
                         <li className="nav-item">
                           <Link
-                            className="nav-link nav-heading"
+                            className="nav-link nav-heading nav-header"
                             to="/ContactUs"
                             tabIndex="-1"
                             aria-disabled="true"
@@ -1596,18 +1621,16 @@ const Header1 = (props) => {
                             Contact
                           </Link>
                         </li>
-                        <Link to={"/Blogs"}>
                           <li className="nav-item">
-                            <a
-                              className="nav-link nav-heading"
-                              href="#"
+                            <Link
+                              className="nav-link nav-heading nav-header"
+                              to={"/Blogs"}
                               tabIndex="-1"
                               aria-disabled="true"
                             >
                               Blog
-                            </a>
+                            </Link>
                           </li>
-                        </Link>
                       </ul>
                       <img
                         className="icons2"
