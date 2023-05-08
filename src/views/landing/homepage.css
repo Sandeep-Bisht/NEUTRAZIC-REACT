@@ -18864,9 +18864,14 @@ iframe {
 }
 
 .cosmetic-shop-now {
-  border: 2px solid rgb(27 151 255 / 33%);
+  border: 1px solid rgb(27 151 255 / 33%);
+  background: linear-gradient(
+    90deg,
+    rgb(44 160 255 / 53%) 0%,
+    rgba(23, 150, 255, 1) 100%
+  );
   padding: 4px 20px;
-  color: var(--optionalColor);
+  color: white;
   letter-spacing: 0.5px;
   text-transform: capitalize;
   font-size: 14px;
@@ -18875,14 +18880,10 @@ iframe {
 }
 .nutracuetical-shop-now:hover,
 .cosmetic-shop-now:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  color: #fff;
-  border: none;
-  padding: 6px 22px;
+  background: none;
+  color: black;
+  border: 1px solid rgb(27 151 255 / 33%);
+  padding: 4px 20px;
 }
 
 .categories-section .cat-heading {
@@ -19160,7 +19161,7 @@ figure .button:hover {
   padding: 5px 10px;
   border: 1px solid rgb(27 151 255 / 33%);
   background: none;
-  color: black;
+  color: var(--optionalColor);
 }
 a.button:hover {
   color: #f1f2f3;
@@ -19233,7 +19234,7 @@ svg {
 .wrapperbtn .btn10 {
   padding: 15px 100px;
   margin: 10px 4px;
-  color:black;
+  color: var(--optionalColor);
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   text-align: center;
@@ -19276,19 +19277,23 @@ svg {
   color: var(--optionalColor);
   letter-spacing: 0.5px;
   text-transform: capitalize;
-  background: linear-gradient( 90deg, rgb(44 160 255 / 53%) 0%, rgba(23, 150, 255, 1) 100% );
-    border: 1px solid rgb(27 151 255 / 33%);
-    color: #fff;
+  background: none;
+  border: 1px solid rgb(27 151 255 / 33%);
+  /* color: #fff; */
   font-size: 14px;
   font-weight: 400;
   border-radius: 0.25rem;
 }
 
 .wrapperbtn .btn10:hover {
-  background:none;
   padding: 8px 40px;
+  background: linear-gradient(
+    90deg,
+    rgb(44 160 255 / 53%) 0%,
+    rgba(23, 150, 255, 1) 100%
+  );
   border: 1px solid rgb(27 151 255 / 33%);
-  color: black;
+  color: #fff;
 }
 
 :where(.css-dev-only-do-not-override-k83k30).ant-btn.ant-btn-sm {
@@ -19308,6 +19313,13 @@ svg {
 .Category-div {
   margin-top: 130px !important;
 }
+/* All PRoduct Category-div */
+@media only screen and (max-width: 991.98) {
+  .Category-div {
+    margin-top: 140px !important;
+  }
+}
+/****/
 
 .heart-top:before {
   content: "\ed36";
@@ -19758,7 +19770,11 @@ svg {
 
 .btn-div .btn {
   color: white;
-  background:linear-gradient( 90deg, rgb(44 160 255 / 53%) 0%, rgba(23, 150, 255, 1) 100% );
+  background: linear-gradient(
+    90deg,
+    rgb(44 160 255 / 53%) 0%,
+    rgba(23, 150, 255, 1) 100%
+  );
   border: 1px solid rgb(27 151 255 / 33%);
   border: 1px solid rgb(27 151 255 / 33%);
   padding: 8px 30px;
@@ -19772,7 +19788,7 @@ svg {
   border: 1px solid rgb(27 151 255 / 33%);
   background: none;
   padding: 8px 30px;
-  color: black;
+  color: var(--optionalColor);
 }
 .btn-div .btn svg {
   height: auto;

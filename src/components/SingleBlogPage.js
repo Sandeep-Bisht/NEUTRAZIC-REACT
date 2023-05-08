@@ -22,7 +22,7 @@ const SingleBlog = (props) => {
     otherBlog();
   }, []);
 
-  const ChangeBlog = async (id,title,description) => {
+  const ChangeBlog = async (id, title, description) => {
     await fetch(`${baseUrl}/api/blogs/find_blog_by_slug`, {
       method: "POST",
       headers: {
@@ -36,7 +36,7 @@ const SingleBlog = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setSingleBlog(data.data);
-        history.push(id,title,description);
+        history.push(id, title, description);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -95,18 +95,39 @@ const SingleBlog = (props) => {
         <div className="row">
           <div className="col-md-12">
             {blog &&
-              blog.map((item,ind) => {
+              blog.map((item, ind) => {
                 return (
                   <>
                     <div className="row" key={ind}>
                       <div className="col-md-12">
-                        <img
-                          className="single-blog-image1"
-                          src={
-                            item.featuredImage &&
-                            `${baseUrl}/` + item.featuredImage[0].path
-                          }
-                        ></img>
+                        <div className="singleBlog-box">
+                          <div className="row">
+                            <div className="col-md-4">
+                              <div className="blog-description-box d-flex justify-content-center align-items-center">
+                                <div>
+                                  <div className="blog-title">
+                                    <strong>Title</strong>
+                                    <p> {item.title}</p>
+                                  </div>
+                                  <div className="blog-title mt-4">
+                                    <strong>Description</strong>{" "}
+                                    <p>{item.description}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="col-md-8">
+                              <img
+                                className="single-blog-image1"
+                                src={
+                                  item.featuredImage &&
+                                  `${baseUrl}/` + item.featuredImage[0].path
+                                }
+                              ></img>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div className="col-md-12">
                         <div
@@ -124,7 +145,7 @@ const SingleBlog = (props) => {
           <div className="blog-page-section-2">
             <div className="row">
               <div className="col-md-12">
-                <div className="latest-blogs-section">
+                <div className="latest-blogs-section single-blog-section">
                   <h2>Other Blogs</h2>
                   <div className="row">
                     {data &&
@@ -133,20 +154,31 @@ const SingleBlog = (props) => {
                         .map((item, ind) => {
                           return (
                             <div className="col-md-6 col-lg-3" key={ind}>
-                              <div className="card" onClick={() => ChangeBlog(item.slug)}>
+                              <div
+                                className="card"
+                                onClick={() => ChangeBlog(item.slug)}
+                              >
                                 <img
                                   src={
                                     item.featuredImage &&
                                     `${baseUrl}/` + item.featuredImage[0].path
                                   }
-                                  
                                   className="card-img-top singleblog-card-image"
                                   alt="blog-image"
                                 />
-                                <div className="card-body single-blog-page-text" style = {{cursor:"pointer"}}>
-                                  <h6 className="blog-title-text">{item.title}</h6>
-                                  <p className="card-text" >{item.description.slice(0,110)}</p>
-                                  <span className="Read-more-singleblog text-primary">Read More</span>
+                                <div
+                                  className="card-body single-blog-page-text"
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <h6 className="blog-title-text">
+                                    {item.title}
+                                  </h6>
+                                  <p className="card-text">
+                                    {item.description.slice(0, 110)}
+                                  </p>
+                                  <span className="Read-more-singleblog text-primary">
+                                    Read More
+                                  </span>
                                 </div>
                               </div>
                             </div>

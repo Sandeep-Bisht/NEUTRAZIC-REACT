@@ -15,6 +15,7 @@ import {
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
+import { AiFillCaretDown } from "react-icons/ai";
 
 const ShippedOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -154,7 +155,7 @@ const ShippedOrder = () => {
             }}
           >
             <a>
-              Shipped <DownOutlined />
+              Shipped <AiFillCaretDown className="icon-dropdown-orders" />
             </a>
           </Dropdown>
         </Space>

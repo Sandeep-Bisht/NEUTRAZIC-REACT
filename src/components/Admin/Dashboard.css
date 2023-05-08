@@ -673,7 +673,7 @@ font-family: 'Roboto', sans-serif;
 }
 .nav__link:hover
 {
-  background: #e0f3ff !important;
+  /* background: #e0f3ff !important; */
   border-radius: 5px;
   color:#1e144f;
 }
@@ -1009,4 +1009,7 @@ font-family: 'Roboto', sans-serif;
 .category-select-div{
   margin-bottom: 0!important;
   padding-left: 12px!important;
+}
+.icon-dropdown-orders{
+  height: 16px !important;
 }

@@ -34,13 +34,13 @@ function Blogs() {
 
       <section className="blog-page">
         <div className="container m-auto">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-12">
               <div className="Single-Blog-Heading">
                 <h1 className="blog-heading1">Our Blogs</h1>
               </div>
             </div>
-          </div>
+          </div> */}
           {
                 loading ?
                 <Loader

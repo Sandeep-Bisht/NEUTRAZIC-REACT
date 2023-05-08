@@ -1,4 +1,4 @@
-.table .width-adjust-of-td
+/* .table .width-adjust-of-td
 {
     width: 30%;
 }
@@ -46,4 +46,91 @@
     .button-order{
     font-size: 11px !important;
     }
+} */
+.orders-section {
+  margin-top: 150px;
+  margin-bottom: 45px;
+}
+.orders-user-page {
+  border-radius: 10px;
+  min-height: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.order-details-image {
+  height: 80%;
+  padding: 20px;
+  object-fit: fill;
+}
+.order-details-image .order-main-Image {
+  height: 100%;
+  width: 100%;
+}
+.order-header {
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+}
+
+.p-accordion-header-text {
+  width: 100%;
+}
+.p-accordion
+  .p-accordion-header:not(.p-disabled)
+  .p-accordion-header-link:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.Order-page:nth-child(even) {
+  background: rgb(42, 150, 255, 0.3) !important;
+}
+.Order-page:nth-child(odd) {
+  background: rgb(42, 150, 255, 0.1) !important;
+}
+.p-accordion .p-accordion-header .p-accordion-header-link {
+  background: none !important;
+}
+
+.order-status-heading {
+  /* color: rgba(13, 110, 253,0.5); */
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.para-order-text {
+  font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+  /* text-shadow: 0 0 1px #ebe6e6, 0 0 1px #0000FF; */
+}
+.para-text {
+  font-size: 13px !important;
+  color: #007185;
+}
+.Re-order-button {
+  font-size: 15px;
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    rgb(44 160 255 / 53%) 0%,
+    rgba(23, 150, 255, 1) 100%
+  );
+  border: 1px solid rgb(27 151 255 / 33%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+.Re-order-button:hover {
+  padding: 5px 10px;
+  border: 1px solid rgb(27 151 255 / 33%);
+  background: none;
+  color: var(--optionalColor);
+  font-weight: bold;
 }
