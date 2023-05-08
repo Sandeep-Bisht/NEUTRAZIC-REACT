@@ -28,6 +28,7 @@ const DeliveredOrder = () => {
         let arr = [];
         for (let item of data.data) {
           if (item.orderStatus == "Delivered") {
+            item.createdAt=item.createdAt.slice(0,10);
             arr.push(item);
           }
         }
@@ -54,14 +55,23 @@ const DeliveredOrder = () => {
 
   const columns = [
     { title: "Order No", dataIndex: "order_no", key: "order_no" },
-    { title: "Status", dataIndex: "orderStatus", key: "stauts" },
+    {
+      title: "Order Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
+    {
+      title: "Shipping Date",
+      dataIndex: "shippingDate",
+      key: "shippingDate",
+    },
     {
       title: "Delivered Date",
-      dataIndex: "delivery_date",
-      key: "delivery_date",
+      dataIndex: "delivery_time",
+      key: "delivery_time",
     },
     { title: "Paid Amount", dataIndex: "totalamount", key: "totalamount" },
-
+    { title: "Status", dataIndex: "orderStatus", key: "stauts" },
     {
       title: "View Order",
       key: "action",
@@ -101,7 +111,7 @@ const DeliveredOrder = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <table className="table">
+          <table className="table order-details">
             <thead>
               <tr>
                 <th scope="col">Image</th>
@@ -121,12 +131,12 @@ const DeliveredOrder = () => {
                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image}`}
+                              src={`${baseUrl}/${item.order[0].image}`}
                             ></img>
                           </div>
                         </td>
-                        <td >{item.name}</td>
-                        <td>{item.singleprice}</td>
+                        <td className="width-adjust-of-td">{item.order[0].name}</td>
+                        <td className='width-adjust-of-td'>{item.order[0].singleprice}</td>
                       </tr>
                     </>
                   );
