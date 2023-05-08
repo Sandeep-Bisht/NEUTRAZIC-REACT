@@ -570,7 +570,7 @@ const Productform = (props) => {
                               onBlur={handleBlur}
                             />
                             <label for="floatingform">
-                              Price after Discount
+                              MRP after Discount
                             </label>
                             <p className="formerror">{formErrors.inrDiscount}</p>
                           </div>
@@ -613,7 +613,7 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingform">Discount In Dollar</label>
+                            <label for="floatingform">MRP after Discount In Dollar</label>
                             <p className="formerror">{formErrors.dollerDiscount}</p>
                           </div>
                           <div className="col-6 p-1">

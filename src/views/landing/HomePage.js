@@ -371,7 +371,7 @@ const HomePage = () => {
         });
     }
   };
-
+  
   const AddtoCart = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
