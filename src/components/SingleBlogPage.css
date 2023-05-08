@@ -55,7 +55,7 @@
 }
 @media only screen and (max-width: 1399.98px) {
   .blog-container {
-    margin-top: 45px !important;
+    margin-top: 60px !important;
   }
   .blog-page-section-2 .card .single-blog-page-text {
     height: 210px !important;
@@ -93,7 +93,7 @@
     margin-top: 45px !important;
   }
   .Single-Blog-Heading .blog-heading1 {
-    font-size: 12px !important;
+    font-size: 20px !important;
   }
   .Single-Blog-Heading .Blog-para {
     font-size: 11px !important;
@@ -112,7 +112,7 @@
 }
 @media only screen and (max-width: 767px) {
   .blog-container {
-    margin-top: 26px !important;
+    margin-top: 40px !important;
   }
   .blog-page-section-2 .card .single-blog-page-text {
     height: 140px !important;
@@ -120,7 +120,7 @@
 }
 @media only screen and (max-width: 575.98px) {
   .blog-container {
-    margin-top: 25px !important;
+    margin-top: 40px !important;
   }
   .Single-Blog-Heading .blog-heading1 {
     font-size: 1.4rem;

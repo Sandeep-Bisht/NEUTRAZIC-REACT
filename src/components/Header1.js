@@ -371,18 +371,18 @@ const Header1 = (props) => {
               $("#loginModalCloseBtn").click();
               history.push("/Dashboard");
             } else if (res.success === 403) {
-              setMsg(res.error);
+              setMsg("No user associated with this account");
               setTimeout(() => {
                 setMsg("");
               }, 2000);
             }
           } else if (res.success === 403) {
-            setMsg(res.error);
+            setMsg("No user associated with this account");
             setTimeout(() => {
               setMsg("");
             }, 2000);
           } else {
-            setMsg(res.error);
+            setMsg("No user associated with this account");
             setTimeout(() => {
               setMsg("");
             }, 2000);
@@ -611,7 +611,7 @@ const Header1 = (props) => {
           setVerifyUserOtp(createOtp.data.otp.otp);
         }
       } else {
-        setForgetMsg("This Email is not registered yet");
+        setForgetMsg("No user associated with this email");
         setTimeout(() => {
           setForgetMsg("");
         }, 2000);
