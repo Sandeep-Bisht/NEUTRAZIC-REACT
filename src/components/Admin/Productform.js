@@ -353,7 +353,7 @@ const Productform = (props) => {
                           </div>
 
                           <div className="col-6 p-1 required">
-                          <div className="input-div">
+                          <div className="">
                             {editableData?<p className="category-select-div">Category</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select "
@@ -379,7 +379,7 @@ const Productform = (props) => {
                             <p className="formerror">{formErrors.category}</p>
                           </div>
                           <div className="col-6 p-1 required">
-                          <div className="input-div">
+                          <div className="">
                             {editableData?<p className="category-select-div">SubCategory</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
@@ -409,7 +409,7 @@ const Productform = (props) => {
 
                           {Userdata.role === "superAdmin" ? (
                             <div className="col-6 p-1 required">
-                              <div className="input-div">
+                              <div className="">
                             {editableData?<p className="category-select-div">Vendor</p>:""}
                               <select
                                 className="form-control Dashborad-search custom-select"
@@ -446,7 +446,7 @@ const Productform = (props) => {
                           )}
 
                           <div className="col-6 p-1 required">
-                          <div className="input-div">
+                          <div className="">
                             {editableData?<p className="category-select-div">Manufacturer</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
@@ -480,7 +480,7 @@ const Productform = (props) => {
                           </div>
 
                           <div className="col-6 p-1 required">
-                          <div className="input-div">
+                          <div className="">
                             {editableData?<p className="category-select-div">warehouse</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select"
@@ -617,7 +617,7 @@ const Productform = (props) => {
                             <p className="formerror">{formErrors.dollerDiscount}</p>
                           </div>
                           <div className="col-6 p-1">
-                          <div className="input-div">
+                          <div className="">
                             {editableData?<p className="category-select-div">Product Type</p>:""}
                             <select
                               className="form-control Dashborad-search custom-select input-div"

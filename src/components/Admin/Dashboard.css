@@ -235,6 +235,13 @@ iframe{
   justify-content: space-between;
   overflow: hidden;
 }
+.order-details .width-adjust-of-image 
+{
+  width: 60%!important;
+}
+.order-details .width-adjust-of-td{
+  font-size: 20px!important;
+}
 
 .nav__logo, .nav__link{
   display: grid;

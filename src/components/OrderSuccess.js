@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import "../components/OderSuccess.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import Footer from "./Footer";
 import Header1 from "./Header1";
@@ -17,18 +17,28 @@ function OrderSuccess() {
   const [cartItems, setCartItems] = useState("");
   let [userCart, setUserCart] = useState([]);
   let dispatch = useDispatch()
+  let location=useLocation();
+  let history=useHistory();
+  console.log(location,"helo location")
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ActualSubtotal = JSON.parse(localStorage.getItem("ActualSubtotal"));
     Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"));
-    Subtotal = JSON.parse(localStorage.getItem("Subtotal"));
+    Subtotal = JSON.parse(localStorage.getItem("Subtotal"));  
   }, []);
 
   useEffect(()=> {
     CartById();
   },[])
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(location.pathname="/orderSuccess"){
+        history.push("/");
+      }
+    },[5000]); 
+  },[])
 
   const CartById = async () => {
     if (!Userdata == []) {

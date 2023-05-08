@@ -3,6 +3,8 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Table,
   Space,
@@ -35,6 +37,7 @@ const InProgressOrder = () => {
         let arr = [];
         for (let item of data.data) {
           if (item.orderStatus == "In-Progress") {
+            item.createdAt=item.createdAt.slice(0,10);
             arr.push(item);
           }
         }
@@ -58,7 +61,22 @@ const InProgressOrder = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        console.log(data.data,"check order status")
         GetOrders();
+        if(order.orderStatus==="Packed")
+        {
+          toast.success("Order move to Packing", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        }
+        else{
+          toast.success("Order move to Cancel", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        }
+       
       })
       .catch((err) => {
         console.log(err, "error");
@@ -84,6 +102,11 @@ const InProgressOrder = () => {
       title: "Transaction Id",
       dataIndex: "transaction_id",
       key: "transaction_id",
+    },
+    {
+      title: "Order Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
     },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     {
@@ -163,7 +186,7 @@ const InProgressOrder = () => {
                   onOk={handleOk}
                   onCancel={handleCancel}
                 >
-                  <table className="table">
+                  <table className="table order-details">
                     <thead>
                       <tr>
                         <th scope="col">Image</th>
@@ -185,12 +208,12 @@ const InProgressOrder = () => {
                                         imageHandler(item.productid)
                                       }
                                       style={{ cursor: "pointer" }}
-                                      src={`${baseUrl}/${item.image}`}
+                                      src={`${baseUrl}/${item.order[0].image}`}
                                     ></img>
                                   </div>
                                 </td>
-                                <td>{item.name}</td>
-                                <td>{item.singleprice}</td>
+                                <td className="width-adjust-of-td">{item.order[0].name}</td>
+                                <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
                               </tr>
                             </>
                           );
@@ -199,6 +222,7 @@ const InProgressOrder = () => {
                   </table>
                 </Modal>
               </div>
+              <ToastContainer />
             
       {/* end modal */}
       <section id="body-pd">

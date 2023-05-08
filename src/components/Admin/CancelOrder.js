@@ -97,7 +97,7 @@ const ShippedOrder = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <table className="table">
+          <table className="table order-details">
             <thead>
               <tr>
                 <th scope="col">Image</th>
@@ -117,12 +117,12 @@ const ShippedOrder = () => {
                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image}`}
+                              src={`${baseUrl}/${item.order[0].image}`}
                             ></img>
                           </div>
                         </td>
-                        <td >{item.name}</td>
-                        <td>{item.singleprice}</td>
+                        <td className='width-adjust-of-td'>{item.order[0].name}</td>
+                        <td className='width-adjust-of-td'>{item.order[0].singleprice}</td>
                       </tr>
                     </>
                   );
