@@ -1,12 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 import { useState } from "react";
 import Header1 from "./Header1";
 import Footer from "./Footer";
 import Baseline from "./Baseline";
 import { baseUrl } from "../utils/services";
 import "../components/SingleBlogPage.css";
+import { BsArrowRight } from "react-icons/bs";
+import Link from "antd/es/typography/Link";
+
 
 const SingleBlog = (props) => {
   const blogSlug = props.match.params.slug;
@@ -15,6 +18,7 @@ const SingleBlog = (props) => {
   const [data, setData] = useState();
   const [titleforheader, setTitleforHeader] = useState();
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -78,20 +82,13 @@ const SingleBlog = (props) => {
       <Header1 />
 
       <div className="container product-div blog-container">
-        {/* <div className="row">
-          <div className="col-md-12">
-            <div className="Single-Blog-Heading">
-              {blog &&
-                blog.map((item, ind) => {
-                  return (
-                    <>
-                      <h1 className="blog-heading1" key={ind}>{item.title}</h1>
-                    </>
-                  );
-                })}
-            </div>
-          </div>
-        </div> */}
+      
+          <span className="nav-text p-3">
+            <Link to="/" className="nav-text">
+              Home
+            </Link>
+            {location.pathname}
+          </span>
         <div className="row">
           <div className="col-md-12">
             {blog &&
@@ -99,41 +96,71 @@ const SingleBlog = (props) => {
                 return (
                   <>
                     <div className="row" key={ind}>
-                      <div className="col-md-12">
-                        <div className="singleBlog-box">
-                          <div className="row">
-                            <div className="col-md-4">
-                              <div className="blog-description-box d-flex justify-content-center align-items-center">
-                                <div>
-                                  <div className="blog-title">
-                                    <strong>Title</strong>
-                                    <p> {item.title}</p>
-                                  </div>
-                                  <div className="blog-title mt-4">
-                                    <strong>Description</strong>{" "}
-                                    <p>{item.description}</p>
+                      <div className="single-blog-container">
+                        <div className="col-md-12">
+                          <div className="singleBlog-box">
+                            <div className="row">
+                              {/* <div className="col-md-1"></div> */}
+                              <div className="col-md-6 px-0">
+                                <div className="single-blog-image-box">
+                                  <img
+                                    className="single-blog-image1"
+                                    src={
+                                      item.featuredImage &&
+                                      `${baseUrl}/` + item.featuredImage[0].path
+                                    }
+                                  ></img>
+                                </div>
+                              </div>
+                              <div className="col-md-5">
+                                <div className="blog-description-box pt-2 px-3">
+                                  <div>
+                                    <div className="blog-title">
+                                      <p> {item.title}</p>
+                                    </div>
+                                    <div className="blog-title-description">
+                                      <p>{item.description}</p>
+                                    </div>
+
+                                    <div className="social-links-blog">
+                                      <div className="social-link-box">
+                                        <a
+                                          href="https://www.facebook.com/Nutrazik"
+                                          target="_blank"
+                                          className="social-links-blog-page"
+                                        >
+                                          <i className="social-links bx bxl-facebook "></i>
+                                        </a>
+                                        <a
+                                          href="https://www.instagram.com/nutrazik/"
+                                          target="_blank"
+                                          className="social-links-blog-page"
+                                        >
+                                          <i className="social-links bx bxl-instagram "></i>
+                                        </a>
+                                        <a
+                                          href="https://twitter.com/nutrazik"
+                                          target="_blank"
+                                          className="social-links-blog-page"
+                                        >
+                                          <i className="social-links bx bxl-twitter "></i>
+                                        </a>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-
-                            <div className="col-md-8">
-                              <img
-                                className="single-blog-image1"
-                                src={
-                                  item.featuredImage &&
-                                  `${baseUrl}/` + item.featuredImage[0].path
-                                }
-                              ></img>
-                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-md-12">
-                        <div
-                          className="single-blog-page-header"
-                          dangerouslySetInnerHTML={{ __html: item.content }}
-                        />
+                        <div className="col-md-1"></div>
+
+                        <div className="col-md-12">
+                          <div
+                            className="single-blog-page-header"
+                            dangerouslySetInnerHTML={{ __html: item.content }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </>
@@ -142,7 +169,7 @@ const SingleBlog = (props) => {
           </div>
         </div>
         <div className="row">
-          <div className="blog-page-section-2">
+          <div className="blog-page-section-2 ">
             <div className="row">
               <div className="col-md-12">
                 <div className="latest-blogs-section single-blog-section">
@@ -176,8 +203,9 @@ const SingleBlog = (props) => {
                                   <p className="card-text">
                                     {item.description.slice(0, 110)}
                                   </p>
-                                  <span className="Read-more-singleblog text-primary">
+                                  <span className="Read-more-singleblog">
                                     Read More
+                                    {/* <BsArrowRight style={{height:"20px"}}/> */}
                                   </span>
                                 </div>
                               </div>
