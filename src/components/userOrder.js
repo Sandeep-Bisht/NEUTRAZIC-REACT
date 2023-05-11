@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Baseline from "../components/Baseline";
 import { baseUrl } from "../utils/services";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { useRef } from "react";
 import "../components/userOrder.css";
 // import "../views/landing/homepage.css";
+// import ProgressBar from "./ProgressBar";
 
 import { Accordion, AccordionTab } from "primereact/accordion";
 import product from "../Images/abayakasthaa-image.png";
@@ -26,6 +28,9 @@ import Header1 from "../components/Header1";
 import Footer from "../components/Footer";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import { green } from "@mui/material/colors";
+import { AiOutlineCheck } from "react-icons/ai";
+import { TbTruckDelivery } from "react-icons/tb";
 
 var Userdata = "";
 const UserOrder = () => {
@@ -37,11 +42,14 @@ const UserOrder = () => {
   const [PendingOrders, setPendingOrders] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const [orderstatus, setOrderStatus] = useState();
+  const location = useLocation();
 
   const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
+
     window.scrollTo(0, 0);
   }, []);
 
@@ -68,11 +76,20 @@ const UserOrder = () => {
         console.log(err, "errors");
       });
   };
-  console.log(OrderDetails, "Checking for map");
+  console.log(OrderDetails, "This is setting order status");
   return (
     <>
       <Header1 />
+
       <section className="orders-section">
+        <div className="container">
+          <span className="nav-text">
+            <Link to="/" className="nav-text">
+              Home
+            </Link>
+            {location.pathname}
+          </span>
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -81,80 +98,161 @@ const UserOrder = () => {
                 OrderDetails.map((el, ind) => {
                   return (
                     <div className="Order-page">
-                      <Accordion activeIndex={el._id}>
+                      <Accordion>
                         <AccordionTab
                           header={
                             <div className="container">
-                              <div className="row">
-                                <div className="orders-Header d-flex justify-content-between">
-                                  <div className="col-md-12">
+                              <div className="user-order-header">
+                                <div className="row">
+                                  <div className="col-md-6 col-12">
                                     <div className="row">
-                                      <div className="col-md-3 d-flex justify-content-center">
-                                        <div>
-                                          <div className="orderno-heading">
-                                            <h6 className="order-status-heading">
-                                              Order Number
-                                            </h6>
+                                      <div className="col-md-12 col-12">
+                                        <div className="progress-box-div">
+                                          <div class="progress-div">
+                                            {el.orderStatus !== "Cancel" ? (
+                                              <div class="progress-box">
+                                                <div class="progress">
+                                                  {/* {el.orderStatus ===
+                                                    "In-Progress" && (
+                                                    <div className="progress-color active33"></div>
+                                                  )} */}
+                                                  {el.orderStatus ===
+                                                    "Shipped" && (
+                                                    <div className="progress-color active35"></div>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                    "Delivered" && (
+                                                    <div className="progress-color active36"></div>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                    "Packed" && (
+                                                    <div className="progress-color active34"></div>
+                                                  )}
+
+                                                  {/* Circle */}
+                                                  {el.orderStatus ===
+                                                    "In-Progress" && (
+                                                    <div className="circle1 active11">
+                                                      <AiOutlineCheck className="Check-icon" />
+                                                    </div>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                    "Packed" && (
+                                                    <div className="circle1 active12">
+                                                      <AiOutlineCheck className="Check-icon" />
+                                                    </div>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                    "Shipped" && (
+                                                    <div className="circle1 active13">
+                                                      <TbTruckDelivery className="Check-icon-shipped" />
+                                                    </div>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                    "Delivered" && (
+                                                    <div className="circle1 active14">
+                                                      <AiOutlineCheck className="Check-icon" />
+                                                    </div>
+                                                  )}
+                                                  {/* <div class="circle1 active14"></div> */}
+                                                </div>
+                                                <div className="progress-text">
+                                                  {el.orderStatus ===
+                                                  "In-Progress" ? (
+                                                    <span className="status-Highligted">
+                                                      In Progress
+                                                    </span>
+                                                  ) : (
+                                                    <span>In Progress</span>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                  "Packed" ? (
+                                                    <span className="status-Highligted">
+                                                      Packed
+                                                    </span>
+                                                  ) : (
+                                                    <span>Packed</span>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                  "Shipped" ? (
+                                                    <span className="status-Highligted">
+                                                      Shipped
+                                                    </span>
+                                                  ) : (
+                                                    <span>Shipped</span>
+                                                  )}
+                                                  {el.orderStatus ===
+                                                  "Delivered" ? (
+                                                    <span className="status-Highligted-delivered">
+                                                      Delivered
+                                                    </span>
+                                                  ) : (
+                                                    <span>Delivered</span>
+                                                  )}
+
+                                                  {/* <span>Shipped</span>
+                                                  <span>Delivered</span> */}
+                                                </div>
+                                              </div>
+                                            ) : (
+                                              <>
+                                                <div class="progress-box">
+                                                  <div class="progress">
+                                                    <div className="progress-color active37"></div>
+                                                    <div class="progress-text text-center">
+                                                      <span className="text-danger mt-4">
+                                                        Order Cancelled
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </>
+                                            )}
                                           </div>
-                                          <p className="para-order-text">
-                                            {el.order_no}
-                                          </p>
                                         </div>
                                       </div>
-                                      <div className="col-md-3 d-flex justify-content-center">
-                                        <div>
-                                          <div className="orderno-heading">
-                                            <h6 className="order-status-heading">
-                                              Total Amount
-                                            </h6>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-6 col-12">
+                                    <div className="row">
+                                      <div className="col-md-12">
+                                        <div className="row">
+                                          <div className="col-md-4 col-12 d-flex justify-content-center">
+                                            <div>
+                                              <div className="orderno-heading">
+                                                <h6 className="order-status-heading">
+                                                  Order Number
+                                                </h6>
+                                              </div>
+                                              <p className="para-order-text">
+                                                {el.order_no}
+                                              </p>
+                                            </div>
                                           </div>
-                                          <p className="para-order-text">
-                                            ₹{el.totalamount}
-                                          </p>
-                                        </div>
-                                      </div>
-                                      <div className="col-md-3 d-flex justify-content-center">
-                                        <div>
-                                          <div className="orderno-heading">
-                                            <h6 className="order-status-heading">
-                                              Order Status
-                                            </h6>
+                                          <div className="col-md-4 col-12 d-flex justify-content-center">
+                                            <div>
+                                              <div className="orderno-heading">
+                                                <h6 className="order-status-heading">
+                                                  Total Amount
+                                                </h6>
+                                              </div>
+                                              <p className="para-order-text">
+                                                ₹{el.totalamount}
+                                              </p>
+                                            </div>
                                           </div>
-                                          {el.orderStatus === "Delivered" ? (
-                                            <p
-                                              className="para-text"
-                                              style={{ color: "#4cd07d" }}
-                                            >
-                                              {el.orderStatus === "Cancel"}
-                                            </p>
-                                          ) : (
-                                            <p
-                                              className="para-text"
-                                              style={{
-                                                color:
-                                                  "var(--toastify-color-error)",
-                                              }}
-                                            >
-                                              {el.orderStatus}
-                                            </p>
-                                          )}
-                                        </div>
-                                      </div>
-                                      <div className="col-md-3 d-flex justify-content-center">
-                                        <div>
-                                          <div className="orderno-heading">
-                                            <h6 className="order-status-heading">
-                                              Order Date
-                                            </h6>
+                                          <div className="col-md-4 col-12 d-flex justify-content-center">
+                                            <div>
+                                              <div className="orderno-heading">
+                                                <h6 className="order-status-heading">
+                                                  Order Date
+                                                </h6>
+                                              </div>
+                                              <p className="para-text">
+                                                {el.createdAt.slice(0, 10)}
+                                              </p>
+                                            </div>
                                           </div>
-                                          <p
-                                            className="para-text"
-                                            style={{
-                                              color: "rgb(76, 208, 125)",
-                                            }}
-                                          >
-                                            {el.createdAt.slice(0, 10)}
-                                          </p>
                                         </div>
                                       </div>
                                     </div>
@@ -173,34 +271,72 @@ const UserOrder = () => {
                               return (
                                 <>
                                   <div className="row" key={ind}>
-                                    <div className="col-md-12">
-                                      <div className="row">
-                                        <div className="col-md-2 d-flex  align-items-center">
-                                          <div className="order-details-image">
-                                            <img
-                                              src={`${baseUrl}/${item.image}`}
-                                              className="order-main-Image"
-                                            ></img>
+                                    <div className="see-user-order">
+                                      <div className="col-md-12">
+                                        <div className="row">
+                                          <div className="col-md-2">
+                                            <div className="order-details-image">
+                                              <img
+                                                src={`${baseUrl}/${item.image}`}
+                                                className="order-main-Image"
+                                              ></img>
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div className="col-md-4 d-flex  align-items-center">
-                                          <div>
-                                          <div className="Price-box">
-                                            <h4 className="userorder-product">{item.name}</h4>
-                                          </div>
-                                          {/* <div className="Price-box">
+                                          <div className="col-md-3">
+                                            <div className="detail-box-order">
+                                              <div>
+                                                <div className="Price-box">
+                                                  <h6 className="userorder-product">
+                                                    {item.name}
+                                                  </h6>
+                                                </div>
+                                                <div className="Price-box">
+                                                  <h6 className="userorder-product">
+                                                    <span>Qty:</span>
+                                                    <sapn
+                                                      style={{
+                                                        color: "#28a745",
+                                                      }}
+                                                    >
+                                                      {item.quantity}
+                                                    </sapn>
+                                                  </h6>
+                                                </div>
+                                                {/* <div className="Price-box">
                                             <h6>₹{item.singleprice}</h6>
                                           </div> */}
-                                          <div className="Price-box">
-                                            <Link to = {"/SingleProduct/"+item.productid}>
-                                            <button className="Re-order-button">Buy it again</button>
-                                            </Link>
+                                                <div className="Price-box"></div>
+                                              </div>
+                                            </div>
                                           </div>
+                                          <div className="col-md-5">
+                                            <div className="description-box">
+                                              <div>
+                                                <p>{item.description}</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div className="col-md-2">
+                                            <div className="button-box">
+                                              <div>
+                                                <Link
+                                                  to={
+                                                    "/SingleProduct/" +
+                                                    item.productid
+                                                  }
+                                                >
+                                                  <button className="Re-order-button">
+                                                    Buy it again
+                                                  </button>
+                                                </Link>
+                                              </div>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
+
                                   <hr />
                                 </>
                               );
@@ -220,6 +356,3 @@ const UserOrder = () => {
 };
 
 export default UserOrder;
-
-
-
