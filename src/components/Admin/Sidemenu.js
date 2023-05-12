@@ -54,7 +54,7 @@ const Sidemenu = () => {
               <div className="d-flex align-items-center justify-content-center div1">
                 <BsCartPlus className="nav__icon" />
                 <button
-                  className="accordion-button"
+                  className="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
