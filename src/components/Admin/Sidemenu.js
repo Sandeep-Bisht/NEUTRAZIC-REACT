@@ -47,29 +47,30 @@ const Sidemenu = () => {
           <RxDashboard className="nav__icon" />
           <span className="nav__name">Dashboard</span>
         </Link>
+        <div className="accordion" id="accordionExample">
         <div className="nav__link active">
           <div className="accordion-item">
-            <h2 className="accordion-header" id="headingThree">
+            <h2 className="accordion-header" id="headingOne">
               <div className="d-flex align-items-center justify-content-center div1">
                 <BsCartPlus className="nav__icon" />
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded={`${pathName.includes("NewOrder")}`}
-                  aria-controls="collapseTwo"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
                 >
                   <span className="pl-3 nav__name">Orders</span>
                 </button>
               </div>
             </h2>
             <div
-              id="collapseTwo"
+              id="collapseOne"
               className={`accordion-collapse collapse ${pathName.includes(
                 "NewOrder"
               ) && "show"}`}
-              aria-labelledby="headingThree"
+              aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
               <div className="dashboard-accordion-body">
@@ -126,27 +127,27 @@ const Sidemenu = () => {
             <div className="nav__link active">
               <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
-                  <h2 className="accordion-header" id="headingThree">
+                  <h2 className="accordion-header" id="headingTwo">
                     <div className="d-flex align-items-center justify-content-center div1">
                       <GrConfigure className="nav__icon" />
                       <button
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree"
-                        aria-expanded={`${pathName.includes("Configuration")}`}
-                        aria-controls="collapseThree"
+                        data-bs-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
                       >
                         <span className="pl-3 nav__name">Configuration</span>
                       </button>
                     </div>
                   </h2>
                   <div
-                    id="collapseThree"
+                    id="collapseTwo"
                     className={`accordion-collapse collapse ${pathName.includes(
                       "Configuration"
                     ) && "show"}`}
-                    aria-labelledby="headingThree"
+                    aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample"
                   >
                     <div className="dashboard-accordion-body">
@@ -233,23 +234,23 @@ const Sidemenu = () => {
 
         <div className="nav__link active">
           <div className="accordion-item">
-            <h2 className="accordion-header" id="headingfour">
+            <h2 className="accordion-header" id="headingThree">
               <div className="d-flex align-items-center justify-content-center div1">
                 <BsCartPlus className="nav__icon" />
                 <button
                   className="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapsefour"
-                  aria-expanded={`${pathName.includes("IAM")}`}
-                  aria-controls="collapsefour"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
                 >
                   <span className="pl-3 nav__name">IAM</span>
                 </button>
               </div>
             </h2>
             <div
-              id="collapsefour"
+              id="collapseThree"
               className={`accordion-collapse collapse ${pathName.includes(
                 "IAM"
               ) && "show"}`}
@@ -284,14 +285,16 @@ const Sidemenu = () => {
             </Link>
           </div>
         </div>
-
+        </div>
         <div className="nav__link" onClick={() => logout()}>
           <BiLogOut className="nav__icon" />
           <span className="nav__name" style={{ cursor: "pointer" }}>
             Log Out
           </span>
         </div>
+        
       </div>
+      
       <ToastContainer />
     </>
   );
