@@ -1,42 +1,82 @@
 .cart-area {
   margin-top: 110px !important;
 }
-/* .ant-popover .ant-popover-inner {
-    padding: 27px!important;
-}
-.ant-popconfirm .ant-popconfirm-description {
-    margin-inline-start: 0px!important;
-    font-size: 17px!important;
-}
-.ant-popconfirm .ant-popconfirm-message >.ant-popconfirm-message-icon .anticon {
-    padding-top: 0px!important;
-}
-.ant-popconfirm .ant-popconfirm-inner-content {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-.ant-popconfirm .ant-popconfirm-message {
-    margin-bottom: 10px;
-}
-.anticon svg{
-    height: 21px!important;
-    color: red;
-    opacity: 0.7;
-}
-.ant-popconfirm .ant-popconfirm-buttons {
-    position: relative;
-    top: 10px;
-    left: 161px;
-}
-.ant-popconfirm .ant-popconfirm-message-title-only {
-    font-size: 15px;
-} */
+
 .anticon svg{
   height: 21px!important;
   color: red;
   opacity: 0.7;
 }
+.card-body .card-text{
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.card-body .unit-amount{
+  font-weight: 500;
+}
+.card-body .input-counter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-body .card-middle-part{
+  align-items: center;
+}
+
+.card-body .card-description{
+  font-size: 15px;
+  line-height: 23px;
+}
+.card-body .sold-by{
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+.cart-body{
+  height: 220px;
+}
+.card-body .cart-image{
+  max-height: 150px;
+}
+
+.card-body .manufacturer-name{
+  font-size: 15px;
+}
+.card-body .plus-minus-btn{
+  border: 1px solid #dedede;
+  font-weight: 600;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dedede;
+}
+.card-body .input-counter .plus-minus-btn:hover{
+  background-color: #007bff;
+  color: #fff;
+}
+
+.card-body .quantity-div{
+  border: 1px solid #dedede;
+    font-weight: 500;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    background-color: #f3eaea;
+}
+
+.card-for-cart{
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+}
+
+.description-link:hover{
+  cursor: pointer;;
+}
+
+
 /* Cart Responsive Media Queries*/
 @media only screen and (max-width: 1399px) {
   .cart-totals {

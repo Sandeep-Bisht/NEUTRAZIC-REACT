@@ -11731,10 +11731,7 @@ textarea.form-control {
   transition: var(--transition);
   font-size: 22px;
 }
-.cart-table .bx-minus,
-.bx-plus {
-  color: black;
-}
+
 /* .cart-table .bx-minus:before {
   content: "\eaed";
   background: none;
