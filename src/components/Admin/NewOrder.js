@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import { DownOutlined } from '@ant-design/icons';
 import { Table,  Space, Dropdown, Modal, Button,} from "antd";
 import { ToastContainer, toast } from "react-toastify";
+import { AiFillCaretDown } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
 
 const NewOrder = () => {
@@ -140,7 +141,7 @@ const NewOrder = () => {
                   key: "2",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item, "In-Progress")}>
-                      Move to In-progress
+                      Move to In-progress 
                     </a>
                   ),
                 },
@@ -148,7 +149,7 @@ const NewOrder = () => {
             }}
           >
             <a>
-              Pending <DownOutlined />
+              Pending <AiFillCaretDown className="icon-dropdown-orders" />
             </a>
           </Dropdown>
         </Space>

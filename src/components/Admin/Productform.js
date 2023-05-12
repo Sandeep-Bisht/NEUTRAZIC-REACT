@@ -298,14 +298,14 @@ const Productform = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Product Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1 form-floating">
-                          {/* <div className="input-div"> */}
+                          <div className="col-6 p-2 form-floating">
+                          <div className="">
+                          <span className="category-select-div">Product Name</span>
                             <input
                               type="text"
                               id="floatingform"
                               name="name"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="Product Name"
+                              className="form-control Dashborad-search"
                               value={data.name}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
@@ -313,15 +313,15 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            {/* </div> */}
+                            </div>
                             <p className="formerror">{formErrors.name}</p>
-                            <label for="floatingform">Product Name</label>
                           </div>
-                          <div className="col-6 p-1">
-                          <div className="input-div">
+                          <div className="col-6 p-2">
+                          <div className="">
+                          <span className="category-select-div">Image</span>
                             <input
                               type="file"
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               name="image"
                               onChange={(e) => {
                                 Setdata({
@@ -334,11 +334,12 @@ const Productform = (props) => {
                             <p className="formerror">{formErrors.image}</p>
                           </div>
 
-                          <div className="col-6 p-1">
-                          <div className="input-div">
+                          <div className="col-6 p-2">
+                          <div className="">
+                          <span className="category-select-div">Other Image</span>
                             <input
                               type="file"
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               multiple
                               name="otherImage"
                               onChange={(e) => {
@@ -352,9 +353,9 @@ const Productform = (props) => {
                             <p className="formerror">{formErrors.otherImage}</p>
                           </div>
 
-                          <div className="col-6 p-1 required">
+                          <div className="col-6 p-2 required">
                           <div className="">
-                            {editableData?<p className="category-select-div">Category</p>:""}
+                            <span className="category-select-div">Category</span>
                             <select
                               className="form-control Dashborad-search custom-select "
                               value={data.category}
@@ -378,9 +379,9 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.category}</p>
                           </div>
-                          <div className="col-6 p-1 required">
-                          <div className="">
-                            {editableData?<p className="category-select-div">SubCategory</p>:""}
+                          <div className="col-6 p-2 required">
+                          <div className="mt-2">
+                            <span className="category-select-div">SubCategory</span>
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.subcategory}
@@ -408,9 +409,9 @@ const Productform = (props) => {
                           </div>
 
                           {Userdata.role === "superAdmin" ? (
-                            <div className="col-6 p-1 required">
-                              <div className="">
-                            {editableData?<p className="category-select-div">Vendor</p>:""}
+                            <div className="col-6 p-2 required">
+                              <div className="mt-2">
+                            <span className="category-select-div">Vendor</span>
                               <select
                                 className="form-control Dashborad-search custom-select"
                                 value={data.subcategory}
@@ -434,20 +435,21 @@ const Productform = (props) => {
                               </div>
                             </div>
                           ) : (
-                            <div className="col-6 p-1 form-floating required">
+                            <div className="col-6 p-2 form-floating required">
+                              <div className="mt-2">
                               <input
                                 type="text"
                                 id="floatingform"
                                 className="form-control Dashborad-search input-div"
-                                placeholder="Product Name"
                                 value={Userdata && Userdata.username}
                               />
                             </div>
+                            </div>
                           )}
 
-                          <div className="col-6 p-1 required">
-                          <div className="">
-                            {editableData?<p className="category-select-div">Manufacturer</p>:""}
+                          <div className="col-6 p-2 required">
+                          <div className="mt-2">
+                            <span className="category-select-div">Manufacturer</span>
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.manufacturer}
@@ -479,9 +481,9 @@ const Productform = (props) => {
                             </p>
                           </div>
 
-                          <div className="col-6 p-1 required">
-                          <div className="">
-                            {editableData?<p className="category-select-div">warehouse</p>:""}
+                          <div className="col-6 p-2 required">
+                          <div className="mt-2">
+                            <span className="category-select-div">warehouse</span>
                             <select
                               className="form-control Dashborad-search custom-select"
                               value={data.warehouse}
@@ -510,14 +512,17 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.warehouse}</p>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">
+                              Quantity of Product
+                            </span>
                             <input
                               type="number"
                               id="floatingform"
                               name="quantity"
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               defaultValue={data.quantity}
-                              placeholder="Quantity of Product"
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
@@ -527,18 +532,18 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingform">
-                              Quantity of Product
-                            </label>
+                            </div>
+                            
                             <p className="formerror">{formErrors.quantity}</p>
                           </div>
-                          <div className="col-3 p-1 form-floating">
+                          <div className="col-3 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">MRP In Rupees</span>
                             <input
                               type="number"
                               id="floatingform"
                               name="inrMrp"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="MRP In Rupees"
+                              className="form-control Dashborad-search"
                               defaultValue={data.inrMrp}
                               onChange={(e) => {
                                 Setdata({
@@ -549,17 +554,18 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingform">MRP In Rupees</label>
+                            </div>
                             <p className="formerror">{formErrors.inrMrp}</p>
                           </div>
-                          <div className="col-3 p-1 form-floating">
+                          <div className="col-3 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">MRP after Discount</span>
                             <input
                               type="number"
                               id="floatingform"
                               name="inrDiscount"
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               defaultValue={data.inrDiscount}
-                              placeholder="Price after discount In Rupees"
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
@@ -569,18 +575,17 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingform">
-                              MRP after Discount
-                            </label>
+                            </div>
                             <p className="formerror">{formErrors.inrDiscount}</p>
                           </div>
-                          <div className="col-3 p-1 form-floating">
+                          <div className="col-3 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">MRP In Dollar</span>
                             <input
                               type="number"
                               id="floatingform"
                               name="dollerMrp"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="MRP In Doller"
+                              className="form-control Dashborad-search"
                               defaultValue={data.dollerMrp}
                               onChange={(e) => {
                                 Setdata({
@@ -591,19 +596,20 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingform">MRP In Dollar</label>
+                            </div>
                             <p className="formerror">{formErrors.dollerMrp}</p>
 
                           </div>
 
-                          <div className="col-3 p-1 form-floating">
+                          <div className="col-3 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">MRP after Discount In Dollar</span>
                             <input
                               type="number"
                               id="floatingform"
                               name="dollerDiscount"
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               defaultValue={data.dollerDiscount}
-                              placeholder="Price after discount In Dollers"
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
@@ -613,14 +619,14 @@ const Productform = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingform">MRP after Discount In Dollar</label>
+                            </div>
                             <p className="formerror">{formErrors.dollerDiscount}</p>
                           </div>
-                          <div className="col-6 p-1">
-                          <div className="">
-                            {editableData?<p className="category-select-div">Product Type</p>:""}
+                          <div className="col-6 p-2">
+                          <div className="mt-2">
+                            <span className="category-select-div">Product Type</span>
                             <select
-                              className="form-control Dashborad-search custom-select input-div"
+                              className="form-control Dashborad-search custom-select"
                               value={data.type}
                               name="type"
                               onChange={(e) => {
@@ -638,11 +644,12 @@ const Productform = (props) => {
                             </select>
                             </div>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">Product Description</span>
                             <textarea
-                              className="form-control h-100"
+                              className="form-control textarea h-100"
                               id="floatingform"
-                              placeholder="Product Description"
                               defaultValue={data.description}
                               rows="3"
                               onChange={(e) => {
@@ -652,14 +659,12 @@ const Productform = (props) => {
                                 });
                               }}
                             ></textarea>
-                            <label for="formfloating">
-                              Product Description
-                            </label>
+                            </div>
                           </div>
 
                           <div className="row">
                             {editableData ? (
-                              <div className="col-6 p-1">
+                              <div className="col-6 p-2">
                                 <button
                                   className="btn btn-registration"
                                   onClick={(e) => UpdateProduct(e, data._id)}
@@ -668,7 +673,7 @@ const Productform = (props) => {
                                 </button>
                               </div>
                             ) : (
-                              <div className="col-6 p-1">
+                              <div className="col-6 p-2">
                                 <button
                                   className="btn btn-primary submit"
                                   type="submit"

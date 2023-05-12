@@ -419,6 +419,7 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
+  console.log(props.func,"props of header");
   const searchData = (e) => {
     if (props.func) {
       props.func(e);
@@ -1084,7 +1085,7 @@ const Header1 = (props) => {
                       <div className="col-12">
                         <div className="form-group ">
                           <label>
-                            Otp<span>*</span>
+                            OTP<span>*</span>
                           </label>
                           <input
                             type="number"
@@ -1237,9 +1238,7 @@ const Header1 = (props) => {
                         Value={searcheditem}
                         onChange={(e) => {
                           setSearch(e.target.value.toLowerCase());
-                          
-                          setSearchedText(e.target.value);
-                        
+                          // setSearchedText(e.target.value);
                         }}
                         onKeyDown={(e) => {
                           if (e.key === "Enter" && search.length) {
