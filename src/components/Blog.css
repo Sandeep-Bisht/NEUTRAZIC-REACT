@@ -164,6 +164,9 @@
   height: 200px !important;
   /* padding: 15px; */
 }
+.loader-spin{
+  text-align: center;
+}
 
 /* Media Query For Blog Page  */
 @media only screen and (max-width: 1399px) {
