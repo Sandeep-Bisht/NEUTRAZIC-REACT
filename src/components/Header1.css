@@ -384,10 +384,8 @@
   height: 150px;
   width: 100%;
   object-fit: contain;
-  background-color: #f2f2f2;
   padding: 10px;
   cursor: pointer;
-  border: 1px solid #c7c7c769;
 }
 .wishlist-btn {
   color: rgb(0, 0, 0, 0.5);
