@@ -1576,7 +1576,7 @@ const Header1 = (props) => {
               </div>
               <div className="col-lg-10 col-11 p-0">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                  <div className="container-fluid mb-1">
+                  <div className="container-fluid">
                     <button
                       className="navbar-toggler"
                       type="button"
