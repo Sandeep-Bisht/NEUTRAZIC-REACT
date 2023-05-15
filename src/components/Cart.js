@@ -294,7 +294,7 @@ const Cart = () => {
                                   <div className="card-middle-part col-lg-6 col-md-6 col-6">
                                     <div>
                                     <Link to={"/SingleProduct/" + el.productid}>
-                                      <div className="card-text">{el.name}</div>
+                                      <div className="cart-text">{el.name}</div>
                                       </Link>
                                     <div className="mt-2 description-link" onClick={()=>history.push("/SingleProduct/" + el.productid)}>
                                       <p className="card-description">

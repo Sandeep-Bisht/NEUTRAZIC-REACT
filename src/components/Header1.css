@@ -891,6 +891,9 @@ body {
 .accordion-button::after {
   background-image: none;
 }
+.Home-navbar .contact:hover{
+color: white !important;
+}
 
 /* End Media Query Responsive for Desktop */
 

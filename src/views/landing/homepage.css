@@ -19832,8 +19832,7 @@ svg {
   /* border-bottom: 1px solid black !important; */
 }
 
-
-.logo-main-div{
+.logo-main-div {
   margin-left: -16px;
 }
 .back-ground-subcategory-sidebar {
@@ -19941,13 +19940,17 @@ svg {
     font-size: 0.8rem;
     text-align: center;
   }
+
+  .homepage-Blog-card .card-text{
+    font-size: 14px !important;
+  }
 }
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 1199.98px) {
   .single-contact-info-box {
     height: 260px !important;
   }
   .blog-section .blog-page-section-2 .card .card-body {
-    height: 180px !important;
+    height: 220px !important;
   }
   .blog-section .displayed-text {
     font-size: 14px !important;
@@ -19961,6 +19964,9 @@ svg {
   }
   .first-nav {
     top: 136px !important;
+  }
+  .homepage-Blog-card .card-text{
+    font-size: 13px !important;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -20083,7 +20089,10 @@ svg {
     line-height: 1.7;
   }
   .blog-section .blog-page-section-2 .card .card-body {
-    height: 150px !important;
+    height: 190px !important;
+  }
+  .homepage-Blog-card .card-text{
+    font-size: 14px !important;
   }
   /* End blog css */
 
@@ -20295,6 +20304,9 @@ svg {
   }
   .home-banner {
     margin-top: 60px;
+  }
+  .blog-section .blog-page-section-2 .card .card-body {
+    height: 190px !important;
   }
 }
 
@@ -21065,8 +21077,16 @@ svg {
   }
 }
 
-
 .category-text p {
   text-align: justify;
   hyphens: auto;
+}
+
+/* Homepage Blog css */
+.homepage-Blog-card .card-text {
+  font-size: 15px;
+  text-align: justify;
+  hyphens: auto;
+  word-spacing: -0.5px;
+  color: rgba(0, 0, 0, 0.5) ;
 }

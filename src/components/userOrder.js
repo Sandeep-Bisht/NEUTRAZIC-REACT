@@ -103,160 +103,146 @@ const UserOrder = () => {
                         <AccordionTab
                           header={
                             <div className="container">
-                              <div className="user-order-header">
-                                <div className="row">
-                                  <div className="col-md-6 col-12">
-                                    <div className="row">
-                                      <div className="col-md-12 col-12">
-                                        <div className="progress-box-div">
-                                          <div class="progress-div">
-                                            {el.orderStatus !== "Cancel" ? (
-                                              <div class="progress-box">
-                                                <div class="progress">
-                                                  
-                                                  {el.orderStatus ===
-                                                    "Shipped" && (
-                                                    <div className="progress-color active35"></div>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                    "Delivered" && (
-                                                    <div className="progress-color active36"></div>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                    "Packed" && (
-                                                    <div className="progress-color active34"></div>
-                                                  )}
+                              <div className="row">
+                                <div className="col-md-6">
+                                  <div className="row">
+                                    <div className="col-md-12 col-12">
+                                      <div class="progress-div">
+                                        {el.orderStatus !== "Cancel" ? (
+                                          <div class="progress-box">
+                                            <div class="progress">
+                                              {el.orderStatus === "Shipped" && (
+                                                <div className="progress-color active35"></div>
+                                              )}
+                                              {el.orderStatus ===
+                                                "Delivered" && (
+                                                <div className="progress-color active36"></div>
+                                              )}
+                                              {el.orderStatus === "Packed" && (
+                                                <div className="progress-color active34"></div>
+                                              )}
 
-                                                  {/* Circle */}
-                                                  {el.orderStatus ===
-                                                    "In-Progress" && (
-                                                    <div className="circle1 active11">
-                                                      <AiOutlineCheck className="Check-icon" />
-                                                    </div>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                    "Packed" && (
-                                                    <div className="circle1 active12">
-                                                      <AiOutlineCheck className="Check-icon" />
-                                                    </div>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                    "Shipped" && (
-                                                    <div className="circle1 active13">
-                                                      <TbTruckDelivery className="Check-icon-shipped" />
-                                                    </div>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                    "Delivered" && (
-                                                    <div className="circle1 active14">
-                                                      <AiOutlineCheck className="Check-icon" />
-                                                    </div>
-                                                  )}
+                                              {/* Circle */}
+                                              {el.orderStatus ===
+                                                "In-Progress" && (
+                                                <div className="circle1 active11">
+                                                  <AiOutlineCheck className="Check-icon" />
                                                 </div>
-                                                <div className="progress-text">
-                                                  {el.orderStatus ===
-                                                  "In-Progress" ? (
-                                                    <span className="status-Highligted">
-                                                      In Progress
-                                                    </span>
-                                                  ) : (
-                                                    <span>In Progress</span>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                  "Packed" ? (
-                                                    <span className="status-Highligted">
-                                                      Packed
-                                                    </span>
-                                                  ) : (
-                                                    <span>Packed</span>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                  "Shipped" ? (
-                                                    <div className="shipped-status">
-                                                      <span className="status-Highligted">
-                                                        Shipped
-                                                      </span>
+                                              )}
+                                              {el.orderStatus === "Packed" && (
+                                                <div className="circle1 active12">
+                                                  <AiOutlineCheck className="Check-icon" />
+                                                </div>
+                                              )}
+                                              {el.orderStatus === "Shipped" && (
+                                                <div className="circle1 active13">
+                                                  <TbTruckDelivery className="Check-icon-shipped" />
+                                                </div>
+                                              )}
+                                              {el.orderStatus ===
+                                                "Delivered" && (
+                                                <div className="circle1 active14">
+                                                  <AiOutlineCheck className="Check-icon" />
+                                                </div>
+                                              )}
+                                            </div>
+                                            <div className="progress-text">
+                                              {el.orderStatus ===
+                                              "In-Progress" ? (
+                                                <span className="status-Highligted">
+                                                  In Progress
+                                                </span>
+                                              ) : (
+                                                <span>In Progress</span>
+                                              )}
+                                              {el.orderStatus === "Packed" ? (
+                                                <span className="status-Highligted">
+                                                  Packed
+                                                </span>
+                                              ) : (
+                                                <span>Packed</span>
+                                              )}
+                                              {el.orderStatus === "Shipped" ? (
+                                                <div className="shipped-status">
+                                                  <span className="status-Highligted">
+                                                    Shipped
+                                                  </span>
 
-                                                      <p className="shipped-time">
-                                                        Expected Delivery by{" "}
-                                                        <br />
-                                                        {el.delivery_time}
-                                                      </p>
-                                                    </div>
-                                                  ) : (
-                                                    <span>Shipped</span>
-                                                  )}
-                                                  {el.orderStatus ===
-                                                  "Delivered" ? (
-                                                    <span className="status-Highligted-delivered">
-                                                      Delivered
-                                                    </span>
-                                                  ) : (
-                                                    <span>Delivered</span>
-                                                  )}
+                                                  <p className="shipped-time">
+                                                    Expected Delivery by <br />
+                                                    {el.delivery_time}
+                                                  </p>
+                                                </div>
+                                              ) : (
+                                                <span>Shipped</span>
+                                              )}
+                                              {el.orderStatus ===
+                                              "Delivered" ? (
+                                                <span className="status-Highligted-delivered">
+                                                  Delivered
+                                                </span>
+                                              ) : (
+                                                <span>Delivered</span>
+                                              )}
 
-                                                  {/* <span>Shipped</span>
+                                              {/* <span>Shipped</span>
                                                   <span>Delivered</span> */}
+                                            </div>
+                                          </div>
+                                        ) : (
+                                          <>
+                                            <div class="progress-box">
+                                              <div class="progress">
+                                                <div className="progress-color active37"></div>
+                                                <div class="progress-text">
+                                                  <span className="text-danger">
+                                                    Order Cancelled
+                                                  </span>
                                                 </div>
                                               </div>
-                                            ) : (
-                                              <>
-                                                <div class="progress-box">
-                                                  <div class="progress">
-                                                    <div className="progress-color active37"></div>
-                                                    <div class="progress-text text-center">
-                                                      <span className="text-danger mt-4">
-                                                        Order Cancelled
-                                                      </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </>
-                                            )}
-                                          </div>
-                                        </div>
+                                            </div>
+                                          </>
+                                        )}
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="col-md-6 col-12">
-                                    <div className="row">
-                                      <div className="col-md-12">
-                                        <div className="row">
-                                          <div className="col-md-4 col-12 d-flex justify-content-center">
-                                            <div>
-                                              <div className="orderno-heading">
-                                                <h6 className="order-status-heading">
-                                                  Order Number
-                                                </h6>
-                                              </div>
-                                              <p className="para-order-text">
-                                                {el.order_no}
-                                              </p>
+                                </div>
+                                <div className="col-md-6">
+                                  <div className="row">
+                                    <div className="col-md-12">
+                                      <div className="row">
+                                        <div className="Right-order-content">
+                                          <div className="col-md-4 col-4">
+                                            <div className="orderno-heading">
+                                              <h6 className="order-status-heading">
+                                                Order Number
+                                              </h6>
                                             </div>
+                                            <p className="para-order-text">
+                                              {el.order_no}
+                                            </p>
                                           </div>
-                                          <div className="col-md-4 col-12 d-flex justify-content-center">
-                                            <div>
-                                              <div className="orderno-heading">
-                                                <h6 className="order-status-heading">
-                                                  Total Amount
-                                                </h6>
-                                              </div>
-                                              <p className="para-order-text">
-                                                ₹{el.totalamount}
-                                              </p>
+
+                                          <div className="col-md-4 col-4 px-0">
+                                            <div className="orderno-heading">
+                                              <h6 className="order-status-heading">
+                                                Total Amount
+                                              </h6>
                                             </div>
+                                            <p className="para-order-text">
+                                              ₹{el.totalamount}
+                                            </p>
                                           </div>
-                                          <div className="col-md-4 col-12 d-flex justify-content-center">
-                                            <div>
-                                              <div className="orderno-heading">
-                                                <h6 className="order-status-heading">
-                                                  Order Date
-                                                </h6>
-                                              </div>
-                                              <p className="para-text">
-                                                {el.createdAt.slice(0, 10)}
-                                              </p>
+
+                                          <div className="col-md-4 col-4 px-0">
+                                            <div className="orderno-heading">
+                                              <h6 className="order-status-heading">
+                                                Order Date
+                                              </h6>
                                             </div>
+                                            <p className="para-text">
+                                              {el.createdAt.slice(0, 10)}
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
