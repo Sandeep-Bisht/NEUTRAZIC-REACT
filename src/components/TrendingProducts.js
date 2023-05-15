@@ -524,13 +524,13 @@ const TrengingProduct = (props) => {
                   );
                 })}
               </div>
-              <div className="wrapperbtn pt-0">
+              {/* <div className="wrapperbtn pt-0">
                 <Link to="/AllProducts">
                   <button type="button" className="btn10">
                     Show All
                   </button>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

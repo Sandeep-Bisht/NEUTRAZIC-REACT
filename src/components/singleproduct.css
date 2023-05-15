@@ -10,7 +10,7 @@ i {
   cursor: pointer;
 }
 .product-div {
-  padding-top: 80px;
+  padding-top: 122px;
 }
 
 .first-nav {
@@ -1552,6 +1552,11 @@ left: 0; */
 @media only screen and (max-width: 1399px) {
   .relate-products .related span {
     font-size: 60px;
+  }
+}
+@media only screen and (max-width: 1199.98px) {
+  .single-product-figure figcaption{
+    height: 25px !important;
   }
 }
 @media only screen and (max-width: 1024px) {

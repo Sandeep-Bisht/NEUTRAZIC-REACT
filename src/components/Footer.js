@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/services";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { SocialIcon } from 'react-social-icons';
 
 var Userdata = "";
 const Footer = () => {
@@ -61,7 +62,7 @@ const Footer = () => {
        email:data.email,
       }
       )
-      if(response && response.success===200)
+      if(response && response.data.success===200)
       {
         setMessage(response.data.message);
         setInterval(function(){
@@ -122,12 +123,12 @@ const Footer = () => {
                         href="https://www.facebook.com/Nutrazik"
                         target="_blank"
                       >
-                        <i className="bx bxl-facebook-square"></i>
+                      <SocialIcon className="social-react-icons" network="facebook" bgColor="#4682B4"/>
                       </a>
                     </li>
                     <li>
                       <a href="https://twitter.com/nutrazik" target="_blank">
-                        <i className="bx bxl-twitter"></i>
+                      <SocialIcon className="social-react-icons" network="twitter" bgColor="#00BFFF"/>
                       </a>
                     </li>
                     <li>
@@ -135,7 +136,7 @@ const Footer = () => {
                         href="https://www.instagram.com/nutrazik/"
                         target="_blank"
                       >
-                        <i className="bx bxl-instagram-alt"></i>
+                      <SocialIcon className="social-react-icons" network="instagram" bgColor="#DB7093"/>
                       </a>
                     </li>
                     <li>
@@ -143,7 +144,7 @@ const Footer = () => {
                         href="https://www.linkedin.com/company/70941207/admin/"
                         target="_blank"
                       >
-                        <i className="bx bxl-linkedin-square"></i>
+                      <SocialIcon className="social-react-icons" network="linkedin" bgColor="#4682B4"/>
                       </a>
                     </li>
                     <li>
@@ -151,7 +152,7 @@ const Footer = () => {
                         href="https://in.pinterest.com/nutrazik/"
                         target="_blank"
                       >
-                        <i className="bx bxl-pinterest"></i>
+                      <SocialIcon className="social-react-icons" network="pinterest" bgColor="#DC143C"/>
                       </a>
                     </li>
                   </ul>
@@ -247,8 +248,8 @@ const Footer = () => {
                         Please enter Valid email Address
                       </p>
                     )}
-                    <p style={{color:"red"}}>{message}</p>
-                    <p style={{color:"red"}}>{msg}</p>
+                    <p className="sendSubscribeLink">{message}</p>
+                    <p className="sendSubscribeError">{msg}</p>
                     <div className="align-items-center">
                         <button type="submit" className="default-btn">
                           Subscribe Now

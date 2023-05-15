@@ -7,6 +7,9 @@ import { BiSearchAlt } from "react-icons/bi";
 import {useHistory} from "react-router-dom";
 import { DownOutlined } from '@ant-design/icons';
 import { Table,  Space, Dropdown, Modal, Button,} from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import { AiFillCaretDown } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -28,7 +31,9 @@ const NewOrder = () => {
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
+          console.log(item,"here is order items")
           if (item.orderStatus == "Pending") {
+            item.createdAt=item.createdAt.slice(0,10);
             arr.push(item);
           }
         }
@@ -53,13 +58,25 @@ const NewOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
+        if(order.orderStatus==="In-Progress")
+        {
+          toast.success("Order move to In Progress", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        }
+        else{
+          toast.success("Order move to Cancel", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        }
+        
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-
-
 
   const onChangeHandler = (e) => {
     setSearchVal(e.target.value);
@@ -94,6 +111,11 @@ const NewOrder = () => {
       dataIndex: "transaction_id",
       key: "transaction_id",
     },
+    {
+      title: "Order Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     {
       title: "Payment Status",
@@ -119,7 +141,7 @@ const NewOrder = () => {
                   key: "2",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item, "In-Progress")}>
-                      Move to In-progress
+                      Move to In-progress 
                     </a>
                   ),
                 },
@@ -127,7 +149,7 @@ const NewOrder = () => {
             }}
           >
             <a>
-              Pending <DownOutlined />
+              Pending <AiFillCaretDown className="icon-dropdown-orders" />
             </a>
           </Dropdown>
         </Space>
@@ -159,7 +181,7 @@ const NewOrder = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <table className="table">
+          <table className="table order-details">
             <thead>
               <tr>
                 <th scope="col">Image</th>
@@ -179,12 +201,12 @@ const NewOrder = () => {
                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image}`}
+                              src={`${baseUrl}/${item.order[0].image}`}
                             ></img>
                           </div>
                         </td>
-                        <td>{item.name}</td>
-                        <td>{item.singleprice}</td>
+                        <td className="width-adjust-of-td">{item.order[0].name}</td>
+                        <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
                       </tr>
                     </>
                   );
@@ -193,6 +215,7 @@ const NewOrder = () => {
           </table>
         </Modal>
       </div>
+      <ToastContainer />
 
       {/* end modal */}
       <section id="body-pd">
@@ -235,6 +258,7 @@ const NewOrder = () => {
           </div>
         </div>
       </section>
+     
     </>
   );
 };

@@ -1,49 +1,24 @@
 .singleblog-card-image {
   height: 210px !important;
 }
-.blog-title-text {
-  color: rgba(0, 0, 0, 0.9);
-  font-size: 16px;
+
+.Read-more-singleblog {
+  color: rgba(0, 0, 0);
+  font-weight: 700;
+  font-size: 12px;
 }
-.Read-more-singleblog{
-  color: #1b97ff;
-    font-weight: 700;
-}
-/* .blog-page-section-2 .single-blog-page-text{
-  overflow: auto;
-} */
-/* ::-webkit-scrollbar-thumb {
-  background-color: #2a96ff;
-} */
-/* .Single-Blog-Heading h1{
-    font-size: 2rem;
-} */
+
 .blog-page-section-2 .card .single-blog-page-text {
   height: 200px !important;
   padding: 15px;
 }
 .blog-container {
-  margin-top: 50px !important;
+  margin-top: 30px !important;
 }
 .single-blog-image1 {
-  margin-top: 20px;
-  height: 460px;
+  height: 350px;
   width: 100%;
-  object-fit: cover;
-}
-.Single-Blog-Heading {
-  background-color: rgba(30, 20, 79);
-  padding: 2rem;
-  width: 100%;
-  color: #fff;
-}
-.Single-Blog-Heading .Blog-para,
-.blog-heading1 {
-  color: white !important;
-  letter-spacing: 0.1rem;
-}
-.Single-Blog-Heading .blog-heading1 {
-  font-size: 2rem;
+  object-fit: fill;
 }
 
 .single-blog-page-text .card-text {
@@ -52,10 +27,106 @@
   hyphens: auto;
   -webkit-hyphens: auto;
   word-spacing: -0.05em;
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+.single-blog-page-header {
+  margin-top: 50px;
+}
+
+.blog-description-box .blog-title p {
+  font-size: 29px;
+  color: #1e144f;
+  font-weight: 500;
+}
+.singleBlog-box {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.16), 0 0px 1px rgba(0, 0, 0, 0.23);
+}
+.blog-description-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.single-blog-page-header {
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(241, 241, 241, 0.1);
+}
+.single-blog-page-header p {
+  font-size: 16px;
+  text-align: justify;
+  font-weight: 400;
+  line-height: none;
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
+  color: var(--optionalColor);
+}
+.single-blog-page-header ol li span {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--optionalColor);
+}
+.single-blog-section {
+  margin-top: 40px;
+}
+.social-links-blog {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 10%;
+}
+.social-links-blog i {
+  color: white;
+  font-size: 25px;
+}
+.single-blog-container {
+  box-shadow: 0px 0px 10px whitesmoke;
+  padding: 20px;
+}
+.social-links-blog i:hover {
+  color: #4169e1;
+  transition: color 0.5s ease-in-out;
+}
+
+.blog-title-description p {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: justify;
+  hyphens: auto;
+  margin-top: 30px;
+}
+.social-link-box {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.social-links-blog-page {
+  height: 30px;
+  width: 30px;
+  background-color: rgba(30, 20, 79, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  transition: box-shadow 0.6s ease-in-out;
+}
+.social-react-icons {
+  border-radius: 50%;
+  height: 30px !important;
+  width: 30px !important;
 }
 @media only screen and (max-width: 1399.98px) {
   .blog-container {
-    margin-top: 45px !important;
+    margin-top: 60px !important;
   }
   .blog-page-section-2 .card .single-blog-page-text {
     height: 210px !important;
@@ -93,7 +164,7 @@
     margin-top: 45px !important;
   }
   .Single-Blog-Heading .blog-heading1 {
-    font-size: 12px !important;
+    font-size: 20px !important;
   }
   .Single-Blog-Heading .Blog-para {
     font-size: 11px !important;
@@ -112,7 +183,7 @@
 }
 @media only screen and (max-width: 767px) {
   .blog-container {
-    margin-top: 26px !important;
+    margin-top: 40px !important;
   }
   .blog-page-section-2 .card .single-blog-page-text {
     height: 140px !important;
@@ -120,7 +191,7 @@
 }
 @media only screen and (max-width: 575.98px) {
   .blog-container {
-    margin-top: 25px !important;
+    margin-top: 40px !important;
   }
   .Single-Blog-Heading .blog-heading1 {
     font-size: 1.4rem;

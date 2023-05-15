@@ -101,6 +101,9 @@ const SubCategoryCreation = (props) => {
 
   const UpdateSubCategory = async (e, _id) => {
     e.preventDefault();
+    const errors = ValidationFrom(data);
+    Setformerror(errors);
+    if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("name", data.name);
@@ -117,8 +120,30 @@ const SubCategoryCreation = (props) => {
         history.push("Configuration/"+"AllSubCategoriesDetails");
       }, 1500);
     }
+  }
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    Setdata({
+      ...data,
+      [name]: value
+    });
+    Setformerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
+
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This is required`;
+    }
+    Setformerror(errors);
+  };
 
   return (
     <>
@@ -137,27 +162,36 @@ const SubCategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>SubCategory Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-1 ">
+                            <div className="input-div">
                             <input
                               type="file"
-                              className="form-control Dashborad-search"
+                              name="image"
+                              className="form-control Dashborad-search input-div"
                               placeholder="SubCategory Name "
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
                               }}
                             />
+                            </div>
+                           
                             <p className="formerror">{formerror.image}</p>
                           </div>
                           <div className="col-6 p-1">
+                          <div className="input-div">
+                            {editableData?<p className="category-select-div">Category</p>:""}
                             <select
-                              className="form-control Dashborad-search custom-select"
+                              className="form-control Dashborad-search custom-select input-div"
                               value={data.category}
+                              name="category"
                               onChange={(e) => {
                                 Setdata({
                                   ...data,
                                   category: e.target.value,
                                 });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             >
                               <option value="" hidden defaultChecked>
                                 Select Category
@@ -166,20 +200,24 @@ const SubCategoryCreation = (props) => {
                                 <option value={el._id} key={ind}>{el.name}</option>
                               ))}
                             </select>
+                            </div>
                             <p className="formerror">{formerror.category}</p>
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <input
                               type="text"
+                              name="name"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search"
+                              className="form-control Dashborad-search input-div"
                               placeholder="SubCategory Name "
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <p className="formerror">{formerror.name}</p>
 

@@ -17,6 +17,8 @@ const Warehouse = (props) => {
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
+  const [formerror, Setformerror] = useState({});
+
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -26,26 +28,41 @@ const Warehouse = (props) => {
     }
   }, []);
 
+  const ValidationFrom = (value) => {
+    const error = {};
+    if (!value.name) {
+      error.name = "This field is required";
+    }
+    if (!value.warehouseContactNo) {
+      error.warehouseContactNo = "This field is required";
+    }
+    if (!value.warehouseAddress) {
+      error.warehouseAddress = "This field is required";
+    }
+    return error;
+  };
+
   const submitData = async (e) => {
     e.preventDefault();
-    data.creatorId = Userdata._id;
-    const url = `${baseUrl}/api/warehouse/add_warehouse`;
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    })
-      .then((res) => {
-        res.json();
-        history.push("Configuration/" + "AllWarehouseDetails")
+    const errors = ValidationFrom(data);
+    Setformerror(errors);
+    if (Object.keys(errors).length === 0) {
+      data.creatorId = Userdata._id;
+      const url = `${baseUrl}/api/warehouse/add_warehouse`;
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       })
-      .then((res) => {
-        // GetManufacturer();
-        // this.getAddOn();
-      })
-
-      .catch((err) => console.log(err));
-    e.preventDefault();
+        .then((res) => {
+          res.json();
+          history.push("Configuration/" + "AllWarehouseDetails")
+        })
+        .then((res) => {
+          // GetManufacturer();
+          // this.getAddOn();
+        })
+    }
   };
 
   const GetWarehouse = async () => {
@@ -60,19 +77,45 @@ const Warehouse = (props) => {
 
   const UpdateWarehouse = async (e, _id) => {
     e.preventDefault();
-    const formData = {
-      _id: data._id,
-      description: data.description,
-      name: data.name
+    const errors = ValidationFrom(data);
+    Setformerror(errors);
+    if (Object.keys(errors).length === 0) {
+      const formData = {
+        _id: data._id,
+        description: data.description,
+        name: data.name
+      }
+      await axios.put(`${baseUrl}/api/warehouse/update_warehouse_by_id`, formData,)
+        .then((res) => {
+          history.push("Configuration/" + "AllWarehouseDetails");
+          GetWarehouse();
+        })
+        .catch((err) => {
+          console.log(err, "error");
+        });
     }
-    await axios.put(`${baseUrl}/api/warehouse/update_warehouse_by_id`, formData,)
-      .then((res) => {
-        history.push("Configuration/" + "AllWarehouseDetails");
-        GetWarehouse();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    Setdata({
+      ...data,
+      [name]: value
+    });
+    Setformerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
+
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This is required`;
+    }
+    Setformerror(errors);
   };
 
   return (
@@ -96,52 +139,61 @@ const Warehouse = (props) => {
                             <input
                               type="text"
                               id="floatingInputValue"
+                              name="name"
                               className="form-control Dashborad-search"
                               placeholder="Warehouse Name"
                               defaultValue={editableData ? editableData.name : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <label for="floatingInputValue">Warehouse Name</label>
-                          </div>
+                            <p className="formerror">{formerror.name}</p>
 
+                          </div>
                           <div className="col-6 p-1 form-floating">
                             <input
-                              type="text"
+                              type="number"
                               id="floatingInputValue"
+                              name="warehouseContactNo"
                               className="form-control Dashborad-search"
                               placeholder="Warehouse Contact No"
-                              defaultValue={editableData ? editableData.warehouseContactNo : ""}
+                              defaultValue={editableData ? editableData.warehouseContactNo : data.warehouseContactNo}
                               onChange={(e) => {
-                                Setdata({ ...data, warehouseContactNo: e.target.value });
+                                if (e.target.value.length > 0) {
+                                  e.target.value = e.target.value.slice(0, e.target.maxLength)
+                                  Setdata({ ...data, warehouseContactNo: e.target.value });
+
+                                }
+                                handleInputChange(e);
                               }}
+                              maxLength={10}
+                              onBlur={handleBlur}
                             />
                             <label for="floatingInputValue">Warehouse Contact No</label>
+                            <p className="formerror">{formerror.warehouseContactNo}</p>
+
                           </div>
                           <div className="col-6 p-1 form-floating">
                             <input
                               type="text"
                               id="floatingInputValue"
+                              name="warehouseAddress"
                               className="form-control Dashborad-search"
                               placeholder="Warehouse Address"
                               defaultValue={editableData ? editableData.warehouseAddress : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, warehouseAddress: e.target.value });
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
                             <label for="floatingInputValue">Warehouse Address</label>
+                            <p className="formerror">{formerror.warehouseAddress}</p>
                           </div>
-                          <div className="col-6 p-1 form-floating">
-                            <input
-                              type="text"
-                              id="floatingInputValue"
-                              className="form-control Dashborad-search"
-                              placeholder="Warehouse Contact"
-                              defaultValue={editableData ? editableData.name : ""}
-                            />
-                            <label for="floatingInputValue">Warehouse Contact</label>
-                          </div>
+
                           <div className="col-6 p-1 form-floating">
                             <textarea
                               className="form-control h-100"
@@ -156,21 +208,6 @@ const Warehouse = (props) => {
                               }}
                             ></textarea>
                             <label for="floatingInputValue">Description</label>
-                          </div>
-                          <div className="col-6 p-1 form-floating">
-                            <textarea
-                              className="form-control h-100"
-                              placeholder="Warehouse Description"
-                              id="floatingInputValue"
-                              rows="5"
-                              defaultValue={
-                                editableData ? editableData.description : ""
-                              }
-                              onChange={(e) => {
-                                Setdata({ ...data, description: e.target.value });
-                              }}
-                            ></textarea>
-                            <label for="floatingInputValue">Additional Information About Warehouse</label>
                           </div>
                           {editableData ? (
                             <div className="col-12 p-1">

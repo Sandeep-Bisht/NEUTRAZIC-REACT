@@ -220,7 +220,7 @@ const Cart = () => {
         <div className="container m-auto">
           <form>
             <div className="cart-buttons">
-              <h1 className="cart-header">Your Cart</h1>
+              <h1 className="cart-header">{cart && cart.length>0 ? "Your Cart":""}</h1>
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
@@ -230,28 +230,7 @@ const Cart = () => {
                     stack="vertical"
                   /> : <>
                     {cart && cart.length > 0 ? (
-                      <div className="cart-table">
-                        <table
-                          className="w-100"
-                          cellsacing="10px"
-                          cellPadding="10px"
-                        >
-                          <thead className="text-center">
-                            <tr>
-                              <th scope="col">Product</th>
-                              <th scope="col"></th>
-                              <th scope="col">PRICE</th>
-                              <th scope="col" className="text-center">
-                                QUANTITY
-                              </th>
-                              <th scope="col" className="text-center">
-                                Total
-                              </th>
-                              <th scope="col"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {cart.map((el, ind1) => {
+                            cart.map((el, ind1) => {
                               if (state1.state1 == "1") {
                                 total = el.dollerDiscount * el.quantity;
                                 total1 = total1 + el.dollerDiscount * el.quantity;
@@ -266,10 +245,14 @@ const Cart = () => {
                                 localStorage.setItem("Subtotal", actualtotal);
                               }
                               return (
-                                <tr key={ind1} className="cart-data">
-                                  <td className="product-thumbnail">
-                                    <Link to={"/SingleProduct/" + el.productid}>
-                                      <img
+                                <>
+                                <div className="card card-for-cart m-2">
+                                <div className="card-body row">
+                                  <div className="col-3">
+                                    <div>
+                                    <div className="d-flex justify-content-center">
+                                  <Link to={"/SingleProduct/" + el.productid}>
+                                      <img className="cart-image"
                                         src={
                                           `${baseUrl}/` + el.image ||
                                           el.manufacturer.image[0].path
@@ -277,14 +260,52 @@ const Cart = () => {
                                         alt="item"
                                       />
                                     </Link>
-                                  </td>
-                                  <td className="product-name">
+                                    </div>
+                                    <div className="amount mt-1">
+                                      {" "}
+                                      <div className="input-counter">
+                                        <span
+                                          className="plus-minus-btn"
+                                          onClick={() => {
+                                            Minusquantity(
+                                              el.quantity,
+                                              el.mrp,
+                                              ind1
+                                            );
+                                          }}
+                                        >
+                                          <i className="bx bx-minus minus"></i>
+                                        </span>
+                                        <span className="m-2 quantity-div">
+                                          Qty : {el.quantity}
+                                          </span>
+                                        <span
+                                          className="plus-minus-btn"
+                                          onClick={() => {
+                                            Plusquantity(el.quantity, el.mrp, ind1);
+                                          }}
+                                        >
+                                          <i className="bx bx-plus  plus"></i>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                  <div className="card-middle-part col-6">
+                                    <div>
                                     <Link to={"/SingleProduct/" + el.productid}>
-                                      <div className="cart-text">{el.name}</div>
-                                    </Link>
-                                  </td>
-                                  <td className="product-price">
-                                    <div className="amount">
+                                      <div className="card-text">{el.name}</div>
+                                      </Link>
+                                    <div className="mt-2 description-link" onClick={()=>history.push("/SingleProduct/" + el.productid)}>
+                                      <p className="card-description">
+                                        {el.description.slice(0,99)}...</p>
+                                    </div>
+                                    <div className="mt-2">
+                                      <span className="sold-by">Sold by : 
+                                      <p className="manufacturer-name"> {el.manufacturer}</p>
+                                      </span>
+                                    </div>
+                                    <div className="amount mt-1">
                                       <span className="unit-amount">
                                         {state1.state1 == "1" ? (
                                           <i class="fa fa-dollar-sign currency-sign"></i>
@@ -297,47 +318,20 @@ const Cart = () => {
                                             : el.mrp}
                                         </del>
                                       </span>
-                                      <span>
+                                      <span className="ms-2 unit-amount">
                                         {state1.state1 == "1"
                                           ? el.dollerDiscount
                                           : el.singleprice}
                                       </span>
                                     </div>
-                                  </td>
-                                  <td className="product-quantity">
-                                    <div className="amount">
-                                      {" "}
-                                      <div className="input-counter">
-                                        <span
-                                          className="minus-btn"
-                                          onClick={() => {
-                                            Minusquantity(
-                                              el.quantity,
-                                              el.mrp,
-                                              ind1
-                                            );
-                                          }}
-                                        >
-                                          <i className="bx bx-minus minus"></i>
-                                        </span>
-                                        <input
-                                          type="number"
-
-                                          value={el.quantity}
-                                        />
-                                        <span
-                                          className="plus-btn"
-                                          onClick={() => {
-                                            Plusquantity(el.quantity, el.mrp, ind1);
-                                          }}
-                                        >
-                                          <i className="bx bx-plus  plus"></i>
-                                        </span>
-                                      </div>
                                     </div>
-                                  </td>
-                                  <td className="product-subtotal">
-                                    <div className="amount">
+                                  </div>
+                                  <div className="col-2">
+                                    <div>
+                                    <div>
+                                    <span className="card-text">Total Price</span>
+                                    </div>
+                                  <div className="amount mt-2">
                                       <span className="subtotal-amount mt-4">
                                         {state1.state1 == "1" ? (
                                           <i class="fa fa-dollar-sign currency-subtotal-sign"></i>
@@ -349,23 +343,27 @@ const Cart = () => {
                                           : el.singleprice) * el.quantity}
                                       </span>
                                     </div>
-                                  </td>
-                                  <td className="cartPop">
-                                    <Popconfirm
+                                    </div>
+                                    </div>
+                                  <div className="col-1">
+                                  <Popconfirm
                                       className="bx bx-trash cart-delete-icon"
                                       title="Delete the Product"
                                       description="Are you sure to delete this Product?"
                                       style={{ margin: "0" }}
                                       onConfirm={(e) => Sliceorder(ind1, e)}
                                     ></Popconfirm>
-                                  </td>
-                                </tr>
+                                  </div>
+                                </div>
+                                </div>
+                                </>
                               );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                    ) : (
+                            })
+                          ) : (
+                      <div className="col-12 text-center EMPTYWISHLIST-DIV">
+                    <div>
+                      <h1>No Product Found</h1>
+                    </div>
                       <lottie-player
                         src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
                         background="transparent"
@@ -378,6 +376,7 @@ const Cart = () => {
                         loop
                         autoplay
                       ></lottie-player>
+                      </div>
                     )}
                   </>}
               </div>

@@ -102,3 +102,9 @@
 {
     color: #1b97ff;
 }
+.single-footer-widget .sendSubscribeLink{
+    color: green;
+}
+.single-footer-widget .sendSubscribeError{
+    color:red;
+}

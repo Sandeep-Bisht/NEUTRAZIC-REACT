@@ -3,6 +3,8 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Table,
   Button,
@@ -13,6 +15,7 @@ import {
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
+import { AiFillCaretDown } from "react-icons/ai";
 
 const ShippedOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -37,6 +40,7 @@ const ShippedOrder = () => {
         let arr = [];
         for (let item of data.data) {
           if (item.orderStatus == "Shipped") {
+            item.createdAt=item.createdAt.slice(0,10);
             arr.push(item);
           }
         }
@@ -61,6 +65,19 @@ const ShippedOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
+        if(order.orderStatus==="Delivered")
+        {
+          toast.success("Order move to Delivered", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        }
+        else{
+          toast.success("Order move to Cancel", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        }
         setIsModalVisible(false);
       })
       .catch((err) => {
@@ -90,6 +107,21 @@ const ShippedOrder = () => {
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
+    {
+      title: "Order Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
+    {
+      title: "Shipping Date",
+      dataIndex: "shippingDate",
+      key: "shippingDate",
+    },
+    {
+      title: "Delivered Date",
+      dataIndex: "delivery_time",
+      key: "delivery_time",
+    },
     { title: "Paid Amount.", dataIndex: "totalamount", key: "totalamount" },
     {
       title: "Payment Status",
@@ -123,7 +155,7 @@ const ShippedOrder = () => {
             }}
           >
             <a>
-              Shipped <DownOutlined />
+              Shipped <AiFillCaretDown className="icon-dropdown-orders" />
             </a>
           </Dropdown>
         </Space>
@@ -159,7 +191,7 @@ const ShippedOrder = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <table className="table">
+          <table className="table order-details">
             <thead>
               <tr>
                 <th scope="col">Image</th>
@@ -181,12 +213,12 @@ const ShippedOrder = () => {
                                 imageHandler(item.productid)
                               }
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image}`}
+                              src={`${baseUrl}/${item.order[0].image}`}
                             ></img>
                           </div>
                         </td>
-                        <td>{item.name}</td>
-                        <td>{item.singleprice}</td>
+                        <td className="width-adjust-of-td">{item.order[0].name}</td>
+                        <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
                       </tr>
                     </>
                   );
@@ -195,6 +227,7 @@ const ShippedOrder = () => {
           </table>
         </Modal>
       </div>
+      <ToastContainer />
       {/* end modal */}
 
       <section id="body-pd">

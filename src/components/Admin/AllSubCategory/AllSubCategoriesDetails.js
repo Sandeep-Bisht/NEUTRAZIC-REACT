@@ -109,7 +109,7 @@ export default function AllSubCategoriesDetails() {
             </Popconfirm>
             <Typography.Link   >
               <Link to={{
-                pathname: "/SubCategoryCreation",
+                pathname: "/SubCategory",
                 state:
                 {
                   ...record,
@@ -137,7 +137,7 @@ export default function AllSubCategoriesDetails() {
               <div className="sub-category-details-section">
                 <h3 className="sub-category-head">All Subcategories <span className="count">{subCategories}</span></h3>
                 <div className="subcategory-search-wrap">
-                  <Link to="/SubCategoryCreation" className="add-icon">
+                  <Link to="/SubCategory" className="add-icon">
                     <MdPlaylistAdd />Add
                   </Link>
                   <input

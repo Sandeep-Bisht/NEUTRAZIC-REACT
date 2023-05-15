@@ -17,6 +17,7 @@ import "../components/Header1.css";
 import Cookies from "universal-cookie";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { useContext } from "react";
+import Loader from "react-spinner-loader";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -39,6 +40,7 @@ const SingleProduct = (props) => {
   const [MainImage, SetMainImage] = useState();
   const [categoryid, setcategoryId] = useState();
   const { loginState, setLoginState } = useContext(CurrencyContext);
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -196,12 +198,12 @@ const SingleProduct = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         setAllProduct(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-
   const Getsingledata = async () => {
     await fetch(`${baseUrl}/api/product/product_by_id`, {
       method: "POST",
@@ -602,7 +604,7 @@ const SingleProduct = (props) => {
   return (
     <>
       <Header1 />
-      <div className="first-nav container-fluid">
+      <div className="first-nav container">
         <span>
           <Link to="/">Home</Link>/
           <Link to={"/SubCategories/" + categoryid}>{categoryname}</Link>/
@@ -872,7 +874,7 @@ const SingleProduct = (props) => {
                     <button
                       data-bs-toggle="modal"
                       data-bs-target={Userdata == null ? "#exampleModal" : null}
-                    onClick={()=>handleResetForm()}
+                      onClick={() => handleResetForm()}
                     >
                       {/* <Link to="/Register"></Link> */}
                       Add to Cart
@@ -908,7 +910,7 @@ const SingleProduct = (props) => {
                         data-bs-target={
                           Userdata == null ? "#exampleModal" : null
                         }
-                        onClick={()=>handleResetForm()}
+                        onClick={() => handleResetForm()}
                       ></i>
                     </>
                   )}
@@ -920,7 +922,7 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
-      <div className="container-fluid description">
+      <div className="container description">
         <div className="row main-div p-4">
           <div>
             <div className="row heading mt-4 jutify-content-center">
@@ -1041,141 +1043,172 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
-
-      <div className="container-fluid m-auto p-4 products relate-products text-center">
-        <div className="row relate-product">
-          <div className="col-3 line">
-            <hr className="hr"></hr>
-          </div>
-          <div className="col-6">
-            <div className="row related">
-              <span>Related Products</span>
+      <div className="container">
+        <div className=" m-auto p-4 products relate-products text-center">
+          <div className="row relate-product">
+            <div className="col-3 line">
+              <hr className="hr"></hr>
+            </div>
+            <div className="col-6">
+              <div className="row related">
+                <span>Related Products</span>
+              </div>
+            </div>
+            <div className="col-3 line">
+              <hr className="hr"></hr>
             </div>
           </div>
-          <div className="col-3 line">
-            <hr className="hr"></hr>
-          </div>
-        </div>
-        <div className="row relate-product1">
-          <div className="col-12">
-            <div className="row related">
-              <span>Related Products</span>
+          <div className="row relate-product1">
+            <div className="col-12">
+              <div className="row related">
+                <span>Related Products</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          id="columns"
-          className="columns_5 d-flex justify-content-between related-Prod-single-product"
-        >
-          {AllProduct.map((el, ind1) => {
-            if (ind1 < 5) {
-              return (
-                <figure className="figure1 single-product-figure" key={ind1}>
-                  <Link Link to={"/SingleProduct/" + el._id}>
-                    <div>
-                      <img
-                        src={`${baseUrl}/` + el.image[0].path}
-                        onClick={() => relatedImageHandler(el._id)}
-                        alt=""
-                      />
-                      <figcaption onClick={() => relatedImageHandler(el._id)}>
-                        {el.name}
-                      </figcaption>
-                    </div>
-                  </Link>
-
-                  <div className="allproduct-price-div">
-                    <div className="row">
-                      <div className="col-lg-6 col-md-12 text-start">
-                        <span className="price">
-                          {" "}
-                          {state1.state1 == "1" ? (
-                            <i className="fa fa-dollar-sign"></i>
-                          ) : (
-                            <i className="fa fa-inr"></i>
-                          )}
-                          {state1.state1 == "1"
-                            ? el.dollerDiscount
-                            : el.inrDiscount}
-                        </span>
-                      </div>
-                      <div className="col-lg-6 col-md-12  text-end">
-                        <p className={`text-nowrap wishlist`}>
-                          {Userdata ? (
-                            <i
-                              id={el._id}
-                              onClick={() => {
-                                AddtoWishlist(
-                                  el._id,
-                                  el.name,
-                                  quantity,
-                                  el.inrMrp,
-                                  el.inrDiscount,
-                                  el.description,
-                                  el.category,
-                                  el.manufacturer.name,
-                                  el.image
-                                );
-                              }}
-                              className={`bx bxs-heart ${checkWishlistItem(
-                                el._id
-                              )}`}
-                            ></i>
-                          ) : (
-                            <i
-                              className="bx bxs-heart "
-                              data-bs-toggle="modal"
-                              data-bs-target={
-                                Userdata == null ? "#exampleModal" : null
-                              }
-                              onClick={() => handleResetForm()}
-                            ></i>
-                          )}
-                          Wishlist
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  {Userdata ? (
-                    <button
-                      className="button btn"
-                      onClick={() => {
-                        cartfunction(
-                          el._id,
-                          el.name,
-                          quantity,
-                          el.inrMrp,
-                          el.inrDiscount,
-                          el.dollerDiscount,
-                          el.dollerMrp,
-                          el.discount,
-                          el.description,
-                          el.category,
-                          el.manufacturer.name,
-                          el.image[0].path
-                        );
-                      }}
-                      data-bs-toggle={Userdata == null ? "modal" : null}
-                      data-bs-target={Userdata == null ? "#exampleModal" : null}
-                    >
-                      Add to Cart
-                    </button>
-                  ) : (
-                    <button
-                      className="button btn"
-                      data-bs-toggle="modal"
-                      data-bs-target={Userdata == null ? "#exampleModal" : null}
-                      onClick={() => handleResetForm()}
-                    >
-                      Add to Cart
-                    </button>
-                  )}
-                </figure>
-              );
-            }
-          })}
         </div>
       </div>
+      <section className="products-area ">
+        <div className="container m-auto py-4">
+          {loading ? (
+            <Loader show={loading} stack="vertical" />
+          ) : (
+            <div className="row ">
+              <div id="column" className="columns_5">
+                {AllProduct.map((el, ind) => {
+                  if (ind < 5) {
+                    return (
+                      <figure
+                        className="figure homepage-trending-figure"
+                        key={ind}
+                      >
+                        {/* <Link to={"/SingleProduct/" + el._id}> */}
+
+                        <Link to={"/SingleProduct/" + el._id}>
+                          <div
+                            className="image hover-switch-homepage"
+                            style={{ position: "relative" }}
+                          >
+                            <img
+                              className="main-Image"
+                              src={`${baseUrl}/` + el.image[0].path}
+                              alt=""
+                              onClick={() => relatedImageHandler(el._id)}
+                            />
+                          </div>
+
+                          <figcaption
+                            className="Product-name-home"
+                            onClick={() => relatedImageHandler(el._id)}
+                          >
+                            {el.name}
+                          </figcaption>
+                        </Link>
+                        <div className="contanier homepage-product-price-div">
+                          <div className="row mt-2">
+                            <div className="col-lg-6 col-sm-6 col-md-6 col-12 text-start">
+                              <span className="price">
+                                {" "}
+                                {state1 == "1" ? (
+                                  <i className="fa fa-dollar-sign"></i>
+                                ) : (
+                                  <i className="fa fa-inr"></i>
+                                )}
+                                {state1 == "1"
+                                  ? el.dollerDiscount
+                                  : el.inrDiscount}
+                              </span>
+                            </div>
+                            <div className="col-6 text-end">
+                              <p className={`text-nowrap wishlist`}>
+                                {Userdata ? (
+                                  <i
+                                    id={el._id}
+                                    onClick={() => {
+                                      AddtoWishlist(
+                                        el._id,
+                                        el.name,
+                                        quantity,
+                                        el.inrMrp,
+                                        el.inrDiscount,
+                                        el.description,
+                                        el.category,
+                                        el.manufacturer.name,
+                                        el.image
+                                      );
+                                    }}
+                                    className={`bx bxs-heart ${checkWishlistItem(
+                                      el._id
+                                    )}`}
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="bx bxs-heart "
+                                    data-bs-toggle="modal"
+                                    data-bs-target={
+                                      Userdata == null ? "#exampleModal" : null
+                                    }
+                                    onClick={() => handleResetForm()}
+                                  ></i>
+                                )}
+                                Wishlist
+                              </p>
+                            </div>
+                            <div>
+                              {Userdata ? (
+                                <button
+                                  className="button btn"
+                                  onClick={() => {
+                                    cartfunction(
+                                      el._id,
+                                      el.name,
+                                      quantity,
+                                      el.inrMrp,
+                                      el.inrDiscount,
+                                      el.dollerMrp,
+                                      el.dollerDiscount,
+                                      el.discount,
+                                      el.description,
+                                      el.category,
+                                      el.manufacturer.name,
+                                      el.image[0].path
+                                    );
+                                  }}
+                                  data-bs-toggle={
+                                    Userdata == null ? "modal" : null
+                                  }
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                >
+                                  Add to Cart
+                                </button>
+                              ) : (
+                                <button
+                                  className="button btn"
+                                  data-bs-toggle="modal"
+                                  data-bs-target={
+                                    Userdata == null ? "#exampleModal" : null
+                                  }
+                                  onClick={() => handleResetForm()}
+                                >
+                                  Add to Cart
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* </Link> */}
+                      </figure>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
       <Baseline />
       <Footer />
     </>
