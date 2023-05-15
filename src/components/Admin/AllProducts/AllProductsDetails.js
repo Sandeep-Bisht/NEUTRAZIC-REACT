@@ -89,8 +89,8 @@ export default function AllProductsDetails() {
     },
     {
       title: "Quantity",
-      dataIndex: "",
-      key: "",
+      dataIndex: "quantity",
+      key: "quantity",
     },
     {
       title: "Image",
