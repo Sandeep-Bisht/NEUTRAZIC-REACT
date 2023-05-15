@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Popconfirm, Typography, Space } from "antd";
+import { Table, Button, Modal, Popconfirm, Typography, Space } from "antd";
 
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
 import { BiSearchAlt } from "react-icons/bi";
 import DashboardHeaader from "../DashboardHeaader";
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { FaTrashAlt } from 'react-icons/fa';
 import { MdOutlineEditNote } from 'react-icons/md';
 import { MdPlaylistAdd } from 'react-icons/md';
@@ -19,16 +19,16 @@ export default function AllProductsDetails() {
   const [searchVal, setSearchVal] = useState("");
   const [filteredData] = useState([]);
   const [products, Setproducts] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [prticularUserOrder, setPrticularUserOrder] = useState([]);
 
-
+  const history=useHistory();
 
 
   useEffect(() => {
     fetchUsers();
     GetProducts();
   }, [])
-
-
 
   const GetProducts = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
@@ -69,6 +69,23 @@ export default function AllProductsDetails() {
       return value.name.toLowerCase().includes(searchVal.toLowerCase());
     });
     setGetuser(filteredData);
+  };
+
+  const showModal = (order) => {
+    console.log(order,"inside the showmodal")
+    const orderDetails=[];
+    orderDetails.push(order)
+    setPrticularUserOrder(orderDetails);
+    setIsModalVisible(true);
+  };
+  console.log(prticularUserOrder,"helo user order")
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   const columns = [
@@ -130,7 +147,20 @@ export default function AllProductsDetails() {
           </Space>
         ) : null,
     },
+    {
+      title: "View Order",
+      key: "action",
+      render: (_, record) => (
+        <Button type="primary" onClick={() => showModal(record)}>
+          See Order
+        </Button>
+      ),
+    },
   ];
+
+  const imageHandler = (id) => {
+    history.push("/SingleProduct/" + id);
+  };
 
   return (
     <>
@@ -169,6 +199,57 @@ export default function AllProductsDetails() {
               />
             </div>
           </div>
+          <Modal
+          className="product-details"
+          title="Order Details"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+        <table className="table order-details ">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Manufacturer</th>
+                <th scope="col">Category</th>
+                <th scope="col">Subcatrgory</th>
+                <th scope="col">Warehouse</th>
+              </tr>
+            </thead>
+            <tbody>
+              {prticularUserOrder &&
+                prticularUserOrder.length > 0 &&
+                prticularUserOrder.map((item, ind) => {
+                  console.log(item,"all products items");
+                  return (
+                    <>
+                      <tr key={ind}>
+                        <td className="width-adjust-of-td">
+                          <div className="width-adjust-of-image">
+                            <img
+                              onClick={() => imageHandler(item.productid)}
+                              style={{ cursor: "pointer" }}
+                              src={`${baseUrl}/${item.image[0].path}`}
+                            ></img>
+                          </div>
+                        </td>
+                        <td className="width-adjust-of-td">{item.name}</td>
+                        <td className="width-adjust-of-td">{item.inrDiscount}</td>
+                        <td className="width-adjust-of-td">{item.quantity}</td>
+                        <td className="width-adjust-of-td">{item.manufacturer.name}</td>
+                        <td className="width-adjust-of-td">{item.category.name}</td>
+                        <td className="width-adjust-of-td">{item.subcategory.name}</td>
+                        <td className="width-adjust-of-td">{item.warehouse.id}</td>
+                      </tr>
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </Modal>
         </div>
       </section>
     </>

@@ -1,6 +1,15 @@
 .wishlist-page {
   margin-top: 100px !important;
 }
+/* .wishlist-div-image:nth-child(even){
+  background-color: rgb(42, 150, 255, 0.2) !important;
+}
+.wishlist-div-image:nth-child(odd){
+  background-color: rgb(42, 150, 255, 0.1) !important;
+}
+.wishlist-div-image:hover{
+  background-color: #fff;
+} */
 
 /* .wishlist-page .container-fluid{
     padding: 0 80px !important;

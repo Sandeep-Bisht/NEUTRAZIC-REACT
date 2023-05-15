@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import { ToastContainer, toast } from "react-toastify";
+import { AiFillCaretDown } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Table,
@@ -141,7 +142,7 @@ const InProgressOrder = () => {
             }}
           >
             <a>
-              In-Progress <DownOutlined />
+              In-Progress <AiFillCaretDown className="icon-dropdown-orders" />
             </a>
           </Dropdown>
         </Space>
