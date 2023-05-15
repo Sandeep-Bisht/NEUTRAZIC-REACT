@@ -690,7 +690,7 @@ h3 .read-more-button {
 /* Sidebar Styles */
 
 .sidebar-nav {
-  padding-left: 10px!important;
+  padding-left: 24px!important;
   position: absolute;
   top: 30px;
   width: 100%;
@@ -941,6 +941,7 @@ body {
   align-items: center;
   padding: 0 20px;
 }
+
 
 .heaader-wrapper .cart-div .login-div1 {
   display: flex;

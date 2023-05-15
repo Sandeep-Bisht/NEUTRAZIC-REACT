@@ -128,6 +128,24 @@
   }
 }
 @media only screen and (max-width: 767.99px) {
+  .card-description{
+    display: none;
+  }
+  .card-body .input-counter{
+    display: flex;
+    top: 125px;
+    left: 100px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
+  .card-for-cart{
+    height: 176px;
+
+  }
+  .card-body .cart-delete-icon{
+    background-color: #fff;
+  }
   .cart-totals {
     margin-left: 0px;
     margin-right: 0px;
@@ -180,6 +198,9 @@
   }
 }
 @media only screen and (max-width: 567.99px) {
+  .card-description{
+    display: none;
+  }
   .cart-table table thead tr th {
     font-size: 13px;
   }
@@ -221,6 +242,17 @@
     white-space: normal;
     font-size: 16px;
   }
+  .card-body .input-counter{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 122px;
+    align-items: center;
+    left: 97px;
+  }
+  .card-for-cart{
+    height: 170px;
+  }
   
 }
 @media only screen and (max-width: 496.99px) {
@@ -232,14 +264,27 @@
     font-size: 26px!important;
     padding-left: 10px;
   }
-  .cart-table{
+  .cart-body{
     overflow-x: auto;
+  }
+  .card-for-cart{
+    height: 180px!important;
+    overflow-x: auto!important;
+    margin: 0px!important;
+    margin-top: 20px!important;
+  }
+  .card-body .delete-icon{
+    display: flex;
+    justify-content: center;
   }
   .cart-table table thead tr th {
     font-size: 13px;
   }
-  .cart-text {
-    font-size: 11px;
+  .card-body .sold-by {
+    font-size: 14px!important;
+  }
+  .card-body .sold-by-div{
+    margin: 0px;
   }
   .product-price .amount span {
     font-size: 13px;
@@ -261,6 +306,15 @@
   }
   .cart-table table tbody tr td {
     white-space: normal;
+  }
+  .card-body .card-text{
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .card-body .input-counter{
+    position: absolute;
+    top: 132px;
+    left: 74px;
   }
 }
 @media only screen and (max-width: 359.98px){

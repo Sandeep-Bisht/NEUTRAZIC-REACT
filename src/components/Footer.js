@@ -208,13 +208,35 @@ const Footer = () => {
                       )}
                     </li>
                     <li>
-                      <Link to="/UserOrder">Order History</Link>
+                      {Userdata === null ? (
+                        <Link
+                          data-bs-toggle="modal"
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                          onClick={()=>clickModalResetHandler()}
+                        >
+                          Order History
+                        </Link>
+                      ) : (
+                        <Link to="/UserOrder">Order History</Link>
+                      )}
                     </li>
-
-                    <li>
-                      <Link to="/WishList" onClick={WishlistHandler}>
-                        Wishlist
-                      </Link>
+                     
+                     <li>
+                      {Userdata === null ? (
+                        <Link
+                          data-bs-toggle="modal"
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                          onClick={()=>clickModalResetHandler()}
+                        >
+                          Wishlist
+                        </Link>
+                      ) : (
+                        <Link to="/WishList">Wishlist</Link>
+                      )}
                     </li>
                     <li>
                       <Link to="/support">Need Support?</Link>

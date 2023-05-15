@@ -248,7 +248,7 @@ const Cart = () => {
                                 <>
                                 <div className="card card-for-cart m-2">
                                 <div className="card-body row">
-                                  <div className="col-3">
+                                  <div className="col-lg-3 col-md-3 col-2">
                                     <div>
                                     <div className="d-flex justify-content-center">
                                   <Link to={"/SingleProduct/" + el.productid}>
@@ -291,7 +291,7 @@ const Cart = () => {
                                     </div>
                                     </div>
                                   </div>
-                                  <div className="card-middle-part col-6">
+                                  <div className="card-middle-part col-lg-6 col-md-6 col-6">
                                     <div>
                                     <Link to={"/SingleProduct/" + el.productid}>
                                       <div className="card-text">{el.name}</div>
@@ -300,7 +300,7 @@ const Cart = () => {
                                       <p className="card-description">
                                         {el.description.slice(0,99)}...</p>
                                     </div>
-                                    <div className="mt-2">
+                                    <div className="mt-2 sold-by-div">
                                       <span className="sold-by">Sold by : 
                                       <p className="manufacturer-name"> {el.manufacturer}</p>
                                       </span>
@@ -326,8 +326,8 @@ const Cart = () => {
                                     </div>
                                     </div>
                                   </div>
-                                  <div className="col-2">
-                                    <div>
+                                  <div className="col-lg-2 col-md-2 col-3">
+                                    <div className="total-price-div">
                                     <div>
                                     <span className="card-text">Total Price</span>
                                     </div>
@@ -345,7 +345,7 @@ const Cart = () => {
                                     </div>
                                     </div>
                                     </div>
-                                  <div className="col-1">
+                                  <div className="col-1 delete-icon">
                                   <Popconfirm
                                       className="bx bx-trash cart-delete-icon"
                                       title="Delete the Product"
