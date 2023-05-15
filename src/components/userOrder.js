@@ -77,6 +77,7 @@ const UserOrder = () => {
       });
   };
   console.log(OrderDetails, "This is setting order status");
+
   return (
     <>
       <Header1 />
@@ -112,10 +113,7 @@ const UserOrder = () => {
                                             {el.orderStatus !== "Cancel" ? (
                                               <div class="progress-box">
                                                 <div class="progress">
-                                                  {/* {el.orderStatus ===
-                                                    "In-Progress" && (
-                                                    <div className="progress-color active33"></div>
-                                                  )} */}
+                                                  
                                                   {el.orderStatus ===
                                                     "Shipped" && (
                                                     <div className="progress-color active35"></div>
@@ -154,7 +152,6 @@ const UserOrder = () => {
                                                       <AiOutlineCheck className="Check-icon" />
                                                     </div>
                                                   )}
-                                                  {/* <div class="circle1 active14"></div> */}
                                                 </div>
                                                 <div className="progress-text">
                                                   {el.orderStatus ===
@@ -175,9 +172,17 @@ const UserOrder = () => {
                                                   )}
                                                   {el.orderStatus ===
                                                   "Shipped" ? (
-                                                    <span className="status-Highligted">
-                                                      Shipped
-                                                    </span>
+                                                    <div className="shipped-status">
+                                                      <span className="status-Highligted">
+                                                        Shipped
+                                                      </span>
+
+                                                      <p className="shipped-time">
+                                                        Expected Delivery by{" "}
+                                                        <br />
+                                                        {el.delivery_time}
+                                                      </p>
+                                                    </div>
                                                   ) : (
                                                     <span>Shipped</span>
                                                   )}

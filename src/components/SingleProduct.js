@@ -922,7 +922,7 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
-      <div className="container-fluid description">
+      <div className="container description">
         <div className="row main-div p-4">
           <div>
             <div className="row heading mt-4 jutify-content-center">
@@ -1043,25 +1043,26 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
-
-      <div className=" m-auto p-4 products relate-products text-center">
-        <div className="row relate-product">
-          <div className="col-3 line">
-            <hr className="hr"></hr>
-          </div>
-          <div className="col-6">
-            <div className="row related">
-              <span>Related Products</span>
+      <div className="container">
+        <div className=" m-auto p-4 products relate-products text-center">
+          <div className="row relate-product">
+            <div className="col-3 line">
+              <hr className="hr"></hr>
+            </div>
+            <div className="col-6">
+              <div className="row related">
+                <span>Related Products</span>
+              </div>
+            </div>
+            <div className="col-3 line">
+              <hr className="hr"></hr>
             </div>
           </div>
-          <div className="col-3 line">
-            <hr className="hr"></hr>
-          </div>
-        </div>
-        <div className="row relate-product1">
-          <div className="col-12">
-            <div className="row related">
-              <span>Related Products</span>
+          <div className="row relate-product1">
+            <div className="col-12">
+              <div className="row related">
+                <span>Related Products</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1095,7 +1096,10 @@ const SingleProduct = (props) => {
                             />
                           </div>
 
-                          <figcaption className="Product-name-home" onClick={() => relatedImageHandler(el._id)}>
+                          <figcaption
+                            className="Product-name-home"
+                            onClick={() => relatedImageHandler(el._id)}
+                          >
                             {el.name}
                           </figcaption>
                         </Link>

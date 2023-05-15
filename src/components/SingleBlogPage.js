@@ -9,6 +9,7 @@ import { baseUrl } from "../utils/services";
 import "../components/SingleBlogPage.css";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "antd/es/typography/Link";
+import { SocialIcon } from 'react-social-icons';
 
 
 const SingleBlog = (props) => {
@@ -127,23 +128,20 @@ const SingleBlog = (props) => {
                                         <a
                                           href="https://www.facebook.com/Nutrazik"
                                           target="_blank"
-                                          className="social-links-blog-page"
                                         >
-                                          <i className="social-links bx bxl-facebook "></i>
+                                          <SocialIcon className="social-react-icons" network="facebook" bgColor="#4682B4"/>
                                         </a>
                                         <a
                                           href="https://www.instagram.com/nutrazik/"
                                           target="_blank"
-                                          className="social-links-blog-page"
                                         >
-                                          <i className="social-links bx bxl-instagram "></i>
-                                        </a>
+                                          <SocialIcon className="social-react-icons" network="instagram" bgColor="#DB7093"/>
+                                          </a>
                                         <a
                                           href="https://twitter.com/nutrazik"
                                           target="_blank"
-                                          className="social-links-blog-page"
                                         >
-                                          <i className="social-links bx bxl-twitter "></i>
+                                          <SocialIcon className="social-react-icons" network="twitter" bgColor="#00BFFF"/>
                                         </a>
                                       </div>
                                     </div>

@@ -74,7 +74,7 @@ const HomePage = () => {
   const [isLogin, setIsLogin] = useState(loginState);
   const [sliderRef, setSliderRef] = useState(null);
   const [loading, setLoading] = useState(true);
-  const{searchedtext,setSearchedText} = useContext(CurrencyContext);
+  const { searchedtext, setSearchedText } = useContext(CurrencyContext);
 
   var settings = {
     dots: true,
@@ -87,7 +87,7 @@ const HomePage = () => {
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
-  }, [loginState,isLogin]);
+  }, [loginState, isLogin]);
 
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
@@ -176,7 +176,10 @@ const HomePage = () => {
         }
         if (data.data !== undefined) {
           Setwishlist(data.data);
-          console.log(data.data.length,"length of wishlisted after call the wishtlisted");
+          console.log(
+            data.data.length,
+            "length of wishlisted after call the wishtlisted"
+          );
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
@@ -375,7 +378,7 @@ const HomePage = () => {
         });
     }
   };
-  
+
   const AddtoCart = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
@@ -854,31 +857,15 @@ const HomePage = () => {
                             className="figure homepage-trending-figure"
                             key={ind}
                           >
-                            {/* <Link to={"/SingleProduct/" + el._id}> */}
-
                             <Link to={"/SingleProduct/" + el._id}>
                               <div
                                 className="image hover-switch-homepage"
                                 style={{ position: "relative" }}
                               >
-                                {/* <img
-                                  className="hoverimage"
-                                  src={
-                                    el.otherImage &&
-                                    el.otherImage.length > 0 &&
-                                    `${baseUrl}/` + el.otherImage[0].path
-                                  }
-                                  alt=""
-                                /> */}
                                 <img
                                   className="main-Image"
                                   src={`${baseUrl}/` + el.image[0].path}
                                   alt=""
-                                  // style={{
-                                  //   position: "absolute",
-                                  //   top: "0",
-                                  //   left: "0",
-                                  // }}
                                 />
                               </div>
                               <Link to={"/SingleProduct/" + el._id}>
