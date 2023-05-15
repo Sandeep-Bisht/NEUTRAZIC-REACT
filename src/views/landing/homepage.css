@@ -13638,9 +13638,6 @@ textarea.form-control {
   overflow: hidden;
 }
 
-.cart-buttons {
-  padding-bottom: 30px;
-}
 .cart-buttons .cart-header {
   font-size: 34px;
   font-weight: 400 !important;
@@ -13670,7 +13667,7 @@ textarea.form-control {
 }
 
 .cart-totals {
-  max-width: 500px;
+  /* max-width: 500px; */
   /* box-shadow: 0 2px 48px 0 rgba(0, 0, 0, .08); */
   border-radius: 3px;
   margin-left: auto;
@@ -19857,13 +19854,10 @@ svg {
   margin-left: -16px;
 }
 .back-ground-subcategory-sidebar {
-  width: 219px;
   background-color: #fff;
   height: 100%;
   color: #002752;
   position: sticky;
-  top: 107px;
-  height: 100vh;
   box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%),
     0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
     0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
@@ -20465,12 +20459,11 @@ svg {
   }
   .subcategory-container {
     position: relative;
-    top: -220px;
     margin-left: 158px;
     width: 65%;
   }
   .browser-category-section {
-    margin-top: 358px !important;
+    margin-top: 147px !important;
   }
   /* end subcategory page */
 }
