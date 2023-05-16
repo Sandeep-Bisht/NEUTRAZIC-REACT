@@ -84,7 +84,7 @@
 }
 .user-login .Total-Item {
   position: absolute;
-  bottom: 16px;
+  bottom: 10px;
   left: -15px;
   font-size: 14px;
 }
@@ -168,6 +168,10 @@
   cursor: pointer;
 }
 
+.drop-category .category-icon {
+  margin-left: -36px!important;
+}
+
 #navbarTogglerDemo03 ul {
   margin-left: 72px!important;
 }
@@ -185,10 +189,6 @@
 }
 .drop-category .category {
   float: left;
-}
-.drop-category .category svg{
-  position: absolute;
-  left: 14px;
 }
 .drop-category .category-head {
   font-size: 16px;
@@ -890,6 +890,7 @@ body {
 /* remove default css */
 .accordion-button::after {
   background-image: none;
+  display: none;
 }
 .Home-navbar .contact:hover{
 color: white !important;
@@ -948,10 +949,12 @@ color: white !important;
 
 .heaader-wrapper .cart-div .login-div1 {
   display: flex;
+  align-items: center;
 }
 
 .heaader-wrapper .heart-div .heart-div-inner {
   display: flex;
+  align-items: center;
 }
 .login-div2 input[type="text"],
 .login-div2 .search {
@@ -1018,7 +1021,6 @@ color: white !important;
   position: relative;
   color: #1e144f;
   padding-left: 5px;
-  bottom: 4px;
 }
 
 .heart-div .option-item .cart-btn h6 {
@@ -1168,10 +1170,10 @@ color: white !important;
     padding-left: 2px !important;
   }
   .cart-div {
-    padding-left: 2px;
+    padding-left: 2px!important;
   }
   .heart-div {
-    padding-left: 2px;
+    padding-left: 2px!important;
   }
   .header-wrapper-right .left-part {
     margin-right: 0;
@@ -1229,7 +1231,7 @@ color: white !important;
     width: 100%;
   }
   .newheader {
-    height: 108px;
+    height: 120px;
   }
 }
 @media only screen and (max-width: 775.98px) {
@@ -1268,7 +1270,7 @@ color: white !important;
     margin: 5px 0;
   }
   .currancy select {
-    height: 25px;
+    height: 28px;
     font-size: 14px;
   }
   .heart-div .option-item .cart-btn h6 {
@@ -1410,9 +1412,9 @@ color: white !important;
     align-items: center;
   }
   .currancy select {
-    height: 24px;
     font-size: 10px;
   }
+
   .user-login .Total-Item {
     position: absolute;
     bottom: 7px;
