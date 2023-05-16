@@ -1350,7 +1350,7 @@ const Header1 = (props) => {
                       ) : (
                         <Link to="/WishList">
                           <div className="  heart-div-inner">
-                            <div className="">
+                            <div className="wishlist-heart d-flex align-item-center">
                               <div className="option-item">
                                 <div className="cart-btn">
                                   {wishlisted ? <h6>{wishlisted}</h6> : ""}

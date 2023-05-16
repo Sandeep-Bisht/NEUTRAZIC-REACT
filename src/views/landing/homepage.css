@@ -19290,7 +19290,7 @@ svg {
   padding-top: 10px;
 }
 .Category-div {
-  margin-top: 130px !important;
+  margin-top: 155px !important;
 }
 /* All PRoduct Category-div */
 @media only screen and (max-width: 991.98) {
@@ -19832,10 +19832,6 @@ svg {
   /* border-bottom: 1px solid black !important; */
 }
 
-
-.logo-main-div{
-  margin-left: -16px;
-}
 .back-ground-subcategory-sidebar {
   background-color: #fff;
   height: 100%;
@@ -20330,7 +20326,7 @@ svg {
   }
 
   .Category-div {
-    margin-top: 126px !important;
+    margin-top: 160px !important;
   }
   div#columns .figure {
     margin: 0px 0px 15px 2px;

@@ -67,6 +67,9 @@
     justify-content: center;
     background-color: #f3eaea;
 }
+.cart-buttons .cart-header{
+  margin-left: 12px!important;
+} 
 
 .card-for-cart{
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
@@ -196,6 +199,9 @@
   .cart-area {
     margin-top: 140px !important;
   }
+  .card-body .card-text{
+    font-size: 16px;
+  }
 }
 @media only screen and (max-width: 567.99px) {
   .card-description{
@@ -225,9 +231,8 @@
   width: 70px;
   margin-left: 10px;
 }
-  .cart-text {
+  .card-body .card-text {
     font-size: 14px;
-    width: 70px;
   }
   .product-price .amount span {
     font-size: 13px;
@@ -259,16 +264,18 @@
   .cart-area {
     margin-top: 140px !important;
   }
-  
+  .card-body .description-link{
+    margin-top: 0px!important;
+  }
   .cart-buttons .cart-header {
-    font-size: 26px!important;
-    padding-left: 10px;
+    font-size: 24px!important;
+    padding-left: 14px;
   }
   .cart-body{
     overflow-x: auto;
   }
   .card-for-cart{
-    height: 180px!important;
+    height: 200px!important;
     overflow-x: auto!important;
     margin: 0px!important;
     margin-top: 20px!important;
@@ -284,7 +291,7 @@
     font-size: 14px!important;
   }
   .card-body .sold-by-div{
-    margin: 0px;
+    margin-top: 0px!important;
   }
   .product-price .amount span {
     font-size: 13px;
@@ -300,6 +307,9 @@
     font-size: 11px;
     width: 83px!important;
   }
+  .card-body .amount{
+    margin-top: 0px!important;
+  }
   .cart-table table tbody tr td.product-quantity .input-counter input
   {
     font-size: 14px!important;
@@ -313,8 +323,18 @@
   }
   .card-body .input-counter{
     position: absolute;
-    top: 132px;
-    left: 74px;
+    top: 130px;
+    left: 90px;
+  }
+}
+@media only screen and (max-width: 429.98px){
+  .card-body .input-counter{
+    position: absolute;
+    top: 128px;
+    left: 84px;
+  }
+  .card-body{
+    width: 400px;
   }
 }
 @media only screen and (max-width: 359.98px){
