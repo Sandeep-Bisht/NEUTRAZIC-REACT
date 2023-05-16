@@ -168,6 +168,10 @@
   cursor: pointer;
 }
 
+.drop-category .category-icon {
+  margin-left: -36px!important;
+}
+
 #navbarTogglerDemo03 ul {
   margin-left: 72px!important;
 }
@@ -888,6 +892,9 @@ body {
   background-image: none;
   display: none;
 }
+.Home-navbar .contact:hover{
+color: white !important;
+}
 
 /* End Media Query Responsive for Desktop */
 
@@ -1407,6 +1414,7 @@ body {
   .currancy select {
     font-size: 10px;
   }
+
   .user-login .Total-Item {
     position: absolute;
     bottom: 7px;

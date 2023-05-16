@@ -1566,7 +1566,7 @@ const Header1 = (props) => {
                 data-bs-target="#myModal"
               >
                 <div>
-                  <div className="category ">
+                  <div className="category category-icon">
                     <BiCategoryAlt></BiCategoryAlt>
                   </div>
                   <div className="category">
@@ -1635,12 +1635,12 @@ const Header1 = (props) => {
                         className="icons2"
                         src={require("../Images/Icons/akar-icons_phone.png")}
                       />{" "}
-                      <span className="contact" style={{cursor:"context-menu"}}>+91-7500872014</span>
+                      <a className="contact" href="tel:+91-7500872014" target="_blank">+91-7500872014</a>
                       <img
                         src={require("../Images/Icons/carbon_email-new.png")}
                         className="icons2 ml-3"
                       />{" "}
-                      <span className="contact  mr-5" style={{cursor:"context-menu"}}>info@nutrazik.com</span>
+                      <a className="contact  mr-5" href="mailto:info@nutrazik.com">info@nutrazik.com</a>
                     </div>
                   </div>
                 </nav>
