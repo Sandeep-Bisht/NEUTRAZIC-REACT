@@ -46,8 +46,8 @@
   max-width: 26px !important;
   height: 30px;
 }
-.navbar-expand-lg .navbar-nav .nav-header{
-  padding-left: 20px!important;
+.navbar-expand-lg .navbar-nav .nav-header {
+  padding-left: 20px !important;
   padding-right: 20px;
 }
 
@@ -57,9 +57,6 @@
   padding-top: 4px;
   padding-bottom: 1px; */
 }
-
-
-
 
 .icons2 {
   max-width: 19px !important;
@@ -82,11 +79,28 @@
   bottom: 0px;
   right: 0px;
 }
+.cart-btn svg {
+  height: 25px !important;
+  width: 25px !important;
+  color: rgba(30, 20, 79, 0.6);
+}
+.cart-btn svg:hover {
+  color: rgba(30, 20, 79, 1);
+}
 .user-login .Total-Item {
   position: absolute;
-  bottom: 10px;
-  left: -15px;
-  font-size: 14px;
+  bottom: 12px;
+  left: -13px;
+  font-size: 10px;
+  height: 17px;
+  width: 17px;
+  background: rgb(30, 20, 79, 0.6);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 10px;
 }
 
 .wishlist-div {
@@ -168,12 +182,12 @@
   cursor: pointer;
 }
 
-.drop-category .category-icon {
+/* .drop-category .category-icon {
   margin-left: -36px!important;
-}
+} */
 
 #navbarTogglerDemo03 ul {
-  margin-left: 72px!important;
+  margin-left: 72px !important;
 }
 .nav-item .nav-heading {
   font-family: "Roboto", sans-serif;
@@ -327,6 +341,7 @@
 /* wishlist code */
 .wishlist-page {
   padding-bottom: 50px;
+  color: rgb(30, 20, 79);
 }
 
 .wishlist-header {
@@ -579,6 +594,7 @@ h3 .read-more-button {
 .dropdown .btn-sm {
   padding: 0px !important;
   font-size: 16px !important;
+  font-weight: 700;
   position: relative;
   bottom: 0;
   letter-spacing: 0.25px;
@@ -586,6 +602,7 @@ h3 .read-more-button {
   outline: 0;
   box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
   text-transform: capitalize;
+  color: rgb(30, 20, 79, 0.6);
 }
 .dropdown .btn-sm:hover {
   color: #1b97ff;
@@ -690,7 +707,7 @@ h3 .read-more-button {
 /* Sidebar Styles */
 
 .sidebar-nav {
-  padding-left: 24px!important;
+  padding-left: 24px !important;
   position: absolute;
   top: 30px;
   width: 100%;
@@ -892,8 +909,8 @@ body {
   background-image: none;
   display: none;
 }
-.Home-navbar .contact:hover{
-color: white !important;
+.Home-navbar .contact:hover {
+  color: white !important;
 }
 
 /* End Media Query Responsive for Desktop */
@@ -903,6 +920,7 @@ color: white !important;
 .user-icon {
   font-size: 28px;
   display: block;
+  color: rgb(30, 20, 79, 0.6);
 }
 
 .logged-In {
@@ -945,7 +963,6 @@ color: white !important;
   align-items: center;
   padding: 0 20px;
 }
-
 
 .heaader-wrapper .cart-div .login-div1 {
   display: flex;
@@ -1019,14 +1036,18 @@ color: white !important;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   position: relative;
-  color: #1e144f;
+  color: rgb(30, 20, 79, 0.8);
   padding-left: 5px;
+  font-weight: 500;
 }
 
 .heart-div .option-item .cart-btn h6 {
   display: none;
 }
 
+.collapsed-button {
+  padding: 7px 10px !important;
+}
 /* forget modal */
 /* .Forgot-Password{
     display: none;
@@ -1088,7 +1109,7 @@ color: white !important;
   .currancy {
     margin-left: 26px !important;
   }
-  
+
   .navbar {
     background-color: #1b97ff !important;
     padding: 0px;
@@ -1161,7 +1182,7 @@ color: white !important;
     width: 150px;
   }
   .user-icon {
-    font-size: 25px;
+    font-size: 28px;
   }
   .option-item .cart-btn {
     font-size: 25px;
@@ -1170,10 +1191,10 @@ color: white !important;
     padding-left: 2px !important;
   }
   .cart-div {
-    padding-left: 2px!important;
+    padding-left: 2px !important;
   }
   .heart-div {
-    padding-left: 2px!important;
+    padding-left: 2px !important;
   }
   .header-wrapper-right .left-part {
     margin-right: 0;
@@ -1218,7 +1239,7 @@ color: white !important;
   }
   .user-icon,
   .option-item .cart-btn {
-    font-size: 18px;
+    font-size: 28px;
   }
   .user-icon {
     padding-top: 3px;
@@ -1250,6 +1271,11 @@ color: white !important;
     width: 100%;
     height: 100%;
   } /* end modal */
+  .currancy select {
+    height: 24px !important;
+    padding: 4px 2px !important;
+    font-size: 12px !important;
+  }
 }
 
 @media only screen and (max-width: 730.98px) {
@@ -1282,7 +1308,9 @@ color: white !important;
 }
 @media only screen and (max-width: 575.98px) {
   /* responsive homepage */
-
+  .after-user-Logout .sp {
+    display: none !important;
+  }
   .single-products-box .image img {
     transition: var(--transition);
     height: 197px;
@@ -1325,6 +1353,11 @@ color: white !important;
   .logiRegisterContentDiv .register-form-button {
     width: auto !important;
   }
+  .currancy select {
+    height: 20px !important;
+    font-size: 10px !important;
+    padding: 2px 0px !important;
+  }
 }
 
 @media only screen and (max-width: 450px) {
@@ -1356,14 +1389,16 @@ color: white !important;
     line-height: 25px !important;
   }
   .dropdown .btn-sm {
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
   .sp {
-    font-size: 13px !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
   }
   .currancy select {
-    font-size: 13px !important;
-    padding: 5px 0px;
+    font-size: 9px !important;
+    padding: 0px 0px !important;
+    height: 15px !important;
   }
   .login-div2 input[type="text"] {
     width: 80%;
@@ -1405,7 +1440,7 @@ color: white !important;
   }
   .user-icon,
   .option-item .cart-btn {
-    font-size: 14px;
+    font-size: 28px !important;
   }
   .heaader-wrapper .cart-div .login-div1,
   .heaader-wrapper .heart-div .heart-div-inner {
@@ -1417,9 +1452,10 @@ color: white !important;
 
   .user-login .Total-Item {
     position: absolute;
-    bottom: 7px;
+    bottom: 10px;
     left: -10px;
-    font-size: 12px;
+    font-size: 10px !important;
+    padding: 5px !important;
   }
   .newheader {
     height: 125px;
@@ -1439,6 +1475,10 @@ color: white !important;
   .after-user-Logout .sp {
     position: relative;
     bottom: 1px;
+  }
+  .cart-btn svg {
+    height: 25px !important;
+    width: 32px !important;
   }
 }
 
@@ -1475,10 +1515,10 @@ color: white !important;
   .currancy {
     margin-left: 5px !important;
   }
-  .dropdown .login-btn {
+  /* .dropdown .login-btn {
     font-size: 12px !important;
     font-weight: bold;
-  }
+  } */  
 }
 @media only screen and (max-width: 359.98px) {
   .cart-div {

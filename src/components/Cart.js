@@ -247,7 +247,7 @@ const Cart = () => {
                               return (
                                 <>
                                 <div className="card card-for-cart m-2">
-                                <div className="card-body row">
+                                <div className="card-body cart-box row">
                                   <div className="col-lg-3 col-md-3 col-2">
                                     <div>
                                     <div className="d-flex justify-content-center">

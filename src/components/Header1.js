@@ -17,6 +17,7 @@ import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
+import { BsBagHeart, BsCart4 } from "react-icons/bs";
 import axios from "axios";
 
 let changeNavValue = 0;
@@ -71,8 +72,8 @@ const Header1 = (props) => {
   const [userItem, setUserItem] = useState({});
   const [otpMsg, setOtpMsg] = useState("");
 
-  const{searchedtext,setSearchedText} = useContext(CurrencyContext);
-  const [searcheditem,setSearchedItem] = useState("");
+  const { searchedtext, setSearchedText } = useContext(CurrencyContext);
+  const [searcheditem, setSearchedItem] = useState("");
 
   const currentLocation = location.pathname;
 
@@ -169,11 +170,10 @@ const Header1 = (props) => {
     GetWishlist();
     GetSubCategory();
     CartById();
-    if(!currentLocation.includes("SearchResult")){
+    if (!currentLocation.includes("SearchResult")) {
       setSearchedItem("");
       setSearchedText("");
-    }
-    else{
+    } else {
       setSearchedItem(searchedtext);
     }
     $(document).ready(function() {
@@ -197,7 +197,7 @@ const Header1 = (props) => {
   }, [currancy]);
 
   const GetWishlist = async () => {
-    console.log("inside the wishlist")
+    console.log("inside the wishlist");
     let id;
     if (Userdata) {
       id = Userdata._id;
@@ -218,7 +218,7 @@ const Header1 = (props) => {
           dispatch(ACTIONS1.getwishlistitem(0));
         }
         if (data.data !== undefined) {
-          console.log(data.data.length)
+          console.log(data.data.length);
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
@@ -227,7 +227,7 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
-  console.log(wishlisted,"number of wishlisted");
+  console.log(wishlisted, "number of wishlisted");
   const currencyHandler = (e) => {
     setCurrency(e.target.value);
     if (currancy === "INR") {
@@ -239,7 +239,7 @@ const Header1 = (props) => {
     cookies.set("CurrencyType", e.target.value, { path: "/" });
   };
   useEffect(() => {
-    if (Userdata === null || Userdata=="") {
+    if (Userdata === null || Userdata == "") {
       setLoginState("0");
       setCartItems("");
       setWishlisted("");
@@ -419,7 +419,7 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
-  console.log(props.func,"props of header");
+  console.log(props.func, "props of header");
   const searchData = (e) => {
     if (props.func) {
       props.func(e);
@@ -640,26 +640,30 @@ const Header1 = (props) => {
       }
     }
   };
-  
+
   $(document).ready(function() {
     // Get the current URL
     var currentUrl = window.location.href;
-  
+
     // Remove the domain name and trailing slash
-    var currentPath = currentUrl.replace(/^(?:\/\/|[^/]+)*\//, '').replace(/\/$/, '');
-  
+    var currentPath = currentUrl
+      .replace(/^(?:\/\/|[^/]+)*\//, "")
+      .replace(/\/$/, "");
+
     // Find the link with the same href as the current URL
-    $('.navbar-nav .nav-link').each(function() {
-      var linkHref = $(this).attr('href').replace(/^(?:\/\/|[^/]+)*\//, '').replace(/\/$/, '');
+    $(".navbar-nav .nav-link").each(function() {
+      var linkHref = $(this)
+        .attr("href")
+        .replace(/^(?:\/\/|[^/]+)*\//, "")
+        .replace(/\/$/, "");
       if (linkHref === currentPath) {
         // Remove "active" class from previously active link
-        $('.navbar-nav .nav-link.active').removeClass('active');
+        $(".navbar-nav .nav-link.active").removeClass("active");
         // Add "active" class to newly active link
-        $(this).addClass('active');
+        $(this).addClass("active");
       }
     });
   });
-  
 
   return (
     <>
@@ -1243,9 +1247,9 @@ const Header1 = (props) => {
                         onKeyDown={(e) => {
                           if (e.key === "Enter" && search.length) {
                             searchData(search);
-                            
-                              setSearchedText(e.target.value);
-                            
+
+                            setSearchedText(e.target.value);
+
                             history.push("/SearchResult/" + search);
                           }
                         }}
@@ -1290,13 +1294,17 @@ const Header1 = (props) => {
                         }}
                       >
                         <div className="cart-btn">
-                          <i
+                          {/* <i
                             className="bx bx-cart"
                             data-bs-toggle="modal"
                             data-bs-target={"#exampleModal"}
-                          >
-                            <span className="sp">Cart</span>
-                          </i>
+                          > */}
+                          <BsCart4
+                            data-bs-toggle="modal"
+                            data-bs-target={"#exampleModal"}
+                            className="header-icon"
+                          />
+                          <span className="sp">Cart</span>
                         </div>
                       </div>
                     ) : (
@@ -1306,7 +1314,7 @@ const Header1 = (props) => {
                             <div className="">
                               <div className="option-item">
                                 <div className="cart-btn">
-                                  <i className="bx bx-cart"></i>
+                                  <BsCart4  className="header-icon"/>
                                 </div>
                               </div>
                             </div>
@@ -1338,13 +1346,17 @@ const Header1 = (props) => {
                           }}
                         >
                           <div className="cart-btn">
-                            <i
+                            {/* <i
                               className="bx bx-heart"
                               data-bs-toggle="modal"
                               data-bs-target={"#exampleModal"}
-                            >
-                              <span className="sp">Wishlist</span>
-                            </i>
+                            > */}
+                            <BsBagHeart
+                              data-bs-toggle="modal"
+                              data-bs-target={"#exampleModal"}
+                              className="header-icon"
+                            />
+                            <span className="sp">Wishlist</span>
                           </div>
                         </div>
                       ) : (
@@ -1354,7 +1366,7 @@ const Header1 = (props) => {
                               <div className="option-item">
                                 <div className="cart-btn">
                                   {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                  <i className="bx bx-heart"></i>
+                                  <BsBagHeart className="header-icon"/>
                                 </div>
                               </div>
                             </div>
@@ -1369,7 +1381,7 @@ const Header1 = (props) => {
                       <div className=" login-div ">
                         <div className="option-item">
                           <div className="cart-btn">
-                            {Userdata == null || Userdata==""? (
+                            {Userdata == null || Userdata == "" ? (
                               <>
                                 <span
                                   className="sp"
@@ -1389,72 +1401,71 @@ const Header1 = (props) => {
                               </>
                             ) : (
                               <>
-                                
                                 <div className="dropdown">
-                              <button
-                                className="btn btn-white btn-sm login-btn user-dropdown-btn"
-                                type="button"
-                                id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
-                                <i className="user-icon bx bx-user-pin"></i>
-                              </button>
-
-                              <ul
-                                className="dropdown-menu Logout-ul"
-                                aria-labelledby="dropdownMenuButton1"
-                              >
-                                <div>
-                                  <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-file pl-2"></i>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <Link to="/UserOrder">
-                                        <span className="pr-4">Orders</span>
-                                      </Link>
-                                    </li>
-                                  </div>
-                                </div>
-                                <Link to="/Cart">
-                                  <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-cart pl-2"></i>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <span className="pr-4">Cart</span>
-                                      {/* <span className="text-danger">item</span> */}
-                                    </li>
-                                  </div>
-                                </Link>
-                                <Link to="/Wishlist">
-                                  <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-heart pl-2"></i>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <span className="pr-4">Wishlist</span>
-                                    </li>
-                                  </div>
-                                </Link>
-                                <div className="Logout-div d-flex align-items-center">
-                                  <i className="bx bx-log-out pl-2"></i>{" "}
-                                  <li
-                                    className="dropdown-item Logout-li"
-                                    style={{ cursor: "pointer" }}
-                                    onClick={() => {
-                                      logout();
-                                    }}
+                                  <button
+                                    className="btn btn-white btn-sm login-btn user-dropdown-btn"
+                                    type="button"
+                                    id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
                                   >
-                                    <span className="pr-4">Logout</span>
-                                  </li>
+                                    <i className="user-icon bx bx-user-pin"></i>
+                                  </button>
+
+                                  <ul
+                                    className="dropdown-menu Logout-ul"
+                                    aria-labelledby="dropdownMenuButton1"
+                                  >
+                                    <div>
+                                      <div className="Logout-div d-flex align-items-center">
+                                        <i className="bx bx-file pl-2"></i>{" "}
+                                        <li
+                                          className="dropdown-item Logout-li"
+                                          style={{ cursor: "pointer" }}
+                                        >
+                                          <Link to="/UserOrder">
+                                            <span className="pr-4">Orders</span>
+                                          </Link>
+                                        </li>
+                                      </div>
+                                    </div>
+                                    <Link to="/Cart">
+                                      <div className="Logout-div d-flex align-items-center">
+                                        <i className="bx bx-cart pl-2"></i>{" "}
+                                        <li
+                                          className="dropdown-item Logout-li"
+                                          style={{ cursor: "pointer" }}
+                                        >
+                                          <span className="pr-4">Cart</span>
+                                          {/* <span className="text-danger">item</span> */}
+                                        </li>
+                                      </div>
+                                    </Link>
+                                    <Link to="/Wishlist">
+                                      <div className="Logout-div d-flex align-items-center">
+                                        <i className="bx bx-heart pl-2"></i>{" "}
+                                        <li
+                                          className="dropdown-item Logout-li"
+                                          style={{ cursor: "pointer" }}
+                                        >
+                                          <span className="pr-4">Wishlist</span>
+                                        </li>
+                                      </div>
+                                    </Link>
+                                    <div className="Logout-div d-flex align-items-center">
+                                      <i className="bx bx-log-out pl-2"></i>{" "}
+                                      <li
+                                        className="dropdown-item Logout-li"
+                                        style={{ cursor: "pointer" }}
+                                        onClick={() => {
+                                          logout();
+                                        }}
+                                      >
+                                        <span className="pr-4">Logout</span>
+                                      </li>
+                                    </div>
+                                  </ul>
                                 </div>
-                              </ul>
-                            </div>
                               </>
                             )}
                           </div>
@@ -1575,7 +1586,7 @@ const Header1 = (props) => {
                 </div>
               </div>
               <div className="col-lg-10 col-11 p-0">
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg bg-light">
                   <div className="container-fluid">
                     <button
                       className="navbar-toggler"
@@ -1586,7 +1597,9 @@ const Header1 = (props) => {
                       aria-expanded="false"
                       aria-label="Toggle navigation"
                     >
-                      <span className="navbar-toggler-icon"></span>
+                      <span className="collapsed-button">
+                        <i class="fas fa-bars" style={{ color: "#fff" }}></i>
+                      </span>
                     </button>
                     <div
                       className="collapse navbar-collapse Home-navbar"
@@ -1620,27 +1633,38 @@ const Header1 = (props) => {
                             Contact
                           </Link>
                         </li>
-                          <li className="nav-item">
-                            <Link
-                              className="nav-link nav-heading nav-header"
-                              to={"/Blogs"}
-                              tabIndex="-1"
-                              aria-disabled="true"
-                            >
-                              Blog
-                            </Link>
-                          </li>
+                        <li className="nav-item">
+                          <Link
+                            className="nav-link nav-heading nav-header"
+                            to={"/Blogs"}
+                            tabIndex="-1"
+                            aria-disabled="true"
+                          >
+                            Blog
+                          </Link>
+                        </li>
                       </ul>
                       <img
                         className="icons2"
                         src={require("../Images/Icons/akar-icons_phone.png")}
                       />{" "}
-                      <a className="contact" href="tel:+91-7500872014" target="_blank">+91-7500872014</a>
+                      <a
+                        className="contact"
+                        href="tel:+91-7500872014"
+                        target="_blank"
+                      >
+                        +91-7500872014
+                      </a>
                       <img
                         src={require("../Images/Icons/carbon_email-new.png")}
                         className="icons2 ml-3"
                       />{" "}
-                      <a className="contact  mr-5" href="mailto:info@nutrazik.com">info@nutrazik.com</a>
+                      <a
+                        className="contact  mr-5"
+                        href="mailto:info@nutrazik.com"
+                      >
+                        info@nutrazik.com
+                      </a>
                     </div>
                   </div>
                 </nav>

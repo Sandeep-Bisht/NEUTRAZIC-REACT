@@ -19794,8 +19794,10 @@ svg {
   margin-bottom: 30px;
 }
 .home-banner .home-banner-content {
-  padding-right: 50px;
+  /* padding-right: 50px; */
   line-height: 1.5;
+  text-align: justify;
+  word-spacing: -1px;
 }
 .home-banner .home-banner-right {
   text-align: center;
@@ -20302,7 +20304,7 @@ svg {
     margin-top: 98px !important;
   }
   .home-banner {
-    margin-top: 60px;
+    margin-top: 90px;
   }
   .blog-section .blog-page-section-2 .card .card-body {
     height: 190px !important;
@@ -20317,9 +20319,7 @@ svg {
     margin-bottom: 18px;
   }
   /* reponsive homepage */
-  .home-banner {
-    margin-top: 65px;
-  }
+  
   .single-products-box .image img {
     width: 100% !important;
   }
@@ -20481,7 +20481,7 @@ svg {
     font-size: 20px !important;
   }
   .home-banner {
-    margin-top: 97px;
+    margin-top: 120px;
   }
   .home-banner .home-banner-content {
     line-height: 27px;
@@ -20541,7 +20541,7 @@ svg {
     font-size: 15px !important;
   }
   p {
-    line-height: 33px;
+    /* line-height: 33px; */
     font-size: 15px;
   }
   .drop-category {
@@ -20673,8 +20673,8 @@ svg {
     margin-top: -56px !important;
   }
   p {
-    line-height: 30px !important;
-    font-size: 15px !important;
+    /* line-height: 30px !important; */
+    /* font-size: 15px !important; */
   }
   .blog-box-wrapper .left-blog-image-wrap img {
     height: 272px !important;
