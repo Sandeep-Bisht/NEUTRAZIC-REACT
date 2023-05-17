@@ -30,7 +30,7 @@ const Sidemenu = () => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   });
-
+console.log(Userdata,"check user data of sidemenu bar for vender")
   const logout = () => {
     localStorage.setItem("Userdata", null);
     toast.success("Logout Successfully", {
@@ -123,7 +123,7 @@ const Sidemenu = () => {
           </div>
         </div>
         {Userdata !== undefined ? (
-          Userdata.role === "superAdmin" || Userdata.role === "Vendor" ? (
+          Userdata.role === "superAdmin"? (
             <div className="nav__link active">
               <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
@@ -229,10 +229,99 @@ const Sidemenu = () => {
                 </div>
               </div>
             </div>
-          ) : null
+          ) : 
+          <div className="nav__link active">
+          <div className="accordion" id="accordionExample">
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingTwo">
+                <div className="d-flex align-items-center justify-content-center div1">
+                  <GrConfigure className="nav__icon" />
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    <span className="pl-3 nav__name">Configuration</span>
+                  </button>
+                </div>
+              </h2>
+              <div
+                id="collapseTwo"
+                className={`accordion-collapse collapse ${pathName.includes(
+                  "Configuration"
+                ) && "show"}`}
+                aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample"
+              >
+                <div className="dashboard-accordion-body">
+                  {Userdata !== undefined ? (
+                    Userdata.role === "vendor" ? (
+                      <ul className="Configration-List">
+                        <Link
+                          to={"/Configuration/" + "AllManufactureDetails"}
+                        >
+                          <li className="nav-name">
+                            <GiFactory className="configuration-icons-wrap" />
+                            Manufacturer
+                          </li>
+                        </Link>
+                        <Link
+                          to={"/Configuration/" + "AllCategoriesDetails"}
+                        >
+                          <li>
+                            <BiCategory className="configuration-icons-wrap" />
+                            Category
+                          </li>
+                        </Link>
+                        <Link
+                          to={"/Configuration/" + "AllSubCategoriesDetails"}
+                        >
+                          <li>
+                            <BsListNested className="configuration-icons-wrap" />
+                            SubCategory
+                          </li>
+                        </Link>
+                        <Link to={"/Configuration/" + "AllProductsDetails"}>
+                          <li>
+                            <GiBoxUnpacking className="configuration-icons-wrap" />
+                            Products
+                          </li>
+                        </Link>
+                        <Link
+                          to={"/Configuration/" + "AllWarehouseDetails"}
+                        >
+                          <li>
+                            <FaWarehouse className="configuration-icons-wrap" />
+                            Warehouse
+                          </li>
+                        </Link>
+                      </ul>
+                    ) : (
+                      <ul className="Configration-List">
+                        
+                        <Link to={"/Configuration/" + "AllProductsDetails"}>
+                          <li>
+                            <GiBoxUnpacking className="configuration-icons-wrap" />
+                            Products
+                          </li>
+                        </Link>
+                      </ul>
+                    )
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         ) : null}
 
-        <div className="nav__link active">
+           {
+            Userdata!==undefined && Userdata.role==="superAdmin" ?
+              (
+                <div className="nav__link active">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingThree">
               <div className="d-flex align-items-center justify-content-center div1">
@@ -277,6 +366,11 @@ const Sidemenu = () => {
             </div>
           </div>
         </div>
+              )
+              :
+              null
+           }
+        
         <div className="nav__link active">
           <div className="d-flex align-items-center justify-content-center div1">
             <Link to="/ALLBlogs">

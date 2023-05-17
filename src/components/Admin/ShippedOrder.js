@@ -17,6 +17,8 @@ import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import { AiFillCaretDown } from "react-icons/ai";
 
+var Userdata="";
+
 const ShippedOrder = () => {
   const [orders, setOrders] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
@@ -30,6 +32,7 @@ const ShippedOrder = () => {
   const history = useHistory();
 
   useEffect(() => {
+    Userdata=JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
   }, []);
 
@@ -37,14 +40,29 @@ const ShippedOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        let arr = [];
-        for (let item of data.data) {
-          if (item.orderStatus == "Shipped") {
-            item.createdAt=item.createdAt.slice(0,10);
-            arr.push(item);
-          }
-        }
+        if(Userdata!==undefined || Userdata!=="")
+        {
+          if(Userdata.role==="Vendor")
+          {
+            let arr = [];
+              for (let item of data.data) {
+                if (item.orderStatus == "Shipped" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
+                  arr.push(item);
+                }
+              }
         setOrderDetails(arr);
+          }
+          else{
+            let arr = [];  
+            for (let item of data.data) {
+              if (item.orderStatus == "Shipped") {
+                item.createdAt=item.createdAt.slice(0,10);
+                arr.push(item);
+              }
+            }
+            setOrderDetails(arr);
+        }
+          }
       })
       .catch((err) => {
         console.log(err, "errors");

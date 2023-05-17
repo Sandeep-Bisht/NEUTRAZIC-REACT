@@ -18,6 +18,8 @@ import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
 import axios from "axios";
+import { RxDashboard } from "react-icons/rx";
+
 
 let changeNavValue = 0;
 var header;
@@ -227,7 +229,6 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
-  console.log(wishlisted,"number of wishlisted");
   const currencyHandler = (e) => {
     setCurrency(e.target.value);
     if (currancy === "INR") {
@@ -419,7 +420,6 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
-  console.log(props.func,"props of header");
   const searchData = (e) => {
     if (props.func) {
       props.func(e);
@@ -1534,6 +1534,23 @@ const Header1 = (props) => {
                                     </li>
                                   </div>
                                 </Link>
+                                {
+                                  Userdata && ( Userdata.role == "superAdmin" || Userdata.role == "Vendor") && 
+                                  <Link to="/dashboard">
+                                  <div className="Logout-div d-flex align-items-center">
+                                  <RxDashboard className="nav__icon pl-2"/>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Dashboard</span>
+                                    </li>
+                                  </div>
+                                </Link>
+                                }
+                                  
+                                
+                                
                                 <div className="Logout-div d-flex align-items-center">
                                   <i className="bx bx-log-out pl-2"></i>{" "}
                                   <li
