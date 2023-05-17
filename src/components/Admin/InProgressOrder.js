@@ -17,6 +17,8 @@ import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 
+var Userdata=""
+
 const InProgressOrder = () => {
   const [orders, setOrders] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
@@ -28,6 +30,7 @@ const InProgressOrder = () => {
   const history = useHistory();
 
   useEffect(() => {
+    Userdata=JSON.parse(localStorage.getItem("Userdata"))
     GetOrders();
   }, []);
 
@@ -35,14 +38,30 @@ const InProgressOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        let arr = [];
-        for (let item of data.data) {
-          if (item.orderStatus == "In-Progress") {
-            item.createdAt=item.createdAt.slice(0,10);
-            arr.push(item);
-          }
-        }
+        if(Userdata!==undefined || Userdata!=="")
+        {
+          if(Userdata.role==="Vendor")
+          {
+            let arr = [];
+         
+              for (let item of data.data) {
+                if (item.orderStatus == "In-Progress" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
+                  arr.push(item);
+                }
+              }
         setOrderDetails(arr);
+          }
+          else{
+            let arr = [];  
+            for (let item of data.data) {
+              if (item.orderStatus == "In-Progress") {
+                item.createdAt=item.createdAt.slice(0,10);
+                arr.push(item);
+              }
+            }
+            setOrderDetails(arr);
+        }
+          }
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -62,7 +81,6 @@ const InProgressOrder = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data.data,"check order status")
         GetOrders();
         if(order.orderStatus==="Packed")
         {
