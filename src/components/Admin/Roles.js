@@ -11,8 +11,10 @@ const Roles = (props) => {
   const [phonenumber, setPhonenumber] = useState("");
   const [password, setPassword] = useState("");
   const [manufactureres, setManufactureres] = useState([]);
+  const [manufacturer,setManufacturer]=useState([]);
   const [role, setRole] = useState("");
   const [users, setUsers] = useState([]);
+  var userStatus="Activate";
   const [organization, setOrganization] = useState("");
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -55,6 +57,8 @@ const Roles = (props) => {
         phonenumber: phonenumber,
         email: email,
         role: role,
+        manufacturer:manufacturer,
+        userStatus:userStatus,
         organization: organization,
       }),
     })
@@ -175,6 +179,27 @@ const Roles = (props) => {
                         />
                         <label htmlFor="formfloating">Confirm Password*</label>
                       </div>
+                      {Userdata!==undefined &&
+                      Userdata.role==="superAdmin" ? 
+                      <div className="form-group col-lg-12 p-1 form-floating">
+                            <select
+                              className="form-control custom-select"
+                              onChange={(e) => {
+                                setManufacturer(e.target.value);
+                              }}
+                            >
+                              <option>
+                                Select Manufacturer
+                              </option>
+                              {manufactureres.map((el, ind) =>
+                                Userdata.role === "superAdmin" ? (
+                                  <option value={el.name} key={ind}>{el.name}</option>
+                                 ) : null
+                              )}
+                            </select>
+                          </div> :
+                          null
+}
                       {Userdata != undefined &&
                         Userdata.role == "superAdmin" ? (
                         <div className="form-group col-lg-12 p-1">

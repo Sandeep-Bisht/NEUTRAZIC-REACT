@@ -168,10 +168,6 @@
   cursor: pointer;
 }
 
-.drop-category .category-icon {
-  margin-left: -36px!important;
-}
-
 #navbarTogglerDemo03 ul {
   margin-left: 72px!important;
 }
@@ -437,6 +433,12 @@
   margin: 0 10px;
   color: #1b97ff;
 }
+.Logout-div .nav__icon{
+  height: 20px;
+  width: auto;
+  color: #007bff;
+  opacity: 1.6!important;
+}
 
 .Home-navbar ul li {
   padding: 0px 10px;
@@ -597,7 +599,7 @@ h3 .read-more-button {
 
 .Logout-ul {
   width: 200px !important;
-  height: 220px;
+  height: 231px;
 }
 .Logout-ul div {
   border-bottom: 1px solid #f2f2f2;
@@ -890,11 +892,10 @@ body {
 /* remove default css */
 .accordion-button::after {
   background-image: none;
-  display: none;
 }
 .Home-navbar .contact:hover{
-color: white !important;
-}
+  color: white !important;
+  }
 
 /* End Media Query Responsive for Desktop */
 
@@ -1270,7 +1271,7 @@ color: white !important;
     margin: 5px 0;
   }
   .currancy select {
-    height: 28px;
+    height: 25px;
     font-size: 14px;
   }
   .heart-div .option-item .cart-btn h6 {
@@ -1414,7 +1415,6 @@ color: white !important;
   .currancy select {
     font-size: 10px;
   }
-
   .user-login .Total-Item {
     position: absolute;
     bottom: 7px;

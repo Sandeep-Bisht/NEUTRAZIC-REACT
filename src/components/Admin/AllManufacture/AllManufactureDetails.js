@@ -11,7 +11,7 @@ import { MdOutlineEditNote } from 'react-icons/md';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
 
-
+var Userdata="";
 
 export default function AllManufactureDetails() {
   const [getuser, setGetuser] = useState([])
@@ -22,18 +22,25 @@ export default function AllManufactureDetails() {
   const [Manufacturer, setManufacturer] = useState("");
 
   useEffect(() => {
+    Userdata=JSON.parse(localStorage.getItem("Userdata"));
     fetchUsers();
     GetManufacturer();
   }, [])
-
-
-
 
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        setManufacturer(data.data.length);
+        if(Userdata!==undefined && Userdata.role==="Vendor")
+    {
+       var responseData=data.data.filter((item)=>{
+        return (Userdata.manufacturer===item.name);
+       })
+       setManufacturer(responseData.length);
+    }
+    else{
+      setManufacturer(data.data.length);
+    }
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -45,8 +52,18 @@ export default function AllManufactureDetails() {
     const response = await axios.get(
       `${baseUrl}/api/manufacture/all_manufacture`
     );
-    setGetuser(response.data.data);
+    if(Userdata!==undefined && Userdata.role==="Vendor")
+    {
+       var responseData=response.data.data.filter((item)=>{
+        return (Userdata.manufacturer===item.name);
+       })
+       setGetuser(responseData);
     setLoading(false);
+    }
+    else{
+      setGetuser(response.data.data);
+      setLoading(false);
+    }
   };
 
   const onChangeHandler = (e) => {

@@ -35,9 +35,6 @@ const Dashboard = () => {
     setIsLogin(loginState)
   }, [loginState])
 
-
-
-
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetUser();
@@ -60,7 +57,17 @@ const Dashboard = () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        Setproducts(data.data.length);
+        if(Userdata!==undefined && Userdata.role==="Vendor")
+    {
+       var responseData=data.data.filter((item)=>{
+        return (Userdata.manufacturer===item.manufacturer.name);
+       })
+       console.log(responseData,"inside the all products details");
+       Setproducts(responseData.length);
+    }
+    else{
+      Setproducts(data.data.length);
+    }
       })
       .catch((err) => {
         console.log(err, "error");
@@ -120,7 +127,16 @@ const Dashboard = () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        setManufacturer(data.data.length);
+        if(Userdata!==undefined && Userdata.role==="Vendor")
+    {
+       var responseData=data.data.filter((item)=>{
+        return (Userdata.manufacturer===item.name);
+       })
+       setManufacturer(responseData.length);
+    }
+    else{
+      setManufacturer(data.data.length);
+    }
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -141,7 +157,71 @@ const Dashboard = () => {
                 <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
                   <main className="main graph-main-div">
                     <div className="row cardsec-row">
+                      {
+                        Userdata!==undefined && Userdata!=="" ? (
+                          Userdata.role==="Vendor" ? (
+                            <>
+                            <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
+                        <Link to={"/Configuration/" + "AllManufactureDetails"}>
+                          <div className="card cardsec">
+                            <div className="row">
+                              <div className="col-12">
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div>
+                                    <GiFactory className="cardicon" />
+                                    <h6 className="cardheads">Manufacturer </h6>
+                                  </div>
+                                  <div>
+                                    <span className="count1">{Manufacturer}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
                       <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
+                        <Link to={"/Configuration/" + "AllProductsDetails"}>
+                          <div className="card cardsec">
+                            <div className="row">
+                              <div className="col-12">
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div>
+                                    <GiBoxUnpacking className="cardicon" />
+                                    <h6 className="cardheads">Products </h6>
+                                  </div>
+                                  <div>
+                                    <span className="count1">{products}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                      <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
+                        <Link to={"/Configuration/" + "AllWarehouseDetails"}>
+                          <div className="card cardsec">
+                            <div className="row">
+                              <div className="col-12">
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div>
+                                    <BsListNested className="cardicon" />
+                                    <h6 className="cardheads">Warehouse</h6>
+                                  </div>
+                                  <div>
+                                    <span className="count1">{warehouse}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                      </>
+                          ):
+                          <>
+                          <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
                         <Link to={"/Configuration/" + "AllManufactureDetails"}>
                           <div className="card cardsec">
                             <div className="row">
@@ -276,6 +356,11 @@ const Dashboard = () => {
                           </div>
                         </Link>
                       </div>
+                      </>
+                        ):
+                        null
+                      }
+                      
                     </div>
                   </main>
                   <div className="container">

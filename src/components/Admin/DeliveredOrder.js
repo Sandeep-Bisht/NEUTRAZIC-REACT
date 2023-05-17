@@ -7,6 +7,8 @@ import { Table, Modal, Button } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
+var Userdata="";
+
 const DeliveredOrder = () => {
   const [orders, setOrders] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
@@ -18,6 +20,7 @@ const DeliveredOrder = () => {
   const history = useHistory();
 
   useEffect(() => {
+    Userdata=JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
   }, []);
 
@@ -25,16 +28,31 @@ const DeliveredOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        let arr = [];
-        for (let item of data.data) {
-          if (item.orderStatus == "Delivered") {
-            item.createdAt=item.createdAt.slice(0,10);
-            arr.push(item);
+        if(Userdata!==undefined || Userdata!=="")
+        {
+          if(Userdata.role==="Vendor")
+          {
+            let arr = [];
+         
+              for (let item of data.data) {
+                if (item.orderStatus == "Delivered" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
+                  arr.push(item);
+                }
+              }
+        setOrderDetails(arr);
           }
+          else{
+            let arr = [];  
+            for (let item of data.data) {
+              if (item.orderStatus == "Delivered") {
+                item.createdAt=item.createdAt.slice(0,10);
+                arr.push(item);
+              }
+            }
+            setOrderDetails(arr);
         }
-        setOrderDetails(arr)
-
-      }
+          }
+       }
       )
       .catch((err) => {
         console.log(err, "errors");

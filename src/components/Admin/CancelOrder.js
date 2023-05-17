@@ -7,6 +7,8 @@ import { Table, Input, Space, Popconfirm, Modal, Button, Typography, Dropdown } 
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
+var Userdata="";
+
 const ShippedOrder = () => {
   const [orders, setOrders] = useState([])
   const [OrderDetails, setOrderDetails] = useState([])
@@ -18,6 +20,7 @@ const ShippedOrder = () => {
   const history = useHistory();
 
   useEffect(() => {
+    Userdata=JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
   }, []);
 
@@ -26,15 +29,29 @@ const ShippedOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then(res => res.json())
       .then(async (data) => {
-        let arr = [];
+        if(Userdata!==undefined || Userdata!=="")
+        {
+          if(Userdata.role==="Vendor")
+          {
+            let arr = [];
+              for (let item of data.data) {
+                if (item.orderStatus == "Cancel" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
+                  arr.push(item);
+                }
+              }
+        setOrderDetails(arr);
+          }
+          else{
+            let arr = [];
         for (let item of data.data) {
           if (item.orderStatus == "Cancel") {
             arr.push(item);
           }
         }
         setOrderDetails(arr)
-
-      }
+        }
+          }
+         }
       )
       .catch((err) => {
         console.log(err, "errors");
