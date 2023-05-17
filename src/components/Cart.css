@@ -333,7 +333,7 @@
     top: 128px;
     left: 84px;
   }
-  .card-body{
+  .card-for-cart .cart-box {
     width: 400px;
   }
 }

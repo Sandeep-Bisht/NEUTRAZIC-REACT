@@ -59,15 +59,15 @@
 }
 .para-order-text {
   font-size: 13px !important;
-  color: rgba(0, 0, 0, 0.8);
+  color: #6c757d;
   font-weight: 600 !important;
 }
 .para-text {
-  font-size: 13px !important;
-  color: #007185;
+  font-size: 12px !important;
+  color: #6c757d;
 }
 .Re-order-button {
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   padding: 8px 13px;
@@ -99,6 +99,8 @@
   justify-content: start;
   align-items: center;
   text-align: justify;
+  word-spacing: 1px !important;
+  hyphens: auto !important;
   height: 100%;
   width: 100%;
 }
@@ -124,7 +126,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  /* height: 100px; */
 }
 .progress-box {
   width: 100%;
@@ -140,7 +142,7 @@
 .progress-text {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
 }
 .progress-color {
   position: absolute;
@@ -217,6 +219,15 @@
   font-size: 8px;
   color: #007bff;
 }
+.Delivery-status{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Delivered-time{
+  font-size: 8px;
+  color: green;
+}
 .progress-text {
   margin-top: 20px;
 }
@@ -248,14 +259,20 @@
   width: 30px;
   color: #007bff;
 }
-.order-details {
+/* .order-details {
   height: 100px;
-}
+} */
 .Right-order-content{
-  height: 100px;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
+}
+
+ .Pending-text{
+  color: orange !important;
+  font-weight: 600 !important;
+}
+.p-accordion .p-accordion-header .p-accordion-header-link{
+  color: rgba(0,0,0,0.7) !important;
 }
 
 /* Responsive Order */
@@ -264,10 +281,85 @@
   .order-status-heading {
     font-size: 10px !important;
   }
+  .order-tracking-details{
+    padding-right: 0px !important;
+  }
   .para-order-text {
     font-size: 10px !important;
   }
   .para-text{
     font-size: 10px !important;
   }
+  .description-box div p{
+    font-size: 10px !important;
+    line-height: inherit !important;
+  }
+  .userorder-product{
+    font-size: 14px !important;
+  }
+  .Re-order-button{
+    font-size: 10px !important;
+  }
+}
+@media only screen and (max-width: 815.98px){
+  .order-status-heading{
+    font-size: 10px !important;
+  }
+  .para-text{
+    font-size: 9px !important;
+  }
+  .para-order-text{
+    font-size: 10px !important;
+  }
+  .order-tracking-details{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }
+  .Right-order-content{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }
+}
+@media only screen and (max-width: 767.98px){
+  .Right-order-content{
+    height: 60px !important;
+  }
+  .order-tracking-details{
+    padding-left: 0px !important;
+  }
+  .progress-div{
+    height: 60px !important;
+  }
+  .progress-text span{
+    font-size: 10px !important;
+  }
+  .user-order-tracking-details
+  {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .order-details-image .order-main-Image{
+    height: 70% !important;
+    width: 40%  !important;
+  }
+  .order-details-image{
+    justify-content: start !important;
+  }
+  .button-box{
+    justify-content: start !important;
+  }
+}
+@media only screen and (max-width: 415.98px){
+  .order-tracking-details{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .order-column{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .order-status-heading,.para-order-text{
+    font-size: 9px !important;
+  }
+
 }
