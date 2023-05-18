@@ -18,6 +18,7 @@ import Cookies from "universal-cookie";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { useContext } from "react";
 import Loader from "react-spinner-loader";
+import { SocialIcon } from "react-social-icons";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -792,20 +793,39 @@ const SingleProduct = (props) => {
                     </Link>
                   </span>
                   &nbsp; <span className="pl-2">Share:</span>
-                  <a href="https://www.facebook.com/Nutrazik" target="_blank">
-                    <i className="social-links bx bxl-facebook "></i>
+                  <a href="https://www.facebook.com/Nutrazik" className="singleproduct-icon" target="_blank">
+                    {/* <i className="social-links bx bxl-facebook "></i> */}
+                    <SocialIcon
+                      className="single-product-social-icons"
+                      network="facebook"
+                      bgColor="#1b97ff"
+                    />
                   </a>
-                  <a href="https://www.instagram.com/nutrazik/" target="_blank">
-                    <i className="social-links bx bxl-instagram "></i>
+                  <a href="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
+                    <SocialIcon
+                      className="single-product-social-icons"
+                      network="instagram"
+                      bgColor="#1b97ff"
+                    />
                   </a>
-                  <a href="https://twitter.com/nutrazik" target="_blank">
-                    <i className="social-links bx bxl-twitter "></i>
+                  <a href="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
+                    {/* <i className="social-links bx bxl-twitter "></i> */}
+                    <SocialIcon
+                      className="single-product-social-icons"
+                      network="twitter"
+                      bgColor="#1b97ff"
+                    />
                   </a>
                   <a
                     href="https://www.linkedin.com/company/70941207/admin/"
                     target="_blank"
+                    className="singleproduct-icon"
                   >
-                    <i className="social-links bx bxl-linkedin "></i>
+                    <SocialIcon
+                      className="single-product-social-icons"
+                      network="linkedin"
+                      bgColor="#1b97ff"
+                    />
                   </a>
                 </div>
               </div>
