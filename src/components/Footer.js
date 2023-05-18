@@ -88,7 +88,8 @@ const Footer = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="section-footer">
+        <div className="container">
         <footer className="footer-area">
           <div className="container-fluid m-auto">
             <div className="row">
@@ -295,7 +296,7 @@ const Footer = () => {
             <div className="container m-auto">
               <div className="row mt-0 align-items-center">
                 <div className="col-lg-6 col-md-6 link-footer-first">
-                  <p>
+                  <p className="footer-end-para">
                     Designed & Developed by <i className="bx bx-copyright"></i>
                     2023
                     <a
@@ -311,7 +312,7 @@ const Footer = () => {
                 <div className="col-lg-6 col-md-6 link-footer-second">
                   <div className="payment-types">
                     <ul className="d-flex align-items-center justify-content-end">
-                      <li>We accept payment via:</li>
+                      <li className="footer-end-para">We accept payment via:</li>
                       <li>
                         <a href="#" target="_blank">
                           <img
@@ -359,6 +360,7 @@ const Footer = () => {
             </div>
           </div>
         </footer>
+        </div>
       </div>
     </>
   );
