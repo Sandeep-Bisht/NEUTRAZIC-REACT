@@ -243,7 +243,7 @@ textarea.textarea{
   width: 60%!important;
 }
 .order-details .width-adjust-of-td{
-  font-size: 20px!important;
+  font-size: 18px!important;
 }
 .ant-table-row:nth-child(even){
   background: rgb(42, 150, 255, 0.06) !important;
@@ -327,6 +327,12 @@ textarea.textarea{
 }
 .product-details .ant-modal-wrap div {
   width: 750px!important;
+}
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  width: fit-content!important;
+}
+.order-details .width-adjust-of-image {
+  width: 65px!important;
 }
 /*Active links*/
 /* .active{

@@ -2023,6 +2023,9 @@ select.form-control[size] {
 .was-validated :valid ~ .valid-tooltip {
   display: block;
 }
+.section-footer, .footer-area{
+  background-color: #1b1e21!important;
+}
 
 .form-control.is-valid,
 .was-validated .form-control:valid {
@@ -9487,13 +9490,16 @@ p {
   line-height: 1.8;
 }
 .Subscribe {
-  color: var(--optionalColor);
+  color: #fff;
   font-size: var(--fontSize);
   margin-bottom: 15px;
   line-height: 1.8;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
+.footer-end-para{
+   color: #fff;
+} 
 
 p:last-child {
   margin-bottom: 0;
@@ -17365,19 +17371,19 @@ iframe {
 .single-footer-widget .footer-contact-info li {
   display: block;
   margin-bottom: 12px;
-  color: var(--optionalColor);
+  color: #fff;
 }
 
 .single-footer-widget .footer-contact-info li span {
   /* color: var(--blackColor); */
-  color: #1e144f;
+  color: #fff;
   font-weight: 600;
   font-family: "Roboto", sans-serif;
   font-size: 19px;
 }
 
 .single-footer-widget .footer-contact-info li a {
-  color: var(--optionalColor);
+  color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
 }
@@ -17416,7 +17422,7 @@ iframe {
   font-size: 22px;
   position: relative;
   padding-bottom: 5px;
-  color: #1e144f;
+  color: #fff;
 }
 
 .single-footer-widget .link-list {
@@ -17431,7 +17437,7 @@ iframe {
 
 .single-footer-widget .link-list li a {
   display: inline-block;
-  color: var(--optionalColor);
+  color: #fff;
   position: relative;
   padding-left: 13px;
   font-family: "Roboto", sans-serif;
@@ -17601,7 +17607,7 @@ iframe {
 
 .footer-bottom-area .payment-types ul li {
   margin-right: 10px;
-  color: var(--optionalColor);
+  color: #fff;
   font-weight: 500;
 }
 
@@ -18929,7 +18935,7 @@ iframe {
 
 .giks-link {
   text-decoration: none;
-  color: #1e144f !important;
+  color: #2a96ff !important;
   cursor: pointer;
 }
 .giks-link:hover {
