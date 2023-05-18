@@ -70,6 +70,16 @@
   position: relative;
   line-height: 0;
 }
+.cart-div{
+  display: flex;
+    align-items: center;
+    padding: 0 20px!important;
+}
+
+.user-dropdown-btn,.before-login-btn{
+display: flex;
+align-items: center;
+}
 
 .login-div1 {
   right: -10px;
@@ -83,6 +93,7 @@
   height: 25px !important;
   width: 25px !important;
   color: rgba(30, 20, 79, 0.6);
+  cursor: pointer;
 }
 .cart-btn svg:hover {
   color: rgba(30, 20, 79, 1);
@@ -118,13 +129,12 @@
   color: #1e144f;
   font-size: 16px;
   font-weight: 400;
+  padding-left: 5px;
   /* position: relative;
     bottom:22px; */
   font-family: "Roboto", sans-serif;
 }
-.Sp1:hover {
-  color: #1b97ff;
-}
+
 .contact1 {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
@@ -612,6 +622,7 @@ h3 .read-more-button {
 .dropdown .btn-sm:hover {
   color: rgb(30, 20, 79, 1);
 }
+
 .login-div {
   justify-content: end;
 }
@@ -926,14 +937,17 @@ body {
   display: block;
   color: rgb(30, 20, 79, 0.6);
 }
+.user-icon:hover{
+  color:#1e144f;
+}
+.username-after-login:hover{
+  color: #1e144f;
+}
 
 .logged-In {
   font-size: 2rem;
 }
 
-.bx-log-in:hover {
-  color: #1b97ff;
-}
 
 /* ---------------------------prashant modified haeder css------------- */
 
@@ -967,6 +981,7 @@ body {
   align-items: center;
   padding: 0 20px;
 }
+
 
 .heaader-wrapper .cart-div .login-div1 {
   display: flex;
@@ -1037,14 +1052,32 @@ body {
   color: black;
 } */
 .after-user-Logout .sp {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 16px !important;
+  font-weight: 700;
   position: relative;
-  color: rgb(30, 20, 79, 0.8);
-  padding-left: 5px;
-  font-weight: 500;
+  cursor: pointer;
+  bottom: 0;
+  letter-spacing: 0.25px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
+  text-transform: capitalize;
+  color: rgb(30, 20, 79, 0.6);
 }
-
+.after-user-Logout .sp:hover{
+  color: #1e144f;
+}
+.login-register{
+    font-size: 16px !important;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    font-family: "Roboto", sans-serif;
+    text-transform: capitalize;
+    color: rgb(30, 20, 79, 0.6);
+}
+.login-register:hover {
+    color: #1e144f;
+}
 .heart-div .option-item .cart-btn h6 {
   display: none;
 }
@@ -1098,6 +1131,10 @@ body {
   }
   .heaader-wrapper {
     padding: 10px;
+  }
+  .option-item .cart-btn {
+    display: flex;
+    align-items: center;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -1216,6 +1253,9 @@ body {
   }
 }
 @media only screen and (max-width: 815px) {
+  .after-user-Logout .sp {
+    display: none;
+  }
   .currancy {
     margin-left: 30px !important;
   }
@@ -1240,6 +1280,9 @@ body {
     } */
   .category i {
     display: none !important;
+  }
+  .dropdown .btn-sm{
+    margin-top: 0px !important;
   }
   .user-icon,
   .option-item .cart-btn {
@@ -1280,6 +1323,7 @@ body {
     padding: 4px 2px !important;
     font-size: 12px !important;
   }
+  
 }
 
 @media only screen and (max-width: 730.98px) {
@@ -1368,7 +1412,9 @@ body {
   .right-part .currancy {
     margin-right: 0px;
   }
-
+  .cart-div {
+    padding: 0 10px!important;
+  }
   .category svg {
     width: 19px !important;
   }
@@ -1429,7 +1475,7 @@ body {
   .heaader-wrapper .account-div,
   .heaader-wrapper .cart-div,
   .heaader-wrapper .heart-div {
-    padding: 0 4px;
+    padding: 0 5px!important;
   }
   .navbar-brand img {
     height: 25px;
