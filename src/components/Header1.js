@@ -1283,6 +1283,7 @@ const Header1 = (props) => {
                     </div>
                   </div>
                   <div className="left-part after-user-Logout">
+                    <div className=" cart-div">
                     {Userdata === null || Userdata === "" ? (
                       <div
                         className="option-item"
@@ -1294,21 +1295,19 @@ const Header1 = (props) => {
                         }}
                       >
                         <div className="cart-btn">
-                          {/* <i
-                            className="bx bx-cart"
-                            data-bs-toggle="modal"
-                            data-bs-target={"#exampleModal"}
-                          > */}
                           <BsCart4
                             data-bs-toggle="modal"
                             data-bs-target={"#exampleModal"}
                             className="header-icon"
                           />
-                          <span className="sp">Cart</span>
+                          <span className="sp"
+                          data-bs-toggle="modal"
+                          data-bs-target={"#exampleModal"}
+                          >
+                            Cart</span>
                         </div>
                       </div>
                     ) : (
-                      <div className="cart-div">
                         <Link to="/cart">
                           <div className=" login-div1">
                             <div className="">
@@ -1329,9 +1328,8 @@ const Header1 = (props) => {
                             </div>
                           </div>
                         </Link>
-                      </div>
                     )}
-
+                    </div>
                     <div className=" heart-div">
                       {Userdata === null || Userdata === "" ? (
                         <div
@@ -1346,17 +1344,15 @@ const Header1 = (props) => {
                           }}
                         >
                           <div className="cart-btn">
-                            {/* <i
-                              className="bx bx-heart"
-                              data-bs-toggle="modal"
-                              data-bs-target={"#exampleModal"}
-                            > */}
                             <BsBagHeart
                               data-bs-toggle="modal"
                               data-bs-target={"#exampleModal"}
                               className="header-icon"
                             />
-                            <span className="sp">Wishlist</span>
+                            <span className="sp"
+                            data-bs-toggle="modal"
+                            data-bs-target={"#exampleModal"}>
+                              Wishlist</span>
                           </div>
                         </div>
                       ) : (
@@ -1378,107 +1374,19 @@ const Header1 = (props) => {
                       )}
                     </div>
                     <div className="  account-div ">
-                      <div className=" login-div ">
-                        <div className="option-item">
-                          <div className="cart-btn">
+                        
                             {Userdata == null || Userdata == "" ? (
                               <>
-                                <span
-                                  className="sp"
+                              <div className="option-item">
+                          <div className="cart-btn before-login-btn mt-1"                               
+                                  
                                   data-bs-toggle="modal"
                                   data-bs-target="#exampleModal"
                                   style={{ cursor: "pointer" }}
                                 >
                                   <i className="user-icon bx bx-log-in"></i>
-                                </span>
-
-                                {/* <span
-                                  className="Sp1 "
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#exampleModal"
-                                  style={{ cursor: "pointer" }}
-                                ></span> */}
-                              </>
-                            ) : (
-                              <>
-                                <div className="dropdown">
-                                  <button
-                                    className="btn btn-white btn-sm login-btn user-dropdown-btn"
-                                    type="button"
-                                    id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
-                                    <i className="user-icon bx bx-user-pin"></i>
-                                  </button>
-
-                                  <ul
-                                    className="dropdown-menu Logout-ul"
-                                    aria-labelledby="dropdownMenuButton1"
-                                  >
-                                    <div>
-                                      <div className="Logout-div d-flex align-items-center">
-                                        <i className="bx bx-file pl-2"></i>{" "}
-                                        <li
-                                          className="dropdown-item Logout-li"
-                                          style={{ cursor: "pointer" }}
-                                        >
-                                          <Link to="/UserOrder">
-                                            <span className="pr-4">Orders</span>
-                                          </Link>
-                                        </li>
-                                      </div>
-                                    </div>
-                                    <Link to="/Cart">
-                                      <div className="Logout-div d-flex align-items-center">
-                                        <i className="bx bx-cart pl-2"></i>{" "}
-                                        <li
-                                          className="dropdown-item Logout-li"
-                                          style={{ cursor: "pointer" }}
-                                        >
-                                          <span className="pr-4">Cart</span>
-                                          {/* <span className="text-danger">item</span> */}
-                                        </li>
-                                      </div>
-                                    </Link>
-                                    <Link to="/Wishlist">
-                                      <div className="Logout-div d-flex align-items-center">
-                                        <i className="bx bx-heart pl-2"></i>{" "}
-                                        <li
-                                          className="dropdown-item Logout-li"
-                                          style={{ cursor: "pointer" }}
-                                        >
-                                          <span className="pr-4">Wishlist</span>
-                                        </li>
-                                      </div>
-                                    </Link>
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <i className="bx bx-log-out pl-2"></i>{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                        onClick={() => {
-                                          logout();
-                                        }}
-                                      >
-                                        <span className="pr-4">Logout</span>
-                                      </li>
-                                    </div>
-                                  </ul>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <div className=" user-login">
-                        {Userdata == null || Userdata == "" ? (
-                          <>
-                            <span
-                              className="Sp1"
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"
-                              style={{ cursor: "pointer" }}
+                                <span
+                              className="Sp1 login-register"
                               onClick={() => {
                                 reset1();
                                 reset();
@@ -1491,18 +1399,21 @@ const Header1 = (props) => {
                             >
                               Login/Register
                             </span>
-                          </>
-                        ) : (
-                          <>
-                            <div className="dropdown">
+                            </div>
+                        </div>
+                              </>
+                            ) : (
+                              <>
+                                 <div className="dropdown">
                               <button
-                                className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn"
+                                className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn mt-1"
                                 type="button"
                                 id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                               >
-                                {Userdata && Userdata.username}
+                                <i className="user-icon bx bx-user-pin mt-1"></i>
+                                <span className="username-after-login">{Userdata && Userdata.username}</span>
                               </button>
 
                               <ul
@@ -1576,9 +1487,10 @@ const Header1 = (props) => {
                                 </div>
                               </ul>
                             </div>
-                          </>
-                        )}
-                      </div>
+                              </>
+                            )}
+                          
+                      
                     </div>
                   </div>
                 </div>
