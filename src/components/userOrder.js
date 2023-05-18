@@ -313,7 +313,7 @@ const UserOrder = () => {
                                     <div className="see-user-order">
                                       <div className="col-md-12 ">
                                         <div className="row">
-                                          <div className="col-md-2 col-sm-4">
+                                          <div className="col-md-2 col-sm-3">
                                             <div className="order-details-image">
                                               <img
                                                 src={`${baseUrl}/${item.image}`}
@@ -321,7 +321,7 @@ const UserOrder = () => {
                                               ></img>
                                             </div>
                                           </div>
-                                          <div className="col-md-3 col-sm-2">
+                                          <div className="col-md-3 col-sm-3">
                                             <div className="detail-box-order">
                                               <div>
                                                 <div className="Price-box">
