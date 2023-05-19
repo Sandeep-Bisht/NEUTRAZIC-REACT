@@ -123,12 +123,12 @@ const Footer = () => {
                         href="https://www.facebook.com/Nutrazik"
                         target="_blank"
                       >
-                      <SocialIcon className="social-react-icons" network="facebook" bgColor="#4682B4"/>
+                      <SocialIcon className="social-react-icons" network="facebook" bgColor="#fff"/>
                       </a>
                     </li>
                     <li>
                       <a href="https://twitter.com/nutrazik" target="_blank">
-                      <SocialIcon className="social-react-icons" network="twitter" bgColor="#00BFFF"/>
+                      <SocialIcon className="social-react-icons" network="twitter" bgColor="#fff"/>
                       </a>
                     </li>
                     <li>
@@ -136,7 +136,7 @@ const Footer = () => {
                         href="https://www.instagram.com/nutrazik/"
                         target="_blank"
                       >
-                      <SocialIcon className="social-react-icons" network="instagram" bgColor="#DB7093"/>
+                      <SocialIcon className="social-react-icons" network="instagram" bgColor="#fff"/>
                       </a>
                     </li>
                     <li>
@@ -144,7 +144,7 @@ const Footer = () => {
                         href="https://www.linkedin.com/company/70941207/admin/"
                         target="_blank"
                       >
-                      <SocialIcon className="social-react-icons" network="linkedin" bgColor="#4682B4"/>
+                      <SocialIcon className="social-react-icons" network="linkedin" bgColor="#fff"/>
                       </a>
                     </li>
                     <li>
@@ -152,7 +152,7 @@ const Footer = () => {
                         href="https://in.pinterest.com/nutrazik/"
                         target="_blank"
                       >
-                      <SocialIcon className="social-react-icons" network="pinterest" bgColor="#DC143C"/>
+                      <SocialIcon className="social-react-icons" network="pinterest" bgColor="#fff"/>
                       </a>
                     </li>
                   </ul>

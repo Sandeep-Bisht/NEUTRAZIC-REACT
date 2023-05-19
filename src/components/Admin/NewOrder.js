@@ -4,9 +4,9 @@ import "./Dashboard.css";
 import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import { BiSearchAlt } from "react-icons/bi";
-import {useHistory} from "react-router-dom";
-import { DownOutlined } from '@ant-design/icons';
-import { Table,  Space, Dropdown, Modal, Button,} from "antd";
+import { useHistory } from "react-router-dom";
+import { DownOutlined } from "@ant-design/icons";
+import { Table, Space, Dropdown, Modal, Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { AiFillCaretDown } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,30 +31,31 @@ const NewOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        if(Userdata!==undefined || Userdata!=="")
-        {
-          if(Userdata.role==="Vendor")
-          {
+        if (Userdata !== undefined || Userdata !== "") {
+          if (Userdata.role === "Vendor") {
             let arr = [];
-         
-              for (let item of data.data) {
-                if (item.orderStatus == "Pending" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
-                  arr.push(item);
-                }
-              }
-        setOrderDetails(arr);
-          }
-          else{
-            let arr = [];  
+
             for (let item of data.data) {
-              if (item.orderStatus == "Pending") {
-                item.createdAt=item.createdAt.slice(0,10);
+              if (
+                item.orderStatus == "Pending" &&
+                Userdata &&
+                Userdata.manufacturer == item.order[0].order[0].manufacturer
+              ) {
                 arr.push(item);
               }
             }
             setOrderDetails(arr);
+          } else {
+            let arr = [];
+            for (let item of data.data) {
+              if (item.orderStatus == "Pending") {
+                item.createdAt = item.createdAt.slice(0, 10);
+                arr.push(item);
+              }
+            }
+            setOrderDetails(arr);
+          }
         }
-          } 
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -75,20 +76,17 @@ const NewOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
-        if(order.orderStatus==="In-Progress")
-        {
+        if (order.orderStatus === "In-Progress") {
           toast.success("Order move to In Progress", {
             position: "bottom-right",
             autoClose: 1000,
           });
-        }
-        else{
+        } else {
           toast.success("Order move to Cancel", {
             position: "bottom-right",
             autoClose: 1000,
           });
         }
-        
       })
       .catch((err) => {
         console.log(err, "error");
@@ -120,6 +118,17 @@ const NewOrder = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
@@ -158,7 +167,7 @@ const NewOrder = () => {
                   key: "2",
                   label: (
                     <a onClick={() => UpdateOrderStatus(item, "In-Progress")}>
-                      Move to In-progress 
+                      Move to In-progress
                     </a>
                   ),
                 },
@@ -197,6 +206,8 @@ const NewOrder = () => {
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          closeIcon={<CustomCloseIcon />}
+          className="New-order-details"
         >
           <table className="table order-details">
             <thead>
@@ -222,8 +233,12 @@ const NewOrder = () => {
                             ></img>
                           </div>
                         </td>
-                        <td className="width-adjust-of-td">{item.order[0].name}</td>
-                        <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
+                        <td className="width-adjust-of-td">
+                          {item.order[0].name}
+                        </td>
+                        <td className="width-adjust-of-td">
+                          {item.order[0].singleprice}
+                        </td>
                       </tr>
                     </>
                   );
@@ -275,7 +290,6 @@ const NewOrder = () => {
           </div>
         </div>
       </section>
-     
     </>
   );
 };

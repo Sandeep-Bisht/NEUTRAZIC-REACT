@@ -1028,3 +1028,24 @@ font-family: 'Roboto', sans-serif;
 .icon-dropdown-orders{
   height: 16px !important;
 }
+
+
+/* New Order Cross Icon Css */
+.New-order-details .custom-close-icon-forget{
+  width: max(10px, 3vw);
+  height: max(14px, 1vw);
+  overflow: visible !important;
+}
+.New-order-details .custom-close-icon-forget{
+  stroke: rgba(0, 0, 0, 0.6) !important;
+  stroke-width: 4px !important;
+}
+.New-order-details .custom-close-icon-forget:hover{
+  stroke: rgba(0, 0, 0, 1) !important;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close:hover {
+  color: rgba(0, 0, 0, 0.6) !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
+}

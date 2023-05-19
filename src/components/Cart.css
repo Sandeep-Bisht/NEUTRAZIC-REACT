@@ -184,7 +184,7 @@
     white-space: normal;
   }
   .cart-area {
-    margin-top: 114px !important;
+    margin-top: 145px !important;
   }
   .product-price .amount {
     /* white-space: normal; */
@@ -197,7 +197,7 @@
 }
 @media only screen and (max-width: 730px){
   .cart-area {
-    margin-top: 140px !important;
+    margin-top: 170px !important;
   }
   .card-body .card-text{
     font-size: 16px;
@@ -262,7 +262,7 @@
 }
 @media only screen and (max-width: 496.99px) {
   .cart-area {
-    margin-top: 140px !important;
+    margin-top: 175px !important;
   }
   .card-body .description-link{
     margin-top: 0px!important;

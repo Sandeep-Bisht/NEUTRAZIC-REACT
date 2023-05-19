@@ -304,6 +304,9 @@
   .Re-order-button {
     font-size: 10px !important;
   }
+  .orders-section{
+    margin-top: 200px !important;
+  }
 }
 @media only screen and (max-width: 815.98px) {
   .order-status-heading {
