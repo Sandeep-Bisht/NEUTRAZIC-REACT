@@ -31,7 +31,6 @@ const NewOrder = () => {
       .then(async (data) => {
         let arr = [];
         for (let item of data.data) {
-          console.log(item,"here is order items")
           if (item.orderStatus == "Pending") {
             item.createdAt=item.createdAt.slice(0,10);
             arr.push(item);
@@ -170,6 +169,8 @@ const NewOrder = () => {
     history.push("/SingleProduct/" + id);
   };
 
+  console.log("prticularUserOrder", prticularUserOrder)
+
   return (
     <>
       {/* table modal */}
@@ -192,21 +193,24 @@ const NewOrder = () => {
             <tbody>
               {prticularUserOrder &&
                 prticularUserOrder.length > 0 &&
-                prticularUserOrder.map((item, ind) => {
+                prticularUserOrder[0].order.length > 0 &&
+                prticularUserOrder[0].order.map((item, ind) => {
+                  console.log("inside loop", item)
                   return (
+                    
                     <>
                       <tr key={ind}>
                         <td className="width-adjust-of-td">
                           <div className="width-adjust-of-image">
-                            <img
+                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.order[0].image}`}
-                            ></img>
+                              src={`${baseUrl}/${item.image}`}
+                            ></img> 
                           </div>
                         </td>
-                        <td className="width-adjust-of-td">{item.order[0].name}</td>
-                        <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
+                        <td className="width-adjust-of-td">{item.name}</td>
+                        <td className="width-adjust-of-td">{item.singleprice}</td>
                       </tr>
                     </>
                   );

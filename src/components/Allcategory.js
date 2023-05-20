@@ -321,7 +321,6 @@ const Allcategory = (props) => {
             if (item.category._id == props.match.params.name) {
               return (
                 <div className="col-lg-3 col-md-12 col-sm-12 " key={ind1}>
-                  {/* <Link to={"/SingleProduct/" + el._id}> */}
                   <div className="single-products-box border">
                     <div className="row  align-items-center product-div">
                       <div className="col-6 product-image-div">
@@ -330,12 +329,6 @@ const Allcategory = (props) => {
                           className="product-image-link"
                         >
                           <div className="image hover-switch">
-                            {/* <img
-                           src={
-                           require('../../Images/products/Hintosulin (1).png')
-                           }
-                           alt="" 
-                            /> */}
                             <img
                               src={
                                 `${baseUrl}/` + item.image[0].path
