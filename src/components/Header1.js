@@ -13,11 +13,12 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsBagHeart, BsCart4 } from "react-icons/bs";
+import {RiShoppingCartLine} from "react-icons/ri";
 import axios from "axios";
 import { RxDashboard } from "react-icons/rx";
 
@@ -36,7 +37,7 @@ const errorEmail = "Please Enter a valid Email Address";
 // var userCart=[]
 const Header1 = (props) => {
   let dispatch = useDispatch();
-  let { state1, setState1 } = useContext(CurrencyContext);
+  // let { state1, setState1 } = useContext(CurrencyContext);
 
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
@@ -55,10 +56,10 @@ const Header1 = (props) => {
   const [cartItems, setCartItems] = useState("");
   const [wishlisted, setWishlisted] = useState("");
   const [usermodal, setUsermodal] = useState();
-  const [currancy, setCurrency] = useState("INR");
+  // const [currancy, setCurrency] = useState("INR");
   // const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  const cookies = new Cookies();
+  // const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
@@ -83,6 +84,14 @@ const Header1 = (props) => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
+
+  $(window).on("scroll", function() {
+    if($(window).scrollTop() > 50) {
+        $(".newheader").addClass("active1");
+    } else {
+       $(".newheader").removeClass("active1");
+    }
+});
 
   const {
     register,
@@ -190,13 +199,13 @@ const Header1 = (props) => {
     });
   }, [loginState]);
 
-  useEffect(() => {
-    const currentCurrency = cookies.get("CurrencyType");
-    if (currentCurrency === "Dollar") {
-      setCurrency("Dollar");
-      setState1("1");
-    }
-  }, [currancy]);
+  // useEffect(() => {
+  //   const currentCurrency = cookies.get("CurrencyType");
+  //   if (currentCurrency === "Dollar") {
+  //     setCurrency("Dollar");
+  //     setState1("1");
+  //   }
+  // }, [currancy]);
 
   const GetWishlist = async () => {
     console.log("inside the wishlist");
@@ -229,16 +238,16 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
-  const currencyHandler = (e) => {
-    setCurrency(e.target.value);
-    if (currancy === "INR") {
-      setState1("1");
-    } else {
-      setState1("0");
-    }
+  // const currencyHandler = (e) => {
+  //   setCurrency(e.target.value);
+  //   if (currancy === "INR") {
+  //     setState1("1");
+  //   } else {
+  //     setState1("0");
+  //   }
 
-    cookies.set("CurrencyType", e.target.value, { path: "/" });
-  };
+  //   cookies.set("CurrencyType", e.target.value, { path: "/" });
+  // };
   useEffect(() => {
     if (Userdata === null || Userdata == "") {
       setLoginState("0");
@@ -1220,7 +1229,7 @@ const Header1 = (props) => {
         )}
         <div className="newheader">
           <div className="row mt-0 top-header-padding">
-            <div className="col-md-12">
+            <div className="col-md-12 header-column">
               <div className="heaader-wrapper">
                 <div className="header-wrapper-left">
                   <div className=" logo-main-div">
@@ -1271,7 +1280,7 @@ const Header1 = (props) => {
                   </div>
                 </div>
                 <div className="header-wrapper-right">
-                  <div className="right-part">
+                  {/* <div className="right-part">
                     <div className="d-flex align-items-center currancy">
                       <select
                         onChange={(e) => currencyHandler(e)}
@@ -1281,7 +1290,7 @@ const Header1 = (props) => {
                         <option value="Dollar">Dollar</option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="left-part after-user-Logout">
                     <div className=" cart-div">
                     {Userdata === null || Userdata === "" ? (
@@ -1295,7 +1304,7 @@ const Header1 = (props) => {
                         }}
                       >
                         <div className="cart-btn">
-                          <BsCart4
+                          <RiShoppingCartLine
                             data-bs-toggle="modal"
                             data-bs-target={"#exampleModal"}
                             className="header-icon"
@@ -1313,7 +1322,7 @@ const Header1 = (props) => {
                             <div className="">
                               <div className="option-item">
                                 <div className="cart-btn">
-                                  <BsCart4  className="header-icon"/>
+                                  <RiShoppingCartLine  className="header-icon"/>
                                 </div>
                               </div>
                             </div>

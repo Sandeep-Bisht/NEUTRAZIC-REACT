@@ -333,6 +333,14 @@
     .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p{
         font-size: 0.8rem;
     } */
+    .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
+  .top-heading-box-3 p {
+    font-size: 15px !important;
+    text-align: justify;
+  }
+  .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p{
+    width: 100% !important;
+  }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
     padding: 4px 15px !important;
   }

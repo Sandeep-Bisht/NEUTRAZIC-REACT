@@ -382,7 +382,7 @@ const Cart = () => {
               </div>
 
               <div className="col-lg-4 col-md-12">
-                <div className="cart-totals">
+                <div className="cart-totals mt-2">
                   <h3>Order Summary</h3>
                   <ul>
                     <li>

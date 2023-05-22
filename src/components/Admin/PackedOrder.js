@@ -5,15 +5,11 @@ import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  Table,
-  Button,
-  Modal,
-} from "antd";
+import { Table, Button, Modal } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
-var Userdata=""
+var Userdata = "";
 
 const InProgressOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -34,7 +30,7 @@ const InProgressOrder = () => {
   const history = useHistory();
 
   useEffect(() => {
-    Userdata=JSON.parse(localStorage.getItem("Userdata"));
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
   }, []);
 
@@ -42,30 +38,31 @@ const InProgressOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        if(Userdata!==undefined || Userdata!=="")
-        {
-          if(Userdata.role==="Vendor")
-          {
+        if (Userdata !== undefined || Userdata !== "") {
+          if (Userdata.role === "Vendor") {
             let arr = [];
-         
-              for (let item of data.data) {
-                if (item.orderStatus == "Packed" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
-                  arr.push(item);
-                }
-              }
-        setOrderDetails(arr);
-          }
-          else{
-            let arr = [];  
+
             for (let item of data.data) {
-              if (item.orderStatus == "Packed") {
-                item.createdAt=item.createdAt.slice(0,10);
+              if (
+                item.orderStatus == "Packed" &&
+                Userdata &&
+                Userdata.manufacturer == item.order[0].order[0].manufacturer
+              ) {
                 arr.push(item);
               }
             }
             setOrderDetails(arr);
-        }
+          } else {
+            let arr = [];
+            for (let item of data.data) {
+              if (item.orderStatus == "Packed") {
+                item.createdAt = item.createdAt.slice(0, 10);
+                arr.push(item);
+              }
+            }
+            setOrderDetails(arr);
           }
+        }
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -90,14 +87,12 @@ const InProgressOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         GetOrders();
-        if(order.orderStatus==="Shipped")
-        {
+        if (order.orderStatus === "Shipped") {
           toast.success("Order move to Shipping", {
             position: "bottom-right",
             autoClose: 1000,
           });
-        }
-        else{
+        } else {
           toast.success("Order move to Cancel", {
             position: "bottom-right",
             autoClose: 1000,
@@ -121,6 +116,18 @@ const InProgressOrder = () => {
     });
     setOrders(filteredData);
   };
+
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
@@ -202,6 +209,8 @@ const InProgressOrder = () => {
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          closeIcon={<CustomCloseIcon />}
+          className="New-order-details"
         >
           <table class="table order-details">
             <thead>
@@ -252,6 +261,8 @@ const InProgressOrder = () => {
           visible={showShippingModal}
           onOk={handleShippingModal}
           onCancel={cancelShippingModal}
+          closeIcon={<CustomCloseIcon />}
+          className="New-order-details"
         >
           <form>
             <div className="row">

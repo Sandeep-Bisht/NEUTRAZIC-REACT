@@ -1840,7 +1840,7 @@ kbd kbd {
   color: #6c757d;
   opacity: 1;
 }
-.header-wrapper-left{
+.header-wrapper-left {
   margin-left: -13px;
 }
 .form-control:-ms-input-placeholder {
@@ -2023,8 +2023,11 @@ select.form-control[size] {
 .was-validated :valid ~ .valid-tooltip {
   display: block;
 }
-.section-footer, .footer-area{
-  background-color: #1b1e21!important;
+.footer-area {
+  background-color: transparent !important;
+}
+.section-footer {
+  background-color: #1b2845;
 }
 
 .form-control.is-valid,
@@ -9497,9 +9500,9 @@ p {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
-.footer-end-para{
-   color: #fff;
-} 
+.footer-end-para {
+  color: #fff;
+}
 
 p:last-child {
   margin-bottom: 0;
@@ -13664,7 +13667,6 @@ textarea.form-control {
   margin-left: auto;
   margin-right: auto;
   border: 2px solid #c7c7c769;
-  margin-top: 22px;
 }
 
 .cart-totals h3 {
@@ -15167,7 +15169,7 @@ textarea.form-control {
   color: var(--optionalColor);
 }
 .products-color {
-  border-bottom: 2px solid #1b97ff4a;
+  border-bottom: 2px solid rgb(27, 40, 69);
   padding-bottom: 0;
   font-size: 2rem;
 }
@@ -17474,7 +17476,7 @@ iframe {
   display: block;
   width: 100%;
   border: 1px solid #c7c7c7;
-  background-color: transparent;
+  background-color: #fff;
   color: #000;
   transition: var(--transition);
   padding: 10px;
@@ -18761,7 +18763,7 @@ iframe {
   padding: 20px 0;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
-  color: #1e144f;
+  color: rgb(27, 40, 69);
   margin-bottom: 0;
   text-align: center;
 }
@@ -18851,12 +18853,8 @@ iframe {
 }
 
 .cosmetic-shop-now {
-  border: 1px solid rgb(27 151 255 / 33%);
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
+  background: rgb(27, 40, 69);
+  /* border: 1px solid #04619f; */
   padding: 4px 20px;
   color: white;
   letter-spacing: 0.5px;
@@ -18864,13 +18862,15 @@ iframe {
   font-size: 14px;
   font-weight: 400;
   margin-top: 20px;
+  font-weight: 600;
 }
 .nutracuetical-shop-now:hover,
 .cosmetic-shop-now:hover {
-  background: none;
-  color: black;
-  border: 1px solid rgb(27 151 255 / 33%);
   padding: 4px 20px;
+  border: 1px solid rgb(27, 40, 69);
+  background: none;
+  color: #274060 !important;
+  font-weight: 600;
 }
 
 .categories-section .cat-heading {
@@ -19134,21 +19134,19 @@ figure .button {
   padding: 5px 10px;
   display: block;
   text-align: center;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: 1px solid rgb(27 151 255 / 33%);
+  background: rgb(27, 40, 69);
+  /* border: 1px solid #04619f; */
   color: #fff;
   text-decoration: none;
   border-radius: 0.25rem;
+  font-weight: 600;
 }
 figure .button:hover {
   padding: 5px 10px;
-  border: 1px solid rgb(27 151 255 / 33%);
+  border: 1px solid rgb(27, 40, 69);
   background: none;
-  color: var(--optionalColor);
+  color: #274060 !important;
+  font-weight: 600;
 }
 a.button:hover {
   color: #f1f2f3;
@@ -19218,17 +19216,19 @@ svg {
   text-align: center;
 }
 
-.wrapperbtn .btn10 {
+/* .wrapperbtn .btn10 {
   padding: 15px 100px;
   margin: 10px 4px;
-  color: var(--optionalColor);
+  color: #274060 !important;
+  border: 1px solid #04619f !important;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   text-align: center;
   position: relative;
   text-decoration: none;
   display: inline-block;
-}
+  font-weight: 600 !important;
+} */
 
 .wrapperbtn .btn::before {
   content: "";
@@ -19261,25 +19261,21 @@ svg {
 /* Btn 10  */
 .wrapperbtn .btn10 {
   padding: 8px 40px;
-  color: var(--optionalColor);
+  color: rgb(27, 40, 69);
   letter-spacing: 0.5px;
   text-transform: capitalize;
   background: none;
-  border: 1px solid rgb(27 151 255 / 33%);
+  border: 1px solid rgb(27, 40, 69);
   /* color: #fff; */
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 600 !important;
   border-radius: 0.25rem;
+  font-weight: 600 !important;
 }
 
 .wrapperbtn .btn10:hover {
   padding: 8px 40px;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: 1px solid rgb(27 151 255 / 33%);
+  background: rgb(27, 40, 69);
   color: #fff;
 }
 
@@ -19537,7 +19533,7 @@ svg {
 } */
   /* For mobile phones: */
   body {
-    padding: 0px 5px;
+    /* padding: 0px 5px; */
   }
   .backimage {
     display: none;
@@ -19757,25 +19753,21 @@ svg {
 
 .btn-div .btn {
   color: white;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: 1px solid rgb(27 151 255 / 33%);
-  border: 1px solid rgb(27 151 255 / 33%);
-  padding: 8px 30px;
-  letter-spacing: 0.5px;
-  text-transform: capitalize;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 2rem;
+    background: rgb(27, 40, 69,0.9);
+    /* border: 1px solid rgb(27 151 255 / 33%); */
+    /* border: 1px solid rgb(27 151 255 / 33%); */
+    padding: 8px 30px;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2rem;
 }
 .btn-div .btn:hover {
-  border: 1px solid rgb(27 151 255 / 33%);
+  border: 1px solid rgb(27, 40, 69);
   background: none;
   padding: 8px 30px;
-  color: var(--optionalColor);
+  color: rgb(27, 40, 69);
 }
 .btn-div .btn svg {
   height: auto;
@@ -19948,7 +19940,7 @@ svg {
     text-align: center;
   }
 
-  .homepage-Blog-card .card-text{
+  .homepage-Blog-card .card-text {
     font-size: 14px !important;
   }
 }
@@ -19972,7 +19964,7 @@ svg {
   .first-nav {
     top: 136px !important;
   }
-  .homepage-Blog-card .card-text{
+  .homepage-Blog-card .card-text {
     font-size: 13px !important;
   }
 }
@@ -20098,7 +20090,7 @@ svg {
   .blog-section .blog-page-section-2 .card .card-body {
     height: 190px !important;
   }
-  .homepage-Blog-card .card-text{
+  .homepage-Blog-card .card-text {
     font-size: 14px !important;
   }
   /* End blog css */
@@ -20325,7 +20317,7 @@ svg {
     margin-bottom: 18px;
   }
   /* reponsive homepage */
-  
+
   .single-products-box .image img {
     width: 100% !important;
   }
@@ -21093,5 +21085,5 @@ svg {
   text-align: justify;
   hyphens: auto;
   word-spacing: -0.5px;
-  color: rgba(0, 0, 0, 0.5) ;
+  color: rgba(0, 0, 0, 0.5);
 }
