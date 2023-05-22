@@ -30,7 +30,6 @@ const Sidemenu = () => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   });
-console.log(Userdata,"check user data of sidemenu bar for vender")
   const logout = () => {
     localStorage.setItem("Userdata", null);
     toast.success("Logout Successfully", {
