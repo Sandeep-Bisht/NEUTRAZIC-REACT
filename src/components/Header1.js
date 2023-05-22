@@ -976,7 +976,7 @@ const Header1 = (props) => {
                             <div className="col-md-12 col-12">
                               <div className="form-group">
                                 <label>
-                                  Username<span>*</span>
+                                Username or email address<span>*</span>
                                 </label>
                                 <input
                                   type="text"

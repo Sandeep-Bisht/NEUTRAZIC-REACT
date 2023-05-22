@@ -12,8 +12,17 @@ const Roles = (props) => {
   const [password, setPassword] = useState("");
   const [manufactureres, setManufactureres] = useState([]);
   const [manufacturer,setManufacturer]=useState([]);
-  const [role, setRole] = useState("");
   const [users, setUsers] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+  const [data,setData]=useState({
+    email:"",
+    username:"",
+    phonenumber:"",
+    password:"",
+    manufacturer:"",
+    cpassword:"",
+    role:"",
+  })
   var userStatus="Activate";
   const [organization, setOrganization] = useState("");
   useEffect(() => {
@@ -44,31 +53,105 @@ const Roles = (props) => {
       });
   };
 
-  const RegisterUser = () => {
-    fetch(`${baseUrl}/api/auth/register`, {
+  var pattern= /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/;
+  const validateForm = (Value) => {
+    const error = {};
+    if (!Value.username) {
+      error.username = "This field is required";
+    }
+    if (!Value.email) {
+      error.email = "This field is required";
+    } else if (!pattern.test(Value.email)) {
+      error.email = "Please enter a valid email";
+    }
+    if (!Value.password) {
+      error.password = "This field is required";
+    }
+    if (!Value.cpassword) {
+      error.cpassword = "This field is required";
+    }
+    if (!Value.manufacturer) {
+      error.manufacturer = "This field is required";
+    }
+    if (!Value.role) {
+      error.role = "This field is required";
+    }
+    if (!Value.phonenumber) {
+      error.phonenumber = "This field is required";
+    }else if(Value.phonenumber.length < 10) {
+      error.phonenumber = "Please enter valid phonenumber";
+    }
+    return error;
+  };
+console.log(data.phonenumber.length,"length");
+  const RegisterUser = async(e) => {
+    e.preventDefault();
+    const errors = validateForm(data);
+    setFormErrors(errors);
+    await fetch(`${baseUrl}/api/auth/register`, {
       method: "POST",
       headers: {
         accept: "application/json",
         "content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
-        phonenumber: phonenumber,
-        email: email,
-        role: role,
-        manufacturer:manufacturer,
+        username: data.username,
+        password: data.password,
+        phonenumber: data.phonenumber,
+        email: data.email,
+        role: data.role,
+        manufacturer:data.manufacturer,
         userStatus:userStatus,
         organization: organization,
       }),
     })
-      .then((res) => res.json())
-      .then(() => {
-        window.location.reload();
-      });
+      .then((res) => {
+        res.json();
+        if(res.success==200)
+        {
+          setData({
+            email:"",
+            username:"",
+            phonenumber:"",
+            password:"",
+            manufacturer:"",
+            role:"",
+          })
+        }
+      });  
   };
 
-
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setData({
+      ...data,
+      [name]: value
+    });
+    setFormErrors({
+      ...formErrors,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formErrors };
+  
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = "This field is required";
+    } else if (name === "phonenumber" && value.length < 10) {
+      errors[name] = "Please enter a valid phone number";
+    } else if (name === "email" && !pattern.test(value)) {
+      errors[name] = "Please enter a valid email";
+    } else if (name === "cpassword" && value !== data.password) {
+      errors[name] = "Password does not match";
+    }else {
+      errors[name] = ""; // clear error message for the current input field
+    }
+    
+    setFormErrors(errors);
+  };
+  
 
   const data1 = [];
   {
@@ -123,72 +206,131 @@ const Roles = (props) => {
                         <input
                           type="text"
                           id="floatingform"
+                          name="username"
+                          value={data.username}
                           className="form-control input-text "
                           placeholder="Username*"
                           required
                           onChange={(e) => {
-                            setUsername(e.target.value);
+                            setData({...data,username:e.target.value});
+                            handleInputChange(e);
                           }}
+                          onBlur={handleBlur}
                         />
                         <label htmlFor="floatingform">Username*</label>
+                        <div>
+                            <p className="formerror">{formErrors.username}</p>
+                          </div>
                       </div>
+                      
                       <div className="form-group col-lg-12 p-1  form-floating">
                         <input
-                          type="text"
+                          type="number"
                           id="floatingform"
+                          name="phonenumber"
+                          value={data.phonenumber}
                           className="form-control input-text"
                           placeholder="Phone Number*"
                           required
                           onChange={(e) => {
-                            setPhonenumber(e.target.value);
+                            setData({...data, phonenumber:e.target.value});
+                            handleInputChange(e);
                           }}
+                          onBlur={handleBlur}
+                          onInput={(e) => {
+                            if (
+                              e.target.value.length > e.target.maxLength
+                            )
+                              e.target.value = e.target.value.slice(
+                                0,
+                                e.target.maxLength
+                              );
+                          }}
+                          maxlength={10}
                         />
                         <label htmlFor="floatingform">Phone Number*</label>
+                        <div>
+                            <p className="formerror">{formErrors.phonenumber}</p>
+                          </div>
                       </div>
+                      
                       <div className="form-group col-lg-12 p-1 form-floating">
                         <input
                           type="email"
                           id="floatingform"
+                          name="email"
+                          value={data.email}
                           className="form-control input-text"
                           placeholder="Email*"
                           required
                           onChange={(e) => {
-                            setemail(e.target.value);
+                            setData({...data,email:e.target.value});
+                            handleInputChange(e);
                           }}
+                          onBlur={handleBlur}
                         />
                         <label htmlFor="floatingform">Email*</label>
+                        <div>
+                            <p className="formerror">{formErrors.email}</p>
+                          </div>
                       </div>
+                      
                       <div className="form-group col-lg-12 p-1 form-floating">
                         <input
                           className="form-control input-text"
                           id="formfloating"
+                          type="password"
                           placeholder="Password*"
+                          name="password"
+                          value={data.password}
                           required
                           onChange={(e) => {
-                            setPassword(e.target.value);
+                            setData({...data,password:e.target.value});
+                            handleInputChange(e);
                           }}
+                          onBlur={handleBlur}
                         />
                         <label htmlFor="formfloating">Password*</label>
+                        <div>
+                            <p className="formerror">{formErrors.password}</p>
+                          </div>
                       </div>
+                      
                       <div className="form-group col-lg-12 p-1 form-floating">
                         <input
                           className="form-control input-text"
                           id="formfloating"
+                          type="password"
+                          name="cpassword"
+                          value={data.cpassword}
                           placeholder="Confirm Password*"
                           required
+                          onChange={(e) => {
+                            setData({...data,cpassword:e.target.value});
+                            handleInputChange(e);
+                          }}
+                          onBlur={handleBlur}
                         />
                         <label htmlFor="formfloating">Confirm Password*</label>
+                        <div>
+                            <p className="formerror">{formErrors.cpassword}</p>
+                          </div>
                       </div>
                       {Userdata!==undefined &&
                       Userdata.role==="superAdmin" ? 
-                      <div className="form-group col-lg-12 p-1 form-floating">
+                      <>
+                      <div className="form-group col-lg-12 p-1">
                             <select
                               className="form-control custom-select"
+                              name="manufacturer"
+                              value={data.manufacturer}
                               onChange={(e) => {
-                                setManufacturer(e.target.value);
+                                setData({...data,manufacturer:e.target.value});
+                                handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             >
-                              <option>
+                              <option value="" disabled hidden>
                                 Select Manufacturer
                               </option>
                               {manufactureres.map((el, ind) =>
@@ -197,41 +339,68 @@ const Roles = (props) => {
                                  ) : null
                               )}
                             </select>
-                          </div> :
+                            <div>
+                          <p className="formerror">{formErrors.manufacturer}</p>
+                        </div>
+                          </div>
+                          
+                        </>
+                           :
                           null
 }
                       {Userdata != undefined &&
                         Userdata.role == "superAdmin" ? (
+                          <>
                         <div className="form-group col-lg-12 p-1">
                           <select
                             className="form-control custom-select"
+                            name="role"
+                            value={data.role}
                             onChange={(e) => {
-                              setRole(e.target.value);
+                              setData({...data,role:e.target.value});
+                              handleInputChange(e);
                             }}
+                            onBlur={handleBlur}
                           >
-                            <option>Select User Role From Here</option>
-                            <option defaultValue="Manager">Manager</option>
-                            <option defaultValue="Vendor">Vendor</option>
-                            <option defaultValue="user">User</option>:null
+                            <option value="" disabled hidden>Select User Role From Here</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Vendor">Vendor</option>
+                            <option value="user">User</option>
                           </select>
+                          <div>
+                        <p className="formerror">{formErrors.role}</p>
+                      </div>
                         </div>
+                        
+                      </>
                       ) : Userdata.role == "Manager" ? (
+                        <>
                         <div className="form-group col-lg-12 p-1">
                           <select
-                            className="form-control"
+                            className="form-control custom-select"
+                            name="role"
+                            value={data.role}
                             onChange={(e) => {
-                              setRole(e.target.value);
+                              setData({...data,role:e.target.value});
+                              handleInputChange(e);
                             }}
+                            onBlur={handleBlur}
                           >
-                            <option>Select User Role From Here</option>
-                            <option defaultValue="Vendor">Vendor</option>
-                            <option defaultValue="user">User</option>:null
+                            <option value="" disabled hidden>Select User Role From Here</option>
+                            <option value="Vendor">Vendor</option>
+                            <option value="user">User</option>
                           </select>
+                          <div>
+                        <p className="formerror">{formErrors.role}</p>
+                      </div>
                         </div>
+                        
+                      </>
                       ) : null}
                       <div className="form-group col-lg-12 p-1">
                         <button
                           className="btn btn-registration btn-lg"
+                          type="submit"
                           onClick={(e) => {
                             RegisterUser(e);
                           }}
