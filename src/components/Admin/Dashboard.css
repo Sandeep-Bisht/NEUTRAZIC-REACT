@@ -151,9 +151,10 @@ a{
   background: #fff;
   z-index: var(--z-fixed);
   transition: .5s;
- 
+}
 
-
+.btn-registration:hover{
+   color: #fff;
 }
 .headertoggle
 {

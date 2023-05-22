@@ -20,6 +20,7 @@ const Roles = (props) => {
     phonenumber:"",
     password:"",
     manufacturer:"",
+    cpassword:"",
     role:"",
   })
   var userStatus="Activate";
@@ -52,6 +53,7 @@ const Roles = (props) => {
       });
   };
 
+  var pattern= /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/;
   const validateForm = (Value) => {
     const error = {};
     if (!Value.username) {
@@ -59,9 +61,14 @@ const Roles = (props) => {
     }
     if (!Value.email) {
       error.email = "This field is required";
+    } else if (!pattern.test(Value.email)) {
+      error.email = "Please enter a valid email";
     }
     if (!Value.password) {
       error.password = "This field is required";
+    }
+    if (!Value.cpassword) {
+      error.cpassword = "This field is required";
     }
     if (!Value.manufacturer) {
       error.manufacturer = "This field is required";
@@ -71,8 +78,7 @@ const Roles = (props) => {
     }
     if (!Value.phonenumber) {
       error.phonenumber = "This field is required";
-    }
-    if(Value.phonenumber.length < 10) {
+    }else if(Value.phonenumber.length < 10) {
       error.phonenumber = "Please enter valid phonenumber";
     }
     return error;
@@ -100,15 +106,18 @@ console.log(data.phonenumber.length,"length");
       }),
     })
       .then((res) => {
-        res.json()
-        setData({
-          email:"",
-          username:"",
-          phonenumber:"",
-          password:"",
-          manufacturer:"",
-          role:"",
-        })
+        res.json();
+        if(res.success==200)
+        {
+          setData({
+            email:"",
+            username:"",
+            phonenumber:"",
+            password:"",
+            manufacturer:"",
+            role:"",
+          })
+        }
       });  
   };
 
@@ -126,13 +135,23 @@ console.log(data.phonenumber.length,"length");
   const handleBlur = (event) => {
     const { name, value } = event.target;
     const errors = { ...formErrors };
-
+  
     // Validate the input field on blur
     if (!value) {
-      errors[name] = `This is required`;
+      errors[name] = "This field is required";
+    } else if (name === "phonenumber" && value.length < 10) {
+      errors[name] = "Please enter a valid phone number";
+    } else if (name === "email" && !pattern.test(value)) {
+      errors[name] = "Please enter a valid email";
+    } else if (name === "cpassword" && value !== data.password) {
+      errors[name] = "Password does not match";
+    }else {
+      errors[name] = ""; // clear error message for the current input field
     }
+    
     setFormErrors(errors);
   };
+  
 
   const data1 = [];
   {
@@ -282,10 +301,20 @@ console.log(data.phonenumber.length,"length");
                           className="form-control input-text"
                           id="formfloating"
                           type="password"
+                          name="cpassword"
+                          value={data.cpassword}
                           placeholder="Confirm Password*"
                           required
+                          onChange={(e) => {
+                            setData({...data,cpassword:e.target.value});
+                            handleInputChange(e);
+                          }}
+                          onBlur={handleBlur}
                         />
                         <label htmlFor="formfloating">Confirm Password*</label>
+                        <div>
+                            <p className="formerror">{formErrors.cpassword}</p>
+                          </div>
                       </div>
                       {Userdata!==undefined &&
                       Userdata.role==="superAdmin" ? 
