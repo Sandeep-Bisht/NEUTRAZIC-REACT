@@ -19,7 +19,6 @@ function OrderSuccess() {
   let dispatch = useDispatch()
   let location=useLocation();
   let history=useHistory();
-  console.log(location,"helo location")
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));

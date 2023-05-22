@@ -46,8 +46,8 @@
   max-width: 26px !important;
   height: 30px;
 }
-.navbar-expand-lg .navbar-nav .nav-header{
-  padding-left: 20px!important;
+.navbar-expand-lg .navbar-nav .nav-header {
+  padding-left: 20px !important;
   padding-right: 20px;
 }
 
@@ -57,9 +57,6 @@
   padding-top: 4px;
   padding-bottom: 1px; */
 }
-
-
-
 
 .icons2 {
   max-width: 19px !important;
@@ -73,6 +70,16 @@
   position: relative;
   line-height: 0;
 }
+.cart-div{
+  display: flex;
+    align-items: center;
+    padding: 0 20px!important;
+}
+
+.user-dropdown-btn,.before-login-btn{
+display: flex;
+align-items: center;
+}
 
 .login-div1 {
   right: -10px;
@@ -82,11 +89,29 @@
   bottom: 0px;
   right: 0px;
 }
+.cart-btn svg {
+  height: 25px !important;
+  width: 25px !important;
+  color: rgba(30, 20, 79, 0.6);
+  cursor: pointer;
+}
+.cart-btn svg:hover {
+  color: rgba(30, 20, 79, 1);
+}
 .user-login .Total-Item {
   position: absolute;
-  bottom: 16px;
-  left: -15px;
-  font-size: 14px;
+  bottom: 12px;
+  left: -13px;
+  font-size: 10px;
+  height: 17px;
+  width: 17px;
+  background: rgb(30, 20, 79, 0.6);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 10px;
 }
 
 .wishlist-div {
@@ -104,13 +129,12 @@
   color: #1e144f;
   font-size: 16px;
   font-weight: 400;
+  padding-left: 5px;
   /* position: relative;
     bottom:22px; */
   font-family: "Roboto", sans-serif;
 }
-.Sp1:hover {
-  color: #1b97ff;
-}
+
 .contact1 {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
@@ -156,20 +180,19 @@
   outline: 0;
 }
 .currancy select {
-  height: 30px;
   font-family: "Roboto", sans-serif;
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  color: rgba(30, 20, 79, 0.6);
+  border: 1px solid rgba(30, 20, 79, 0.6);
   padding: 5px 12px;
   outline: 0;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 4px;
+  font-size: 14px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
 
 #navbarTogglerDemo03 ul {
-  margin-left: 72px!important;
+  margin-left: 72px !important;
 }
 .nav-item .nav-heading {
   font-family: "Roboto", sans-serif;
@@ -185,10 +208,6 @@
 }
 .drop-category .category {
   float: left;
-}
-.drop-category .category svg{
-  position: absolute;
-  left: 14px;
 }
 .drop-category .category-head {
   font-size: 16px;
@@ -222,7 +241,6 @@
   margin: 26px;
   margin-left: 0;
 }
-
 .side-nav {
   width: 0;
   margin: 0 auto;
@@ -327,6 +345,7 @@
 /* wishlist code */
 .wishlist-page {
   padding-bottom: 50px;
+  color: rgb(30, 20, 79);
 }
 
 .wishlist-header {
@@ -436,6 +455,12 @@
   height: 30px;
   margin: 0 10px;
   color: #1b97ff;
+}
+.Logout-div .nav__icon {
+  height: 20px;
+  width: auto;
+  color: #007bff;
+  opacity: 1.6 !important;
 }
 
 .Home-navbar ul li {
@@ -575,10 +600,16 @@ h3 .read-more-button {
   color: black;
   cursor: pointer;
 }
-
+.user-icon:hover {
+  color: rgb(30, 20, 79, 1) !important;
+}
+.after-user-Logout .sp:hover {
+  color: rgb(30, 20, 79, 1) !important;
+}
 .dropdown .btn-sm {
   padding: 0px !important;
   font-size: 16px !important;
+  font-weight: 700;
   position: relative;
   bottom: 0;
   letter-spacing: 0.25px;
@@ -586,10 +617,12 @@ h3 .read-more-button {
   outline: 0;
   box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
   text-transform: capitalize;
+  color: rgb(30, 20, 79, 0.6);
 }
 .dropdown .btn-sm:hover {
-  color: #1b97ff;
+  color: rgb(30, 20, 79, 1);
 }
+
 .login-div {
   justify-content: end;
 }
@@ -597,7 +630,7 @@ h3 .read-more-button {
 
 .Logout-ul {
   width: 200px !important;
-  height: 220px;
+  height: 231px;
 }
 .Logout-ul div {
   border-bottom: 1px solid #f2f2f2;
@@ -690,7 +723,7 @@ h3 .read-more-button {
 /* Sidebar Styles */
 
 .sidebar-nav {
-  padding-left: 10px!important;
+  padding-left: 24px !important;
   position: absolute;
   top: 30px;
   width: 100%;
@@ -891,6 +924,9 @@ body {
 .accordion-button::after {
   background-image: none;
 }
+.Home-navbar .contact:hover {
+  color: white !important;
+}
 
 /* End Media Query Responsive for Desktop */
 
@@ -899,15 +935,19 @@ body {
 .user-icon {
   font-size: 28px;
   display: block;
+  color: rgb(30, 20, 79, 0.6);
+}
+.user-icon:hover{
+  color:#1e144f;
+}
+.username-after-login:hover{
+  color: #1e144f;
 }
 
 .logged-In {
   font-size: 2rem;
 }
 
-.bx-log-in:hover {
-  color: #1b97ff;
-}
 
 /* ---------------------------prashant modified haeder css------------- */
 
@@ -942,12 +982,15 @@ body {
   padding: 0 20px;
 }
 
+
 .heaader-wrapper .cart-div .login-div1 {
   display: flex;
+  align-items: center;
 }
 
 .heaader-wrapper .heart-div .heart-div-inner {
   display: flex;
+  align-items: center;
 }
 .login-div2 input[type="text"],
 .login-div2 .search {
@@ -1009,18 +1052,39 @@ body {
   color: black;
 } */
 .after-user-Logout .sp {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 16px !important;
+  font-weight: 700;
   position: relative;
-  color: #1e144f;
-  padding-left: 5px;
-  bottom: 4px;
+  cursor: pointer;
+  bottom: 0;
+  letter-spacing: 0.25px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  box-shadow: 0 0 0 -0.8rem rgb(0 123 255 / 25%) !important;
+  text-transform: capitalize;
+  color: rgb(30, 20, 79, 0.6);
 }
-
+.after-user-Logout .sp:hover{
+  color: #1e144f;
+}
+.login-register{
+    font-size: 16px !important;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    font-family: "Roboto", sans-serif;
+    text-transform: capitalize;
+    color: rgb(30, 20, 79, 0.6);
+}
+.login-register:hover {
+    color: #1e144f;
+}
 .heart-div .option-item .cart-btn h6 {
   display: none;
 }
 
+.collapsed-button {
+  padding: 7px 10px !important;
+}
 /* forget modal */
 /* .Forgot-Password{
     display: none;
@@ -1068,6 +1132,10 @@ body {
   .heaader-wrapper {
     padding: 10px;
   }
+  .option-item .cart-btn {
+    display: flex;
+    align-items: center;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .heaader-wrapper {
@@ -1082,7 +1150,7 @@ body {
   .currancy {
     margin-left: 26px !important;
   }
-  
+
   .navbar {
     background-color: #1b97ff !important;
     padding: 0px;
@@ -1155,7 +1223,7 @@ body {
     width: 150px;
   }
   .user-icon {
-    font-size: 25px;
+    font-size: 28px;
   }
   .option-item .cart-btn {
     font-size: 25px;
@@ -1164,10 +1232,10 @@ body {
     padding-left: 2px !important;
   }
   .cart-div {
-    padding-left: 2px;
+    padding-left: 2px !important;
   }
   .heart-div {
-    padding-left: 2px;
+    padding-left: 2px !important;
   }
   .header-wrapper-right .left-part {
     margin-right: 0;
@@ -1185,6 +1253,9 @@ body {
   }
 }
 @media only screen and (max-width: 815px) {
+  .after-user-Logout .sp {
+    display: none;
+  }
   .currancy {
     margin-left: 30px !important;
   }
@@ -1210,9 +1281,12 @@ body {
   .category i {
     display: none !important;
   }
+  .dropdown .btn-sm{
+    margin-top: 0px !important;
+  }
   .user-icon,
   .option-item .cart-btn {
-    font-size: 18px;
+    font-size: 28px;
   }
   .user-icon {
     padding-top: 3px;
@@ -1225,7 +1299,7 @@ body {
     width: 100%;
   }
   .newheader {
-    height: 108px;
+    height: 120px;
   }
 }
 @media only screen and (max-width: 775.98px) {
@@ -1244,6 +1318,12 @@ body {
     width: 100%;
     height: 100%;
   } /* end modal */
+  .currancy select {
+    height: 24px !important;
+    padding: 4px 2px !important;
+    font-size: 12px !important;
+  }
+  
 }
 
 @media only screen and (max-width: 730.98px) {
@@ -1276,7 +1356,9 @@ body {
 }
 @media only screen and (max-width: 575.98px) {
   /* responsive homepage */
-
+  .after-user-Logout .sp {
+    display: none !important;
+  }
   .single-products-box .image img {
     transition: var(--transition);
     height: 197px;
@@ -1319,13 +1401,20 @@ body {
   .logiRegisterContentDiv .register-form-button {
     width: auto !important;
   }
+  .currancy select {
+    height: 20px !important;
+    font-size: 10px !important;
+    padding: 2px 0px !important;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   .right-part .currancy {
     margin-right: 0px;
   }
-
+  .cart-div {
+    padding: 0 10px!important;
+  }
   .category svg {
     width: 19px !important;
   }
@@ -1350,14 +1439,16 @@ body {
     line-height: 25px !important;
   }
   .dropdown .btn-sm {
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
   .sp {
-    font-size: 13px !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
   }
   .currancy select {
-    font-size: 13px !important;
-    padding: 5px 0px;
+    font-size: 9px !important;
+    padding: 0px 0px !important;
+    height: 15px !important;
   }
   .login-div2 input[type="text"] {
     width: 80%;
@@ -1384,7 +1475,7 @@ body {
   .heaader-wrapper .account-div,
   .heaader-wrapper .cart-div,
   .heaader-wrapper .heart-div {
-    padding: 0 4px;
+    padding: 0 5px!important;
   }
   .navbar-brand img {
     height: 25px;
@@ -1399,21 +1490,21 @@ body {
   }
   .user-icon,
   .option-item .cart-btn {
-    font-size: 14px;
+    font-size: 28px !important;
   }
   .heaader-wrapper .cart-div .login-div1,
   .heaader-wrapper .heart-div .heart-div-inner {
     align-items: center;
   }
   .currancy select {
-    height: 24px;
     font-size: 10px;
   }
   .user-login .Total-Item {
     position: absolute;
-    bottom: 7px;
+    bottom: 10px;
     left: -10px;
-    font-size: 12px;
+    font-size: 10px !important;
+    padding: 5px !important;
   }
   .newheader {
     height: 125px;
@@ -1433,6 +1524,10 @@ body {
   .after-user-Logout .sp {
     position: relative;
     bottom: 1px;
+  }
+  .cart-btn svg {
+    height: 25px !important;
+    width: 32px !important;
   }
 }
 
@@ -1469,10 +1564,10 @@ body {
   .currancy {
     margin-left: 5px !important;
   }
-  .dropdown .login-btn {
+  /* .dropdown .login-btn {
     font-size: 12px !important;
     font-weight: bold;
-  }
+  } */
 }
 @media only screen and (max-width: 359.98px) {
   .cart-div {
@@ -1553,6 +1648,9 @@ body {
 .forget-modal-body .custom-close-icon-forget {
   stroke: rgba(0, 0, 0, 0.6) !important;
   stroke-width: 4px !important;
+}
+.forget-modal-body .custom-close-icon-forget:hover {
+  stroke: rgba(0, 0, 0, 1) !important;
 }
 
 :where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close:hover {

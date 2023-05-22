@@ -1840,7 +1840,9 @@ kbd kbd {
   color: #6c757d;
   opacity: 1;
 }
-
+.header-wrapper-left{
+  margin-left: -13px;
+}
 .form-control:-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
@@ -2020,6 +2022,9 @@ select.form-control[size] {
 .was-validated :valid ~ .valid-feedback,
 .was-validated :valid ~ .valid-tooltip {
   display: block;
+}
+.section-footer, .footer-area{
+  background-color: #1b1e21!important;
 }
 
 .form-control.is-valid,
@@ -9485,13 +9490,16 @@ p {
   line-height: 1.8;
 }
 .Subscribe {
-  color: var(--optionalColor);
+  color: #fff;
   font-size: var(--fontSize);
   margin-bottom: 15px;
   line-height: 1.8;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
+.footer-end-para{
+   color: #fff;
+} 
 
 p:last-child {
   margin-bottom: 0;
@@ -13621,9 +13629,6 @@ textarea.form-control {
   overflow: hidden;
 }
 
-.cart-buttons {
-  padding-bottom: 30px;
-}
 .cart-buttons .cart-header {
   font-size: 34px;
   font-weight: 400 !important;
@@ -13653,7 +13658,7 @@ textarea.form-control {
 }
 
 .cart-totals {
-  max-width: 500px;
+  /* max-width: 500px; */
   /* box-shadow: 0 2px 48px 0 rgba(0, 0, 0, .08); */
   border-radius: 3px;
   margin-left: auto;
@@ -17366,19 +17371,19 @@ iframe {
 .single-footer-widget .footer-contact-info li {
   display: block;
   margin-bottom: 12px;
-  color: var(--optionalColor);
+  color: #fff;
 }
 
 .single-footer-widget .footer-contact-info li span {
   /* color: var(--blackColor); */
-  color: #1e144f;
+  color: #fff;
   font-weight: 600;
   font-family: "Roboto", sans-serif;
   font-size: 19px;
 }
 
 .single-footer-widget .footer-contact-info li a {
-  color: var(--optionalColor);
+  color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
 }
@@ -17417,7 +17422,7 @@ iframe {
   font-size: 22px;
   position: relative;
   padding-bottom: 5px;
-  color: #1e144f;
+  color: #fff;
 }
 
 .single-footer-widget .link-list {
@@ -17432,7 +17437,7 @@ iframe {
 
 .single-footer-widget .link-list li a {
   display: inline-block;
-  color: var(--optionalColor);
+  color: #fff;
   position: relative;
   padding-left: 13px;
   font-family: "Roboto", sans-serif;
@@ -17602,7 +17607,7 @@ iframe {
 
 .footer-bottom-area .payment-types ul li {
   margin-right: 10px;
-  color: var(--optionalColor);
+  color: #fff;
   font-weight: 500;
 }
 
@@ -18930,7 +18935,7 @@ iframe {
 
 .giks-link {
   text-decoration: none;
-  color: #1e144f !important;
+  color: #2a96ff !important;
   cursor: pointer;
 }
 .giks-link:hover {
@@ -19293,7 +19298,7 @@ svg {
   padding-top: 10px;
 }
 .Category-div {
-  margin-top: 130px !important;
+  margin-top: 155px !important;
 }
 /* All PRoduct Category-div */
 @media only screen and (max-width: 991.98) {
@@ -19795,8 +19800,10 @@ svg {
   margin-bottom: 30px;
 }
 .home-banner .home-banner-content {
-  padding-right: 50px;
+  /* padding-right: 50px; */
   line-height: 1.5;
+  text-align: justify;
+  word-spacing: -1px;
 }
 .home-banner .home-banner-right {
   text-align: center;
@@ -19835,18 +19842,11 @@ svg {
   /* border-bottom: 1px solid black !important; */
 }
 
-
-.logo-main-div{
-  margin-left: -16px;
-}
 .back-ground-subcategory-sidebar {
-  width: 219px;
   background-color: #fff;
   height: 100%;
   color: #002752;
   position: sticky;
-  top: 107px;
-  height: 100vh;
   box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%),
     0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
     0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
@@ -19947,13 +19947,17 @@ svg {
     font-size: 0.8rem;
     text-align: center;
   }
+
+  .homepage-Blog-card .card-text{
+    font-size: 14px !important;
+  }
 }
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 1199.98px) {
   .single-contact-info-box {
     height: 260px !important;
   }
   .blog-section .blog-page-section-2 .card .card-body {
-    height: 180px !important;
+    height: 220px !important;
   }
   .blog-section .displayed-text {
     font-size: 14px !important;
@@ -19967,6 +19971,9 @@ svg {
   }
   .first-nav {
     top: 136px !important;
+  }
+  .homepage-Blog-card .card-text{
+    font-size: 13px !important;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -20089,7 +20096,10 @@ svg {
     line-height: 1.7;
   }
   .blog-section .blog-page-section-2 .card .card-body {
-    height: 150px !important;
+    height: 190px !important;
+  }
+  .homepage-Blog-card .card-text{
+    font-size: 14px !important;
   }
   /* End blog css */
 
@@ -20300,7 +20310,10 @@ svg {
     margin-top: 98px !important;
   }
   .home-banner {
-    margin-top: 60px;
+    margin-top: 90px;
+  }
+  .blog-section .blog-page-section-2 .card .card-body {
+    height: 190px !important;
   }
 }
 
@@ -20312,9 +20325,7 @@ svg {
     margin-bottom: 18px;
   }
   /* reponsive homepage */
-  .home-banner {
-    margin-top: 65px;
-  }
+  
   .single-products-box .image img {
     width: 100% !important;
   }
@@ -20336,7 +20347,7 @@ svg {
   }
 
   .Category-div {
-    margin-top: 126px !important;
+    margin-top: 160px !important;
   }
   div#columns .figure {
     margin: 0px 0px 15px 2px;
@@ -20448,12 +20459,11 @@ svg {
   }
   .subcategory-container {
     position: relative;
-    top: -220px;
     margin-left: 158px;
     width: 65%;
   }
   .browser-category-section {
-    margin-top: 358px !important;
+    margin-top: 147px !important;
   }
   /* end subcategory page */
 }
@@ -20477,7 +20487,7 @@ svg {
     font-size: 20px !important;
   }
   .home-banner {
-    margin-top: 97px;
+    margin-top: 120px;
   }
   .home-banner .home-banner-content {
     line-height: 27px;
@@ -20537,7 +20547,7 @@ svg {
     font-size: 15px !important;
   }
   p {
-    line-height: 33px;
+    /* line-height: 33px; */
     font-size: 15px;
   }
   .drop-category {
@@ -20669,8 +20679,8 @@ svg {
     margin-top: -56px !important;
   }
   p {
-    line-height: 30px !important;
-    font-size: 15px !important;
+    /* line-height: 30px !important; */
+    /* font-size: 15px !important; */
   }
   .blog-box-wrapper .left-blog-image-wrap img {
     height: 272px !important;
@@ -21072,8 +21082,16 @@ svg {
   }
 }
 
-
 .category-text p {
   text-align: justify;
   hyphens: auto;
+}
+
+/* Homepage Blog css */
+.homepage-Blog-card .card-text {
+  font-size: 15px;
+  text-align: justify;
+  hyphens: auto;
+  word-spacing: -0.5px;
+  color: rgba(0, 0, 0, 0.5) ;
 }

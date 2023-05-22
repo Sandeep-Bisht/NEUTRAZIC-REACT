@@ -466,6 +466,14 @@ display: flex;
 	  transform: scale(1.1);
   
   } */
+  .singleproduct-icon{
+    margin-left: 2px !important;
+  }
+  .single-product-social-icons{
+    height: 20px !important;
+    width: 20px !important;
+    border-radius: 50%;
+  }
 #columns1:hover .figure2:not(:hover) {
   opacity: 0.4;
 }

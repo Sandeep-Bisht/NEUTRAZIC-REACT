@@ -613,7 +613,6 @@ const HomePage = () => {
                     .map((el, ind) => {
                       if (ind < 5) {
                         return (
-                          <>
                             <figure
                               className="figure homepage-trending-figure"
                               key={ind}
@@ -643,11 +642,11 @@ const HomePage = () => {
                                     // }}
                                   />
                                 </div>
-                                <Link to={"/SingleProduct/" + el._id}>
+                                <span>
                                   <figcaption className="Product-name-home">
                                     {el.name}
                                   </figcaption>
-                                </Link>
+                                </span>
                               </Link>
 
                               <div className="contanier homepage-product-price-div">
@@ -748,7 +747,6 @@ const HomePage = () => {
 
                               {/* </Link> */}
                             </figure>
-                          </>
                         );
                       }
                     })}
@@ -868,11 +866,11 @@ const HomePage = () => {
                                   alt=""
                                 />
                               </div>
-                              <Link to={"/SingleProduct/" + el._id}>
+                              <span>
                                 <figcaption className="Product-name-home">
                                   {el.name}
                                 </figcaption>
-                              </Link>
+                              </span>
                             </Link>
                             <div className="contanier homepage-product-price-div">
                               <div className="row mt-2">
@@ -1039,11 +1037,11 @@ const HomePage = () => {
                                   // }}
                                 />
                               </div>
-                              <Link to={"/SingleProduct/" + el._id}>
+                              <span>
                                 <figcaption className="Product-name-home">
                                   {el.name}
                                 </figcaption>
-                              </Link>
+                              </span>
                             </Link>
                             <div className="contanier homepage-product-price-div">
                               <div className="row mt-2">
@@ -1193,7 +1191,6 @@ const HomePage = () => {
                 {Manufactureres &&
                   Manufactureres.length > 0 &&
                   Manufactureres.map((el, index) => (
-                    <>
                       <div className="col" key={index}>
                         <img
                           className="img-slides"
@@ -1204,7 +1201,6 @@ const HomePage = () => {
                           }
                         />
                       </div>
-                    </>
                   ))}
               </Carousel>
             </div>
@@ -1276,7 +1272,7 @@ const HomePage = () => {
               <div className="blog-page-section-2">
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="latest-blogs-section">
+                    <div className="latest-blogs-section homepage-blog-box">
                       <div className="row">
                         {blogs &&
                           blogs.map((item, ind) => {
@@ -1294,19 +1290,16 @@ const HomePage = () => {
                                         className="card-img-homepage"
                                         alt="blog-image"
                                       />
-                                      <div className="card-body">
+                                      <div className="card-body homepage-Blog-card">
                                         <h6 className="blog-title-text">
                                           {item.title}
                                         </h6>
                                         <p className="card-text">
-                                          <ReadMoreReact
-                                            text={item.description}
-                                            min={60}
-                                            ideal={60}
-                                            max={60}
-                                            readMoreText={"Read More"}
-                                          />
+                                          {item.description.slice(0, 110)}
                                         </p>
+                                        <span className="Read-more-singleblog">
+                                          Read More
+                                        </span>
                                       </div>
                                     </div>
                                   </Link>

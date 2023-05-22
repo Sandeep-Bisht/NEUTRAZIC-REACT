@@ -7,8 +7,6 @@ import Footer from "./Footer";
 import Baseline from "./Baseline";
 import { baseUrl } from "../utils/services";
 import "../components/SingleBlogPage.css";
-import { BsArrowRight } from "react-icons/bs";
-import Link from "antd/es/typography/Link";
 import { SocialIcon } from 'react-social-icons';
 
 
@@ -84,12 +82,12 @@ const SingleBlog = (props) => {
 
       <div className="container product-div blog-container">
       
-          <span className="nav-text p-3">
-            <Link to="/" className="nav-text">
+          {/* <span className="nav-text p-3">
+          <Link to="/" className="nav-text">
               Home
             </Link>
             {location.pathname}
-          </span>
+          </span> */}
         <div className="row">
           <div className="col-md-12">
             {blog &&
@@ -113,8 +111,8 @@ const SingleBlog = (props) => {
                                   ></img>
                                 </div>
                               </div>
-                              <div className="col-md-5">
-                                <div className="blog-description-box pt-2 px-3">
+                              <div className="col-md-6 px-0">
+                                <div className="blog-description-box p-4">
                                   <div>
                                     <div className="blog-title">
                                       <p> {item.title}</p>
@@ -151,7 +149,6 @@ const SingleBlog = (props) => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-1"></div>
 
                         <div className="col-md-12">
                           <div
@@ -203,7 +200,6 @@ const SingleBlog = (props) => {
                                   </p>
                                   <span className="Read-more-singleblog">
                                     Read More
-                                    {/* <BsArrowRight style={{height:"20px"}}/> */}
                                   </span>
                                 </div>
                               </div>

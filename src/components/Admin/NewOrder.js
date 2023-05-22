@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { AiFillCaretDown } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
 
+var Userdata = "";
 const NewOrder = () => {
   const [orders, setOrders] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
@@ -22,6 +23,7 @@ const NewOrder = () => {
   const history = useHistory();
 
   useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
   }, []);
 
@@ -29,14 +31,30 @@ const NewOrder = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        let arr = [];
-        for (let item of data.data) {
-          if (item.orderStatus == "Pending") {
-            item.createdAt=item.createdAt.slice(0,10);
-            arr.push(item);
-          }
-        }
+        if(Userdata!==undefined || Userdata!=="")
+        {
+          if(Userdata.role==="Vendor")
+          {
+            let arr = [];
+         
+              for (let item of data.data) {
+                if (item.orderStatus == "Pending" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
+                  arr.push(item);
+                }
+              }
         setOrderDetails(arr);
+          }
+          else{
+            let arr = [];  
+            for (let item of data.data) {
+              if (item.orderStatus == "Pending") {
+                item.createdAt=item.createdAt.slice(0,10);
+                arr.push(item);
+              }
+            }
+            setOrderDetails(arr);
+        }
+          } 
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -169,7 +187,6 @@ const NewOrder = () => {
     history.push("/SingleProduct/" + id);
   };
 
-  console.log("prticularUserOrder", prticularUserOrder)
 
   return (
     <>
@@ -195,7 +212,6 @@ const NewOrder = () => {
                 prticularUserOrder.length > 0 &&
                 prticularUserOrder[0].order.length > 0 &&
                 prticularUserOrder[0].order.map((item, ind) => {
-                  console.log("inside loop", item)
                   return (
                     
                     <>

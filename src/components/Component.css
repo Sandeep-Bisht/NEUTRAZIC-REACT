@@ -429,10 +429,6 @@ width:100%;
     .Myacount-heading{
         font-size: 30px!important;
     }
-    .col-12 button {
-        width: 7rem!important;
-        padding: 5px!important;
-    }
 }
 
 @media only screen and (max-width:379.98px){

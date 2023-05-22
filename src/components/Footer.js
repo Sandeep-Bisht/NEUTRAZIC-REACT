@@ -88,7 +88,8 @@ const Footer = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="section-footer">
+        <div className="container">
         <footer className="footer-area">
           <div className="container-fluid m-auto">
             <div className="row">
@@ -208,13 +209,35 @@ const Footer = () => {
                       )}
                     </li>
                     <li>
-                      <Link to="/UserOrder">Order History</Link>
+                      {Userdata === null ? (
+                        <Link
+                          data-bs-toggle="modal"
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                          onClick={()=>clickModalResetHandler()}
+                        >
+                          Order History
+                        </Link>
+                      ) : (
+                        <Link to="/UserOrder">Order History</Link>
+                      )}
                     </li>
-
-                    <li>
-                      <Link to="/WishList" onClick={WishlistHandler}>
-                        Wishlist
-                      </Link>
+                     
+                     <li>
+                      {Userdata === null ? (
+                        <Link
+                          data-bs-toggle="modal"
+                          data-bs-target={
+                            Userdata == null ? "#exampleModal" : null
+                          }
+                          onClick={()=>clickModalResetHandler()}
+                        >
+                          Wishlist
+                        </Link>
+                      ) : (
+                        <Link to="/WishList">Wishlist</Link>
+                      )}
                     </li>
                     <li>
                       <Link to="/support">Need Support?</Link>
@@ -273,7 +296,7 @@ const Footer = () => {
             <div className="container m-auto">
               <div className="row mt-0 align-items-center">
                 <div className="col-lg-6 col-md-6 link-footer-first">
-                  <p>
+                  <p className="footer-end-para">
                     Designed & Developed by <i className="bx bx-copyright"></i>
                     2023
                     <a
@@ -289,7 +312,7 @@ const Footer = () => {
                 <div className="col-lg-6 col-md-6 link-footer-second">
                   <div className="payment-types">
                     <ul className="d-flex align-items-center justify-content-end">
-                      <li>We accept payment via:</li>
+                      <li className="footer-end-para">We accept payment via:</li>
                       <li>
                         <a href="#" target="_blank">
                           <img
@@ -337,6 +360,7 @@ const Footer = () => {
             </div>
           </div>
         </footer>
+        </div>
       </div>
     </>
   );

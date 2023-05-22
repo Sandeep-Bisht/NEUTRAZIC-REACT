@@ -19,7 +19,6 @@ const ManufacturerCreation = (props) => {
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
-console.log(editableData,"inside the manufacturerCreaction");
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetManufacturer();

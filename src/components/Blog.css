@@ -50,7 +50,9 @@
   line-height: 2;
   width: 80%;
 }
-
+.blod-page-main a:hover{
+  color: black !important;
+}
 .right-blog-image-wrapper img {
   height: 240px;
   width: 100%;
@@ -127,7 +129,6 @@
 }
 .blog-page-section-2 .cart-text-body .card-text {
   color: rgba(0, 0, 0, 0.5);
-  /* font-size: 0.8rem !important; */
 }
 .blog-page-section-2 .card-img-link {
   height: 230px;
@@ -147,7 +148,7 @@
   font-size: 15px !important;
   text-align: justify !important;
   hyphens: auto !important;
-  word-spacing: 0px !important;
+  word-spacing: -0.1em !important;
 }
 /* / Single-blog-css / */
 
@@ -176,10 +177,8 @@
   }
   .blog-page-section-2 .card .cart-text-body .card-text,
   .blog-page-section-2 .card .cart-text-body .displayed-text {
-    font-size: 15px !important;
-    text-align: left !important;
-    hyphens: auto !important;
-    word-spacing: 3px !important; 
+    font-size: 14px !important;
+    text-align: justify !important;
   }
   .blog-page .blog-title-text {
     font-size: 16px !important;
@@ -187,16 +186,12 @@
   }
 }
 @media only screen and (max-width: 1199.98px) {
-  .blog-page-section-2 .card .cart-text-body {
-    height: 210px !important;
-    /* padding: 15px; */
-  }
+ 
   .blog-page-section-2 .card .cart-text-body .card-text,
   .blog-page-section-2 .card .cart-text-body .displayed-text {
-    font-size: 15px !important;
-    text-align: left !important;
+    font-size: 13px !important;
+    text-align: justify !important;
     hyphens: auto !important;
-    word-spacing: normal;
     
   }
   .blog-page .display-text-group {
@@ -209,18 +204,22 @@
 }
 @media only screen and (max-width: 1024px) {
   .blog-page-section-2 .card .cart-text-body {
-    height: 200px !important;
+    height: 230px !important;
     /* padding: 15px; */
   }
 }
 @media only screen and (max-width: 991.98px) {
   .blog-page-section-2 .card .cart-text-body {
-    height: 175px !important;
+    height: 190px !important;
     /* padding: 15px; */
   }
   .blog-page .blog-title-text {
     font-size: 16px !important;
     height: auto;
+  }
+  .blog-page-section-2 .card .cart-text-body .card-text,
+  .blog-page-section-2 .card .cart-text-body .displayed-text {
+    font-size: 14px !important;
   }
   .blog-page .blog-page-section-2 .card-body {
     /* height: 150px; */
@@ -253,6 +252,10 @@
     height: 240px;
     margin-left: 1%;
     width: 100%;
+  }
+  .blog-page-section-2 .card .cart-text-body {
+    height:  192px !important;
+    /* padding: 15px; */
   }
   .blog-text-div {
     top: 8%;
