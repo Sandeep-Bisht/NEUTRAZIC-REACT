@@ -118,11 +118,10 @@ const ShippedOrder = () => {
   const showModal = (item) => {
     setPrticularUserOrder(item.order)
     setShippedOrder(item.address);
-    setPrticularUserOrder(item.order);
     setOrderItem(item);
     setIsModalVisible(true);
   };
-
+console.log(prticularUserOrder,"inside shipper")
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
     {
@@ -220,7 +219,8 @@ const ShippedOrder = () => {
             <tbody>
               {prticularUserOrder &&
                 prticularUserOrder.length > 0 &&
-                prticularUserOrder.map((item, ind) => {
+                prticularUserOrder[0].order.length > 0 &&
+                prticularUserOrder[0].order.map((item, ind) => {
                   return (
                     <>
                       <tr key={ind}>
@@ -231,12 +231,12 @@ const ShippedOrder = () => {
                                 imageHandler(item.productid)
                               }
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.order[0].image}`}
+                              src={`${baseUrl}/${item.image}`}
                             ></img>
                           </div>
                         </td>
-                        <td className="width-adjust-of-td">{item.order[0].name}</td>
-                        <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
+                        <td className="width-adjust-of-td">{item.name}</td>
+                        <td className="width-adjust-of-td">{item.singleprice}</td>
                       </tr>
                     </>
                   );

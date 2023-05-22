@@ -51,6 +51,9 @@ overflow: hidden!important;
   .sidebar-nav{
     padding: 6px;
   }
+  .subcategory-container{
+    width: auto!important;
+  } 
 }
 @media only screen and (max-width : 756.98px){
   .subcategory-columns .figure{
@@ -59,6 +62,9 @@ overflow: hidden!important;
   .sidebar-nav{
     padding: 6px;
   }
+  .subcategory-container{
+    width: auto!important;
+  } 
 }
 @media only screen and (max-width : 575.98px){
   .subcategory-columns .figure{
