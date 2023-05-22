@@ -105,7 +105,7 @@ const UserOrder = () => {
                           header={
                             <div className="container">
                               <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-9">
                                   <div className="row">
                                     <div className="user-order-tracking-details">
                                       <div className="col-md-12 col-12">
@@ -130,7 +130,7 @@ const UserOrder = () => {
                                                 )}
 
                                                 {/* Circle */}
-                                                {el.orderStatus ===
+                                                {/* {el.orderStatus ===
                                                   "In-Progress" && (
                                                   <div className="circle1 active11">
                                                     <AiOutlineCheck className="Check-icon" />
@@ -138,22 +138,22 @@ const UserOrder = () => {
                                                 )}
                                                 {el.orderStatus ===
                                                   "Packed" && (
-                                                  <div className="circle1 active12">
+                                                  <div className="circle2 active12">
                                                     <AiOutlineCheck className="Check-icon" />
                                                   </div>
                                                 )}
                                                 {el.orderStatus ===
                                                   "Shipped" && (
-                                                  <div className="circle1 active13">
+                                                  <div className="circle3 active13">
                                                     <TbTruckDelivery className="Check-icon-shipped" />
                                                   </div>
                                                 )}
                                                 {el.orderStatus ===
                                                   "Delivered" && (
-                                                  <div className="circle1 active14">
+                                                  <div className="circle4 active14">
                                                     <AiOutlineCheck className="Check-icon" />
                                                   </div>
-                                                )}
+                                                )} */}
                                               </div>
                                               <div className="progress-text">
                                                 {el.orderStatus ===
@@ -228,72 +228,86 @@ const UserOrder = () => {
                                             </>
                                           )}
                                         </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                  <div className="order-column p-2">
-                                    <div className="row">
-                                      <div className="order-tracking-details">
                                         <div className="col-md-12">
-                                          <div className="row">
-                                            <div className="Right-order-content">
-                                              <div className="col-md-3 col-3">
-                                                <div className="orderno-heading">
-                                                  <h6 className="order-status-heading">
-                                                    Order Number
-                                                  </h6>
-                                                </div>
-                                                <p className="para-order-text">
-                                                  {el.order_no}
-                                                </p>
-                                              </div>
+                                          <div className="order-column p-2">
+                                            <div className="row">
+                                              <div className="order-tracking-details">
+                                                <div className="col-md-12">
+                                                  <div className="row">
+                                                    <div className="Right-order-content">
+                                                      <div className="col-md-3 col-3">
+                                                        <div className="orderno-heading">
+                                                          <h6 className="order-status-heading">
+                                                            Order Number
+                                                          </h6>
+                                                        </div>
+                                                        <p className="para-order-text">
+                                                          {el.order_no}
+                                                        </p>
+                                                      </div>
 
-                                              <div className="col-md-3 col-3 px-0">
-                                                <div className="orderno-heading">
-                                                  <h6 className="order-status-heading">
-                                                    Total Amount
-                                                  </h6>
-                                                </div>
-                                                <p className="para-order-text">
-                                                  ₹{el.totalamount}
-                                                </p>
-                                              </div>
+                                                      <div className="col-md-3 col-3 px-0">
+                                                        <div className="orderno-heading">
+                                                          <h6 className="order-status-heading">
+                                                            Total Amount
+                                                          </h6>
+                                                        </div>
+                                                        <p className="para-order-text">
+                                                          ₹{el.totalamount}
+                                                        </p>
+                                                      </div>
 
-                                              <div className="col-md-3 col-3 px-0">
-                                                <div className="orderno-heading">
-                                                  <h6 className="order-status-heading">
-                                                    Order Date
-                                                  </h6>
-                                                </div>
-                                                <p className="para-text">
-                                                  {el.createdAt.slice(0, 10)}
-                                                </p>
-                                              </div>
-                                              {el.orderStatus ===
-                                              "Delivered" ? (
-                                                <div className="col-md-3 col-3 px-0">
-                                                  <div className="orderno-heading">
-                                                    <h6 className="order-status-heading">
-                                                      Delivered On
-                                                    </h6>
+                                                      <div className="col-md-3 col-3 px-0">
+                                                        <div className="orderno-heading">
+                                                          <h6 className="order-status-heading">
+                                                            Order Date
+                                                          </h6>
+                                                        </div>
+                                                        <p className="para-text">
+                                                          {el.createdAt.slice(
+                                                            0,
+                                                            10
+                                                          )}
+                                                        </p>
+                                                      </div>
+                                                      {el.orderStatus ===
+                                                      "Delivered" ? (
+                                                        <div className="col-md-3 col-3 px-0">
+                                                          <div className="orderno-heading">
+                                                            <h6 className="order-status-heading">
+                                                              Delivered On
+                                                            </h6>
+                                                          </div>
+                                                          {el.orderStatus ===
+                                                            "Delivered" && (
+                                                            <p className="para-text">
+                                                              {el.delivery_time}
+                                                            </p>
+                                                          )}
+                                                        </div>
+                                                      ) : (
+                                                        " "
+                                                      )}
+                                                    </div>
                                                   </div>
-                                                  {el.orderStatus ===
-                                                    "Delivered" && (
-                                                    <p className="para-text">
-                                                      {el.delivery_time}
-                                                    </p>
-                                                  )}
                                                 </div>
-                                              ) : (
-                                                " "
-                                              )}
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="See-more-details">
+                                    <div className="details-button">
+                                      <button className="order-detail-button">
+                                        Return
+                                      </button>
+                                      <button className="order-detail-button">
+                                        See Details
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -303,10 +317,6 @@ const UserOrder = () => {
                         >
                           {el &&
                             el.order[0].order.map((item, ind) => {
-                              console.log(
-                                item.image,
-                                "This is checking inside order number"
-                              );
                               return (
                                 <>
                                   <div className="row" key={ind}>
@@ -338,6 +348,18 @@ const UserOrder = () => {
                                                       }}
                                                     >
                                                       {item.quantity}
+                                                    </sapn>
+                                                  </h6>
+                                                </div>
+                                                <div className="Price-box">
+                                                  <h6 className="userorder-product">
+                                                  <span>Price:</span>
+                                                    <sapn
+                                                      style={{
+                                                        color: "#28a745",
+                                                      }}
+                                                    >
+                                                      {item.singleprice}
                                                     </sapn>
                                                   </h6>
                                                 </div>
