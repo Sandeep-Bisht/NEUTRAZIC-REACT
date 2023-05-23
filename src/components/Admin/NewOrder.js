@@ -220,25 +220,23 @@ const NewOrder = () => {
             <tbody>
               {prticularUserOrder &&
                 prticularUserOrder.length > 0 &&
-                prticularUserOrder.map((item, ind) => {
+                prticularUserOrder[0].order.length > 0 &&
+                prticularUserOrder[0].order.map((item, ind) => {
                   return (
+                    
                     <>
                       <tr key={ind}>
                         <td className="width-adjust-of-td">
                           <div className="width-adjust-of-image">
-                            <img
+                             <img
                               onClick={() => imageHandler(item.productid)}
                               style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.order[0].image}`}
-                            ></img>
+                              src={`${baseUrl}/${item.image}`}
+                            ></img> 
                           </div>
                         </td>
-                        <td className="width-adjust-of-td">
-                          {item.order[0].name}
-                        </td>
-                        <td className="width-adjust-of-td">
-                          {item.order[0].singleprice}
-                        </td>
+                        <td className="width-adjust-of-td">{item.name}</td>
+                        <td className="width-adjust-of-td">{item.singleprice}</td>
                       </tr>
                     </>
                   );
