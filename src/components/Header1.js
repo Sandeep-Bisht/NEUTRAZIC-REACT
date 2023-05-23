@@ -18,10 +18,10 @@ import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsBagHeart, BsCart4 } from "react-icons/bs";
-import {RiShoppingCartLine} from "react-icons/ri";
+import { RiShoppingCartLine } from "react-icons/ri";
 import axios from "axios";
 import { RxDashboard } from "react-icons/rx";
-
+import { BiUser } from "react-icons/bi";
 
 let changeNavValue = 0;
 var header;
@@ -59,6 +59,7 @@ const Header1 = (props) => {
   // const [currancy, setCurrency] = useState("INR");
   // const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
+  const [toggle, setToggle] = useState(0);
   // const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
@@ -85,13 +86,19 @@ const Header1 = (props) => {
     setIsLogin(loginState);
   }, [loginState]);
 
+  // $(document).ready(function() {
+  //   $(".open-search-bar").on('click',function() {
+  //     $(".search-bar").toggleClass("show1");
+  //   });
+  // });
+
   $(window).on("scroll", function() {
-    if($(window).scrollTop() > 50) {
-        $(".newheader").addClass("active1");
+    if ($(window).scrollTop() > 50) {
+      $(".newheader").addClass("active1");
     } else {
-       $(".newheader").removeClass("active1");
+      $(".newheader").removeClass("active1");
     }
-});
+  });
 
   const {
     register,
@@ -198,7 +205,14 @@ const Header1 = (props) => {
       });
     });
   }, [loginState]);
-
+  useEffect(() => {
+    $(document).ready(function() {
+      $(".open-search-bar").on("click", function() {
+        $(".search-bar").toggleClass("show1");
+      });
+    });
+  }, []);
+  console.log(toggle, "This is checking toggle while clicking header");
   // useEffect(() => {
   //   const currentCurrency = cookies.get("CurrencyType");
   //   if (currentCurrency === "Dollar") {
@@ -985,7 +999,7 @@ const Header1 = (props) => {
                             <div className="col-md-12 col-12">
                               <div className="form-group">
                                 <label>
-                                Username or email address<span>*</span>
+                                  Username or email address<span>*</span>
                                 </label>
                                 <input
                                   type="text"
@@ -1243,10 +1257,53 @@ const Header1 = (props) => {
                   </div>
 
                   <div className=" main-navbar-head ">
-                    <div className="login-div2">
-                      <input
+                    {/* <input
                         type="text"
                         className="my-input-field"
+                        placeholder="Search..."
+                        Value={searcheditem}
+                        onChange={(e) => {
+                          setSearch(e.target.value.toLowerCase());
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && search.length) {
+                            searchData(search);
+
+                            setSearchedText(e.target.value);
+
+                            history.push("/SearchResult/" + search);
+                          }
+                        }}
+                      />
+                      <button
+                        className="search mr-1"
+                        onClick={() => {
+                          if (search.length) {
+                            searchData(search);
+                            history.push("/SearchResult/" + search);
+                          }
+                        }}
+                      >
+                        <i className="bx bx-search-alt"></i>
+                      </button> */}
+                  </div>
+                </div>
+                <div className="header-wrapper-right">
+                  {/* <div className="right-part">
+                    <div className="d-flex align-items-center currancy">
+                      <select
+                        onChange={(e) => currencyHandler(e)}
+                        value={currancy}
+                      >
+                        <option value="INR">INR</option>
+                        <option value="Dollar">Dollar</option>
+                      </select>
+                    </div>
+                  </div> */}
+                  <div className="search-prod">
+                    <div className="search-box">
+                      <input
+                        type="text"
                         placeholder="Search..."
                         Value={searcheditem}
                         onChange={(e) => {
@@ -1262,71 +1319,57 @@ const Header1 = (props) => {
                             history.push("/SearchResult/" + search);
                           }
                         }}
-                      />
-                      {/* <Link to={"/SearchResult/" + search}> */}
-                      <button
-                        className="search mr-1"
+                        className="search-input1"
+                      ></input>
+                      <i
+                        className="fa fa-search icon-search"
                         onClick={() => {
                           if (search.length) {
                             searchData(search);
                             history.push("/SearchResult/" + search);
                           }
                         }}
-                      >
-                        <i className="bx bx-search-alt"></i>
-                      </button>
-                      {/* </Link> */}
+                      ></i>
                     </div>
                   </div>
-                </div>
-                <div className="header-wrapper-right">
-                  {/* <div className="right-part">
-                    <div className="d-flex align-items-center currancy">
-                      <select
-                        onChange={(e) => currencyHandler(e)}
-                        value={currancy}
-                      >
-                        <option value="INR">INR</option>
-                        <option value="Dollar">Dollar</option>
-                      </select>
-                    </div>
-                  </div> */}
                   <div className="left-part after-user-Logout">
                     <div className=" cart-div">
-                    {Userdata === null || Userdata === "" ? (
-                      <div
-                        className="option-item"
-                        onClick={() => {
-                          reset1();
-                          reset();
-                          setRegMsg("");
-                          setMsg("");
-                        }}
-                      >
-                        <div className="cart-btn">
-                          <RiShoppingCartLine
-                            data-bs-toggle="modal"
-                            data-bs-target={"#exampleModal"}
-                            className="header-icon"
-                          />
-                          <span className="sp"
-                          data-bs-toggle="modal"
-                          data-bs-target={"#exampleModal"}
-                          >
-                            Cart</span>
+                      {Userdata === null || Userdata === "" ? (
+                        <div
+                          className="option-item"
+                          onClick={() => {
+                            reset1();
+                            reset();
+                            setRegMsg("");
+                            setMsg("");
+                          }}
+                        >
+                          <div className="cart-btn">
+                            <RiShoppingCartLine
+                              data-bs-toggle="modal"
+                              data-bs-target={"#exampleModal"}
+                              className="header-icon"
+                            />
+                            <span
+                              className="sp"
+                              data-bs-toggle="modal"
+                              data-bs-target={"#exampleModal"}
+                            >
+                              Cart
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ) : (
+                      ) : (
                         <Link to="/cart">
                           <div className=" login-div1">
                             <div className="">
                               <div className="option-item">
                                 <div className="cart-btn">
-                                  <RiShoppingCartLine  className="header-icon"/>
+                                  <RiShoppingCartLine className="header-icon" />
                                 </div>
                               </div>
                             </div>
-                            <div className=" user-login pt-1">
+                            <div className=" user-login">
                               {cartItems ? (
                                 <h6 className="Total-Item">{cartItems}</h6>
                               ) : (
@@ -1337,7 +1380,7 @@ const Header1 = (props) => {
                             </div>
                           </div>
                         </Link>
-                    )}
+                      )}
                     </div>
                     <div className=" heart-div">
                       {Userdata === null || Userdata === "" ? (
@@ -1358,10 +1401,13 @@ const Header1 = (props) => {
                               data-bs-target={"#exampleModal"}
                               className="header-icon"
                             />
-                            <span className="sp"
-                            data-bs-toggle="modal"
-                            data-bs-target={"#exampleModal"}>
-                              Wishlist</span>
+                            <span
+                              className="sp"
+                              data-bs-toggle="modal"
+                              data-bs-target={"#exampleModal"}
+                            >
+                              Wishlist
+                            </span>
                           </div>
                         </div>
                       ) : (
@@ -1371,11 +1417,11 @@ const Header1 = (props) => {
                               <div className="option-item">
                                 <div className="cart-btn">
                                   {wishlisted ? <h6>{wishlisted}</h6> : ""}
-                                  <BsBagHeart className="header-icon"/>
+                                  <BsBagHeart className="header-icon" />
                                 </div>
                               </div>
                             </div>
-                            <div className=" user-login pt-1">
+                            <div className=" user-login">
                               <span className="sp">Wishlist</span>
                             </div>
                           </div>
@@ -1383,123 +1429,165 @@ const Header1 = (props) => {
                       )}
                     </div>
                     <div className="  account-div ">
-                        
-                            {Userdata == null || Userdata == "" ? (
-                              <>
-                              <div className="option-item">
-                          <div className="cart-btn before-login-btn mt-1"                               
-                                  
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#exampleModal"
-                                  style={{ cursor: "pointer" }}
-                                >
-                                  <i className="user-icon bx bx-log-in"></i>
-                                <span
-                              className="Sp1 login-register"
-                              onClick={() => {
-                                reset1();
-                                reset();
-                                setRegMsg("");
-                                reset3();
-                                reset4();
-                                setMsg("");
-                                setOtpInput(false);
-                              }}
+                      {Userdata == null || Userdata == "" ? (
+                        <>
+                          <div className="option-item">
+                            <div
+                              className="cart-btn before-login-btn"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                              style={{ cursor: "pointer" }}
                             >
-                              Login/Register
-                            </span>
+                              {/* <i className="user-icon bx bx-log-in"></i> */}
+                              <BiUser className="user-icon" />
+                              <span
+                                className="Sp1 login-register"
+                                onClick={() => {
+                                  reset1();
+                                  reset();
+                                  setRegMsg("");
+                                  reset3();
+                                  reset4();
+                                  setMsg("");
+                                  setOtpInput(false);
+                                }}
+                              >
+                                Login/Register
+                              </span>
                             </div>
-                        </div>
-                              </>
-                            ) : (
-                              <>
-                                 <div className="dropdown">
-                              <button
-                                className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn mt-1"
-                                type="button"
-                                id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
-                                <i className="user-icon bx bx-user-pin mt-1"></i>
-                                <span className="username-after-login">{Userdata && Userdata.username}</span>
-                              </button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="dropdown">
+                            <button
+                              className="btn btn-white btn-sm login-btn dropdown-toggle user-dropdown-btn"
+                              type="button"
+                              id="dropdownMenuButton1"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              {/* <i className="user-icon bx bx-user-pin mt-1"></i> */}
+                              <BiUser className="user-icon" />
+                              <span className="username-after-login">
+                                {Userdata && Userdata.username}
+                              </span>
+                            </button>
 
-                              <ul
-                                className="dropdown-menu Logout-ul"
-                                aria-labelledby="dropdownMenuButton1"
-                              >
-                                <div>
-                                  <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-file pl-2"></i>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <Link to="/UserOrder">
-                                        <span className="pr-4">Orders</span>
-                                      </Link>
-                                    </li>
-                                  </div>
-                                </div>
-                                <Link to="/Cart">
-                                  <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-cart pl-2"></i>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <span className="pr-4">Cart</span>
-                                      {/* <span className="text-danger">item</span> */}
-                                    </li>
-                                  </div>
-                                </Link>
-                                <Link to="/Wishlist">
-                                  <div className="Logout-div d-flex align-items-center">
-                                    <i className="bx bx-heart pl-2"></i>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <span className="pr-4">Wishlist</span>
-                                    </li>
-                                  </div>
-                                </Link>
-                                {
-                                  Userdata && ( Userdata.role == "superAdmin" || Userdata.role == "Vendor") && 
-                                  <Link to="/dashboard">
-                                  <div className="Logout-div d-flex align-items-center">
-                                  <RxDashboard className="nav__icon pl-2"/>{" "}
-                                    <li
-                                      className="dropdown-item Logout-li"
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <span className="pr-4">Dashboard</span>
-                                    </li>
-                                  </div>
-                                </Link>
-                                }
-                                  
-                                
-                                
+                            <ul
+                              className="dropdown-menu Logout-ul"
+                              aria-labelledby="dropdownMenuButton1"
+                            >
+                              <div>
                                 <div className="Logout-div d-flex align-items-center">
-                                  <i className="bx bx-log-out pl-2"></i>{" "}
+                                  <i className="bx bx-file pl-2"></i>{" "}
                                   <li
                                     className="dropdown-item Logout-li"
                                     style={{ cursor: "pointer" }}
-                                    onClick={() => {
-                                      logout();
-                                    }}
                                   >
-                                    <span className="pr-4">Logout</span>
+                                    <Link to="/UserOrder">
+                                      <span className="pr-4">Orders</span>
+                                    </Link>
                                   </li>
                                 </div>
-                              </ul>
-                            </div>
-                              </>
-                            )}
-                          
-                      
+                              </div>
+                              <Link to="/Cart">
+                                <div className="Logout-div d-flex align-items-center">
+                                  <i className="bx bx-cart pl-2"></i>{" "}
+                                  <li
+                                    className="dropdown-item Logout-li"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <span className="pr-4">Cart</span>
+                                    {/* <span className="text-danger">item</span> */}
+                                  </li>
+                                </div>
+                              </Link>
+                              <Link to="/Wishlist">
+                                <div className="Logout-div d-flex align-items-center">
+                                  <i className="bx bx-heart pl-2"></i>{" "}
+                                  <li
+                                    className="dropdown-item Logout-li"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <span className="pr-4">Wishlist</span>
+                                  </li>
+                                </div>
+                              </Link>
+                              {Userdata &&
+                                (Userdata.role == "superAdmin" ||
+                                  Userdata.role == "Vendor") && (
+                                  <Link to="/dashboard">
+                                    <div className="Logout-div d-flex align-items-center">
+                                      <RxDashboard className="nav__icon pl-2" />{" "}
+                                      <li
+                                        className="dropdown-item Logout-li"
+                                        style={{ cursor: "pointer" }}
+                                      >
+                                        <span className="pr-4">Dashboard</span>
+                                      </li>
+                                    </div>
+                                  </Link>
+                                )}
+
+                              <div className="Logout-div d-flex align-items-center">
+                                <i className="bx bx-log-out pl-2"></i>{" "}
+                                <li
+                                  className="dropdown-item Logout-li"
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => {
+                                    logout();
+                                  }}
+                                >
+                                  <span className="pr-4">Logout</span>
+                                </li>
+                              </div>
+                            </ul>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="login-div3">
+                      <div
+                        className="open-search-bar"
+                        onClick={() => {
+                          setToggle(1);
+                        }}
+                      >
+                        <i className="fa fa-search"></i>
+                      </div>
+                      <div className="search-bar">
+                        <input
+                          type="text"
+                          className="search-input"
+                          placeholder="Search..."
+                          Value={searcheditem}
+                          onChange={(e) => {
+                            setSearch(e.target.value.toLowerCase());
+                            // setSearchedText(e.target.value);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && search.length) {
+                              searchData(search);
+
+                              setSearchedText(e.target.value);
+
+                              history.push("/SearchResult/" + search);
+                            }
+                          }}
+                        ></input>
+                        <label
+                          className="search-button"
+                          onClick={() => {
+                            if (search.length) {
+                              searchData(search);
+                              history.push("/SearchResult/" + search);
+                            }
+                          }}
+                        >
+                          <i className="fa fa-search"></i>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
