@@ -103,7 +103,17 @@ const ShippedOrder = () => {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
-
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
 
   return (
     <>
@@ -113,6 +123,8 @@ const ShippedOrder = () => {
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          closeIcon={<CustomCloseIcon />}
+          className="New-order-details"
         >
           <table className="table order-details">
             <thead>
