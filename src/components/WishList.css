@@ -43,7 +43,7 @@
 }
 @media only screen and (max-width: 730.98px) {
   .wishlist-page {
-    margin-top: 170px !important;
+    margin-top: 120px !important;
   }
 }
 @media only screen and (max-width: 767.98px) {
@@ -70,7 +70,7 @@
 } */
 @media only screen and (max-width: 576.99px) {
   .wishlist-page {
-    margin-top: 170px !important;
+    margin-top: 105px !important;
   }
 
   .wishlist-btn {
@@ -133,7 +133,7 @@
     overflow: hidden;
   }
   .wishlist-page {
-    margin-top: 160px !important;
+    margin-top: 100px !important;
   }
 }
 @media only screen and (max-width: 359.98px) {
