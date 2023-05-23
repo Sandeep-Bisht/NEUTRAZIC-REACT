@@ -615,6 +615,8 @@ div#columns1 .figure2 .price-div .price {
 }
 .facility-area {
   background-color: #f6f7fb;
+  position: relative;
+  z-index: 50;
 }
 .facility-area .container .row .box {
   text-align: center;
