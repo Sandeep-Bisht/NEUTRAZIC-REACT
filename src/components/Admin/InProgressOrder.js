@@ -178,8 +178,21 @@ const InProgressOrder = () => {
   ];
 
   const showModal = (order) => {
-    setPrticularUserOrder(order.order);
-    setIsModalVisible(true);
+    if(Userdata!==null || Userdata!=="")
+    {
+      if(Userdata.role==="Vendor")
+      {
+        const response=order.order[0].order.filter((item)=>{
+        return (Userdata.manufacturer == item.manufacturer)
+        })
+        setPrticularUserOrder(response);
+        setIsModalVisible(true);
+      }
+      else{
+        setPrticularUserOrder(order.order);
+        setIsModalVisible(true);
+      }   
+    }
   };
 
   const handleOk = () => {
@@ -216,9 +229,9 @@ const InProgressOrder = () => {
                     <tbody>
                       {prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder[0].order.length > 0 &&
-                        prticularUserOrder[0].order.map((item,ind) => {
-                          return (
+                        prticularUserOrder.map((item,ind) => {
+                          console.log(item,"inside the map method")
+;                          return (
                             <>
                               <tr key={ind}>
                                 <td className="width-adjust-of-td">
