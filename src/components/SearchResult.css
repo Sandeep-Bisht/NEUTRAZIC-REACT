@@ -63,7 +63,7 @@
     font-size: 16px !important ;
   } */
   #__next_search {
-    margin-top: 156px;
+    margin-top: 132px;
   }
   .Search-Result {
     font-size: 1.5rem;
@@ -80,6 +80,14 @@
     margin-bottom: 10px;
   }
   
+}
+@media only screen and (max-width: 359.98px){
+  #__next_search {
+    margin-top: 112px;
+  }
+  .Search-Result {
+    font-size: 15px!important;
+  }
 }
 @media only screen and (max-width: 359.98px) {
   #__next_search {

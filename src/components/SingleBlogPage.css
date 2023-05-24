@@ -209,12 +209,17 @@
     line-height: 2 !important;
   }
   .single-page {
-    padding-top: 80px;
+    padding-top: 75px;
   }
   .blog-page-section-2 .card .single-blog-page-text {
     height: 180px !important;
   }
   .blog-description-box .blog-title p{
     font-size: 20px !important;
+  }
+}
+@media only screen and (max-width: 380px){
+  .single-page {
+    padding-top: 45px;
   }
 }

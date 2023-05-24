@@ -265,7 +265,7 @@ label {
 }
 
 .contact-container {
-  margin-top: 130px !important;
+  margin-top: 87px !important;
 }
 button {
   border-radius: 0;
@@ -19296,7 +19296,7 @@ svg {
   padding-top: 10px;
 }
 .Category-div {
-  margin-top: 155px !important;
+  margin-top: 130px !important;
 }
 /* All PRoduct Category-div */
 @media only screen and (max-width: 991.98) {
@@ -20132,7 +20132,10 @@ svg {
     width: 202px;
   }
   .browser-category-section {
-    margin-top: 138px !important;
+    margin-top: 134px !important;
+  }
+  .back-ground-subcategory-sidebar{
+    top: 127px!important;
   }
   .back-ground-subcategory-sidebar {
     margin-left: -20px;
@@ -20316,7 +20319,7 @@ svg {
 }
 @media only screen and (max-width: 767px) {
   .contact-container {
-    margin-top: 98px !important;
+    margin-top: 62px !important;
   }
   .home-banner {
     margin-top: 90px;
@@ -20331,7 +20334,12 @@ svg {
     margin: 0px 0px 15px 9px!important;
   }
 }
-
+@media only screen and (max-width: 729.98px)
+{
+  .contact-container {
+    margin-top: 34px !important;
+}
+}
 @media only screen and (max-width: 575.98px) {
   .search-btn {
     width: 40%;
@@ -20345,7 +20353,7 @@ svg {
     width: 100% !important;
   }
   .contact-container {
-    margin-top: 80px !important;
+    margin-top: 27px !important;
   }
 
   /* end homepage */
@@ -20362,7 +20370,7 @@ svg {
   }
 
   .Category-div {
-    margin-top: 160px !important;
+    margin-top: 107px !important;
   }
   div#columns .figure {
     margin: 0px 0px 15px 2px;
@@ -20478,7 +20486,7 @@ svg {
     width: 65%;
   }
   .browser-category-section {
-    margin-top: 147px !important;
+    margin-top: 108px !important;
   }
   .homepage-trending-figure{
     margin-left: 4px!important;
@@ -20736,6 +20744,12 @@ svg {
 }
 
 @media only screen and (max-width: 380px) {
+  .browser-category-section{
+    margin-top: 89px!important;
+  }
+  .back-ground-subcategory-sidebar {
+    margin-top: 72px!important;
+}
   .homepage-trending-figure{
     margin-left: 3px!important;
   }
@@ -20838,7 +20852,7 @@ svg {
   }
   /* end All product page */
   .contact-container {
-    margin-top: 68px !important;
+    margin-top: 13px !important;
   }
   .contact-container-div {
     overflow: hidden !important;
