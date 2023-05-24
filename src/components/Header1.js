@@ -22,6 +22,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import axios from "axios";
 import { RxDashboard } from "react-icons/rx";
 import { BiUser } from "react-icons/bi";
+import {ImCross} from "react-icons/im";
 
 let changeNavValue = 0;
 var header;
@@ -188,6 +189,7 @@ const Header1 = (props) => {
     GetWishlist();
     GetSubCategory();
     CartById();
+    setToggle(1);
     if (!currentLocation.includes("SearchResult")) {
       setSearchedItem("");
       setSearchedText("");
@@ -205,14 +207,27 @@ const Header1 = (props) => {
       });
     });
   }, [loginState]);
+
   useEffect(() => {
+    
     $(document).ready(function() {
       $(".open-search-bar").on("click", function() {
-        $(".search-bar").toggleClass("show1");
+        if (toggle === 1) {
+          $(".search-bar").addClass("show1").fadeIn(5000);
+          // $(".search-bar");
+
+          $(this).css("background-color","red");
+          $(".cross-icon-search").css("z-index","1");
+          $(".search-icon").css("z-index","-1");
+        } else {
+          $(".search-bar").removeClass("show1");
+          $(this).css("background-color","");
+          $(".cross-icon-search").css("z-index","-1");
+          $(".search-icon").css("z-index","1");
+        }
       });
     });
-  }, []);
-  console.log(toggle, "This is checking toggle while clicking header");
+  }, [toggle]);
   // useEffect(() => {
   //   const currentCurrency = cookies.get("CurrencyType");
   //   if (currentCurrency === "Dollar") {
@@ -687,7 +702,7 @@ const Header1 = (props) => {
       }
     });
   });
-
+  console.log(toggle, "This is checking toggle");
   return (
     <>
       <div
@@ -1548,13 +1563,19 @@ const Header1 = (props) => {
                       )}
                     </div>
                     <div className="login-div3">
+                    
                       <div
                         className="open-search-bar"
                         onClick={() => {
                           setToggle(1);
+                          if (toggle === 1) {
+                            setToggle(0);
+                          }
                         }}
                       >
-                        <i className="fa fa-search"></i>
+                        {/* <span class="tooltiptext">Search here</span> */}
+                        <i className="fa fa-search search-icon"></i>
+                        <ImCross className="cross-icon-search"/>
                       </div>
                       <div className="search-bar">
                         <input
@@ -1577,7 +1598,7 @@ const Header1 = (props) => {
                           }}
                         ></input>
                         <label
-                          className="search-button"
+                          className="search-button1"
                           onClick={() => {
                             if (search.length) {
                               searchData(search);

@@ -13665,6 +13665,7 @@ textarea.form-control {
 .cart-totals {
   /* max-width: 500px; */
   /* box-shadow: 0 2px 48px 0 rgba(0, 0, 0, .08); */
+  box-shadow: -8px 0px 12px -6px rgba(0, 0, 0, 0.4);
   border-radius: 3px;
   margin-left: auto;
   margin-right: auto;
@@ -13738,7 +13739,6 @@ textarea.form-control {
   position: relative;
   z-index: 1;
   border: none;
-  background-color: fff;
   border-radius: 3px;
   padding: 10px 18px;
   margin-top: 4px;
@@ -13748,9 +13748,13 @@ textarea.form-control {
   font-weight: 700;
   font-family: "Roboto", sans-serif;
   letter-spacing: 0.5px;
-  background-color: #1b97ff;
+  background-color: #1b2845;
   cursor: pointer;
   color: #fff;
+}
+.cart-area .default-btn1:hover{
+  background-color:rgb(27, 40, 69,0.8);
+  transition: all 0.3s ease-in-out;
 }
 .cart-area .default-btn1 a {
   color: #fff;
@@ -19755,15 +19759,15 @@ svg {
 
 .btn-div .btn {
   color: white;
-    background: rgb(27, 40, 69,0.9);
-    /* border: 1px solid rgb(27 151 255 / 33%); */
-    /* border: 1px solid rgb(27 151 255 / 33%); */
-    padding: 8px 30px;
-    letter-spacing: 0.5px;
-    text-transform: capitalize;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2rem;
+  background: rgb(27, 40, 69, 0.9);
+  /* border: 1px solid rgb(27 151 255 / 33%); */
+  /* border: 1px solid rgb(27 151 255 / 33%); */
+  padding: 8px 30px;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2rem;
 }
 .btn-div .btn:hover {
   border: 1px solid rgb(27, 40, 69);
@@ -20492,6 +20496,9 @@ svg {
     margin-left: 4px!important;
   }
   /* end subcategory page */
+  .home-banner {
+    margin-top: 64px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -20519,7 +20526,7 @@ svg {
     font-size: 20px !important;
   }
   .home-banner {
-    margin-top: 120px;
+    margin-top: 74px;
   }
   .home-banner .home-banner-content {
     line-height: 27px;
@@ -21116,6 +21123,9 @@ svg {
     margin-top: 18%;
     right: 0;
     margin-right: 13%;
+  }
+  .category-text p{
+    font-size: 15px !important;
   }
 }
 @media only screen and (max-width: 900.98px) {
