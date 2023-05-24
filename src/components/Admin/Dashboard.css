@@ -261,7 +261,18 @@ textarea.textarea{
   align-items: center;
   column-gap: 1rem;
 }
-
+.New-order-details{
+  position: fixed!important;
+  left: 35%;
+}
+.New-order-details .table .table-head{
+  position: fixed;
+}
+.New-order-details .table .table-body{
+  position:relative;
+  top: 50px;
+  height: 500px;
+}
 .dashboard-username
 {
   margin: 0 10px;

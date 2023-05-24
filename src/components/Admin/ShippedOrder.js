@@ -68,7 +68,7 @@ const ShippedOrder = () => {
         console.log(err, "errors");
       });
   };
-
+console.log(OrderDetails,"shipped order details");
   const UpdateOrderStatus = async (order, orderStatus) => {
     delete order.createdAt;
     order.orderStatus = orderStatus;
@@ -116,10 +116,26 @@ const ShippedOrder = () => {
   };
 
   const showModal = (item) => {
-    setPrticularUserOrder(item.order)
+    if(Userdata!==null || Userdata!=="")
+    {
+      if(Userdata.role==="Vendor")
+      {
+        const response=item.order[0].order.filter((item)=>{
+        return (Userdata.manufacturer == item.manufacturer)
+        })
+        setPrticularUserOrder(response)
     setShippedOrder(item.address);
     setOrderItem(item);
     setIsModalVisible(true);
+      }
+      else{
+        setPrticularUserOrder(item.order)
+    setShippedOrder(item.address);
+    setOrderItem(item);
+    setIsModalVisible(true);
+      }   
+    }
+    
   };
 
   const CustomCloseIcon = () => (
@@ -233,8 +249,7 @@ const ShippedOrder = () => {
             <tbody>
               {prticularUserOrder &&
                 prticularUserOrder.length > 0 &&
-                prticularUserOrder[0].order.length > 0 &&
-                prticularUserOrder[0].order.map((item, ind) => {
+                prticularUserOrder.map((item, ind) => {
                   return (
                     <>
                       <tr key={ind}>
