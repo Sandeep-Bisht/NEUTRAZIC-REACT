@@ -265,7 +265,7 @@ label {
 }
 
 .contact-container {
-  margin-top: 130px !important;
+  margin-top: 87px !important;
 }
 button {
   border-radius: 0;
@@ -2028,6 +2028,8 @@ select.form-control[size] {
 }
 .section-footer {
   background-color: #1b2845;
+  position: relative;
+  z-index: 60;
 }
 
 .form-control.is-valid,
@@ -19298,7 +19300,7 @@ svg {
   padding-top: 10px;
 }
 .Category-div {
-  margin-top: 155px !important;
+  margin-top: 130px !important;
 }
 /* All PRoduct Category-div */
 @media only screen and (max-width: 991.98) {
@@ -19842,7 +19844,7 @@ svg {
   background-color: #fff;
   height: 100%;
   color: #002752;
-  position: sticky;
+  position: fixed;
   box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%),
     0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
     0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
@@ -19949,6 +19951,7 @@ svg {
   }
 }
 @media only screen and (max-width: 1199.98px) {
+  
   .single-contact-info-box {
     height: 260px !important;
   }
@@ -19975,6 +19978,9 @@ svg {
 @media only screen and (max-width: 1024px) {
   .first-nav {
     top: 101px !important;
+  }
+  .subcategory-container{
+    margin-left: 230px!important;
   }
   /* responsive homepage */
   .home-banner .home-banner-left .home-banner-heading {
@@ -20117,19 +20123,30 @@ svg {
   /* end All product page */
 }
 @media only screen and (max-width: 815px) {
+  .allproduct-figure{
+    margin: 0px 0px 15px 2px!important;
+  }
   .home-banner .home-banner-right img {
     height: 370px;
   }
   .contact-container {
     margin-top: 69px !important;
   }
-
+  .back-ground-subcategory-sidebar{
+    width: 202px;
+  }
   .browser-category-section {
-    margin-top: 138px !important;
+    margin-top: 134px !important;
+  }
+  .back-ground-subcategory-sidebar{
+    top: 127px!important;
   }
   .back-ground-subcategory-sidebar {
     margin-left: -20px;
     padding-left: 5px;
+  }
+  div#columns .figure {
+    margin: 0px 0px 15px 12px;
   }
 }
 
@@ -20299,11 +20316,14 @@ svg {
     padding-left: 0px;
     padding-right: 0px;
   }
+  div#columns .figure {
+    margin: 0px 0px 15px 8px!important;
+  }
   /* end subcategory */
 }
 @media only screen and (max-width: 767px) {
   .contact-container {
-    margin-top: 98px !important;
+    margin-top: 62px !important;
   }
   .home-banner {
     margin-top: 90px;
@@ -20311,8 +20331,19 @@ svg {
   .blog-section .blog-page-section-2 .card .card-body {
     height: 190px !important;
   }
+  div#columns .figure {
+    margin: 0px 0px 15px 12px;
+  }
+  .allproduct-figure{
+    margin: 0px 0px 15px 9px!important;
+  }
 }
-
+@media only screen and (max-width: 729.98px)
+{
+  .contact-container {
+    margin-top: 34px !important;
+}
+}
 @media only screen and (max-width: 575.98px) {
   .search-btn {
     width: 40%;
@@ -20326,7 +20357,7 @@ svg {
     width: 100% !important;
   }
   .contact-container {
-    margin-top: 80px !important;
+    margin-top: 27px !important;
   }
 
   /* end homepage */
@@ -20343,7 +20374,7 @@ svg {
   }
 
   .Category-div {
-    margin-top: 160px !important;
+    margin-top: 107px !important;
   }
   div#columns .figure {
     margin: 0px 0px 15px 2px;
@@ -20459,7 +20490,10 @@ svg {
     width: 65%;
   }
   .browser-category-section {
-    margin-top: 147px !important;
+    margin-top: 108px !important;
+  }
+  .homepage-trending-figure{
+    margin-left: 4px!important;
   }
   /* end subcategory page */
   .home-banner {
@@ -20479,6 +20513,12 @@ svg {
   }
   .figure .button {
     width: 100% !important;
+  }
+  .allproduct-figure{
+   margin: 0px 0px 15px 6px!important;
+  }
+  .allproduct-figure{
+    width: 46%!important;
   }
 
   /* responsive homepage */
@@ -20653,6 +20693,9 @@ svg {
   .home-banner .home-banner-right img {
     bottom: 0px;
   }
+  .homepage-trending-figure{
+    margin-left: 3px!important;
+  }
 }
 @media only screen and (max-width: 430px) {
   .allproduct-price-div .text-start,
@@ -20702,9 +20745,21 @@ svg {
   .single-footer-widget .link-list li {
     margin-bottom: 8px !important;
   }
+  .homepage-trending-figure{
+    margin-left: 3px!important;
+  }
 }
 
 @media only screen and (max-width: 380px) {
+  .browser-category-section{
+    margin-top: 89px!important;
+  }
+  .back-ground-subcategory-sidebar {
+    margin-top: 72px!important;
+}
+  .homepage-trending-figure{
+    margin-left: 3px!important;
+  }
   .product-home-div {
     width: 155px;
     margin-left: -15px !important;
@@ -20804,7 +20859,7 @@ svg {
   }
   /* end All product page */
   .contact-container {
-    margin-top: 68px !important;
+    margin-top: 13px !important;
   }
   .contact-container-div {
     overflow: hidden !important;
