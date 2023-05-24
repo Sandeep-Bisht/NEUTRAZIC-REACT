@@ -86,13 +86,28 @@ overflow: hidden!important;
     width: 48% !important;
 }
 .subcategory-container {
-  margin-left: 162px!important;
+  margin-left: 185px!important;
 }
+.browser-category-section {
+  margin-top: 131px!important;
+}
+.back-ground-subcategory-sidebar {
+  top: 132px!important;
+}
+
 }
 @media only screen and (max-width : 730.98px){
   .back-ground-subcategory-sidebar {
     width: 180px!important;
+    top: 112px!important;
+
   }
+  .subcategory-columns .figure {
+    width: 44% !important;
+}
+.browser-category-section {
+  margin-top: 111px!important;
+}
 }
 @media only screen and (max-width : 575.98px){
   .subcategory-columns .figure{
@@ -103,7 +118,7 @@ overflow: hidden!important;
     text-align: center;
   }
   .back-ground-subcategory-sidebar{
-    top:40px !important
+    top:0px !important
   }
   .sidebar-nav{
     padding: 6px;
@@ -142,6 +157,9 @@ overflow: hidden!important;
   }
   .subcategory-container{
     margin-left: 132px !important;
+  }
+  .browser-category-section{
+    margin-top: 89px!important;
   }
   .back-ground-subcategory-sidebar {
     width: 155px!important;
