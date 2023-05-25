@@ -20,6 +20,7 @@ const NewOrder = () => {
   const [searchVal, setSearchVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const [vendor,setVendor]=useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const NewOrder = () => {
                 arr.push(item);
               }
             }
+            setVendor(true);
             setOrderDetails(arr);
           } else {
             let arr = [];

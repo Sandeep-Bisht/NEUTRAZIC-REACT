@@ -9,12 +9,13 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import Loader from "react-spinner-loader";
 import AllproductsFilter from "./AllproductsFilter";
 import Baseline from "./Baseline";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 var Userdata;
 const AllProducts = (props) => {
@@ -42,6 +43,7 @@ const AllProducts = (props) => {
   const [isLogin, setIsLogin] = useState(loginState);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [loading,setLoading] = useState(true);
+  const [currentPage,setCurrentPage]=useState(1);
 
 
   useEffect(() => {
@@ -75,7 +77,7 @@ const AllProducts = (props) => {
     
     // GetCategory();
   }, [loginState]);
-
+console.log(currentPage,"currentpage");
 
   const handleResetForm = () => {
     if (resetForm === 0) {
@@ -221,19 +223,25 @@ const AllProducts = (props) => {
     }
   };
 
-  var page = 1;
+  
   const ProductByCategory = async () => {
-    await fetch(`${baseUrl}/api/product/all_product?_page=${page}&_limit=10`)
+    await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=5`)
       .then((res) => res.json())
       .then(async (data) => {
         serProductLength(data.length);
         setAllProduct([...AllProduct, ...data.data]);
         setLoading(false);        
-        page = page + 1;
       })
       .catch((err) => {
         console.log(err, "error");
       });
+  };
+
+  const handleChange = (event, value) => {
+    // Handle page change
+    setCurrentPage(value);
+    ProductByCategory();
+    console.log(value,"value of number current page");
   };
   const categoryDetails = async () => {
     await fetch(`${baseUrl}/api/category/category_by_id`, {
@@ -443,15 +451,9 @@ const AllProducts = (props) => {
           /> :
             <div>
               <div id="columns" className="columns_5">
-                {/* <InfiniteScroll
-                  dataLength={AllProduct.length}
-                  next={ProductByCategory}
-                  hasMore={AllProduct.length < productLength}
-                  loader={<h4>Loading...</h4>}
-                > */}
                   {AllProduct.map((el, ind1) => {
                     return (
-                      <figure className="figure allproduct-figure" key={ind1}>
+                      <figure className="figure allproduct-figure  mt-3" key={ind1}>
                         <Link Link to={"/SingleProduct/" + el._id}>
                           <div>
                             <img src={`${baseUrl}/` + el.image[0].path} />
@@ -552,12 +554,17 @@ const AllProducts = (props) => {
                       </figure>
                     );
                   })}
-                {/* </InfiniteScroll> */}
               </div>
             </div>
           }
           </div>
         </div>
+        <div className="d-flex justify-content-center mt-3 mb-3">
+        <Stack spacing={2}>
+      <Pagination count={10} showFirstButton showLastButton 
+      onChange={handleChange}/>
+    </Stack>
+    </div>
       </div>
       <ToastContainer />
       <Baseline/>
