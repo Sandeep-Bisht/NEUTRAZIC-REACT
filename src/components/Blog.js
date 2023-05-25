@@ -117,7 +117,7 @@ function Blogs() {
                           data.map((item, ind) => {
                             return (
                               <div className="col-md-6 col-lg-3" key={ind}>
-                                <div className="card">
+                                <div className="card hover-effect">
                                   <div className="card-img-link">
                                     <Link to={"/SingleBlogPage/" + item.slug}>
                                       <img
