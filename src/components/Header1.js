@@ -1632,7 +1632,7 @@ const Header1 = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-10 col-11 p-0">
+              <div className="col-lg-10 col-11 p-0 nav-display">
                 <nav className="navbar navbar-expand-lg bg-light">
                   <div className="container-fluid">
                     <button
