@@ -25,7 +25,7 @@ const ShippedOrder = () => {
   }, []);
 
   const GetOrders = async () => {
-
+    setLoading(true);
     await fetch(`${baseUrl}/api/order/all_order`)
       .then(res => res.json())
       .then(async (data) => {
@@ -51,6 +51,7 @@ const ShippedOrder = () => {
         setOrderDetails(arr)
         }
           }
+          setLoading(false);
          }
       )
       .catch((err) => {
