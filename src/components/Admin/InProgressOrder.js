@@ -27,6 +27,7 @@ const InProgressOrder = () => {
   const [searchVal, setSearchVal] = useState("");
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [vendor,setVendor]=useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const InProgressOrder = () => {
   }, []);
 
   const GetOrders = async () => {
+    setLoading(true);
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -42,8 +44,8 @@ const InProgressOrder = () => {
         {
           if(Userdata.role==="Vendor")
           {
-            let arr = [];
-         
+            setVendor(true);
+            let arr = [];        
               for (let item of data.data) {
                 if (item.orderStatus == "In-Progress" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
                   arr.push(item);
@@ -62,6 +64,7 @@ const InProgressOrder = () => {
             setOrderDetails(arr);
         }
           }
+          setLoading(false);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -178,8 +181,21 @@ const InProgressOrder = () => {
   ];
 
   const showModal = (order) => {
-    setPrticularUserOrder(order.order);
-    setIsModalVisible(true);
+    if(Userdata!==null || Userdata!=="")
+    {
+      if(Userdata.role==="Vendor")
+      {
+        const response=order.order[0].order.filter((item)=>{
+        return (Userdata.manufacturer == item.manufacturer)
+        })
+        setPrticularUserOrder(response);
+        setIsModalVisible(true);
+      }
+      else{
+        setPrticularUserOrder(order.order);
+        setIsModalVisible(true);
+      }   
+    }
   };
 
   const handleOk = () => {
@@ -214,11 +230,12 @@ const InProgressOrder = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {prticularUserOrder &&
+                      {
+                      vendor ? (prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
-                        prticularUserOrder[0].order.length > 0 &&
-                        prticularUserOrder[0].order.map((item,ind) => {
-                          return (
+                        prticularUserOrder.map((item,ind) => {
+                          console.log(item,"inside the map method")
+;                          return (
                             <>
                               <tr key={ind}>
                                 <td className="width-adjust-of-td">
@@ -237,7 +254,29 @@ const InProgressOrder = () => {
                               </tr>
                             </>
                           );
-                        })}
+                        })):
+                        (prticularUserOrder &&
+                          prticularUserOrder.length > 0 &&
+                          prticularUserOrder[0].order.length > 0 &&
+                          prticularUserOrder[0].order.map((item, ind) => {
+                            return (
+                              <>
+                                <tr key={ind}>
+                                  <td className="width-adjust-of-td">
+                                    <div className="width-adjust-of-image">
+                                       <img
+                                        onClick={() => imageHandler(item.productid)}
+                                        style={{ cursor: "pointer" }}
+                                        src={`${baseUrl}/${item.image}`}
+                                      ></img> 
+                                    </div>
+                                  </td>
+                                  <td className="width-adjust-of-td">{item.name}</td>
+                                  <td className="width-adjust-of-td">{item.singleprice}</td>
+                                </tr>
+                              </>
+                            );
+                          }))}
                     </tbody>
                   </table>
                 </Modal>

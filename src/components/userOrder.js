@@ -31,13 +31,14 @@ import "primereact/resources/primereact.min.css";
 import { green } from "@mui/material/colors";
 import { AiOutlineCheck } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
+import Loader from "react-spinner-loader";
 
 var Userdata = "";
 const UserOrder = () => {
   const [orders, setOrders] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
   const [filteredData, setFilterData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchVal, setSearchVal] = useState("");
   const [PendingOrders, setPendingOrders] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -55,7 +56,7 @@ const UserOrder = () => {
 
   const GetOrders = async () => {
     await fetch(`${baseUrl}/api/order/all_order`)
-      .then((res) => res.json())
+      .then((res) => {res.json(); setLoading(false)})
       .then(async (data) => {
         let arr1 = [];
         for (let item of data.data) {
@@ -93,9 +94,12 @@ const UserOrder = () => {
         </div> */}
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
+          {loading ? (
+              <Loader show={loading} stack="vertical" />
+            ) :
+            (<div className="col-md-12">
               {OrderDetails &&
-                OrderDetails.length > 0 &&
+                OrderDetails.length > 0 ?
                 OrderDetails.map((el, ind) => {
                   console.log(el, "Checking shipment date");
                   return (
@@ -406,11 +410,31 @@ const UserOrder = () => {
                       </Accordion>
                     </div>
                   );
-                })}
-            </div>
+                }):
+                <div className="col-12 text-center EMPTYWISHLIST-DIV">
+                    <div>
+                      <h1>No Product Found</h1>
+                    </div>
+                    <lottie-player
+                      src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                      background="transparent"
+                      speed="1"
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        margin: "auto",
+                      }}
+                      loop
+                      autoplay
+                    ></lottie-player>
+                  </div>
+              }
+            </div>)
+          }
           </div>
         </div>
       </section>
+      <Baseline/>
       <Footer />
     </>
   );
