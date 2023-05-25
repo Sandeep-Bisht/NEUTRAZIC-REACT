@@ -33,7 +33,6 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import Loader from "react-spinner-loader";
 
-
 var Userdata = "";
 const UserOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -435,6 +434,7 @@ const UserOrder = () => {
           </div>
         </div>
       </section>
+      <Baseline/>
       <Footer />
     </>
   );

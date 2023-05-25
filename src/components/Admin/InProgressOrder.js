@@ -35,6 +35,7 @@ const InProgressOrder = () => {
   }, []);
 
   const GetOrders = async () => {
+    setLoading(true);
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -62,6 +63,7 @@ const InProgressOrder = () => {
             setOrderDetails(arr);
         }
           }
+          setLoading(false);
       })
       .catch((err) => {
         console.log(err, "errors");

@@ -14,6 +14,7 @@ import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import Loader from "react-spinner-loader";
 import AllproductsFilter from "./AllproductsFilter";
+import Baseline from "./Baseline";
 
 var Userdata;
 const AllProducts = (props) => {
@@ -559,6 +560,7 @@ const AllProducts = (props) => {
         </div>
       </div>
       <ToastContainer />
+      <Baseline/>
       <Footer />
     </>
   );
