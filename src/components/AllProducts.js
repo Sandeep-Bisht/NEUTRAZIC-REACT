@@ -224,12 +224,12 @@ console.log(currentPage,"currentpage");
   };
 
   
-  const ProductByCategory = async () => {
-    await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=5`)
+  const ProductByCategory = async (value) => {
+      await fetch(`${baseUrl}/api/product/all_product?_page=${value}&_limit=10`)
       .then((res) => res.json())
       .then(async (data) => {
         serProductLength(data.length);
-        setAllProduct([...AllProduct, ...data.data]);
+        setAllProduct(data.data);
         setLoading(false);        
       })
       .catch((err) => {
@@ -240,8 +240,8 @@ console.log(currentPage,"currentpage");
   const handleChange = (event, value) => {
     // Handle page change
     setCurrentPage(value);
-    ProductByCategory();
-    console.log(value,"value of number current page");
+    ProductByCategory(value);
+    Window.scrollTo(0,0);
   };
   const categoryDetails = async () => {
     await fetch(`${baseUrl}/api/category/category_by_id`, {
