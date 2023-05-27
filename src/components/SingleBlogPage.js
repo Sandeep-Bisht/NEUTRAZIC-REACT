@@ -83,13 +83,6 @@ const SingleBlog = (props) => {
       <Header1 />
 
       <div className="container product-div blog-container">
-      
-          {/* <span className="nav-text p-3">
-          <Link to="/" className="nav-text">
-              Home
-            </Link>
-            {location.pathname}
-          </span> */}
         <div className="row">
           <div className="col-md-12">
             {blog &&
@@ -101,7 +94,6 @@ const SingleBlog = (props) => {
                         <div className="col-md-12">
                           <div className="singleBlog-box">
                             <div className="row">
-                              {/* <div className="col-md-1"></div> */}
                               <div className="col-md-6 px-0">
                                 <div className="single-blog-image-box">
                                   <img

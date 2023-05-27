@@ -74,9 +74,9 @@
 
 /* -------------------faq responsive----------------------- */
 @media only screen and (max-width:575.98px){
-    .single-faq{
-        margin-top: 164px!important;
-    } 
+    .single-faq {
+        margin-top: 133px!important;
+    }
 }
 @media only screen and (max-width:520px){
     .single-faq .accordion .accordion-header span.one{
@@ -96,4 +96,9 @@
     /* .single-faq .accordion .accordion-header span.one{
         background-color: red;
     } */
+}
+@media only screen and (max-width:380px){
+    .single-faq {
+        margin-top: 114px!important;
+    }
 }

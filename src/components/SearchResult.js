@@ -63,7 +63,6 @@ const SearchResult = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    // setSearchedTextState("1");
     GetData();
     CartById();
     GetWishlist();
@@ -81,9 +80,6 @@ const SearchResult = (props) => {
       });
     });
   }, [loginState]);
-  // useEffect(() => {
-  //   setFilterData(data);
-  // }, [data]);
 
   useEffect(() => {
     Docsearch(searchresults);
@@ -459,7 +455,7 @@ const SearchResult = (props) => {
                 <Loader show={loading} stack="vertical" />
               ) : (
                 <div className="row mt-0">
-                  <div id="columns" className="columns_5">
+                  <div id="columns" className="columns_5 search-figure-maindiv">
                     {filterdata &&
                       filterdata.length > 0 &&
                       filterdata.map((el, ind) => {

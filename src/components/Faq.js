@@ -3,6 +3,7 @@ import Header1 from "./Header1";
 import '../components/Faq.css';
 import Footer from "./Footer";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import Baseline from "./Baseline";
 
 function Faq () {
   useEffect(()=>{
@@ -160,8 +161,9 @@ function Faq () {
             </div>
           </div>
       </div>
-      <Footer/>
         </div>
+        <Baseline/>
+        <Footer/>
         </>
     )
 }

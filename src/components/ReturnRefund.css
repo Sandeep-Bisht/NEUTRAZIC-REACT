@@ -2,11 +2,11 @@
 {
     background-color: #fff;
     padding-top: 164px;
+    padding-bottom: 60px;
 }
 .return-policy-section h1, h2
 {
     color: #1e144f;
-    text-transform: capitalize;
 }
 .return-policy-section ul
 {
@@ -27,13 +27,15 @@
   
 }
 @media only screen and (max-width : 767px) {
-  
+    .return-policy-section {
+        padding-top: 136px;
+    }
 }
 @media only screen and (max-width : 575.98px) {
 
     .return-policy-section
     {
-        padding-top: 165px;
+        padding-top: 136px;
     }
     .return-policy-section p{
         line-height: 37px;
@@ -63,7 +65,9 @@
 @media only screen and (max-width : 430px)
    { 
      
- 
+    .return-policy-section {
+        padding-top: 111px;
+    }
   }
 
 @media only screen and (max-width : 360px) {
@@ -71,11 +75,10 @@
     .return-policy-section
     {
         padding-left: 8px;
-        padding-top: 154px;
     }
 
-}
 
+}
 
 
 
