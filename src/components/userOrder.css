@@ -49,17 +49,17 @@
 }
 
 .order-status-heading {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   font-family: "Roboto", sans-serif;
 }
 .para-order-text {
-  font-size: 13px !important;
+  font-size: 10px !important;
   color: #6c757d;
   font-weight: 600 !important;
 }
 .para-text {
-  font-size: 12px !important;
+  font-size: 10px !important;
   color: #6c757d;
 }
 .Re-order-button {
@@ -79,7 +79,7 @@
 
 .Re-order-button:hover {
   padding: 8px 13px;
-  
+
   background-color: white !important;
   color: #1b2845 !important;
   box-shadow: 0px 0px 1px 1px #1b2845;
@@ -92,7 +92,7 @@
   justify-content: start;
   align-items: start;
 }
-.order-tracking-details{
+.order-tracking-details {
   margin-top: 10px !important;
 }
 .description-box {
@@ -111,8 +111,9 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.userorder-product-name {
-  font-size: 1.4rem;
+.userorder-product {
+  font-size: 14px !important;
+  font-weight: 400 !important;
 }
 
 .button-box {
@@ -246,7 +247,7 @@
   bottom: 22px;
 }
 .pending-bar {
-  background: rgb(255, 165, 0,0.8) !important;
+  background: rgb(255, 165, 0, 0.8) !important;
   width: 100% !important;
 }
 .shipped-status {
@@ -325,24 +326,26 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.pending-box .process-icon{
+.pending-box .process-icon {
   height: 15px !important;
   width: 15px !important;
   animation: animatepending 3s linear infinite;
 
   transition: all 1s ease;
 }
-.pending-box .process-icon g{
+.pending-box .process-icon g {
   fill: orange !important;
-
 }
 @keyframes animatepending {
-  from{
+  from {
     transform: rotate(0deg);
   }
-  to{
+  to {
     transform: rotate(360deg);
   }
+}
+.Order-page .p-accordion .p-accordion-content {
+  background: ghostwhite !important;
 }
 .order-detail-button {
   display: flex;
@@ -391,7 +394,7 @@
     font-size: 10px !important;
   }
   .orders-section {
-    margin-top: 200px !important;
+    margin-top: 160px !important;
   }
 }
 @media only screen and (max-width: 815.98px) {
@@ -416,6 +419,13 @@
 @media only screen and (max-width: 767.98px) {
   .Right-order-content {
     height: 60px !important;
+  }
+  .order-detail-button {
+    padding: 10px 10px !important;
+    font-size: 10px !important;
+  }
+  .See-more-details {
+    justify-content: start !important;
   }
   .order-tracking-details {
     padding-left: 0px !important;
@@ -457,10 +467,18 @@
     padding: 5px 10px !important;
   }
 }
+@media only screen and (max-width: 730.98px) {
+  .orders-section {
+    margin-top: 130px !important;
+  }
+}
 @media only screen and (max-width: 575.98px) {
   .order-details-image .order-main-Image {
     height: 70% !important;
     width: 24% !important;
+  }
+  .orders-section {
+    margin-top: 130px !important;
   }
 }
 @media only screen and (max-width: 415.98px) {
@@ -468,6 +486,7 @@
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+
   .order-column {
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -476,4 +495,32 @@
   .para-order-text {
     font-size: 9px !important;
   }
+}
+@media only screen and (max-width: 390.98px) {
+  .orders-section {
+    margin-top: 114px !important;
+  }
+}
+.Buttons-order-page {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.Buttons-order-page button {
+  padding: 9px 24px;
+  border: none;
+  font-size: 15px;
+  background: ghostwhite;
+  transition: all 0.4s linear;
+}
+.Buttons-order-page button:hover {
+  text-decoration: underline !important;
+  color: goldenrod;
+  transition: all 0.4s linear;
+  transition: text-decoration 0.4s linear;
+}
+
+.Buttons-order-page .return-product {
+  height: 25px !important;
+  width: 25px !important;
 }

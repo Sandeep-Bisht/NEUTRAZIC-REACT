@@ -200,7 +200,7 @@ const Header1 = (props) => {
     $(document).ready(function() {
       $(".open-search-bar").on("click", function() {
         if (toggle === 1) {
-          $(".search-bar").addClass("show1").fadeIn(5000);
+          $(".search-bar").addClass("show1").fadeIn(2000);
           // $(".search-bar");
 
           $(this).css("background-color","red");

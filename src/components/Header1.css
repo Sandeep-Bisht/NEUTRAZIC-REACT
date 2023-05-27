@@ -176,17 +176,17 @@
   outline: 0;
 }
 .currancy select {
-      font-family: "Roboto", sans-serif;
-    color: white;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 400;
-    cursor: pointer;
-    background-color: #1b2845;
-    box-shadow: 0px 0px 1px white;
-    padding: 5px;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  background-color: #1b2845;
+  box-shadow: 0px 0px 1px white;
+  padding: 5px;
 }
 .right-part {
   padding: 20px 12px;
@@ -1191,7 +1191,7 @@ h3 .read-more-button {
   .navbar-toggler {
     border-radius: 0px !important;
   }
-  .login-div2{
+  .login-div2 {
     display: none !important;
   }
 }
@@ -1400,7 +1400,7 @@ h3 .read-more-button {
   }
   .search-bar {
     top: 63px !important;
-    height: 46px !important;
+    height: 47px !important;
   }
   .right-part .currancy {
     justify-content: start !important;
@@ -1411,7 +1411,7 @@ h3 .read-more-button {
   .right-part .currancy {
     margin-right: 0px;
   }
-  .login-register{
+  .login-register {
     font-size: 12px !important;
     margin-top: 0.25rem !important;
   }
@@ -1489,6 +1489,13 @@ h3 .read-more-button {
   .user-icon {
     font-size: 24px !important;
   }
+  .open-search-bar{
+    height: 20px !important;
+    width: 20px !important;
+  }
+  .cross-icon-search{
+    height: 8px !important;
+  }
 }
 
 @media only screen and (max-width: 390px) {
@@ -1498,7 +1505,7 @@ h3 .read-more-button {
   .account-div svg {
     height: 21px !important;
     width: 25px !important;
-}
+  }
   .heaader-wrapper .cart-div {
     padding: 0 10px 0px 0px !important;
   }
@@ -1597,15 +1604,14 @@ h3 .read-more-button {
     font-weight: bold;
   } */
   .search-bar {
-    height: 35px !important;
+    height: 36px !important;
     width: 260px !important;
   }
-  .search-button1{
+  .search-button1 {
     height: 22px !important;
     width: 22px !important;
     font-size: 9px !important;
   }
-  
 }
 @media only screen and (max-width: 359.98px) {
   .cart-div {
@@ -1716,11 +1722,11 @@ h3 .read-more-button {
   position: relative;
 }
 .account-div svg {
-  height: 25px ;
-  width: 25px ;
+  height: 25px;
+  width: 25px;
 }
 .search-bar {
-  background: #1b2845;
+  background: red;
   width: 330px;
   position: absolute;
   top: 90px;
@@ -1778,10 +1784,10 @@ h3 .read-more-button {
   font-size: 12px;
 }
 .search-button1 {
-  color: black;
-  background-color: white;
+  color: white;
+  /* background-color: white; */
   border: none;
-  margin-top: 10px;
+  margin-top: 6px;
   width: 27px;
   border-radius: 50%;
   height: 27px;

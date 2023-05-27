@@ -19756,6 +19756,7 @@ svg {
 #para {
   line-height: 22px;
   margin-top: 20px;
+  font-size: 14px !important;
 }
 
 .btn-div .btn {
@@ -19803,6 +19804,7 @@ svg {
   line-height: 1.5;
   text-align: justify;
   word-spacing: -1px;
+  font-size: 14px !important;
 }
 .home-banner .home-banner-right {
   text-align: center;
@@ -20008,6 +20010,9 @@ svg {
   .home-banner .home-banner-left .home-banner-heading {
     font-size: 34px !important;
   }
+  .home-banner .home-banner-content{
+    font-size: 13px !important;
+  }
   .home-banner .home-banner-right img {
     height: 361px;
   }
@@ -20051,7 +20056,7 @@ svg {
     margin-top: 23px;
   }
   .home-banner .home-banner-content {
-    line-height: 30px;
+    line-height: 1.5;
   }
   .blog-page-section-2 .card-img-top {
     height: 250px !important;
@@ -20327,7 +20332,7 @@ svg {
     margin-top: 62px !important;
   }
   .home-banner {
-    margin-top: 90px;
+    margin-top: 60px;
   }
   .blog-section .blog-page-section-2 .card .card-body {
     height: 190px !important;
@@ -20498,7 +20503,7 @@ svg {
   }
   /* end subcategory page */
   .home-banner {
-    margin-top: 64px;
+    margin-top: 36px;
   }
 }
 
@@ -20846,7 +20851,7 @@ svg {
     font-size: 11px !important;
   }
   .home-banner {
-    padding-top: 150px !important;
+    margin-top: 100px !important;
   }
   .single-products-box .content .price-div .new-price {
     font-size: 11px !important;
@@ -20989,7 +20994,7 @@ svg {
 .Category-container {
      max-height: 350px;
     padding: 20px;
-    background-color: #f6f7fb;
+    background-color: aliceblue;
     border-radius: 5px;
     border: 1px solid rgb(30, 31 ,102,0.1);
     box-shadow: 0px 0px 12px whitesmoke;
@@ -21180,8 +21185,16 @@ svg {
   background: #1b2845 !important;
   color: transparent!important;
 }
-
-
+.brands-area .slick-dots{
+  bottom: -30px !important;
+}
+.brands-area .slick-dots li button::before{
+  height:12px !important;
+  width: 12px !important;
+  border-radius: 4px !important;
+  background: #1b2845 !important;
+  color: transparent!important;
+}
 .hover-effect{
   transform: scale(0.95) !important;
   transition: all 0.2s linear;

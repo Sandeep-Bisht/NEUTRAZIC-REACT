@@ -6,6 +6,8 @@ import { useRef } from "react";
 import "../components/userOrder.css";
 import {ImCross} from "react-icons/im";
 import { Accordion, AccordionTab } from "primereact/accordion";
+import { RiRefund2Fill } from "react-icons/ri";
+import {TbTruckReturn} from "react-icons/tb";
 import product from "../Images/abayakasthaa-image.png";
 import {
   Table,
@@ -31,9 +33,8 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import Loader from "react-spinner-loader";
 import Base from "antd/es/typography/Base";
-import {FaCheck} from "react-icons/fa";
-import {FcProcess} from "react-icons/fc";
-
+import { FaCheck } from "react-icons/fa";
+import { FcProcess } from "react-icons/fc";
 
 var Userdata = "";
 const UserOrder = () => {
@@ -96,7 +97,7 @@ const UserOrder = () => {
                 {OrderDetails &&
                   OrderDetails.length > 0 &&
                   OrderDetails.map((el, ind) => {
-                    console.log(OrderDetails, "This is orders");
+                    console.log(el, "This is orders");
                     return (
                       <div className="Order-page">
                         <Accordion>
@@ -240,7 +241,9 @@ const UserOrder = () => {
                                                 {el.orderStatus ===
                                                   "Cancel" && (
                                                   <>
-                                                    <div className="circle5"><ImCross className="Check-icon" /></div>
+                                                    <div className="circle5">
+                                                      <ImCross className="Check-icon" />
+                                                    </div>
                                                     <div class="progress-box">
                                                       <div class="progress">
                                                         <div className="progress-color active37"></div>
@@ -257,10 +260,12 @@ const UserOrder = () => {
                                                   "Pending" && (
                                                   <div class="progress-box pending-box">
                                                     <div class="progress">
-                                                    <div className="progress-color pending-bar"></div>
+                                                      <div className="progress-color pending-bar"></div>
                                                       <div class="progress-text">
                                                         <span className="Pending-text">
-                                                         <FcProcess className="process-icon"/> Order is Being Processed
+                                                          <FcProcess className="process-icon" />{" "}
+                                                          Order is Being
+                                                          Processed
                                                         </span>
                                                       </div>
                                                     </div>
@@ -331,6 +336,26 @@ const UserOrder = () => {
                                                         ) : (
                                                           " "
                                                         )}
+                                                        {/* {el.orderStatus ===
+                                                        "Shipped" ? (
+                                                          <div className="col-md-3 col-3 px-0">
+                                                            <div className="orderno-heading">
+                                                              <h6 className="order-status-heading">
+                                                                Expected Delivery On
+                                                              </h6>
+                                                            </div>
+                                                            {el.orderStatus ===
+                                                              "Shipped" && (
+                                                              <p className="para-text">
+                                                                {
+                                                                  el.delivery_time
+                                                                }
+                                                              </p>
+                                                            )}
+                                                          </div>
+                                                        ) : (
+                                                          " "
+                                                        )} */}
                                                       </div>
                                                     </div>
                                                   </div>
@@ -437,6 +462,41 @@ const UserOrder = () => {
                                               </div>
                                             </div>
                                           </div>
+                                          {el.orderStatus === "Delivered" || el.orderStatus === "Shipped" ? (
+                                            <div className="row">
+                                              {/* <div className="col-md-10">
+                                              </div> */}
+                                              <div className="col-md-12">
+                                                <div className="Buttons-order-page">
+                                                  <button>
+                                                    <TbTruckReturn className="return-product" />
+                                                    Return
+                                                  </button>
+                                                  <button>
+                                                    <RiRefund2Fill className="return-product" />
+                                                    Refund
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ) : (
+                                            <>
+                                              {/* <div className="row"> */}
+                                                {/* <div className="col-md-10">
+                                              </div> */}
+                                                {/* <div className="col-md-12">
+                                                  <div className="Buttons-order-page">
+                                                    <Link to = "/return&refund">
+                                                    <button> */}
+                                                      {/* <RiRefund2Fill className="return-product" /> */}
+                                                      {/* Return & Refund Policy
+                                                    </button>
+                                                    </Link>
+                                                  </div>
+                                                </div>
+                                              </div> */}
+                                            </>
+                                          )}
                                         </div>
                                       </div>
                                     </div>
