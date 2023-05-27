@@ -2,6 +2,7 @@
 {
     background-color: #fff;
     padding-top: 164px;
+    padding-bottom: 60px;
 }
 .terms-condition-page h1, h2
 {
@@ -26,13 +27,15 @@
   
 }
 @media only screen and (max-width : 767px) {
-  
+    .terms-condition-page {
+        padding-top: 136px;
+    }
 }
 @media only screen and (max-width : 575.98px) {
 
     .terms-condition-page
     {
-        padding-top: 165px;
+        padding-top: 136px;
     }
     .terms-condition-page p{
         line-height: 37px;
@@ -62,7 +65,9 @@
 @media only screen and (max-width : 430px)
    { 
      
- 
+    .terms-condition-page {
+        padding-top: 111px;
+    }
   }
 
 @media only screen and (max-width : 360px) {
@@ -70,8 +75,8 @@
     .terms-condition-page
     {
         padding-left: 8px;
-        padding-top: 154px;
     }
+
 
 }
 

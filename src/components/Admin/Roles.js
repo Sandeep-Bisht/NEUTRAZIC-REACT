@@ -83,7 +83,6 @@ const Roles = (props) => {
     }
     return error;
   };
-console.log(data.phonenumber.length,"length");
   const RegisterUser = async(e) => {
     e.preventDefault();
     const errors = validateForm(data);
@@ -129,15 +128,13 @@ console.log(data.phonenumber.length,"length");
     });
     setFormErrors({
       ...formErrors,
-      [name]: '' // clear error message for the current input field
+      [name]: ''
     });
   };
   const handleBlur = (event) => {
     const { name, value } = event.target;
     const errors = { ...formErrors };
-  
-    // Validate the input field on blur
-    if (!value) {
+      if (!value) {
       errors[name] = "This field is required";
     } else if (name === "phonenumber" && value.length < 10) {
       errors[name] = "Please enter a valid phone number";
@@ -146,7 +143,7 @@ console.log(data.phonenumber.length,"length");
     } else if (name === "cpassword" && value !== data.password) {
       errors[name] = "Password does not match";
     }else {
-      errors[name] = ""; // clear error message for the current input field
+      errors[name] = ""; 
     }
     
     setFormErrors(errors);

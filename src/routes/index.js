@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import { StateProvider } from "../state";
-// import { INITIAL_STATE as AUTH_INITIAL_STATE } from "../state/auth/reducers";
-// import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from "../state/product/reducers";
-// import reducers from "../state/reducers";
-// import BaseStyles from './base-styles';
 import PrivateRoute from "./private-route";
-// import Content from '../components/content';
 import Login from "../views/login";
 import Home from "../views/home";
 import HomePage from "../views/landing/HomePage";
@@ -168,7 +162,6 @@ const Root = (props) => {
               <Route exact path="/UserDetails/:_id" component={UserDetails} />
               <Route exact path="/Header1" component={Header1} />
               <Route exact path="/WishList" component={WishList} />
-              {/* <Route exact path="/AddressPage" component={AddressPage} /> */}
               <Route
                 exact
                 path={"/NewOrder/" + "Pending"}

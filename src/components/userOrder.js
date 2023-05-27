@@ -4,12 +4,10 @@ import { baseUrl } from "../utils/services";
 import { useHistory, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import "../components/userOrder.css";
-import { ImCross } from "react-icons/im";
-// import "../views/landing/homepage.css";
-// import ProgressBar from "./ProgressBar";
-import { TbTruckReturn } from "react-icons/tb";
+import {ImCross} from "react-icons/im";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { RiRefund2Fill } from "react-icons/ri";
+import {TbTruckReturn} from "react-icons/tb";
 import product from "../Images/abayakasthaa-image.png";
 import {
   Table,
@@ -90,14 +88,6 @@ const UserOrder = () => {
       <Header1 />
 
       <section className="orders-section">
-        {/* <div className="container">
-          <span className="nav-text">
-            <Link to="/" className="nav-text">
-              Home
-            </Link>
-            {location.pathname}
-          </span>
-        </div> */}
         <div className="container">
           <div className="row">
             {loading ? (

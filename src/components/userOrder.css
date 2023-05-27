@@ -2,9 +2,6 @@
   margin-top: 150px;
   margin-bottom: 45px;
 }
-/* .user-order-header {
-  padding: 20px;
-} */
 .orders-user-page {
   border-radius: 10px;
   min-height: 0px;
@@ -52,7 +49,6 @@
 }
 
 .order-status-heading {
-  /* color: rgba(13, 110, 253,0.5); */
   font-size: 12px;
   font-weight: 400;
   font-family: "Roboto", sans-serif;
@@ -88,7 +84,6 @@
   color: #1b2845 !important;
   box-shadow: 0px 0px 1px 1px #1b2845;
   transition: all 0.3s ease-in-out;
-  /* font-weight: bold; */
 }
 .detail-box-order {
   height: 100%;
@@ -133,7 +128,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100px; */
 }
 .progress-box {
   width: 100%;
@@ -153,7 +147,6 @@
 .progress-text {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
 }
 .progress-color {
   position: absolute;
@@ -165,7 +158,6 @@
   z-index: 2;
 }
 
-/* //active classes */
 
 .active34 {
   width: 33.33%;
@@ -184,7 +176,6 @@
   background-color: red;
 }
 
-/* circle active class */
 .activecircles {
   background-color: green !important;
 }
@@ -196,7 +187,6 @@
   background-color: red !important;
   color: white !important;
 }
-/* end active class */
 
 .Check-icon {
   color: white;
@@ -256,10 +246,6 @@
   left: 98%;
   bottom: 22px;
 }
-/* .circle5 svg{
-  color: white !important;
-  height:20px !important;
-} */
 .pending-bar {
   background: rgb(255, 165, 0, 0.8) !important;
   width: 100% !important;
@@ -294,12 +280,10 @@
 }
 .status-Highligted {
   color: green !important;
-  /* font-size: 13px !important; */
   font-weight: 400 !important;
 }
 .status-Highligted-delivered {
   color: green !important;
-  /* font-size: 13px !important; */
   font-weight: 400 !important;
 }
 .nav-text {
@@ -314,9 +298,6 @@
   width: 30px;
   color: #007bff;
 }
-/* .order-details {
-  height: 100px;
-} */
 .Right-order-content {
   display: flex;
   align-items: center;
@@ -343,8 +324,6 @@
 .details-button {
   display: flex;
   flex-direction: column;
-  /* align-items: start;
-   */
   justify-content: space-between;
 }
 .pending-box .process-icon {

@@ -13,7 +13,6 @@ import { baseUrl } from "../utils/services";
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
-// import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
@@ -35,10 +34,8 @@ var ActualSubtotal = "";
 
 const errorEmail = "Please Enter a valid Email Address";
 
-// var userCart=[]
 const Header1 = (props) => {
   let dispatch = useDispatch();
-  // let { state1, setState1 } = useContext(CurrencyContext);
 
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
@@ -57,11 +54,8 @@ const Header1 = (props) => {
   const [cartItems, setCartItems] = useState("");
   const [wishlisted, setWishlisted] = useState("");
   const [usermodal, setUsermodal] = useState();
-  // const [currancy, setCurrency] = useState("INR");
-  // const [currentLocation, setCurrentLocation] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
   const [toggle, setToggle] = useState(0);
-  // const cookies = new Cookies();
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
@@ -76,10 +70,8 @@ const Header1 = (props) => {
   const [verifyUserOtp, setVerifyUserOtp] = useState("");
   const [userItem, setUserItem] = useState({});
   const [otpMsg, setOtpMsg] = useState("");
-
   const { searchedtext, setSearchedText } = useContext(CurrencyContext);
   const [searcheditem, setSearchedItem] = useState("");
-
   const currentLocation = location.pathname;
 
   useEffect(() => {
@@ -87,11 +79,6 @@ const Header1 = (props) => {
     setIsLogin(loginState);
   }, [loginState]);
 
-  // $(document).ready(function() {
-  //   $(".open-search-bar").on('click',function() {
-  //     $(".search-bar").toggleClass("show1");
-  //   });
-  // });
 
   $(window).on("scroll", function() {
     if ($(window).scrollTop() > 50) {
@@ -228,16 +215,8 @@ const Header1 = (props) => {
       });
     });
   }, [toggle]);
-  // useEffect(() => {
-  //   const currentCurrency = cookies.get("CurrencyType");
-  //   if (currentCurrency === "Dollar") {
-  //     setCurrency("Dollar");
-  //     setState1("1");
-  //   }
-  // }, [currancy]);
-
+ 
   const GetWishlist = async () => {
-    console.log("inside the wishlist");
     let id;
     if (Userdata) {
       id = Userdata._id;
@@ -267,16 +246,7 @@ const Header1 = (props) => {
         console.log(err, "error");
       });
   };
-  // const currencyHandler = (e) => {
-  //   setCurrency(e.target.value);
-  //   if (currancy === "INR") {
-  //     setState1("1");
-  //   } else {
-  //     setState1("0");
-  //   }
 
-  //   cookies.set("CurrencyType", e.target.value, { path: "/" });
-  // };
   useEffect(() => {
     if (Userdata === null || Userdata == "") {
       setLoginState("0");
@@ -344,7 +314,6 @@ const Header1 = (props) => {
             reset1();
             return res.json();
           }
-          // throw new Error(res.status);
           else if (res.status === 400) {
           }
         })
@@ -510,7 +479,7 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
+          setUserCart(data.data);
           setCartItems(data.data[0].order.length);
         })
 
@@ -702,7 +671,6 @@ const Header1 = (props) => {
       }
     });
   });
-  console.log(toggle, "This is checking toggle");
   return (
     <>
       <div
@@ -1272,49 +1240,9 @@ const Header1 = (props) => {
                   </div>
 
                   <div className=" main-navbar-head ">
-                    {/* <input
-                        type="text"
-                        className="my-input-field"
-                        placeholder="Search..."
-                        Value={searcheditem}
-                        onChange={(e) => {
-                          setSearch(e.target.value.toLowerCase());
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" && search.length) {
-                            searchData(search);
-
-                            setSearchedText(e.target.value);
-
-                            history.push("/SearchResult/" + search);
-                          }
-                        }}
-                      />
-                      <button
-                        className="search mr-1"
-                        onClick={() => {
-                          if (search.length) {
-                            searchData(search);
-                            history.push("/SearchResult/" + search);
-                          }
-                        }}
-                      >
-                        <i className="bx bx-search-alt"></i>
-                      </button> */}
                   </div>
                 </div>
                 <div className="header-wrapper-right">
-                  {/* <div className="right-part">
-                    <div className="d-flex align-items-center currancy">
-                      <select
-                        onChange={(e) => currencyHandler(e)}
-                        value={currancy}
-                      >
-                        <option value="INR">INR</option>
-                        <option value="Dollar">Dollar</option>
-                      </select>
-                    </div>
-                  </div> */}
                   <div className="search-prod">
                     <div className="search-box">
                       <input
@@ -1323,7 +1251,6 @@ const Header1 = (props) => {
                         Value={searcheditem}
                         onChange={(e) => {
                           setSearch(e.target.value.toLowerCase());
-                          // setSearchedText(e.target.value);
                         }}
                         onKeyDown={(e) => {
                           if (e.key === "Enter" && search.length) {
@@ -1453,7 +1380,6 @@ const Header1 = (props) => {
                               data-bs-target="#exampleModal"
                               style={{ cursor: "pointer" }}
                             >
-                              {/* <i className="user-icon bx bx-log-in"></i> */}
                               <BiUser className="user-icon" />
                               <span
                                 className="Sp1 login-register"
@@ -1482,7 +1408,6 @@ const Header1 = (props) => {
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
                             >
-                              {/* <i className="user-icon bx bx-user-pin mt-1"></i> */}
                               <BiUser className="user-icon" />
                               <span className="username-after-login">
                                 {Userdata && Userdata.username}
@@ -1514,7 +1439,6 @@ const Header1 = (props) => {
                                     style={{ cursor: "pointer" }}
                                   >
                                     <span className="pr-4">Cart</span>
-                                    {/* <span className="text-danger">item</span> */}
                                   </li>
                                 </div>
                               </Link>
@@ -1645,7 +1569,7 @@ const Header1 = (props) => {
                       aria-label="Toggle navigation"
                     >
                       <span className="collapsed-button">
-                        <i class="fas fa-bars" style={{ color: "#fff" }}></i>
+                        <i className="fas fa-bars" style={{ color: "#fff" }}></i>
                       </span>
                     </button>
                     <div

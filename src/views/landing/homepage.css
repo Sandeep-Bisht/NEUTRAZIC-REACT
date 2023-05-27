@@ -9504,6 +9504,7 @@ p {
 }
 .footer-end-para {
   color: #fff;
+  font-size: 15px;
 }
 
 p:last-child {

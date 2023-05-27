@@ -102,7 +102,6 @@ export default function AllProductsDetails() {
     setPrticularUserOrder(orderDetails);
     setIsModalVisible(true);
   };
-  console.log(prticularUserOrder,"helo user order")
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -251,7 +250,6 @@ export default function AllProductsDetails() {
                 <th scope="col">Manufacturer</th>
                 <th scope="col">Category</th>
                 <th scope="col">Subcatrgory</th>
-                <th scope="col">Warehouse</th>
               </tr>
             </thead>
             <tbody>
@@ -277,7 +275,6 @@ export default function AllProductsDetails() {
                         <td className="width-adjust-of-td">{item.manufacturer.name}</td>
                         <td className="width-adjust-of-td">{item.category.name}</td>
                         <td className="width-adjust-of-td">{item.subcategory.name}</td>
-                        <td className="width-adjust-of-td">{item.warehouse.id}</td>
                       </tr>
                     </>
                   );
