@@ -32,6 +32,12 @@
     font-size: 12px !important;
   }
 }
+@media only screen and (max-width: 815px){
+  div#columns .search-figure {
+    margin: 0 0px 15px 10px!important;
+    width: 30%!important;
+}
+}
 @media only screen and (max-width: 767.98px) {
   #__next_search {
     margin-top: 150px;
@@ -51,6 +57,9 @@
   .search-product-div .content .price-div .fa-inr {
     font-size: 12px !important;
   }
+  div#columns .search-figure {
+    width: 47%!important;
+}
 }
 @media only screen and (max-width: 575.98px) {
   .single-products-box .image img {
@@ -80,6 +89,15 @@
     margin-bottom: 10px;
   }
   
+}
+@media only screen and (max-width: 380px){
+  div#columns .search-figure {
+    width: 45%!important;
+}
+.search-figure-maindiv{
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+}
 }
 @media only screen and (max-width: 359.98px){
   #__next_search {

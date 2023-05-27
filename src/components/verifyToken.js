@@ -8,10 +8,8 @@ import Footer from './Footer';
 
 function VerifyToken(props) {
     const token = props.match.params.token;
-    // const[token,setToken]=useState("");
     var currentLocation=useLocation();
     useEffect(()=>{ 
-    //   setToken(currentLocation.token);
       verifyToken(token); 
     },[]);
 

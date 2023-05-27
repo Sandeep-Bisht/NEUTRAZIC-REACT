@@ -3,6 +3,7 @@ import Header1 from "./Header1";
 import "../components/NeedSupport.css";
 import Footer from "./Footer";
 import CustomerSupport from "../Images/Support/customerSupport.png";
+import Baseline from "./Baseline";
 
 function NeedSupport() {
   useEffect(() => {
@@ -48,6 +49,7 @@ function NeedSupport() {
           </div>
         </div>
       </section>
+      <Baseline/>
       <Footer />
     </>
   );

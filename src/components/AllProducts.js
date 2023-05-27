@@ -16,7 +16,7 @@ import AllproductsFilter from "./AllproductsFilter";
 import Baseline from "./Baseline";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 var Userdata;
 const AllProducts = (props) => {
   const state1 = useContext(CurrencyContext);
@@ -42,8 +42,8 @@ const AllProducts = (props) => {
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
-  const [loading,setLoading] = useState(true);
-  const [currentPage,setCurrentPage]=useState(1);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
 
   useEffect(() => {
@@ -67,17 +67,13 @@ const AllProducts = (props) => {
     GetCategory();
     GetSubCategory();
     GetManufacturer();
-    // GetCategory();
   }, []);
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     window.scrollTo(0, 0);
     GetWishlist();
     CartById();
-    
-    // GetCategory();
   }, [loginState]);
-console.log(currentPage,"currentpage");
 
   const handleResetForm = () => {
     if (resetForm === 0) {
@@ -148,7 +144,6 @@ console.log(currentPage,"currentpage");
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        // CartById();
         UpdateCart();
       }
     }
@@ -223,26 +218,20 @@ console.log(currentPage,"currentpage");
     }
   };
 
-  
-  const ProductByCategory = async (value) => {
-      await fetch(`${baseUrl}/api/product/all_product?_page=${value}&_limit=10`)
+
+  const ProductByCategory = async () => {
+    await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=20`)
       .then((res) => res.json())
       .then(async (data) => {
-        serProductLength(data.length);
-        setAllProduct(data.data);
-        setLoading(false);        
+        setCurrentPage(prevPage => prevPage + 1);
+        setAllProduct(prevData => [...prevData, ...data.data]);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
 
-  const handleChange = (event, value) => {
-    // Handle page change
-    setCurrentPage(value);
-    ProductByCategory(value);
-    Window.scrollTo(0,0);
-  };
   const categoryDetails = async () => {
     await fetch(`${baseUrl}/api/category/category_by_id`, {
       method: "POST",
@@ -444,130 +433,134 @@ console.log(currentPage,"currentpage");
               <h2>All Products</h2>
               {/* <AllproductsFilter/> */}
             </div>
-            {loading ? 
-            <Loader
-            show={loading}
-            stack="vertical"
-          /> :
-            <div>
-              <div id="columns" className="columns_5">
-                  {AllProduct.map((el, ind1) => {
-                    return (
-                      <figure className="figure allproduct-figure  mt-3" key={ind1}>
-                        <Link Link to={"/SingleProduct/" + el._id}>
-                          <div>
-                            <img src={`${baseUrl}/` + el.image[0].path} />
-                          </div>
-                          <figcaption>{el.name}</figcaption>
-                        </Link>
+            {loading ?
+              <Loader
+                show={loading}
+                stack="vertical"
+              /> :
+              <div>
+                <div id="columns" className="columns_5">
+                  <InfiniteScroll
+                    dataLength={AllProduct.length}
+                    next={ProductByCategory}
+                    hasMore={true}
+                  >
 
-                        <div className="contanier allproduct-price-div">
-                          <div className="row">
-                            <div className="col-6 text-start">
-                              <span className="price">
-                                {" "}
-                                {state1.state1 == "1" ? (
-                                  <i className="fa fa-dollar-sign"></i>
-                                ) : (
-                                  <i className="fa fa-inr"></i>
-                                )}
-                                {state1.state1 == "1"
-                                  ? el.dollerDiscount
-                                  : el.inrDiscount}
-                              </span>
+                    {AllProduct.map((el, ind1) => {
+                      return (
+                        <figure className="figure allproduct-figure  mt-3" key={ind1}>
+                          <Link Link to={"/SingleProduct/" + el._id}>
+                            <div>
+                              <img src={`${baseUrl}/` + el.image[0].path} />
                             </div>
-                            <div className="col-6 text-end">
-                              <p className={`text-nowrap wishlist`}>
-                                {Userdata ? (
-                                  <i
-                                    id={el._id}
-                                    onClick={() => {
-                                      AddtoWishlist(
-                                        el._id,
-                                        el.name,
-                                        quantity,
-                                        el.inrMrp,
-                                        el.inrDiscount,
-                                        el.description,
-                                        el.category,
-                                        el.manufacturer.name,
-                                        el.image
-                                      );
-                                    }}
-                                    className={`bx bxs-heart ${checkWishlistItem(
-                                      el._id
-                                    )}`}
-                                  ></i>
-                                ) : (
-                                  <i
-                                    className="bx bxs-heart "
-                                    data-bs-toggle="modal"
-                                    data-bs-target={
-                                      Userdata == null ? "#exampleModal" : null
-                                    }
-                                    onClick={() => handleResetForm()}
-                                  ></i>
-                                )}
-                                Wishlist
-                              </p>
+                            <figcaption>{el.name}</figcaption>
+                          </Link>
+
+                          <div className="contanier allproduct-price-div">
+                            <div className="row">
+                              <div className="col-6 text-start">
+                                <span className="price">
+                                  {" "}
+                                  {state1.state1 == "1" ? (
+                                    <i className="fa fa-dollar-sign"></i>
+                                  ) : (
+                                    <i className="fa fa-inr"></i>
+                                  )}
+                                  {state1.state1 == "1"
+                                    ? el.dollerDiscount
+                                    : el.inrDiscount}
+                                </span>
+                              </div>
+                              <div className="col-6 text-end">
+                                <p className={`text-nowrap wishlist`}>
+                                  {Userdata ? (
+                                    <i
+                                      id={el._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        el._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null ? "#exampleModal" : null
+                                      }
+                                      onClick={() => handleResetForm()}
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        {Userdata ? (
-                          <button
-                            className="button btn"
-                            onClick={() => {
-                              cartfunction(
-                                el._id,
-                                el.name,
-                                quantity,
-                                el.inrMrp,
-                                el.inrDiscount,
-                                el.dollerDiscount,
-                                el.dollerMrp,
-                                el.discount,
-                                el.description,
-                                el.category,
-                                el.manufacturer.name,
-                                el.image[0].path
-                              );
-                            }}
-                            data-bs-toggle={Userdata == null ? "modal" : null}
-                            data-bs-target={
-                              Userdata == null ? "#exampleModal" : null
-                            }
-                          >
-                            Add to Cart
-                          </button>
-                        ) : (
-                          <button
-                            className="button btn"
-                            data-bs-toggle="modal"
-                            data-bs-target={
-                              Userdata == null ? "#exampleModal" : null
-                            }
-                            onClick={() => handleResetForm()}
-                          >
-                            Add to Cart
-                          </button>
-                        )}
-                      </figure>
-                    );
-                  })}
+                          {Userdata ? (
+                            <button
+                              className="button btn"
+                              onClick={() => {
+                                cartfunction(
+                                  el._id,
+                                  el.name,
+                                  quantity,
+                                  el.inrMrp,
+                                  el.inrDiscount,
+                                  el.dollerDiscount,
+                                  el.dollerMrp,
+                                  el.discount,
+                                  el.description,
+                                  el.category,
+                                  el.manufacturer.name,
+                                  el.image[0].path
+                                );
+                              }}
+                              data-bs-toggle={Userdata == null ? "modal" : null}
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                            >
+                              Add to Cart
+                            </button>
+                          ) : (
+                            <button
+                              className="button btn"
+                              data-bs-toggle="modal"
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                              onClick={() => handleResetForm()}
+                            >
+                              Add to Cart
+                            </button>
+                          )}
+                        </figure>
+                      );
+                    })}
+                  </InfiniteScroll>
+
+                </div>
               </div>
-            </div>
-          }
+            }
           </div>
         </div>
         <div className="d-flex justify-content-center mt-3 mb-3">
-        <Stack spacing={2}>
-      <Pagination count={10} showFirstButton showLastButton 
-      onChange={handleChange}/>
-    </Stack>
-    </div>
+        </div>
       </div>
       <ToastContainer />
-      <Baseline/>
+      <Baseline />
       <Footer />
     </>
   );

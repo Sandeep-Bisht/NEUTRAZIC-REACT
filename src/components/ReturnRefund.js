@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import Footer from './Footer';
 import Header1 from './Header1';
 import '../components/ReturnRefund.css';
+import Baseline from './Baseline';
 
 function ReturnRefund() {
     useEffect(()=>{
@@ -28,8 +29,9 @@ function ReturnRefund() {
                 </div>
             </div>
         </div>
-        <Footer/>
     </div>
+    <Baseline/>
+    <Footer/>
     </>
   )
 }

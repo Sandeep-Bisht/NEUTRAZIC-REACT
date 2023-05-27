@@ -5,9 +5,6 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import "../components/userOrder.css";
 import {ImCross} from "react-icons/im";
-// import "../views/landing/homepage.css";
-// import ProgressBar from "./ProgressBar";
-
 import { Accordion, AccordionTab } from "primereact/accordion";
 import product from "../Images/abayakasthaa-image.png";
 import {
@@ -90,14 +87,6 @@ const UserOrder = () => {
       <Header1 />
 
       <section className="orders-section">
-        {/* <div className="container">
-          <span className="nav-text">
-            <Link to="/" className="nav-text">
-              Home
-            </Link>
-            {location.pathname}
-          </span>
-        </div> */}
         <div className="container">
           <div className="row">
             {loading ? (

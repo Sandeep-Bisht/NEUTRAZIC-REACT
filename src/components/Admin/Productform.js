@@ -16,7 +16,6 @@ const Productform = (props) => {
   const [shwoTable, setShowTable] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [editableData] = useState(props.history.location.state);
-
   let [data, Setdata] = useState({
     name: "",
     description: "",

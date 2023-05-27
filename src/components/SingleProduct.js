@@ -625,7 +625,6 @@ const SingleProduct = (props) => {
 
               <div className="row image-group pt-2">
                 <Carousel
-                  // breakPoints={breakPoints}
                   enableAutoPlay
                   autoPlaySpeed={1500}
                   itemsToShow={4}
@@ -634,7 +633,6 @@ const SingleProduct = (props) => {
                   // onChange={Loop}
                   ref={carouselRef}
                   disableArrowsOnEnd={false}
-                  // itemPadding={[0, 4]}
                 >
                   {data.otherImage &&
                     data.otherImage.length > 0 &&

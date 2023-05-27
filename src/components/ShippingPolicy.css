@@ -1,13 +1,12 @@
-
 .shipping-policy-page
 {
     background-color: #fff;
     padding-top: 164px;
+    padding-bottom: 60px;
 }
 .shipping-policy-page h1, h2
 {
     color: #1e144f;
-    text-transform: capitalize;
 }
 .shipping-policy-page ul
 {
@@ -28,13 +27,15 @@
   
 }
 @media only screen and (max-width : 767px) {
-  
+    .shipping-policy-page {
+        padding-top: 136px;
+    }
 }
 @media only screen and (max-width : 575.98px) {
 
     .shipping-policy-page
     {
-        padding-top: 165px;
+        padding-top: 136px;
     }
     .shipping-policy-page p{
         line-height: 37px;
@@ -64,7 +65,9 @@
 @media only screen and (max-width : 430px)
    { 
      
- 
+    .shipping-policy-page {
+        padding-top: 111px;
+    }
   }
 
 @media only screen and (max-width : 360px) {
@@ -72,11 +75,10 @@
     .shipping-policy-page
     {
         padding-left: 8px;
-        padding-top: 154px;
     }
 
-}
 
+}
 
 
 

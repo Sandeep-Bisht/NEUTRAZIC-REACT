@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import "../components/TermsConditions.css";
+import Baseline from "./Baseline";
 
 function TermsConditions() {
   useEffect(() => {
@@ -351,10 +352,11 @@ function TermsConditions() {
                 any loss or damage of any nature.
               </p>
             </div>
-            <Footer />
           </div>
         </div>
       </div>
+      <Baseline/>
+      <Footer />
     </>
   );
 }
