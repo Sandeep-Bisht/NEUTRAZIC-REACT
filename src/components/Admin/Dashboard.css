@@ -31,7 +31,9 @@ body
 {
   font-family: 'Roboto', sans-serif;
 }
-
+.New-order-details .ant-modal .ant-modal-close:hover{
+  background: none !important;
+}
 .container{
   margin-top: 10px;
 

@@ -53,17 +53,17 @@
 
 .order-status-heading {
   /* color: rgba(13, 110, 253,0.5); */
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   font-family: "Roboto", sans-serif;
 }
 .para-order-text {
-  font-size: 13px !important;
+  font-size: 10px !important;
   color: #6c757d;
   font-weight: 600 !important;
 }
 .para-text {
-  font-size: 12px !important;
+  font-size: 10px !important;
   color: #6c757d;
 }
 .Re-order-button {
@@ -116,8 +116,9 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.userorder-product-name {
-  font-size: 1.4rem;
+.userorder-product {
+  font-size: 14px !important;
+  font-weight: 400 !important;
 }
 
 .button-box {
@@ -364,6 +365,9 @@
     transform: rotate(360deg);
   }
 }
+.Order-page .p-accordion .p-accordion-content {
+  background: ghostwhite !important;
+}
 .order-detail-button {
   display: flex;
   justify-content: center;
@@ -436,6 +440,13 @@
 @media only screen and (max-width: 767.98px) {
   .Right-order-content {
     height: 60px !important;
+  }
+  .order-detail-button {
+    padding: 10px 10px !important;
+    font-size: 10px !important;
+  }
+  .See-more-details {
+    justify-content: start !important;
   }
   .order-tracking-details {
     padding-left: 0px !important;
@@ -510,4 +521,27 @@
   .orders-section {
     margin-top: 114px !important;
   }
+}
+.Buttons-order-page {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.Buttons-order-page button {
+  padding: 9px 24px;
+  border: none;
+  font-size: 15px;
+  background: ghostwhite;
+  transition: all 0.4s linear;
+}
+.Buttons-order-page button:hover {
+  text-decoration: underline !important;
+  color: goldenrod;
+  transition: all 0.4s linear;
+  transition: text-decoration 0.4s linear;
+}
+
+.Buttons-order-page .return-product {
+  height: 25px !important;
+  width: 25px !important;
 }

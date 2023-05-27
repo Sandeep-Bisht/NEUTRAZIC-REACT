@@ -82,7 +82,7 @@ const HomePage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    speed: 3000,
+    speed: 4000,
     autoplay: true,
     pauseOnHover: true,
     autoPlaySpeed: 3000,
@@ -95,6 +95,7 @@ const HomePage = () => {
     arrows: false,
     speed: 4000,
     autoplay: true,
+    pauseOnHover: false,
     autoPlaySpeed: 3000,
   };
   useEffect(() => {
