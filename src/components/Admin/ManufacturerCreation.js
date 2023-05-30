@@ -19,12 +19,14 @@ const ManufacturerCreation = (props) => {
   });
   const history = useHistory();
   const [editableData] = useState(props.history.location.state);
-console.log(editableData,"inside the manufacturerCreaction");
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetManufacturer();
     if (editableData) {
-
+      const {image ,...restData}=editableData;
+      {
+        image.length>0 && (restData.image=[]) 
+      }
       Setdata(editableData);
     }
   }, []);
@@ -57,7 +59,7 @@ console.log(editableData,"inside the manufacturerCreaction");
       })
         .then((res) => {
           res.json();
-          history.push("/AllManufactureDetails");
+          history.push("Configuration/"+"AllManufactureDetails");
         })
         .then((res) => {
           GetManufacturer();
@@ -78,7 +80,6 @@ console.log(editableData,"inside the manufacturerCreaction");
         console.log(err, "errors");
       });
   };
-
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
     const errors = ValidattionForm(data);
@@ -126,7 +127,6 @@ console.log(editableData,"inside the manufacturerCreaction");
     }
     setFormerror(errors);
   };
-
   return (
     <>
       <section id="body-pd">
@@ -144,25 +144,31 @@ console.log(editableData,"inside the manufacturerCreaction");
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Manufacturer Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-2">
+                            <div>
+                          <span className="category-select-div">Image</span>
                             <input
                               type="file"
                               name="image"
                               multiple
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
+                            </div>
                             <p className="formerror">{formerror.image}</p>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2">
+                            <div>
+                          <span className="category-select-div">Manufacturer Name</span>
                             <input
                               type="text"
                               name="name"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="Manufacturer Name "
+                              className="form-control Dashborad-search"
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }
@@ -173,16 +179,15 @@ console.log(editableData,"inside the manufacturerCreaction");
                               onBlur={handleBlur}
 
                             />
+                            </div>
                             <p className="formerror">{formerror.name}</p>
-                            <label for="floatingInputValue">
-                              Manufacturer Name
-                            </label>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2">
+                            <div>
+                          <span className="category-select-div">Manufacturer Description</span>
                             <textarea
                               className="form-control h-100"
                               id="floatingInputValue"
-                              placeholder="Manufacturer Description"
                               rows="6"
                               defaultValue={
                                 editableData ? editableData.description : ""
@@ -194,9 +199,7 @@ console.log(editableData,"inside the manufacturerCreaction");
                                 });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">
-                              Manufacturer Description
-                            </label>
+                            </div>
                           </div>
                           {editableData ? (
                             <div className="col-12 p-1">

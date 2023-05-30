@@ -10,6 +10,8 @@ import JoditEditor from "jodit-react";
 
 const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
+  const [formerror, setFormerror] = useState({});
+  const [blogs,setBlogs]=useState({})
   const [data, setData] = useState({
     title: "",
     featuredImage: [],
@@ -17,13 +19,44 @@ const Blog = (props) => {
     content: "",
   });
   useEffect(() => {
+    GetBlog();
     if (editableData) {
-      setData(editableData);
+      const {featuredImage,...restData}=editableData;
+      {
+        featuredImage.length>0 && (restData.featuredImage=[]) 
+      }
+      setData(restData);
     }
   }, []);
   const history = useHistory();
+
+  const GetBlog = async () => {
+    await fetch(`${baseUrl}/api/blogs/find_all_slug`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setBlogs(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "errors");
+      });
+  };
+
+  const ValidattionForm = (value) => {
+    const error = {};
+    if (value.featuredImage.length === 0) {
+      error.featuredImage = "This field is required";
+    }
+    if (!value.title) {
+      error.title = "This field is required";
+    }
+    return error;
+  };
+
   const addBlogs = async (e) => {
     e.preventDefault();
+    const errors = ValidattionForm(data);
+    setFormerror(errors);
+    if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     await formData.append("title", data.title);
     await formData.append("description", data.description);
@@ -37,13 +70,18 @@ const Blog = (props) => {
     })
       .then((res) => {
         res.json();
+        history.push("/AllBlogs");
       })
       .then((res) => {})
       .catch((err) => console.log(err));
-    history.push("/AllBlogs");
+    }
   };
+
   const UpdateBlogs = async (e, _id) => {
     e.preventDefault();
+    const errors = ValidattionForm(data);
+    setFormerror(errors);
+    if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     await formData.append("_id", data._id);
     await formData.append("description", data.description);
@@ -56,12 +94,33 @@ const Blog = (props) => {
         `${baseUrl}/api/blogs/update_slug_by_id`,
         formData
       );
-
+      history.push("/AllBlogs");
       await addBlogs();
     } catch (error) {
       console.log(error);
     }
-    history.push("/AllBlogs");
+  }
+  };
+    const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setData({
+      ...data,
+      [name]: value
+    });
+    setFormerror({
+      ...formerror,
+      [name]: '' // clear error message for the current input field
+    });
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const errors = { ...formerror };
+
+    // Validate the input field on blur
+    if (!value) {
+      errors[name] = `This field is required`;
+    }
+    setFormerror(errors);
   };
   return (
     <>
@@ -78,41 +137,54 @@ const Blog = (props) => {
                   <div className="card p-4 m-2 mt-4 product-form">
                     <h5>Create Blog</h5>
                     <div className="row">
-                      <div className="col-6 p-1 m-2 form-floating">
+                      <div className="col-6 p-1">
+                      <div className="">
+                        <span className="category-select-div">Title</span>
                         <input
                         maxLength={50}
                           type="text"
+                          name="title"
                           id="floatingInputValue"
                           className="form-control Dashborad-search"
-                          placeholder="Title"
                           defaultValue={editableData ? editableData.title : ""}
-                          onChange={(e) =>
-                            setData({ ...data, title: e.target.value })
+                          onChange={(e) =>{
+                            setData({ ...data, title: e.target.value });
+                            handleInputChange(e);
                           }
+                          }
+                          onBlur={handleBlur}
                         />
-                        <label for="floatingInputValue">Title</label>
+                        </div>
+                        <p className="formerror">{formerror.title}</p>
                       </div>
-                      <div className="col-5">
-                        <label className="featured-Image">
-                          <p>Featured Image:</p>
-                        </label>
+                      <div className="col-6 p-1">
+                      <div className="">
+                          <span className="category-select-div">Featured Image</span>
                         <input
                           type="file"
+                          name="featuredImage"
                           className="form-control Dashborad-search featured"
                           onChange={(e) =>
+                            {
                             setData({
                               ...data,
                               featuredImage: e.target.files[0],
-                            })
+                            });
+                            // handleInputChange(e);
                           }
+                          }
+                          onBlur={handleBlur}
                         />
+                        </div>
+                        <p className="formerror">{formerror.featuredImage}</p>
                       </div>
-                      <div className="col-5 p-1 m-2 form-floating">
+                      <div className="col-5 p-2">
+                      <div className="">
+                          <span className="category-select-div">Description</span>
                         <textarea
                           maxLength={150}
                           className="form-control h-100"
                           id="floatingInputValue"
-                          placeholder="Description"
                           defaultValue={
                             editableData ? editableData.description : ""
                           }
@@ -121,7 +193,7 @@ const Blog = (props) => {
                             setData({ ...data, description: e.target.value })
                           }
                         ></textarea>
-                        <label for="floatingInputValue">Description</label>
+                        </div>
                       </div>
                       <div className="col-12">
                         <JoditEditor
@@ -132,16 +204,16 @@ const Blog = (props) => {
                         />
                       </div>
                       {editableData ? (
-                        <div className="col-12 p-1">
+                        <div className="col-12 p-2">
                           <button
                             className="m-2 ps-2 btn btn-primary"
-                            onClick={(e) => UpdateBlogs(e)}
+                            onClick={(e) => UpdateBlogs(e, data._id)}
                           >
                             Update
                           </button>
                         </div>
                       ) : (
-                        <div className="col-12 p-1">
+                        <div className="col-12 p-2">
                           <button
                             className="m-2 ps-2 btn btn-primary"
                             onClick={(e) => addBlogs(e)}
