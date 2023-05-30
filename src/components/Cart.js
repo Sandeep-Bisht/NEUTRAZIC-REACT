@@ -36,7 +36,6 @@ const Cart = () => {
   const state1 = useContext(CurrencyContext);
 
   useEffect(() => {
-
     if (state1 == "1") {
       setCurrency("Dollar");
     }
@@ -89,7 +88,7 @@ const Cart = () => {
 
           setCartStatus(data.data[0].cartStatus);
           setCart(data.data[0].order);
-          setLoading(false)
+          setLoading(false);
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
           setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
@@ -97,12 +96,11 @@ const Cart = () => {
           Set_id(data.data[0]._id);
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
           console.log(err, "error");
         });
     }
   };
-
 
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
@@ -120,7 +118,7 @@ const Cart = () => {
       }),
     })
       .then((res) => res.json())
-      .then((res) => { })
+      .then((res) => {})
       .then((err) => console.log(err));
   };
 
@@ -156,7 +154,7 @@ const Cart = () => {
     const stripe = await stripePromise;
     let { order } = data;
     let neworder = JSON.parse(order);
-    neworder.forEach(function (item) {
+    neworder.forEach(function(item) {
       delete item.category;
       delete item.description;
       delete item.delivery_time;
@@ -205,8 +203,8 @@ const Cart = () => {
         localStorage.removeItem("Usercartdata");
         window.location.href = url;
       })
-      .then(async (res) => { })
-      .catch((err) => { });
+      .then(async (res) => {})
+      .catch((err) => {});
   };
   return (
     <>
@@ -220,46 +218,50 @@ const Cart = () => {
         <div className="container m-auto">
           <form>
             <div className="cart-buttons">
-              <h1 className="cart-header">{cart && cart.length>0 ? "Your Cart":""}</h1>
+              <h1 className="cart-header">
+                {cart && cart.length > 0 ? "Your Cart" : ""}
+              </h1>
             </div>
             <div className="row">
               <div className="col-lg-8 col-md-12">
-                {loading ?
-                  <Loader
-                    show={loading}
-                    stack="vertical"
-                  /> : <>
+                {loading ? (
+                  <Loader show={loading} stack="vertical" />
+                ) : (
+                  <>
                     {cart && cart.length > 0 ? (
-                            cart.map((el, ind1) => {
-                              if (state1.state1 == "1") {
-                                total = el.dollerDiscount * el.quantity;
-                                total1 = total1 + el.dollerDiscount * el.quantity;
-                                localStorage.setItem("ActualSubtotal", total1);
-                                actualtotal += el.dollerMrp * el.quantity;
-                                localStorage.setItem("Subtotal", actualtotal);
-                              } else {
-                                total = el.singleprice * el.quantity;
-                                total1 = total1 + el.singleprice * el.quantity;
-                                localStorage.setItem("ActualSubtotal", total1);
-                                actualtotal += el.mrp * el.quantity;
-                                localStorage.setItem("Subtotal", actualtotal);
-                              }
-                              return (
-                                <>
-                                <div className="card card-for-cart m-2">
-                                <div className="card-body cart-box row">
-                                  <div className="col-lg-3 col-md-3 col-2">
-                                    <div>
+                      cart.map((el, ind1) => {
+                        if (state1.state1 == "1") {
+                          total = el.dollerDiscount * el.quantity;
+                          total1 = total1 + el.dollerDiscount * el.quantity;
+                          localStorage.setItem("ActualSubtotal", total1);
+                          actualtotal += el.dollerMrp * el.quantity;
+                          localStorage.setItem("Subtotal", actualtotal);
+                        } else {
+                          total = el.singleprice * el.quantity;
+                          total1 = total1 + el.singleprice * el.quantity;
+                          localStorage.setItem("ActualSubtotal", total1);
+                          actualtotal += el.mrp * el.quantity;
+                          localStorage.setItem("Subtotal", actualtotal);
+                        }
+                        return (
+                          <>
+                            <div className="card card-for-cart m-2">
+                              <div className="card-body cart-box row">
+                                <div className="col-lg-3 col-md-3 col-2">
+                                  <div>
                                     <div className="d-flex justify-content-center">
-                                  <Link to={"/SingleProduct/" + el.productid}>
-                                      <img className="cart-image"
-                                        src={
-                                          `${baseUrl}/` + el.image ||
-                                          el.manufacturer.image[0].path
-                                        }
-                                        alt="item"
-                                      />
-                                    </Link>
+                                      <Link
+                                        to={"/SingleProduct/" + el.productid}
+                                      >
+                                        <img
+                                          className="cart-image"
+                                          src={
+                                            `${baseUrl}/` + el.image ||
+                                            el.manufacturer.image[0].path
+                                          }
+                                          alt="item"
+                                        />
+                                      </Link>
                                     </div>
                                     <div className="amount mt-1">
                                       {" "}
@@ -277,32 +279,48 @@ const Cart = () => {
                                           <i className="bx bx-minus minus"></i>
                                         </span>
                                         <span className="m-2 quantity-div">
-                                          Qty : {el.quantity}
-                                          </span>
+                                          {el.quantity}
+                                        </span>
                                         <span
                                           className="plus-minus-btn"
                                           onClick={() => {
-                                            Plusquantity(el.quantity, el.mrp, ind1);
+                                            Plusquantity(
+                                              el.quantity,
+                                              el.mrp,
+                                              ind1
+                                            );
                                           }}
                                         >
                                           <i className="bx bx-plus  plus"></i>
                                         </span>
                                       </div>
                                     </div>
-                                    </div>
                                   </div>
-                                  <div className="card-middle-part col-lg-6 col-md-6 col-6">
-                                    <div>
+                                </div>
+                                <div className="card-middle-part col-lg-6 col-md-6 col-6">
+                                  <div>
                                     <Link to={"/SingleProduct/" + el.productid}>
                                       <div className="cart-text">{el.name}</div>
-                                      </Link>
-                                    <div className="mt-2 description-link" onClick={()=>history.push("/SingleProduct/" + el.productid)}>
+                                    </Link>
+                                    <div
+                                      className="mt-2 description-link"
+                                      onClick={() =>
+                                        history.push(
+                                          "/SingleProduct/" + el.productid
+                                        )
+                                      }
+                                    >
                                       <p className="card-description">
-                                        {el.description.slice(0,99)}...</p>
+                                        {el.description.slice(0, 99)}...
+                                      </p>
                                     </div>
                                     <div className="mt-2 sold-by-div">
-                                      <span className="sold-by">Sold by : 
-                                      <p className="manufacturer-name"> {el.manufacturer}</p>
+                                      <span className="sold-by">
+                                        Sold by :
+                                        <p className="manufacturer-name">
+                                          {" "}
+                                          {el.manufacturer}
+                                        </p>
                                       </span>
                                     </div>
                                     <div className="amount mt-1">
@@ -324,14 +342,16 @@ const Cart = () => {
                                           : el.singleprice}
                                       </span>
                                     </div>
-                                    </div>
                                   </div>
-                                  <div className="col-lg-2 col-md-2 col-3">
-                                    <div className="total-price-div">
+                                </div>
+                                <div className="col-lg-2 col-md-2 col-3">
+                                  <div className="total-price-div">
                                     <div>
-                                    <span className="card-text">Total Price</span>
+                                      <span className="card-text">
+                                        Total Price
+                                      </span>
                                     </div>
-                                  <div className="amount mt-2">
+                                    <div className="amount mt-2">
                                       <span className="subtotal-amount mt-4">
                                         {state1.state1 == "1" ? (
                                           <i class="fa fa-dollar-sign currency-subtotal-sign"></i>
@@ -343,42 +363,43 @@ const Cart = () => {
                                           : el.singleprice) * el.quantity}
                                       </span>
                                     </div>
-                                    </div>
-                                    </div>
-                                  <div className="col-1 delete-icon">
-                                  <Popconfirm
-                                      className="bx bx-trash cart-delete-icon"
-                                      title="Delete the Product"
-                                      description="Are you sure to delete this Product?"
-                                      style={{ margin: "0" }}
-                                      onConfirm={(e) => Sliceorder(ind1, e)}
-                                    ></Popconfirm>
                                   </div>
                                 </div>
+                                <div className="col-1 delete-icon">
+                                  <Popconfirm
+                                    className="bx bx-trash cart-delete-icon"
+                                    title="Delete the Product"
+                                    description="Are you sure to delete this Product?"
+                                    style={{ margin: "0" }}
+                                    onConfirm={(e) => Sliceorder(ind1, e)}
+                                  ></Popconfirm>
                                 </div>
-                                </>
-                              );
-                            })
-                          ) : (
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })
+                    ) : (
                       <div className="col-12 text-center EMPTYWISHLIST-DIV">
-                    <div>
-                      <h1>No Product Found</h1>
-                    </div>
-                      <lottie-player
-                        src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
-                        background="transparent"
-                        speed="1"
-                        style={{
-                          width: "300px",
-                          height: "300px",
-                          margin: "auto",
-                        }}
-                        loop
-                        autoplay
-                      ></lottie-player>
+                        <div>
+                          <h1>No Product Found</h1>
+                        </div>
+                        <lottie-player
+                          src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                          background="transparent"
+                          speed="1"
+                          style={{
+                            width: "300px",
+                            height: "300px",
+                            margin: "auto",
+                          }}
+                          loop
+                          autoplay
+                        ></lottie-player>
                       </div>
                     )}
-                  </>}
+                  </>
+                )}
               </div>
 
               <div className="col-lg-4 col-md-12">

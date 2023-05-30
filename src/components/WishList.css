@@ -35,6 +35,9 @@
   .word-wrapping {
     font-size: 12px;
   }
+  .wishlist-heading2{
+    height: 20px !important;
+  }
 }
 @media only screen and (max-width: 815.98px) {
   .wishlist-page {
@@ -74,8 +77,8 @@
   }
 
   .wishlist-btn {
-    font-size: 12px!important;
-    padding: 3px 14px!important;
+    font-size: 10px!important;
+    padding: 6px 8px!important;
     width: 93px!important;
 }
   
@@ -102,8 +105,8 @@
     font-size: 14px;
   }
   .wishlist-btn {
-    font-size: 12px!important;
-    padding: 4px 6px!important;
+    font-size: 10px!important;
+    padding: 7px 6px!important;
     width: 80px!important;
   }
   .buynow-details-btn-wrap {

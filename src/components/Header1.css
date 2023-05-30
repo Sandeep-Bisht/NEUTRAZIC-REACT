@@ -355,19 +355,18 @@
 }
 .wishlist-heading2 {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000;
-  opacity: 0.8;
-  text-transform: uppercase;
-  width: 97%;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1b2845;
+  height: 30px;
 }
 .wishlistDiv {
   padding: 10px;
-  border: 2px solid #c7c7c769;
   border-radius: 5px;
+  box-shadow: -2px 0px 8px -3px #1b2845;
   position: relative;
   margin: 10px 0;
+  background: whitesmoke;
 }
 .wishlist-close-icon {
   position: absolute;
@@ -376,7 +375,7 @@
 }
 .wishlist-close-icon svg {
   color: #000;
-  height: 25px;
+  height: 18px;
   opacity: 0.7;
 }
 .wishlist-close-icon svg:hover {
@@ -403,25 +402,23 @@
   cursor: pointer;
 }
 .wishlist-btn {
-  color: rgb(0, 0, 0, 0.5);
-  padding: 8px 20px;
+  padding: 8px 15px;
   border-radius: 3px;
-  font-size: 0.8rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 500;
+  /* border: 1px solid #1b2845; */
+  font-weight: 400;
+  color: white;
+  font-size: 12px;
   text-align: center;
-  display: inline-block;
-  border: 2px solid rgb(27 151 255 / 33%);
-  text-transform: capitalize;
+  background: #1b2845;
+  transition: all 0.3s ease;
+  border: 1px solid #1b2845;
 }
 .wishlist-btn:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  color: white;
-  border: none;
+  /* padding: 8px 15px; */
+  background: white;
+  color: #1b2845;
+
   border-radius: 3px;
 }
 .buynow-details-btn-wrap {
@@ -434,6 +431,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 13px;
 }
 
 /* End wishlist code */
@@ -1127,7 +1125,7 @@ h3 .read-more-button {
   }
   .navbar-collapse {
     background: rgb(27, 40, 69, 1);
-    margin-top: -3px;
+    /* margin-top: 12px; */
     /* height: 210px; */
   }
   .drop-category {
@@ -1215,7 +1213,7 @@ h3 .read-more-button {
     padding-right: 10px;
     height: 45px;
   }
-  
+
   .category i {
     display: none !important;
   }
@@ -1223,7 +1221,7 @@ h3 .read-more-button {
   .option-item .cart-btn {
     font-size: 27px;
   }
-  
+
   .sp,
   .Sp1 {
     font-size: 14px;
@@ -1489,11 +1487,11 @@ h3 .read-more-button {
   .user-icon {
     font-size: 24px !important;
   }
-  .open-search-bar{
+  .open-search-bar {
     height: 20px !important;
     width: 20px !important;
   }
-  .cross-icon-search{
+  .cross-icon-search {
     height: 8px !important;
   }
 }
@@ -1510,7 +1508,7 @@ h3 .read-more-button {
     padding: 0 10px 0px 0px !important;
   }
   .heaader-wrapper .heart-div {
-    padding: 0 8px 0px 0px !important;
+    padding: 0 4px 0px 0px !important;
   }
   .navbar-brand img {
     height: 36px;
@@ -1757,7 +1755,7 @@ h3 .read-more-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 10px;
+  padding-right: 26px;
 }
 .search-box .icon-search {
   background: rgb(27, 40, 69, 1) !important;
@@ -1815,4 +1813,3 @@ h3 .read-more-button {
   transform: translateY(-50%);
   height: 10px;
 }
-
