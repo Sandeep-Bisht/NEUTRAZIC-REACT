@@ -14,6 +14,8 @@
   position: absolute;
   bottom: 20%;
   left: 5%;
+  font-size: 14px;
+  font-weight: 400;
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
   width: auto;
@@ -43,9 +45,9 @@
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   margin-top: 10px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.25px;
   line-height: 2;
   width: 80%;
@@ -107,14 +109,14 @@
 .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
 .top-heading-box-3 p {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 10px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.25px;
 }
 .blog-page-section-2 .latest-blogs-section h2 {
   color: #fff;
-  background-color: #1e144f;
+  background-color: #1b2845;
   font-size: 16px;
   font-weight: 500;
   padding: 12px;

@@ -1291,7 +1291,7 @@ const HomePage = () => {
                             if (ind < 4)
                               return (
                                 <div className="col-lg-3 col-md-6" key={ind}>
-                                  <Link to={"/SingleBlogPage/" + item.slug}>
+                                  <Link className="blog-link" to={"/SingleBlogPage/" + item.slug}>
                                     <div className="card hover-effect">
                                       <img
                                         src={

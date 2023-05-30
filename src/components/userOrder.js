@@ -4,10 +4,10 @@ import { baseUrl } from "../utils/services";
 import { useHistory, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import "../components/userOrder.css";
-import {ImCross} from "react-icons/im";
+import { ImCross } from "react-icons/im";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { RiRefund2Fill } from "react-icons/ri";
-import {TbTruckReturn} from "react-icons/tb";
+import { TbTruckReturn } from "react-icons/tb";
 import product from "../Images/abayakasthaa-image.png";
 import {
   Table,
@@ -409,12 +409,7 @@ const UserOrder = () => {
                                                   </div>
                                                   <div className="Price-box">
                                                     <h6 className="userorder-product">
-                                                      <span>Qty:</span>
-                                                      <sapn
-                                                        style={{
-                                                          color: "#28a745",
-                                                        }}
-                                                      >
+                                                      <sapn className="order-details">
                                                         {item.quantity}
                                                       </sapn>
                                                     </h6>
@@ -422,11 +417,7 @@ const UserOrder = () => {
                                                   <div className="Price-box">
                                                     <h6 className="userorder-product">
                                                       <span>Price:</span>
-                                                      <sapn
-                                                        style={{
-                                                          color: "#28a745",
-                                                        }}
-                                                      >
+                                                      <sapn className="order-details">
                                                         {item.singleprice}
                                                       </sapn>
                                                     </h6>
@@ -434,7 +425,7 @@ const UserOrder = () => {
                                                   {/* <div className="Price-box">
                                             <h6>₹{item.singleprice}</h6>
                                           </div> */}
-                                                  <div className="Price-box"></div>
+                                                  {/* <div className="Price-box"></div> */}
                                                 </div>
                                               </div>
                                             </div>
@@ -462,7 +453,8 @@ const UserOrder = () => {
                                               </div>
                                             </div>
                                           </div>
-                                          {el.orderStatus === "Delivered" || el.orderStatus === "Shipped" ? (
+                                          {el.orderStatus === "Delivered" ||
+                                          el.orderStatus === "Shipped" ? (
                                             <div className="row">
                                               {/* <div className="col-md-10">
                                               </div> */}
@@ -482,14 +474,14 @@ const UserOrder = () => {
                                           ) : (
                                             <>
                                               {/* <div className="row"> */}
-                                                {/* <div className="col-md-10">
+                                              {/* <div className="col-md-10">
                                               </div> */}
-                                                {/* <div className="col-md-12">
+                                              {/* <div className="col-md-12">
                                                   <div className="Buttons-order-page">
                                                     <Link to = "/return&refund">
                                                     <button> */}
-                                                      {/* <RiRefund2Fill className="return-product" /> */}
-                                                      {/* Return & Refund Policy
+                                              {/* <RiRefund2Fill className="return-product" /> */}
+                                              {/* Return & Refund Policy
                                                     </button>
                                                     </Link>
                                                   </div>
