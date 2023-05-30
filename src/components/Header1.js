@@ -1642,13 +1642,13 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-          <div className="container-fluid p-0">
+          {/* <div className="container-fluid p-0">
             <div className="row side-nav">
               <div className=" col-sm-12 p-0 content">
                 <React.Fragment>{props.children}</React.Fragment>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

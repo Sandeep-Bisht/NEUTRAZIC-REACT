@@ -21203,3 +21203,7 @@ svg {
   transform: scale(1) !important;
   transition: all 0.2s linear !important;
 }
+
+.homepage-blog-box .blog-link:hover{
+  color: black !important;
+}
