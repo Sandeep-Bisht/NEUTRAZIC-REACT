@@ -1,7 +1,6 @@
 .order-success-page
 {
-    background-color: #f2f2f2;
-    padding: 80px 0;
+margin-top: 155px;
 }
 .order-success-page .order-success-card
 {
@@ -64,4 +63,74 @@
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0.15px;
+}
+@media only screen and (max-width : 1299px){
+    .order-success-page
+    {
+    margin-top: 180px;
+    }
+}
+@media only screen and (max-width : 1024px) {
+  
+}
+
+@media only screen and (max-width :815px) {
+    .success-heading h1 {
+        font-size: 23px;
+    }
+}
+@media only screen and (max-width : 730px) {
+    .order-success-page {
+        margin-top: 145px;
+    }
+}
+@media only screen and (max-width : 575.98px) {
+    .order-success-page {
+        margin-top: 127px;
+    }
+}
+@media only screen and (max-width : 480px) {
+    .success-heading h1 {
+        font-size: 21px;
+    }
+    .success-svg {
+        padding: 5px!important;
+    }
+    .order-success-page .success-home-btn {
+        padding: 5px 15px;
+    }
+    .order-success-page .success-home-btn a{
+        font-size: 14px;
+    }
+
+}
+@media only screen and (max-width : 430px)
+   {
+    .success-heading h1 {
+        font-size: 19px;
+    }
+    .success-order-id p, .success-email-confirm-msg p {
+        font-size: 11px!important;
+    }
+    .order-success-page .order-success-card {
+        padding: 30px 0px;
+    }
+    .success-thank-you h2 {
+        font-size: 15px;
+    }
+    .order-success-page .success-home-btn a {
+        font-size: 12px;
+    }
+    .order-success-page .success-home-btn {
+        padding: 3px 12px;
+    }
+    .order-success-div{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+  }
+
+@media only screen and (max-width : 360px) {
+
+
 }

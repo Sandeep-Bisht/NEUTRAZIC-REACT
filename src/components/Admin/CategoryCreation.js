@@ -69,6 +69,9 @@ const CategoryCreation = (props) => {
           ? (restData.featuredCategories = featuredCategories)
           : (restData.featuredCategories = "");
       }
+      {
+        image.length>0 && (restData.image=[]);
+      }
       Setdata(restData);
     }
   }, []);
@@ -153,24 +156,30 @@ const CategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Category Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1">
+                          <div className="col-6 p-2">
+                            <div>
+                            <span className="category-select-div">Image</span>
                             <input
                               type="file"
                               name="image"
-                              className="form-control Dashborad-search  input-div"
+                              className="form-control Dashborad-search"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
                               }}
+                              onBlur={handleBlur}
                             />
+                            </div>
                             <p className="formerror">{formerror.image}</p>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2">
+                            <div>
+                          <span className="category-select-div">Category Name</span>
                             <input
                               type="text"
                               id="floatingInputValue"
                               name="name"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="Category Name"
+                              className="form-control Dashborad-search"
                               defaultValue={editableData ? editableData.name : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
@@ -178,13 +187,14 @@ const CategoryCreation = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
+                            </div>
                             <p className="formerror">{formerror.name}</p>
-                            <label for="floatingInputValue">Category Name</label>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2">
+                            <div>
+                          <span className="category-select-div">Category Description</span>
                             <textarea
                               className="form-control h-100"
-                              placeholder="Category Description"
                               id="floatingInputValue"
                               rows="5"
                               defaultValue={
@@ -194,11 +204,13 @@ const CategoryCreation = (props) => {
                                 Setdata({ ...data, description: e.target.value });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">Category Description</label>
+                            </div>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-6 p-2">
+                            <div>
+                          <span className="category-select-div">Featured Categories</span>
                           <select
-                              className="form-control Dashborad-search custom-select input-div"
+                              className="form-control Dashborad-search custom-select"
                               value={data.featuredCategories}
                               name="featuredCategories"
                               onChange={(e) => {
@@ -213,10 +225,11 @@ const CategoryCreation = (props) => {
                                 Featured Categories
                               </option>
                             </select>
+                            </div>
                             <p className="formerror">{formerror.featuredCategories}</p>
                           </div>
                           {editableData ? (
-                            <div className="col-12 p-1">
+                            <div className="col-12 p-2">
 
                               <button
                                 className="btn btn-primary"

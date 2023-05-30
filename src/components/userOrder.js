@@ -82,7 +82,6 @@ const UserOrder = () => {
         console.log(err, "errors");
       });
   };
-
   return (
     <>
       <Header1 />
@@ -95,7 +94,7 @@ const UserOrder = () => {
             ) : (
               <div className="col-md-12">
                 {OrderDetails &&
-                  OrderDetails.length > 0 &&
+                  OrderDetails.length > 0 ?
                   OrderDetails.map((el, ind) => {
                     console.log(el, "This is orders");
                     return (
@@ -501,7 +500,25 @@ const UserOrder = () => {
                         </Accordion>
                       </div>
                     );
-                  })}
+                  }):
+                  <div className="col-12 text-center EMPTYWISHLIST-DIV">
+                  <div>
+                    <h1>No Product Found</h1>
+                  </div>
+                  <lottie-player
+                    src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                    background="transparent"
+                    speed="1"
+                    style={{
+                      width: "300px",
+                      height: "300px",
+                      margin: "auto",
+                    }}
+                    loop
+                    autoplay
+                  ></lottie-player>
+                </div>
+                }
               </div>
             )}
           </div>

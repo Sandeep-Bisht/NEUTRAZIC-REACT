@@ -77,10 +77,10 @@ function OrderSuccess() {
   return (
     <>
       <Header1 />
-      <div className="order-success-page">
+      <div className="order-success-page mb-5">
         <div className="container m-auto">
           <div className="row mt-0">
-            <div className="col-8 mx-auto">
+            <div className="col-lg-8 col-md-10 col-sm-10 col-12 mx-auto order-success-div">
               <div className="order-success-card">
                 <div className="success-heading">
                   <h1>Your order has been placed successfully</h1>

@@ -54,6 +54,7 @@ const Roles = (props) => {
   };
 
   var pattern= /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$/;
+  var UserNamePattern= /^[A-Za-z0-9]*$/;
   const validateForm = (Value) => {
     const error = {};
     if (!Value.username) {
@@ -61,9 +62,7 @@ const Roles = (props) => {
     }
     if (!Value.email) {
       error.email = "This field is required";
-    } else if (!pattern.test(Value.email)) {
-      error.email = "Please enter a valid email";
-    }
+    } 
     if (!Value.password) {
       error.password = "This field is required";
     }
@@ -136,7 +135,9 @@ const Roles = (props) => {
     const errors = { ...formErrors };
       if (!value) {
       errors[name] = "This field is required";
-    } else if (name === "phonenumber" && value.length < 10) {
+    }else if (name === "username" && !UserNamePattern.test(value)) {
+      errors[name] = "Username does not contain space and special key";
+    }else if (name === "phonenumber" && value.length < 10) {
       errors[name] = "Please enter a valid phone number";
     } else if (name === "email" && !pattern.test(value)) {
       errors[name] = "Please enter a valid email";
@@ -213,6 +214,9 @@ const Roles = (props) => {
                             handleInputChange(e);
                           }}
                           onBlur={handleBlur}
+                          onInput={(event) =>
+                            (event.target.value = event.target.value.toLowerCase())
+                          }
                         />
                         <label htmlFor="floatingform">Username*</label>
                         <div>
