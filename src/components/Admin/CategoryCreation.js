@@ -48,7 +48,7 @@ const CategoryCreation = (props) => {
       })
         .then((res) => {
           res.json()
-          history.push("Configuration/"+"AllCategoriesDetails");
+          history.push("Configuration/" + "AllCategoriesDetails");
         })
         .then((res) => {
           GetCategory();
@@ -63,14 +63,11 @@ const CategoryCreation = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetCategory();
     if (editableData) {
-      let {featuredCategories,image, ...restData}=editableData;
+      let { featuredCategories, ...restData } = editableData;
       {
         featuredCategories
           ? (restData.featuredCategories = featuredCategories)
           : (restData.featuredCategories = "");
-      }
-      {
-        image.length>0 && (restData.image=[]);
       }
       Setdata(restData);
     }
@@ -92,29 +89,28 @@ const CategoryCreation = (props) => {
     const errors = ValidationFrom(data);
     setFormerror(errors);
     if (Object.keys(errors).length === 0) {
-    const formData = new FormData();
-    await formData.append("_id", data._id);
-    await formData.append("description", data.description);
-    await formData.append("name", data.name);
-    await formData.append("image", data.image);
-    await formData.append("featuredImage", []);
-    await formData.append("slideShow", false);
-    await fetch(`${baseUrl}/api/category/update_category_by_id`, {
-      method: "Put",
-      body: formData,
-    })
-      .then((res) => {
-        res.json()
-        history.push("Configuration/"+"AllCategoriesDetails");
+      const formData = new FormData();
+      formData.append("_id", data._id);
+      formData.append("description", data.description);
+      formData.append("name", data.name);
+      formData.append("image", data.image);
+      formData.append("slideShow", false);
+
+      fetch(`${baseUrl}/api/category/update_category_by_id`, {
+        method: "PUT",
+        body: formData,
       })
-      .then(async (data) => {
-        GetCategory();
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          history.push("Configuration/AllCategoriesDetails");
+          GetCategory();
+        })
+        .catch((err) => {
+          console.log(err, "error");
+        });
     }
   };
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -156,81 +152,80 @@ const CategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Category Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-2">
+                          <div className="col-3 p-2">
                             <div>
-                            <span className="category-select-div">Image</span>
-                            <input
-                              type="file"
-                              name="image"
-                              className="form-control Dashborad-search"
-                              onChange={(e) => {
-                                Setdata({ ...data, image: e.target.files[0] });
-                                // handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">Image</span>
+                              <input
+                                type="file"
+                                name="image"
+                                className="form-control Dashborad-search"
+                                onChange={(e) => {
+                                  Setdata({ ...data, image: e.target.files[0] });
+                                  // handleInputChange(e);
+                                }}
+                              />
                             </div>
                             <p className="formerror">{formerror.image}</p>
                           </div>
+                          <div className="col-3 p-2">
+                          {
+                                editableData && editableData.length? <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"100px", height:"100px"}} alt=""/>:""
+                              }
+                          </div>
                           <div className="col-6 p-2">
                             <div>
-                          <span className="category-select-div">Category Name</span>
-                            <input
-                              type="text"
-                              id="floatingInputValue"
-                              name="name"
-                              className="form-control Dashborad-search"
-                              defaultValue={editableData ? editableData.name : ""}
-                              onChange={(e) => {
-                                Setdata({ ...data, name: e.target.value });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">Category Name</span>
+                              <input
+                                type="text"
+                                id="floatingInputValue"
+                                name="name"
+                                className="form-control Dashborad-search"
+                                defaultValue={editableData ? editableData.name : ""}
+                                onChange={(e) => {
+                                  Setdata({ ...data, name: e.target.value });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
                             <p className="formerror">{formerror.name}</p>
                           </div>
                           <div className="col-6 p-2">
                             <div>
-                          <span className="category-select-div">Category Description</span>
-                            <textarea
-                              className="form-control h-100"
-                              id="floatingInputValue"
-                              rows="5"
-                              defaultValue={
-                                editableData ? editableData.description : ""
-                              }
-                              onChange={(e) => {
-                                Setdata({ ...data, description: e.target.value });
-                              }}
-                            ></textarea>
+                              <span className="category-select-div">Category Description</span>
+                              <textarea
+                                className="form-control h-100"
+                                id="floatingInputValue"
+                                rows="5"
+                                defaultValue={editableData ? editableData.description : ""}
+                                onChange={(e) => {
+                                  Setdata({ ...data, description: e.target.value });
+                                }}
+                              ></textarea>
                             </div>
                           </div>
                           <div className="col-6 p-2">
                             <div>
-                          <span className="category-select-div">Featured Categories</span>
-                          <select
-                              className="form-control Dashborad-search custom-select"
-                              value={data.featuredCategories}
-                              name="featuredCategories"
-                              onChange={(e) => {
-                                Setdata({ ...data, featuredCategories: e.target.value });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            >
-                              <option value="" hidden defaultChecked>
-                                Select Category Type</option>
-                              <option value="Featured Categories">
-                                Featured Categories
-                              </option>
-                            </select>
+                              <span className="category-select-div">Featured Categories</span>
+                              <select
+                                className="form-control Dashborad-search custom-select"
+                                value={data.featuredCategories}
+                                name="featuredCategories"
+                                onChange={(e) => {
+                                  Setdata({ ...data, featuredCategories: e.target.value });
+                                  handleInputChange(e);
+                                }}
+                              >
+                                <option value="" hidden>
+                                  Select Category Type
+                                </option>
+                                <option value="Featured Categories">Featured Categories</option>
+                              </select>
                             </div>
                             <p className="formerror">{formerror.featuredCategories}</p>
                           </div>
                           {editableData ? (
                             <div className="col-12 p-2">
-
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => UpdateCategory(e, data._id)}

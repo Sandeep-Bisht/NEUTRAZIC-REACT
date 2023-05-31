@@ -27,14 +27,11 @@ const SubCategoryCreation = (props) => {
     GetSubCategory();
     GetCategory();
     if (editableData) {
-      let { category,image, ...restData } = editableData;
+      let { category, ...restData } = editableData;
       {
         category
           ? (restData.category = category)
           : (restData.category = "");
-      }
-      {
-        image.length>0 && (restData.image=[]);
       }
       Setdata(restData);
     }
