@@ -23,10 +23,6 @@ const ManufacturerCreation = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetManufacturer();
     if (editableData) {
-      const {image ,...restData}=editableData;
-      {
-        image.length>0 && (restData.image=[]) 
-      }
       Setdata(editableData);
     }
   }, []);

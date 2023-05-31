@@ -176,8 +176,6 @@ const Productform = (props) => {
         subcategory,
         manufacturer,
         type,
-        image,
-        otherImage,
         ...restData
       } = editableData;
       {
@@ -197,12 +195,6 @@ const Productform = (props) => {
       }
       {
         type ? (restData.type = type._id) : (restData.type = "");
-      }
-      {
-        image.length > 0 && (restData.image = []);
-      }
-      {
-        otherImage.length > 0 && (restData.otherImage = []);
       }
       Setdata(restData);
     }

@@ -21,11 +21,7 @@ const Blog = (props) => {
   useEffect(() => {
     GetBlog();
     if (editableData) {
-      const {featuredImage,...restData}=editableData;
-      {
-        featuredImage.length>0 && (restData.featuredImage=[]) 
-      }
-      setData(restData);
+      setData(editableData);
     }
   }, []);
   const history = useHistory();
