@@ -487,10 +487,11 @@ const Productform = (props) => {
                           ) : (
                             <div className="col-6 p-2 form-floating required">
                               <div className="mt-2">
+                              <span className="category-select-div">Vendor</span>
                                 <input
                                   type="text"
                                   id="floatingform"
-                                  className="form-control Dashborad-search input-div"
+                                  className="form-control Dashborad-search"
                                   value={Userdata && Userdata.username}
                                 />
                               </div>
