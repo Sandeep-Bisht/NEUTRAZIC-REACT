@@ -12,6 +12,7 @@ const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
   const [formerror, setFormerror] = useState({});
   const [blogs,setBlogs]=useState({})
+  const [editableArray,setEditableArray]=useState([]);
   const [data, setData] = useState({
     title: "",
     featuredImage: [],
@@ -97,6 +98,14 @@ const Blog = (props) => {
     }
   }
   };
+
+  useEffect(()=>{
+    const arr=[];
+    if (editableData) {
+      arr.push(editableData)
+      }
+      setEditableArray(arr)
+  },[])
     const handleInputChange = (event) => {
     const { name, value } = event.target;
     setData({
@@ -153,27 +162,48 @@ const Blog = (props) => {
                         </div>
                         <p className="formerror">{formerror.title}</p>
                       </div>
-                      <div className="col-6 p-1">
-                      <div className="">
-                          <span className="category-select-div">Featured Image</span>
-                        <input
-                          type="file"
-                          name="featuredImage"
-                          className="form-control Dashborad-search featured"
-                          onChange={(e) =>
-                            {
-                            setData({
-                              ...data,
-                              featuredImage: e.target.files[0],
-                            });
-                            // handleInputChange(e);
-                          }
-                          }
-                          onBlur={handleBlur}
-                        />
+                      <div className="col-6">
+                              <div className="row">
+                          {
+                            editableArray && editableArray.length>0  ?
+                            <div className="d-flex p-2">
+                            <div className="col-10">
+                            <div>
+                              <span className="category-select-div">Featured Image</span>
+                              <input
+                                type="file"
+                                name="image"
+                                className="form-control Dashborad-search"
+                                onChange={(e) => {
+                                  setData({ ...data, featuredImage: e.target.files[0] });
+                                  // handleInputChange(e);
+                                }}
+                              />
+                            </div>
+                            <p className="formerror">{formerror.image}</p>
+                            </div>
+                            <div className="col-2 p-2 d-flex align-items-end edit-images">
+                             <img src={`${baseUrl}/${data.featuredImage[0].path}`} style={{width:"70px", height:"40px"}} alt=""/>
+                          </div>
+                          </div>:
+                          <div className="col-12 p-2">
+                          <div>
+                            <span className="category-select-div">Image</span>
+                            <input
+                              type="file"
+                              name="image"
+                              className="form-control Dashborad-search"
+                              onChange={(e) => {
+                                setData({ ...data, featuredImage: e.target.files[0] });
+                                // handleInputChange(e);
+                              }}
+                            />
+                          </div>
+                          <p className="formerror">{formerror.image}</p>
                         </div>
-                        <p className="formerror">{formerror.featuredImage}</p>
-                      </div>
+                          }
+                          </div>
+                          </div>
                       <div className="col-5 p-2">
                       <div className="">
                           <span className="category-select-div">Description</span>
