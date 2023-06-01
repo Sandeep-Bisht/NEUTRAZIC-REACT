@@ -14,6 +14,7 @@ const Productform = (props) => {
   const [warehouse, setWarehouse] = useState([]);
   const [products, Setproducts] = useState([]);
   const [shwoTable, setShowTable] = useState(false);
+  const [editableArray,setEditableArray]=useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [editableData] = useState(props.history.location.state);
   let [data, Setdata] = useState({
@@ -161,7 +162,13 @@ const Productform = (props) => {
       console.log("Form has errors. Please correct them.");
     }
   };
-
+  useEffect(()=>{
+    const arr=[];
+    if (editableData) {
+      arr.push(editableData)
+      }
+      setEditableArray(arr)
+  },[])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -315,24 +322,47 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.name}</p>
                           </div>
-                          <div className="col-6 p-2">
-                            <div className="">
+                          <div className="col-6">
+                              <div className="row">
+                          {
+                            editableArray && editableArray.length>0  ?
+                            <div className="d-flex p-2">
+                            <div className="col-10">
+                            <div>
                               <span className="category-select-div">Image</span>
                               <input
                                 type="file"
-                                className="form-control Dashborad-search"
                                 name="image"
+                                className="form-control Dashborad-search"
                                 onChange={(e) => {
-                                  Setdata({
-                                    ...data,
-                                    image: e.target.files[0],
-                                  });
+                                  Setdata({ ...data, image: e.target.files[0] });
                                   // handleInputChange(e);
                                 }}
-                                onBlur={handleBlur}
                               />
                             </div>
                             <p className="formerror">{formErrors.image}</p>
+                            </div>
+                            <div className="col-2 p-2 d-flex align-items-end edit-images">
+                             <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"60px", height:"50px"}} alt=""/>
+                          </div>
+                          </div>:
+                          <div className="col-12 p-2">
+                          <div>
+                            <span className="category-select-div">Image</span>
+                            <input
+                              type="file"
+                              name="image"
+                              className="form-control Dashborad-search"
+                              onChange={(e) => {
+                                Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
+                              }}
+                            />
+                          </div>
+                          <p className="formerror">{formErrors.image}</p>
+                        </div>
+                          }
+                          </div>
                           </div>
                           <div className="col-6 p-2">
                             <div className="">
@@ -379,6 +409,26 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.category}</p>
                           </div>
+                          {
+                            editableArray && editableArray.length>0 &&
+                           <div className="col-6 p-2">
+                           <div className="row">
+                             {
+                               editableArray && editableArray.length>0 ? 
+                               editableData.otherImage.map((item,index)=>{
+                                 return (
+                                   <>
+                                   <div className="col-2 p-2 d-flex align-items-end edit-images" key={index}>
+                             <img src={`${baseUrl}/${item.path}`} style={{width:"60px", height:"50px"}} alt=""/>
+                          </div>
+                                   </>
+                                 )
+                               }):""
+                             }
+                           </div>
+                         </div>
+                          }
+                          
                           <div className="col-6 p-2 required">
                             <div className="mt-2">
                               <span className="category-select-div">SubCategory</span>

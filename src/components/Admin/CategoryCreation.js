@@ -9,6 +9,7 @@ const CategoryCreation = (props) => {
   var categoryCount = 0;
   const [categories, setCategories] = useState([]);
   const [formerror, setFormerror] = useState({});
+  const [editableArray,setEditableArray]=useState([]);
   const [data, Setdata] = useState({
     name: "",
     description: "",
@@ -58,6 +59,15 @@ const CategoryCreation = (props) => {
         .catch((err) => console.log(err));
     }
   };
+
+
+  useEffect(()=>{
+    const arr=[];
+    if (editableData) {
+      arr.push(editableData)
+      }
+      setEditableArray(arr)
+  },[])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -133,8 +143,8 @@ const CategoryCreation = (props) => {
     }
     setFormerror(errors);
   };
-
-
+console.log(editableArray,"array");
+console.log(editableData,"editable data of category");
   return (
     <>
       <section id="body-pd">
@@ -152,7 +162,12 @@ const CategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Category Creation</h5>
                         <div className="row">
-                          <div className="col-3 p-2">
+                        <div className="col-6">
+                              <div className="row pt-2">
+                          {
+                            editableArray && editableArray.length>0  ?
+                            <div className="d-flex">
+                            <div className="col-10">
                             <div>
                               <span className="category-select-div">Image</span>
                               <input
@@ -166,11 +181,28 @@ const CategoryCreation = (props) => {
                               />
                             </div>
                             <p className="formerror">{formerror.image}</p>
+                            </div>
+                            <div className="col-2 p-2 d-flex align-items-end edit-images">
+                             <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"70px", height:"40px"}} alt=""/>
                           </div>
-                          <div className="col-3 p-2">
-                          {
-                                editableData && editableData.length? <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"100px", height:"100px"}} alt=""/>:""
-                              }
+                          </div>:
+                          <div className="col-12 p-2">
+                          <div>
+                            <span className="category-select-div">Image</span>
+                            <input
+                              type="file"
+                              name="image"
+                              className="form-control Dashborad-search"
+                              onChange={(e) => {
+                                Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
+                              }}
+                            />
+                          </div>
+                          <p className="formerror">{formerror.image}</p>
+                        </div>
+                          }
+                          </div>
                           </div>
                           <div className="col-6 p-2">
                             <div>
