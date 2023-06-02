@@ -92,7 +92,7 @@ i {
   line-height: 25px;
 }
 .content-div .price .price-detail {
-  color: #1b97ff;
+  color: rgb(27, 40, 69);
   font-size: 38px;
   font-family: "Roboto", sans-serif;
   margin-left: 5px;
@@ -104,7 +104,7 @@ i {
   margin-left: 5px;
 }
 .content-div .price .price-detail span {
-  color: #1b97ff;
+  color: rgba(27,16,49);
   font-size: 18px;
   font-family: "Roboto", sans-serif;
   margin-left: 5px;
@@ -244,7 +244,7 @@ input[type="number"] {
 }
 .content-div .add .wishlist span span {
   font-size: 16px;
-  color: #1b97ff;
+  color: green;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
   cursor: pointer;

@@ -42,7 +42,6 @@ export default function AllProductsDetails() {
        var responseData=data.data.filter((item)=>{
         return (Userdata.manufacturer===item.manufacturer.name);
        })
-       console.log(responseData,"inside the all products details");
        Setproducts(responseData.length);
     }
     else{
@@ -61,7 +60,6 @@ export default function AllProductsDetails() {
        var responseData=response.data.data.filter((item)=>{
         return (Userdata.manufacturer===item.manufacturer.name);
        })
-       console.log(responseData,"inside the all products details");
        setGetuser(responseData);
        setLoading(false);
     }
@@ -96,7 +94,6 @@ export default function AllProductsDetails() {
   };
 
   const showModal = (order) => {
-    console.log(order,"inside the showmodal")
     const orderDetails=[];
     orderDetails.push(order)
     setPrticularUserOrder(orderDetails);
@@ -175,7 +172,7 @@ export default function AllProductsDetails() {
       key: "action",
       render: (_, record) => (
         <Button type="primary" onClick={() => showModal(record)}>
-          See Order
+          See Product
         </Button>
       ),
     },
@@ -256,7 +253,6 @@ export default function AllProductsDetails() {
               {prticularUserOrder &&
                 prticularUserOrder.length > 0 &&
                 prticularUserOrder.map((item, ind) => {
-                  console.log(item,"all products items");
                   return (
                     <>
                       <tr key={ind}>

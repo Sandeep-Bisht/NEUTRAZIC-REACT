@@ -53,7 +53,6 @@ const UserOrder = () => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetOrders();
-    console.log(Userdata, "This is user data");
 
     window.scrollTo(0, 0);
   }, []);
@@ -62,7 +61,6 @@ const UserOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setLoading(false);
-        console.log(data.data, "Datatatatatat");
         let arr1 = [];
         for (let item of data.data) {
           if (item.userid === Userdata._id) {
@@ -89,6 +87,13 @@ const UserOrder = () => {
       <section className="orders-section">
         <div className="container">
           <div className="row">
+            <div className="col-md-12">
+              <div className="user-order-head">
+                <h2>Your Orders</h2>
+              </div>
+            </div>
+          </div>
+          <div className="row">
             {loading ? (
               <Loader show={loading} stack="vertical" />
             ) : (
@@ -96,7 +101,6 @@ const UserOrder = () => {
                 {OrderDetails &&
                   OrderDetails.length > 0 ?
                   OrderDetails.map((el, ind) => {
-                    console.log(el, "This is orders");
                     return (
                       <div className="Order-page">
                         <Accordion>

@@ -62,7 +62,6 @@ const Dashboard = () => {
        var responseData=data.data.filter((item)=>{
         return (Userdata.manufacturer===item.manufacturer.name);
        })
-       console.log(responseData,"inside the all products details");
        Setproducts(responseData.length);
     }
     else{

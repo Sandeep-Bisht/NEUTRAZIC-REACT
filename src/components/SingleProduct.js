@@ -796,14 +796,14 @@ const SingleProduct = (props) => {
                     <SocialIcon
                       className="single-product-social-icons"
                       network="facebook"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                   <a href="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="instagram"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                   <a href="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
@@ -811,7 +811,7 @@ const SingleProduct = (props) => {
                     <SocialIcon
                       className="single-product-social-icons"
                       network="twitter"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                   <a
@@ -822,7 +822,7 @@ const SingleProduct = (props) => {
                     <SocialIcon
                       className="single-product-social-icons"
                       network="linkedin"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                 </div>
