@@ -14,6 +14,7 @@ const Productform = (props) => {
   const [warehouse, setWarehouse] = useState([]);
   const [products, Setproducts] = useState([]);
   const [shwoTable, setShowTable] = useState(false);
+  const [editableArray,setEditableArray]=useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [editableData] = useState(props.history.location.state);
   let [data, Setdata] = useState({
@@ -32,7 +33,6 @@ const Productform = (props) => {
     image: [],
     otherImage: [],
   });
-
   const history = useHistory();
 
   const validateForm = (Value) => {
@@ -76,12 +76,13 @@ const Productform = (props) => {
     return error;
   };
 
+
   const submitData = async (e) => {
     e.preventDefault();
 
     const errors = validateForm(data);
     setFormErrors(errors);
-   
+
     if (Object.keys(errors).length === 0) {
       const formData = new FormData();
       await formData.append("description", data.description);
@@ -124,44 +125,50 @@ const Productform = (props) => {
     const Errors = await validateForm(data);
     setFormErrors(Errors);
     if (Object.keys(Errors).length === 0) {
-    const formData = new FormData();
-    await formData.append("_id", data._id);
-    await formData.append("description", data.description);
-    await formData.append("name", data.name);
-    await formData.append("warehouse", data.warehouse);
-    await formData.append("category", data.category);
-    await formData.append("subcategory", data.subcategory);
-    await formData.append("quantity", data.quantity);
-    await formData.append("inrMrp", data.inrMrp);
-    await formData.append("dollerMrp", data.dollerMrp);
-    await formData.append("inrDiscount", data.inrDiscount);
-    await formData.append("dollerDiscount", data.dollerDiscount);
-    await formData.append("manufacturer", data.manufacturer);
-    await formData.append("type", data.type);
-    await formData.append("image", data.image);
-    for (let item of data.otherImage) {
-      await formData.append("otherImage", item);
-    }
-    try {
-      const response = await axios.put(
-        `${baseUrl}/api/product/update_product_by_id`,
-        formData
-      );
-      if (response.status === 200) {
-        await GetData();
-        setTimeout(() => {
-          history.push("/Configuration/" + "AllProductsDetails");
-        }, 1500);
+      const formData = new FormData();
+      await formData.append("_id", data._id);
+      await formData.append("description", data.description);
+      await formData.append("name", data.name);
+      await formData.append("warehouse", data.warehouse);
+      await formData.append("category", data.category);
+      await formData.append("subcategory", data.subcategory);
+      await formData.append("quantity", data.quantity);
+      await formData.append("inrMrp", data.inrMrp);
+      await formData.append("dollerMrp", data.dollerMrp);
+      await formData.append("inrDiscount", data.inrDiscount);
+      await formData.append("dollerDiscount", data.dollerDiscount);
+      await formData.append("manufacturer", data.manufacturer);
+      await formData.append("type", data.type);
+      await formData.append("image", data.image);
+      for (let item of data.otherImage) {
+        await formData.append("otherImage", item);
       }
-    } catch (error) {
-      console.log(error);
+      try {
+        const response = await axios.put(
+          `${baseUrl}/api/product/update_product_by_id`,
+          formData
+        );
+        if (response.status === 200) {
+          await GetData();
+          setTimeout(() => {
+            history.push("/Configuration/" + "AllProductsDetails");
+          }, 1500);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
-  else {
-    console.log("Form has errors. Please correct them.");
-  }
+    else {
+      console.log("Form has errors. Please correct them.");
+    }
   };
-
+  useEffect(()=>{
+    const arr=[];
+    if (editableData) {
+      arr.push(editableData)
+      }
+      setEditableArray(arr)
+  },[])
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
@@ -198,8 +205,8 @@ const Productform = (props) => {
       }
       Setdata(restData);
     }
-    $(document).ready(function() {
-      $(".update").click(function() {
+    $(document).ready(function () {
+      $(".update").click(function () {
         $(".update-btn").css("display", "block");
       });
     });
@@ -278,7 +285,7 @@ const Productform = (props) => {
     setFormErrors(errors);
   };
 
- 
+
 
   return (
     <>
@@ -298,119 +305,133 @@ const Productform = (props) => {
                         <h5>Product Creation</h5>
                         <div className="row">
                           <div className="col-6 p-2 form-floating">
-                          <div className="">
-                          <span className="category-select-div">Product Name</span>
-                            <input
-                              type="text"
-                              id="floatingform"
-                              name="name"
-                              className="form-control Dashborad-search"
-                              value={data.name}
-                              onChange={(e) => {
-                                Setdata({ ...data, name: e.target.value });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                            <div className="">
+                              <span className="category-select-div">Product Name</span>
+                              <input
+                                type="text"
+                                id="floatingform"
+                                name="name"
+                                className="form-control Dashborad-search"
+                                value={data.name}
+                                onChange={(e) => {
+                                  Setdata({ ...data, name: e.target.value });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
                             <p className="formerror">{formErrors.name}</p>
                           </div>
-                          <div className="col-6 p-2">
-                          <div className="">
-                          <span className="category-select-div">Image</span>
-                            <input
-                              type="file"
-                              className="form-control Dashborad-search"
-                              name="image"
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  image: e.target.files[0],
-                                });
-                              }}
-                            />
+                          <div className="col-6">
+                              <div className="row">
+                          {
+                            editableArray && editableArray.length>0  ?
+                            <div className="d-flex p-2">
+                            <div className="col-10">
+                            <div>
+                              <span className="category-select-div">Image</span>
+                              <input
+                                type="file"
+                                name="image"
+                                className="form-control Dashborad-search"
+                                onChange={(e) => {
+                                  Setdata({ ...data, image: e.target.files[0] });
+                                  // handleInputChange(e);
+                                }}
+                              />
                             </div>
                             <p className="formerror">{formErrors.image}</p>
+                            </div>
+                            <div className="col-2 p-2 d-flex align-items-end edit-images">
+                             <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"60px", height:"50px"}} alt=""/>
                           </div>
-
-                          <div className="col-6 p-2">
-                          <div className="">
-                          <span className="category-select-div">Other Image</span>
+                          </div>:
+                          <div className="col-12 p-2">
+                          <div>
+                            <span className="category-select-div">Image</span>
                             <input
                               type="file"
+                              name="image"
                               className="form-control Dashborad-search"
-                              multiple
-                              name="otherImage"
                               onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  otherImage: e.target.files,
-                                });
+                                Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
                               }}
                             />
+                          </div>
+                          <p className="formerror">{formErrors.image}</p>
+                        </div>
+                          }
+                          </div>
+                          </div>
+                          <div className="col-6 p-2">
+                            <div className="">
+                              <span className="category-select-div">Other Image</span>
+                              <input
+                                type="file"
+                                className="form-control Dashborad-search"
+                                multiple
+                                name="otherImage"
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    otherImage: e.target.files,
+                                  });
+                                }}
+                              />
                             </div>
                             <p className="formerror">{formErrors.otherImage}</p>
                           </div>
 
                           <div className="col-6 p-2 required">
-                          <div className="">
-                            <span className="category-select-div">Category</span>
-                            <select
-                              className="form-control Dashborad-search custom-select "
-                              value={data.category}
-                              name="category"
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  category: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            >
-                              <option value="" hidden defaultChecked>
-                                Select Category
-                              </option>
-                              {categories.map((el, ind) => (
-                                <option value={el._id} key={ind}>{el.name}</option>
-                              ))}
-                            </select>
+                            <div className="">
+                              <span className="category-select-div">Category</span>
+                              <select
+                                className="form-control Dashborad-search custom-select "
+                                value={data.category}
+                                name="category"
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    category: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              >
+                                <option value="" hidden defaultChecked>
+                                  Select Category
+                                </option>
+                                {categories.map((el, ind) => (
+                                  <option value={el._id} key={ind}>{el.name}</option>
+                                ))}
+                              </select>
                             </div>
                             <p className="formerror">{formErrors.category}</p>
                           </div>
-                          <div className="col-6 p-2 required">
-                          <div className="mt-2">
-                            <span className="category-select-div">SubCategory</span>
-                            <select
-                              className="form-control Dashborad-search custom-select"
-                              value={data.subcategory}
-                              name="subcategory"
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  subcategory: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            >
-                              <option value="" disabled hidden>
-                                Select Sub Category
-                              </option>
-                              {subcategories.map((el, ind) => (
-                                <option value={el._id} key={ind}>{el.name}</option>
-                              ))}
-                            </select>
-                            </div>
-                            <p className="formerror">
-                              {formErrors.subcategory}
-                            </p>
+                          {
+                            editableArray && editableArray.length>0 &&
+                           <div className="col-6 p-2">
+                           <div className="row">
+                             {
+                               editableArray && editableArray.length>0 ? 
+                               editableData.otherImage.map((item,index)=>{
+                                 return (
+                                   <>
+                                   <div className="col-2 p-2 d-flex align-items-end edit-images" key={index}>
+                             <img src={`${baseUrl}/${item.path}`} style={{width:"60px", height:"50px"}} alt=""/>
                           </div>
-
-                          {Userdata.role === "superAdmin" ? (
-                            <div className="col-6 p-2 required">
-                              <div className="mt-2">
-                            <span className="category-select-div">Vendor</span>
+                                   </>
+                                 )
+                               }):""
+                             }
+                           </div>
+                         </div>
+                          }
+                          
+                          <div className="col-6 p-2 required">
+                            <div className="mt-2">
+                              <span className="category-select-div">SubCategory</span>
                               <select
                                 className="form-control Dashborad-search custom-select"
                                 value={data.subcategory}
@@ -425,55 +446,86 @@ const Productform = (props) => {
                                 onBlur={handleBlur}
                               >
                                 <option value="" disabled hidden>
-                                  Select Vendor
+                                  Select Sub Category
                                 </option>
                                 {subcategories.map((el, ind) => (
                                   <option value={el._id} key={ind}>{el.name}</option>
                                 ))}
                               </select>
+                            </div>
+                            <p className="formerror">
+                              {formErrors.subcategory}
+                            </p>
+                          </div>
+
+                          {Userdata.role === "superAdmin" ? (
+                            <div className="col-6 p-2 required">
+                              <div className="mt-2">
+                                <span className="category-select-div">Vendor</span>
+                                <select
+                                  className="form-control Dashborad-search custom-select"
+                                  value={data.subcategory}
+                                  name="subcategory"
+                                  onChange={(e) => {
+                                    Setdata({
+                                      ...data,
+                                      subcategory: e.target.value,
+                                    });
+                                    handleInputChange(e);
+                                  }}
+                                  onBlur={handleBlur}
+                                >
+                                  <option value="" disabled hidden>
+                                    Select Vendor
+                                  </option>
+                                  {subcategories.map((el, ind) => (
+                                    <option value={el._id} key={ind}>{el.name}</option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
                           ) : (
                             <div className="col-6 p-2 form-floating required">
                               <div className="mt-2">
-                              <input
-                                type="text"
-                                id="floatingform"
-                                className="form-control Dashborad-search input-div"
-                                value={Userdata && Userdata.username}
-                              />
-                            </div>
+                              <span className="category-select-div">Vendor</span>
+                                <input
+                                  type="text"
+                                  id="floatingform"
+                                  className="form-control Dashborad-search"
+                                  value={Userdata && Userdata.username}
+                                />
+                              </div>
                             </div>
                           )}
 
                           <div className="col-6 p-2 required">
-                          <div className="mt-2">
-                            <span className="category-select-div">Manufacturer</span>
-                            <select
-                              className="form-control Dashborad-search custom-select"
-                              value={data.manufacturer}
-                              name="manufacturer"
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  manufacturer: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            >
-                              <option value="" disabled hidden>
-                                Select Manufacturer
-                              </option>
-                              {manufactureres.map((el, ind) =>
-                                Userdata.role === "superAdmin" ? (
-                                  <option value={el._id} key={ind}>{el.name}</option>
-                                ) : Userdata._id === el.creatorId &&
-                                  Userdata.role === "Vendor" ? (
-                                  <option value={el._id}>{el.name}</option>
-                                ) : null
-                              )}
-                            </select>
+                            <div className="mt-2">
+                              <span className="category-select-div">Manufacturer</span>
+                              <select
+                                className="form-control Dashborad-search custom-select"
+                                value={data.manufacturer}
+                                name="manufacturer"
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    manufacturer: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              >
+                                <option value="" disabled hidden>
+                                  Select Manufacturer
+                                </option>
+                                {manufactureres.map((el, ind) =>
+                                  Userdata.role === "superAdmin" ? (
+                                    <option value={el._id} key={ind}>{el.name}</option>
+                                  ) : Userdata._id === el.creatorId &&
+                                    Userdata.role === "Vendor" ? (
+                                    <option value={el._id}>{el.name}</option>
+                                  ) : null
+                                )}
+                              </select>
                             </div>
                             <p className="formerror">
                               {formErrors.manufacturer}
@@ -481,120 +533,120 @@ const Productform = (props) => {
                           </div>
 
                           <div className="col-6 p-2 required">
-                          <div className="mt-2">
-                            <span className="category-select-div">warehouse</span>
-                            <select
-                              className="form-control Dashborad-search custom-select"
-                              value={data.warehouse}
-                              name="warehouse"
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  warehouse: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            >
-                              <option value="" disabled hidden>
-                                Select warehouse
-                              </option>
-                              {warehouse.map((el, ind) =>
-                                Userdata.role === "superAdmin" ? (
-                                  <option value={el._id} key={ind}>{el.name}</option>
-                                ) : Userdata._id === el.creatorId &&
-                                  Userdata.role === "Vendor" ? (
-                                  <option value={el._id}>{el.name}</option>
-                                ) : null
-                              )}
-                            </select>
+                            <div className="mt-2">
+                              <span className="category-select-div">Warehouse</span>
+                              <select
+                                className="form-control Dashborad-search custom-select"
+                                value={data.warehouse}
+                                name="warehouse"
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    warehouse: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              >
+                                <option value="" disabled hidden>
+                                  Select warehouse
+                                </option>
+                                {warehouse.map((el, ind) =>
+                                  Userdata.role === "superAdmin" ? (
+                                    <option value={el._id} key={ind}>{el.name}</option>
+                                  ) : Userdata._id === el.creatorId &&
+                                    Userdata.role === "Vendor" ? (
+                                    <option value={el._id}>{el.name}</option>
+                                  ) : null
+                                )}
+                              </select>
                             </div>
                             <p className="formerror">{formErrors.warehouse}</p>
                           </div>
                           <div className="col-6 p-2 form-floating">
                             <div className="mt-2">
-                            <span className="category-select-div">
-                              Quantity of Product
-                            </span>
-                            <input
-                              type="number"
-                              id="floatingform"
-                              name="quantity"
-                              className="form-control Dashborad-search"
-                              defaultValue={data.quantity}
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  quantity: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">
+                                Quantity of Product
+                              </span>
+                              <input
+                                type="number"
+                                id="floatingform"
+                                name="quantity"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.quantity}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    quantity: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
-                            
+
                             <p className="formerror">{formErrors.quantity}</p>
                           </div>
                           <div className="col-3 p-2 form-floating">
                             <div className="mt-2">
-                            <span className="category-select-div">MRP In Rupees</span>
-                            <input
-                              type="number"
-                              id="floatingform"
-                              name="inrMrp"
-                              className="form-control Dashborad-search"
-                              defaultValue={data.inrMrp}
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  inrMrp: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">MRP In Rupees</span>
+                              <input
+                                type="number"
+                                id="floatingform"
+                                name="inrMrp"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.inrMrp}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    inrMrp: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
                             <p className="formerror">{formErrors.inrMrp}</p>
                           </div>
                           <div className="col-3 p-2 form-floating">
                             <div className="mt-2">
-                            <span className="category-select-div">MRP after Discount</span>
-                            <input
-                              type="number"
-                              id="floatingform"
-                              name="inrDiscount"
-                              className="form-control Dashborad-search"
-                              defaultValue={data.inrDiscount}
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  inrDiscount: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">MRP after Discount</span>
+                              <input
+                                type="number"
+                                id="floatingform"
+                                name="inrDiscount"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.inrDiscount}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    inrDiscount: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
                             <p className="formerror">{formErrors.inrDiscount}</p>
                           </div>
                           <div className="col-3 p-2 form-floating">
                             <div className="mt-2">
-                            <span className="category-select-div">MRP In Dollar</span>
-                            <input
-                              type="number"
-                              id="floatingform"
-                              name="dollerMrp"
-                              className="form-control Dashborad-search"
-                              defaultValue={data.dollerMrp}
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  dollerMrp: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">MRP In Dollar</span>
+                              <input
+                                type="number"
+                                id="floatingform"
+                                name="dollerMrp"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.dollerMrp}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    dollerMrp: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
                             <p className="formerror">{formErrors.dollerMrp}</p>
 
@@ -602,62 +654,62 @@ const Productform = (props) => {
 
                           <div className="col-3 p-2 form-floating">
                             <div className="mt-2">
-                            <span className="category-select-div">MRP after Discount In Dollar</span>
-                            <input
-                              type="number"
-                              id="floatingform"
-                              name="dollerDiscount"
-                              className="form-control Dashborad-search"
-                              defaultValue={data.dollerDiscount}
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  dollerDiscount: e.target.value,
-                                });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            />
+                              <span className="category-select-div">MRP after Discount In Dollar</span>
+                              <input
+                                type="number"
+                                id="floatingform"
+                                name="dollerDiscount"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.dollerDiscount}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    dollerDiscount: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
                             </div>
                             <p className="formerror">{formErrors.dollerDiscount}</p>
                           </div>
                           <div className="col-6 p-2">
-                          <div className="mt-2">
-                            <span className="category-select-div">Product Type</span>
-                            <select
-                              className="form-control Dashborad-search custom-select"
-                              value={data.type}
-                              name="type"
-                              onChange={(e) => {
-                                Setdata({ ...data, type: e.target.value });
-                                handleInputChange(e);
-                              }}
-                              onBlur={handleBlur}
-                            >
-                              <option value="" hidden defaultChecked>
-                                Select Product Type
-                              </option>
-                              <option value="Trending Product">
-                                Trending Product
-                              </option>
-                            </select>
+                            <div className="mt-2">
+                              <span className="category-select-div">Product Type</span>
+                              <select
+                                className="form-control Dashborad-search custom-select"
+                                value={data.type}
+                                name="type"
+                                onChange={(e) => {
+                                  Setdata({ ...data, type: e.target.value });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              >
+                                <option value="" hidden defaultChecked>
+                                  Select Product Type
+                                </option>
+                                <option value="Trending Product">
+                                  Trending Product
+                                </option>
+                              </select>
                             </div>
                           </div>
                           <div className="col-6 p-2 form-floating">
                             <div className="mt-2">
-                            <span className="category-select-div">Product Description</span>
-                            <textarea
-                              className="form-control textarea h-100"
-                              id="floatingform"
-                              defaultValue={data.description}
-                              rows="3"
-                              onChange={(e) => {
-                                Setdata({
-                                  ...data,
-                                  description: e.target.value,
-                                });
-                              }}
-                            ></textarea>
+                              <span className="category-select-div">Product Description</span>
+                              <textarea
+                                className="form-control textarea h-100"
+                                id="floatingform"
+                                defaultValue={data.description}
+                                rows="3"
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    description: e.target.value,
+                                  });
+                                }}
+                              ></textarea>
                             </div>
                           </div>
 
