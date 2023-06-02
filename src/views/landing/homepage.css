@@ -4114,7 +4114,7 @@ input[type="submit"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  box-shadow: 0px 12px 30px whitesmoke;
+  box-shadow: 0px 1px 1px 2px whitesmoke;
   /* border: 1px solid rgba(0, 0, 0, 0.125); */
   border: none !important;
   border-radius: 0.25rem;
@@ -9260,7 +9260,7 @@ a.text-secondary:hover {
 }
 
 .text-success {
-  color: #1b97ff !important;
+  color: rgb(27, 40, 69, 0.6)!important;
 }
 
 a.text-success:focus,
@@ -19804,7 +19804,8 @@ svg {
   line-height: 1.5;
   text-align: justify;
   word-spacing: -1px;
-  font-size: 14px !important;
+  font-size: 15px !important;
+  letter-spacing: 0.5px;
 }
 .home-banner .home-banner-right {
   text-align: center;
@@ -19884,7 +19885,7 @@ svg {
   text-transform: capitalize;
 }
 .newActive {
-  color: #1b97ff;
+  color: rgb(27, 40, 69,0.6);
 }
 #List-item:hover {
   color: #1b97ff !important;
@@ -20171,7 +20172,7 @@ svg {
     margin-top: 20px !important;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
-    font-size: 17px !important;
+    font-size: 14px !important;
   }
   .blog-box-wrapper .right-blog-image-wrap .top-heading-box-2 button {
     padding: 4px 20px !important;
@@ -20582,7 +20583,7 @@ svg {
     padding: 1px 7px !important;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
   .blog-box-wrapper .right-blog-image-wrap .top-heading-box-2 button {
     padding: 1px 12px !important;

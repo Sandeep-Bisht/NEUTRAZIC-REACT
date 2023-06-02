@@ -43,7 +43,6 @@ const UserProfile = (props) => {
 
 
   const UpdateUserProfiles = async (e, _id) => {
-    console.log(_id,"user id")
     e.preventDefault();
       try{
         const response=await axios.put(`${baseUrl}/api/auth/update_user_by_id`, {

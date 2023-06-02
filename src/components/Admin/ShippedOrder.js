@@ -70,7 +70,6 @@ const ShippedOrder = () => {
         console.log(err, "errors");
       });
   };
-console.log(OrderDetails,"shipped order details");
   const UpdateOrderStatus = async (order, orderStatus) => {
     delete order.createdAt;
     order.orderStatus = orderStatus;
@@ -253,7 +252,6 @@ console.log(OrderDetails,"shipped order details");
                       vendor ? (prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item,ind) => {
-                          console.log(item,"inside the map method")
 ;                          return (
                             <>
                               <tr key={ind}>

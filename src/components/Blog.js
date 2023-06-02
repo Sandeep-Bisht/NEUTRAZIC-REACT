@@ -60,7 +60,7 @@ function Blogs() {
                                   <Link to={"/SingleBlogPage/" + item.slug}>
                                     <button>Read More</button>
                                   </Link>
-                                  <p>{item.description}</p>
+                                  <p>{item.description}...</p>
                                 </div>
                               </div>
                             );
@@ -88,9 +88,9 @@ function Blogs() {
                                   />
                                   <div className="top-heading-box-2">
                                     <Link to={"/SingleBlogPage/" + item.slug}>
+                                      <p>{item.description.slice(0, 90)}...</p>
                                       <button>Read More</button>
                                     </Link>
-                                    <p>{item.description}</p>
                                   </div>
                                 </div>
                               </div>
