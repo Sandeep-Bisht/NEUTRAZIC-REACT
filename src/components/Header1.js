@@ -462,6 +462,11 @@ const Header1 = (props) => {
       }
     }
   };
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    CartById();
+    window.scroll(0, 0);
+  }, []);
 
   const CartById = async () => {
     if (!Userdata == []) {
