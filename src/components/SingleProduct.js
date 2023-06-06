@@ -19,6 +19,7 @@ import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { useContext } from "react";
 import Loader from "react-spinner-loader";
 import { SocialIcon } from "react-social-icons";
+import whishlist from "../Images/Icons/wishlist.png";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -901,6 +902,7 @@ const SingleProduct = (props) => {
                 </div>
 
                 <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
+                  <img src={whishlist} alt="wishlist"></img>
                   {Userdata ? (
                     <i
                       id={prodId}

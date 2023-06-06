@@ -17559,21 +17559,21 @@ iframe {
   margin-top: 12px;
   padding-left: 25px;
   padding-right: 25px;
-  color: var(--optionalColor);
-  border: 2px solid rgb(27 151 255 / 33%);
+  color: White;
+  background: #2a96ff;
+  /* border: 2px solid rgb(27 151 255 / 33%); */
   border-radius: 0.25rem;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 17px;
 }
+.subs-btn .subscribe-icon{
+  height: 25px;
+}
 .single-footer-widget .newsletter-form .default-btn:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
+  background:white;
   border: none;
-  color: #fff;
+  color: #2a96ff;
 }
 .mobile-app .cat-heading {
   font-size: 2rem;
@@ -20993,12 +20993,14 @@ svg {
   margin: 20px 10px 0 0;
 }
 .Category-container {
-     max-height: 350px;
-    padding: 20px;
-    background-color: aliceblue;
-    border-radius: 5px;
-    border: 1px solid rgb(30, 31 ,102,0.1);
-    box-shadow: 0px 0px 12px whitesmoke;
+  max-height: 350px;
+  padding: 20px;
+  background-color: aliceblue;
+  border-radius: 5px;
+  /* border: 1px solid rgb(30, 31 ,102,0.1); */
+  box-shadow: 0px 0px 12px whitesmoke;
+  /* inset: 20px; */
+  margin: 0px 40px
 }
 
 /* slick Carousel */
