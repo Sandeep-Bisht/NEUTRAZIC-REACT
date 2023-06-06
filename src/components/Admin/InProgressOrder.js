@@ -236,7 +236,6 @@ const InProgressOrder = () => {
                 ? prticularUserOrder &&
                   prticularUserOrder.length > 0 &&
                   prticularUserOrder.map((item, ind) => {
-                    console.log(item, "inside the map method");
                     return (
                       <>
                         <tr key={ind}>

@@ -19,20 +19,17 @@
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
   width: auto;
-  padding: 10px 25px;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: none;
+  padding: 8px 20px;
+  background: rgb(27, 40, 69);
+  border: 1px solid white;
   color: #fff;
   border-radius: 0.3rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   position: absolute;
   top: 100%;
+  transition: all 0.5s ease;
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button:hover {
   background: linear-gradient(
@@ -40,19 +37,20 @@
     rgb(255 255 255 / 53%) 0%,
     rgba(255, 255, 255, 1) 50%
   );
-  border: 2px solid rgba(23, 150, 255);
-  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgb(27, 40, 69);
+  color: rgb(27, 40, 69);
+  /* transition: all 0.5s ease; */
 }
 .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   margin-top: 10px;
   font-weight: 400;
   letter-spacing: 0.25px;
   line-height: 2;
   width: 80%;
 }
-.blod-page-main a:hover{
+.blod-page-main a:hover {
   color: black !important;
 }
 .right-blog-image-wrapper img {
@@ -68,25 +66,24 @@
 .top-heading-box-3 {
   position: absolute;
   bottom: 20%;
-  left: 5%;
+  left: 4%;
+  right: 4%;
+  padding: 10px;
 }
 .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button,
 .top-heading-box-3 button {
   width: auto;
-  padding: 10px 25px;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: none;
+  padding: 8px 18px;
+  background: rgb(27, 40, 69);
+  /* border: none; */
   color: white;
   border-radius: 0.3rem;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
   position: absolute;
-  top: 100%;
+  /* top: 100%; */
+  border: 1px solid white;
 }
 .blog-text-div {
   background: rgba(0, 0, 0, 0.4);
@@ -103,8 +100,8 @@
     rgb(255 255 255 / 53%) 0%,
     rgba(255, 255, 255, 1) 50%
   );
-  border: 2px solid rgba(23, 150, 255);
-  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgb(27, 40, 69);
+  color: rgb(27, 40, 69);
 }
 .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
 .top-heading-box-3 p {
@@ -167,7 +164,7 @@
   height: 200px !important;
   /* padding: 15px; */
 }
-.loader-spin{
+.loader-spin {
   text-align: center;
 }
 
@@ -188,13 +185,11 @@
   }
 }
 @media only screen and (max-width: 1199.98px) {
- 
   .blog-page-section-2 .card .cart-text-body .card-text,
   .blog-page-section-2 .card .cart-text-body .displayed-text {
     font-size: 13px !important;
     text-align: justify !important;
     hyphens: auto !important;
-    
   }
   .blog-page .display-text-group {
     line-height: 1.5;
@@ -233,10 +228,12 @@
   .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
   .top-heading-box-3 p {
     font-size: 13px !important;
-    padding: 6px !important;
+    /* padding: 6px !important; */
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
     font-size: 14px;
+    text-align: justify;
+    word-spacing: 0.5px;
   }
   .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 button,
   .top-heading-box-3 button {
@@ -256,7 +253,7 @@
     width: 100%;
   }
   .blog-page-section-2 .card .cart-text-body {
-    height:  192px !important;
+    height: 192px !important;
     /* padding: 15px; */
   }
   .blog-text-div {
@@ -285,11 +282,13 @@
     margin-left: 7px;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
-    font-size: 15px;
+    font-size: 14px;
   }
   .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
   .top-heading-box-3 p {
-    font-size: 13px !important;
+    font-size: 12px !important;
+    text-align: justify;
+    word-spacing: -1px;
   }
   .blog-page {
     margin-top: 129px;
@@ -329,13 +328,19 @@
   }
 }
 @media only screen and (max-width: 486.4px) {
-    .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
+  .right-blog-image-wrapper .right-blog-image-wrap .top-heading-box-2 p,
   .top-heading-box-3 p {
     font-size: 15px !important;
     text-align: justify;
   }
-  .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p{
-    width: 100% !important;
+  .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
+    width: 90% !important;
+  }
+  .without-slice {
+    display: none !important;
+  }
+  .with-slice {
+    display: block !important;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 button {
     padding: 4px 15px !important;
@@ -353,4 +358,16 @@
   .blog-page {
     margin-top: 90px;
   }
+}
+
+/* .blog-slider-car{
+  background: black !important;
+} */
+
+.top-heading-box-2 .blog-heading {
+  font-size: 1.2rem !important;
+}
+
+.with-slice {
+  display: none !important;
 }

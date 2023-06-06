@@ -319,7 +319,6 @@ console.log(cartItems,"items of cart");
                                       <span className="sold-by">
                                         Sold by :
                                         <p className="manufacturer-name">
-                                          {" "}
                                           {el.manufacturer}
                                         </p>
                                       </span>

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 import Loader from "react-spinner-loader";
+import { BreadCrumb } from 'primereact/breadcrumb';
 
 function Blogs() {
   const [data, setData] = useState([]);
@@ -31,7 +32,7 @@ function Blogs() {
   return (
     <>
       <Header1 />
-
+    <BreadCrumb/>
       <section className="blog-page">
         <div className="container m-auto">
           {loading ? (
@@ -60,7 +61,7 @@ function Blogs() {
                                   <Link to={"/SingleBlogPage/" + item.slug}>
                                     <button>Read More</button>
                                   </Link>
-                                  <p>{item.description}</p>
+                                  <p>{item.description}...</p>
                                 </div>
                               </div>
                             );
@@ -88,9 +89,9 @@ function Blogs() {
                                   />
                                   <div className="top-heading-box-2">
                                     <Link to={"/SingleBlogPage/" + item.slug}>
+                                      <p>{item.description.slice(0, 90)}...</p>
                                       <button>Read More</button>
                                     </Link>
-                                    <p>{item.description}</p>
                                   </div>
                                 </div>
                               </div>

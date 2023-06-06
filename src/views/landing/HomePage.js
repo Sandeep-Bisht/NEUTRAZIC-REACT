@@ -102,7 +102,6 @@ const HomePage = () => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState, isLogin]);
-
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())

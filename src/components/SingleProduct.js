@@ -19,6 +19,7 @@ import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { useContext } from "react";
 import Loader from "react-spinner-loader";
 import { SocialIcon } from "react-social-icons";
+import whishlist from "../Images/Icons/wishlist.png";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -796,14 +797,14 @@ const SingleProduct = (props) => {
                     <SocialIcon
                       className="single-product-social-icons"
                       network="facebook"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                   <a href="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="instagram"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                   <a href="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
@@ -811,7 +812,7 @@ const SingleProduct = (props) => {
                     <SocialIcon
                       className="single-product-social-icons"
                       network="twitter"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                   <a
@@ -822,7 +823,7 @@ const SingleProduct = (props) => {
                     <SocialIcon
                       className="single-product-social-icons"
                       network="linkedin"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
                   </a>
                 </div>
@@ -901,6 +902,7 @@ const SingleProduct = (props) => {
                 </div>
 
                 <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
+                  <img src={whishlist} alt="wishlist"></img>
                   {Userdata ? (
                     <i
                       id={prodId}

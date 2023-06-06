@@ -21,7 +21,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import axios from "axios";
 import { RxDashboard } from "react-icons/rx";
 import { BiUser } from "react-icons/bi";
-import {ImCross} from "react-icons/im";
+import { ImCross } from "react-icons/im";
 
 let changeNavValue = 0;
 var header;
@@ -45,7 +45,7 @@ const Header1 = (props) => {
   const [subcategories, setSubCategories] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  let   [userCart, setUserCart] = useState([]);
+  let [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
   const [msg, setMsg] = useState("");
   const [regmsg, setRegMsg] = useState("");
@@ -78,7 +78,6 @@ const Header1 = (props) => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState]);
-
 
   $(window).on("scroll", function() {
     if ($(window).scrollTop() > 50) {
@@ -196,26 +195,27 @@ const Header1 = (props) => {
   }, [loginState]);
 
   useEffect(() => {
-    
     $(document).ready(function() {
       $(".open-search-bar").on("click", function() {
         if (toggle === 1) {
-          $(".search-bar").addClass("show1").fadeIn(2000);
+          $(".search-bar")
+            .addClass("show1")
+            .fadeIn(2000);
           // $(".search-bar");
 
-          $(this).css("background-color","red");
-          $(".cross-icon-search").css("z-index","1");
-          $(".search-icon").css("z-index","-1");
+          $(this).css("background-color", "#2a96ff");
+          $(".cross-icon-search").css("z-index", "1");
+          $(".search-icon").css("z-index", "-1");
         } else {
           $(".search-bar").removeClass("show1");
-          $(this).css("background-color","");
-          $(".cross-icon-search").css("z-index","-1");
-          $(".search-icon").css("z-index","1");
+          $(this).css("background-color", "");
+          $(".cross-icon-search").css("z-index", "-1");
+          $(".search-icon").css("z-index", "1");
         }
       });
     });
   }, [toggle]);
- 
+
   const GetWishlist = async () => {
     let id;
     if (Userdata) {
@@ -237,7 +237,6 @@ const Header1 = (props) => {
           dispatch(ACTIONS1.getwishlistitem(0));
         }
         if (data.data !== undefined) {
-          console.log(data.data.length);
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
@@ -313,8 +312,7 @@ const Header1 = (props) => {
           if (res.status === 200 || res.status === 201) {
             reset1();
             return res.json();
-          }
-          else if (res.status === 400) {
+          } else if (res.status === 400) {
           }
         })
         .then((data) => {
@@ -340,10 +338,10 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
-    console.log(data, "data of login users");
-    if (data.username && data.password) {
+    console.log(data,"This is data");
+    if (data) {
       fetch(`${baseUrl}/api/auth/login`, {
-        method: "POST",
+        method: "POST",   
         headers: {
           accept: "application/json",
           "content-Type": "application/json",
@@ -544,7 +542,6 @@ const Header1 = (props) => {
     $("#loginModalCloseBtn").click();
   };
   const forgetPassword = async (data) => {
-    console.log(data, "data of forget password");
     if (!otpInput) {
       await GetUserData(data);
     } else {
@@ -779,6 +776,7 @@ const Header1 = (props) => {
                   <div className="col-12">
                     <div className="nutra-logo-in-login-form">
                       <img
+                        className="header-login-logo"
                         src="/static/media/new-logo.8b4fa066.png"
                         alt="nutrazik-logo"
                       />
@@ -1061,6 +1059,7 @@ const Header1 = (props) => {
           >
             <div className="nutra-logo-in-login-form">
               <img
+                className="header-login-logo"
                 src="/static/media/new-logo.8b4fa066.png"
                 alt="nutrazik-logo"
               />
@@ -1244,8 +1243,7 @@ const Header1 = (props) => {
                     </Link>
                   </div>
 
-                  <div className=" main-navbar-head ">
-                  </div>
+                  <div className=" main-navbar-head "></div>
                 </div>
                 <div className="header-wrapper-right">
                   <div className="search-prod">
@@ -1424,17 +1422,17 @@ const Header1 = (props) => {
                               aria-labelledby="dropdownMenuButton1"
                             >
                               <div>
-                                <div className="Logout-div d-flex align-items-center">
-                                  <i className="bx bx-file pl-2"></i>{" "}
-                                  <li
-                                    className="dropdown-item Logout-li"
-                                    style={{ cursor: "pointer" }}
-                                  >
-                                    <Link to="/UserOrder">
+                                <Link to="/UserOrder">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-file pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
                                       <span className="pr-4">Orders</span>
-                                    </Link>
-                                  </li>
-                                </div>
+                                    </li>
+                                  </div>
+                                </Link>
                               </div>
                               <Link to="/Cart">
                                 <div className="Logout-div d-flex align-items-center">
@@ -1459,20 +1457,22 @@ const Header1 = (props) => {
                                 </div>
                               </Link>
                               {Userdata &&
-                                (Userdata.role == "superAdmin" ||
-                                  Userdata.role == "Vendor") && (
-                                  <Link to="/dashboard">
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <RxDashboard className="nav__icon pl-2" />{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <span className="pr-4">Dashboard</span>
-                                      </li>
-                                    </div>
-                                  </Link>
-                                )}
+                              (Userdata.role == "superAdmin" ||
+                                Userdata.role == "Vendor") ? (
+                                <Link to="/dashboard">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <RxDashboard className="nav__icon pl-2" />{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Dashboard</span>
+                                    </li>
+                                  </div>
+                                </Link>
+                              ) : (
+                                " "
+                              )}
 
                               <div className="Logout-div d-flex align-items-center">
                                 <i className="bx bx-log-out pl-2"></i>{" "}
@@ -1492,7 +1492,6 @@ const Header1 = (props) => {
                       )}
                     </div>
                     <div className="login-div3">
-                    
                       <div
                         className="open-search-bar"
                         onClick={() => {
@@ -1504,7 +1503,7 @@ const Header1 = (props) => {
                       >
                         {/* <span class="tooltiptext">Search here</span> */}
                         <i className="fa fa-search search-icon"></i>
-                        <ImCross className="cross-icon-search"/>
+                        <ImCross className="cross-icon-search" />
                       </div>
                       <div className="search-bar">
                         <input
@@ -1574,7 +1573,10 @@ const Header1 = (props) => {
                       aria-label="Toggle navigation"
                     >
                       <span className="collapsed-button">
-                        <i className="fas fa-bars" style={{ color: "#fff" }}></i>
+                        <i
+                          className="fas fa-bars"
+                          style={{ color: "#fff" }}
+                        ></i>
                       </span>
                     </button>
                     <div
