@@ -278,9 +278,9 @@ const WishList = () => {
               <>
                 {wishlistData && wishlistData.length > 0 ? (
                   wishlistData.map((item, ind) => (
-                    <div className="col-lg-6 col-md-6 col-12" key={ind}>
+                    <div className="col-xl-4 col-lg-6 col-md-6 col-12" key={ind}>
                       <div className="wishlistDiv wishlist-div-image">
-                        <div className="row">
+                        <div className="row wishlist-starting-row">
                           <div className="col-4">
                             <Link to={"/SingleProduct/" + item.productId}>
                               <img src={`${baseUrl}/` + item.image[0].path} className="img-fluid" />
@@ -294,7 +294,7 @@ const WishList = () => {
                                 onClick={() => handleBuyNow(item.productId)}
                                 className="wishlist-btn"
                               >
-                                Buy Now
+                                Add to cart
                               </button>
                               <Link to={"/SingleProduct/" + item.productId}>
                                 <button className=" wishlist-btn">

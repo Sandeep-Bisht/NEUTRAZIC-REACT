@@ -1,14 +1,17 @@
 .wishlist-page {
   margin-top: 100px !important;
 }
-
+.wishlist-starting-row{
+  display: flex;
+  align-items: center;
+}
 @media only screen and (max-width: 1399px) {
   .wishlistDiv img {
     height: 180px;
     width: 100%;
   }
   .wishlist-page {
-    margin-top: 150px !important;
+    margin-top: 115px !important;
   }
 }
 @media only screen and (max-width: 1024px) {

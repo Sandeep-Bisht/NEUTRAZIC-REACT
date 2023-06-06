@@ -172,8 +172,7 @@ const DeliveredOrder = () => {
                       vendor ? (prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item,ind) => {
-                          console.log(item,"inside the map method")
-;                          return (
+                          return (
                             <>
                               <tr key={ind}>
                                 <td className="width-adjust-of-td">

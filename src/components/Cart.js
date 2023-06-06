@@ -21,6 +21,7 @@ const stripePromise = loadStripe(
   "pk_test_51MSERVSIpuAtmPLpPWErXWB5nxXPzA8YPHzMdWbL537Dgav6yW8qDYnDtDVIEn5e2pmNmFkrxDOOMiQPn3TCF5Sb00a79isfLk"
 );
 var Userdata = "";
+var CartItems="";
 
 const Cart = () => {
   const history = useHistory();
@@ -101,7 +102,7 @@ const Cart = () => {
         });
     }
   };
-
+console.log(cartItems,"items of cart");
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {
@@ -441,8 +442,10 @@ const Cart = () => {
                         {total1}
                       </span>
                     </li>
-                  </ul>
-                  {cartItems ? (
+                  </ul>                
+                </div>
+                {cartItems ? (
+                    <>
                     <button
                       className="default-btn1"
                       onClick={(e) => {
@@ -451,6 +454,14 @@ const Cart = () => {
                     >
                       <i className="flaticon-trolley"></i> Proceed To Checkout
                     </button>
+                    <button
+                      className="default-btn1">
+                     <Link to={"/AllProducts"} className="flaticon-trolley">
+                   Continue Shopping
+                </Link>
+                </button>
+                    
+                     </>
                   ) : (
                     <button
                       className="default-btn1"
@@ -459,7 +470,6 @@ const Cart = () => {
                       <i className="flaticon-trolley"></i> Continue Shopping
                     </button>
                   )}
-                </div>
               </div>
             </div>
           </form>
