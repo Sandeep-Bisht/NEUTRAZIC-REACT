@@ -995,11 +995,11 @@ h3 .read-more-button {
   transition: all 0.5s ease;
 }
 .forgetContentDiv .btn:hover {
-  background: rgb(27, 40, 69,0.8) !important;
-  border: 1px solid rgb(27, 40, 69,0.8) !important;
+  background: rgb(27, 40, 69, 0.8) !important;
+  border: 1px solid rgb(27, 40, 69, 0.8) !important;
 }
 
-.start-login-form span{
+.start-login-form span {
   color: #2a96ff !important;
 }
 .forgetContentDiv input {
@@ -1270,6 +1270,9 @@ h3 .read-more-button {
     top: 70px;
     height: 47px;
   }
+  .header-login-logo {
+    height: 60px !important;
+  }
 }
 
 @media only screen and (max-width: 730.98px) {
@@ -1418,13 +1421,20 @@ h3 .read-more-button {
   .right-part .currancy {
     justify-content: start !important;
   }
+  .logiRegisterContentDiv {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   .right-part .currancy {
     margin-right: 0px;
   }
-  .forgetContentDiv .btn{
+  .Forgot-Password{
+    font-size: 12px !important;
+  }
+  .forgetContentDiv .btn {
     padding: 20px 0px !important;
   }
   .login-register {
@@ -1447,10 +1457,7 @@ h3 .read-more-button {
   .blog-page-section-2 .card-body {
     height: 170px !important;
   }
-  .logiRegisterContentDiv {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
+
   .logiRegisterHeader2 {
     display: flex;
     justify-content: center;
@@ -1512,11 +1519,21 @@ h3 .read-more-button {
   .cross-icon-search {
     height: 8px !important;
   }
+  .header-login-logo {
+    height: 40px !important;
+  }
+  
 }
 
 @media only screen and (max-width: 390px) {
   .search-bar {
     top: 54px !important;
+  }
+  .logiRegisterContentDiv label {
+    font-size: 12px;
+  }
+  .logiRegisterContentDiv input {
+    font-size: 12px;
   }
   .account-div svg {
     height: 21px !important;
@@ -1580,6 +1597,16 @@ h3 .read-more-button {
     height: 20px !important;
     width: 20px !important;
   }
+  .logiRegisterHeader2 h3 {
+    font-size: 16px !important;
+  }
+  .logiRegisterHeader1 h3 {
+    font-size: 16px !important;
+  }
+  .logiRegisterContentDiv .btn {
+    padding: 16px 16px !important;
+    font-size: 12px !important;
+  }
 }
 
 @media only screen and (max-width: 380px) {
@@ -1587,6 +1614,10 @@ h3 .read-more-button {
   .logiRegisterContentDiv {
     margin: 0px;
     padding: 0px;
+  }
+  .logiRegisterContentDiv .btn {
+    padding: 14px 16px !important;
+    font-size: 12px !important;
   }
   .logiRegisterHeader1 {
     padding-left: 35px;
@@ -1752,8 +1783,8 @@ h3 .read-more-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  /* border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px; */
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transform: scaleX(0);

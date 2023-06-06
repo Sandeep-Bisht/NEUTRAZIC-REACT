@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { SocialIcon } from "react-social-icons";
 import Cookies from "universal-cookie";
+import {FaTelegramPlane} from "react-icons/fa";
 
 var Userdata = "";
 const Footer = () => {
@@ -311,13 +312,10 @@ const Footer = () => {
                       )}
                       <p className="sendSubscribeLink">{message}</p>
                       <p className="sendSubscribeError">{msg}</p>
-                      <div className="align-items-center">
+                      <div className="align-items-center subs-btn">
                         <button type="submit" className="default-btn">
                           Subscribe Now
-                          <img
-                            src={require("../Images/Icons/cib_telegram-plane.png")}
-                            className="pl-2 pb-1"
-                          />
+                         <FaTelegramPlane className="subscribe-icon"/>
                         </button>
                       </div>
 

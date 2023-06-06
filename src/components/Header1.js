@@ -45,7 +45,7 @@ const Header1 = (props) => {
   const [subcategories, setSubCategories] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  let   [userCart, setUserCart] = useState([]);
+  let [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
   const [msg, setMsg] = useState("");
   const [regmsg, setRegMsg] = useState("");
@@ -338,9 +338,10 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
-    if (data.username && data.password) {
+    console.log(data,"This is data");
+    if (data) {
       fetch(`${baseUrl}/api/auth/login`, {
-        method: "POST",
+        method: "POST",   
         headers: {
           accept: "application/json",
           "content-Type": "application/json",
@@ -770,6 +771,7 @@ const Header1 = (props) => {
                   <div className="col-12">
                     <div className="nutra-logo-in-login-form">
                       <img
+                        className="header-login-logo"
                         src="/static/media/new-logo.8b4fa066.png"
                         alt="nutrazik-logo"
                       />
@@ -1052,6 +1054,7 @@ const Header1 = (props) => {
           >
             <div className="nutra-logo-in-login-form">
               <img
+                className="header-login-logo"
                 src="/static/media/new-logo.8b4fa066.png"
                 alt="nutrazik-logo"
               />
@@ -1437,7 +1440,7 @@ const Header1 = (props) => {
                                   </li>
                                 </div>
                               </Link>
-                              <Link  to="/Wishlist">
+                              <Link to="/Wishlist">
                                 <div className="Logout-div d-flex align-items-center">
                                   <i className="bx bx-heart pl-2"></i>{" "}
                                   <li
@@ -1449,22 +1452,22 @@ const Header1 = (props) => {
                                 </div>
                               </Link>
                               {Userdata &&
-                                (Userdata.role == "superAdmin" ||
-                                  Userdata.role == "Vendor") ? (
-                                  <Link to="/dashboard">
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <RxDashboard className="nav__icon pl-2" />{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <span className="pr-4">Dashboard</span>
-                                      </li>
-                                    </div>
-                                  </Link>
-                                ):(
-                                  " "
-                                )}
+                              (Userdata.role == "superAdmin" ||
+                                Userdata.role == "Vendor") ? (
+                                <Link to="/dashboard">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <RxDashboard className="nav__icon pl-2" />{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Dashboard</span>
+                                    </li>
+                                  </div>
+                                </Link>
+                              ) : (
+                                " "
+                              )}
 
                               <div className="Logout-div d-flex align-items-center">
                                 <i className="bx bx-log-out pl-2"></i>{" "}

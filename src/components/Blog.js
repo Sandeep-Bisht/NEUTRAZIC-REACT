@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Baseline from "./Baseline";
 import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 import Loader from "react-spinner-loader";
+import { BreadCrumb } from 'primereact/breadcrumb';
 
 function Blogs() {
   const [data, setData] = useState([]);
@@ -31,7 +32,7 @@ function Blogs() {
   return (
     <>
       <Header1 />
-
+    <BreadCrumb/>
       <section className="blog-page">
         <div className="container m-auto">
           {loading ? (
