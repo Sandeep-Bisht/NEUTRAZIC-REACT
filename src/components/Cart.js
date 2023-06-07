@@ -102,7 +102,6 @@ const Cart = () => {
         });
     }
   };
-console.log(cartItems,"items of cart");
   const UpdateCart = async (array) => {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     await fetch(url, {
@@ -207,6 +206,7 @@ console.log(cartItems,"items of cart");
       .then(async (res) => {})
       .catch((err) => {});
   };
+  console.log(cart,"This is cart");
   return (
     <>
       <Header1 CartItems={cart} />

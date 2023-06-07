@@ -70,7 +70,6 @@ const Footer = () => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    // setLoginState(loginState);
     setIsLogin(loginState);
     window.scroll(0, 0);
   }, [loginState]);

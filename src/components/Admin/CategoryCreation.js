@@ -143,8 +143,6 @@ const CategoryCreation = (props) => {
     }
     setFormerror(errors);
   };
-console.log(editableArray,"array");
-console.log(editableData,"editable data of category");
   return (
     <>
       <section id="body-pd">
