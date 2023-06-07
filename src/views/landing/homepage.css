@@ -19821,7 +19821,7 @@ svg {
 }
 
 .Toastify__progress-bar--error {
-  background-color: #1b97ff !important;
+  background-color: rgb(27, 40, 69) !important;
 }
 /* HEart css */
 
@@ -20997,7 +20997,7 @@ svg {
   padding: 20px;
   background-color: aliceblue;
   border-radius: 5px;
-  /* border: 1px solid rgb(30, 31 ,102,0.1); */
+  border: 1px solid rgb(30, 31 ,102,0.1);
   box-shadow: 0px 0px 12px whitesmoke;
   /* inset: 20px; */
   margin: 0px 40px
