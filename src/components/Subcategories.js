@@ -422,7 +422,6 @@ const Subcategories = (props) => {
     let filteredData = [];
     for (let item of data) {
       if (item.subcategory._id === id) filteredData.push(item);
-      // activeItem.classList.add("newActive");
     }
     setfilterData(filteredData);
     setsubcategoryId(name);

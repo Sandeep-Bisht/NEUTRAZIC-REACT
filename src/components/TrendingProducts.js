@@ -11,7 +11,6 @@ import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
-// import Cookies from "universal-cookie";
 
 var Userdata;
 const TrengingProduct = (props) => {

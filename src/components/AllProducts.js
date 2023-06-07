@@ -431,7 +431,6 @@ const AllProducts = (props) => {
           <div className="col-12">
             <div className="section-title my-4">
               <h2>All Products</h2>
-              {/* <AllproductsFilter/> */}
             </div>
             {loading ?
               <Loader

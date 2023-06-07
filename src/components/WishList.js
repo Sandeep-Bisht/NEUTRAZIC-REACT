@@ -191,7 +191,7 @@ const WishList = () => {
         discountprice: data.discount,
         description: data.description,
         category: data.category,
-        manufacturer: data.manufacturer,
+        manufacturer: data.manufacturer.name,
         status: "Pending",
         justification: "Enjoy",
         delivery_time: "No Status",
@@ -278,12 +278,18 @@ const WishList = () => {
               <>
                 {wishlistData && wishlistData.length > 0 ? (
                   wishlistData.map((item, ind) => (
-                    <div className="col-xl-4 col-lg-6 col-md-6 col-12" key={ind}>
+                    <div
+                      className="col-xl-4 col-lg-6 col-md-6 col-12"
+                      key={ind}
+                    >
                       <div className="wishlistDiv wishlist-div-image">
                         <div className="row wishlist-starting-row">
                           <div className="col-4">
                             <Link to={"/SingleProduct/" + item.productId}>
-                              <img src={`${baseUrl}/` + item.image[0].path} className="img-fluid" />
+                              <img
+                                src={`${baseUrl}/` + item.image[0].path}
+                                className="img-fluid"
+                              />
                             </Link>
                           </div>
                           <div className="col-8 py-0">
