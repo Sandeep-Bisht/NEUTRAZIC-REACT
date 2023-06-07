@@ -296,6 +296,10 @@ const Subcategories = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        if (data.error && data.message === "Data Not Found") {
+          Setwishlist([])
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
         if (data.data !== undefined) {
           Setwishlist(data.data);
           const wishlisted = data.data.length;

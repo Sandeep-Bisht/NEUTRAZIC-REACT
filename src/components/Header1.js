@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { MdOutlineClose } from "react-icons/md";
 import { baseUrl } from "../utils/services";
+import * as AddToCartAction from "../CommonService/AddToCart/action"
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
@@ -338,7 +339,6 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
-    console.log(data,"This is data");
     if (data) {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",   
@@ -482,8 +482,16 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
+          if (data.error && data.message === "Data Not Found") {
+            dispatch(AddToCartAction.getCartItem(0));
+            setUserCart([]);
+            setCartItems("")
+
+          }
+          else{
           setUserCart(data.data);
           setCartItems(data.data[0].order.length);
+          }
         })
 
         .catch((err) => {

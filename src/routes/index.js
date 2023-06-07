@@ -66,10 +66,14 @@ import NeedSupport from "../components/NeedSupport";
 import CurrencyState from "./ContextApi/CurrencyState";
 import AppStoreNutrazik from "../components/AppStoreNutrazik";
 import verifyToken from "../components/verifyToken";
+// import { useContext } from "react";
+// import CurrencyContext from "./ContextApi/CurrencyContext";
 
 var Userdata = "";
 const Root = (props) => {
   const [currancyType, setCurrancyType] = useState("");
+  // const [isLoggedIn,setIsLoggedIn] = useState('');
+  // const { loginState, setLoginState } = useContext(CurrencyContext);
 
   useEffect(() => {}, []);
   const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -85,6 +89,12 @@ const Root = (props) => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
+
+  // useEffect(()=>{
+  //   let num = Math.random();
+  //   setIsLoggedIn(num);
+  // },[loginState])
+
   return (
     <CurrencyState>
       <Provider store={store}>

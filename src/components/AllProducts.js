@@ -269,6 +269,10 @@ const AllProducts = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        if (data.error && data.message === "Data Not Found") {
+          Setwishlist([])
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
           const wishlisted = data.data.length;

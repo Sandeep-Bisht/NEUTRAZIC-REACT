@@ -1,5 +1,6 @@
 import CurrencyContext from "./CurrencyContext";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Cookies from "universal-cookie";
 
 const CurrencyState = (props) => {
@@ -8,6 +9,7 @@ const CurrencyState = (props) => {
   const [resetForm, setResetForm] = useState("0");
   const [searchedtext, setSearchedText] = useState("");
   const [searchlength, setSearchLength] = useState("");
+
   return (
     <CurrencyContext.Provider
       value={{

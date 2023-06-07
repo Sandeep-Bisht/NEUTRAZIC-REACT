@@ -191,7 +191,7 @@ const WishList = () => {
         discountprice: data.discount,
         description: data.description,
         category: data.category,
-        manufacturer: data.manufacturer,
+        manufacturer: data.manufacturer.name,
         status: "Pending",
         justification: "Enjoy",
         delivery_time: "No Status",
