@@ -233,6 +233,7 @@ const Header1 = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+
         if (data.error && data.message === "Data Not Found") {
           dispatch(ACTIONS1.getwishlistitem(0));
         }
@@ -338,7 +339,7 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
-    console.log(data,"This is data");
+    // console.log(data,"This is data");
     if (data) {
       fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",   
