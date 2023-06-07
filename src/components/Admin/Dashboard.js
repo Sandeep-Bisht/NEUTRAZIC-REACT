@@ -121,7 +121,6 @@ const Dashboard = () => {
         {
         {
           const orderArray=data.data.filter((items)=>{
-            console.log(items,"items or order");
             return (Userdata.manufacturer==items.order[0].order[0].manufacturer);
           })
           setOrders(orderArray.length);

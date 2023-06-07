@@ -635,7 +635,6 @@ const SingleProduct = (props) => {
                   itemsToShow={4}
                   onPrevStart={onPrevStart}
                   onNextStart={onNextStart}
-                  // onChange={Loop}
                   ref={carouselRef}
                   disableArrowsOnEnd={false}
                 >
@@ -797,7 +796,6 @@ const SingleProduct = (props) => {
                   </span>
                   &nbsp; <span className="pl-2">Share:</span>
                   <a href="https://www.facebook.com/Nutrazik" className="singleproduct-icon" target="_blank">
-                    {/* <i className="social-links bx bxl-facebook "></i> */}
                     <SocialIcon
                       className="single-product-social-icons"
                       network="facebook"
@@ -812,7 +810,6 @@ const SingleProduct = (props) => {
                     />
                   </a>
                   <a href="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
-                    {/* <i className="social-links bx bxl-twitter "></i> */}
                     <SocialIcon
                       className="single-product-social-icons"
                       network="twitter"
@@ -844,7 +841,6 @@ const SingleProduct = (props) => {
                   ></i>
                   <input
                     type="number"
-                    //value="1"
                     min="1"
                     max="9"
                     step="1"
@@ -899,7 +895,6 @@ const SingleProduct = (props) => {
                       data-bs-target={Userdata == null ? "#exampleModal" : null}
                       onClick={() => handleResetForm()}
                     >
-                      {/* <Link to="/Register"></Link> */}
                       Add to Cart
                     </button>
                   )}
@@ -910,7 +905,6 @@ const SingleProduct = (props) => {
                   {Userdata ? (
                     <i
                       id={prodId}
-                      // className="bx bxs-heart"
                       className={`bx bxs-heart ${checkWishlistItem(prodId)}`}
                       onClick={() => {
                         AddtoWishlist(
@@ -1105,7 +1099,6 @@ const SingleProduct = (props) => {
                         className="figure homepage-trending-figure"
                         key={ind}
                       >
-                        {/* <Link to={"/SingleProduct/" + el._id}> */}
 
                         <Link to={"/SingleProduct/" + el._id}>
                           <div
@@ -1222,7 +1215,6 @@ const SingleProduct = (props) => {
                           </div>
                         </div>
 
-                        {/* </Link> */}
                       </figure>
                     );
                   }

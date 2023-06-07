@@ -335,7 +335,7 @@ const HomePage = () => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        // CartById();
+        CartById();
         await UpdateCart();
       }
       toast.success("Added to Cart", {
@@ -551,9 +551,7 @@ const HomePage = () => {
   return (
     <>
       <Header1 />
-      {/* <Carouselcomp /> */}
       <div id="">
-        {/* trending section  */}
         <section className="home-banner">
           <div className="container m-auto">
             <div className="row align-items-center">
@@ -584,20 +582,17 @@ const HomePage = () => {
                         }
                       }}
                     />
-                    {/* <Link to={"/SearchResult/" + search}> */}
                     <button
                       className="search mr-1"
                       onClick={() => {
                         if (search.length) {
                           searchData(search);
-                          // setSearchedText(e.target.value);
                           history.push("/SearchResult/" + search);
                         }
                       }}
                     >
                       <i className="bx bx-search-alt"></i>
                     </button>
-                    {/* </Link> */}
                   </div>
                 </div>
               </div>
@@ -635,24 +630,12 @@ const HomePage = () => {
                                   className="image hover-switch-homepage"
                                   style={{ position: "relative" }}
                                 >
-                                  {/* <img
-                                    className="hoverimage"
-                                    src={
-                                      el.otherImage &&
-                                      el.otherImage.length > 0 &&
-                                      `${baseUrl}/` + el.otherImage[0].path
-                                    }
-                                    alt=""
-                                  /> */}
+                                 
                                   <img
                                     className="main-Image"
                                     src={`${baseUrl}/` + el.image[0].path}
                                     alt=""
-                                    // style={{
-                                    //   position: "absolute",
-                                    //   top: "0",
-                                    //   left: "0",
-                                    // }}
+                                    
                                   />
                                 </div>
                                 <Link to={"/SingleProduct/" + el._id}>
@@ -758,7 +741,6 @@ const HomePage = () => {
                                 </button>
                               )}
 
-                              {/* </Link> */}
                             </figure>
                           </>
                         );
@@ -767,7 +749,6 @@ const HomePage = () => {
                 </div>
               )}
 
-              {/* hover Button */}
               <div className="wrapperbtn pt-0">
                 <Link to="/TrendingProducts">
                   <button type="button" className="btn10">
@@ -775,7 +756,6 @@ const HomePage = () => {
                   </button>
                 </Link>
               </div>
-              {/* Hover Button End */}
             </div>
           </div>
         </section>
@@ -835,18 +815,8 @@ const HomePage = () => {
                         );
                       }
                     })}
-                  {/* </Carousel> */}
                 </Slider>
-                {/* <div className="controls controls-left">
-                  <button onClick={sliderRef?.slickPrev}>
-                    <FaChevronLeft />
-                  </button>
-                </div> */}
-                {/* <div className="controls controls-right">
-                  <button onClick={sliderRef?.slickNext}>
-                    <FaChevronRight />
-                  </button>
-                </div> */}
+                
               </div>
             )}
           </div>
@@ -989,13 +959,11 @@ const HomePage = () => {
                               </div>
                             </div>
 
-                            {/* </Link> */}
                           </figure>
                         );
                       }
                     })}
                 </div>
-                {/* hover Button */}
 
                 <div className="wrapperbtn pt-3 pb-4">
                   <Link to="/AllProducts">
@@ -1004,7 +972,6 @@ const HomePage = () => {
                     </button>
                   </Link>
                 </div>
-                {/* Hover Button End */}
               </div>
             )}
           </div>
@@ -1033,24 +1000,12 @@ const HomePage = () => {
                                 className="image hover-switch-homepage"
                                 style={{ position: "relative" }}
                               >
-                                {/* <img
-                                  className="hoverimage"
-                                  src={
-                                    el.otherImage &&
-                                    el.otherImage.length > 0 &&
-                                    `${baseUrl}/` + el.otherImage[0].path
-                                  }
-                                  alt=""
-                                /> */}
+                               
                                 <img
                                   className="main-Image"
                                   src={`${baseUrl}/` + el.image[0].path}
                                   alt=""
-                                  // style={{
-                                  //   position: "absolute",
-                                  //   top: "0",
-                                  //   left: "0",
-                                  // }}
+                                  
                                 />
                               </div>
                               <Link to={"/SingleProduct/" + el._id}>
@@ -1165,7 +1120,6 @@ const HomePage = () => {
                       }
                     })}
                 </div>
-                {/* hover Button */}
                 <div className="wrapperbtn pt-3 pb-4">
                   {data
                     .filter((item) => item.category.name == singlecategory.name)
@@ -1184,7 +1138,6 @@ const HomePage = () => {
                       }
                     })}
                 </div>
-                {/* Hover Button End */}
               </div>
             )}
           </div>
@@ -1289,7 +1242,10 @@ const HomePage = () => {
                             if (ind < 4)
                               return (
                                 <div className="col-lg-3 col-md-6" key={ind}>
-                                  <Link className="blog-link" to={"/SingleBlogPage/" + item.slug}>
+                                  <Link
+                                    className="blog-link"
+                                    to={"/SingleBlogPage/" + item.slug}
+                                  >
                                     <div className="card hover-effect">
                                       <img
                                         src={

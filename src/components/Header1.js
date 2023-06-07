@@ -202,7 +202,6 @@ const Header1 = (props) => {
           $(".search-bar")
             .addClass("show1")
             .fadeIn(2000);
-          // $(".search-bar");
 
           $(this).css("background-color", "#2a96ff");
           $(".cross-icon-search").css("z-index", "1");
@@ -234,6 +233,7 @@ const Header1 = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+
         if (data.error && data.message === "Data Not Found") {
           dispatch(ACTIONS1.getwishlistitem(0));
         }
@@ -1057,7 +1057,6 @@ const Header1 = (props) => {
           </div>
         </div>
         {forgetModal ? (
-          // <div className="forget-modal-body">
           <Modal
             visible={forgetModal}
             onOk={handleOk}
@@ -1148,7 +1147,6 @@ const Header1 = (props) => {
             </div>
           </Modal>
         ) : (
-          // </div>
           ""
         )}
         {isModalVisible ? (
@@ -1509,7 +1507,6 @@ const Header1 = (props) => {
                           }
                         }}
                       >
-                        {/* <span class="tooltiptext">Search here</span> */}
                         <i className="fa fa-search search-icon"></i>
                         <ImCross className="cross-icon-search" />
                       </div>
@@ -1521,7 +1518,6 @@ const Header1 = (props) => {
                           Value={searcheditem}
                           onChange={(e) => {
                             setSearch(e.target.value.toLowerCase());
-                            // setSearchedText(e.target.value);
                           }}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" && search.length) {
@@ -1657,13 +1653,7 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-          {/* <div className="container-fluid p-0">
-            <div className="row side-nav">
-              <div className=" col-sm-12 p-0 content">
-                <React.Fragment>{props.children}</React.Fragment>
-              </div>
-            </div>
-          </div> */}
+          
         </div>
       </div>
 

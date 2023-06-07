@@ -206,6 +206,7 @@ const Cart = () => {
       .then(async (res) => {})
       .catch((err) => {});
   };
+  console.log(cart,"This is cart");
   return (
     <>
       <Header1 CartItems={cart} />
