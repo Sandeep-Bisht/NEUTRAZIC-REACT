@@ -33,6 +33,7 @@ var Userdata = "";
 let currentCurrencyType = "";
 var CartDataWoLogin = [];
 const HomePage = () => {
+
   let dispatch = useDispatch();
   const images = [
     "../../Images/categories/categories-img1.png",
@@ -143,6 +144,7 @@ const HomePage = () => {
         alert("in");
       });
     });
+
   }, [loginState]);
 
   let carouselRef = useRef(null);
@@ -185,6 +187,7 @@ const HomePage = () => {
       .then((res) => res.json())
       .then(async (data) => {
         if (data.error && data.message === "Data Not Found") {
+          Setwishlist([])
           dispatch(ACTIONS1.getwishlistitem(0));
         }
         if (data.data !== undefined) {
