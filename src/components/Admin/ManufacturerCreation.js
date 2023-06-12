@@ -149,11 +149,11 @@ const ManufacturerCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Manufacturer Creation</h5>
                         <div className="row">
-                        <div className="col-6">
+                        <div className="col-md-6 col-12 image-main-div">
                               <div className="row">
                           {
                             editableArray && editableArray.length>0  ?
-                            <div className="d-flex p-2">
+                            <div className="d-flex p-2 image-second-div">
                             <div className="col-10">
                             <div>
                               <span className="category-select-div">Image</span>
@@ -191,7 +191,7 @@ const ManufacturerCreation = (props) => {
                           }
                           </div>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                           <span className="category-select-div">Manufacturer Name</span>
                             <input
@@ -212,7 +212,7 @@ const ManufacturerCreation = (props) => {
                             </div>
                             <p className="formerror">{formerror.name}</p>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                           <span className="category-select-div">Manufacturer Description</span>
                             <textarea

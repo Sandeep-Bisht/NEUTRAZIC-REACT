@@ -317,7 +317,7 @@ const Productform = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Product Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-2 form-floating">
+                          <div className="col-md-6 col-12 p-2 form-floating">
                             <div className="">
                               <span className="category-select-div">Product Name</span>
                               <input
@@ -335,11 +335,11 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.name}</p>
                           </div>
-                          <div className="col-6">
+                          <div className="col-md-6 col-12 image-main-div">
                               <div className="row">
                           {
                             editableArray && editableArray.length>0  ?
-                            <div className="d-flex p-2">
+                            <div className="d-flex p-2 image-second-div">
                             <div className="col-10">
                             <div>
                               <span className="category-select-div">Image</span>
@@ -377,7 +377,7 @@ const Productform = (props) => {
                           }
                           </div>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div className="">
                               <span className="category-select-div">Other Image</span>
                               <input
@@ -396,7 +396,7 @@ const Productform = (props) => {
                             <p className="formerror">{formErrors.otherImage}</p>
                           </div>
 
-                          <div className="col-6 p-2 required">
+                          <div className="col-md-6 col-12 p-2 required">
                             <div className="">
                               <span className="category-select-div">Category</span>
                               <select
@@ -424,7 +424,7 @@ const Productform = (props) => {
                           </div>
                           {
                             editableArray && editableArray.length>0 &&
-                           <div className="col-6 p-2">
+                           <div className="col-md-6 col-12 p-2">
                            <div className="row">
                              {
                                editableArray && editableArray.length>0 ? 
@@ -442,7 +442,7 @@ const Productform = (props) => {
                          </div>
                           }
                           
-                          <div className="col-6 p-2 required">
+                          <div className="col-md-6 col-12 p-2 required">
                             <div className="mt-2">
                               <span className="category-select-div">SubCategory</span>
                               <select
@@ -472,7 +472,7 @@ const Productform = (props) => {
                           </div>
 
                           {Userdata.role === "superAdmin" ? (
-                            <div className="col-6 p-2 required">
+                            <div className="col-md-6 col-12 p-2 required">
                               <div className="mt-2">
                                 <span className="category-select-div">Vendor</span>
                                 <select
@@ -498,7 +498,7 @@ const Productform = (props) => {
                               </div>
                             </div>
                           ) : (
-                            <div className="col-6 p-2 form-floating required">
+                            <div className="col-md-6 col-12 p-2 form-floating required">
                               <div className="mt-2">
                               <span className="category-select-div">Vendor</span>
                                 <input
@@ -511,7 +511,7 @@ const Productform = (props) => {
                             </div>
                           )}
 
-                          <div className="col-6 p-2 required">
+                          <div className="col-md-6 col-12 p-2 required">
                             <div className="mt-2">
                               <span className="category-select-div">Manufacturer</span>
                               <select
@@ -545,7 +545,7 @@ const Productform = (props) => {
                             </p>
                           </div>
 
-                          <div className="col-6 p-2 required">
+                          <div className="col-md-6 col-12 p-2 required">
                             <div className="mt-2">
                               <span className="category-select-div">Warehouse</span>
                               <select
@@ -576,7 +576,7 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.warehouse}</p>
                           </div>
-                          <div className="col-6 p-2 form-floating">
+                          <div className="col-md-6 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">
                                 Quantity of Product
@@ -599,7 +599,7 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.quantity}</p>
                           </div>
-                          <div className="col-6 p-2 form-floating">
+                          <div className="col-md-6 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">
                                 Re-Order Quantity
@@ -622,7 +622,7 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.reorderQuantity}</p>
                             </div>
-                            <div className="col-6 p-2 form-floating">
+                            <div className="col-md-6 col-12 p-2 form-floating">
                             <div className="mt-2">
                             <span className="category-select-div">
                                 Maximum Order
@@ -645,7 +645,7 @@ const Productform = (props) => {
                               </div>
                             <p className="formerror">{formErrors.maximumOrder}</p>
                           </div>
-                          <div className="col-3 p-2 form-floating">
+                          <div className="col-md-3 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">MRP In Rupees</span>
                               <input
@@ -666,7 +666,7 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.inrMrp}</p>
                           </div>
-                          <div className="col-3 p-2 form-floating">
+                          <div className="col-md-3 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">MRP after Discount</span>
                               <input
@@ -687,7 +687,7 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.inrDiscount}</p>
                           </div>
-                          <div className="col-3 p-2 form-floating">
+                          <div className="col-md-3 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">MRP In Dollar</span>
                               <input
@@ -710,7 +710,7 @@ const Productform = (props) => {
 
                           </div>
 
-                          <div className="col-3 p-2 form-floating">
+                          <div className="col-md-3 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">MRP after Discount In Dollar</span>
                               <input
@@ -731,7 +731,7 @@ const Productform = (props) => {
                             </div>
                             <p className="formerror">{formErrors.dollerDiscount}</p>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div className="mt-2">
                               <span className="category-select-div">Product Type</span>
                               <select
@@ -753,7 +753,7 @@ const Productform = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-6 p-2 form-floating">
+                          <div className="col-md-6 col-12 p-2 form-floating">
                             <div className="mt-2">
                               <span className="category-select-div">Product Description</span>
                               <textarea
@@ -773,7 +773,7 @@ const Productform = (props) => {
 
                           <div className="row">
                             {editableData ? (
-                              <div className="col-6 p-2">
+                              <div className="col-md-6 col-12 p-2">
                                 <button
                                   className="btn btn-registration"
                                   onClick={(e) => UpdateProduct(e, data._id)}
@@ -782,7 +782,7 @@ const Productform = (props) => {
                                 </button>
                               </div>
                             ) : (
-                              <div className="col-6 p-2">
+                              <div className="col-md-6 col-12 p-2">
                                 <button
                                   className="btn btn-primary submit"
                                   type="submit"
