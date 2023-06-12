@@ -171,8 +171,8 @@ const SubCategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>SubCategory Creation</h5>
                         <div className="row">
-                        <div className="col-6">
-                              <div className="row pt-2">
+                        <div className="col-md-6 col-12 image-main-div">
+                              <div className="row image-second-div">
                           {
                             editableArray && editableArray.length>0  ?
                             <div className="d-flex">
@@ -213,7 +213,7 @@ const SubCategoryCreation = (props) => {
                           }
                           </div>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                           <div className="">
                           <span className="category-select-div">Category</span>
                             <select
@@ -239,7 +239,7 @@ const SubCategoryCreation = (props) => {
                             </div>
                             <p className="formerror">{formerror.category}</p>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                             <span className="category-select-div">SubCategory Name</span>
                             </div>
@@ -259,7 +259,7 @@ const SubCategoryCreation = (props) => {
                             />
                             <p className="formerror">{formerror.name}</p>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                             <span className="category-select-div">SubCategory Description</span>
                             </div>

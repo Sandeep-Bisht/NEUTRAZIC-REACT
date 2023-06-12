@@ -160,8 +160,8 @@ const CategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Category Creation</h5>
                         <div className="row">
-                        <div className="col-6">
-                              <div className="row pt-2">
+                        <div className="col-md-6 col-12 image-main-div">
+                              <div className="row image-second-div">
                           {
                             editableArray && editableArray.length>0  ?
                             <div className="d-flex">
@@ -202,7 +202,7 @@ const CategoryCreation = (props) => {
                           }
                           </div>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                               <span className="category-select-div">Category Name</span>
                               <input
@@ -220,7 +220,7 @@ const CategoryCreation = (props) => {
                             </div>
                             <p className="formerror">{formerror.name}</p>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                               <span className="category-select-div">Category Description</span>
                               <textarea
@@ -234,7 +234,7 @@ const CategoryCreation = (props) => {
                               ></textarea>
                             </div>
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                               <span className="category-select-div">Featured Categories</span>
                               <select

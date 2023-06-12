@@ -135,7 +135,7 @@ const Warehouse = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Warehouse Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                             <span className="category-select-div">Warehouse Name</span>
                             <input
@@ -154,7 +154,7 @@ const Warehouse = (props) => {
                             <p className="formerror">{formerror.name}</p>
 
                           </div>
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                             <div>
                             <span className="category-select-div">Warehouse Contact No</span>
                             <input
@@ -178,7 +178,7 @@ const Warehouse = (props) => {
                             <p className="formerror">{formerror.warehouseContactNo}</p>
 
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-1 form-floating">
                             <div>
                             <span className="category-select-div">Warehouse Address</span>
                             <input
@@ -197,7 +197,7 @@ const Warehouse = (props) => {
                             <p className="formerror">{formerror.warehouseAddress}</p>
                           </div>
 
-                          <div className="col-6 p-2">
+                          <div className="col-md-6 col-12 p-2">
                           <span className="category-select-div">Warehouse Description</span>
                             <div>
                             <textarea
