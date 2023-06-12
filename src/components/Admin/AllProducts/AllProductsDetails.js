@@ -12,7 +12,7 @@ import { MdOutlineEditNote } from 'react-icons/md';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { baseUrl } from "../../../utils/services";
 
-var Userdata="";
+var Userdata = "";
 
 export default function AllProductsDetails() {
 
@@ -24,11 +24,11 @@ export default function AllProductsDetails() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
 
-  const history=useHistory();
+  const history = useHistory();
 
 
   useEffect(() => {
-    Userdata=JSON.parse(localStorage.getItem("Userdata"));
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
     fetchUsers();
     GetProducts();
   }, [])
@@ -37,16 +37,15 @@ export default function AllProductsDetails() {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        if(Userdata!==undefined && Userdata.role==="Vendor")
-    {
-       var responseData=data.data.filter((item)=>{
-        return (Userdata.manufacturer===item.manufacturer.name);
-       })
-       Setproducts(responseData.length);
-    }
-    else{
-      Setproducts(data.data.length);
-    }
+        if (Userdata !== undefined && Userdata.role === "Vendor") {
+          var responseData = data.data.filter((item) => {
+            return (Userdata.manufacturer === item.manufacturer.name);
+          })
+          Setproducts(responseData.length);
+        }
+        else {
+          Setproducts(data.data.length);
+        }
       })
       .catch((err) => {
         console.log(err, "error");
@@ -55,15 +54,14 @@ export default function AllProductsDetails() {
   const fetchUsers = async () => {
     setLoading(true);
     const response = await axios.get(`${baseUrl}/api/product/all_product`);
-    if(Userdata!==undefined && Userdata.role==="Vendor")
-    {
-       var responseData=response.data.data.filter((item)=>{
-        return (Userdata.manufacturer===item.manufacturer.name);
-       })
-       setGetuser(responseData);
-       setLoading(false);
+    if (Userdata !== undefined && Userdata.role === "Vendor") {
+      var responseData = response.data.data.filter((item) => {
+        return (Userdata.manufacturer === item.manufacturer.name);
+      })
+      setGetuser(responseData);
+      setLoading(false);
     }
-    else{
+    else {
       setGetuser(response.data.data);
       setLoading(false);
     }
@@ -94,7 +92,7 @@ export default function AllProductsDetails() {
   };
 
   const showModal = (order) => {
-    const orderDetails=[];
+    const orderDetails = [];
     orderDetails.push(order)
     setPrticularUserOrder(orderDetails);
     setIsModalVisible(true);
@@ -128,6 +126,17 @@ export default function AllProductsDetails() {
       title: "Quantity",
       dataIndex: "quantity",
       key: "quantity",
+    },
+    {
+      title: "Reorder Quantity",
+      dataIndex: "reorderQuantity",
+      key: "reorderQuantity",
+
+    },
+    {
+      title:"maximumOrder",
+      dataIndex:"maximumOrder",
+      key:"maximumOrder",
     },
     {
       title: "Image",
@@ -192,6 +201,16 @@ export default function AllProductsDetails() {
       <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
     </svg>
   );
+  console.log(getuser, "get user ")
+  const rowClassName = (record) => {
+    console.log(record,"record of per row");
+        if(record.quantity<=record.reorderQuantity)
+        {
+          return "table-style" ;
+        }
+    return '';
+  };
+
   return (
     <>
       <section id="body-pd">
@@ -202,13 +221,14 @@ export default function AllProductsDetails() {
             <div className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4  sidebar-dashboard">
               <Sidemenu />
             </div>
-            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
+            <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2 table-outer-div">
               <div className="all-products-details-section">
                 <h3 className="all-products-head">All Products <span className="count">{products}</span></h3>
-                <div className="all-products-search-wrap">
+                <div className="all-products-search-wrap all-products-search-wrap">
                   <Link to="/Productform" className="add-icon">
                     <MdPlaylistAdd />Add
                   </Link>
+                  <div>
                   <input
                     type='text'
                     onChange={e => onChangeHandler(e)}
@@ -218,66 +238,75 @@ export default function AllProductsDetails() {
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
                   <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                  </div>
                 </div>
               </div>
               <Table
-                rowKey="name"
-                dataSource={filteredData && filteredData.length ? filteredData : getuser}
-                columns={columns}
-                loading={loading}
-                pagination={false}
-              />
+rowClassName={rowClassName}
+  rowKey="name"
+  dataSource={filteredData && filteredData.length ? filteredData : getuser}
+  columns={columns}
+  loading={loading}
+  pagination={false}
+  //   getRowClassName={(record) =>
+  //   record._id === getuser._id && record.quantity && record.quantity <= 5
+  //     ? 'table-style'
+  //     : ''
+  // }
+/>
+
+
             </div>
           </div>
           <Modal
-          className="product-details New-order-details"
-          title="Order Details"
-          visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          closeIcon={<CustomCloseIcon />}
-        >
-        <table className="table order-details ">
-            <thead>
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Manufacturer</th>
-                <th scope="col">Category</th>
-                <th scope="col">Subcatrgory</th>
-              </tr>
-            </thead>
-            <tbody>
-              {prticularUserOrder &&
-                prticularUserOrder.length > 0 &&
-                prticularUserOrder.map((item, ind) => {
-                  return (
-                    <>
-                      <tr key={ind}>
-                        <td className="width-adjust-of-td">
-                          <div className="width-adjust-of-image">
-                            <img
-                              onClick={() => imageHandler(item.productid)}
-                              style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.image[0].path}`}
-                            ></img>
-                          </div>
-                        </td>
-                        <td className="width-adjust-of-td">{item.name}</td>
-                        <td className="width-adjust-of-td">{item.inrDiscount}</td>
-                        <td className="width-adjust-of-td">{item.quantity}</td>
-                        <td className="width-adjust-of-td">{item.manufacturer.name}</td>
-                        <td className="width-adjust-of-td">{item.category.name}</td>
-                        <td className="width-adjust-of-td">{item.subcategory.name}</td>
-                      </tr>
-                    </>
-                  );
-                })}
-            </tbody>
-          </table>
-        </Modal>
+            className="product-details New-order-details"
+            title="Order Details"
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            closeIcon={<CustomCloseIcon />}
+          >
+            <table className="table order-details ">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Manufacturer</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Subcatrgory</th>
+                </tr>
+              </thead>
+              <tbody>
+                {prticularUserOrder &&
+                  prticularUserOrder.length > 0 &&
+                  prticularUserOrder.map((item, ind) => {
+                    return (
+                      <>
+                        <tr key={ind}>
+                          <td className="width-adjust-of-td">
+                            <div className="width-adjust-of-image">
+                              <img
+                                onClick={() => imageHandler(item.productid)}
+                                style={{ cursor: "pointer" }}
+                                src={`${baseUrl}/${item.image[0].path}`}
+                              ></img>
+                            </div>
+                          </td>
+                          <td className="width-adjust-of-td">{item.name}</td>
+                          <td className="width-adjust-of-td">{item.inrDiscount}</td>
+                          <td className="width-adjust-of-td">{item.quantity}</td>
+                          <td className="width-adjust-of-td">{item.manufacturer.name}</td>
+                          <td className="width-adjust-of-td">{item.category.name}</td>
+                          <td className="width-adjust-of-td">{item.subcategory.name}</td>
+                        </tr>
+                      </>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </Modal>
         </div>
       </section>
     </>

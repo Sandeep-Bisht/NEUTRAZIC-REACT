@@ -59,6 +59,7 @@ const HomePage = () => {
   const [search, setSearch] = useState("");
   const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  // const [maximumOrder,setMaximumOrder]=useState(1);
   const [userCart, setUserCart] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
   const [order, Setorder] = useState([]);
@@ -279,6 +280,7 @@ const HomePage = () => {
     productid,
     name,
     quantity,
+    maximumOrder,
     mrp,
     singleprice,
     dollerMrp,
@@ -296,6 +298,7 @@ const HomePage = () => {
         name: name,
         image: image,
         quantity: quantity,
+        maximumOrder:maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         discountprice: discount,
@@ -336,16 +339,16 @@ const HomePage = () => {
         }
         setQuantity(1);
         CartById();
-        await UpdateCart();
+        UpdateCart(productid);
       }
-      toast.success("Added to Cart", {
-        position: "bottom-right",
-        autoClose: 1000,
-      });
     }
   };
 
-  const UpdateCart = () => {
+  const UpdateCart = (id) => {
+    const product=userCart.order.map((item)=>item)
+    const productsData=product.filter((item)=>item.productid==id)
+      if(productsData[0].quantity<=productsData[0].maximumOrder)
+      {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -362,10 +365,15 @@ const HomePage = () => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
+        toast.success("Added to Cart", {
+          position: "bottom-right",
+          autoClose: 1000,
+        });
       })
       .then((err) => console.log(err));
+    }
   };
-
+console.log(data,"all the products");
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
@@ -380,10 +388,18 @@ const HomePage = () => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
-          setCartItems(data.data[0].order.length);
-          let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems));
+          console.log(data,"cart by id data");
+          if (data.error && data.message === "Data Not Found") {
+            setUserCart([]);
+            setCartItems("")
+            dispatch(ACTIONS.getCartItem(0));
+          }
+          else{
+            setUserCart(data.data[0]);
+            setCartItems(data.data[0].order.length);
+            let cartItems = data.data[0].order.length;
+            dispatch(ACTIONS.getCartItem(cartItems));
+          }
         })
         .catch((err) => {
           console.log(err, "error");
@@ -392,6 +408,7 @@ const HomePage = () => {
   };
 
   const AddtoCart = async () => {
+        if(quantity)
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
@@ -407,7 +424,7 @@ const HomePage = () => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          CartById();
+            CartById();
         })
         .catch((err) => {
           console.log(err, "error");
@@ -708,6 +725,7 @@ const HomePage = () => {
                                       el._id,
                                       el.name,
                                       quantity,
+                                      el.maximumOrder,
                                       el.inrMrp,
                                       el.inrDiscount,
                                       el.dollerMrp,
@@ -919,6 +937,7 @@ const HomePage = () => {
                                           el._id,
                                           el.name,
                                           quantity,
+                                          el.maximumOrder,
                                           el.inrMrp,
                                           el.inrDiscount,
                                           el.dollerMrp,
@@ -1076,6 +1095,7 @@ const HomePage = () => {
                                           el._id,
                                           el.name,
                                           quantity,
+                                          el.maximumOrder,
                                           el.inrMrp,
                                           el.inrDiscount,
                                           el.dollerMrp,

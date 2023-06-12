@@ -268,9 +268,15 @@ const SingleProduct = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
+          if (data.error && data.message === "Data Not Found") {
+            setUserCart([]);
+            dispatch(ACTIONS.getCartItem(0));
+          }
+          else{
           setUserCart(data.data[0]);
           let cartItems = data.data[0].order.length;
           dispatch(ACTIONS.getCartItem(cartItems));
+          }
         })
         .catch((err) => {
           console.log(err, "error");
@@ -306,7 +312,11 @@ const SingleProduct = (props) => {
     SetMainImage(Imagestore);
   };
 
-  const UpdateCart = () => {
+  const UpdateCart = (id) => {
+    const product=userCart.order.map((item)=>item)
+    const productsData=product.filter((item)=>item.productid==id)
+      if(productsData[0].quantity<=productsData[0].maximumOrder)
+      {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -329,11 +339,13 @@ const SingleProduct = (props) => {
         });
       })
       .then((err) => console.log(err, "inside update cart"));
+  }
   };
   const cartfunction = async (
     productid,
     name,
     quantity,
+    maximumOrder,
     mrp,
     singleprice,
     dollerDiscount,
@@ -351,6 +363,7 @@ const SingleProduct = (props) => {
         name: name,
         image: image,
         quantity: quantity,
+        maximumOrder:maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         dollerDiscount: dollerDiscount,
@@ -390,8 +403,7 @@ const SingleProduct = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-
-        await UpdateCart();
+         UpdateCart(productid);
       }
     }
   };
@@ -862,6 +874,7 @@ const SingleProduct = (props) => {
                                 data._id,
                                 data.name,
                                 quantity,
+                                data.maximumOrder,
                                 data.inrMrp,
                                 data.inrDiscount,
                                 data.dollerDiscount,
@@ -876,6 +889,7 @@ const SingleProduct = (props) => {
                                 data._id,
                                 data.name,
                                 quantity,
+                                data.maximumOrder,
                                 data.inrMrp,
                                 data.inrDiscount,
                                 data.discount,
@@ -1179,6 +1193,7 @@ const SingleProduct = (props) => {
                                       el._id,
                                       el.name,
                                       quantity,
+                                      el.maximumOrder,
                                       el.inrMrp,
                                       el.inrDiscount,
                                       el.dollerMrp,

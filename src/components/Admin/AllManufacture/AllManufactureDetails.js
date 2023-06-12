@@ -156,12 +156,13 @@ export default function AllManufactureDetails() {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="all-manufacture-details-section">
-                <h3 className="all-manufacturer-head">All Manufacturer <span className="count">{Manufacturer}</span></h3>
-                <div className="all-manufacturer-search-wrap">
+              <div className="all-manufacture-details-section all-products-details-section">
+                <h3 className="all-manufacturer-head all-products-head">All Manufacturer <span className="count">{Manufacturer}</span></h3>
+                <div className="all-manufacturer-search-wrap all-products-search-wrap">
                   <Link to="/Manufacturer" className="add-icon">
                     <MdPlaylistAdd />Add
                   </Link>
+                  <div>
                   <input
                     type='text'
                     onChange={e => onChangeHandler(e)}
@@ -171,6 +172,7 @@ export default function AllManufactureDetails() {
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
                   <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                </div>
                 </div>
               </div>
 

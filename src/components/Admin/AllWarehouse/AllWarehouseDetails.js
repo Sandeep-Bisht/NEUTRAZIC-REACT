@@ -129,15 +129,16 @@ export default function AllWarehouseDetails() {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="category-details-section">
-                <h3 className="all-category-head">
+              <div className="category-details-section all-products-details-section">
+                <h3 className="all-category-head all-products-head">
                   All Warehouses <span className="count">{warehouse}</span>
                 </h3>
-                <div className="all-category-search-wrap">
+                <div className="all-category-search-wrap all-products-search-wrap">
                   <Link to="/Warehouse" className="add-icon">
                     <MdPlaylistAdd />
                     Add
                   </Link>
+                  <div>
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}
@@ -149,6 +150,7 @@ export default function AllWarehouseDetails() {
                   <button type="button" className="dashboard-search-btn">
                     <BiSearchAlt />
                   </button>
+                  </div>
                 </div>
               </div>
 
