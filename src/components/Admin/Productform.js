@@ -24,6 +24,8 @@ const Productform = (props) => {
     category: "",
     subcategory: "",
     quantity: "",
+    reorderQuantity:"",
+    maximumOrder:"",
     inrMrp: "",
     dollerMrp: "",
     inrDiscount: "",
@@ -64,6 +66,13 @@ const Productform = (props) => {
     if (!Value.quantity) {
       error.quantity = "This field is required";
     }
+    if(!Value.reorderQuantity){
+      error.reorderQuantity="This field is required";
+    }
+    if(!Value.maximumOrder)
+    {
+      error.maximumOrder="This field is required";
+    }
     if (!Value.manufacturer) {
       error.manufacturer = "This field is required";
     }
@@ -91,6 +100,8 @@ const Productform = (props) => {
       await formData.append("category", data.category);
       await formData.append("subcategory", data.subcategory);
       await formData.append("quantity", data.quantity);
+      await formData.append("reorderQuantity",data.reorderQuantity);
+      await formData.append("maximumOrder",data.maximumOrder);
       await formData.append("inrMrp", data.inrMrp);
       await formData.append("dollerMrp", data.dollerMrp);
       await formData.append("inrDiscount", data.inrDiscount);
@@ -133,6 +144,8 @@ const Productform = (props) => {
       await formData.append("category", data.category);
       await formData.append("subcategory", data.subcategory);
       await formData.append("quantity", data.quantity);
+      await formData.append("reorderQuantity",data.reorderQuantity);
+      await formData.append("maximumOrder",data.maximumOrder);
       await formData.append("inrMrp", data.inrMrp);
       await formData.append("dollerMrp", data.dollerMrp);
       await formData.append("inrDiscount", data.inrDiscount);
@@ -584,8 +597,53 @@ const Productform = (props) => {
                                 onBlur={handleBlur}
                               />
                             </div>
-
                             <p className="formerror">{formErrors.quantity}</p>
+                          </div>
+                          <div className="col-6 p-2 form-floating">
+                            <div className="mt-2">
+                              <span className="category-select-div">
+                                Re-Order Quantity
+                              </span>
+                              <input
+                                type="number"
+                                id="floatingform"
+                                name="reorderQuantity"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.reorderQuantity}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    reorderQuantity: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
+                            </div>
+                            <p className="formerror">{formErrors.reorderQuantity}</p>
+                            </div>
+                            <div className="col-6 p-2 form-floating">
+                            <div className="mt-2">
+                            <span className="category-select-div">
+                                Maximum Order
+                              </span>
+                            <input
+                                type="number"
+                                id="floatingform"
+                                name="maximumOrder"
+                                className="form-control Dashborad-search"
+                                defaultValue={data.maximumOrder}
+                                onChange={(e) => {
+                                  Setdata({
+                                    ...data,
+                                    maximumOrder: e.target.value,
+                                  });
+                                  handleInputChange(e);
+                                }}
+                                onBlur={handleBlur}
+                              />
+                              </div>
+                            <p className="formerror">{formErrors.maximumOrder}</p>
                           </div>
                           <div className="col-3 p-2 form-floating">
                             <div className="mt-2">

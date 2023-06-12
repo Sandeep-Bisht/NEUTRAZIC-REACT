@@ -87,6 +87,7 @@ const AllProducts = (props) => {
     productid,
     name,
     quantity,
+    maximumOrder,
     mrp,
     singleprice,
     dollerDiscount,
@@ -104,6 +105,7 @@ const AllProducts = (props) => {
         name: name,
         image: image,
         quantity: quantity,
+        maximumOrder:maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         dollerDiscount: dollerDiscount,
@@ -144,11 +146,15 @@ const AllProducts = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        UpdateCart();
+        UpdateCart(productid);
       }
     }
   };
-  const UpdateCart = () => {
+  const UpdateCart = (id) => {
+    const product=userCart.order.map((item)=>item)
+    const productsData=product.filter((item)=>item.productid==id)
+      if(productsData[0].quantity<=productsData[0].maximumOrder)
+      {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -171,6 +177,7 @@ const AllProducts = (props) => {
         });
       })
       .then((err) => console.log(err));
+    }
   };
   const CartById = async () => {
     if (!Userdata == []) {
@@ -186,9 +193,15 @@ const AllProducts = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
-          let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems));
+          if (data.error && data.message === "Data Not Found") {
+            setUserCart([]);
+            dispatch(ACTIONS.getCartItem(0));
+          }
+          else{
+            setUserCart(data.data[0]);
+            let cartItems = data.data[0].order.length;
+            dispatch(ACTIONS.getCartItem(cartItems));
+          }        
         })
         .catch((err) => {
           console.log(err, "error");
@@ -519,6 +532,7 @@ const AllProducts = (props) => {
                                   el._id,
                                   el.name,
                                   quantity,
+                                  el.maximumOrder,
                                   el.inrMrp,
                                   el.inrDiscount,
                                   el.dollerDiscount,

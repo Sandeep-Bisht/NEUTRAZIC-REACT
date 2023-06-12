@@ -129,8 +129,9 @@ const Cart = () => {
       await CartById();
     }
   };
-  const Plusquantity = async (quantity, price, index) => {
-    if (quantity >= 1) {
+  const Plusquantity = async (quantity, price, index,maximumOrder) => {
+    console.log(quantity,"inse plus quantity");
+    if (quantity >= 1 && quantity<maximumOrder) {
       cart[index].quantity = quantity + 1;
       await UpdateCart();
       await CartById();
@@ -150,7 +151,6 @@ const Cart = () => {
 
   const submitData = async (e) => {
     e.preventDefault();
-
     const stripe = await stripePromise;
     let { order } = data;
     let neworder = JSON.parse(order);
@@ -206,7 +206,6 @@ const Cart = () => {
       .then(async (res) => {})
       .catch((err) => {});
   };
-  console.log(cart,"This is cart");
   return (
     <>
       <Header1 CartItems={cart} />
@@ -273,7 +272,7 @@ const Cart = () => {
                                             Minusquantity(
                                               el.quantity,
                                               el.mrp,
-                                              ind1
+                                              ind1,
                                             );
                                           }}
                                         >
@@ -288,7 +287,8 @@ const Cart = () => {
                                             Plusquantity(
                                               el.quantity,
                                               el.mrp,
-                                              ind1
+                                              ind1,
+                                              el.maximumOrder
                                             );
                                           }}
                                         >

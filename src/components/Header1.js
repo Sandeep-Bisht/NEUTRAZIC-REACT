@@ -270,6 +270,7 @@ const Header1 = (props) => {
     });
     reset();
     setLoginState("0");
+    setUserCart([]);
     setCartItems("");
     setWishlisted("");
     if (

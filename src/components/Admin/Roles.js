@@ -105,7 +105,7 @@ const Roles = (props) => {
     })
       .then((res) => {
         res.json();
-        if(res.success==200)
+        if(res.sucess==200)
         {
           setData({
             email:"",
