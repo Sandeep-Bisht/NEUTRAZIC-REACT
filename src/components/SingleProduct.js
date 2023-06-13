@@ -340,6 +340,12 @@ const SingleProduct = (props) => {
       })
       .then((err) => console.log(err, "inside update cart"));
   }
+  else{
+    toast.success("You have reached the max limit", {
+      position: "bottom-right",
+      autoClose: 1000,
+    });
+  }
   };
   const cartfunction = async (
     productid,
@@ -842,7 +848,7 @@ const SingleProduct = (props) => {
                 </div>
               </div>
               <div className="mt-3 add-cart-buttons ml-3">
-                <div className="quantity1 mt-1 ">
+                {/* <div className="quantity1 mt-1 ">
                   <i
                     className="bx bx-minus minus-single mr-2"
                     onClick={() => {
@@ -863,7 +869,7 @@ const SingleProduct = (props) => {
                     className="bx bx-plus minus-single ml-2"
                     onClick={() => setQuantity(quantity + 1)}
                   ></i>
-                </div>
+                </div> */}
                 <div className="add-to-cart mt-1">
                   {Userdata ? (
                     <button

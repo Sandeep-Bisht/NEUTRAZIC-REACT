@@ -12,7 +12,7 @@ useEffect(() => {
   return (
     <>
         <div className="nav__logo">
-        <div>
+        <div className="nav__logo__img">
           <Link to="/" style={{ cursor: "pointer" }}>
             <img
               src={require("../../Images/new-logo.png")}

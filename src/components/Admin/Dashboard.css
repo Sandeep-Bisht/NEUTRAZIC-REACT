@@ -1002,7 +1002,18 @@ font-family: 'Roboto', sans-serif;
   .ant-table{
    width: fit-content!important;
   }
-  
+  .all-products-head{
+    font-size: 21px;
+  }
+  .all-products-search-wrap .add-icon {
+    font-size: 14px;
+  }
+  .all-products-search-wrap .dashboard-search-btn{
+    padding: 4px 8px!important;
+  }
+  .all-products-search-wrap input{
+    padding: 4px 8px!important;
+  }
 }
 @media (max-width:767px){
   .all-products-details-section {
@@ -1068,12 +1079,15 @@ font-family: 'Roboto', sans-serif;
   .all-products-search-wrap .add-icon{
     padding: 3px 7px!important;
   }
+  .nav__logo__img{
+    width: 50%!important;
+  }
   
 }
 @media (max-width:430px)
 {
   .all-products-search-wrap .add-icon {
-    padding: 0px 2px!important;
+    padding: 0px 1px!important;
 }
 .all-products-search-wrap .dashboard-search-btn {
   padding: 1px 2px!important;
@@ -1102,5 +1116,11 @@ font-family: 'Roboto', sans-serif;
 }
 .nav__link {
   grid-column-gap: 0px!important;
+}
+.all-order-details-section{
+  padding-top: 39px!important;
+}
+.nav__name {
+  font-size: 11px;
 }
 }
