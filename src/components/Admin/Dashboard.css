@@ -1044,6 +1044,7 @@ font-family: 'Roboto', sans-serif;
   .nav__link {
     margin-bottom: 3px!important;
     padding:5px 2px!important;
+    grid-column-gap: 0px!important;
   }
   .all-products-head{
     font-size: 22px;
