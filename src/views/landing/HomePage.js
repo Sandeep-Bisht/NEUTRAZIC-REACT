@@ -372,6 +372,12 @@ const HomePage = () => {
       })
       .then((err) => console.log(err));
     }
+    else{
+      toast.success("You have reached the max limit", {
+        position: "bottom-right",
+        autoClose: 1000,
+      });
+    }
   };
 console.log(data,"all the products");
   const CartById = async () => {

@@ -178,6 +178,12 @@ const AllProducts = (props) => {
       })
       .then((err) => console.log(err));
     }
+    else{
+      toast.success("You have reached the max limit", {
+        position: "bottom-right",
+        autoClose: 1000,
+      });
+    }
   };
   const CartById = async () => {
     if (!Userdata == []) {
