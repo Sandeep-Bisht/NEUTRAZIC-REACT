@@ -17,6 +17,8 @@ import Baseline from "./Baseline";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { BiArrowToLeft } from "react-icons/bi";
+import { Button, Modal } from 'antd';
 var Userdata;
 const AllProducts = (props) => {
   const state1 = useContext(CurrencyContext);
@@ -44,8 +46,19 @@ const AllProducts = (props) => {
   let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allCategoryData, setAllCategoryData] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [categoriesId,setCategoriesId]=useState("");
 
-
+  const handleOrderChange = (order) => {
+    setSelectedOrder(order);
+  };
+useEffect(()=>{
+  if(selectedOrder){
+    ProductByCategory()
+  }
+},[selectedOrder])
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
@@ -65,7 +78,6 @@ const AllProducts = (props) => {
     GetWishlist();
     CartById();
     GetCategory();
-    GetSubCategory();
     GetManufacturer();
   }, []);
   useEffect(() => {
@@ -105,7 +117,7 @@ const AllProducts = (props) => {
         name: name,
         image: image,
         quantity: quantity,
-        maximumOrder:maximumOrder,
+        maximumOrder: maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         dollerDiscount: dollerDiscount,
@@ -151,34 +163,33 @@ const AllProducts = (props) => {
     }
   };
   const UpdateCart = (id) => {
-    const product=userCart.order.map((item)=>item)
-    const productsData=product.filter((item)=>item.productid==id)
-      if(productsData[0].quantity<=productsData[0].maximumOrder)
-      {
-    const url = `${baseUrl}/api/cart/update_cart_by_id`;
-    fetch(url, {
-      method: "put",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: userCart._id,
-        userid: Userdata._id,
-        order: userCart.order,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        CartById();
-        toast.success("Added to cart", {
-          position: "bottom-right",
-          autoClose: 1000,
-        });
+    const product = userCart.order.map((item) => item)
+    const productsData = product.filter((item) => item.productid == id)
+    if (productsData[0].quantity <= productsData[0].maximumOrder) {
+      const url = `${baseUrl}/api/cart/update_cart_by_id`;
+      fetch(url, {
+        method: "put",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: userCart._id,
+          userid: Userdata._id,
+          order: userCart.order,
+        }),
       })
-      .then((err) => console.log(err));
+        .then((res) => res.json())
+        .then((res) => {
+          CartById();
+          toast.success("Added to cart", {
+            position: "bottom-right",
+            autoClose: 1000,
+          });
+        })
+        .then((err) => console.log(err));
     }
-    else{
+    else {
       toast.success("You have reached the max limit", {
         position: "bottom-right",
         autoClose: 1000,
@@ -203,11 +214,11 @@ const AllProducts = (props) => {
             setUserCart([]);
             dispatch(ACTIONS.getCartItem(0));
           }
-          else{
+          else {
             setUserCart(data.data[0]);
             let cartItems = data.data[0].order.length;
             dispatch(ACTIONS.getCartItem(cartItems));
-          }        
+          }
         })
         .catch((err) => {
           console.log(err, "error");
@@ -236,19 +247,108 @@ const AllProducts = (props) => {
         });
     }
   };
-
-
   const ProductByCategory = async () => {
-    await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=20`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setCurrentPage(prevPage => prevPage + 1);
+    try {
+      let response;
+      
+      if (selectedOrder) {
+        response = await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=5&_order=${selectedOrder}`);
+      } else {
+        response = await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=5`);
+      }
+      
+      const data = await response.json();
+      setCurrentPage(prevPage => prevPage + 1);
+      
+      let sortedData = [...AllProduct];
+      if (selectedOrder) {
+        sortedData.sort((a, b) => {
+          if (selectedOrder === "ascending") {
+            return a.inrDiscount - b.inrDiscount;
+          } else {
+            return b.inrDiscount - a.inrDiscount;
+          }
+        });
+      }
+      await setAllProduct(sortedData);
+      
+      setAllProduct(prevData => [...prevData, ...data.data]);
+      setLoading(false);
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+  
+  
+
+  // const allProductADorder = async (sortprice) => {
+  //   try {
+  //     const response = await fetch(`${baseUrl}/api/product/all_product`);
+  //     const data = await response.json();
+  //     if(categoriesId)
+  //     {
+  //       const filterData = data.data.filter((item) => {
+  //         return (item.category._id == categoriesId)
+  //       });
+  //     if (sortprice === "ascending") {
+  //       const sortingPrice = filterData.sort((a, b) => a.inrDiscount - b.inrDiscount);
+  //       setAllProduct(sortingPrice);
+  //     } else if (sortprice === "descending") {
+  //       const sortingPrice = filterData.sort((a, b) => b.inrDiscount - a.inrDiscount);
+  //       setAllProduct(sortingPrice);
+  //     } else {
+  //       setAllProduct(prevData => [...prevData, ...data.data]);
+  //       setLoading(false);
+  //     }
+  //   }
+  //   else{
+  //     if (sortprice === "ascending") {
+  //       const sortingPrice = data.data.sort((a, b) => a.inrDiscount - b.inrDiscount);
+  //       setAllProduct(sortingPrice);
+  //     } else if (sortprice === "descending") {
+  //       const sortingPrice = data.data.sort((a, b) => b.inrDiscount - a.inrDiscount);
+  //       setAllProduct(sortingPrice);
+  //     } else {
+  //       setAllProduct(prevData => [...prevData, ...data.data]);
+  //       setLoading(false);
+  //     }
+  //   }
+  //   } catch (err) {
+  //     console.log(err, "error");
+  //   }
+  // };
+
+  const filterCategoryById = async (categoryId) => {
+    try {
+      const response = await fetch(`${baseUrl}/api/product/all_product`);
+      const data = await response.json();
+      console.log(data.data, "data.data check")
+      if (categoryId) {
+        const filterData = data.data.filter((item) => {
+          return (item.category._id == categoryId)
+        });
+        console.log(filterData, "inside the ProductByCategory by id");
+         if (selectedOrder) {
+          const filterCtegorySortedPrice=filterData.sort((a, b) => {
+            if (selectedOrder === "ascending") {
+              return a.inrDiscount - b.inrDiscount;
+            } else {
+              return b.inrDiscount - a.inrDiscount;
+            }
+          });
+          console.log(filterCtegorySortedPrice,"check data here category")
+          setAllProduct(filterCtegorySortedPrice);
+        }else{
+          setAllProduct(prevData => [...prevData, ...filterData]);
+        setLoading(false);
+        }
+      } else {
         setAllProduct(prevData => [...prevData, ...data.data]);
         setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
+      }
+    } catch (err) {
+      console.log(err, "error");
+    }
   };
 
   const categoryDetails = async () => {
@@ -424,11 +524,14 @@ const AllProducts = (props) => {
       });
   };
 
-  const GetSubCategory = async () => {
+  const GetSubCategory = async (categoryId) => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
         setSubCategories(data.data);
+        const filterSubcategory = data.data.filter((item) => item.category == categoryId)
+        console.log(filterSubcategory, "chek filter daat for subcategory");
+        setAllProduct(filterSubcategory);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -446,14 +549,82 @@ const AllProducts = (props) => {
       });
   };
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleCheckboxChange = async (e) => {
+    setCategoriesId(e.target.value);
+    filterCategoryById(e.target.value);
+  }
+  console.log(allCategoryData, "chekc the data of all category details");
   return (
     <>
       <Header1 />
       <div className="container m-auto Category-div">
         <div className="row align-items-center">
           <div className="col-12">
-            <div className="section-title my-4">
+            <div className="section-title my-4" style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>All Products</h2>
+              <div className="" style={{ cursor: "pointer" }} onClick={showModal}><BiArrowToLeft /></div>
+              {
+                isModalOpen && <div>
+                  <Modal title="" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                    <h6>Category</h6>
+                    {categories &&
+                      categories.length > 0 &&
+                      categories.map((items) => {
+                        return (
+                          <div className="form-check" key={items.name}>
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              value={items._id}
+                              id={`radio-${items.name}`}
+                              name="category" // Add the name attribute
+                              onClick={handleCheckboxChange}
+                            />
+                            <label className="form-check-label" htmlFor={`radio-${items.name}`}>
+                              {items.name}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    <h6>Price</h6>
+                    <div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          checked={selectedOrder === "ascending"}
+                          onChange={() => handleOrderChange("ascending")}
+                        />
+                        <label className="form-check-label">
+                          Ascending order
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          checked={selectedOrder === "descending"}
+                          onChange={() => handleOrderChange("descending")}
+                        />
+                        <label className="form-check-label">
+                          Descending order
+                        </label>
+                      </div>
+                    </div>
+                  </Modal>
+
+
+                </div>
+              }
             </div>
             {loading ?
               <Loader

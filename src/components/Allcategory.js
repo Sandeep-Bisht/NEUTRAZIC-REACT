@@ -179,8 +179,6 @@ const Allcategory = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         await setCategoryDetails(data.data[0]);
-
-        
       })
       .catch((err) => {
         console.log(err, "error");

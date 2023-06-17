@@ -798,7 +798,7 @@ const Header1 = (props) => {
                         setLoginModal(true);
                         reset1();
                       }}
-                      className={!registerModal ? "text-success" : null}
+                      className={!registerModal ? null : "text-success" }
                     >
                       Login
                     </h3>
@@ -811,7 +811,7 @@ const Header1 = (props) => {
                         reset();
                         setMsg("");
                       }}
-                      className={registerModal ? "text-success" : null}
+                      className={registerModal ? null : "text-success"  }
                     >
                       Register
                     </h3>

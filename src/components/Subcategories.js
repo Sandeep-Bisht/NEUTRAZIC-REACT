@@ -577,6 +577,7 @@ const Subcategories = (props) => {
                         >
                           {filterData && filterData.length > 0 ? (
                             filterData.map((item, ind) => {
+                              console.log(item,"chek all the filter data on sucategory page")
                               return (
                                 <figure
                                   className="figure subcategory-figure"
