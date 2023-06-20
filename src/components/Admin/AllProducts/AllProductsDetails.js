@@ -134,9 +134,9 @@ export default function AllProductsDetails() {
 
     },
     {
-      title:"maximumOrder",
-      dataIndex:"maximumOrder",
-      key:"maximumOrder",
+      title: "maximumOrder",
+      dataIndex: "maximumOrder",
+      key: "maximumOrder",
     },
     {
       title: "Image",
@@ -201,13 +201,10 @@ export default function AllProductsDetails() {
       <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
     </svg>
   );
-  console.log(getuser, "get user ")
   const rowClassName = (record) => {
-    console.log(record,"record of per row");
-        if(record.quantity<=record.reorderQuantity)
-        {
-          return "table-style" ;
-        }
+    if (record.quantity <= record.reorderQuantity) {
+      return "table-style";
+    }
     return '';
   };
 
@@ -229,31 +226,26 @@ export default function AllProductsDetails() {
                     <MdPlaylistAdd />Add
                   </Link>
                   <div>
-                  <input
-                    type='text'
-                    onChange={e => onChangeHandler(e)}
-                    onKeyUp={searchHandler}
-                    placeholder="Search.."
-                    enterButton
-                    style={{ position: "sticky", top: "0", left: "0" }}
-                  />
-                  <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                    <input
+                      type='text'
+                      onChange={e => onChangeHandler(e)}
+                      onKeyUp={searchHandler}
+                      placeholder="Search.."
+                      enterButton
+                      style={{ position: "sticky", top: "0", left: "0" }}
+                    />
+                    <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
                   </div>
                 </div>
               </div>
               <Table
-rowClassName={rowClassName}
-  rowKey="name"
-  dataSource={filteredData && filteredData.length ? filteredData : getuser}
-  columns={columns}
-  loading={loading}
-  pagination={false}
-  //   getRowClassName={(record) =>
-  //   record._id === getuser._id && record.quantity && record.quantity <= 5
-  //     ? 'table-style'
-  //     : ''
-  // }
-/>
+                rowClassName={rowClassName}
+                rowKey="name"
+                dataSource={filteredData && filteredData.length ? filteredData : getuser}
+                columns={columns}
+                loading={loading}
+                pagination={false}
+              />
 
 
             </div>

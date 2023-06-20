@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input, Space, Popconfirm, Typography } from "antd";
+import { Table, Space, Popconfirm, Typography } from "antd";
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
@@ -28,7 +28,6 @@ export default function AllSubCategoriesDetails() {
     fetchUsers();
     GetSubCategory();
   }, [])
-  // console
 
 
   const GetSubCategory = async () => {

@@ -8,7 +8,6 @@ import axios from "axios";
 
 var Userdata;
 const UserProfile = (props) => {
-  var count = 0;
   const [userProfile, setUserProfile] = useState([]);
   const [data, Setdata] = useState({
     username: "",

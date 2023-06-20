@@ -8,7 +8,6 @@ import axios from "axios";
 
 var Userdata;
 const SubCategoryCreation = (props) => {
-  var categoryCount = 0;
   const [subcategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [formerror, Setformerror] = useState({});

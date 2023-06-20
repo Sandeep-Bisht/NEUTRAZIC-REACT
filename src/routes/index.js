@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import PrivateRoute from "./private-route";
-import Login from "../views/login";
-import Home from "../views/home";
 import HomePage from "../views/landing/HomePage";
-import Footer from "../components/Footer";
 import Register from "../components/form/Register";
 import Dashboard from "../components/Admin/Dashboard";
 import Productform from "../components/Admin/Productform";
@@ -24,8 +20,6 @@ import UserDetails from "../components/form/UserDetails";
 import Header1 from "../components/Header1";
 import WishList from "../components/WishList";
 // import AddressPage from "../components/AddressPage";
-import ShippingAddress from "../components/ShippingAddress";
-import Vieworder from "../components/Admin/NewOrder";
 import NewOrder from "../components/Admin/NewOrder";
 import InProgressOrder from "../components/Admin/InProgressOrder";
 import DeliveredOrder from "../components/Admin/DeliveredOrder";
@@ -89,11 +83,6 @@ const Root = (props) => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
-
-  // useEffect(()=>{
-  //   let num = Math.random();
-  //   setIsLoggedIn(num);
-  // },[loginState])
 
   return (
     <CurrencyState>

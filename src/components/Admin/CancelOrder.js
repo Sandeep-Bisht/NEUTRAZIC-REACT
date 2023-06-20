@@ -3,7 +3,7 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Modal, Button, Typography, Dropdown } from "antd";
+import { Table, Modal, Button,} from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 

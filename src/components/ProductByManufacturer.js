@@ -225,7 +225,6 @@ const ProductByManufacturer = (props) => {
                 if (el.manufacturer.name == props.match.params._id) {
                   return (
                     <div className="col-lg-3 col-md-12 col-sm-12 " key={ind}>
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row  align-items-center product-div">
                           <div className="col-6 product-image-div">
@@ -239,7 +238,6 @@ const ProductByManufacturer = (props) => {
                                     `${baseUrl}/` + el.image[0].path
                                   }
                                   alt=""
-                                  //  style={{position:"absolute"}}
                                 />
                               </div>
                             </Link>

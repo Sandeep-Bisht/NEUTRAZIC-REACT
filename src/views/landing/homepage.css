@@ -9514,7 +9514,24 @@ p:last-child {
 .ptb-70 {
   padding-bottom: 70px;
 }
-
+.all_Product-filter{
+  position: absolute;
+  right: 20px!important;
+  top: 140px!important;
+  width: 220px!important;
+}
+.filterClass{
+  display: none!important;
+}
+.all_Product-filter .custom-close-icon-forget {
+  stroke: rgba(0, 0, 0, 0.6) !important;
+  stroke-width: 4px !important;
+}
+.all_Product-filter .custom-close-icon-forget {
+  width: max(10px, 3vw);
+  height: max(14px, 1vw);
+  overflow: visible !important;
+}
 /* .pt-70,
 .ptb-70 {
 	padding-top: 70px

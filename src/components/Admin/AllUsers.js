@@ -5,7 +5,7 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { Link } from "react-router-dom"
 import { baseUrl } from "../../utils/services";
-import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button, } from "antd";
+import { Table,Space, Popconfirm, Typography,} from "antd";
 import { BiSearchAlt } from 'react-icons/bi';
 import { FaTrashAlt } from 'react-icons/fa';
 import { MdOutlineEditNote } from 'react-icons/md';
@@ -124,8 +124,8 @@ const UserPage = () => {
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
               <div className="all-manufacture-details-section">
-                <h3 className="all-manufacturer-head">All Users</h3>
-                <div className="all-manufacturer-search-wrap">
+                <h3 className="all-manufacturer-head all-products-head">All Users</h3>
+                <div className="all-manufacturer-search-wrap all-products-search-wrap">
                   <input
                     type='text'
                     onChange={e => onChangeHandler(e)}

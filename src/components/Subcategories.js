@@ -60,7 +60,6 @@ const Subcategories = (props) => {
     }
   };
 
-  var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
   useEffect(() => {
     window.scroll(0, 0);

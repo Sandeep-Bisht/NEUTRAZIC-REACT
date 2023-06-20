@@ -1033,6 +1033,18 @@ font-family: 'Roboto', sans-serif;
   :where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper {
     margin-top: 5px!important;
   }
+  .dashboard-logo{
+    max-width: 70%!important;
+  }
+  .cardicon{
+    height: 22px;
+  }
+  .count1{
+    font-size: 22px;
+  }
+  .cardheads{
+    font-size: 14px;
+  }
 }
 @media (max-width:575px){
   .dashboard-accordion-body {
@@ -1082,7 +1094,21 @@ font-family: 'Roboto', sans-serif;
   .nav__logo__img{
     width: 50%!important;
   }
-  
+  .nav__list{
+    padding-top: 29px!important;
+  }
+  .graph-main-div{
+    padding-top: 0px!important;
+  }
+  .cardheads{
+    font-size: 14px;
+  } 
+  .cardicon {
+    font-size: 22px;
+  }
+  .all-products-details-section {
+    padding-top: 26px!important;
+  }  
 }
 @media (max-width:430px)
 {
@@ -1112,7 +1138,7 @@ font-family: 'Roboto', sans-serif;
   padding-top: 7px;
 }
 .nav__link .accordion-item .accordion-header .d-flex button {
-  width: 87px!important;
+  width: 88px!important;
 }
 .nav__link {
   grid-column-gap: 0px!important;
@@ -1122,5 +1148,17 @@ font-family: 'Roboto', sans-serif;
 }
 .nav__name {
   font-size: 11px;
+}
+.dashboard-logo{
+  max-width: 85%!important;
+} 
+.nav__logo .user-name {
+  font-size: 14px;
+}
+.cardicon{
+  font-size: 20px;
+}
+.nav__link .accordion-button::after {
+  background-size: 11px!important;
 }
 }

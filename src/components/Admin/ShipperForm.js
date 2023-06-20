@@ -9,7 +9,6 @@ import axios from "axios";
 var Userdata;
 const ShipperForm = (props) => {
   const [warehouse,setWarehouse] = useState([]);
-  const [update, setUpdate] = useState(false);
   const [data, Setdata] = useState({
     name: "",
     description: "",    
