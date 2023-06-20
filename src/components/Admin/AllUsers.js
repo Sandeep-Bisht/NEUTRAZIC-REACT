@@ -5,7 +5,7 @@ import Sidemenu from "./Sidemenu";
 import "./Dashboard.css";
 import { Link } from "react-router-dom"
 import { baseUrl } from "../../utils/services";
-import { Table, Input, Space, Popconfirm, Typography, Dropdown, Modal, Button, } from "antd";
+import { Table,Space, Popconfirm, Typography,} from "antd";
 import { BiSearchAlt } from 'react-icons/bi';
 import { FaTrashAlt } from 'react-icons/fa';
 import { MdOutlineEditNote } from 'react-icons/md';

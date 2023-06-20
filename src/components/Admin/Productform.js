@@ -13,7 +13,6 @@ const Productform = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
   const [products, Setproducts] = useState([]);
-  const [shwoTable, setShowTable] = useState(false);
   const [editableArray,setEditableArray]=useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [editableData] = useState(props.history.location.state);
@@ -127,7 +126,6 @@ const Productform = (props) => {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log("Form has errors. Please correct them.");
     }
   };
 
@@ -172,7 +170,6 @@ const Productform = (props) => {
       }
     }
     else {
-      console.log("Form has errors. Please correct them.");
     }
   };
   useEffect(()=>{

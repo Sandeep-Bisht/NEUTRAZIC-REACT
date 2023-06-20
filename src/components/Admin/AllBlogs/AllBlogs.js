@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DashboardHeaader from "../DashboardHeaader";
 import Sidemenu from "../Sidemenu";
 import { baseUrl } from "../../../utils/services";
-import { Table, Input, Space, Popconfirm, Typography } from "antd";
+import { Table, Space, Popconfirm, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";

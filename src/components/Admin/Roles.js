@@ -6,10 +6,7 @@ import Sidemenu from "./Sidemenu";
 
 var Userdata = "";
 const Roles = (props) => {
-  const [email, setemail] = useState("");
-  const [username, setUsername] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [password, setPassword] = useState("");
+
   const [manufactureres, setManufactureres] = useState([]);
   const [manufacturer,setManufacturer]=useState([]);
   const [users, setUsers] = useState([]);

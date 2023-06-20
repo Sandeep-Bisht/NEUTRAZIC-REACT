@@ -59,8 +59,6 @@ const Warehouse = (props) => {
           history.push("Configuration/" + "AllWarehouseDetails")
         })
         .then((res) => {
-          // GetManufacturer();
-          // this.getAddOn();
         })
     }
   };

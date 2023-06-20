@@ -6,7 +6,6 @@ import { baseUrl } from "../../utils/services";
 import { useHistory } from "react-router";
 var Userdata;
 const CategoryCreation = (props) => {
-  var categoryCount = 0;
   const [categories, setCategories] = useState([]);
   const [formerror, setFormerror] = useState({});
   const [editableArray,setEditableArray]=useState([]);

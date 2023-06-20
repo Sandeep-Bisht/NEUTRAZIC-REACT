@@ -60,7 +60,6 @@ const Subcategories = (props) => {
     }
   };
 
-  var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
   useEffect(() => {
     window.scroll(0, 0);
@@ -577,7 +576,6 @@ const Subcategories = (props) => {
                         >
                           {filterData && filterData.length > 0 ? (
                             filterData.map((item, ind) => {
-                              console.log(item,"chek all the filter data on sucategory page")
                               return (
                                 <figure
                                   className="figure subcategory-figure"

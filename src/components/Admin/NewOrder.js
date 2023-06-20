@@ -5,7 +5,6 @@ import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
 import { Table, Space, Dropdown, Modal, Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { AiFillCaretDown } from "react-icons/ai";

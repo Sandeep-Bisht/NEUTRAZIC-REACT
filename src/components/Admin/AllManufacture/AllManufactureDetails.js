@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input, Typography, Popconfirm, Space } from "antd";
+import { Table, Typography, Popconfirm, Space } from "antd";
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
@@ -141,14 +141,9 @@ export default function AllManufactureDetails() {
     },
 
   ];
-
-
-
-
   return (
     <>
-
-      <section id="body-pd">
+     <section id="body-pd">
         <div className="container-fluid">
           <DashboardHeaader />
           <div className="row px-0 dashboard-container">

@@ -25,11 +25,9 @@ var CartItems="";
 
 const Cart = () => {
   const history = useHistory();
-  const [newquantities, setNewqantities] = useState();
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [_id, Set_id] = useState();
-  const [subtotal, setSubtotal] = useState(0);
   const [cartStatus, setCartStatus] = useState();
   const [cartItems, setCartItems] = useState(undefined);
 
@@ -130,7 +128,6 @@ const Cart = () => {
     }
   };
   const Plusquantity = async (quantity, price, index,maximumOrder) => {
-    console.log(quantity,"inse plus quantity");
     if (quantity >= 1 && quantity<maximumOrder) {
       cart[index].quantity = quantity + 1;
       await UpdateCart();
@@ -187,25 +184,6 @@ const Cart = () => {
       .catch((err) => console.log(err));
   };
 
-  const DeleteCart = async (url) => {
-    await fetch(`${baseUrl}/api/cart/delete_cart_by_id`, {
-      method: "delete",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: Userdata._id,
-      }),
-    })
-      .then((res) => {
-        res.json();
-        localStorage.removeItem("Usercartdata");
-        window.location.href = url;
-      })
-      .then(async (res) => {})
-      .catch((err) => {});
-  };
   return (
     <>
       <Header1 CartItems={cart} />

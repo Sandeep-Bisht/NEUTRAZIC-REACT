@@ -12,13 +12,11 @@ import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import Loader from "react-spinner-loader";
-import AllproductsFilter from "./AllproductsFilter";
 import Baseline from "./Baseline";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { BiArrowToLeft } from "react-icons/bi";
+import { BiFilter } from "react-icons/bi";
 import { Button, Modal } from 'antd';
+import { RiContactsBookLine } from "react-icons/ri";
 var Userdata;
 const AllProducts = (props) => {
   const state1 = useContext(CurrencyContext);
@@ -26,37 +24,34 @@ const AllProducts = (props) => {
   let dispatch = useDispatch();
 
   const [AllProduct, setAllProduct] = useState([]);
-  const [productLength, serProductLength] = useState();
   const [Categorydetails, setCategoryDetails] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
   const [order, Setorder] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
   const [wishlistData, Setwishlist] = useState([]);
-  const [prev, SetPrev] = useState(0);
-  const [filter, setFilter] = useState("");
-  const [mrp, setMrp] = useState();
-  const [data, setData] = useState([]);
   const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allCategoryData, setAllCategoryData] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [categoriesId,setCategoriesId]=useState("");
-
+  const [categoriesId,setCategoriesId]=useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [allProductCheck,setAllProductCheck]=useState(true);
+  const [AllPaginationProduct,setAllPaginationProduct]=useState([]);
   const handleOrderChange = (order) => {
     setSelectedOrder(order);
   };
 useEffect(()=>{
   if(selectedOrder){
-    ProductByCategory()
+    ProductByCategory();
+    AssecnedingDesecending();
   }
 },[selectedOrder])
   useEffect(() => {
@@ -247,20 +242,22 @@ useEffect(()=>{
         });
     }
   };
+  
   const ProductByCategory = async () => {
+    if(allProductCheck)
+    {
     try {
       let response;
-      
       if (selectedOrder) {
         response = await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=5&_order=${selectedOrder}`);
       } else {
-        response = await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=5`);
+        response = await fetch(`${baseUrl}/api/product/all_product?_page=${currentPage}&_limit=10`);
       }
       
       const data = await response.json();
       setCurrentPage(prevPage => prevPage + 1);
       
-      let sortedData = [...AllProduct];
+      let sortedData = [...AllPaginationProduct];
       if (selectedOrder) {
         sortedData.sort((a, b) => {
           if (selectedOrder === "ascending") {
@@ -270,64 +267,25 @@ useEffect(()=>{
           }
         });
       }
-      await setAllProduct(sortedData);
+      await setAllPaginationProduct(sortedData);
       
-      setAllProduct(prevData => [...prevData, ...data.data]);
+      setAllPaginationProduct(prevData => [...prevData, ...data.data]);
       setLoading(false);
     } catch (err) {
       console.log(err, "error");
     }
+  }
   };
-  
-  
 
-  // const allProductADorder = async (sortprice) => {
-  //   try {
-  //     const response = await fetch(`${baseUrl}/api/product/all_product`);
-  //     const data = await response.json();
-  //     if(categoriesId)
-  //     {
-  //       const filterData = data.data.filter((item) => {
-  //         return (item.category._id == categoriesId)
-  //       });
-  //     if (sortprice === "ascending") {
-  //       const sortingPrice = filterData.sort((a, b) => a.inrDiscount - b.inrDiscount);
-  //       setAllProduct(sortingPrice);
-  //     } else if (sortprice === "descending") {
-  //       const sortingPrice = filterData.sort((a, b) => b.inrDiscount - a.inrDiscount);
-  //       setAllProduct(sortingPrice);
-  //     } else {
-  //       setAllProduct(prevData => [...prevData, ...data.data]);
-  //       setLoading(false);
-  //     }
-  //   }
-  //   else{
-  //     if (sortprice === "ascending") {
-  //       const sortingPrice = data.data.sort((a, b) => a.inrDiscount - b.inrDiscount);
-  //       setAllProduct(sortingPrice);
-  //     } else if (sortprice === "descending") {
-  //       const sortingPrice = data.data.sort((a, b) => b.inrDiscount - a.inrDiscount);
-  //       setAllProduct(sortingPrice);
-  //     } else {
-  //       setAllProduct(prevData => [...prevData, ...data.data]);
-  //       setLoading(false);
-  //     }
-  //   }
-  //   } catch (err) {
-  //     console.log(err, "error");
-  //   }
-  // };
 
   const filterCategoryById = async (categoryId) => {
     try {
       const response = await fetch(`${baseUrl}/api/product/all_product`);
       const data = await response.json();
-      console.log(data.data, "data.data check")
       if (categoryId) {
         const filterData = data.data.filter((item) => {
           return (item.category._id == categoryId)
         });
-        console.log(filterData, "inside the ProductByCategory by id");
          if (selectedOrder) {
           const filterCtegorySortedPrice=filterData.sort((a, b) => {
             if (selectedOrder === "ascending") {
@@ -336,10 +294,9 @@ useEffect(()=>{
               return b.inrDiscount - a.inrDiscount;
             }
           });
-          console.log(filterCtegorySortedPrice,"check data here category")
           setAllProduct(filterCtegorySortedPrice);
         }else{
-          setAllProduct(prevData => [...prevData, ...filterData]);
+          setAllProduct(filterData);
         setLoading(false);
         }
       } else {
@@ -524,20 +481,6 @@ useEffect(()=>{
       });
   };
 
-  const GetSubCategory = async (categoryId) => {
-    await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        setSubCategories(data.data);
-        const filterSubcategory = data.data.filter((item) => item.category == categoryId)
-        console.log(filterSubcategory, "chek filter daat for subcategory");
-        setAllProduct(filterSubcategory);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      });
-  };
-
   const GetManufacturer = async () => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
@@ -551,18 +494,60 @@ useEffect(()=>{
 
   const showModal = () => {
     setIsModalOpen(true);
+    const filter=document.getElementById("filterId");
+    filter.classList.add("filterClass")
   };
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    const filter=document.getElementById("filterId");
+    filter.classList.remove("filterClass")
   };
   const handleCheckboxChange = async (e) => {
     setCategoriesId(e.target.value);
+    setAllProductCheck(false);
+    setCurrentPage(1);
+    setAllPaginationProduct([]);
+    setSelectedCategory(e.target.value);
     filterCategoryById(e.target.value);
   }
-  console.log(allCategoryData, "chekc the data of all category details");
+  const AssecnedingDesecending=()=>{
+    let sortedData = [...AllProduct];
+      sortedData.sort((a, b) => {
+        if (selectedOrder === "ascending") {
+          return a.inrDiscount - b.inrDiscount;
+        } else {
+          return b.inrDiscount - a.inrDiscount;
+        }
+      });
+      setAllProduct(sortedData);
+  }
+  useEffect(()=>{
+    if(allProductCheck==true)
+    {
+      setCategoriesId(null);
+      ProductByCategory(); 
+    }
+  },[allProductCheck])
+  const allProducts=(e)=>{
+    setSelectedOrder(null);
+    setSelectedCategory(null);
+    setAllProductCheck(!allProductCheck);
+  }
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
+
   return (
     <>
       <Header1 />
@@ -571,59 +556,72 @@ useEffect(()=>{
           <div className="col-12">
             <div className="section-title my-4" style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>All Products</h2>
-              <div className="" style={{ cursor: "pointer" }} onClick={showModal}><BiArrowToLeft /></div>
+              <div className="d-flex" id="filterId"  style={{cursor: "pointer" }} onClick={showModal}>
+                <h5>Filters</h5><BiFilter style={{height:("30px")}}/></div>
               {
                 isModalOpen && <div>
-                  <Modal title="" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                    <h6>Category</h6>
-                    {categories &&
-                      categories.length > 0 &&
-                      categories.map((items) => {
-                        return (
-                          <div className="form-check" key={items.name}>
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              value={items._id}
-                              id={`radio-${items.name}`}
-                              name="category" // Add the name attribute
-                              onClick={handleCheckboxChange}
-                            />
-                            <label className="form-check-label" htmlFor={`radio-${items.name}`}>
-                              {items.name}
-                            </label>
-                          </div>
-                        );
-                      })}
-                    <h6>Price</h6>
-                    <div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          checked={selectedOrder === "ascending"}
-                          onChange={() => handleOrderChange("ascending")}
-                        />
-                        <label className="form-check-label">
-                          Ascending order
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          checked={selectedOrder === "descending"}
-                          onChange={() => handleOrderChange("descending")}
-                        />
-                        <label className="form-check-label">
-                          Descending order
-                        </label>
-                      </div>
-                    </div>
-                  </Modal>
+    <Modal className="all_Product-filter" title="" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+              closeIcon={<CustomCloseIcon />}
+              >
+      <h6>AllProducts</h6>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          value={allProductCheck}
+          checked={allProductCheck}
+          onChange={allProducts}
+        />
+        <label className="form-check-label">All products</label>
+      </div>
+      <h6>Category</h6>
+      {categories &&
+        categories.length > 0 &&
+        categories.map((items) => {
+          return (
+            <div className="form-check" key={items.name}>
+              <input
+                className="form-check-input"
+                type="radio"
+                value={items._id}
+                id={`radio-${items.name}`}
+                name="category"
+                checked={selectedCategory === items._id && !allProductCheck}
+                onChange={handleCheckboxChange}
+              />
+              <label
+                className="form-check-label"
+                htmlFor={`radio-${items.name}`}
+              >
+                {items.name}
+              </label>
+            </div>
+          );
+        })}
+      <h6>Price</h6>
+      <div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            checked={selectedOrder === "ascending"}
+            onChange={() => handleOrderChange("ascending")}
+          />
+          <label className="form-check-label">Ascending order</label>
+        </div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            checked={selectedOrder === "descending"}
+            onChange={() => handleOrderChange("descending")}
+          />
+          <label className="form-check-label">Descending order</label>
+        </div>
+      </div>
+    </Modal>
 
-
-                </div>
+                   </div>
               }
             </div>
             {loading ?
@@ -634,12 +632,115 @@ useEffect(()=>{
               <div>
                 <div id="columns" className="columns_5">
                   <InfiniteScroll
-                    dataLength={AllProduct.length}
+                    dataLength={AllPaginationProduct.length}
                     next={ProductByCategory}
                     hasMore={true}
                   >
 
-                    {AllProduct.map((el, ind1) => {
+                    {allProductCheck ? AllPaginationProduct.map((el, ind1) => {
+                      return (
+                        <figure className="figure allproduct-figure  mt-3" key={ind1}>
+                          <Link Link to={"/SingleProduct/" + el._id}>
+                            <div>
+                              <img src={`${baseUrl}/` + el.image[0].path} />
+                            </div>
+                            <figcaption>{el.name}</figcaption>
+                          </Link>
+
+                          <div className="contanier allproduct-price-div">
+                            <div className="row">
+                              <div className="col-6 text-start">
+                                <span className="price">
+                                  {" "}
+                                  {state1.state1 == "1" ? (
+                                    <i className="fa fa-dollar-sign"></i>
+                                  ) : (
+                                    <i className="fa fa-inr"></i>
+                                  )}
+                                  {state1.state1 == "1"
+                                    ? el.dollerDiscount
+                                    : el.inrDiscount}
+                                </span>
+                              </div>
+                              <div className="col-6 text-end">
+                                <p className={`text-nowrap wishlist`}>
+                                  {Userdata ? (
+                                    <i
+                                      id={el._id}
+                                      onClick={() => {
+                                        AddtoWishlist(
+                                          el._id,
+                                          el.name,
+                                          quantity,
+                                          el.inrMrp,
+                                          el.inrDiscount,
+                                          el.description,
+                                          el.category,
+                                          el.manufacturer.name,
+                                          el.image
+                                        );
+                                      }}
+                                      className={`bx bxs-heart ${checkWishlistItem(
+                                        el._id
+                                      )}`}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="bx bxs-heart "
+                                      data-bs-toggle="modal"
+                                      data-bs-target={
+                                        Userdata == null ? "#exampleModal" : null
+                                      }
+                                      onClick={() => handleResetForm()}
+                                    ></i>
+                                  )}
+                                  Wishlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          {Userdata ? (
+                            <button
+                              className="button btn"
+                              onClick={() => {
+                                cartfunction(
+                                  el._id,
+                                  el.name,
+                                  quantity,
+                                  el.maximumOrder,
+                                  el.inrMrp,
+                                  el.inrDiscount,
+                                  el.dollerDiscount,
+                                  el.dollerMrp,
+                                  el.discount,
+                                  el.description,
+                                  el.category,
+                                  el.manufacturer.name,
+                                  el.image[0].path
+                                );
+                              }}
+                              data-bs-toggle={Userdata == null ? "modal" : null}
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                            >
+                              Add to Cart
+                            </button>
+                          ) : (
+                            <button
+                              className="button btn"
+                              data-bs-toggle="modal"
+                              data-bs-target={
+                                Userdata == null ? "#exampleModal" : null
+                              }
+                              onClick={() => handleResetForm()}
+                            >
+                              Add to Cart
+                            </button>
+                          )}
+                        </figure>
+                      );
+                    }):AllProduct.map((el, ind1) => {
                       return (
                         <figure className="figure allproduct-figure  mt-3" key={ind1}>
                           <Link Link to={"/SingleProduct/" + el._id}>
@@ -744,7 +845,6 @@ useEffect(()=>{
                       );
                     })}
                   </InfiniteScroll>
-
                 </div>
               </div>
             }

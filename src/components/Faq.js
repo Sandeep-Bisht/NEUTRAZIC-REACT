@@ -82,11 +82,9 @@ function Faq () {
                     <button className="accordion-button collapsed" type="button"  id="accordionThree"
                     data-bs-toggle="collapse" data-bs-target="#collapseThree" 
                     aria-expanded="false" aria-controls="collapseThree" 
-                    // onClick={(e)=>Toogle(e)}
                     >
                       <span className="one">What do I need to register as a seller on Nutrazik?</span>
                       <span className="two">
-                    {/* {showInfo.accordionThree == true ? <AiOutlineMinus /> : <AiOutlinePlus />} */}
                     <AiOutlineMinus className="icon1"/>
                       <AiOutlinePlus className="icon2" />
                     </span>
