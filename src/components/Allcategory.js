@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import ReadMoreReact from "read-more-react";
@@ -10,10 +10,7 @@ var Userdata;
 const Allcategory = (props) => {
   const [AllProduct, setAllProduct] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
-  const [quantity, setQuantity] = useState(1);
-  const [userCart, setUserCart] = useState([]);
 
-  const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ProductByCategory();
@@ -22,7 +19,7 @@ const Allcategory = (props) => {
   }, []);
 
   const CartById = async () => {
-    if (!Userdata == []) {
+    if (!Userdata === []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
@@ -35,7 +32,6 @@ const Allcategory = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
         })
         .catch((err) => {
           console.log(err, "error");
@@ -76,7 +72,6 @@ const Allcategory = (props) => {
   const AddtoWishlist = async (
     productid,
     name,
-    quantity,
     mrp,
     discount,
     description,
@@ -97,7 +92,7 @@ const Allcategory = (props) => {
       .then((data) => data.json())
       .then(async (data) => {
         if (!JSON.stringify(data.data).includes(productid)) {
-          if (!Userdata == []) {
+          if (!Userdata === []) {
             await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
               headers: {
@@ -204,7 +199,7 @@ const Allcategory = (props) => {
       <div id="container m-auto p-4 products">
         <div id="columns" className="columns_4 products-row row">
           {AllProduct.map((item, ind1) => {
-            if (item.category._id == props.match.params.name) {
+            if (item.category._id === props.match.params.name) {
               return (
                 <div className="col-lg-3 col-md-12 col-sm-12 " key={ind1}>
                   <div className="single-products-box border">
@@ -269,7 +264,6 @@ const Allcategory = (props) => {
                                   AddtoWishlist(
                                     item._id,
                                     item.name,
-                                    quantity,
                                     item.inrMrp,
                                     item.inrDiscount,
                                     item.description,

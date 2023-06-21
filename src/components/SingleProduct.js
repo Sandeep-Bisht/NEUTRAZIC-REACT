@@ -813,29 +813,29 @@ const SingleProduct = (props) => {
                     </Link>
                   </span>
                   &nbsp; <span className="pl-2">Share:</span>
-                  <a href="https://www.facebook.com/Nutrazik" className="singleproduct-icon" target="_blank">
+                  <Link to="https://www.facebook.com/Nutrazik" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="facebook"
                       bgColor="#1b2845"
                     />
-                  </a>
-                  <a href="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
+                  </Link>
+                  <Link to="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="instagram"
                       bgColor="#1b2845"
                     />
-                  </a>
-                  <a href="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
+                  </Link>
+                  <Link to="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="twitter"
                       bgColor="#1b2845"
                     />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/70941207/admin/"
+                  </Link>
+                  <Link
+                    to="https://www.linkedin.com/company/70941207/admin/"
                     target="_blank"
                     className="singleproduct-icon"
                   >
@@ -844,32 +844,10 @@ const SingleProduct = (props) => {
                       network="linkedin"
                       bgColor="#1b2845"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-3 add-cart-buttons ml-3">
-                {/* <div className="quantity1 mt-1 ">
-                  <i
-                    className="bx bx-minus minus-single mr-2"
-                    onClick={() => {
-                      if (quantity > 1) {
-                        setQuantity(quantity - 1);
-                      }
-                    }}
-                  ></i>
-                  <input
-                    type="number"
-                    min="1"
-                    max="9"
-                    step="1"
-                    value={quantity}
-                    onChange={(e) => cartfunction(e.target.value)}
-                  />
-                  <i
-                    className="bx bx-plus minus-single ml-2"
-                    onClick={() => setQuantity(quantity + 1)}
-                  ></i>
-                </div> */}
                 <div className="add-to-cart mt-1">
                   {Userdata ? (
                     <button

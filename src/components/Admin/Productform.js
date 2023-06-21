@@ -12,7 +12,6 @@ const Productform = (props) => {
   const [subcategories, setSubCategories] = useState([]);
   const [manufactureres, setManufactureres] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
-  const [products, Setproducts] = useState([]);
   const [editableArray,setEditableArray]=useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [editableData] = useState(props.history.location.state);
@@ -266,7 +265,6 @@ const Productform = (props) => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
       .then(async (data) => {
-        Setproducts(data.data);
       })
       .catch((err) => {
         console.log(err, "error");

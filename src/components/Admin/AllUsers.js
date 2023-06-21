@@ -23,10 +23,12 @@ const UserPage = () => {
 
 
   const GetUserData = async () => {
+    setLoading(true);
     await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
       .then(async (data) => {
         setUserdata(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "error");

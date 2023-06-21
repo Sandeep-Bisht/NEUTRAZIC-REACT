@@ -15,43 +15,24 @@ import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import Loader from "react-spinner-loader";
 
-var CartDataWoLogin = [];
 var Userdata = "";
-let tranding = 0;
 const SearchResult = (props) => {
-  const SearchedText = props.match.params.Search;
   var count = 0;
   const params = useParams();
   const [data, setData] = useState([]);
-  const [heading, setHeading] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [Manufactureres, setManufactureres] = useState([]);
-  const [AllProduct, setAllProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
-  const [ct, setCT] = useState();
-  const [order, Setorder] = useState([]);
-  const [Categorydetails, setCategoryDetails] = useState({});
-  const [categoryname, Setcategoryname] = useState();
   const [filterdata, setFilterData] = useState(data);
   const [searchresults, setSearchResults] = useState();
-  let [dataForFilter, setDataForFilter] = useState([]);
-  let [minprice, setMinPrice] = useState();
-  let [maxprice, setMaxPrice] = useState();
   const [wishlistData, Setwishlist] = useState([]);
-  const [cartItems, setCartItems] = useState(undefined);
   const [currancy, setCurrency] = useState("INR");
-  const { loginState, setLoginState } = useContext(CurrencyContext);
+  const { loginState } = useContext(CurrencyContext);
   let { resetForm, setResetForm } = useContext(CurrencyContext);
-  const { searchedtextstate, setSearchedTextState } = useContext(
-    CurrencyContext
-  );
-  const { searchedtext, setSearchedText } = useContext(CurrencyContext);
+  const { searchedtext } = useContext(CurrencyContext);
   const [filterLength, setFilterLength] = useState("");
+  const order=[];
 
-  const history = useHistory();
   const state1 = useContext(CurrencyContext);
 
   const dispatch = useDispatch();
@@ -86,7 +67,6 @@ const SearchResult = (props) => {
   }, [searchresults]);
   const Docsearch = async (e) => {
     setSearchResults(e);
-    setCT(Date());
   };
   useEffect(() => {
     const filterdataLength = data.filter((el, ind) =>
@@ -151,7 +131,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        setManufactureres(data.data);
         Docsearch(params.Search);
       })
       .catch((err) => {
@@ -163,7 +142,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        setCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -173,7 +151,6 @@ const SearchResult = (props) => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
-        setHeading(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -283,7 +260,6 @@ const SearchResult = (props) => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data[0]);
-          setCartItems(data.data[0].order.length);
           let cartItems = data.data[0].order.length;
           dispatch(ACTIONS.getCartItem(cartItems));
         })

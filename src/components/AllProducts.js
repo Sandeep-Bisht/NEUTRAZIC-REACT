@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import "../views/landing/homepage.css";
@@ -15,8 +15,7 @@ import Loader from "react-spinner-loader";
 import Baseline from "./Baseline";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { BiFilter } from "react-icons/bi";
-import { Button, Modal } from 'antd';
-import { RiContactsBookLine } from "react-icons/ri";
+import { Modal } from 'antd';
 var Userdata;
 const AllProducts = (props) => {
   const state1 = useContext(CurrencyContext);
@@ -24,14 +23,11 @@ const AllProducts = (props) => {
   let dispatch = useDispatch();
 
   const [AllProduct, setAllProduct] = useState([]);
-  const [Categorydetails, setCategoryDetails] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
-  const [order, Setorder] = useState([]);
+  const order=[];
   const [categories, setCategories] = useState([]);
-  const [manufactureres, setManufactureres] = useState([]);
   const [wishlistData, Setwishlist] = useState([]);
-  const history = useHistory();
   const [currancy, setCurrency] = useState("INR");
   const { loginState, setLoginState } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
@@ -39,9 +35,7 @@ const AllProducts = (props) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [allCategoryData, setAllCategoryData] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [categoriesId,setCategoriesId]=useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [allProductCheck,setAllProductCheck]=useState(true);
   const [AllPaginationProduct,setAllPaginationProduct]=useState([]);
@@ -57,7 +51,7 @@ useEffect(()=>{
   useEffect(() => {
     setLoginState(loginState);
     setIsLogin(loginState);
-  }, [loginState]);
+  }, [loginState,isLogin]);
 
   useEffect(() => {
     if (state1 == "1") {
@@ -321,7 +315,6 @@ useEffect(()=>{
     })
       .then((res) => res.json())
       .then(async (data) => {
-        await setCategoryDetails(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -485,7 +478,6 @@ useEffect(()=>{
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        setManufactureres(data.data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -506,7 +498,6 @@ useEffect(()=>{
     filter.classList.remove("filterClass")
   };
   const handleCheckboxChange = async (e) => {
-    setCategoriesId(e.target.value);
     setAllProductCheck(false);
     setCurrentPage(1);
     setAllPaginationProduct([]);
@@ -527,7 +518,6 @@ useEffect(()=>{
   useEffect(()=>{
     if(allProductCheck==true)
     {
-      setCategoriesId(null);
       ProductByCategory(); 
     }
   },[allProductCheck])
@@ -649,7 +639,7 @@ useEffect(()=>{
 
                           <div className="contanier allproduct-price-div">
                             <div className="row">
-                              <div className="col-6 text-start">
+                              <div className="col-5 text-start ">
                                 <span className="price">
                                   {" "}
                                   {state1.state1 == "1" ? (
@@ -662,7 +652,7 @@ useEffect(()=>{
                                     : el.inrDiscount}
                                 </span>
                               </div>
-                              <div className="col-6 text-end">
+                              <div className="col-7 text-end">
                                 <p className={`text-nowrap wishlist`}>
                                   {Userdata ? (
                                     <i
@@ -752,7 +742,7 @@ useEffect(()=>{
 
                           <div className="contanier allproduct-price-div">
                             <div className="row">
-                              <div className="col-6 text-start">
+                              <div className="col-5 text-start ">
                                 <span className="price">
                                   {" "}
                                   {state1.state1 == "1" ? (
@@ -765,7 +755,7 @@ useEffect(()=>{
                                     : el.inrDiscount}
                                 </span>
                               </div>
-                              <div className="col-6 text-end">
+                              <div className="col-7 text-end">
                                 <p className={`text-nowrap wishlist`}>
                                   {Userdata ? (
                                     <i

@@ -15,7 +15,7 @@ const Ordered = () => {
   }, []);
   
   const ordersDetails = async () => {
-    if (!Userdata == []) {
+    if (!Userdata === []) {
       await fetch(`${baseUrl}/api/order/order_by_id`, {
         method: "POST",
         headers: {
@@ -30,7 +30,7 @@ const Ordered = () => {
 
         .then(async (data) => {
           
-          if (data.data != undefined) {
+          if (data.data !== undefined) {
             setOrderes(data.data);
           }
         })

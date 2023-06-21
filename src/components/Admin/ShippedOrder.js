@@ -14,7 +14,6 @@ import {
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
 import { AiFillCaretDown } from "react-icons/ai";
 
 var Userdata="";
@@ -26,8 +25,6 @@ const ShippedOrder = () => {
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [shippedOrder, setShippedOrder] = useState([]);
-  const [orderItem, setOrderItem] = useState([]);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
   const [vendor,setVendor]=useState(false);
   const history = useHistory();
@@ -125,14 +122,10 @@ const ShippedOrder = () => {
         return (Userdata.manufacturer == item.manufacturer)
         })
         setPrticularUserOrder(response)
-    setShippedOrder(item.address);
-    setOrderItem(item);
     setIsModalVisible(true);
       }
       else{
         setPrticularUserOrder(item.order)
-    setShippedOrder(item.address);
-    setOrderItem(item);
     setIsModalVisible(true);
       }   
     }

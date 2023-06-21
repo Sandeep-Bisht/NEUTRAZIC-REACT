@@ -8,7 +8,6 @@ import axios from "axios";
 
 var Userdata;
 const SubCategoryCreation = (props) => {
-  const [subcategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [formerror, Setformerror] = useState({});
   const [editableArray,setEditableArray]=useState([]);
@@ -100,7 +99,6 @@ const SubCategoryCreation = (props) => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
-        setSubCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLocation,Link } from 'react-router-dom'
 import { TiTick } from "react-icons/ti";
 import axios from "axios";
@@ -8,7 +8,6 @@ import Footer from './Footer';
 
 function VerifyToken(props) {
     const token = props.match.params.token;
-    var currentLocation=useLocation();
     useEffect(()=>{ 
       verifyToken(token); 
     },[]);
