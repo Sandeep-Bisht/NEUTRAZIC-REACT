@@ -8,7 +8,6 @@ import axios from "axios";
 
 var Userdata;
 const UserProfile = (props) => {
-  const [userProfile, setUserProfile] = useState([]);
   const [data, Setdata] = useState({
     username: "",
     email: "",
@@ -33,7 +32,6 @@ const UserProfile = (props) => {
     await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
       .then(async (data) => {
-        setUserProfile(data.data);
       })
       .catch((err) => {
         console.log(err, "errors");

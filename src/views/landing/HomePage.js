@@ -7,7 +7,6 @@ import Baseline from "../../components/Baseline";
 import Header1 from "../../components/Header1";
 import { useHistory } from "react-router-dom";
 import Delivery from "../../Images/delivery.jpg";
-import ReadMoreReact from "read-more-react";
 import Mobile from "../../Images/Mobile.png";
 import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
@@ -17,20 +16,17 @@ import * as ACTIONS from "../../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
-import Carousel from "react-elastic-carousel";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Loader from "react-spinner-loader";
 
 import $ from "jquery";
 
 var Userdata = "";
-let currentCurrencyType = "";
 var CartDataWoLogin = [];
 const HomePage = () => {
 
@@ -55,16 +51,11 @@ const HomePage = () => {
   const [singlecategory, setSingleCategory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
-  const [AllProduct, setAllProduct] = useState([]);
   const [search, setSearch] = useState("");
-  const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  // const [maximumOrder,setMaximumOrder]=useState(1);
   const [userCart, setUserCart] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
-  const [order, Setorder] = useState([]);
-  const [Categorydetails, setCategoryDetails] = useState({});
-  const [categoryname, Setcategoryname] = useState();
+  const order=[];
   const [wishlistData, Setwishlist] = useState([]);
   const [blogs, setBlogs] = useState();
   const history = useHistory();
@@ -148,27 +139,6 @@ const HomePage = () => {
 
   }, [loginState]);
 
-  let carouselRef = useRef(null);
-
-  const onNextStart = (currentItem, nextItem) => {
-    if (currentItem.index === nextItem.index) {
-      carouselRef.current.goTo(0);
-    }
-  };
-
-  const onPrevStart = (currentItem, nextItem) => {
-    if (currentItem.index === nextItem.index) {
-      carouselRef.current.goTo(data.otherImage);
-    }
-  };
-
-  const Loop = (currentItem) => {
-    if (currentItem.index == data.otherImage.length - 1) {
-      setTimeout(() => {
-        carouselRef.current.goTo(0);
-      }, 1000);
-    }
-  };
 
   const GetWishlist = async () => {
     let id;
@@ -237,44 +207,6 @@ const HomePage = () => {
       });
   };
 
-  const addToCartWithoutRegistration = (
-    productid,
-    name,
-    quantity,
-    mrp,
-    discount,
-    description,
-    category,
-    manufacturer,
-    image
-  ) => {
-    var newItemObj = {
-      productid: productid,
-      name: name,
-      image: image,
-      quantity: quantity,
-      mrp: parseInt(mrp),
-      singleprice: parseInt(mrp),
-      discountprice: discount,
-      description: description,
-      category: category,
-      manufacturer: manufacturer,
-      description: description,
-      status: "Pending",
-      justification: "Enjoy",
-      delivery_time: "No Status",
-    };
-    if (
-      !JSON.stringify(CartDataWoLogin).includes(name) &&
-      !JSON.stringify(localStorage.getItem("CartDataWoLogin")).includes(name)
-    ) {
-      if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
-        CartDataWoLogin = JSON.parse(localStorage.getItem("CartDataWoLogin"));
-      }
-      CartDataWoLogin.push(newItemObj);
-      localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-    }
-  };
 
   const cartfunction = async (
     productid,
@@ -379,7 +311,6 @@ const HomePage = () => {
       });
     }
   };
-console.log(data,"all the products");
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
@@ -394,7 +325,6 @@ console.log(data,"all the products");
       })
         .then((res) => res.json())
         .then(async (data) => {
-          console.log(data,"cart by id data");
           if (data.error && data.message === "Data Not Found") {
             setUserCart([]);
             setCartItems("")
@@ -540,29 +470,6 @@ console.log(data,"all the products");
       });
   };
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 1,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 1,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  const searchData = (e) => {
-    // if (props.func) props.func(e);
-  };
-
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
       if (item.productId == productId) {
@@ -599,7 +506,6 @@ console.log(data,"all the products");
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && search.length) {
-                          searchData(search);
                           setSearchedText(e.target.value);
                           history.push("/SearchResult/" + search);
                         }
@@ -609,7 +515,6 @@ console.log(data,"all the products");
                       className="search mr-1"
                       onClick={() => {
                         if (search.length) {
-                          searchData(search);
                           history.push("/SearchResult/" + search);
                         }
                       }}
@@ -857,9 +762,8 @@ console.log(data,"all the products");
               <div className="row ">
                 <div id="column" className="columns_5">
                   {data
-                    .filter((item) => item.type == "")
                     .map((el, ind) => {
-                      if (ind < 5) {
+                      if (ind < 6) {
                         return (
                           <figure
                             className="figure homepage-trending-figure"

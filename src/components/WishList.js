@@ -1,4 +1,3 @@
-import { get, map } from "jquery";
 import "../components/WishList.css";
 import React, { useState, useEffect } from "react";
 import Baseline from "./Baseline";
@@ -18,7 +17,7 @@ const WishList = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [wishlistData, Setwishlist] = useState([]);
-  const [order, Setorder] = useState([]);
+  const order=[];
   const [userCart, setUserCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);

@@ -5,15 +5,12 @@ import Header1 from "./Header1";
 import Baseline from "./Baseline";
 import "../views/landing/homepage.css";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 const ContactUs = () => {
-  const history = useHistory();
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm({
     mode: "onBlur",

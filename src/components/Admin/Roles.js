@@ -8,7 +8,6 @@ var Userdata = "";
 const Roles = (props) => {
 
   const [manufactureres, setManufactureres] = useState([]);
-  const [manufacturer,setManufacturer]=useState([]);
   const [users, setUsers] = useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [data,setData]=useState({

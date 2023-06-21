@@ -9,7 +9,7 @@ import Baseline from "./Baseline";
 function PrivacyPolicy() {
 useEffect(()=>{
   window.scroll(0,0);
-},[0])
+},[])
   return (
     <>
     <Header1/>

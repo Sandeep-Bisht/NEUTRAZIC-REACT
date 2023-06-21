@@ -11,7 +11,6 @@ import JoditEditor from "jodit-react";
 const Blog = (props) => {
   const [editableData] = useState(props.history.location.state);
   const [formerror, setFormerror] = useState({});
-  const [blogs,setBlogs]=useState({})
   const [editableArray,setEditableArray]=useState([]);
   const [data, setData] = useState({
     title: "",
@@ -31,7 +30,6 @@ const Blog = (props) => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())
       .then(async (data) => {
-        setBlogs(data.data);
       })
       .catch((err) => {
         console.log(err, "errors");

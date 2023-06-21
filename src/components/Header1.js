@@ -3,7 +3,6 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "antd";
 import "../components/Header1.css";
-import "../components/Carouselcomp";
 import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,24 +16,15 @@ import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
-import { BsBagHeart, BsCart4 } from "react-icons/bs";
+import { BsBagHeart } from "react-icons/bs";
 import { RiShoppingCartLine } from "react-icons/ri";
 import axios from "axios";
 import { RxDashboard } from "react-icons/rx";
 import { BiUser } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 
-let changeNavValue = 0;
 var header;
-var sticky;
 var Userdata = "";
-var Subtotal = "";
-var Usercartdata = "";
-var Userdata1 = "";
-var ActualSubtotal = "";
-
-const errorEmail = "Please Enter a valid Email Address";
-
 const Header1 = (props) => {
   let dispatch = useDispatch();
 
@@ -43,32 +33,24 @@ const Header1 = (props) => {
 
   const history = useHistory();
   const [search, setSearch] = useState("");
-  const [subcategories, setSubCategories] = useState([]);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   let [userCart, setUserCart] = useState([]);
-  const [order, Setorder] = useState([]);
+  const order=[];
   const [msg, setMsg] = useState("");
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
   const [wishlisted, setWishlisted] = useState("");
-  const [usermodal, setUsermodal] = useState();
-  const [shouldRefresh, setShouldRefresh] = useState(false);
   const [toggle, setToggle] = useState(0);
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
-  let { resetForm, setResetForm } = useContext(CurrencyContext);
+  let { resetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
-  const [forgetSecondModal, setForgetSecondModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [userdata, setUserdata] = useState();
   const [forgetMsg, setForgetMsg] = useState("");
   const [otpInput, setOtpInput] = useState(false);
-  const [verifyUserOtp, setVerifyUserOtp] = useState("");
   const [userItem, setUserItem] = useState({});
   const [otpMsg, setOtpMsg] = useState("");
   const { searchedtext, setSearchedText } = useContext(CurrencyContext);
@@ -168,10 +150,6 @@ const Header1 = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    ActualSubtotal = JSON.parse(localStorage.getItem("ActualSubtotal"));
-    Subtotal = JSON.parse(localStorage.getItem("Subtotal"));
-    Userdata1 = JSON.parse(localStorage.getItem("Userdata1"));
-    Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"));
     GetCategory();
     GetWishlist();
     GetSubCategory();
@@ -185,7 +163,7 @@ const Header1 = (props) => {
     }
     $(document).ready(function() {
       header = document.getElementById("myHeader");
-      sticky = header.offsetTop;
+      // sticky = header.offsetTop;
       window.onscroll = function() {
         // headerFunction();
       };
@@ -420,7 +398,6 @@ const Header1 = (props) => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
-        setSubCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -627,7 +604,6 @@ const Header1 = (props) => {
         });
         if (createOtp.data.success === 200) {
           setOtpInput(true);
-          setVerifyUserOtp(createOtp.data.otp.otp);
         }
       } else {
         setForgetMsg("No user associated with this email");
