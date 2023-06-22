@@ -634,7 +634,7 @@ useEffect(()=>{
                             <div>
                               <img src={`${baseUrl}/` + el.image[0].path} />
                             </div>
-                            <figcaption>{el.name}</figcaption>
+                            <figcaption className="Product-name-home">{el.name}</figcaption>
                           </Link>
 
                           <div className="contanier allproduct-price-div">
@@ -737,7 +737,7 @@ useEffect(()=>{
                             <div>
                               <img src={`${baseUrl}/` + el.image[0].path} />
                             </div>
-                            <figcaption>{el.name}</figcaption>
+                            <figcaption className="Product-name-home">{el.name}</figcaption>
                           </Link>
 
                           <div className="contanier allproduct-price-div">
