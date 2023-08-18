@@ -14,7 +14,6 @@ import {
 } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
 import { AiFillCaretDown } from "react-icons/ai";
 
 var Userdata="";
@@ -26,8 +25,6 @@ const ShippedOrder = () => {
   const [loading, setLoading] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [shippedOrder, setShippedOrder] = useState([]);
-  const [orderItem, setOrderItem] = useState([]);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
   const [vendor,setVendor]=useState(false);
   const history = useHistory();
@@ -70,7 +67,6 @@ const ShippedOrder = () => {
         console.log(err, "errors");
       });
   };
-console.log(OrderDetails,"shipped order details");
   const UpdateOrderStatus = async (order, orderStatus) => {
     delete order.createdAt;
     order.orderStatus = orderStatus;
@@ -126,14 +122,10 @@ console.log(OrderDetails,"shipped order details");
         return (Userdata.manufacturer == item.manufacturer)
         })
         setPrticularUserOrder(response)
-    setShippedOrder(item.address);
-    setOrderItem(item);
     setIsModalVisible(true);
       }
       else{
         setPrticularUserOrder(item.order)
-    setShippedOrder(item.address);
-    setOrderItem(item);
     setIsModalVisible(true);
       }   
     }
@@ -253,7 +245,6 @@ console.log(OrderDetails,"shipped order details");
                       vendor ? (prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item,ind) => {
-                          console.log(item,"inside the map method")
 ;                          return (
                             <>
                               <tr key={ind}>
@@ -311,9 +302,9 @@ console.log(OrderDetails,"shipped order details");
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="category-details-section">
-                <h3 className="all-category-head">Orders </h3>
-                <div className="all-category-search-wrap">
+              <div className="category-details-section all-order-details-section ">
+                <h3 className="all-category-head all-products-head">Orders </h3>
+                <div className="all-category-search-wrap all-products-search-wrap input">
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}

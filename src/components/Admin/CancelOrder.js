@@ -3,7 +3,7 @@ import Sidemenu from './Sidemenu';
 import './Dashboard.css';
 import { baseUrl } from '../../utils/services';
 import DashboardHeaader from './DashboardHeaader';
-import { Table, Input, Space, Popconfirm, Modal, Button, Typography, Dropdown } from "antd";
+import { Table, Modal, Button,} from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
@@ -155,7 +155,6 @@ const ShippedOrder = () => {
                       vendor ? (prticularUserOrder &&
                         prticularUserOrder.length > 0 &&
                         prticularUserOrder.map((item,ind) => {
-                          console.log(item,"inside the map method")
 ;                          return (
                             <>
                               <tr key={ind}>
@@ -211,9 +210,9 @@ const ShippedOrder = () => {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="category-details-section">
-                <h3 className="all-category-head">Orders </h3>
-                <div className="all-category-search-wrap">
+              <div className="category-details-section all-order-details-section ">
+                <h3 className="all-category-head all-products-head">Orders </h3>
+                <div className="all-category-search-wrap all-products-search-wrap input">
                   <input
                     type='text'
                     onChange={e => onChangeHandler(e)}

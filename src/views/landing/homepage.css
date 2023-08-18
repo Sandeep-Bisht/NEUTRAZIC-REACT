@@ -60,12 +60,13 @@
   background-color: #1b97ff !important;
 }
 .allproduct-price-div {
-  font-size: 16px;
+  font-size: 13px;
   color: #212121;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
+
 .allproduct-price-div i {
   color: var(--optionalColor);
   padding-right: 5px;
@@ -73,7 +74,7 @@
   font-weight: 600;
 }
 .wishlisted {
-  color: red !important;
+  color: #1b97ff !important;
 }
 /*!* Bootstrap v4.5.0 (https://getbootstrap.com/)
 * Copyright 2011-2020 The Bootstrap Authors
@@ -4114,7 +4115,7 @@ input[type="submit"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  box-shadow: 0px 12px 30px whitesmoke;
+  box-shadow: 0px 1px 1px 2px whitesmoke;
   /* border: 1px solid rgba(0, 0, 0, 0.125); */
   border: none !important;
   border-radius: 0.25rem;
@@ -9260,7 +9261,7 @@ a.text-secondary:hover {
 }
 
 .text-success {
-  color: #1b97ff !important;
+  color: rgb(27, 40, 69, 0.6)!important;
 }
 
 a.text-success:focus,
@@ -9514,7 +9515,24 @@ p:last-child {
 .ptb-70 {
   padding-bottom: 70px;
 }
-
+.all_Product-filter{
+  position: absolute;
+  right: 20px!important;
+  top: 140px!important;
+  width: 220px!important;
+}
+.filterClass{
+  display: none!important;
+}
+.all_Product-filter .custom-close-icon-forget {
+  stroke: rgba(0, 0, 0, 0.6) !important;
+  stroke-width: 4px !important;
+}
+.all_Product-filter .custom-close-icon-forget {
+  width: max(10px, 3vw);
+  height: max(14px, 1vw);
+  overflow: visible !important;
+}
 /* .pt-70,
 .ptb-70 {
 	padding-top: 70px
@@ -17559,21 +17577,21 @@ iframe {
   margin-top: 12px;
   padding-left: 25px;
   padding-right: 25px;
-  color: var(--optionalColor);
-  border: 2px solid rgb(27 151 255 / 33%);
+  color: White;
+  background: #2a96ff;
+  /* border: 2px solid rgb(27 151 255 / 33%); */
   border-radius: 0.25rem;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 17px;
 }
+.subs-btn .subscribe-icon{
+  height: 25px;
+}
 .single-footer-widget .newsletter-form .default-btn:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
+  background:white;
   border: none;
-  color: #fff;
+  color: #2a96ff;
 }
 .mobile-app .cat-heading {
   font-size: 2rem;
@@ -18985,8 +19003,8 @@ iframe {
   margin-right: 0;
 }
 .columns_5 .figure {
-  width: 19%;
-  margin-right: 1% !important;
+  width: 178px;
+  margin-right: 12px !important;
 }
 .columns_5 .figure:nth-child(5) {
   margin-right: 0;
@@ -19076,6 +19094,7 @@ div#columns .figure {
   display: inline-block;
   background: #fefefe;
   border: 2px solid #fafafa;
+  border-left: 1px solid #eaedff;
   box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
   margin: 0 0px 15px;
   -webkit-column-break-inside: avoid;
@@ -19804,7 +19823,8 @@ svg {
   line-height: 1.5;
   text-align: justify;
   word-spacing: -1px;
-  font-size: 14px !important;
+  font-size: 15px !important;
+  letter-spacing: 0.5px;
 }
 .home-banner .home-banner-right {
   text-align: center;
@@ -19820,7 +19840,7 @@ svg {
 }
 
 .Toastify__progress-bar--error {
-  background-color: #1b97ff !important;
+  background-color: rgb(27, 40, 69) !important;
 }
 /* HEart css */
 
@@ -19884,7 +19904,7 @@ svg {
   text-transform: capitalize;
 }
 .newActive {
-  color: #1b97ff;
+  color: rgb(27, 40, 69,0.6);
 }
 #List-item:hover {
   color: #1b97ff !important;
@@ -19977,6 +19997,23 @@ svg {
   .homepage-Blog-card .card-text {
     font-size: 13px !important;
   }
+  div#column .figure {
+   padding: 38px!important;
+}
+.columns_5 .figure {
+  width: 294px;
+  margin-right: 26px !important;
+  height: 390px!important;
+}
+div#column .figure img {
+  height: 203px!important;
+}
+div#columns .figure img {
+  height: 203px;
+}
+div#columns .figure {
+  padding: 38px!important;
+}
 }
 @media only screen and (max-width: 1024px) {
   .first-nav {
@@ -20115,9 +20152,14 @@ svg {
   div#columns .figure {
     margin: 0 0px 15px 2px;
   }
+  div#column .figure {
+    padding: 15px!important;
+}
   .columns_5 .figure {
     width: 32%;
-  }
+    height: 354px!important;
+    margin-right: 7px!important;
+}
   .browser-category-section {
     margin-top: 142px !important;
   }
@@ -20171,7 +20213,7 @@ svg {
     margin-top: 20px !important;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
-    font-size: 17px !important;
+    font-size: 14px !important;
   }
   .blog-box-wrapper .right-blog-image-wrap .top-heading-box-2 button {
     padding: 4px 20px !important;
@@ -20383,7 +20425,11 @@ svg {
     margin-top: 107px !important;
   }
   div#columns .figure {
-    margin: 0px 0px 15px 2px;
+    padding: 15px!important;
+  }
+  div#column .figure {
+    margin: 0px 0px 15px 8px!important;
+    padding: 15px!important;
   }
   p {
     line-height: 1.6;
@@ -20526,7 +20572,13 @@ svg {
   .allproduct-figure{
     width: 46%!important;
   }
-
+  .columns_5 .figure {
+    width: 47%!important;
+    height: 307px!important;
+  }
+  div#column .figure img {
+    height: 152px!important;
+  } 
   /* responsive homepage */
   .home-banner .home-banner-left .home-banner-heading {
     font-size: 20px !important;
@@ -20582,7 +20634,7 @@ svg {
     padding: 1px 7px !important;
   }
   .blog-box-wrapper .left-blog-image-wrap .top-heading-box-1 p {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
   .blog-box-wrapper .right-blog-image-wrap .top-heading-box-2 button {
     padding: 1px 12px !important;
@@ -20992,12 +21044,14 @@ svg {
   margin: 20px 10px 0 0;
 }
 .Category-container {
-     max-height: 350px;
-    padding: 20px;
-    background-color: aliceblue;
-    border-radius: 5px;
-    border: 1px solid rgb(30, 31 ,102,0.1);
-    box-shadow: 0px 0px 12px whitesmoke;
+  max-height: 350px;
+  padding: 20px;
+  background-color: aliceblue;
+  border-radius: 5px;
+  border: 1px solid rgb(30, 31 ,102,0.1);
+  box-shadow: 0px 0px 12px whitesmoke;
+  /* inset: 20px; */
+  margin: 0px 40px
 }
 
 /* slick Carousel */
@@ -21202,4 +21256,8 @@ svg {
 .hover-effect:hover{
   transform: scale(1) !important;
   transition: all 0.2s linear !important;
+}
+
+.homepage-blog-box .blog-link:hover{
+  color: black !important;
 }

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import PrivateRoute from "./private-route";
-import Login from "../views/login";
-import Home from "../views/home";
 import HomePage from "../views/landing/HomePage";
-import Footer from "../components/Footer";
 import Register from "../components/form/Register";
 import Dashboard from "../components/Admin/Dashboard";
 import Productform from "../components/Admin/Productform";
@@ -24,8 +20,6 @@ import UserDetails from "../components/form/UserDetails";
 import Header1 from "../components/Header1";
 import WishList from "../components/WishList";
 // import AddressPage from "../components/AddressPage";
-import ShippingAddress from "../components/ShippingAddress";
-import Vieworder from "../components/Admin/NewOrder";
 import NewOrder from "../components/Admin/NewOrder";
 import InProgressOrder from "../components/Admin/InProgressOrder";
 import DeliveredOrder from "../components/Admin/DeliveredOrder";
@@ -66,10 +60,14 @@ import NeedSupport from "../components/NeedSupport";
 import CurrencyState from "./ContextApi/CurrencyState";
 import AppStoreNutrazik from "../components/AppStoreNutrazik";
 import verifyToken from "../components/verifyToken";
+// import { useContext } from "react";
+// import CurrencyContext from "./ContextApi/CurrencyContext";
 
 var Userdata = "";
 const Root = (props) => {
   const [currancyType, setCurrancyType] = useState("");
+  // const [isLoggedIn,setIsLoggedIn] = useState('');
+  // const { loginState, setLoginState } = useContext(CurrencyContext);
 
   useEffect(() => {}, []);
   const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -85,6 +83,7 @@ const Root = (props) => {
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
   }, []);
+
   return (
     <CurrencyState>
       <Provider store={store}>

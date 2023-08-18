@@ -4,25 +4,13 @@ import Footer from ".././components/Footer";
 import ".././views/landing/homepage.css";
 import Baseline from ".././components/Baseline";
 import Header1 from ".././components/Header1";
-import { useHistory } from "react-router-dom";
 import ReadMoreReact from "read-more-react";
 import $ from "jquery";
 import { baseUrl } from "../utils/services";
 var Userdata = "";
-let tranding = 0;
 const ProductByManufacturer = (props) => {
   const [data, setData] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [Manufactureres, setManufactureres] = useState([]);
-  const [AllProduct, setAllProduct] = useState([]);
-
-  const [ProductCategory, setProductCategory] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [userCart, setUserCart] = useState([]);
-  const [order, Setorder] = useState([]);
-  const [Categorydetails, setCategoryDetails] = useState({});
-  const [categoryname, Setcategoryname] = useState();
-  const history = useHistory();
+  var quantity=1;
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetData();
@@ -36,11 +24,6 @@ const ProductByManufacturer = (props) => {
       $(".frontimage").mouseenter(function() {
         $(".backimage").hide();
       });
-      const WishlistHeart = () => {
-        $(".icon-wishlist").on("click", function() {
-          $(this).toggleClass("in-wishlist");
-        });
-      };
     });
   }, []);
 
@@ -59,7 +42,6 @@ const ProductByManufacturer = (props) => {
     await fetch(`${baseUrl}/api/manufacture/all_manufacture`)
       .then((res) => res.json())
       .then(async (data) => {
-        setManufactureres(data.data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -69,7 +51,6 @@ const ProductByManufacturer = (props) => {
     await fetch(`${baseUrl}/api/category/all_category`)
       .then((res) => res.json())
       .then(async (data) => {
-        setCategories(data.data._id);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -90,7 +71,6 @@ const ProductByManufacturer = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
         })
         .catch((err) => {
           console.log(err, "error");
@@ -225,7 +205,6 @@ const ProductByManufacturer = (props) => {
                 if (el.manufacturer.name == props.match.params._id) {
                   return (
                     <div className="col-lg-3 col-md-12 col-sm-12 " key={ind}>
-                      {/* <Link to={"/SingleProduct/" + el._id}> */}
                       <div className="single-products-box border">
                         <div className="row  align-items-center product-div">
                           <div className="col-6 product-image-div">
@@ -239,7 +218,6 @@ const ProductByManufacturer = (props) => {
                                     `${baseUrl}/` + el.image[0].path
                                   }
                                   alt=""
-                                  //  style={{position:"absolute"}}
                                 />
                               </div>
                             </Link>

@@ -1,5 +1,6 @@
 import CurrencyContext from "./CurrencyContext";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Cookies from "universal-cookie";
 
 const CurrencyState = (props) => {

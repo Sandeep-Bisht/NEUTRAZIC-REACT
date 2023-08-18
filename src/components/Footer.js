@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { SocialIcon } from "react-social-icons";
 import Cookies from "universal-cookie";
+import {FaTelegramPlane} from "react-icons/fa";
 
 var Userdata = "";
 const Footer = () => {
@@ -69,7 +70,6 @@ const Footer = () => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    // setLoginState(loginState);
     setIsLogin(loginState);
     window.scroll(0, 0);
   }, [loginState]);
@@ -111,23 +111,23 @@ const Footer = () => {
               <div className="row">
                 <div className="col-lg-3 col-sm-6 col-md-6">
                   <div className="single-footer-widget">
-                    <a className="logo d-inline-block" href="#">
+                    <Link className="logo d-inline-block" to="#">
                       <img
                         src={require("../Images/new-logo.png")}
                         alt="logo"
                         className="logo2"
                       />
-                    </a>
+                    </Link>
                     <ul className="footer-contact-info">
                       <li>
                         <span>Phone:</span>{" "}
-                        <a href="tel:+91-7500872014">+91-7500872014</a>
+                        <Link to="tel:+91-7500872014">+91-7500872014</Link>
                       </li>
                       <li>
                         <span>Email:</span>{" "}
-                        <a href="mailto:info@nutrazik.com" target="_blank">
+                        <Link to="mailto:info@nutrazik.com" target="_blank">
                           info@nutrazik.com
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <span>Address:</span> NutraZik Corp 539 W. Commerce
@@ -136,8 +136,8 @@ const Footer = () => {
                     </ul>
                     <ul className="social">
                       <li>
-                        <a
-                          href="https://www.facebook.com/Nutrazik"
+                        <Link
+                          to="https://www.facebook.com/Nutrazik"
                           target="_blank"
                         >
                           <SocialIcon
@@ -145,20 +145,20 @@ const Footer = () => {
                             network="facebook"
                             bgColor="#fff"
                           />
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="https://twitter.com/nutrazik" target="_blank">
+                        <Link to="https://twitter.com/nutrazik" target="_blank">
                           <SocialIcon
                             className="social-react-icons"
                             network="twitter"
                             bgColor="#fff"
                           />
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="https://www.instagram.com/nutrazik/"
+                        <Link
+                          to="https://www.instagram.com/nutrazik/"
                           target="_blank"
                         >
                           <SocialIcon
@@ -166,11 +166,11 @@ const Footer = () => {
                             network="instagram"
                             bgColor="#fff"
                           />
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="https://www.linkedin.com/company/70941207/admin/"
+                        <Link
+                          to="https://www.linkedin.com/company/70941207/admin/"
                           target="_blank"
                         >
                           <SocialIcon
@@ -178,11 +178,11 @@ const Footer = () => {
                             network="linkedin"
                             bgColor="#fff"
                           />
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="https://in.pinterest.com/nutrazik/"
+                        <Link
+                          to="https://in.pinterest.com/nutrazik/"
                           target="_blank"
                         >
                           <SocialIcon
@@ -190,7 +190,7 @@ const Footer = () => {
                             network="pinterest"
                             bgColor="#fff"
                           />
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -311,13 +311,10 @@ const Footer = () => {
                       )}
                       <p className="sendSubscribeLink">{message}</p>
                       <p className="sendSubscribeError">{msg}</p>
-                      <div className="align-items-center">
+                      <div className="align-items-center subs-btn">
                         <button type="submit" className="default-btn">
                           Subscribe Now
-                          <img
-                            src={require("../Images/Icons/cib_telegram-plane.png")}
-                            className="pl-2 pb-1"
-                          />
+                         <FaTelegramPlane className="subscribe-icon"/>
                         </button>
                       </div>
 
@@ -351,14 +348,14 @@ const Footer = () => {
                       Designed & Developed by{" "}
                       <i className="bx bx-copyright"></i>
                       2023
-                      <a
-                        href="https://giksindia.com/"
+                      <Link
+                        to="https://giksindia.com/"
                         target="_blank"
                         className="giks-link"
                       >
                         {" "}
                         GIKSINDIA
-                      </a>
+                      </Link>
                     </p>
                   </div>
                   <div className="col-lg-6 col-md-6 link-footer-second">

@@ -302,16 +302,18 @@
   padding-top: 50px;
 }
 .logiRegisterContentDiv .btn {
-  padding: 18px;
   margin-top: 20px;
   line-height: 0px;
   width: 45%;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: #00d872;
+  padding: 20px 20px !important;
+  background: #1b2845 !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  border: 1px solid #1b2845;
+  transition: all 0.5s ease;
+}
+.logiRegisterContentDiv .btn:hover {
+  background: rgb(27, 40, 69, 0.8) !important;
 }
 .logiRegisterContentDiv input {
   border: 0.8px solid #acacac;
@@ -333,9 +335,11 @@
 .logiRegisterHeader2 h3 {
   float: right;
   cursor: pointer;
+  color: #1b2845;
 }
 .logiRegisterHeader1 h3 {
   cursor: pointer;
+  color: #1b2845;
 }
 
 /* wishlist code */
@@ -355,19 +359,18 @@
 }
 .wishlist-heading2 {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000;
-  opacity: 0.8;
-  text-transform: uppercase;
-  width: 97%;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1b2845;
+  height: 30px;
 }
 .wishlistDiv {
   padding: 10px;
-  border: 2px solid #c7c7c769;
   border-radius: 5px;
+  box-shadow: -2px 0px 8px -3px #1b2845;
   position: relative;
   margin: 10px 0;
+  background: whitesmoke;
 }
 .wishlist-close-icon {
   position: absolute;
@@ -376,7 +379,7 @@
 }
 .wishlist-close-icon svg {
   color: #000;
-  height: 25px;
+  height: 18px;
   opacity: 0.7;
 }
 .wishlist-close-icon svg:hover {
@@ -403,25 +406,23 @@
   cursor: pointer;
 }
 .wishlist-btn {
-  color: rgb(0, 0, 0, 0.5);
-  padding: 8px 20px;
+  padding: 8px 15px;
   border-radius: 3px;
-  font-size: 0.8rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 500;
+  /* border: 1px solid #1b2845; */
+  font-weight: 400;
+  color: white;
+  font-size: 12px;
   text-align: center;
-  display: inline-block;
-  border: 2px solid rgb(27 151 255 / 33%);
-  text-transform: capitalize;
+  background: #1b2845;
+  transition: all 0.3s ease;
+  border: 1px solid #1b2845;
 }
 .wishlist-btn:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  color: white;
-  border: none;
+  /* padding: 8px 15px; */
+  background: white;
+  color: #1b2845;
+
   border-radius: 3px;
 }
 .buynow-details-btn-wrap {
@@ -434,6 +435,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 13px;
 }
 
 /* End wishlist code */
@@ -441,11 +443,11 @@
   font-family: "Roboto", sans-serif;
   font-size: 1.3rem;
   font-weight: 500;
-  color: #1e144f;
+  color: #1b2845;
   text-transform: capitalize;
 }
 .accordion-item .accordion-header .d-flex button:hover {
-  color: #1b97ff;
+  color: rgb(27, 40, 69, 0.6);
 }
 .icons1 {
   height: 30px;
@@ -640,11 +642,12 @@ h3 .read-more-button {
   font-size: 15px;
   font-family: "Roboto", sans-serif;
   line-height: 35px;
+  font-weight: 400;
   text-align: center;
   color: #1e144f;
 }
 .Logout-ul .Logout-li:hover {
-  color: #1b97ff;
+  color: rgb(27, 40, 69, 0.6);
 }
 
 .dropdown-item:focus,
@@ -981,16 +984,23 @@ h3 .read-more-button {
   padding-bottom: 20px;
 }
 .forgetContentDiv .btn {
-  padding: 18px;
   margin-top: 20px;
   line-height: 0px;
   width: 45%;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: #00d872;
+  padding: 20px 20px !important;
+  background: #1b2845 !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  border: 1px solid #1b2845;
+  transition: all 0.5s ease;
+}
+.forgetContentDiv .btn:hover {
+  background: rgb(27, 40, 69, 0.8) !important;
+  border: 1px solid rgb(27, 40, 69, 0.8) !important;
+}
+
+.start-login-form span {
+  color: #2a96ff !important;
 }
 .forgetContentDiv input {
   border: 0.8px solid #acacac;
@@ -1040,9 +1050,12 @@ h3 .read-more-button {
   padding: 7px 10px !important;
 }
 /* forget modal */
-/* .Forgot-Password{
-    display: none;
-} */
+.Forgot-Password {
+  color: rgb(27, 40, 69, 0.8);
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 600;
+}
 /* end forget modal */
 
 @media only screen and (max-width: 1399px) {
@@ -1127,7 +1140,7 @@ h3 .read-more-button {
   }
   .navbar-collapse {
     background: rgb(27, 40, 69, 1);
-    margin-top: -3px;
+    /* margin-top: 12px; */
     /* height: 210px; */
   }
   .drop-category {
@@ -1215,7 +1228,6 @@ h3 .read-more-button {
     padding-right: 10px;
     height: 45px;
   }
-  
   .category i {
     display: none !important;
   }
@@ -1223,7 +1235,6 @@ h3 .read-more-button {
   .option-item .cart-btn {
     font-size: 27px;
   }
-  
   .sp,
   .Sp1 {
     font-size: 14px;
@@ -1256,6 +1267,9 @@ h3 .read-more-button {
   .search-bar {
     top: 70px;
     height: 47px;
+  }
+  .header-login-logo {
+    height: 60px !important;
   }
 }
 
@@ -1405,11 +1419,21 @@ h3 .read-more-button {
   .right-part .currancy {
     justify-content: start !important;
   }
+  .logiRegisterContentDiv {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   .right-part .currancy {
     margin-right: 0px;
+  }
+  .Forgot-Password{
+    font-size: 12px !important;
+  }
+  .forgetContentDiv .btn {
+    padding: 20px 0px !important;
   }
   .login-register {
     font-size: 12px !important;
@@ -1431,10 +1455,7 @@ h3 .read-more-button {
   .blog-page-section-2 .card-body {
     height: 170px !important;
   }
-  .logiRegisterContentDiv {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
+
   .logiRegisterHeader2 {
     display: flex;
     justify-content: center;
@@ -1489,18 +1510,28 @@ h3 .read-more-button {
   .user-icon {
     font-size: 24px !important;
   }
-  .open-search-bar{
+  .open-search-bar {
     height: 20px !important;
     width: 20px !important;
   }
-  .cross-icon-search{
+  .cross-icon-search {
     height: 8px !important;
   }
+  .header-login-logo {
+    height: 40px !important;
+  }
+  
 }
 
 @media only screen and (max-width: 390px) {
   .search-bar {
     top: 54px !important;
+  }
+  .logiRegisterContentDiv label {
+    font-size: 12px;
+  }
+  .logiRegisterContentDiv input {
+    font-size: 12px;
   }
   .account-div svg {
     height: 21px !important;
@@ -1510,7 +1541,7 @@ h3 .read-more-button {
     padding: 0 10px 0px 0px !important;
   }
   .heaader-wrapper .heart-div {
-    padding: 0 8px 0px 0px !important;
+    padding: 0 4px 0px 0px !important;
   }
   .navbar-brand img {
     height: 36px;
@@ -1564,6 +1595,16 @@ h3 .read-more-button {
     height: 20px !important;
     width: 20px !important;
   }
+  .logiRegisterHeader2 h3 {
+    font-size: 16px !important;
+  }
+  .logiRegisterHeader1 h3 {
+    font-size: 16px !important;
+  }
+  .logiRegisterContentDiv .btn {
+    padding: 16px 16px !important;
+    font-size: 12px !important;
+  }
 }
 
 @media only screen and (max-width: 380px) {
@@ -1571,6 +1612,10 @@ h3 .read-more-button {
   .logiRegisterContentDiv {
     margin: 0px;
     padding: 0px;
+  }
+  .logiRegisterContentDiv .btn {
+    padding: 14px 16px !important;
+    font-size: 12px !important;
   }
   .logiRegisterHeader1 {
     padding-left: 35px;
@@ -1726,7 +1771,7 @@ h3 .read-more-button {
   width: 25px;
 }
 .search-bar {
-  background: red;
+  background: #2a96ff;
   width: 330px;
   position: absolute;
   top: 90px;
@@ -1736,8 +1781,8 @@ h3 .read-more-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  /* border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px; */
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transform: scaleX(0);
@@ -1757,7 +1802,7 @@ h3 .read-more-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 10px;
+  padding-right: 26px;
 }
 .search-box .icon-search {
   background: rgb(27, 40, 69, 1) !important;
@@ -1815,4 +1860,3 @@ h3 .read-more-button {
   transform: translateY(-50%);
   height: 10px;
 }
-

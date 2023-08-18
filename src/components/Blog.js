@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../components/Blog.css";
-import BlogImage from "../Images/blog-img.jpg";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import { baseUrl } from "../utils/services";
 import { Link } from "react-router-dom";
 import Baseline from "./Baseline";
-import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 import Loader from "react-spinner-loader";
 
 function Blogs() {
@@ -31,7 +29,7 @@ function Blogs() {
   return (
     <>
       <Header1 />
-
+    
       <section className="blog-page">
         <div className="container m-auto">
           {loading ? (
@@ -60,7 +58,7 @@ function Blogs() {
                                   <Link to={"/SingleBlogPage/" + item.slug}>
                                     <button>Read More</button>
                                   </Link>
-                                  <p>{item.description}</p>
+                                  <p>{item.description}...</p>
                                 </div>
                               </div>
                             );
@@ -88,9 +86,9 @@ function Blogs() {
                                   />
                                   <div className="top-heading-box-2">
                                     <Link to={"/SingleBlogPage/" + item.slug}>
+                                      <p>{item.description.slice(0, 90)}...</p>
                                       <button>Read More</button>
                                     </Link>
-                                    <p>{item.description}</p>
                                   </div>
                                 </div>
                               </div>

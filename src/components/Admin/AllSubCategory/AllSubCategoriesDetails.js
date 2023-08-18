@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input, Space, Popconfirm, Typography } from "antd";
+import { Table, Space, Popconfirm, Typography } from "antd";
 import axios from "axios";
 import Sidemenu from "../Sidemenu";
 import "../Dashboard.css";
@@ -28,7 +28,6 @@ export default function AllSubCategoriesDetails() {
     fetchUsers();
     GetSubCategory();
   }, [])
-  // console
 
 
   const GetSubCategory = async () => {
@@ -134,12 +133,13 @@ export default function AllSubCategoriesDetails() {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="sub-category-details-section">
-                <h3 className="sub-category-head">All Subcategories <span className="count">{subCategories}</span></h3>
-                <div className="subcategory-search-wrap">
+              <div className="sub-category-details-section all-products-details-section">
+                <h3 className="all-category-head all-products-head">All Subcategories <span className="count">{subCategories}</span></h3>
+                <div className="subcategory-search-wrap all-products-search-wrap">
                   <Link to="/SubCategory" className="add-icon">
                     <MdPlaylistAdd />Add
                   </Link>
+                  <div>
                   <input
                     type='text'
                     onChange={e => onChangeHandler(e)}
@@ -149,6 +149,7 @@ export default function AllSubCategoriesDetails() {
                     style={{ position: "sticky", top: "0", left: "0" }}
                   />
                   <button type="button" className="dashboard-search-btn"><BiSearchAlt /></button>
+                </div>
                 </div>
               </div>
 

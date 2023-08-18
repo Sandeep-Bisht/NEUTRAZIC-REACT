@@ -100,13 +100,13 @@
   justify-content: start;
   align-items: start;
   text-align: justify;
-  word-spacing: 1px !important;
+  word-spacing: -1px !important;
   hyphens: auto !important;
   height: 100%;
   width: 100%;
 }
 .description-box div p {
-  font-size: 14px;
+  font-size: 13px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -157,7 +157,6 @@
   border-radius: 50px;
   z-index: 2;
 }
-
 
 .active34 {
   width: 33.33%;
@@ -396,6 +395,12 @@
   .orders-section {
     margin-top: 160px !important;
   }
+  .Buttons-order-page button {
+    font-size: 10px !important;
+  }
+  .Buttons-order-page .return-product {
+    height: 20px !important;
+  }
 }
 @media only screen and (max-width: 815.98px) {
   .order-status-heading {
@@ -509,9 +514,11 @@
 .Buttons-order-page button {
   padding: 9px 24px;
   border: none;
-  font-size: 15px;
+  font-size: 13px;
   background: ghostwhite;
   transition: all 0.4s linear;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
 }
 .Buttons-order-page button:hover {
   text-decoration: underline !important;
@@ -521,6 +528,14 @@
 }
 
 .Buttons-order-page .return-product {
-  height: 25px !important;
-  width: 25px !important;
+  height: 22px;
+  width: 25px;
+}
+
+.userorder-product .order-details {
+  font-weight: 600 !important;
+}
+.userorder-product span:nth-child(2){
+  color: rgba(0, 0, 0, 0.6) !important;
+  padding: 20px !important;
 }

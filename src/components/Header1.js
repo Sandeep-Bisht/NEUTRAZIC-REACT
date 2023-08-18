@@ -3,20 +3,20 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "antd";
 import "../components/Header1.css";
-import "../components/Carouselcomp";
 import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { MdOutlineClose } from "react-icons/md";
 import { baseUrl } from "../utils/services";
+import * as AddToCartAction from "../CommonService/AddToCart/action"
 import * as ACTIONS from "../CommonService/CategoriesbyID/action";
 import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { BiCategoryAlt } from "react-icons/bi";
-import { BsBagHeart, BsCart4 } from "react-icons/bs";
+import { BsBagHeart } from "react-icons/bs";
 import { RiShoppingCartLine } from "react-icons/ri";
 import axios from "axios";
 import { RxDashboard } from "react-icons/rx";
@@ -25,50 +25,33 @@ import {ImCross} from "react-icons/im";
 
 let changeNavValue = 0;
 var header;
-var sticky;
 var Userdata = "";
-var Subtotal = "";
-var Usercartdata = "";
-var Userdata1 = "";
-var ActualSubtotal = "";
-
-
 const Header1 = (props) => {
   let dispatch = useDispatch();
-
-  console.log(props, "propspsss")
 
   const state = useSelector((state) => state.GetCartItemReducer);
   const wishListstate = useSelector((state) => state.GetWishlistedReducer);
 
   const history = useHistory();
   const [search, setSearch] = useState("");
-  const [subcategories, setSubCategories] = useState([]);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   let [userCart, setUserCart] = useState([]);
-  const [order, Setorder] = useState([]);
+  const order=[];
   const [msg, setMsg] = useState("");
   const [regmsg, setRegMsg] = useState("");
   const [categories, setCategories] = useState([]);
   const [registerModal, setRegisterModal] = useState(false);
   const [cartItems, setCartItems] = useState("");
   const [wishlisted, setWishlisted] = useState("");
-  const [usermodal, setUsermodal] = useState();
-  const [shouldRefresh, setShouldRefresh] = useState(false);
   const [toggle, setToggle] = useState(0);
   const location = useLocation();
   const { loginState, setLoginState } = useContext(CurrencyContext);
-  let { resetForm, setResetForm } = useContext(CurrencyContext);
+  let { resetForm } = useContext(CurrencyContext);
   const [isLogin, setIsLogin] = useState(loginState);
   const [loginModal, setLoginModal] = useState(false);
   const [forgetModal, setForgetModal] = useState(false);
-  const [forgetSecondModal, setForgetSecondModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [userdata, setUserdata] = useState();
   const [forgetMsg, setForgetMsg] = useState("");
   const [otpInput, setOtpInput] = useState(false);
-  const [verifyUserOtp, setVerifyUserOtp] = useState("");
   const [userItem, setUserItem] = useState({});
   const [otpMsg, setOtpMsg] = useState("");
   const { searchedtext, setSearchedText } = useContext(CurrencyContext);
@@ -169,10 +152,6 @@ const Header1 = (props) => {
 
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
-    ActualSubtotal = JSON.parse(localStorage.getItem("ActualSubtotal"));
-    Subtotal = JSON.parse(localStorage.getItem("Subtotal"));
-    Userdata1 = JSON.parse(localStorage.getItem("Userdata1"));
-    Usercartdata = JSON.parse(localStorage.getItem("Usercartdata"));
     GetCategory();
     GetWishlist();
     GetSubCategory();
@@ -186,7 +165,7 @@ const Header1 = (props) => {
     }
     $(document).ready(function() {
       header = document.getElementById("myHeader");
-      sticky = header.offsetTop;
+      // sticky = header.offsetTop;
       window.onscroll = function() {
         // headerFunction();
       };
@@ -234,11 +213,11 @@ const Header1 = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+
         if (data.error && data.message === "Data Not Found") {
           dispatch(ACTIONS1.getwishlistitem(0));
         }
         if (data.data !== undefined) {
-          console.log(data.data.length);
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
@@ -271,6 +250,7 @@ const Header1 = (props) => {
     });
     reset();
     setLoginState("0");
+    setUserCart([]);
     setCartItems("");
     setWishlisted("");
     if (
@@ -314,8 +294,7 @@ const Header1 = (props) => {
           if (res.status === 200 || res.status === 201) {
             reset1();
             return res.json();
-          }
-          else if (res.status === 400) {
+          } else if (res.status === 400) {
           }
         })
         .then((data) => {
@@ -341,9 +320,9 @@ const Header1 = (props) => {
     }
   };
   const LoginUser = (data) => {
-    if (data.username && data.password) {
+    if (data) {
       fetch(`${baseUrl}/api/auth/login`, {
-        method: "POST",
+        method: "POST",   
         headers: {
           accept: "application/json",
           "content-Type": "application/json",
@@ -421,7 +400,6 @@ const Header1 = (props) => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
-        setSubCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -464,6 +442,11 @@ const Header1 = (props) => {
       }
     }
   };
+  useEffect(() => {
+    Userdata = JSON.parse(localStorage.getItem("Userdata"));
+    CartById();
+    window.scroll(0, 0);
+  }, []);
 
   const CartById = async () => {
     if (!Userdata == []) {
@@ -479,8 +462,16 @@ const Header1 = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
+          if (data.error && data.message === "Data Not Found") {
+            dispatch(AddToCartAction.getCartItem(0));
+            setUserCart([]);
+            setCartItems("")
+
+          }
+          else{
           setUserCart(data.data);
           setCartItems(data.data[0].order.length);
+          }
         })
 
         .catch((err) => {
@@ -615,7 +606,6 @@ const Header1 = (props) => {
         });
         if (createOtp.data.success === 200) {
           setOtpInput(true);
-          setVerifyUserOtp(createOtp.data.otp.otp);
         }
       } else {
         setForgetMsg("No user associated with this email");
@@ -773,6 +763,7 @@ const Header1 = (props) => {
                   <div className="col-12">
                     <div className="nutra-logo-in-login-form">
                       <img
+                        className="header-login-logo"
                         src="/static/media/new-logo.8b4fa066.png"
                         alt="nutrazik-logo"
                       />
@@ -785,7 +776,7 @@ const Header1 = (props) => {
                         setLoginModal(true);
                         reset1();
                       }}
-                      className={!registerModal ? "text-success" : null}
+                      className={!registerModal ? null : "text-success" }
                     >
                       Login
                     </h3>
@@ -798,7 +789,7 @@ const Header1 = (props) => {
                         reset();
                         setMsg("");
                       }}
-                      className={registerModal ? "text-success" : null}
+                      className={registerModal ? null : "text-success"  }
                     >
                       Register
                     </h3>
@@ -1045,7 +1036,6 @@ const Header1 = (props) => {
           </div>
         </div>
         {forgetModal ? (
-          // <div className="forget-modal-body">
           <Modal
             visible={forgetModal}
             onOk={handleOk}
@@ -1055,6 +1045,7 @@ const Header1 = (props) => {
           >
             <div className="nutra-logo-in-login-form">
               <img
+                className="header-login-logo"
                 src="/static/media/new-logo.8b4fa066.png"
                 alt="nutrazik-logo"
               />
@@ -1135,7 +1126,6 @@ const Header1 = (props) => {
             </div>
           </Modal>
         ) : (
-          // </div>
           ""
         )}
         {isModalVisible ? (
@@ -1238,8 +1228,7 @@ const Header1 = (props) => {
                     </Link>
                   </div>
 
-                  <div className=" main-navbar-head ">
-                  </div>
+                  <div className=" main-navbar-head "></div>
                 </div>
                 <div className="header-wrapper-right">
                   <div className="search-prod">
@@ -1418,17 +1407,17 @@ const Header1 = (props) => {
                               aria-labelledby="dropdownMenuButton1"
                             >
                               <div>
-                                <div className="Logout-div d-flex align-items-center">
-                                  <i className="bx bx-file pl-2"></i>{" "}
-                                  <li
-                                    className="dropdown-item Logout-li"
-                                    style={{ cursor: "pointer" }}
-                                  >
-                                    <Link to="/UserOrder">
+                                <Link to="/UserOrder">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <i className="bx bx-file pl-2"></i>{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
                                       <span className="pr-4">Orders</span>
-                                    </Link>
-                                  </li>
-                                </div>
+                                    </li>
+                                  </div>
+                                </Link>
                               </div>
                               <Link to="/Cart">
                                 <div className="Logout-div d-flex align-items-center">
@@ -1453,20 +1442,22 @@ const Header1 = (props) => {
                                 </div>
                               </Link>
                               {Userdata &&
-                                (Userdata.role == "superAdmin" ||
-                                  Userdata.role == "Vendor") && (
-                                  <Link to="/dashboard">
-                                    <div className="Logout-div d-flex align-items-center">
-                                      <RxDashboard className="nav__icon pl-2" />{" "}
-                                      <li
-                                        className="dropdown-item Logout-li"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <span className="pr-4">Dashboard</span>
-                                      </li>
-                                    </div>
-                                  </Link>
-                                )}
+                              (Userdata.role == "superAdmin" ||
+                                Userdata.role == "Vendor") ? (
+                                <Link to="/dashboard">
+                                  <div className="Logout-div d-flex align-items-center">
+                                    <RxDashboard className="nav__icon pl-2" />{" "}
+                                    <li
+                                      className="dropdown-item Logout-li"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <span className="pr-4">Dashboard</span>
+                                    </li>
+                                  </div>
+                                </Link>
+                              ) : (
+                                " "
+                              )}
 
                               <div className="Logout-div d-flex align-items-center">
                                 <i className="bx bx-log-out pl-2"></i>{" "}
@@ -1486,7 +1477,6 @@ const Header1 = (props) => {
                       )}
                     </div>
                     <div className="login-div3">
-                    
                       <div
                         className="open-search-bar"
                         onClick={() => {
@@ -1496,19 +1486,17 @@ const Header1 = (props) => {
                           }
                         }}
                       >
-                        {/* <span class="tooltiptext">Search here</span> */}
                         <i className="fa fa-search search-icon"></i>
-                        <ImCross className="cross-icon-search"/>
+                        <ImCross className="cross-icon-search" />
                       </div>
                       <div className="search-bar">
                         <input
                           type="text"
                           className="search-input"
                           placeholder="Search..."
-                          value={searcheditem}
+                          Value={searcheditem}
                           onChange={(e) => {
                             setSearch(e.target.value.toLowerCase());
-                            // setSearchedText(e.target.value);
                           }}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" && search.length) {
@@ -1568,7 +1556,10 @@ const Header1 = (props) => {
                       aria-label="Toggle navigation"
                     >
                       <span className="collapsed-button">
-                        <i className="fas fa-bars" style={{ color: "#fff" }}></i>
+                        <i
+                          className="fas fa-bars"
+                          style={{ color: "#fff" }}
+                        ></i>
                       </span>
                     </button>
                     <div
@@ -1641,13 +1632,7 @@ const Header1 = (props) => {
               </div>
             </div>
           </div>
-          <div className="container-fluid p-0">
-            <div className="row side-nav">
-              <div className=" col-sm-12 p-0 content">
-                <React.Fragment>{props.children}</React.Fragment>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
 

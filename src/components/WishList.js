@@ -1,4 +1,3 @@
-import { get, map } from "jquery";
 import "../components/WishList.css";
 import React, { useState, useEffect } from "react";
 import Baseline from "./Baseline";
@@ -18,7 +17,7 @@ const WishList = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [wishlistData, Setwishlist] = useState([]);
-  const [order, Setorder] = useState([]);
+  const order=[];
   const [userCart, setUserCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -191,7 +190,7 @@ const WishList = () => {
         discountprice: data.discount,
         description: data.description,
         category: data.category,
-        manufacturer: data.manufacturer,
+        manufacturer: data.manufacturer.name,
         status: "Pending",
         justification: "Enjoy",
         delivery_time: "No Status",
@@ -277,12 +276,18 @@ const WishList = () => {
               <>
                 {wishlistData && wishlistData.length > 0 ? (
                   wishlistData.map((item, ind) => (
-                    <div className="col-lg-6 col-md-6 col-12" key={ind}>
+                    <div
+                      className="col-xl-4 col-lg-6 col-md-6 col-12"
+                      key={ind}
+                    >
                       <div className="wishlistDiv wishlist-div-image">
-                        <div className="row">
+                        <div className="row wishlist-starting-row">
                           <div className="col-4">
                             <Link to={"/SingleProduct/" + item.productId}>
-                              <img src={`${baseUrl}/` + item.image[0].path} className="img-fluid" />
+                              <img
+                                src={`${baseUrl}/` + item.image[0].path}
+                                className="img-fluid"
+                              />
                             </Link>
                           </div>
                           <div className="col-8 py-0">
@@ -293,7 +298,7 @@ const WishList = () => {
                                 onClick={() => handleBuyNow(item.productId)}
                                 className="wishlist-btn"
                               >
-                                Buy Now
+                                Add to cart
                               </button>
                               <Link to={"/SingleProduct/" + item.productId}>
                                 <button className=" wishlist-btn">

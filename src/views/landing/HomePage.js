@@ -7,7 +7,6 @@ import Baseline from "../../components/Baseline";
 import Header1 from "../../components/Header1";
 import { useHistory } from "react-router-dom";
 import Delivery from "../../Images/delivery.jpg";
-import ReadMoreReact from "read-more-react";
 import Mobile from "../../Images/Mobile.png";
 import { AiFillApple } from "react-icons/ai";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
@@ -17,22 +16,20 @@ import * as ACTIONS from "../../CommonService/AddToCart/action";
 import * as ACTIONS1 from "../../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import { baseUrl } from "../../utils/services";
-import Carousel from "react-elastic-carousel";
 import Cookies from "universal-cookie";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Loader from "react-spinner-loader";
 
 import $ from "jquery";
 
 var Userdata = "";
-let currentCurrencyType = "";
 var CartDataWoLogin = [];
 const HomePage = () => {
+
   let dispatch = useDispatch();
   const images = [
     "../../Images/categories/categories-img1.png",
@@ -54,15 +51,11 @@ const HomePage = () => {
   const [singlecategory, setSingleCategory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [Manufactureres, setManufactureres] = useState([]);
-  const [AllProduct, setAllProduct] = useState([]);
   const [search, setSearch] = useState("");
-  const [ProductCategory, setProductCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [userCart, setUserCart] = useState([]);
   const [cartItems, setCartItems] = useState(undefined);
-  const [order, Setorder] = useState([]);
-  const [Categorydetails, setCategoryDetails] = useState({});
-  const [categoryname, Setcategoryname] = useState();
+  const order=[];
   const [wishlistData, Setwishlist] = useState([]);
   const [blogs, setBlogs] = useState();
   const history = useHistory();
@@ -102,7 +95,6 @@ const HomePage = () => {
     setLoginState(loginState);
     setIsLogin(loginState);
   }, [loginState, isLogin]);
-
   const getAllBlog = async () => {
     await fetch(`${baseUrl}/api/blogs/find_all_slug`)
       .then((res) => res.json())
@@ -144,29 +136,9 @@ const HomePage = () => {
         alert("in");
       });
     });
+
   }, [loginState]);
 
-  let carouselRef = useRef(null);
-
-  const onNextStart = (currentItem, nextItem) => {
-    if (currentItem.index === nextItem.index) {
-      carouselRef.current.goTo(0);
-    }
-  };
-
-  const onPrevStart = (currentItem, nextItem) => {
-    if (currentItem.index === nextItem.index) {
-      carouselRef.current.goTo(data.otherImage);
-    }
-  };
-
-  const Loop = (currentItem) => {
-    if (currentItem.index == data.otherImage.length - 1) {
-      setTimeout(() => {
-        carouselRef.current.goTo(0);
-      }, 1000);
-    }
-  };
 
   const GetWishlist = async () => {
     let id;
@@ -186,14 +158,11 @@ const HomePage = () => {
       .then((res) => res.json())
       .then(async (data) => {
         if (data.error && data.message === "Data Not Found") {
+          Setwishlist([])
           dispatch(ACTIONS1.getwishlistitem(0));
         }
         if (data.data !== undefined) {
           Setwishlist(data.data);
-          console.log(
-            data.data.length,
-            "length of wishlisted after call the wishtlisted"
-          );
           const wishlisted = data.data.length;
           dispatch(ACTIONS1.getwishlistitem(wishlisted));
         }
@@ -238,49 +207,12 @@ const HomePage = () => {
       });
   };
 
-  const addToCartWithoutRegistration = (
-    productid,
-    name,
-    quantity,
-    mrp,
-    discount,
-    description,
-    category,
-    manufacturer,
-    image
-  ) => {
-    var newItemObj = {
-      productid: productid,
-      name: name,
-      image: image,
-      quantity: quantity,
-      mrp: parseInt(mrp),
-      singleprice: parseInt(mrp),
-      discountprice: discount,
-      description: description,
-      category: category,
-      manufacturer: manufacturer,
-      description: description,
-      status: "Pending",
-      justification: "Enjoy",
-      delivery_time: "No Status",
-    };
-    if (
-      !JSON.stringify(CartDataWoLogin).includes(name) &&
-      !JSON.stringify(localStorage.getItem("CartDataWoLogin")).includes(name)
-    ) {
-      if (JSON.parse(localStorage.getItem("CartDataWoLogin"))) {
-        CartDataWoLogin = JSON.parse(localStorage.getItem("CartDataWoLogin"));
-      }
-      CartDataWoLogin.push(newItemObj);
-      localStorage.setItem("CartDataWoLogin", JSON.stringify(CartDataWoLogin));
-    }
-  };
 
   const cartfunction = async (
     productid,
     name,
     quantity,
+    maximumOrder,
     mrp,
     singleprice,
     dollerMrp,
@@ -298,6 +230,7 @@ const HomePage = () => {
         name: name,
         image: image,
         quantity: quantity,
+        maximumOrder:maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         discountprice: discount,
@@ -337,17 +270,17 @@ const HomePage = () => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        // CartById();
-        await UpdateCart();
+        CartById();
+        UpdateCart(productid);
       }
-      toast.success("Added to Cart", {
-        position: "bottom-right",
-        autoClose: 1000,
-      });
     }
   };
 
-  const UpdateCart = () => {
+  const UpdateCart = (id) => {
+    const product=userCart.order.map((item)=>item)
+    const productsData=product.filter((item)=>item.productid==id)
+      if(productsData[0].quantity<=productsData[0].maximumOrder)
+      {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -364,10 +297,20 @@ const HomePage = () => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
+        toast.success("Added to Cart", {
+          position: "bottom-right",
+          autoClose: 1000,
+        });
       })
       .then((err) => console.log(err));
+    }
+    else{
+      toast.success("You have reached the max limit", {
+        position: "bottom-right",
+        autoClose: 1000,
+      });
+    }
   };
-
   const CartById = async () => {
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
@@ -382,10 +325,17 @@ const HomePage = () => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
-          setCartItems(data.data[0].order.length);
-          let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems));
+          if (data.error && data.message === "Data Not Found") {
+            setUserCart([]);
+            setCartItems("")
+            dispatch(ACTIONS.getCartItem(0));
+          }
+          else{
+            setUserCart(data.data[0]);
+            setCartItems(data.data[0].order.length);
+            let cartItems = data.data[0].order.length;
+            dispatch(ACTIONS.getCartItem(cartItems));
+          }
         })
         .catch((err) => {
           console.log(err, "error");
@@ -394,6 +344,7 @@ const HomePage = () => {
   };
 
   const AddtoCart = async () => {
+        if(quantity)
     if (!Userdata == []) {
       await fetch(`${baseUrl}/api/cart/add_to_cart`, {
         method: "POST",
@@ -409,7 +360,7 @@ const HomePage = () => {
         .then((res) => res.json())
         .then(async (data) => {
           setUserCart(data.data);
-          CartById();
+            CartById();
         })
         .catch((err) => {
           console.log(err, "error");
@@ -519,29 +470,6 @@ const HomePage = () => {
       });
   };
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 1,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 1,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  const searchData = (e) => {
-    // if (props.func) props.func(e);
-  };
-
   const checkWishlistItem = (productId) => {
     for (let item of wishlistData) {
       if (item.productId == productId) {
@@ -553,9 +481,7 @@ const HomePage = () => {
   return (
     <>
       <Header1 />
-      {/* <Carouselcomp /> */}
       <div id="">
-        {/* trending section  */}
         <section className="home-banner">
           <div className="container m-auto">
             <div className="row align-items-center">
@@ -580,26 +506,21 @@ const HomePage = () => {
                       onChange={(e) => setSearch(e.target.value.toLowerCase())}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && search.length) {
-                          searchData(search);
                           setSearchedText(e.target.value);
                           history.push("/SearchResult/" + search);
                         }
                       }}
                     />
-                    {/* <Link to={"/SearchResult/" + search}> */}
                     <button
                       className="search mr-1"
                       onClick={() => {
                         if (search.length) {
-                          searchData(search);
-                          // setSearchedText(e.target.value);
                           history.push("/SearchResult/" + search);
                         }
                       }}
                     >
                       <i className="bx bx-search-alt"></i>
                     </button>
-                    {/* </Link> */}
                   </div>
                 </div>
               </div>
@@ -636,24 +557,12 @@ const HomePage = () => {
                                   className="image hover-switch-homepage"
                                   style={{ position: "relative" }}
                                 >
-                                  {/* <img
-                                    className="hoverimage"
-                                    src={
-                                      el.otherImage &&
-                                      el.otherImage.length > 0 &&
-                                      `${baseUrl}/` + el.otherImage[0].path
-                                    }
-                                    alt=""
-                                  /> */}
+                                 
                                   <img
                                     className="main-Image"
                                     src={`${baseUrl}/` + el.image[0].path}
                                     alt=""
-                                    // style={{
-                                    //   position: "absolute",
-                                    //   top: "0",
-                                    //   left: "0",
-                                    // }}
+                                    
                                   />
                                 </div>
                                 <span>
@@ -726,6 +635,7 @@ const HomePage = () => {
                                       el._id,
                                       el.name,
                                       quantity,
+                                      el.maximumOrder,
                                       el.inrMrp,
                                       el.inrDiscount,
                                       el.dollerMrp,
@@ -759,7 +669,6 @@ const HomePage = () => {
                                 </button>
                               )}
 
-                              {/* </Link> */}
                             </figure>
                         );
                       }
@@ -767,7 +676,6 @@ const HomePage = () => {
                 </div>
               )}
 
-              {/* hover Button */}
               <div className="wrapperbtn pt-0">
                 <Link to="/TrendingProducts">
                   <button type="button" className="btn10">
@@ -775,7 +683,6 @@ const HomePage = () => {
                   </button>
                 </Link>
               </div>
-              {/* Hover Button End */}
             </div>
           </div>
         </section>
@@ -835,18 +742,8 @@ const HomePage = () => {
                         );
                       }
                     })}
-                  {/* </Carousel> */}
                 </Slider>
-                {/* <div className="controls controls-left">
-                  <button onClick={sliderRef?.slickPrev}>
-                    <FaChevronLeft />
-                  </button>
-                </div> */}
-                {/* <div className="controls controls-right">
-                  <button onClick={sliderRef?.slickNext}>
-                    <FaChevronRight />
-                  </button>
-                </div> */}
+                
               </div>
             )}
           </div>
@@ -863,9 +760,8 @@ const HomePage = () => {
               <div className="row ">
                 <div id="column" className="columns_5">
                   {data
-                    .filter((item) => item.type == "")
                     .map((el, ind) => {
-                      if (ind < 5) {
+                      if (ind < 6) {
                         return (
                           <figure
                             className="figure homepage-trending-figure"
@@ -949,6 +845,7 @@ const HomePage = () => {
                                           el._id,
                                           el.name,
                                           quantity,
+                                          el.maximumOrder,
                                           el.inrMrp,
                                           el.inrDiscount,
                                           el.dollerMrp,
@@ -989,13 +886,11 @@ const HomePage = () => {
                               </div>
                             </div>
 
-                            {/* </Link> */}
                           </figure>
                         );
                       }
                     })}
                 </div>
-                {/* hover Button */}
 
                 <div className="wrapperbtn pt-3 pb-4">
                   <Link to="/AllProducts">
@@ -1004,7 +899,6 @@ const HomePage = () => {
                     </button>
                   </Link>
                 </div>
-                {/* Hover Button End */}
               </div>
             )}
           </div>
@@ -1033,24 +927,12 @@ const HomePage = () => {
                                 className="image hover-switch-homepage"
                                 style={{ position: "relative" }}
                               >
-                                {/* <img
-                                  className="hoverimage"
-                                  src={
-                                    el.otherImage &&
-                                    el.otherImage.length > 0 &&
-                                    `${baseUrl}/` + el.otherImage[0].path
-                                  }
-                                  alt=""
-                                /> */}
+                               
                                 <img
                                   className="main-Image"
                                   src={`${baseUrl}/` + el.image[0].path}
                                   alt=""
-                                  // style={{
-                                  //   position: "absolute",
-                                  //   top: "0",
-                                  //   left: "0",
-                                  // }}
+                                  
                                 />
                               </div>
                               <span>
@@ -1121,6 +1003,7 @@ const HomePage = () => {
                                           el._id,
                                           el.name,
                                           quantity,
+                                          el.maximumOrder,
                                           el.inrMrp,
                                           el.inrDiscount,
                                           el.dollerMrp,
@@ -1165,7 +1048,6 @@ const HomePage = () => {
                       }
                     })}
                 </div>
-                {/* hover Button */}
                 <div className="wrapperbtn pt-3 pb-4">
                   {data
                     .filter((item) => item.category.name == singlecategory.name)
@@ -1184,7 +1066,6 @@ const HomePage = () => {
                       }
                     })}
                 </div>
-                {/* Hover Button End */}
               </div>
             )}
           </div>
@@ -1287,7 +1168,10 @@ const HomePage = () => {
                             if (ind < 4)
                               return (
                                 <div className="col-lg-3 col-md-6" key={ind}>
-                                  <Link to={"/SingleBlogPage/" + item.slug}>
+                                  <Link
+                                    className="blog-link"
+                                    to={"/SingleBlogPage/" + item.slug}
+                                  >
                                     <div className="card hover-effect">
                                       <img
                                         src={

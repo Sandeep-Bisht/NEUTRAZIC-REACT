@@ -4,10 +4,10 @@ import { baseUrl } from "../utils/services";
 import { useHistory, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import "../components/userOrder.css";
-import {ImCross} from "react-icons/im";
+import { ImCross } from "react-icons/im";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { RiRefund2Fill } from "react-icons/ri";
-import {TbTruckReturn} from "react-icons/tb";
+import { TbTruckReturn } from "react-icons/tb";
 import product from "../Images/abayakasthaa-image.png";
 import {
   Table,
@@ -62,7 +62,6 @@ const UserOrder = () => {
       .then((res) => res.json())
       .then(async (data) => {
         setLoading(false);
-        console.log(data.data, "Datatatatatat");
         let arr1 = [];
         for (let item of data.data) {
           if (item.userid === Userdata._id) {
@@ -82,7 +81,6 @@ const UserOrder = () => {
         console.log(err, "errors");
       });
   };
-
   return (
     <>
       <Header1 />
@@ -90,14 +88,19 @@ const UserOrder = () => {
       <section className="orders-section">
         <div className="container">
           <div className="row">
+            <div className="col-md-12">
+              <div className="user-order-head">
+                <h2>Your Orders</h2>
+              </div>
+            </div>
+          </div>
+          <div className="row">
             {loading ? (
               <Loader show={loading} stack="vertical" />
             ) : (
               <div className="col-md-12">
-                {OrderDetails &&
-                  OrderDetails.length > 0 &&
+                {OrderDetails && OrderDetails.length > 0 ? (
                   OrderDetails.map((el, ind) => {
-                    console.log(el, "This is orders");
                     return (
                       <div className="Order-page">
                         <Accordion>
@@ -336,26 +339,6 @@ const UserOrder = () => {
                                                         ) : (
                                                           " "
                                                         )}
-                                                        {/* {el.orderStatus ===
-                                                        "Shipped" ? (
-                                                          <div className="col-md-3 col-3 px-0">
-                                                            <div className="orderno-heading">
-                                                              <h6 className="order-status-heading">
-                                                                Expected Delivery On
-                                                              </h6>
-                                                            </div>
-                                                            {el.orderStatus ===
-                                                              "Shipped" && (
-                                                              <p className="para-text">
-                                                                {
-                                                                  el.delivery_time
-                                                                }
-                                                              </p>
-                                                            )}
-                                                          </div>
-                                                        ) : (
-                                                          " "
-                                                        )} */}
                                                       </div>
                                                     </div>
                                                   </div>
@@ -370,9 +353,6 @@ const UserOrder = () => {
                                   <div className="col-md-3">
                                     <div className="See-more-details">
                                       <div className="details-button">
-                                        {/* <button className="order-detail-button">
-                                          Return
-                                        </button> */}
                                         <button className="order-detail-button">
                                           See Details
                                         </button>
@@ -409,12 +389,7 @@ const UserOrder = () => {
                                                   </div>
                                                   <div className="Price-box">
                                                     <h6 className="userorder-product">
-                                                      <span>Qty:</span>
-                                                      <sapn
-                                                        style={{
-                                                          color: "#28a745",
-                                                        }}
-                                                      >
+                                                      <sapn className="order-details">
                                                         {item.quantity}
                                                       </sapn>
                                                     </h6>
@@ -422,19 +397,11 @@ const UserOrder = () => {
                                                   <div className="Price-box">
                                                     <h6 className="userorder-product">
                                                       <span>Price:</span>
-                                                      <sapn
-                                                        style={{
-                                                          color: "#28a745",
-                                                        }}
-                                                      >
+                                                      <sapn className="order-details">
                                                         {item.singleprice}
                                                       </sapn>
                                                     </h6>
                                                   </div>
-                                                  {/* <div className="Price-box">
-                                            <h6>₹{item.singleprice}</h6>
-                                          </div> */}
-                                                  <div className="Price-box"></div>
                                                 </div>
                                               </div>
                                             </div>
@@ -462,10 +429,8 @@ const UserOrder = () => {
                                               </div>
                                             </div>
                                           </div>
-                                          {el.orderStatus === "Delivered" || el.orderStatus === "Shipped" ? (
+                                          {el.orderStatus === "Delivered" ? (
                                             <div className="row">
-                                              {/* <div className="col-md-10">
-                                              </div> */}
                                               <div className="col-md-12">
                                                 <div className="Buttons-order-page">
                                                   <button>
@@ -480,22 +445,7 @@ const UserOrder = () => {
                                               </div>
                                             </div>
                                           ) : (
-                                            <>
-                                              {/* <div className="row"> */}
-                                                {/* <div className="col-md-10">
-                                              </div> */}
-                                                {/* <div className="col-md-12">
-                                                  <div className="Buttons-order-page">
-                                                    <Link to = "/return&refund">
-                                                    <button> */}
-                                                      {/* <RiRefund2Fill className="return-product" /> */}
-                                                      {/* Return & Refund Policy
-                                                    </button>
-                                                    </Link>
-                                                  </div>
-                                                </div>
-                                              </div> */}
-                                            </>
+                                            <></>
                                           )}
                                         </div>
                                       </div>
@@ -509,7 +459,26 @@ const UserOrder = () => {
                         </Accordion>
                       </div>
                     );
-                  })}
+                  })
+                ) : (
+                  <div className="col-12 text-center EMPTYWISHLIST-DIV">
+                    <div>
+                      <h1>No Product Found</h1>
+                    </div>
+                    <lottie-player
+                      src="https://assets10.lottiefiles.com/packages/lf20_yRyM3f.json"
+                      background="transparent"
+                      speed="1"
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        margin: "auto",
+                      }}
+                      loop
+                      autoplay
+                    ></lottie-player>
+                  </div>
+                )}
               </div>
             )}
           </div>

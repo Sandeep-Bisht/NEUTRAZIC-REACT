@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 import "../components/OderSuccess.css";
 import { Link, useLocation, useHistory } from "react-router-dom";
@@ -13,9 +13,6 @@ var Usercartdata;
 var Subtotal;
 
 function OrderSuccess() {
-
-  const [cartItems, setCartItems] = useState("");
-  let [userCart, setUserCart] = useState([]);
   let dispatch = useDispatch()
   let location=useLocation();
   let history=useHistory();
@@ -40,7 +37,7 @@ function OrderSuccess() {
   },[])
 
   const CartById = async () => {
-    if (!Userdata == []) {
+    if (!Userdata === []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
@@ -53,8 +50,6 @@ function OrderSuccess() {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
-          setCartItems(data.data[0].order.length);
           if (localStorage.getItem("ActualSubtotal")) {
             localStorage.removeItem("ActualSubtotal");
           }
@@ -75,11 +70,11 @@ function OrderSuccess() {
 
   return (
     <>
-      <Header1 />
-      <div className="order-success-page">
+     <Header1 />
+      <div className="order-success-page mb-5">
         <div className="container m-auto">
           <div className="row mt-0">
-            <div className="col-8 mx-auto">
+            <div className="col-lg-8 col-md-10 col-sm-10 col-12 mx-auto order-success-div">
               <div className="order-success-card">
                 <div className="success-heading">
                   <h1>Your order has been placed successfully</h1>

@@ -11,6 +11,7 @@ var Userdata;
 const ManufacturerCreation = (props) => {
   const [manufactureres, setManufactureres] = useState([]);
   const [formerror, setFormerror] = useState({});
+  const [editableArray,setEditableArray]=useState([]);
   const [data, Setdata] = useState({
     name: "",
     description: "",
@@ -23,7 +24,6 @@ const ManufacturerCreation = (props) => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     GetManufacturer();
     if (editableData) {
-
       Setdata(editableData);
     }
   }, []);
@@ -56,7 +56,7 @@ const ManufacturerCreation = (props) => {
       })
         .then((res) => {
           res.json();
-          history.push("/AllManufactureDetails");
+          history.push("Configuration/"+"AllManufactureDetails");
         })
         .then((res) => {
           GetManufacturer();
@@ -77,7 +77,6 @@ const ManufacturerCreation = (props) => {
         console.log(err, "errors");
       });
   };
-
   const UpdateManufacturer = async (e, _id) => {
     e.preventDefault();
     const errors = ValidattionForm(data);
@@ -104,6 +103,14 @@ const ManufacturerCreation = (props) => {
     }
   }
   };
+  useEffect(()=>{
+    const arr=[];
+    if (editableData) {
+      arr.push(editableData)
+      }
+      setEditableArray(arr)
+  },[])
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     Setdata({
@@ -125,7 +132,6 @@ const ManufacturerCreation = (props) => {
     }
     setFormerror(errors);
   };
-
   return (
     <>
       <section id="body-pd">
@@ -143,25 +149,56 @@ const ManufacturerCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Manufacturer Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1">
+                        <div className="col-md-6 col-12 image-main-div">
+                              <div className="row">
+                          {
+                            editableArray && editableArray.length>0  ?
+                            <div className="d-flex p-2 image-second-div">
+                            <div className="col-10">
+                            <div>
+                              <span className="category-select-div">Image</span>
+                              <input
+                                type="file"
+                                name="image"
+                                className="form-control Dashborad-search"
+                                onChange={(e) => {
+                                  Setdata({ ...data, image: e.target.files[0] });
+                                  // handleInputChange(e);
+                                }}
+                              />
+                            </div>
+                            <p className="formerror">{formerror.image}</p>
+                            </div>
+                            <div className="col-2 p-2 d-flex align-items-end">
+                             <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"70px", height:"30px"}} alt=""/>
+                          </div>
+                          </div>:
+                          <div className="col-12 p-2">
+                          <div>
+                            <span className="category-select-div">Image</span>
                             <input
                               type="file"
                               name="image"
-                              multiple
-                              className="form-control Dashborad-search input-div"
+                              className="form-control Dashborad-search"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
                               }}
                             />
-                            <p className="formerror">{formerror.image}</p>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <p className="formerror">{formerror.image}</p>
+                        </div>
+                          }
+                          </div>
+                          </div>
+                          <div className="col-md-6 col-12 p-2">
+                            <div>
+                          <span className="category-select-div">Manufacturer Name</span>
                             <input
                               type="text"
                               name="name"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="Manufacturer Name "
+                              className="form-control Dashborad-search"
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }
@@ -172,16 +209,15 @@ const ManufacturerCreation = (props) => {
                               onBlur={handleBlur}
 
                             />
+                            </div>
                             <p className="formerror">{formerror.name}</p>
-                            <label for="floatingInputValue">
-                              Manufacturer Name
-                            </label>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-2">
+                            <div>
+                          <span className="category-select-div">Manufacturer Description</span>
                             <textarea
                               className="form-control h-100"
                               id="floatingInputValue"
-                              placeholder="Manufacturer Description"
                               rows="6"
                               defaultValue={
                                 editableData ? editableData.description : ""
@@ -193,9 +229,7 @@ const ManufacturerCreation = (props) => {
                                 });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">
-                              Manufacturer Description
-                            </label>
+                            </div>
                           </div>
                           {editableData ? (
                             <div className="col-12 p-1">

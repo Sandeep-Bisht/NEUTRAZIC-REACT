@@ -60,7 +60,6 @@ const Subcategories = (props) => {
     }
   };
 
-  var CartDataWoLogin = [];
   const state = useSelector((state) => state.GetCategoriesReducer);
   useEffect(() => {
     window.scroll(0, 0);
@@ -147,6 +146,7 @@ const Subcategories = (props) => {
     productid,
     name,
     quantity,
+    maximumOrder,
     mrp,
     singleprice,
     dollerDiscount,
@@ -164,6 +164,7 @@ const Subcategories = (props) => {
         name: name,
         image: image,
         quantity: quantity,
+        maximumOrder:maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         dollerDiscount: dollerDiscount,
@@ -203,16 +204,17 @@ const Subcategories = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-        // CartById();
-        await UpdateCart();
+         CartById();
+         UpdateCart(productid);
       }
-      toast.success("Added to Cart", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
+      
     }
   };
-  const UpdateCart = () => {
+  const UpdateCart = (id) => {
+    const product=userCart.order.map((item)=>item)
+    const productsData=product.filter((item)=>item.productid==id)
+      if(productsData[0].quantity<=productsData[0].maximumOrder)
+      {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -229,8 +231,19 @@ const Subcategories = (props) => {
       .then((res) => res.json())
       .then((res) => {
         CartById();
+        toast.success("Added to Cart", {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
       })
       .then((err) => console.log(err));
+    }
+    else{
+      toast.success("You have reached the max limit", {
+        position: "bottom-right",
+        autoClose: 1000,
+      });
+    }
   };
   const CartById = async () => {
     if (!Userdata == []) {
@@ -246,10 +259,17 @@ const Subcategories = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
-          setCartItems(data.data[0].order.length);
-          let cartItems = data.data[0].order.length;
-          dispatch(ACTIONS.getCartItem(cartItems));
+          if (data.error && data.message === "Data Not Found") {
+            setUserCart([]);
+            setCartItems("")
+            dispatch(ACTIONS.getCartItem(0));
+          }
+          else{
+            setUserCart(data.data[0]);
+            setCartItems(data.data[0].order.length);
+            let cartItems = data.data[0].order.length;
+            dispatch(ACTIONS.getCartItem(cartItems));
+          }
         })
         .catch((err) => {
           console.log(err, "error");
@@ -296,6 +316,10 @@ const Subcategories = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        if (data.error && data.message === "Data Not Found") {
+          Setwishlist([])
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
         if (data.data !== undefined) {
           Setwishlist(data.data);
           const wishlisted = data.data.length;
@@ -422,7 +446,6 @@ const Subcategories = (props) => {
     let filteredData = [];
     for (let item of data) {
       if (item.subcategory._id === id) filteredData.push(item);
-      // activeItem.classList.add("newActive");
     }
     setfilterData(filteredData);
     setsubcategoryId(name);
@@ -597,7 +620,6 @@ const Subcategories = (props) => {
                                                   item._id,
                                                   item.name,
                                                   quantity,
-
                                                   item.inrMrp,
                                                   item.inrDiscount,
                                                   item.description,
@@ -636,6 +658,7 @@ const Subcategories = (props) => {
                                           item._id,
                                           item.name,
                                           quantity,
+                                          item.maximumOrder,
                                           item.inrMrp,
                                           item.inrDiscount,
                                           item.dollerDiscount,
@@ -771,6 +794,7 @@ const Subcategories = (props) => {
                                                 item._id,
                                                 item.name,
                                                 quantity,
+                                                item.maximumOrder,
                                                 item.inrMrp,
                                                 item.inrDiscount,
                                                 item.dollerDiscount,

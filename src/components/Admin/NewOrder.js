@@ -5,7 +5,6 @@ import { baseUrl } from "../../utils/services";
 import DashboardHeaader from "./DashboardHeaader";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
 import { Table, Space, Dropdown, Modal, Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { AiFillCaretDown } from "react-icons/ai";
@@ -273,9 +272,9 @@ const NewOrder = () => {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="category-details-section">
-                <h3 className="all-category-head">Orders </h3>
-                <div className="all-category-search-wrap">
+              <div className="category-details-section all-order-details-section ">
+                <h3 className="all-category-head all-products-head">Orders </h3>
+                <div className="all-category-search-wrap all-products-search-wrap input ">
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}

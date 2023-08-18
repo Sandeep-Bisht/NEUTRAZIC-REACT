@@ -8,8 +8,6 @@ import axios from "axios";
 
 var Userdata;
 const UserProfile = (props) => {
-  var count = 0;
-  const [userProfile, setUserProfile] = useState([]);
   const [data, Setdata] = useState({
     username: "",
     email: "",
@@ -34,7 +32,6 @@ const UserProfile = (props) => {
     await fetch(`${baseUrl}/api/auth/allusers`)
       .then((res) => res.json())
       .then(async (data) => {
-        setUserProfile(data.data);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -43,7 +40,6 @@ const UserProfile = (props) => {
 
 
   const UpdateUserProfiles = async (e, _id) => {
-    console.log(_id,"user id")
     e.preventDefault();
       try{
         const response=await axios.put(`${baseUrl}/api/auth/update_user_by_id`, {

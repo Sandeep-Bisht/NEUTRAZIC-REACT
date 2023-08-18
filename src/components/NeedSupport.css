@@ -32,17 +32,13 @@
 }
 .Support-page-section .left-side-supportpage button {
   margin-top: 20px;
-  color: var(--optionalColor);
-  background: white;
-  border: 1px solid rgb(27 151 255 / 33%);
+  background: #1b2845;
+  color: #fff;
+  border: 1px solid rgba(27, 151, 255, 0.33);
   font-size: 14px;
 }
 .Support-page-section .left-side-supportpage button:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
-  border: 1px solid rgb(27 151 255 / 33%);
-  color: #fff;
+  background: #fff;
+  border: 1px solid #1b2845;
+  color: #1b2845;
 }

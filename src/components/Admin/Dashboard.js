@@ -16,6 +16,7 @@ import LineChart from "../../LineChart";
 import PieChart from "../PieChart";
 import { useContext } from "react";
 import CurrencyContext from "../../routes/ContextApi/CurrencyContext";
+
 var Userdata;
 const Dashboard = () => {
   const [Manufacturer, setManufacturer] = useState("");
@@ -45,6 +46,7 @@ const Dashboard = () => {
     GetProducts();
     GetLocalUserData();
     GetBlogs();
+    GetWarehouse();
   }, [loginState]);
 
   const GetLocalUserData = () => {
@@ -62,7 +64,6 @@ const Dashboard = () => {
        var responseData=data.data.filter((item)=>{
         return (Userdata.manufacturer===item.manufacturer.name);
        })
-       console.log(responseData,"inside the all products details");
        Setproducts(responseData.length);
     }
     else{
@@ -116,7 +117,18 @@ const Dashboard = () => {
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
-        setOrders(data.data.length);
+        if(Userdata.role=="Vendor")
+        {
+        {
+          const orderArray=data.data.filter((items)=>{
+            return (Userdata.manufacturer==items.order[0].order[0].manufacturer);
+          })
+          setOrders(orderArray.length);
+        }
+        }else{
+          setOrders(data.data.length);
+        }
+        
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -140,6 +152,16 @@ const Dashboard = () => {
       })
       .catch((err) => {
         console.log(err, "errors");
+      });
+  };
+  const GetWarehouse = async () => {
+    await fetch(`${baseUrl}/api/warehouse/get_all_warehouse`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setWarehouse(data.data.length)
+      })
+      .catch((err) => {
+        console.log(err, "error");
       });
   };
 
@@ -211,6 +233,25 @@ const Dashboard = () => {
                                   </div>
                                   <div>
                                     <span className="count1">{warehouse}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                      <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
+                        <Link to={"/NewOrder/" + "Pending/"}>
+                          <div className="card cardsec">
+                            <div className="row">
+                              <div className="col-12">
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div>
+                                    <BsListNested className="cardicon" />
+                                    <h6 className="cardheads">Orders</h6>
+                                  </div>
+                                  <div>
+                                    <span className="count1">{Orders}</span>
                                   </div>
                                 </div>
                               </div>
@@ -349,6 +390,25 @@ const Dashboard = () => {
                                   </div>
                                   <div>
                                     <span className="count1">{warehouse}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                      <div className="col-lg-3 col-md-6 col-sm-6 col-12 pt-4">
+                        <Link to={"/NewOrder/" + "Pending"}>
+                          <div className="card cardsec">
+                            <div className="row">
+                              <div className="col-12">
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <div>
+                                    <BsListNested className="cardicon" />
+                                    <h6 className="cardheads">Orders</h6>
+                                  </div>
+                                  <div>
+                                    <span className="count1">{Orders}</span>
                                   </div>
                                 </div>
                               </div>

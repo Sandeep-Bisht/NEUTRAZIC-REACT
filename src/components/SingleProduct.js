@@ -19,6 +19,7 @@ import CurrencyContext from "../routes/ContextApi/CurrencyContext";
 import { useContext } from "react";
 import Loader from "react-spinner-loader";
 import { SocialIcon } from "react-social-icons";
+import whishlist from "../Images/Icons/wishlist.png";
 
 var Userdata = "";
 var CartDataWoLogin = [];
@@ -267,9 +268,15 @@ const SingleProduct = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
+          if (data.error && data.message === "Data Not Found") {
+            setUserCart([]);
+            dispatch(ACTIONS.getCartItem(0));
+          }
+          else{
           setUserCart(data.data[0]);
           let cartItems = data.data[0].order.length;
           dispatch(ACTIONS.getCartItem(cartItems));
+          }
         })
         .catch((err) => {
           console.log(err, "error");
@@ -305,7 +312,11 @@ const SingleProduct = (props) => {
     SetMainImage(Imagestore);
   };
 
-  const UpdateCart = () => {
+  const UpdateCart = (id) => {
+    const product=userCart.order.map((item)=>item)
+    const productsData=product.filter((item)=>item.productid==id)
+      if(productsData[0].quantity<=productsData[0].maximumOrder)
+      {
     const url = `${baseUrl}/api/cart/update_cart_by_id`;
     fetch(url, {
       method: "put",
@@ -328,11 +339,19 @@ const SingleProduct = (props) => {
         });
       })
       .then((err) => console.log(err, "inside update cart"));
+  }
+  else{
+    toast.success("You have reached the max limit", {
+      position: "bottom-right",
+      autoClose: 1000,
+    });
+  }
   };
   const cartfunction = async (
     productid,
     name,
     quantity,
+    maximumOrder,
     mrp,
     singleprice,
     dollerDiscount,
@@ -350,6 +369,7 @@ const SingleProduct = (props) => {
         name: name,
         image: image,
         quantity: quantity,
+        maximumOrder:maximumOrder,
         mrp: parseInt(mrp),
         singleprice: parseInt(singleprice),
         dollerDiscount: dollerDiscount,
@@ -389,8 +409,7 @@ const SingleProduct = (props) => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-
-        await UpdateCart();
+         UpdateCart(productid);
       }
     }
   };
@@ -473,6 +492,10 @@ const SingleProduct = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        if (data.error && data.message === "Data Not Found") {
+          setWishlist([])
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
         if (data.data[0] !== undefined) {
           let prodId = props.match.params.id;
           setWishlist(data.data);
@@ -630,7 +653,6 @@ const SingleProduct = (props) => {
                   itemsToShow={4}
                   onPrevStart={onPrevStart}
                   onNextStart={onNextStart}
-                  // onChange={Loop}
                   ref={carouselRef}
                   disableArrowsOnEnd={false}
                 >
@@ -791,66 +813,41 @@ const SingleProduct = (props) => {
                     </Link>
                   </span>
                   &nbsp; <span className="pl-2">Share:</span>
-                  <a href="https://www.facebook.com/Nutrazik" className="singleproduct-icon" target="_blank">
-                    {/* <i className="social-links bx bxl-facebook "></i> */}
+                  <Link to="https://www.facebook.com/Nutrazik" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="facebook"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
-                  </a>
-                  <a href="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
+                  </Link>
+                  <Link to="https://www.instagram.com/nutrazik/" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="instagram"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
-                  </a>
-                  <a href="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
-                    {/* <i className="social-links bx bxl-twitter "></i> */}
+                  </Link>
+                  <Link to="https://twitter.com/nutrazik" className="singleproduct-icon" target="_blank">
                     <SocialIcon
                       className="single-product-social-icons"
                       network="twitter"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/70941207/admin/"
+                  </Link>
+                  <Link
+                    to="https://www.linkedin.com/company/70941207/admin/"
                     target="_blank"
                     className="singleproduct-icon"
                   >
                     <SocialIcon
                       className="single-product-social-icons"
                       network="linkedin"
-                      bgColor="#1b97ff"
+                      bgColor="#1b2845"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-3 add-cart-buttons ml-3">
-                <div className="quantity1 mt-1 ">
-                  <i
-                    className="bx bx-minus minus-single mr-2"
-                    onClick={() => {
-                      if (quantity > 1) {
-                        setQuantity(quantity - 1);
-                      }
-                    }}
-                  ></i>
-                  <input
-                    type="number"
-                    //value="1"
-                    min="1"
-                    max="9"
-                    step="1"
-                    value={quantity}
-                    onChange={(e) => cartfunction(e.target.value)}
-                  />
-                  <i
-                    className="bx bx-plus minus-single ml-2"
-                    onClick={() => setQuantity(quantity + 1)}
-                  ></i>
-                </div>
                 <div className="add-to-cart mt-1">
                   {Userdata ? (
                     <button
@@ -861,6 +858,7 @@ const SingleProduct = (props) => {
                                 data._id,
                                 data.name,
                                 quantity,
+                                data.maximumOrder,
                                 data.inrMrp,
                                 data.inrDiscount,
                                 data.dollerDiscount,
@@ -875,6 +873,7 @@ const SingleProduct = (props) => {
                                 data._id,
                                 data.name,
                                 quantity,
+                                data.maximumOrder,
                                 data.inrMrp,
                                 data.inrDiscount,
                                 data.discount,
@@ -894,17 +893,16 @@ const SingleProduct = (props) => {
                       data-bs-target={Userdata == null ? "#exampleModal" : null}
                       onClick={() => handleResetForm()}
                     >
-                      {/* <Link to="/Register"></Link> */}
                       Add to Cart
                     </button>
                   )}
                 </div>
 
                 <div className="quantity2 mt-1 ml-2 justify-content-center align-items-center d-flex">
+                  <img src={whishlist} alt="wishlist"></img>
                   {Userdata ? (
                     <i
                       id={prodId}
-                      // className="bx bxs-heart"
                       className={`bx bxs-heart ${checkWishlistItem(prodId)}`}
                       onClick={() => {
                         AddtoWishlist(
@@ -1099,7 +1097,6 @@ const SingleProduct = (props) => {
                         className="figure homepage-trending-figure"
                         key={ind}
                       >
-                        {/* <Link to={"/SingleProduct/" + el._id}> */}
 
                         <Link to={"/SingleProduct/" + el._id}>
                           <div
@@ -1180,6 +1177,7 @@ const SingleProduct = (props) => {
                                       el._id,
                                       el.name,
                                       quantity,
+                                      el.maximumOrder,
                                       el.inrMrp,
                                       el.inrDiscount,
                                       el.dollerMrp,
@@ -1216,7 +1214,6 @@ const SingleProduct = (props) => {
                           </div>
                         </div>
 
-                        {/* </Link> */}
                       </figure>
                     );
                   }

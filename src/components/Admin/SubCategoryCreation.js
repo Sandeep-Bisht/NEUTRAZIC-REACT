@@ -8,10 +8,9 @@ import axios from "axios";
 
 var Userdata;
 const SubCategoryCreation = (props) => {
-  var categoryCount = 0;
-  const [subcategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [formerror, Setformerror] = useState({});
+  const [editableArray,setEditableArray]=useState([]);
   const [data, Setdata] = useState({
     name: "",
     description: "",
@@ -36,6 +35,14 @@ const SubCategoryCreation = (props) => {
       Setdata(restData);
     }
   }, []);
+
+  useEffect(()=>{
+    const arr=[];
+    if (editableData) {
+      arr.push(editableData)
+      }
+      setEditableArray(arr)
+  },[])
 
   const ValidationFrom = (value) => {
     const error = {};
@@ -67,7 +74,7 @@ const SubCategoryCreation = (props) => {
       })
         .then((res) => {
           res.json();
-          history.push("/AllSubCategoriesDetails");
+          history.push("Configuration/"+"AllSubCategoriesDetails");
         })
         .then((res) => {
           GetSubCategory();
@@ -92,7 +99,6 @@ const SubCategoryCreation = (props) => {
     await fetch(`${baseUrl}/api/subcategory/all_subcategory`)
       .then((res) => res.json())
       .then(async (data) => {
-        setSubCategories(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -162,26 +168,53 @@ const SubCategoryCreation = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>SubCategory Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1 ">
-                            <div className="input-div">
+                        <div className="col-md-6 col-12 image-main-div">
+                              <div className="row image-second-div">
+                          {
+                            editableArray && editableArray.length>0  ?
+                            <div className="d-flex">
+                            <div className="col-10">
+                            <div>
+                              <span className="category-select-div">Image</span>
+                              <input
+                                type="file"
+                                name="image"
+                                className="form-control Dashborad-search"
+                                onChange={(e) => {
+                                  Setdata({ ...data, image: e.target.files[0] });
+                                  // handleInputChange(e);
+                                }}
+                              />
+                            </div>
+                            <p className="formerror">{formerror.image}</p>
+                            </div>
+                            <div className="col-2 p-2 d-flex align-items-end edit-images">
+                             <img src={`${baseUrl}/${data.image[0].path}`} style={{width:"70px", height:"40px"}} alt=""/>
+                          </div>
+                          </div>:
+                          <div className="col-12 p-2">
+                          <div>
+                            <span className="category-select-div">Image</span>
                             <input
                               type="file"
                               name="image"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="SubCategory Name "
+                              className="form-control Dashborad-search"
                               onChange={(e) => {
                                 Setdata({ ...data, image: e.target.files[0] });
+                                // handleInputChange(e);
                               }}
                             />
-                            </div>
-                           
-                            <p className="formerror">{formerror.image}</p>
                           </div>
-                          <div className="col-6 p-1">
-                          <div className="input-div">
-                            {editableData?<p className="category-select-div">Category</p>:""}
+                          <p className="formerror">{formerror.image}</p>
+                        </div>
+                          }
+                          </div>
+                          </div>
+                          <div className="col-md-6 col-12 p-2">
+                          <div className="">
+                          <span className="category-select-div">Category</span>
                             <select
-                              className="form-control Dashborad-search custom-select input-div"
+                              className="form-control Dashborad-search custom-select "
                               value={data.category}
                               name="category"
                               onChange={(e) => {
@@ -203,13 +236,15 @@ const SubCategoryCreation = (props) => {
                             </div>
                             <p className="formerror">{formerror.category}</p>
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-2">
+                            <div>
+                            <span className="category-select-div">SubCategory Name</span>
+                            </div>
                             <input
                               type="text"
                               name="name"
                               id="floatingInputValue"
-                              className="form-control Dashborad-search input-div"
-                              placeholder="SubCategory Name "
+                              className="form-control Dashborad-search "
                               defaultValue={
                                 editableData ? editableData.name : ""
                               }
@@ -220,17 +255,14 @@ const SubCategoryCreation = (props) => {
                               onBlur={handleBlur}
                             />
                             <p className="formerror">{formerror.name}</p>
-
-                            <label for="floatingInputValue">
-                              SubCategory Name
-                            </label>
                           </div>
-
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-2">
+                            <div>
+                            <span className="category-select-div">SubCategory Description</span>
+                            </div>
                             <textarea
                               className="form-control h-100"
                               id="floatingInputValue"
-                              placeholder="SubCategory Description"
                               rows="6"
                               defaultValue={
                                 editableData ? editableData.description : ""
@@ -242,12 +274,9 @@ const SubCategoryCreation = (props) => {
                                 });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">
-                              SubCategory Description
-                            </label>
                           </div>
                           {editableData ? (
-                            <div className="col-12 p-1">
+                            <div className="col-12 p-2">
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => UpdateSubCategory(e, data._id)}
@@ -256,7 +285,7 @@ const SubCategoryCreation = (props) => {
                               </button>
                             </div>
                           ) : (
-                            <div className="col-12 p-1">
+                            <div className="col-12 p-2">
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => {

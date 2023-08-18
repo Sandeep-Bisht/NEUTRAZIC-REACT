@@ -11,7 +11,6 @@ import * as ACTIONS1 from "../CommonService/WishlistItem/action";
 import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import CurrencyContext from "../routes/ContextApi/CurrencyContext";
-// import Cookies from "universal-cookie";
 
 var Userdata;
 const TrengingProduct = (props) => {
@@ -255,6 +254,10 @@ const TrengingProduct = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
+        if (data.error && data.message === "Data Not Found") {
+          Setwishlist([])
+          dispatch(ACTIONS1.getwishlistitem(0));
+        }
         if (data.data[0] !== undefined) {
           Setwishlist(data.data);
           const wishlisted = data.data.length;

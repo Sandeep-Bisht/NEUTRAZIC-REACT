@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLocation,Link } from 'react-router-dom'
 import { TiTick } from "react-icons/ti";
 import axios from "axios";
@@ -8,7 +8,6 @@ import Footer from './Footer';
 
 function VerifyToken(props) {
     const token = props.match.params.token;
-    var currentLocation=useLocation();
     useEffect(()=>{ 
       verifyToken(token); 
     },[]);
@@ -22,10 +21,10 @@ function VerifyToken(props) {
   return (
     <>
     <Header1 />
-    <div className="order-success-page">
+    <div className="order-success-page mb-5">
         <div className="container m-auto">
           <div className="row mt-0">
-            <div className="col-8 mx-auto">
+            <div className="col-lg-8 col-md-10 col-sm-10 col-12 mx-auto order-success-div">
               <div className="order-success-card">
                 <div className="success-heading">
                   <h1>Subscribed successfully </h1>

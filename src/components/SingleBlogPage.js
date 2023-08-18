@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useHistory,useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Header1 from "./Header1";
 import Footer from "./Footer";
@@ -11,13 +11,9 @@ import { SocialIcon } from 'react-social-icons';
 
 
 const SingleBlog = (props) => {
-  const blogSlug = props.match.params.slug;
   const [blog, setSingleBlog] = useState();
-  const [otherblogs, setOtherBlogs] = useState();
   const [data, setData] = useState();
-  const [titleforheader, setTitleforHeader] = useState();
   const history = useHistory();
-  const location = useLocation();
 
   useEffect(() => {
     window.scroll(0, 0);

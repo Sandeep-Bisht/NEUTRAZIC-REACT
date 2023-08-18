@@ -59,8 +59,6 @@ const Warehouse = (props) => {
           history.push("Configuration/" + "AllWarehouseDetails")
         })
         .then((res) => {
-          // GetManufacturer();
-          // this.getAddOn();
         })
     }
   };
@@ -135,13 +133,14 @@ const Warehouse = (props) => {
                       <div className="card p-4 m-2 mt-4 product-form">
                         <h5>Warehouse Creation</h5>
                         <div className="row">
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-2">
+                            <div>
+                            <span className="category-select-div">Warehouse Name</span>
                             <input
                               type="text"
                               id="floatingInputValue"
                               name="name"
                               className="form-control Dashborad-search"
-                              placeholder="Warehouse Name"
                               defaultValue={editableData ? editableData.name : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, name: e.target.value });
@@ -149,17 +148,18 @@ const Warehouse = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingInputValue">Warehouse Name</label>
+                            </div>
                             <p className="formerror">{formerror.name}</p>
 
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-2">
+                            <div>
+                            <span className="category-select-div">Warehouse Contact No</span>
                             <input
                               type="number"
                               id="floatingInputValue"
                               name="warehouseContactNo"
                               className="form-control Dashborad-search"
-                              placeholder="Warehouse Contact No"
                               defaultValue={editableData ? editableData.warehouseContactNo : data.warehouseContactNo}
                               onChange={(e) => {
                                 if (e.target.value.length > 0) {
@@ -172,17 +172,18 @@ const Warehouse = (props) => {
                               maxLength={10}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingInputValue">Warehouse Contact No</label>
+                            </div>
                             <p className="formerror">{formerror.warehouseContactNo}</p>
 
                           </div>
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-1 form-floating">
+                            <div>
+                            <span className="category-select-div">Warehouse Address</span>
                             <input
                               type="text"
                               id="floatingInputValue"
                               name="warehouseAddress"
                               className="form-control Dashborad-search"
-                              placeholder="Warehouse Address"
                               defaultValue={editableData ? editableData.warehouseAddress : ""}
                               onChange={(e) => {
                                 Setdata({ ...data, warehouseAddress: e.target.value });
@@ -190,14 +191,15 @@ const Warehouse = (props) => {
                               }}
                               onBlur={handleBlur}
                             />
-                            <label for="floatingInputValue">Warehouse Address</label>
+                            </div>
                             <p className="formerror">{formerror.warehouseAddress}</p>
                           </div>
 
-                          <div className="col-6 p-1 form-floating">
+                          <div className="col-md-6 col-12 p-2">
+                          <span className="category-select-div">Warehouse Description</span>
+                            <div>
                             <textarea
                               className="form-control h-100"
-                              placeholder="Warehouse Address"
                               id="floatingInputValue"
                               rows="5"
                               defaultValue={
@@ -207,10 +209,10 @@ const Warehouse = (props) => {
                                 Setdata({ ...data, description: e.target.value });
                               }}
                             ></textarea>
-                            <label for="floatingInputValue">Description</label>
+                            </div>
                           </div>
                           {editableData ? (
-                            <div className="col-12 p-1">
+                            <div className="col-12 p-2">
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => UpdateWarehouse(e, data._id)}
@@ -219,7 +221,7 @@ const Warehouse = (props) => {
                               </button>
                             </div>
                           ) : (
-                            <div className="col-12 p-1">
+                            <div className="col-12 p-2">
                               <button
                                 className="btn btn-primary"
                                 onClick={(e) => {

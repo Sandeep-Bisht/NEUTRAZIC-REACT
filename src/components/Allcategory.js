@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header1 from "./Header1";
 import ReadMoreReact from "read-more-react";
@@ -10,11 +10,7 @@ var Userdata;
 const Allcategory = (props) => {
   const [AllProduct, setAllProduct] = useState([]);
   const [Categorydetails, setCategoryDetails] = useState({});
-  const [quantity, setQuantity] = useState(1);
-  const [userCart, setUserCart] = useState([]);
-  const [order, Setorder] = useState([]);
 
-  const history = useHistory();
   useEffect(() => {
     Userdata = JSON.parse(localStorage.getItem("Userdata"));
     ProductByCategory();
@@ -22,93 +18,8 @@ const Allcategory = (props) => {
     CartById();
   }, []);
 
-  const cartfunction = async (
-    productid,
-    name,
-    quantity,
-    mrp,
-    discount,
-    description,
-    category,
-    manufacturer,
-    image
-  ) => {
-    if (quantity !== 0) {
-      var merged = false;
-      var newItemObj = {
-        productid: productid,
-        name: name,
-        image: image,
-        quantity: quantity,
-        mrp: parseInt(mrp),
-        singleprice: parseInt(mrp),
-        discountprice: discount,
-        description: description,
-        category: category,
-        manufacturer: manufacturer,
-      };
-      if (userCart.order == null || userCart.order == []) {
-        for (var i = 0; i < order.length; i++) {
-          if (order[i].productid == newItemObj.productid) {
-            order[i].quantity += newItemObj.quantity;
-            order[i].mrp += newItemObj.mrp;
-            // order[i].actualprice+=newItemObj.actualprice
-            merged = true;
-            setQuantity(1);
-          }
-        }
-        if (!merged) {
-          order.push(newItemObj);
-          setQuantity(1);
-          await AddtoCart();
-          await CartById();
-        }
-      } else {
-        for (var i = 0; i < userCart.order.length; i++) {
-          if (userCart.order[i].productid == newItemObj.productid) {
-            userCart.order[i].quantity += newItemObj.quantity;
-            userCart.order[i].mrp += newItemObj.mrp;
-            merged = true;
-          } else {
-            merged = false;
-          }
-          setQuantity(1);
-        }
-        if (!merged) {
-          userCart.order.push(newItemObj);
-        }
-        setQuantity(1);
-        CartById();
-        UpdateCart();
-
-        //   await AsyncStorage.setItem("order1", JSON.stringify(userCart.order));
-        //   newamount = 0;
-      }
-    }
-  };
-  const UpdateCart = () => {
-    const url = `${baseUrl}/api/cart/update_cart_by_id`;
-    fetch(url, {
-      method: "put",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: userCart._id,
-        userid: Userdata._id,
-        order: userCart.order,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        history.push("/Cart");
-      })
-      .then((err) => console.log(err));
-  };
-
   const CartById = async () => {
-    if (!Userdata == []) {
+    if (!Userdata === []) {
       await fetch(`${baseUrl}/api/cart/cart_by_id`, {
         method: "POST",
         headers: {
@@ -121,40 +32,13 @@ const Allcategory = (props) => {
       })
         .then((res) => res.json())
         .then(async (data) => {
-          setUserCart(data.data[0]);
         })
         .catch((err) => {
           console.log(err, "error");
         });
     }
   };
-  const AddtoCart = async () => {
-    if (!Userdata == []) {
-      await fetch(`${baseUrl}/api/cart/add_to_cart`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: Userdata._id,
-          order: order,
-        }),
-      })
-        .then((res) => res.json())
-        .then(async (data) => {
-          setUserCart(data.data);
-          history.push("/Cart");
-        })
-        .catch((err) => {
-          console.log(err, "error");
-        });
-    }
-    // else{
-    //    history.push('/Register')
-    // }
-  };
-
+ 
   const ProductByCategory = async () => {
     await fetch(`${baseUrl}/api/product/all_product`)
       .then((res) => res.json())
@@ -179,8 +63,6 @@ const Allcategory = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         await setCategoryDetails(data.data[0]);
-
-        
       })
       .catch((err) => {
         console.log(err, "error");
@@ -190,7 +72,6 @@ const Allcategory = (props) => {
   const AddtoWishlist = async (
     productid,
     name,
-    quantity,
     mrp,
     discount,
     description,
@@ -211,7 +92,7 @@ const Allcategory = (props) => {
       .then((data) => data.json())
       .then(async (data) => {
         if (!JSON.stringify(data.data).includes(productid)) {
-          if (!Userdata == []) {
+          if (!Userdata === []) {
             await fetch(`${baseUrl}/api/wishlist/add_to_wishlist`, {
               method: "POST",
               headers: {
@@ -318,7 +199,7 @@ const Allcategory = (props) => {
       <div id="container m-auto p-4 products">
         <div id="columns" className="columns_4 products-row row">
           {AllProduct.map((item, ind1) => {
-            if (item.category._id == props.match.params.name) {
+            if (item.category._id === props.match.params.name) {
               return (
                 <div className="col-lg-3 col-md-12 col-sm-12 " key={ind1}>
                   <div className="single-products-box border">
@@ -372,14 +253,6 @@ const Allcategory = (props) => {
                           </div>
                           <div className="price-div justify-content-center align-items-center d-flex">
                             <span className="new-price ml-3">
-                              {/* ${" "}
-                              {isNaN(
-                                item.inrMrp -
-                                  (item.inrMrp * item.inrDiscount) / 100
-                              )
-                                ? 0
-                                : item.inrMrp -
-                                  (item.inrMrp * item.inrDiscount) / 100} */}
                                   {item.inrDiscount}
                             </span>
                             <del className="new-price ml-1">
@@ -391,7 +264,6 @@ const Allcategory = (props) => {
                                   AddtoWishlist(
                                     item._id,
                                     item.name,
-                                    quantity,
                                     item.inrMrp,
                                     item.inrDiscount,
                                     item.description,

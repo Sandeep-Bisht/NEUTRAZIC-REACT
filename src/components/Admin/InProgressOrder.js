@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Table, Space, Modal, Button, Dropdown } from "antd";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
 
 var Userdata = "";
 
@@ -236,7 +235,6 @@ const InProgressOrder = () => {
                 ? prticularUserOrder &&
                   prticularUserOrder.length > 0 &&
                   prticularUserOrder.map((item, ind) => {
-                    console.log(item, "inside the map method");
                     return (
                       <>
                         <tr key={ind}>
@@ -296,9 +294,9 @@ const InProgressOrder = () => {
               <Sidemenu />
             </div>
             <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 mt-2">
-              <div className="category-details-section">
-                <h3 className="all-category-head">Orders </h3>
-                <div className="all-category-search-wrap">
+              <div className="category-details-section all-order-details-section ">
+                <h3 className="all-category-head all-products-head">Orders </h3>
+                <div className="all-category-search-wrap all-products-search-wrap input">
                   <input
                     type="text"
                     onChange={(e) => onChangeHandler(e)}

@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
 import UserImg from "../../Images/user3.jpg";
 import {Link} from "react-router-dom"
 
@@ -12,7 +12,7 @@ useEffect(() => {
   return (
     <>
         <div className="nav__logo">
-        <div>
+        <div className="nav__logo__img">
           <Link to="/" style={{ cursor: "pointer" }}>
             <img
               src={require("../../Images/new-logo.png")}
