@@ -34,13 +34,6 @@ function Blogs() {
 
       <section className="blog-page">
         <div className="container m-auto">
-          {/* <div className="row">
-            <div className="col-md-12">
-              <div className="Single-Blog-Heading">
-                <h1 className="blog-heading1">Our Blogs</h1>
-              </div>
-            </div>
-          </div> */}
           {loading ? (
             <Loader show={loading} stack="vertical" />
           ) : (
@@ -117,7 +110,7 @@ function Blogs() {
                           data.map((item, ind) => {
                             return (
                               <div className="col-md-6 col-lg-3" key={ind}>
-                                <div className="card">
+                                <div className="card hover-effect">
                                   <div className="card-img-link">
                                     <Link to={"/SingleBlogPage/" + item.slug}>
                                       <img

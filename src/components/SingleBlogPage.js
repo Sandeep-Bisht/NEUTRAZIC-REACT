@@ -81,13 +81,6 @@ const SingleBlog = (props) => {
       <Header1 />
 
       <div className="container product-div blog-container">
-      
-          {/* <span className="nav-text p-3">
-          <Link to="/" className="nav-text">
-              Home
-            </Link>
-            {location.pathname}
-          </span> */}
         <div className="row">
           <div className="col-md-12">
             {blog &&
@@ -99,7 +92,6 @@ const SingleBlog = (props) => {
                         <div className="col-md-12">
                           <div className="singleBlog-box">
                             <div className="row">
-                              {/* <div className="col-md-1"></div> */}
                               <div className="col-md-6 px-0">
                                 <div className="single-blog-image-box">
                                   <img
@@ -127,19 +119,19 @@ const SingleBlog = (props) => {
                                           href="https://www.facebook.com/Nutrazik"
                                           target="_blank"
                                         >
-                                          <SocialIcon className="social-react-icons" network="facebook" bgColor="#4682B4"/>
+                                          <SocialIcon className="social-react-icons" network="facebook" bgColor="#1b2845"/>
                                         </a>
                                         <a
                                           href="https://www.instagram.com/nutrazik/"
                                           target="_blank"
                                         >
-                                          <SocialIcon className="social-react-icons" network="instagram" bgColor="#DB7093"/>
+                                          <SocialIcon className="social-react-icons" network="instagram" bgColor="#1b2845"/>
                                           </a>
                                         <a
                                           href="https://twitter.com/nutrazik"
                                           target="_blank"
                                         >
-                                          <SocialIcon className="social-react-icons" network="twitter" bgColor="#00BFFF"/>
+                                          <SocialIcon className="social-react-icons" network="twitter" bgColor="#1b2845"/>
                                         </a>
                                       </div>
                                     </div>
@@ -177,7 +169,7 @@ const SingleBlog = (props) => {
                           return (
                             <div className="col-md-6 col-lg-3" key={ind}>
                               <div
-                                className="card"
+                                className="card hover-effect"
                                 onClick={() => ChangeBlog(item.slug)}
                               >
                                 <img

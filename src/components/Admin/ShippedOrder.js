@@ -29,6 +29,7 @@ const ShippedOrder = () => {
   const [shippedOrder, setShippedOrder] = useState([]);
   const [orderItem, setOrderItem] = useState([]);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const [vendor,setVendor]=useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const ShippedOrder = () => {
         {
           if(Userdata.role==="Vendor")
           {
+            setVendor(true);
             let arr = [];
               for (let item of data.data) {
                 if (item.orderStatus == "Shipped" && Userdata && Userdata.manufacturer==item.order[0].order[0].manufacturer) {
@@ -68,7 +70,7 @@ const ShippedOrder = () => {
         console.log(err, "errors");
       });
   };
-
+console.log(OrderDetails,"shipped order details");
   const UpdateOrderStatus = async (order, orderStatus) => {
     delete order.createdAt;
     order.orderStatus = orderStatus;
@@ -116,12 +118,39 @@ const ShippedOrder = () => {
   };
 
   const showModal = (item) => {
-    setPrticularUserOrder(item.order)
+    if(Userdata!==null || Userdata!=="")
+    {
+      if(Userdata.role==="Vendor")
+      {
+        const response=item.order[0].order.filter((item)=>{
+        return (Userdata.manufacturer == item.manufacturer)
+        })
+        setPrticularUserOrder(response)
     setShippedOrder(item.address);
-    setPrticularUserOrder(item.order);
     setOrderItem(item);
     setIsModalVisible(true);
+      }
+      else{
+        setPrticularUserOrder(item.order)
+    setShippedOrder(item.address);
+    setOrderItem(item);
+    setIsModalVisible(true);
+      }   
+    }
+    
   };
+
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
 
   const columns = [
     { title: "Order No.", dataIndex: "order_no", key: "order_no" },
@@ -208,6 +237,8 @@ const ShippedOrder = () => {
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          closeIcon={<CustomCloseIcon />}
+          className="New-order-details"
         >
           <table className="table order-details">
             <thead>
@@ -218,30 +249,54 @@ const ShippedOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {prticularUserOrder &&
-                prticularUserOrder.length > 0 &&
-                prticularUserOrder.map((item, ind) => {
-                  return (
-                    <>
-                      <tr key={ind}>
-                        <td className="width-adjust-of-td">
-                          <div className="width-adjust-of-image">
-                            <img
-                              onClick={() =>
-                                imageHandler(item.productid)
-                              }
-                              style={{ cursor: "pointer" }}
-                              src={`${baseUrl}/${item.order[0].image}`}
-                            ></img>
-                          </div>
-                        </td>
-                        <td className="width-adjust-of-td">{item.order[0].name}</td>
-                        <td className="width-adjust-of-td">{item.order[0].singleprice}</td>
-                      </tr>
-                    </>
-                  );
-                })}
-            </tbody>
+                      {
+                      vendor ? (prticularUserOrder &&
+                        prticularUserOrder.length > 0 &&
+                        prticularUserOrder.map((item,ind) => {
+                          console.log(item,"inside the map method")
+;                          return (
+                            <>
+                              <tr key={ind}>
+                                <td className="width-adjust-of-td">
+                                  <div className="width-adjust-of-image">
+                                    <img
+                                      onClick={() =>
+                                        imageHandler(item.productid)
+                                      }
+                                      style={{ cursor: "pointer" }}
+                                      src={`${baseUrl}/${item.image}`}
+                                    ></img>
+                                  </div>
+                                </td>
+                                <td className="width-adjust-of-td">{item.name}</td>
+                                <td className="width-adjust-of-td">{item.singleprice}</td>
+                              </tr>
+                            </>
+                          );
+                        })):
+                        (prticularUserOrder &&
+                          prticularUserOrder.length > 0 &&
+                          prticularUserOrder[0].order.length > 0 &&
+                          prticularUserOrder[0].order.map((item, ind) => {
+                            return (
+                              <>
+                                <tr key={ind}>
+                                  <td className="width-adjust-of-td">
+                                    <div className="width-adjust-of-image">
+                                       <img
+                                        onClick={() => imageHandler(item.productid)}
+                                        style={{ cursor: "pointer" }}
+                                        src={`${baseUrl}/${item.image}`}
+                                      ></img> 
+                                    </div>
+                                  </td>
+                                  <td className="width-adjust-of-td">{item.name}</td>
+                                  <td className="width-adjust-of-td">{item.singleprice}</td>
+                                </tr>
+                              </>
+                            );
+                          }))}
+                    </tbody>
           </table>
         </Modal>
       </div>

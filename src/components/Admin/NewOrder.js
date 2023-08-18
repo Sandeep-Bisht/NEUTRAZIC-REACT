@@ -20,6 +20,7 @@ const NewOrder = () => {
   const [searchVal, setSearchVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [prticularUserOrder, setPrticularUserOrder] = useState([]);
+  const [vendor,setVendor]=useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const NewOrder = () => {
   }, []);
 
   const GetOrders = async () => {
+    setLoading(true);
     await fetch(`${baseUrl}/api/order/all_order`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -44,6 +46,7 @@ const NewOrder = () => {
                 arr.push(item);
               }
             }
+            setVendor(true);
             setOrderDetails(arr);
           } else {
             let arr = [];
@@ -56,6 +59,7 @@ const NewOrder = () => {
             setOrderDetails(arr);
           }
         }
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err, "errors");
@@ -107,8 +111,20 @@ const NewOrder = () => {
   };
 
   const showModal = (order) => {
-    setPrticularUserOrder(order.order);
-    setIsModalVisible(true);
+    if(Userdata!==null || Userdata!=="")
+    {
+      if(Userdata.role==="Vendor")
+      {
+        const response=order.order[0].order.filter((item)=>{
+        return (Userdata.manufacturer == item.manufacturer)
+        })
+        setPrticularUserOrder(response);
+        setIsModalVisible(true);
+      }
+      setPrticularUserOrder(order.order);
+      setIsModalVisible(true);
+    }
+    
   };
 
   const handleOk = () => {

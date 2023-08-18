@@ -3,6 +3,8 @@ import Footer from './Footer'
 import Header1 from './Header1'
 import '../components/PrivacyPolicy.css';
 import { useEffect } from 'react'
+import Baseline from "./Baseline";
+
 
 function PrivacyPolicy() {
 useEffect(()=>{
@@ -95,6 +97,7 @@ useEffect(()=>{
         </div>
     </div>
     </div>
+    <Baseline/>
     <Footer/>
     </>
   )

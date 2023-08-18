@@ -2,9 +2,6 @@
   margin-top: 150px;
   margin-bottom: 45px;
 }
-/* .user-order-header {
-  padding: 20px;
-} */
 .orders-user-page {
   border-radius: 10px;
   min-height: 0px;
@@ -52,44 +49,41 @@
 }
 
 .order-status-heading {
-  /* color: rgba(13, 110, 253,0.5); */
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   font-family: "Roboto", sans-serif;
 }
 .para-order-text {
-  font-size: 13px !important;
+  font-size: 10px !important;
   color: #6c757d;
   font-weight: 600 !important;
 }
 .para-text {
-  font-size: 12px !important;
+  font-size: 10px !important;
   color: #6c757d;
 }
 .Re-order-button {
   font-size: 12px;
   font-family: "Roboto", sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   padding: 8px 13px;
   display: block;
   text-align: center;
-  background: linear-gradient(
-    90deg,
-    rgb(44 160 255 / 53%) 0%,
-    rgba(23, 150, 255, 1) 100%
-  );
+  background: #1b2845;
   border: 1px solid rgb(27 151 255 / 33%);
   color: #fff;
   text-decoration: none;
   border-radius: 0.25rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .Re-order-button:hover {
   padding: 8px 13px;
-  border: 1px solid rgb(27 151 255 / 33%);
-  background: none;
-  color: var(--optionalColor);
-  font-weight: bold;
+
+  background-color: white !important;
+  color: #1b2845 !important;
+  box-shadow: 0px 0px 1px 1px #1b2845;
+  transition: all 0.3s ease-in-out;
 }
 .detail-box-order {
   height: 100%;
@@ -97,6 +91,9 @@
   display: flex;
   justify-content: start;
   align-items: start;
+}
+.order-tracking-details {
+  margin-top: 10px !important;
 }
 .description-box {
   display: flex;
@@ -114,8 +111,9 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.userorder-product-name {
-  font-size: 1.4rem;
+.userorder-product {
+  font-size: 14px !important;
+  font-weight: 400 !important;
 }
 
 .button-box {
@@ -130,7 +128,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100px; */
 }
 .progress-box {
   width: 100%;
@@ -143,11 +140,13 @@
   position: relative;
   border-radius: 50px;
   overflow: visible;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .progress-text {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
 }
 .progress-color {
   position: absolute;
@@ -159,15 +158,14 @@
   z-index: 2;
 }
 
-/* //active classes */
 
 .active34 {
   width: 33.33%;
-  background-color: #007bff;
+  background-color: green;
 }
 .active35 {
   width: 66.66%;
-  background-color: #007bff;
+  background-color: green;
 }
 .active36 {
   width: 100%;
@@ -178,24 +176,17 @@
   background-color: red;
 }
 
-/* circle active class */
-.active11 {
-  background-color: #007bff !important;
-}
-.active12 {
-  left: 33% !important;
-  background-color: #007bff !important;
-}
-.active13 {
-  left: 64% !important;
-  background-color: #fff !important;
-}
-.active14 {
-  left: 98% !important;
+.activecircles {
   background-color: green !important;
 }
+.deactivecircles {
+  display: none;
+}
 
-/* end active class */
+.activecancelcircle {
+  background-color: red !important;
+  color: white !important;
+}
 
 .Check-icon {
   color: white;
@@ -207,13 +198,57 @@
   height: 20px;
   border-radius: 50%;
   z-index: 10;
-  background-color: #007bff;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: -7px;
-  left: 0;
+  background: lightgray;
+}
+.circle2 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lightgray;
+}
+.circle3 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lightgray;
+}
+.circle4 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lightgray;
+}
+.circle5 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  background: red;
+  align-items: center;
+  position: relative;
+  left: 98%;
+  bottom: 22px;
+}
+.pending-bar {
+  background: rgb(255, 165, 0, 0.8) !important;
+  width: 100% !important;
 }
 .shipped-status {
   display: flex;
@@ -241,16 +276,15 @@
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 12px;
+  margin-top: 10px;
 }
 .status-Highligted {
-  color: #007bff !important;
-  /* font-size: 13px !important; */
-  font-weight: 700 !important;
+  color: green !important;
+  font-weight: 400 !important;
 }
 .status-Highligted-delivered {
   color: green !important;
-  /* font-size: 13px !important; */
-  font-weight: 700 !important;
+  font-weight: 400 !important;
 }
 .nav-text {
   font-size: 10px;
@@ -264,9 +298,6 @@
   width: 30px;
   color: #007bff;
 }
-/* .order-details {
-  height: 100px;
-} */
 .Right-order-content {
   display: flex;
   align-items: center;
@@ -275,6 +306,7 @@
 .Pending-text {
   color: orange !important;
   font-weight: 600 !important;
+  margin-top: 10px !important;
 }
 .p-accordion .p-accordion-header .p-accordion-header-link {
   color: rgba(0, 0, 0, 0.7) !important;
@@ -292,27 +324,49 @@
 .details-button {
   display: flex;
   flex-direction: column;
-  /* align-items: start;
-   */
   justify-content: space-between;
+}
+.pending-box .process-icon {
+  height: 15px !important;
+  width: 15px !important;
+  animation: animatepending 3s linear infinite;
+
+  transition: all 1s ease;
+}
+.pending-box .process-icon g {
+  fill: orange !important;
+}
+@keyframes animatepending {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.Order-page .p-accordion .p-accordion-content {
+  background: ghostwhite !important;
 }
 .order-detail-button {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px 20px;
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 12px;
-  background: white;
   border: none;
-  color: rgba(0,0,0,0.7);
-  font-weight: 600;
-  font-family: 'Roboto',sans-serif;
+  color: white;
+  font-weight: 400;
+  background: #1b2845;
+  font-family: "Roboto", sans-serif;
   box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
-.order-detail-button:hover{
-  background-color: #007bff !important;
-  color: white !important;
+.order-detail-button:hover {
+  background-color: white !important;
+  color: #1b2845 !important;
+  box-shadow: 0px 0px 1px 1px #1b2845;
+  transition: all 0.3s ease-in-out;
 }
 /* Responsive Order */
 
@@ -340,7 +394,7 @@
     font-size: 10px !important;
   }
   .orders-section {
-    margin-top: 200px !important;
+    margin-top: 160px !important;
   }
 }
 @media only screen and (max-width: 815.98px) {
@@ -365,6 +419,13 @@
 @media only screen and (max-width: 767.98px) {
   .Right-order-content {
     height: 60px !important;
+  }
+  .order-detail-button {
+    padding: 10px 10px !important;
+    font-size: 10px !important;
+  }
+  .See-more-details {
+    justify-content: start !important;
   }
   .order-tracking-details {
     padding-left: 0px !important;
@@ -406,10 +467,18 @@
     padding: 5px 10px !important;
   }
 }
+@media only screen and (max-width: 730.98px) {
+  .orders-section {
+    margin-top: 130px !important;
+  }
+}
 @media only screen and (max-width: 575.98px) {
   .order-details-image .order-main-Image {
     height: 70% !important;
     width: 24% !important;
+  }
+  .orders-section {
+    margin-top: 130px !important;
   }
 }
 @media only screen and (max-width: 415.98px) {
@@ -417,6 +486,7 @@
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+
   .order-column {
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -425,4 +495,32 @@
   .para-order-text {
     font-size: 9px !important;
   }
+}
+@media only screen and (max-width: 390.98px) {
+  .orders-section {
+    margin-top: 114px !important;
+  }
+}
+.Buttons-order-page {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.Buttons-order-page button {
+  padding: 9px 24px;
+  border: none;
+  font-size: 15px;
+  background: ghostwhite;
+  transition: all 0.4s linear;
+}
+.Buttons-order-page button:hover {
+  text-decoration: underline !important;
+  color: goldenrod;
+  transition: all 0.4s linear;
+  transition: text-decoration 0.4s linear;
+}
+
+.Buttons-order-page .return-product {
+  height: 25px !important;
+  width: 25px !important;
 }

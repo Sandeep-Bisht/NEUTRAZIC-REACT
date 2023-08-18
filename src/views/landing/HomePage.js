@@ -79,10 +79,24 @@ const HomePage = () => {
   var settings = {
     dots: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    speed: 4000,
+    autoplay: true,
+    pauseOnHover: true,
+    autoPlaySpeed: 3000,
+  };
+  var settings1 = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    speed: 4000,
+    autoplay: true,
+    pauseOnHover: false,
+    autoPlaySpeed: 3000,
   };
   useEffect(() => {
     setLoginState(loginState);
@@ -781,22 +795,24 @@ const HomePage = () => {
                     categories.map((item, index) => {
                       if (item.featuredCategories == "Featured Categories") {
                         return (
-                          <div className="col-12 p-5" key={index}>
+                          <div className="col-12 py-5" key={index}>
                             <div className="Category-container">
                               <div className="row">
                                 <div className="col-md-6">
                                   <div className="category-left-side">
-                                    <div className="category-heading">
-                                      <h4>{item.name}</h4>
+                                    <div>
+                                      <div className="category-heading">
+                                        <h4>{item.name}</h4>
+                                      </div>
+                                      <div className="category-text">
+                                        <p>{item.description}</p>
+                                      </div>
+                                      <Link to={"/Subcategories/" + item._id}>
+                                        <button className="btn btn cosmetic-shop-now category-Button">
+                                          Shop Now
+                                        </button>
+                                      </Link>
                                     </div>
-                                    <div className="category-text">
-                                      <p>{item.description}</p>
-                                    </div>
-                                    <Link to={"/Subcategories/" + item._id}>
-                                      <button className="btn btn cosmetic-shop-now category-Button">
-                                        Shop Now
-                                      </button>
-                                    </Link>
                                   </div>
                                 </div>
                                 <div className="col-md-6">
@@ -821,16 +837,16 @@ const HomePage = () => {
                     })}
                   {/* </Carousel> */}
                 </Slider>
-                <div className="controls controls-left">
+                {/* <div className="controls controls-left">
                   <button onClick={sliderRef?.slickPrev}>
                     <FaChevronLeft />
                   </button>
-                </div>
-                <div className="controls controls-right">
+                </div> */}
+                {/* <div className="controls controls-right">
                   <button onClick={sliderRef?.slickNext}>
                     <FaChevronRight />
                   </button>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
@@ -1179,15 +1195,7 @@ const HomePage = () => {
               <span className="products-color">Selling Brands</span>
             </div>
             <div className="row image-group">
-              <Carousel
-                disableAutoPlay
-                autoPlaySpeed={1500}
-                itemsToShow={3}
-                onPrevStart={onPrevStart}
-                onNextStart={onNextStart}
-                ref={carouselRef}
-                disableArrowsOnEnd={false}
-              >
+              <Slider ref={setSliderRef} {...settings1}>
                 {Manufactureres &&
                   Manufactureres.length > 0 &&
                   Manufactureres.map((el, index) => (
@@ -1202,7 +1210,7 @@ const HomePage = () => {
                         />
                       </div>
                   ))}
-              </Carousel>
+              </Slider>
             </div>
           </div>
         </div>
@@ -1280,7 +1288,7 @@ const HomePage = () => {
                               return (
                                 <div className="col-lg-3 col-md-6" key={ind}>
                                   <Link to={"/SingleBlogPage/" + item.slug}>
-                                    <div className="card">
+                                    <div className="card hover-effect">
                                       <img
                                         src={
                                           item.featuredImage &&

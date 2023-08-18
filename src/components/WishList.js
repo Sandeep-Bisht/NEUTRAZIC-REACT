@@ -222,8 +222,7 @@ const WishList = () => {
           userCart.order.push(newItemObj);
         }
         setQuantity(1);
-
-        await UpdateCart();
+        UpdateCart();
       }
     }
   };

@@ -105,7 +105,7 @@ const Footer = () => {
   return (
     <>
       <div className="section-footer">
-        <div className="container">
+        <div className="container mt-0">
           <footer className="footer-area">
             <div className="container-fluid m-auto">
               <div className="row">
@@ -368,44 +368,44 @@ const Footer = () => {
                           We accept payment via:
                         </li>
                         <li>
-                          <a href="#" target="_blank">
+                          
                             <img
                               src={require(".././Images/payment-types/visa.png")}
                               alt="image"
                             />
-                          </a>
+                          
                         </li>
                         <li>
-                          <a href="#" target="_blank">
+                         
                             <img
                               src={require(".././Images/payment-types/mastercard.png")}
                               alt="image"
                             />
-                          </a>
+                          
                         </li>
                         <li>
-                          <a href="#" target="_blank">
+                          
                             <img
                               src={require(".././Images/payment-types/paypal.png")}
                               alt="image"
                             />
-                          </a>
+                          
                         </li>
                         <li>
-                          <a href="#" target="_blank">
+                          
                             <img
                               src={require(".././Images/payment-types/descpver.png")}
                               alt="image"
                             />
-                          </a>
+                         
                         </li>
                         <li>
-                          <a href="#" target="_blank">
+                          
                             <img
                               src={require(".././Images/payment-types/american-express.png")}
                               alt="image"
                             />
-                          </a>
+                          
                         </li>
                       </ul>
                     </div>

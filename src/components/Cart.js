@@ -88,6 +88,7 @@ const Cart = () => {
           await localStorage.setItem("Usercartdata", JSON.stringify(data));
 
           setCartStatus(data.data[0].cartStatus);
+          console.log(data.data[0].order, "cart item")
           setCart(data.data[0].order);
           setLoading(false)
           Setdata({ ...data, order: JSON.stringify(data.data[0].order) });
@@ -210,7 +211,7 @@ const Cart = () => {
   };
   return (
     <>
-      <Header1 CartItems={cart} />
+      <Header1/>
       <div className="first-nav container-fluid">
         <span>
           <Link to="/">Home</Link>/ Cart
@@ -231,6 +232,7 @@ const Cart = () => {
                   /> : <>
                     {cart && cart.length > 0 ? (
                             cart.map((el, ind1) => {
+                              console.log(el, "ellllllllllll")
                               if (state1.state1 == "1") {
                                 total = el.dollerDiscount * el.quantity;
                                 total1 = total1 + el.dollerDiscount * el.quantity;
@@ -245,8 +247,8 @@ const Cart = () => {
                                 localStorage.setItem("Subtotal", actualtotal);
                               }
                               return (
-                                <>
-                                <div className="card card-for-cart m-2">
+                                
+                                <div className="card card-for-cart m-2" key={ind1}>
                                 <div className="card-body cart-box row">
                                   <div className="col-lg-3 col-md-3 col-2">
                                     <div>
@@ -356,7 +358,7 @@ const Cart = () => {
                                   </div>
                                 </div>
                                 </div>
-                                </>
+                               
                               );
                             })
                           ) : (

@@ -837,8 +837,8 @@ const Subcategories = (props) => {
                   </div>
                 </section>
               </div>
+              </div>
             </div>
-          </div>
         </section>
         <ToastContainer />
       </div>

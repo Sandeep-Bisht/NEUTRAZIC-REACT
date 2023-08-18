@@ -181,7 +181,25 @@ export default function AllProductsDetails() {
   const imageHandler = (id) => {
     history.push("/SingleProduct/" + id);
   };
+  const CustomCloseIcon = () => (
+    <svg
+      className="custom-close-icon-forget"
+      viewBox="0 0 12 12"
+      width="12"
+      height="12"
+    >
+      <line x1="1" y1="11" x2="11" y2="1" strokeWidth="2" />
+      <line x1="1" y1="1" x2="11" y2="11" strokeWidth="2" />
+    </svg>
+  );
 
+  const rowClassName = (record) => {
+    console.log(record,"recordddddddddddddd")
+    if (record.quantity < 5) {
+      return "red-row";
+    }
+    return "";
+  };
   return (
     <>
       <section id="body-pd">
@@ -211,20 +229,23 @@ export default function AllProductsDetails() {
                 </div>
               </div>
               <Table
+                
                 rowKey="name"
                 dataSource={filteredData && filteredData.length ? filteredData : getuser}
                 columns={columns}
                 loading={loading}
                 pagination={false}
+                rowClassName={rowClassName}
               />
             </div>
           </div>
           <Modal
-          className="product-details"
+          className="product-details New-order-details"
           title="Order Details"
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          closeIcon={<CustomCloseIcon />}
         >
         <table className="table order-details ">
             <thead>
@@ -236,7 +257,6 @@ export default function AllProductsDetails() {
                 <th scope="col">Manufacturer</th>
                 <th scope="col">Category</th>
                 <th scope="col">Subcatrgory</th>
-                <th scope="col">Warehouse</th>
               </tr>
             </thead>
             <tbody>
@@ -261,7 +281,6 @@ export default function AllProductsDetails() {
                         <td className="width-adjust-of-td">{item.manufacturer.name}</td>
                         <td className="width-adjust-of-td">{item.category.name}</td>
                         <td className="width-adjust-of-td">{item.subcategory.name}</td>
-                        <td className="width-adjust-of-td">{item.warehouse.id}</td>
                       </tr>
                     </>
                   );
